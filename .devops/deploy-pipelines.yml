@@ -4,21 +4,21 @@ pr: none
 
 parameters:
   - name: 'DEV'
-    displayName: 'Plan on DEV environment'
+    displayName: 'Run on DEV environment'
     type: boolean
     default: True
     values:
       - False
       - True
   - name: 'UAT'
-    displayName: 'Plan on UAT environment'
+    displayName: 'Run on UAT environment'
     type: boolean
     default: True
     values:
       - False
       - True
   - name: 'PROD'
-    displayName: 'Plan on PROD environment'
+    displayName: 'Run on PROD environment'
     type: boolean
     default: True
     values:
@@ -57,6 +57,7 @@ stages:
             parameters:
               SUBSCRIPTION: DEV-PAGOPA-SERVICE-CONN
               ENVIRONMENT: dev
+              WORKINGDIR: 'src/core'
 
   - stage: apply_DEV
     dependsOn: [plan_DEV]
@@ -82,6 +83,7 @@ stages:
                   parameters:
                     SUBSCRIPTION: DEV-PAGOPA-SERVICE-CONN
                     ENVIRONMENT: dev
+                    WORKINGDIR: 'src/core'
 
   # UAT
   - stage: plan_UAT
@@ -100,6 +102,7 @@ stages:
             parameters:
               SUBSCRIPTION: UAT-PAGOPA-SERVICE-CONN
               ENVIRONMENT: uat
+              WORKINGDIR: 'src/core'
 
   - stage: apply_UAT
     dependsOn: [plan_UAT]
@@ -125,6 +128,7 @@ stages:
                   parameters:
                     SUBSCRIPTION: UAT-PAGOPA-SERVICE-CONN
                     ENVIRONMENT: uat
+                    WORKINGDIR: 'src/core'
 
   # PROD
   - stage: plan_PROD
@@ -143,6 +147,7 @@ stages:
             parameters:
               SUBSCRIPTION: PROD-PAGOPA-SERVICE-CONN
               ENVIRONMENT: prod
+              WORKINGDIR: 'src/core'
 
   - stage: apply_PROD
     dependsOn: [plan_PROD]
@@ -168,3 +173,4 @@ stages:
                   parameters:
                     SUBSCRIPTION: PROD-PAGOPA-SERVICE-CONN
                     ENVIRONMENT: prod
+                    WORKINGDIR: 'src/core'
