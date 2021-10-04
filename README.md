@@ -1,6 +1,6 @@
-# terraform-infrastructure-template
+# SelfCare-infrastructure
 
-Terraform template repository for infrastructures projects
+Self Care project infrastructure
 
 ## Requirements
 
@@ -53,6 +53,7 @@ rm .terraform.lock.hcl
 terraform providers lock \
   -platform=windows_amd64 \
   -platform=darwin_amd64 \
+  -platform=darwin_arm64 \
   -platform=linux_amd64
 ```
 
