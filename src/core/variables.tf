@@ -201,7 +201,7 @@ variable "enable_iac_pipeline" {
   default     = false
 }
 
-## Database server postgresl 
+## Database server postgresl
 variable "postgresql_sku_name" {
   type        = string
   description = "Specifies the SKU Name for this PostgreSQL Server."

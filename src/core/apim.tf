@@ -27,7 +27,7 @@ locals {
 }
 
 ###########################
-## Api Management (apim) ## 
+## Api Management (apim) ##
 ###########################
 
 module "apim" {
