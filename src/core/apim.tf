@@ -1,6 +1,6 @@
 # APIM subnet
 module "apim_snet" {
-  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.51"
+  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
   name                 = format("%s-apim-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet_integration.name
@@ -31,7 +31,7 @@ locals {
 ###########################
 
 module "apim" {
-  source               = "git::https://github.com/pagopa/azurerm.git//api_management?ref=v1.0.50"
+  source               = "git::https://github.com/pagopa/azurerm.git//api_management?ref=v1.0.58"
   subnet_id            = module.apim_snet.id
   location             = azurerm_resource_group.rg_api.location
   name                 = format("%s-apim", local.project)
@@ -104,7 +104,7 @@ resource "azurerm_api_management_custom_domain" "api_custom_domain" {
 
 ## monitor ##
 module "monitor" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.16"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-monitor", var.env_short)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
