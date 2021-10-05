@@ -46,6 +46,103 @@ variable "tags" {
   }
 }
 
+## VPN ##
+variable "vpn_sku" {
+  type        = string
+  default     = "VpnGw1"
+  description = "VPN Gateway SKU"
+}
+
+variable "vpn_pip_sku" {
+  type        = string
+  default     = "Basic"
+  description = "VPN GW PIP SKU"
+}
+
+## AKS ##
+variable "cidr_subnet_k8s" {
+  type        = list(string)
+  description = "Subnet cluster kubernetes."
+}
+
+variable "aks_availability_zones" {
+  type        = list(number)
+  description = "A list of Availability Zones across which the Node Pool should be spread."
+  default     = []
+}
+
+variable "aks_vm_size" {
+  type        = string
+  default     = "Standard_DS3_v2"
+  description = "The size of the AKS Virtual Machine in the Node Pool."
+}
+
+variable "aks_node_count" {
+  type        = number
+  description = "The initial number of the AKS nodes which should exist in this Node Pool."
+  default     = 1
+}
+
+variable "kubernetes_version" {
+  type    = string
+  default = null
+}
+
+variable "aks_sku_tier" {
+  type        = string
+  description = "The SKU Tier that should be used for this Kubernetes Cluster."
+  default     = "Free"
+}
+
+variable "reverse_proxy_ip" {
+  type        = string
+  default     = "127.0.0.1"
+  description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
+}
+
+variable "aks_num_outbound_ips" {
+  type        = number
+  default     = 1
+  description = "How many outbound ips allocate for AKS cluster"
+}
+
+variable "aks_metric_alerts" {
+  default = {}
+
+  description = <<EOD
+Map of name = criteria objects
+EOD
+
+  type = map(object({
+    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]
+    aggregation = string
+    # "Insights.Container/pods" "Insights.Container/nodes"
+    metric_namespace = string
+    metric_name      = string
+    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]
+    operator  = string
+    threshold = number
+    # Possible values are PT1M, PT5M, PT15M, PT30M and PT1H
+    frequency = string
+    # Possible values are PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H and P1D.
+    window_size = string
+
+    dimension = list(object(
+      {
+        name     = string
+        operator = string
+        values   = list(string)
+      }
+    ))
+  }))
+}
+
+variable "aks_alerts_enabled" {
+  type        = bool
+  default     = true
+  description = "Aks alert enabled?"
+}
+
 ## Monitor
 variable "law_sku" {
   type        = string
@@ -99,6 +196,16 @@ variable "cidr_subnet_apim" {
 variable "cidr_subnet_appgateway" {
   type        = list(string)
   description = "Application gateway address space."
+}
+
+variable "cidr_subnet_vpn" {
+  type        = list(string)
+  description = "VPN network address space."
+}
+
+variable "cidr_subnet_dnsforwarder" {
+  type        = list(string)
+  description = "DNS Forwarder network address space."
 }
 
 # DNS
