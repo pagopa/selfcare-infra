@@ -7,12 +7,13 @@ resource "azurerm_dns_zone" "public" {
 }
 
 # Prod ONLY record to DEV public DNS delegation
-resource "azurerm_dns_ns_record" "dev_pagopa_it_ns" {
+resource "azurerm_dns_ns_record" "dev_it_ns" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "dev"
   zone_name           = azurerm_dns_zone.public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   records = [
+    # todo delegation records after create DNS zone in DEV env
     "ns1-08.azure-dns.com.",
     "ns2-08.azure-dns.net.",
     "ns3-08.azure-dns.org.",
@@ -23,12 +24,13 @@ resource "azurerm_dns_ns_record" "dev_pagopa_it_ns" {
 }
 
 # Prod ONLY record to UAT public DNS delegation
-resource "azurerm_dns_ns_record" "uat_pagopa_it_ns" {
+resource "azurerm_dns_ns_record" "uat_it_ns" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "uat"
   zone_name           = azurerm_dns_zone.public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   records = [
+    # todo delegation records after create DNS zone in UAT env
     "ns1-07.azure-dns.com.",
     "ns2-07.azure-dns.net.",
     "ns3-07.azure-dns.org.",

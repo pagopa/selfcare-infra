@@ -51,7 +51,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.DEV}}, true))
     pool:
-      name: pagopa-dev-linux
+      name: selfcare-dev-linux
     jobs:
       - job: terraform_install
         steps:
@@ -65,7 +65,7 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: DEV-PAGOPA-SERVICE-CONN
+              SUBSCRIPTION: DEV-SELFCARE-SERVICE-CONN
               ENVIRONMENT: dev
               WORKINGDIR: 'src/core'
 
@@ -73,7 +73,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
-      name: pagopa-uat-linux
+      name: selfcare-uat-linux
     jobs:
       - job: terraform_install
         steps:
@@ -87,7 +87,7 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: UAT-PAGOPA-SERVICE-CONN
+              SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
               ENVIRONMENT: uat
               WORKINGDIR: 'src/core'
 
@@ -95,7 +95,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.PROD}}, true))
     pool:
-      name: pagopa-prod-linux
+      name: selfcare-prod-linux
     jobs:
       - job: terraform_install
         steps:
@@ -109,6 +109,6 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: PROD-PAGOPA-SERVICE-CONN
+              SUBSCRIPTION: PROD-SELFCARE-SERVICE-CONN
               ENVIRONMENT: prod
               WORKINGDIR: 'src/core'

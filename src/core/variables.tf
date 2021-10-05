@@ -1,15 +1,29 @@
-variable "location" {
-  type    = string
-  default = "westeurope"
-}
+# general
 
 variable "prefix" {
   type    = string
-  default = "pagopa"
+  default = "selc"
+  validation {
+    condition = (
+      length(var.prefix) > 6
+    )
+    error_message = "Max length is 6 chars."
+  }
 }
 
 variable "env_short" {
   type = string
+  validation {
+    condition = (
+      length(var.env_short) > 1
+    )
+    error_message = "Max length is 1 chars."
+  }
+}
+
+variable "location" {
+  type    = string
+  default = "westeurope"
 }
 
 variable "lock_enable" {
@@ -51,70 +65,6 @@ variable "law_daily_quota_gb" {
   default     = -1
 }
 
-# mock_ec
-
-variable "mock_ec_enabled" {
-  type        = bool
-  description = "Mock EC enabled"
-  default     = false
-}
-
-variable "mock_ec_always_on" {
-  type        = bool
-  description = "Mock EC always on property"
-  default     = false
-}
-
-variable "mock_ec_tier" {
-  type        = string
-  description = "Mock EC Plan tier"
-  default     = "Standard"
-}
-
-variable "mock_ec_size" {
-  type        = string
-  description = "Mock EC Plan size"
-  default     = "S1"
-}
-
-variable "cidr_subnet_mock_ec" {
-  type        = list(string)
-  description = "Address prefixes subnet mock ec"
-  default     = null
-}
-
-# mock_ec
-
-variable "mock_psp_enabled" {
-  type        = bool
-  description = "Mock PSP enabled"
-  default     = false
-}
-
-variable "mock_psp_always_on" {
-  type        = bool
-  description = "Mock PSP always on property"
-  default     = false
-}
-
-variable "mock_psp_tier" {
-  type        = string
-  description = "Mock PSP Plan tier"
-  default     = "Standard"
-}
-
-variable "mock_psp_size" {
-  type        = string
-  description = "Mock PSP Plan size"
-  default     = "S1"
-}
-
-variable "cidr_subnet_mock_psp" {
-  type        = list(string)
-  description = "Address prefixes subnet mock psp"
-  default     = null
-}
-
 # api_config
 
 variable "api_config_enabled" {
@@ -127,24 +77,6 @@ variable "cidr_subnet_api_config" {
   type        = list(string)
   description = "Address prefixes subnet api config"
   default     = null
-}
-
-variable "api_config_tier" {
-  type        = string
-  description = "Api config Plan tier"
-  default     = "Standard"
-}
-
-variable "api_config_size" {
-  type        = string
-  description = "Api Config Plan size"
-  default     = "S1"
-}
-
-variable "api_config_always_on" {
-  type        = bool
-  description = "Api Config always on property"
-  default     = false
 }
 
 # Network
