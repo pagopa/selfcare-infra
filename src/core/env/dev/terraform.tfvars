@@ -15,20 +15,15 @@ lock_enable = false
 # main vnet
 cidr_vnet              = ["10.1.0.0/16"]
 cidr_subnet_appgateway = ["10.1.128.0/24"]
-cidr_subnet_postgresql = ["10.1.129.0/24"]
 cidr_subnet_azdoa      = ["10.1.130.0/24"]
-# dev/uat only
-cidr_subnet_mock_ec  = ["10.1.240.0/29"]
-cidr_subnet_mock_psp = ["10.1.240.8/29"]
 
 # integration vnet
 # https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
-cidr_vnet_integration  = ["10.230.7.0/24"] # ask to SIA
-cidr_subnet_apim       = ["10.230.7.0/26"]
-cidr_subnet_api_config = ["10.230.7.128/29"]
+cidr_vnet_integration = ["10.230.7.0/24"] # ask to SIA
+cidr_subnet_apim      = ["10.230.7.0/26"]
 
 # dns
-external_domain = "pagopa.it" # FIXME da chiedere
+external_domain = "pagopa.it"
 dns_zone_prefix = "dev.selfcare"
 
 # azure devops
@@ -57,11 +52,3 @@ postgresql_network_rules = {
   # dblink
   allow_access_to_azure_services = false
 }
-prostgresql_db_mockpsp = "mock-psp"
-
-# mock
-mock_ec_enabled  = true
-mock_psp_enabled = true
-
-# api_config
-api_config_enabled = true
