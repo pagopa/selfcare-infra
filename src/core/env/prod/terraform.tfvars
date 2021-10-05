@@ -4,7 +4,7 @@ env_short = "p"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Prod"
-  Owner       = "pagoPA"
+  Owner       = "SelfCare"
   Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
