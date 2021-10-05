@@ -15,7 +15,6 @@ lock_enable = true
 # main vnet
 cidr_vnet              = ["10.1.0.0/16"]
 cidr_subnet_appgateway = ["10.1.128.0/24"]
-cidr_subnet_postgresql = ["10.1.129.0/24"]
 cidr_subnet_azdoa      = ["10.1.130.0/24"]
 # prod only
 cidr_subnet_redis = ["10.1.132.0/24"]
@@ -26,7 +25,7 @@ cidr_vnet_integration = ["10.230.7.0/24"] # todo ask to SIA
 cidr_subnet_apim      = ["10.230.7.0/26"]
 
 # dns
-external_domain = "pagopa.it" # FIXME da chiedere
+external_domain = "selfcare.pagopa.it"
 dns_zone_prefix = "selfcare"
 
 # azure devops
@@ -48,16 +47,3 @@ app_gateway_max_capacity                = 2
 # todo change to Premium before launch
 # redis_sku_name = "Premium"
 # redis_family   = "P"
-
-# postgresql
-prostgresql_enabled                      = false
-postgresql_sku_name                      = "GP_Gen5_2" # todo change before launch
-postgresql_enable_replica                = false
-postgresql_public_network_access_enabled = false
-
-# mock
-mock_ec_enabled  = false
-mock_psp_enabled = false
-
-# api_config
-api_config_enabled = false
