@@ -5,7 +5,7 @@ tags = {
   CreatedBy   = "Terraform"
   Environment = "Uat"
   Owner       = "pagoPA"
-  Source      = "https://github.com/pagopa/pagopa-infra"
+  Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
@@ -27,8 +27,8 @@ cidr_vnet_integration = ["10.230.7.0/24"] # todo ask to SIA
 cidr_subnet_apim      = ["10.230.7.0/26"]
 
 # dns
-external_domain = "pagopa.it"
-dns_zone_prefix = "uat.platform"
+external_domain = "pagopa.it" # FIXME da chiedere
+dns_zone_prefix = "uat.selfcare"
 
 # azure devops
 azdo_sp_tls_cert_enabled = true
@@ -36,13 +36,13 @@ enable_azdoa             = true
 enable_iac_pipeline      = true
 
 # apim
-apim_publisher_name = "pagoPA Platform UAT"
+apim_publisher_name = "pagoPA SelfCare UAT"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name        = "api-uat-platform-pagopa-it"
-app_gateway_portal_certificate_name     = "portal-uat-platform-pagopa-it"
-app_gateway_management_certificate_name = "management-uat-platform-pagopa-it"
+app_gateway_api_certificate_name        = "api-uat-selfcare-pagopa-it"
+app_gateway_portal_certificate_name     = "portal-uat-selfcare-pagopa-it"
+app_gateway_management_certificate_name = "management-uat-selfcare-pagopa-it"
 
 # postgresql
 prostgresql_enabled                      = false
