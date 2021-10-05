@@ -23,7 +23,7 @@ cidr_vnet_integration = ["10.230.7.0/24"] # ask to SIA
 cidr_subnet_apim      = ["10.230.7.0/26"]
 
 # dns
-external_domain = "selfcare.pagopa.it"
+external_domain = "pagopa.it"
 dns_zone_prefix = "dev.selfcare"
 
 # azure devops
