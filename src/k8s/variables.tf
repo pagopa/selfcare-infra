@@ -36,7 +36,7 @@ variable "k8s_apiserver_insecure" {
 }
 
 variable "rbac_namespaces" {
-  type = list(string)
+  type    = list(string)
   default = ["selc"]
 }
 

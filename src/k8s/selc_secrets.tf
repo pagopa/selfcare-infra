@@ -18,9 +18,9 @@ resource "kubernetes_secret" "selc-redis-credentials" {
   }
 
   data = {
-    REDIS_URL=local.redis_url
-    REDIS_PASSWORD=module.key_vault_secrets_query.values["redis-primary-access-key"].value
-    REDIS_PORT="6379"
+    REDIS_URL      = local.redis_url
+    REDIS_PASSWORD = module.key_vault_secrets_query.values["redis-primary-access-key"].value
+    REDIS_PORT     = "6379"
   }
 
   type = "Opaque"

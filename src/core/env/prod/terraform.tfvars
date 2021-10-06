@@ -51,10 +51,10 @@ app_gateway_max_capacity                = 2
 # redis_family   = "P"
 
 # aks
-aks_availability_zones = [1, 2, 3] # TODO to check
-aks_node_count         = 6 # TODO to check
+aks_availability_zones = [1, 2, 3]         # TODO to check
+aks_node_count         = 6                 # TODO to check
 aks_vm_size            = "Standard_D8S_v3" # TODO to check
-aks_sku_tier           = "Paid" # TODO to check
+aks_sku_tier           = "Paid"            # TODO to check
 
 aks_metric_alerts = {
   node_cpu = {

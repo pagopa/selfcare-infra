@@ -5,7 +5,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   }
 
   data = merge({
-    JAVA_TOOL_OPTIONS                   = ""
+    JAVA_TOOL_OPTIONS = ""
     },
     var.configmaps_hub-spid-login-ms
   )
