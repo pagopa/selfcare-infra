@@ -62,8 +62,7 @@ module "vpn" {
   source = "git::https://github.com/pagopa/azurerm.git//vpn_gateway?ref=v1.0.36"
 
   depends_on = [
-    azurerm_log_analytics_workspace.log_analytics_workspace,
-    module.operations_logs,
+    azurerm_log_analytics_workspace.log_analytics_workspace
   ]
 
   name                = format("%s-vpn", local.project)
@@ -73,8 +72,8 @@ module "vpn" {
   pip_sku             = var.vpn_pip_sku
   subnet_id           = module.vpn_snet.id
 
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
-  log_storage_account_id     = module.operations_logs.id
+  log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
+  log_storage_account_id     = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
 
   vpn_client_configuration = [
     {
