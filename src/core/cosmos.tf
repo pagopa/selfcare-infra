@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "cosmosdb_rg" {
 }
 
 locals {
-  base_capabilities: [
+  base_capabilities = [
     "EnableMongo"
   ]
 }
@@ -22,14 +22,14 @@ module "cosmosdb_account_mongodb" {
 
   enable_free_tier = var.cosmosdb_mongodb_enable_free_tier
 
-  public_network_access_enabled = var.cosmosdb_mongodb_public_network_access_enabled
+  public_network_access_enabled     = var.cosmosdb_mongodb_public_network_access_enabled
   is_virtual_network_filter_enabled = false
 
-  mongo_server_version="4.0"
+  mongo_server_version = "4.0"
 
-  capabilities=var.cosmosdb_mongodb_enable_serverless? concat(local.base_capabilities, "EnableServerless") : local.base_capabilities
+  capabilities = var.cosmosdb_mongodb_enable_serverless ? concat(local.base_capabilities, "EnableServerless") : local.base_capabilities
 
-  consistency_policy=var.cosmosdb_mongodb_consistency_policy
+  consistency_policy = var.cosmosdb_mongodb_consistency_policy
 
   main_geo_location_location = azurerm_resource_group.cosmosdb_rg.location
 
@@ -44,7 +44,7 @@ resource "azurerm_cosmosdb_mongodb_database" "cosmosdb_mongodb" {
   account_name        = module.cosmosdb_account_mongodb.name
 
   throughput         = !var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
-  autoscale_settings = var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless? {max_throughput: var.cosmosdb_mongodb_max_throughput} : null
+  autoscale_settings = var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? { max_throughput : var.cosmosdb_mongodb_max_throughput } : null
 
   tags = var.tags
 }
