@@ -200,3 +200,75 @@ variable "enable_iac_pipeline" {
   description = "If true create the key vault policy to allow used by azure devops iac pipelines."
   default     = false
 }
+
+# CosmosDb Mongo
+variable "cosmosdb_mongodb_offer_type" {
+  type = string
+  description = "Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard"
+  default = "Standard"
+}
+
+variable "cosmosdb_mongodb_enable_free_tier" {
+  type =  bool
+  description = "Enable Free Tier pricing option for this Cosmos DB account"
+  default = true
+}
+
+variable "cosmosdb_mongodb_public_network_access_enabled" {
+  type =  bool
+  description = "Whether or not public network access is allowed for this CosmosDB account"
+  default = false
+}
+
+variable "cosmosdb_mongodb_failover_location" {
+  type =  string
+  description = "The name of the Azure region to host replicated data"
+  default = ""
+}
+
+variable "cosmosdb_mongodb_consistency_policy" {
+  type = object({
+    consistency_level       = string
+    max_interval_in_seconds = number
+    max_staleness_prefix    = number
+  })
+
+  default = {
+    consistency_level       = "Strong"
+    max_interval_in_seconds = null
+    max_staleness_prefix    = null
+  }
+}
+
+variable "cosmosdb_mongodb_additional_geo_locations" {
+  type = list(object({
+    location          = string
+    failover_priority = number
+  }))
+  description = "The name of the Azure region to host replicated data and the priority to apply starting from 1. Not used when cosmosdb_mongodb_enable_serverless"
+  default = []
+}
+
+variable "cosmosdb_mongodb_throughput" {
+  type =  number
+  description = "The throughput of the MongoDB database (RU/s). Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply."
+  default = 400
+}
+
+variable "cosmosdb_mongodb_enable_serverless" {
+  type =  bool
+  description = "It will enable serverless mode. If true, cosmosdb_mongodb_throughput and cosmosdb_mongodb_enable_autoscaling will be ignored"
+  default = false
+}
+
+variable "cosmosdb_mongodb_enable_autoscaling" {
+  type =  bool
+  description = "It will enable autoscaling mode. If true, cosmosdb_mongodb_throughput must be unset"
+  default = false
+}
+
+variable "cosmosdb_mongodb_max_throughput" {
+  type =  number
+  description = "The maximum throughput of the MongoDB database (RU/s). Must be between 4,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput"
+  default = 4000
+}
