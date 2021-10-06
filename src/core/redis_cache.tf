@@ -23,3 +23,12 @@ module "redis" {
 
   tags = var.tags
 }
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "redis_primary_access_key" {
+  name         = "redis-primary-access-key"
+  value        = module.redis.primary_access_key
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}

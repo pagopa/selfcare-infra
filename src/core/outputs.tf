@@ -17,3 +17,21 @@ output "vnet_integration_address_space" {
 # output "azurerm_key_vault_certificate_management_platform" {
 #   value = data.azurerm_key_vault_certificate.management_platform
 # }
+
+## Redis cache
+output "redis_primary_access_key" {
+  value     = module.redis.primary_access_key
+  sensitive = true
+}
+
+output "redis_hostname" {
+  value = module.redis.hostname
+}
+
+output "redis_port" {
+  value = module.redis.port
+}
+
+output "redis_ssl_port" {
+  value = module.redis.ssl_port
+}
