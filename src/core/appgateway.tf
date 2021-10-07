@@ -60,24 +60,6 @@ module "app_gw" {
       probe        = "/status-0123456789abcdef"
       probe_name   = "probe-apim"
     }
-
-    portal = {
-      protocol     = "Https"
-      host         = trim(azurerm_dns_a_record.dns_a_portal.fqdn, ".")
-      port         = 443
-      ip_addresses = module.apim.private_ip_addresses
-      probe        = "/signin"
-      probe_name   = "probe-portal"
-    }
-
-    management = {
-      protocol     = "Https"
-      host         = trim(azurerm_dns_a_record.dns_a_management.fqdn, ".")
-      port         = 443
-      ip_addresses = module.apim.private_ip_addresses
-      probe        = "/ServiceStatus"
-      probe_name   = "probe-management"
-    }
   }
 
   ssl_profiles = [{
@@ -117,36 +99,6 @@ module "app_gw" {
         )
       }
     }
-
-    portal = {
-      protocol         = "Https"
-      host             = format("portal.%s.%s", var.dns_zone_prefix, var.external_domain)
-      port             = 443
-      ssl_profile_name = format("%s-ssl-profile", local.project)
-
-      certificate = {
-        name = var.app_gateway_portal_certificate_name
-        id = trimsuffix(
-          data.azurerm_key_vault_certificate.portal_platform.secret_id,
-          data.azurerm_key_vault_certificate.portal_platform.version
-        )
-      }
-    }
-
-    management = {
-      protocol         = "Https"
-      host             = format("management.%s.%s", var.dns_zone_prefix, var.external_domain)
-      port             = 443
-      ssl_profile_name = format("%s-ssl-profile", local.project)
-
-      certificate = {
-        name = var.app_gateway_management_certificate_name
-        id = trimsuffix(
-          data.azurerm_key_vault_certificate.management_platform.secret_id,
-          data.azurerm_key_vault_certificate.management_platform.version
-        )
-      }
-    }
   }
 
   # maps listener to backend
@@ -154,16 +106,6 @@ module "app_gw" {
     api = {
       listener = "api"
       backend  = "apim"
-    }
-
-    portal = {
-      listener = "portal"
-      backend  = "portal"
-    }
-
-    mangement = {
-      listener = "management"
-      backend  = "management"
     }
   }
 
@@ -175,9 +117,8 @@ module "app_gw" {
   app_gateway_max_capacity = var.app_gateway_max_capacity
 
   # Logs
-  # todo enable
-  # sec_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
-  # sec_storage_id                 = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
+  sec_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
+  sec_storage_id                 = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
 
   tags = var.tags
 }

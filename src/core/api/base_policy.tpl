@@ -2,8 +2,6 @@
     <inbound>
         <cors allow-credentials="true">
             <allowed-origins>
-                <origin>https://${portal-domain}</origin>
-                <origin>https://${management-api-domain}</origin>
                 <origin>https://${apim-name}.developer.azure-api.net</origin>
             </allowed-origins>
             <allowed-methods preflight-result-max-age="300">

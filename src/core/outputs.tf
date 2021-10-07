@@ -13,7 +13,3 @@ output "vnet_integration_name" {
 output "vnet_integration_address_space" {
   value = module.vnet_integration.address_space
 }
-
-# output "azurerm_key_vault_certificate_management_platform" {
-#   value = data.azurerm_key_vault_certificate.management_platform
-# }
