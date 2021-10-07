@@ -18,12 +18,9 @@ resource "azurerm_resource_group" "rg_api" {
 }
 
 locals {
-  apim_cert_name_proxy_endpoint   = format("%s-proxy-endpoint-cert", local.project)
-  portal_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", "portal")
+  apim_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", local.project)
 
-  api_domain        = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
-  portal_domain     = format("portal.%s.%s", var.dns_zone_prefix, var.external_domain)
-  management_domain = format("management.%s.%s", var.dns_zone_prefix, var.external_domain)
+  api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
 }
 
 ###########################
@@ -58,9 +55,7 @@ module "apim" {
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
 
   xml_content = templatefile("./api/base_policy.tpl", {
-    portal-domain         = local.portal_domain
-    management-api-domain = local.management_domain
-    apim-name             = format("%s-apim", local.project)
+    apim-name = format("%s-apim", local.project)
   })
 
   tags = var.tags
@@ -75,25 +70,10 @@ resource "azurerm_api_management_custom_domain" "api_custom_domain" {
 
   proxy {
     host_name = local.api_domain
-    key_vault_id = trimsuffix(
+    key_vault_id = replace(
       data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-      data.azurerm_key_vault_certificate.app_gw_platform.version
-    )
-  }
-
-  developer_portal {
-    host_name = local.portal_domain
-    key_vault_id = trimsuffix(
-      data.azurerm_key_vault_certificate.portal_platform.secret_id,
-      data.azurerm_key_vault_certificate.portal_platform.version
-    )
-  }
-
-  management {
-    host_name = local.management_domain
-    key_vault_id = trimsuffix(
-      data.azurerm_key_vault_certificate.management_platform.secret_id,
-      data.azurerm_key_vault_certificate.management_platform.version
+      "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
+      ""
     )
   }
 }
