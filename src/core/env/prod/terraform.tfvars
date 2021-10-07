@@ -38,9 +38,9 @@ apim_publisher_name = "pagoPA SelfCare PROD"
 apim_sku            = "Developer_1" # todo change to Premium_1 before launch
 
 # app_gateway
-app_gateway_api_certificate_name        = "api-selfcare-pagopa-it"
-app_gateway_min_capacity                = 0 # todo change to at least 1
-app_gateway_max_capacity                = 2
+app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
+app_gateway_min_capacity         = 0 # todo change to at least 1
+app_gateway_max_capacity         = 2
 
 # todo change to Premium before launch
 # redis_sku_name = "Premium"

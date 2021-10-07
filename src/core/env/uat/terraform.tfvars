@@ -36,4 +36,4 @@ apim_publisher_name = "pagoPA SelfCare UAT"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name        = "api-uat-selfcare-pagopa-it"
+app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
