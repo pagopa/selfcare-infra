@@ -38,7 +38,7 @@ module "apim" {
   sku_name             = var.apim_sku
   virtual_network_type = "Internal"
 
-  redis_connection_string = coalesce(module.redis.primary_connection_string, "")
+  redis_connection_string = module.redis.primary_connection_string
   redis_cache_id          = module.redis.id
 
   # This enables the Username and Password Identity Provider
