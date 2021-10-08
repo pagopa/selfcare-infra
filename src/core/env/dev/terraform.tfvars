@@ -36,19 +36,4 @@ apim_publisher_name = "pagoPA SelfCare DEV"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name        = "api-dev-selfcare-pagopa-it"
-app_gateway_portal_certificate_name     = "portal-dev-selfcare-pagopa-it"
-app_gateway_management_certificate_name = "management-dev-selfcare-pagopa-it"
-
-# postgresql
-prostgresql_enabled                      = true
-postgresql_sku_name                      = "GP_Gen5_2" # todo fixme verify
-postgresql_enable_replica                = false
-postgresql_public_network_access_enabled = true
-postgresql_network_rules = {
-  ip_rules = [
-    "0.0.0.0/0"
-  ]
-  # dblink
-  allow_access_to_azure_services = false
-}
+app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
