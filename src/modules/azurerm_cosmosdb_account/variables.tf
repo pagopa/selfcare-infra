@@ -7,6 +7,16 @@ variable "name" {
   type = string
 }
 
+variable "subnet_id" {
+  type        = string
+  description = "Used only when Mongo"
+}
+
+variable "private_dns_zone_ids" {
+  type        = list(string)
+  description = "Used only when Mongo"
+}
+
 // Resource Group
 variable "resource_group_name" {
   type = string

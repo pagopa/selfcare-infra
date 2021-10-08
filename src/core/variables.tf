@@ -101,6 +101,11 @@ variable "cidr_subnet_appgateway" {
   description = "Application gateway address space."
 }
 
+variable "cidr_subnet_cosmosdb_mongodb" {
+  type        = list(string)
+  description = "Application gateway address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number

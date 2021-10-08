@@ -11,14 +11,28 @@ locals {
   ]
 }
 
+# APIM subnet
+module "cosmosdb_mongodb_snet" {
+  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
+  name                 = format("%s-cosmosb-mongodb-snet", local.project)
+  resource_group_name  = azurerm_resource_group.rg_vnet.name
+  virtual_network_name = module.vnet.name
+  address_prefixes     = var.cidr_subnet_cosmosdb_mongodb
+
+  enforce_private_link_endpoint_network_policies = true
+  service_endpoints                              = ["Microsoft.Web"]
+}
+
 module "cosmosdb_account_mongodb" {
   source = "../modules/azurerm_cosmosdb_account"
 
-  name                = format("%s-cosmosdb-mongodb-account", local.project)
-  location            = azurerm_resource_group.mongodb_rg.location
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-  offer_type          = var.cosmosdb_mongodb_offer_type
-  kind                = "MongoDB"
+  name                 = format("%s-cosmosdb-mongodb-account", local.project)
+  location             = azurerm_resource_group.mongodb_rg.location
+  resource_group_name  = azurerm_resource_group.mongodb_rg.name
+  offer_type           = var.cosmosdb_mongodb_offer_type
+  kind                 = "MongoDB"
+  subnet_id            = module.cosmosdb_mongodb_snet.id
+  private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_documents_azure_com.id]
 
   enable_free_tier = var.cosmosdb_mongodb_enable_free_tier
 
