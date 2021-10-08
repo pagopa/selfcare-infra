@@ -17,7 +17,6 @@ cidr_vnet              = ["10.1.0.0/16"]
 cidr_subnet_k8s        = ["10.1.0.0/17"]
 cidr_subnet_appgateway = ["10.1.128.0/24"]
 cidr_subnet_azdoa      = ["10.1.130.0/24"]
-# prod only
 cidr_subnet_redis = ["10.1.132.0/24"]
 
 # integration vnet
