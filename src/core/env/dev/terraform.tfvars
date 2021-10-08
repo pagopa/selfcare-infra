@@ -13,9 +13,11 @@ lock_enable = false
 
 # networking
 # main vnet
-cidr_vnet              = ["10.1.0.0/16"]
-cidr_subnet_appgateway = ["10.1.128.0/24"]
-cidr_subnet_azdoa      = ["10.1.130.0/24"]
+cidr_vnet                = ["10.1.0.0/16"]
+cidr_subnet_appgateway   = ["10.1.128.0/24"]
+cidr_subnet_azdoa        = ["10.1.130.0/24"]
+cidr_subnet_vpn          = ["10.1.133.0/24"]
+cidr_subnet_dnsforwarder = ["10.1.134.0/29"]
 
 # integration vnet
 # https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
