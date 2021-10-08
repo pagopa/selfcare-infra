@@ -45,7 +45,7 @@ data "azuread_group" "adgroup_admin" {
 }
 
 ## ad group policy ##
-resource "azurerm_key_vault_access_policy" "ad_group_policy" {
+resource "azurerm_key_vault_access_policy" "adgroup_admin_policy" {
   key_vault_id = module.key_vault.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
@@ -143,16 +143,6 @@ resource "azurerm_user_assigned_identity" "appgateway" {
 
 data "azurerm_key_vault_certificate" "app_gw_platform" {
   name         = var.app_gateway_api_certificate_name
-  key_vault_id = module.key_vault.id
-}
-
-data "azurerm_key_vault_certificate" "portal_platform" {
-  name         = var.app_gateway_portal_certificate_name
-  key_vault_id = module.key_vault.id
-}
-
-data "azurerm_key_vault_certificate" "management_platform" {
-  name         = var.app_gateway_management_certificate_name
   key_vault_id = module.key_vault.id
 }
 

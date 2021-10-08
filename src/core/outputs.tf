@@ -14,10 +14,6 @@ output "vnet_integration_address_space" {
   value = module.vnet_integration.address_space
 }
 
-# output "azurerm_key_vault_certificate_management_platform" {
-#   value = data.azurerm_key_vault_certificate.management_platform
-# }
-
 ## CosmosDb - MongoDB ##
 output "cosmosdb_account_mongodb_id" {
   value = module.cosmosdb_account_mongodb.id
