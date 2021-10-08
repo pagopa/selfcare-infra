@@ -13,11 +13,10 @@ lock_enable = true
 
 # networking
 # main vnet
-cidr_vnet                    = ["10.1.0.0/16"]
-cidr_subnet_appgateway       = ["10.1.128.0/24"]
+cidr_vnet              = ["10.1.0.0/16"]
+cidr_subnet_appgateway = ["10.1.128.0/24"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.129.0/24"]
-cidr_subnet_azdoa            = ["10.1.130.0/24"]
-# prod only
+cidr_subnet_azdoa      = ["10.1.130.0/24"]
 cidr_subnet_redis = ["10.1.132.0/24"]
 
 # integration vnet
@@ -46,7 +45,6 @@ app_gateway_max_capacity         = 2
 # todo change to Premium before launch
 # redis_sku_name = "Premium"
 # redis_family   = "P"
-
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless = true # TODO set to false before launch
