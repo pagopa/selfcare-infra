@@ -94,8 +94,6 @@ variable "aks_num_outbound_ips" {
 }
 
 variable "aks_metric_alerts" {
-  default = {}
-
   description = <<EOD
 Map of name = criteria objects
 EOD
@@ -122,6 +120,199 @@ EOD
       }
     ))
   }))
+
+  default = {
+    node_cpu = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/nodes"
+      metric_name      = "cpuUsagePercentage"
+      operator         = "GreaterThan"
+      threshold        = 80
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "host"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ],
+    }
+    node_memory = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/nodes"
+      metric_name      = "memoryWorkingSetPercentage"
+      operator         = "GreaterThan"
+      threshold        = 80
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "host"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ],
+    }
+    node_disk = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/nodes"
+      metric_name      = "DiskUsedPercentage"
+      operator         = "GreaterThan"
+      threshold        = 80
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "host"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "device"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ],
+    }
+    node_not_ready = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/nodes"
+      metric_name      = "nodesCount"
+      operator         = "GreaterThan"
+      threshold        = 0
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "status"
+          operator = "Include"
+          values   = ["NotReady"]
+        }
+      ],
+    }
+    pods_failed = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/pods"
+      metric_name      = "podCount"
+      operator         = "GreaterThan"
+      threshold        = 0
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "phase"
+          operator = "Include"
+          values   = ["Failed"]
+        }
+      ]
+    }
+    pods_ready = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/pods"
+      metric_name      = "PodReadyPercentage"
+      operator         = "LessThan"
+      threshold        = 80
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "kubernetes namespace"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "controllerName"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ]
+    }
+    container_cpu = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/containers"
+      metric_name      = "cpuExceededPercentage"
+      operator         = "GreaterThan"
+      threshold        = 95
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "kubernetes namespace"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "controllerName"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ]
+    }
+    container_memory = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/containers"
+      metric_name      = "memoryWorkingSetExceededPercentage"
+      operator         = "GreaterThan"
+      threshold        = 95
+      frequency        = "PT1M"
+      window_size      = "PT5M"
+      dimension = [
+        {
+          name     = "kubernetes namespace"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "controllerName"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ]
+    }
+    container_oom = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/pods"
+      metric_name      = "oomKilledContainerCount"
+      operator         = "GreaterThan"
+      threshold        = 0
+      frequency        = "PT1M"
+      window_size      = "PT1M"
+      dimension = [
+        {
+          name     = "kubernetes namespace"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "controllerName"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ]
+    }
+    container_restart = {
+      aggregation      = "Average"
+      metric_namespace = "Insights.Container/pods"
+      metric_name      = "restartingContainerCount"
+      operator         = "GreaterThan"
+      threshold        = 0
+      frequency        = "PT1M"
+      window_size      = "PT1M"
+      dimension = [
+        {
+          name     = "kubernetes namespace"
+          operator = "Include"
+          values   = ["*"]
+        },
+        {
+          name     = "controllerName"
+          operator = "Include"
+          values   = ["*"]
+        }
+      ]
+    }
+  }
 }
 
 variable "aks_alerts_enabled" {

@@ -46,3 +46,11 @@ app_gateway_max_capacity         = 2
 # todo change to Premium before launch
 # redis_sku_name = "Premium"
 # redis_family   = "P"
+
+# aks
+# This is the k8s ingress controller ip. It must be in the aks subnet range.
+reverse_proxy_ip = "10.1.0.250"
+# aks_availability_zones = [1, 2, 3]         # TODO to define and uncomment before release to prod
+# aks_node_count         = 6                 # TODO to define and uncomment before release to prod
+# aks_vm_size            = "Standard_D8S_v3" # TODO to define and uncomment before release to prod
+# aks_sku_tier           = "Paid"            # TODO to define and uncomment before release to prod

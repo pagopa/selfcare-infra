@@ -38,3 +38,8 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
+
+# aks
+aks_alerts_enabled = false
+# This is the k8s ingress controller ip. It must be in the aks subnet range.
+reverse_proxy_ip = "10.1.0.250"
