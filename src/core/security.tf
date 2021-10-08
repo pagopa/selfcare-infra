@@ -45,7 +45,7 @@ data "azuread_group" "adgroup_admin" {
 }
 
 ## ad group policy ##
-resource "azurerm_key_vault_access_policy" "ad_group_policy" {
+resource "azurerm_key_vault_access_policy" "adgroup_admin_policy" {
   key_vault_id = module.key_vault.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
