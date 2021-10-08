@@ -39,4 +39,5 @@ apim_sku            = "Developer_1"
 app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless = true
+cosmosdb_mongodb_enable_serverless             = true
+cosmosdb_mongodb_public_network_access_enabled = true

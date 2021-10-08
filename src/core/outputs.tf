@@ -24,15 +24,18 @@ output "cosmosdb_account_mongodb_endpoint" {
 }
 
 output "cosmosdb_account_mongodb_primary_key" {
-  value = module.cosmosdb_account_mongodb.primary_key
+  value     = module.cosmosdb_account_mongodb.primary_key
+  sensitive = true
 }
 
 output "cosmosdb_account_mongodb_primary_readonly_key" {
-  value = module.cosmosdb_account_mongodb.primary_readonly_master_key
+  value     = module.cosmosdb_account_mongodb.primary_readonly_master_key
+  sensitive = true
 }
 
 output "cosmosdb_account_mongodb_connection_strings" {
-  value = module.cosmosdb_account_mongodb.connection_strings
+  value     = module.cosmosdb_account_mongodb.connection_strings
+  sensitive = true
 }
 
 output "cosmosdb_mongodb_id" {

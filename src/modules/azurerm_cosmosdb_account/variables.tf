@@ -36,7 +36,7 @@ variable "kind" {
 variable "mongo_server_version" {
   type        = string
   description = "The Server Version of a MongoDB account. Possible values are 4.0, 3.6, and 3.2."
-  default = null
+  default     = null
 }
 
 variable "public_network_access_enabled" {
@@ -96,9 +96,9 @@ variable "ip_range" {
 }
 
 variable "capabilities" {
-  type        = map(string)
+  type        = list(string)
   description = "The capabilities which should be enabled for this Cosmos DB account."
-  default     = {}
+  default     = []
 }
 
 variable "lock_enable" {

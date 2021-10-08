@@ -49,5 +49,5 @@ output "connection_strings" {
 }
 
 output "lock_id" {
-  value = var.lock_enable? azurerm_management_lock.this[0].id : null
+  value = var.lock_enable ? azurerm_management_lock.this[0].id : null
 }
