@@ -47,3 +47,11 @@ app_gateway_max_capacity                = 2
 # todo change to Premium before launch
 # redis_sku_name = "Premium"
 # redis_family   = "P"
+
+
+# CosmosDb MongoDb
+cosmosdb_mongodb_enable_serverless = true # TODO set to false before launch
+# cosmosdb_mongodb_enable_autoscaling = true TODO uncomment befor launch
+# cosmosdb_mongodb_max_throughput TODO define before launch
+cosmosdb_mongodb_enable_free_tier = true # TODO change to false before launch
+# cosmosdb_mongodb_additional_geo_locations TODO do we want replication?

@@ -220,12 +220,6 @@ variable "cosmosdb_mongodb_public_network_access_enabled" {
   default     = false
 }
 
-variable "cosmosdb_mongodb_failover_location" {
-  type        = string
-  description = "The name of the Azure region to host replicated data"
-  default     = ""
-}
-
 variable "cosmosdb_mongodb_consistency_policy" {
   type = object({
     consistency_level       = string
@@ -234,7 +228,7 @@ variable "cosmosdb_mongodb_consistency_policy" {
   })
 
   default = {
-    consistency_level       = "Strong"
+    consistency_level       = "Session"
     max_interval_in_seconds = null
     max_staleness_prefix    = null
   }

@@ -32,7 +32,7 @@ output "cosmosdb_account_mongodb_primary_key" {
 }
 
 output "cosmosdb_account_mongodb_primary_readonly_key" {
-  value = module.cosmosdb_account_mongodb.primary_readonly_key
+  value = module.cosmosdb_account_mongodb.primary_readonly_master_key
 }
 
 output "cosmosdb_account_mongodb_connection_strings" {
@@ -40,5 +40,5 @@ output "cosmosdb_account_mongodb_connection_strings" {
 }
 
 output "cosmosdb_mongodb_id" {
-  value = azurerm_cosmosdb_mongodb_database.cosmosdb_mongodb.id
+  value = azurerm_cosmosdb_mongo_database.mongodb.id
 }

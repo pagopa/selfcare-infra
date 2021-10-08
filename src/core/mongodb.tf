@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "cosmosdb_rg" {
+resource "azurerm_resource_group" "mongodb_rg" {
   name     = format("%s-cosmosdb-mongodb-rg", local.project)
   location = var.location
 
@@ -12,11 +12,11 @@ locals {
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/io-infrastructure-modules-new.git//azurerm_cosmosdb_account?ref=v3.0.15"
+  source = "../modules/azurerm_cosmosdb_account"
 
   name                = format("%s-cosmosdb-mongodb-account", local.project)
-  location            = azurerm_resource_group.cosmosdb_rg.location
-  resource_group_name = azurerm_resource_group.cosmosdb_rg.name
+  location            = azurerm_resource_group.mongodb_rg.location
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
   offer_type          = var.cosmosdb_mongodb_offer_type
   kind                = "MongoDB"
 
@@ -31,22 +31,26 @@ module "cosmosdb_account_mongodb" {
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
 
-  main_geo_location_location = azurerm_resource_group.cosmosdb_rg.location
+  main_geo_location_location = azurerm_resource_group.mongodb_rg.location
 
   additional_geo_locations = var.cosmosdb_mongodb_additional_geo_locations
 
   tags = var.tags
 }
 
-resource "azurerm_cosmosdb_mongodb_database" "cosmosdb_mongodb" {
+resource "azurerm_cosmosdb_mongo_database" "mongodb" {
   name                = format("%s-cosmosdb-mongodb", local.project)
-  resource_group_name = module.cosmosdb_account_mongodb.resource_group_name
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
   account_name        = module.cosmosdb_account_mongodb.name
 
-  throughput         = !var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
-  autoscale_settings = var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? { max_throughput : var.cosmosdb_mongodb_max_throughput } : null
+  throughput         = var.cosmosdb_mongodb_enable_autoscaling || var.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
 
-  tags = var.tags
+  dynamic "autoscale_settings" {
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? [""] : []
+    content {
+      max_throughput = var.cosmosdb_mongodb_max_throughput
+    }
+  }
 }
 
 #tfsec:ignore:AZU023
