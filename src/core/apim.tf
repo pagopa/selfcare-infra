@@ -38,8 +38,8 @@ module "apim" {
   sku_name             = var.apim_sku
   virtual_network_type = "Internal"
 
-  redis_connection_string = var.redis_cache_enabled ? module.redis[0].primary_connection_string : null
-  redis_cache_id          = var.redis_cache_enabled ? module.redis[0].id : null
+  redis_connection_string = coalesce(module.redis.primary_connection_string, "")
+  redis_cache_id          = module.redis.id
 
   # This enables the Username and Password Identity Provider
   sign_up_enabled = false
@@ -61,7 +61,8 @@ module "apim" {
   tags = var.tags
 
   depends_on = [
-    azurerm_application_insights.application_insights
+    azurerm_application_insights.application_insights,
+    module.redis
   ]
 }
 
