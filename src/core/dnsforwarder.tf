@@ -15,6 +15,10 @@ module "dns_forwarder_snet" {
   virtual_network_name                           = module.vnet.name
   enforce_private_link_endpoint_network_policies = true
 
+  service_endpoints = [
+    "Microsoft.Storage",
+  ]
+
   delegation = {
     name = "delegation"
     service_delegation = {
@@ -39,21 +43,32 @@ resource "azurerm_network_profile" "dns_forwarder" {
   }
 }
 
-#tfsec:ignore:AZU012 # TODO to analyze
-resource "azurerm_storage_account" "dns_forwarder" {
+#tfsec:ignore:azure-storage-default-action-deny
+module "storage_account_dns_forwarder" {
+  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v1.0.60"
 
-  name                      = replace(format("%s-dnsfwd-st", local.project), "-", "")
-  resource_group_name       = azurerm_resource_group.dns_forwarder.name
-  location                  = var.location
-  enable_https_traffic_only = true
-  min_tls_version           = "TLS1_2"
-  account_tier              = "Standard"
+  name                       = replace(format("%s-dnsfwd-st", local.project), "-", "")
+  account_kind               = "StorageV2"
+  account_tier               = "Standard"
+  account_replication_type   = "LRS"
+  access_tier                = "Hot"
+  resource_group_name        = azurerm_resource_group.dns_forwarder.name
+  location                   = var.location
+  advanced_threat_protection = false
 
-  account_replication_type = "LRS"
 
-  network_rules {
+  network_rules = {
     default_action = "Deny"
-    virtual_network_subnet_ids = []
+    ip_rules       = []
+    bypass = [
+      "Logging",
+      "Metrics",
+      "AzureServices",
+    ]
+    virtual_network_subnet_ids = [
+      module.dns_forwarder_snet.id,
+      module.azdoa_snet[0].id
+    ]
   }
 
   tags = var.tags
@@ -63,7 +78,7 @@ resource "azurerm_storage_share" "dns_forwarder" {
 
   name = format("%s-dns-forwarder-share", local.project)
 
-  storage_account_name = azurerm_storage_account.dns_forwarder.name
+  storage_account_name = module.storage_account_dns_forwarder.name
 
   quota = 1
 }
@@ -138,8 +153,8 @@ resource "azurerm_container_group" "coredns_forwarder" {
       read_only  = false
       share_name = azurerm_storage_share.dns_forwarder.name
 
-      storage_account_key  = azurerm_storage_account.dns_forwarder.primary_access_key
-      storage_account_name = azurerm_storage_account.dns_forwarder.name
+      storage_account_key  = module.storage_account_dns_forwarder.primary_access_key
+      storage_account_name = module.storage_account_dns_forwarder.name
     }
 
   }
@@ -165,8 +180,8 @@ resource "null_resource" "upload_corefile" {
   provisioner "local-exec" {
     command = <<EOT
               az storage file upload \
-                --account-name ${azurerm_storage_account.dns_forwarder.name} \
-                --account-key ${azurerm_storage_account.dns_forwarder.primary_access_key} \
+                --account-name ${module.storage_account_dns_forwarder.name} \
+                --account-key ${module.storage_account_dns_forwarder.primary_access_key} \
                 --share-name ${azurerm_storage_share.dns_forwarder.name} \
                 --source "${path.module}/dns/Corefile"
           EOT
