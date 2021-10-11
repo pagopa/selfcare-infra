@@ -56,21 +56,6 @@ module "storage_account_dns_forwarder" {
   location                   = var.location
   advanced_threat_protection = false
 
-
-  network_rules = {
-    default_action = "Deny"
-    ip_rules       = []
-    bypass = [
-      "Logging",
-      "Metrics",
-      "AzureServices",
-    ]
-    virtual_network_subnet_ids = [
-      module.dns_forwarder_snet.id,
-      module.azdoa_snet[0].id
-    ]
-  }
-
   tags = var.tags
 }
 
