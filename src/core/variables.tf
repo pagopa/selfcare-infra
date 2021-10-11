@@ -46,6 +46,19 @@ variable "tags" {
   }
 }
 
+## VPN ##
+variable "vpn_sku" {
+  type        = string
+  default     = "VpnGw1"
+  description = "VPN Gateway SKU"
+}
+
+variable "vpn_pip_sku" {
+  type        = string
+  default     = "Basic"
+  description = "VPN GW PIP SKU"
+}
+
 ## Monitor
 variable "law_sku" {
   type        = string
@@ -99,6 +112,16 @@ variable "cidr_subnet_apim" {
 variable "cidr_subnet_appgateway" {
   type        = list(string)
   description = "Application gateway address space."
+}
+
+variable "cidr_subnet_vpn" {
+  type        = list(string)
+  description = "VPN network address space."
+}
+
+variable "cidr_subnet_dnsforwarder" {
+  type        = list(string)
+  description = "DNS Forwarder network address space."
 }
 
 # DNS
