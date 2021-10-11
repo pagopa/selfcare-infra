@@ -72,8 +72,9 @@ module "vpn" {
   pip_sku             = var.vpn_pip_sku
   subnet_id           = module.vpn_snet.id
 
-  log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
-  log_storage_account_id     = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
+  # TODO uncomment when security team will allow this project
+  #log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
+  #log_storage_account_id     = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
 
   vpn_client_configuration = [
     {
