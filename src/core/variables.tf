@@ -70,6 +70,12 @@ variable "aks_node_count" {
   default     = 1
 }
 
+variable "aks_max_pods" {
+  type        = number
+  description = "The maximum number of pods"
+  default     = 100
+}
+
 variable "kubernetes_version" {
   type    = string
   default = null

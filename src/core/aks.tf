@@ -18,7 +18,7 @@ module "aks" {
   vm_size    = var.aks_vm_size
   node_count = var.aks_node_count
   sku_tier   = var.aks_sku_tier
-  max_pods   = var.env_short == "d" ? 100 : 30
+  max_pods   = var.aks_max_pods
 
   private_cluster_enabled = true
 
