@@ -54,3 +54,9 @@ variable "default_service_port" {
   type    = number
   default = 8080
 }
+
+# hub-spid-login-ms
+
+variable "configmaps_hub-spid-login-ms" {
+  type = map(string)
+}

@@ -5,6 +5,7 @@ module "key_vault_secrets_query" {
   key_vault_name = local.key_vault_name
 
   secrets = [
-    "appinsights-instrumentation-key"
+    "appinsights-instrumentation-key",
+    "redis-primary-access-key"
   ]
 }
