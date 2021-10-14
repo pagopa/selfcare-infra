@@ -32,12 +32,12 @@ module "cosmosdb_account_mongodb" {
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
   subnet_id            = module.cosmosdb_mongodb_snet.id
-  private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_documents_azure_com.id]
+  private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id]
 
   enable_free_tier = var.cosmosdb_mongodb_enable_free_tier
 
   public_network_access_enabled     = var.cosmosdb_mongodb_public_network_access_enabled
-  is_virtual_network_filter_enabled = false
+  is_virtual_network_filter_enabled = true
 
   mongo_server_version = "4.0"
 
