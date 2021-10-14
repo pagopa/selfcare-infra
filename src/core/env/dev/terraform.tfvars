@@ -18,6 +18,8 @@ cidr_subnet_appgateway       = ["10.1.128.0/24"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.129.0/24"]
 cidr_subnet_azdoa            = ["10.1.130.0/24"]
 cidr_subnet_redis            = ["10.1.132.0/24"]
+cidr_subnet_vpn              = ["10.1.133.0/24"]
+cidr_subnet_dnsforwarder     = ["10.1.134.0/29"]
 
 # integration vnet
 # https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
@@ -39,6 +41,12 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
+
+# aks
+aks_alerts_enabled = false
+# This is the k8s ingress controller ip. It must be in the aks subnet range.
+reverse_proxy_ip = "10.1.0.250"
+aks_max_pods     = 100
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless             = true
