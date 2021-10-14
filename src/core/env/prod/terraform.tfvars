@@ -16,6 +16,7 @@ lock_enable = true
 cidr_vnet                = ["10.1.0.0/16"]
 cidr_subnet_k8s          = ["10.1.0.0/17"]
 cidr_subnet_appgateway   = ["10.1.128.0/24"]
+cidr_subnet_postgres     = ["10.1.129.0/24"]
 cidr_subnet_azdoa        = ["10.1.130.0/24"]
 cidr_subnet_redis        = ["10.1.132.0/24"]
 cidr_subnet_vpn          = ["10.1.133.0/24"]
@@ -56,3 +57,19 @@ aks_node_count = 1 # TODO to define before release to prod
 aks_max_pods   = 100
 # aks_vm_size            = "Standard_D8S_v3" # TODO to define and uncomment before release to prod
 # aks_sku_tier           = "Paid"            # TODO to define and uncomment before release to prod
+
+#postgres
+postgres_sku_name                     = "GP_Gen5_2" # TODO to define
+postgres_geo_redundant_backup_enabled = false
+postgres_enable_replica               = false #TODO to define
+# postgres_storage_mb                   = 5242880 # 5TB TODO to define
+postgres_configuration = {
+  autovacuum_work_mem         = "-1"
+  effective_cache_size        = "5242880"
+  log_autovacuum_min_duration = "5000"
+  log_connections             = "off"
+  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
+  log_temp_files              = "4096"
+  maintenance_work_mem        = "524288"
+  max_wal_size                = "4096"
+}
