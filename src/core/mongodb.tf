@@ -69,7 +69,7 @@ resource "azurerm_cosmosdb_mongo_database" "mongodb" {
 
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings" {
-  name         = "appinsights-instrumentation-key"
+  name         = "mongodb-connection-string"
   value        = module.cosmosdb_account_mongodb.connection_strings[0]
   content_type = "text/plain"
 
