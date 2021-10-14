@@ -14,6 +14,7 @@ lock_enable = true
 # networking
 # main vnet
 cidr_vnet                = ["10.1.0.0/16"]
+cidr_subnet_k8s          = ["10.1.0.0/17"]
 cidr_subnet_appgateway   = ["10.1.128.0/24"]
 cidr_subnet_azdoa        = ["10.1.130.0/24"]
 cidr_subnet_redis        = ["10.1.132.0/24"]
@@ -40,3 +41,9 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
+
+# aks
+aks_alerts_enabled = false
+# This is the k8s ingress controller ip. It must be in the aks subnet range.
+reverse_proxy_ip = "10.1.0.250"
+aks_max_pods     = 100
