@@ -33,6 +33,17 @@ aks_name=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:name}")
 aks_resource_group_name=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:resourceGroup}")
 aks_private_fqdn=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:privateFqdn}")
 
+# in widows, even if using cygwin, these variables will contain a landing \r character
+aks_name=${aks_name//[$'\r']}
+aks_resource_group_name=${aks_resource_group_name//[$'\r']}
+aks_private_fqdn=${aks_private_fqdn//[$'\r']}
+
+# if using cygwin, we have to transcode the WORKDIR
+HOME_DIR=$HOME
+if [[ $HOME_DIR == /cygdrive/* ]]; then
+  HOME_DIR=$(cygpath -w ~)
+fi
+
 rm -rf "${HOME}/.kube/config-${aks_name}"
 az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --file "~/.kube/config-${aks_name}"
 az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --overwrite-existing
@@ -41,6 +52,6 @@ echo "kube_config_path=~/.kube/config-${aks_name}" >> "${WORKDIR}/subscriptions/
 
 # with AAD auth enabled we need to authenticate the machine on the first setup
 echo "Follow Microsoft sign in steps. kubectl get pods command will fail but it's the expected behavior"
-kubectl --kubeconfig="${HOME}/.kube/config-${aks_name}" get pods
+kubectl --kubeconfig="${HOME_DIR}/.kube/config-${aks_name}" get pods
 kubectl config use-context "${aks_name}"
 kubectl get pods
