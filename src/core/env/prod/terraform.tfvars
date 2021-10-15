@@ -13,14 +13,15 @@ lock_enable = true
 
 # networking
 # main vnet
-cidr_vnet                = ["10.1.0.0/16"]
-cidr_subnet_k8s          = ["10.1.0.0/17"]
-cidr_subnet_appgateway   = ["10.1.128.0/24"]
-cidr_subnet_postgres     = ["10.1.129.0/24"]
-cidr_subnet_azdoa        = ["10.1.130.0/24"]
-cidr_subnet_redis        = ["10.1.132.0/24"]
-cidr_subnet_vpn          = ["10.1.133.0/24"]
-cidr_subnet_dnsforwarder = ["10.1.134.0/29"]
+cidr_vnet                    = ["10.1.0.0/16"]
+cidr_subnet_k8s              = ["10.1.0.0/17"]
+cidr_subnet_appgateway       = ["10.1.128.0/24"]
+cidr_subnet_postgres         = ["10.1.129.0/24"]
+cidr_subnet_azdoa            = ["10.1.130.0/24"]
+cidr_subnet_redis            = ["10.1.132.0/24"]
+cidr_subnet_vpn              = ["10.1.133.0/24"]
+cidr_subnet_dnsforwarder     = ["10.1.134.0/29"]
+cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 
 # integration vnet
 # https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
@@ -57,6 +58,13 @@ aks_node_count = 1 # TODO to define before release to prod
 aks_max_pods   = 100
 # aks_vm_size            = "Standard_D8S_v3" # TODO to define and uncomment before release to prod
 # aks_sku_tier           = "Paid"            # TODO to define and uncomment before release to prod
+
+# CosmosDb MongoDb
+cosmosdb_mongodb_enable_serverless = true # TODO set to false before launch
+# cosmosdb_mongodb_enable_autoscaling = true TODO uncomment befor launch
+# cosmosdb_mongodb_max_throughput TODO define before launch
+cosmosdb_mongodb_enable_free_tier = true # TODO change to false before launch
+# cosmosdb_mongodb_additional_geo_locations TODO do we want replication?
 
 #postgres
 postgres_sku_name                     = "GP_Gen5_2" # TODO to define
