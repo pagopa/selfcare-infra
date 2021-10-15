@@ -91,7 +91,7 @@ variable "aks_max_pods" {
 
 variable "kubernetes_version" {
   type    = string
-  default = null
+  default = "1.21.2"
 }
 
 variable "aks_sku_tier" {
