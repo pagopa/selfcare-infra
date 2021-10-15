@@ -26,9 +26,14 @@ module "postgres_snet" {
   enforce_private_link_endpoint_network_policies = true
 }
 
+// azure-database-postgres-configuration ignored because these rules are not correctly evaluated! this configuration is enabled using postgres_configurations var
 #tfsec:ignore:azure-database-no-public-access
+#tfsec:ignore:azure-database-postgres-configuration-log-checkpoints
+#tfsec:ignore:azure-database-postgres-configuration-log-connection-throttling
+#tfsec:ignore:azure-database-postgres-configuration-log-connections
 module "postgresql" {
-  source                           = "git::https://github.com/pagopa/azurerm.git//postgresql_server?ref=v1.0.60"
+  source = "git::https://github.com/pagopa/azurerm.git//postgresql_server?ref=v1.0.60"
+
   name                             = format("%s-postgresql", local.project)
   location                         = azurerm_resource_group.postgres_rg.location
   resource_group_name              = azurerm_resource_group.postgres_rg.name

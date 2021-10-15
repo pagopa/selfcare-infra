@@ -66,5 +66,8 @@ postgres_configuration = {
   log_temp_files              = "4096"
   maintenance_work_mem        = "524288"
   max_wal_size                = "4096"
+  log_connections             = "on"
+  log_checkpoints             = "on"
+  connection_throttling       = "on"
 }
 postgres_alerts_enabled = false
