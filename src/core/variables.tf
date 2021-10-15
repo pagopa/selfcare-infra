@@ -419,13 +419,13 @@ variable "dns_default_ttl_sec" {
 
 variable "external_domain" {
   type        = string
-  default     = null
+  default     = "pagopa.it"
   description = "Domain for delegation"
 }
 
 variable "dns_zone_prefix" {
   type        = string
-  default     = null
+  default     = "selfcare"
   description = "The dns subdomain."
 }
 
@@ -557,4 +557,11 @@ variable "cosmosdb_mongodb_max_throughput" {
   type        = number
   description = "The maximum throughput of the MongoDB database (RU/s). Must be between 4,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput"
   default     = 4000
+}
+
+# spid-testenv
+variable "enable_spid_test" {
+  type        = bool
+  description = "to provision italia/spid-testenv2:1.1.0"
+  default     = false
 }

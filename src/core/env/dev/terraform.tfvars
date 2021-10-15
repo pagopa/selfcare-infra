@@ -52,3 +52,6 @@ aks_max_pods     = 100
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless             = true
 cosmosdb_mongodb_public_network_access_enabled = true
+
+# spid-testenv
+enable_spid_test = true
