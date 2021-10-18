@@ -6,14 +6,6 @@ output "vnet_address_space" {
   value = module.vnet.address_space
 }
 
-output "vnet_integration_name" {
-  value = module.vnet_integration.name
-}
-
-output "vnet_integration_address_space" {
-  value = module.vnet_integration.address_space
-}
-
 ## Redis cache
 output "redis_primary_access_key" {
   value     = module.redis.primary_access_key
