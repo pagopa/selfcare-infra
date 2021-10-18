@@ -419,13 +419,13 @@ variable "dns_default_ttl_sec" {
 
 variable "external_domain" {
   type        = string
-  default     = null
+  default     = "pagopa.it"
   description = "Domain for delegation"
 }
 
 variable "dns_zone_prefix" {
   type        = string
-  default     = null
+  default     = "selfcare"
   description = "The dns subdomain."
 }
 
