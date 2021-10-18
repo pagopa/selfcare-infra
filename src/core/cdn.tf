@@ -19,7 +19,7 @@ module "checkout_cdn" {
   prefix                = local.project
   resource_group_name   = azurerm_resource_group.checkout_fe_rg.name
   location              = var.location
-  hostname              = format("www.%s.%s", var.dns_zone_prefix, var.external_domain)
+  hostname              = format("%s.%s", var.dns_zone_prefix, var.external_domain)
   https_rewrite_enabled = true
   lock_enabled          = var.lock_enable
 
