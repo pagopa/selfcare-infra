@@ -27,7 +27,6 @@ module "postgres_snet" {
 }
 
 // azure-database-postgres-configuration ignored because these rules are not correctly evaluated! this configuration is enabled using postgres_configurations var
-#tfsec:ignore:azure-database-no-public-access
 #tfsec:ignore:azure-database-postgres-configuration-log-checkpoints
 #tfsec:ignore:azure-database-postgres-configuration-log-connection-throttling
 #tfsec:ignore:azure-database-postgres-configuration-log-connections
@@ -47,7 +46,7 @@ module "postgresql" {
   geo_redundant_backup_enabled     = var.postgres_geo_redundant_backup_enabled
   enable_replica                   = var.postgres_enable_replica
   ssl_minimal_tls_version_enforced = "TLS1_2"
-  public_network_access_enabled    = true
+  public_network_access_enabled    = false
   lock_enable                      = var.lock_enable
 
   network_rules         = var.postgres_network_rules
