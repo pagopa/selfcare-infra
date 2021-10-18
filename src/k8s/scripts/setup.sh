@@ -42,13 +42,14 @@ aks_private_fqdn=${aks_private_fqdn//[$'\r']}
 HOME_DIR=$HOME
 if [[ $HOME_DIR == /cygdrive/* ]]; then
   HOME_DIR=$(cygpath -w ~)
+  HOME_DIR=${HOME_DIR//\\//}
 fi
 
 rm -rf "${HOME}/.kube/config-${aks_name}"
 az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --file "~/.kube/config-${aks_name}"
 az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --overwrite-existing
 echo "aks_private_fqdn=${aks_private_fqdn}" >> "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
-echo "kube_config_path=~/.kube/config-${aks_name}" >> "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
+echo "kube_config_path=${HOME_DIR}/.kube/config-${aks_name}" >> "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
 
 # with AAD auth enabled we need to authenticate the machine on the first setup
 echo "Follow Microsoft sign in steps. kubectl get pods command will fail but it's the expected behavior"
