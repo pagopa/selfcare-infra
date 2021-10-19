@@ -22,11 +22,7 @@ cidr_subnet_redis            = ["10.1.132.0/24"]
 cidr_subnet_vpn              = ["10.1.133.0/24"]
 cidr_subnet_dnsforwarder     = ["10.1.134.0/29"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
-
-# integration vnet
-# https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
-cidr_vnet_integration = ["10.230.7.0/24"] # todo ask to SIA
-cidr_subnet_apim      = ["10.230.7.0/26"]
+cidr_subnet_apim             = ["10.1.136.0/24"]
 
 # dns
 external_domain = "pagopa.it"

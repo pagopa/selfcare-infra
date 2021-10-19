@@ -379,11 +379,6 @@ variable "cidr_vnet" {
   description = "Virtual network address space."
 }
 
-variable "cidr_vnet_integration" {
-  type        = list(string)
-  description = "Virtual network to peer with sia subscription. It should host apim"
-}
-
 variable "cidr_subnet_apim" {
   type        = list(string)
   description = "Address prefixes subnet api management."
