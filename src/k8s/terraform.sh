@@ -50,6 +50,12 @@ terraform init -reconfigure \
     -backend-config="storage_account_name=${storage_account_name}" \
     -backend-config="resource_group_name=${resource_group_name}"
 
+# if using cygwin, we have to transcode the WORKDIR
+if [[ $WORKDIR == /cygdrive/* ]]; then
+  WORKDIR=$(cygpath -w $WORKDIR)
+fi
+
+
 export HELM_DEBUG=1
 if echo "plan apply refresh import output destroy" | grep -w ${COMMAND} > /dev/null; then
   if [ ${COMMAND} = "output" ]; then
