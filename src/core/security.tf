@@ -172,3 +172,48 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
   name         = "sec-storage-id"
   key_vault_id = module.key_vault.id
 }
+
+# JWT
+resource "tls_private_key" "jwt" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+resource "tls_self_signed_cert" "jwt_self" {
+  allowed_uses = [
+    "crl_signing",
+    "data_encipherment",
+    "digital_signature",
+    "key_agreement",
+    "cert_signing",
+    "key_encipherment"
+  ]
+  key_algorithm         = "RSA"
+  private_key_pem       = tls_private_key.jwt.private_key_pem
+  validity_period_hours = 8640
+  subject {
+    common_name = "apim"
+  }
+}
+
+resource "pkcs12_from_pem" "jwt_pkcs12" {
+  password        = ""
+  cert_pem        = tls_self_signed_cert.jwt_self.cert_pem
+  private_key_pem = tls_private_key.jwt.private_key_pem
+}
+
+resource "azurerm_key_vault_secret" "jwt_private_key" {
+  name         = "jwt-private-key"
+  value        = tls_private_key.jwt.private_key_pem
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "jwt_public_key" {
+  name         = "jwt-public-key"
+  value        = tls_private_key.jwt.public_key_pem
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}

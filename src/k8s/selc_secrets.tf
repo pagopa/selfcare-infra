@@ -5,7 +5,12 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
   }
 
   data = {
-    APPLICATIONINSIGHTS_CONNECTION_STRING = local.appinsights_instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY = local.appinsights_instrumentation_key
+    JWT_TOKEN_PRIVATE_KEY = module.key_vault_secrets_query.values["jwt-private-key"].value
+
+    METADATA_PUBLIC_CERT  = var.agid_spid_public_cert != null ? data.azurerm_key_vault_secret.agid_spid_cert[0].value : tls_self_signed_cert.spid_self.cert_pem
+    METADATA_PRIVATE_CERT = var.agid_spid_private_key != null ? data.azurerm_key_vault_secret.agid_spid_private_key[0].value : tls_private_key.spid.private_key_pem
+
   }
 
   type = "Opaque"

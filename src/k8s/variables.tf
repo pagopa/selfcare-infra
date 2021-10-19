@@ -55,6 +55,19 @@ variable "default_service_port" {
   default = 8080
 }
 
+# gateway
+variable "api_gateway_url" {
+  type = string
+}
+variable "cdn_frontend_url" {
+  type = string
+}
+variable "spid_testenv_url" {
+  type    = string
+  default = null
+}
+
+
 # hub-spid-login-ms
 
 variable "configmaps_hub-spid-login-ms" {
