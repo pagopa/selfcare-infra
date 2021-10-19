@@ -36,3 +36,4 @@ __TMP
 .metals/
 __azurite_*
 /.idea
+.bastianhost.ini
