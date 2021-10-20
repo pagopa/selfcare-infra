@@ -8,8 +8,8 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
     APPINSIGHTS_INSTRUMENTATIONKEY = local.appinsights_instrumentation_key
     JWT_TOKEN_PRIVATE_KEY          = module.key_vault_secrets_query.values["jwt-private-key"].value
 
-    METADATA_PUBLIC_CERT  = module.key_vault_secrets_query.values["agid-spid-cert"]        # TODO actually manually populated, but to try to automate in gitops
-    METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"] # TODO actually manually populated, but to try to automate in gitops
+    METADATA_PUBLIC_CERT  = module.key_vault_secrets_query.values["agid-spid-cert"].value        # TODO actually manually populated, but to try to automate in gitops
+    METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value # TODO actually manually populated, but to try to automate in gitops
 
   }
 

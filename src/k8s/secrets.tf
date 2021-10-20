@@ -7,6 +7,8 @@ module "key_vault_secrets_query" {
   secrets = [
     "appinsights-instrumentation-key",
     "redis-primary-access-key",
-    "jwt-private-key"
+    "jwt-private-key",
+    "agid-spid-cert",
+    "agid-spid-private-key"
   ]
 }
