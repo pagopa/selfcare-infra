@@ -38,8 +38,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     ENABLE_JWT                         = "true"
     INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
 
-    TOKEN_EXPIRATION      = "3600"
-    JWT_TOKEN_ISSUER      = "SPID"
+    TOKEN_EXPIRATION = "3600"
+    JWT_TOKEN_ISSUER = "SPID"
 
     # ADE
     ENABLE_ADE_AA = "false"
@@ -48,7 +48,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     APPINSIGHTS_DISABLED = true
 
     SPID_TESTENV_URL = var.spid_testenv_url
-  },
+    },
     var.configmaps_hub-spid-login-ms,
   )
 }
