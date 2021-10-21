@@ -2,6 +2,7 @@ openapi: 3.0.3
 info:
   title: Party Management Micro Service
   description: This service is the party manager
+  version: 'v1'
   contact:
     name: API Support
     url: 'http://www.example.com/support'
@@ -10,7 +11,7 @@ info:
   x-api-id: an x-api-id
   x-summary: an x-summary
 servers:
-  - url: 'https://${host}/party-management/v1'
+  - url: 'https://${host}/${basePath}'
     description: This service is the party manager
 tags:
   - name: party
@@ -25,18 +26,20 @@ tags:
       url: 'http://swagger.io'
 paths:
   '/persons/{id}':
-    parameters:
-      - name: id
-        in: path
-        schema:
-          type: string
-          format: uuid
-        required: true
-        description: Person ID
     get:
       summary: Retrieves Person by ID
       tags:
         - party
+      operationId: getPersonById
+      description: 'returns the identified person, if any.'
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Person ID
       responses:
         '200':
           description: Person
@@ -56,8 +59,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: getPersonById
-      description: 'returns the identified person, if any.'
     head:
       tags:
         - party
@@ -136,18 +137,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
   /organizations/{id}:
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-        name: id
-        in: path
-        required: true
-        description: Organization ID
     get:
       summary: Retrieves Organization by ID
       tags:
         - party
+      operationId: getOrganizationById
+      description: 'returns the identified organization, if any.'
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          name: id
+          in: path
+          required: true
+          description: Organization ID
       responses:
         '200':
           description: Organization
@@ -167,8 +170,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: getOrganizationById
-      description: 'returns the identified organization, if any.'
     head:
       #      security:
       #        - bearerAuth: [ ]

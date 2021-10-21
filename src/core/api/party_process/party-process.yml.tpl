@@ -2,6 +2,7 @@ openapi: 3.0.3
 info:
   title: Party Process Micro Service
   description: This service is the party process
+  version: 'v1'
   contact:
     name: API Support
     url: 'http://www.example.com/support'
@@ -10,7 +11,7 @@ info:
   x-api-id: an x-api-id
   x-summary: an x-summary
 servers:
-  - url: 'https://${host}/pdnd-interop-uservice-party-process/v1'
+  - url: 'https://${host}/${basePath}'
     description: This service is the party process
 security:
   - bearerAuth: []
