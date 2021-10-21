@@ -114,6 +114,29 @@ module "monitor" {
   ]
 }
 
+module "apim_hub_spid_login_api" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-spid-login-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "Login SPID Service Provider"
+  display_name = "SPID"
+  path         = "spid/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/hub-spid-login-ms", var.reverse_proxy_ip)
+
+  content_format = "swagger-json"
+  content_value = templatefile("./api/hubspidlogin_api/swagger.json.tpl", {
+    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+  })
+
+  xml_content = file("./api/hubspidlogin_api/policy.xml")
+
+  subscription_required = false
+}
+
 module "pdnd_interop_party_prc" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-prc-api", local.project)

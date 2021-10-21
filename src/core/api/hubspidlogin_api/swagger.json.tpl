@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HUB Login SPID",
+    "version": "1.0",
+    "description": "Login SPID Service Provider"
+  },
+  "host": "${host}",
+  "basePath": "/spid/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {},
+  "security": [],
+  "paths": {
+    "/acs": {
+      "post": {
+        "description": "postACS",
+        "operationId": "postACS",
+        "summary": "postACS",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/error": {
+      "get": {
+        "description": "getError",
+        "operationId": "getError",
+        "summary": "getError",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/invalidate": {
+      "post": {
+        "description": "postInvalidate",
+        "operationId": "postInvalidate",
+        "summary": "postInvalidate",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/introspect": {
+      "post": {
+        "description": "postIntrospect",
+        "operationId": "postIntrospect",
+        "summary": "postIntrospect",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "getLogin",
+        "operationId": "getLogin",
+        "summary": "getLogin",
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "400": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "description": "postLogout",
+        "operationId": "postLogout",
+        "summary": "postLogout",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/metadata": {
+      "get": {
+        "description": "getMetadata",
+        "operationId": "getMetadata",
+        "summary": "getMetadata",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/refresh": {
+      "get": {
+        "description": "getRefresh",
+        "operationId": "getRefresh",
+        "summary": "getRefresh",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/success": {
+      "get": {
+        "description": "getSuccess",
+        "operationId": "getSuccess",
+        "summary": "getSuccess",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    },
+    "/upgradeToken": {
+      "post": {
+        "description": "postUpgradeToken",
+        "operationId": "postUpgradeToken",
+        "summary": "postUpgradeToken",
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
