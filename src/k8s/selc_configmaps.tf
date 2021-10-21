@@ -7,8 +7,6 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   data = merge({
     JAVA_TOOL_OPTIONS = ""
 
-    SERVER_PORT = 8080
-
     # SPID
     ORG_URL          = "https://pagopa.gov.it"
     ACS_BASE_URL     = format("%s/spid/v1", var.api_gateway_url)
