@@ -113,3 +113,72 @@ module "monitor" {
     }
   ]
 }
+
+module "pdnd_interop_party_prc" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-spid-login-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the party process"
+  display_name = "Party Process Micro Service"
+  path         = "pdnd-interop-uservice-party-process/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-process-client", var.reverse_proxy_ip) // TODO using a different ingress, reverse_proxy_ip should not be usable...
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_process/party-process.yml.tpl", {
+    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+}
+
+module "apim_pdnd_interop_party_manag" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-spid-login-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the party manager"
+  display_name = "Party Management Micro Service"
+  path         = "party-management/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-management-client", var.reverse_proxy_ip) // TODO using a different ingress, reverse_proxy_ip should not be usable...
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_management/party-management.yml.tpl", {
+    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+}
+
+module "pdnd_interop_party_reg_proxy" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-spid-login-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the proxy to the party registry"
+  display_name = "Party Registry Proxy Server"
+  path         = "pdnd-interop-uservice-party-registry-proxy/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-registry-proxy", var.reverse_proxy_ip) // TODO using a different ingress, reverse_proxy_ip should not be usable...
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_registry_proxy/party-registry-proxy.yml.tpl", {
+    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+}
