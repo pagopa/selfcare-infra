@@ -8,7 +8,7 @@ ingress_load_balancer_ip = "10.1.0.250"
 # Gateway
 api_gateway_url  = "https://api.dev.selfcare.pagopa.it"
 cdn_frontend_url = "https://dev.selfcare.pagopa.it"
-spid_testenv_url = "https://" # TODO
+spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
 
 # hub-spid-login-ms
 configmaps_hub-spid-login-ms = {

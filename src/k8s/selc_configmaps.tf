@@ -44,9 +44,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
 
     # application insights key
     APPINSIGHTS_DISABLED = true
-
-    SPID_TESTENV_URL = var.spid_testenv_url
     },
     var.configmaps_hub-spid-login-ms,
+    var.spid_testenv_url != null? {SPID_TESTENV_URL = var.spid_testenv_url}:{}
   )
 }
