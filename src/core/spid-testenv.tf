@@ -7,7 +7,7 @@ module "spid-test-env" {
   location          = var.location
   subscription_name = data.azurerm_subscription.current.display_name
 
-  hub_spid_login_metadata_url = format("https://api.%s.%s/hubspidloginms/metadata", var.dns_zone_prefix, var.external_domain)
+  hub_spid_login_metadata_url = format("https://api.%s.%s/spid/v1/metadata", var.dns_zone_prefix, var.external_domain)
 
   tags = var.tags
 }
