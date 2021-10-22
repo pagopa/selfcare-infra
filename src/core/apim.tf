@@ -154,7 +154,7 @@ module "apim_hub_spid_login_api_v1" {
   version_set_id      = azurerm_api_management_api_version_set.apim_hub_spid_login_api.id
 
   description  = "Login SPID Service Provider"
-  display_name = "SPID"
+  display_name = "SPID V1"
   path         = "spid/v1"
   protocols    = ["https"]
 
@@ -184,14 +184,23 @@ module "apim_hub_spid_login_api_v1" {
   ]
 }
 
-module "pdnd_interop_party_prc" {
+resource "azurerm_api_management_api_version_set" "pdnd_interop_party_prc" {
+  name                = format("%s-party-prc-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Process Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "pdnd_interop_party_prc_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-party-prc-api", local.project)
+  name                = format("%s-party-prc-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.pdnd_interop_party_prc.id
 
   description  = "This service is the party process"
-  display_name = "Party Process Micro Service"
+  display_name = "Party Process Micro Service V1"
   path         = "party-process/v1"
   protocols    = ["https"]
 
@@ -220,14 +229,23 @@ module "pdnd_interop_party_prc" {
   ]
 }
 
-module "apim_pdnd_interop_party_mgmt" {
+resource "azurerm_api_management_api_version_set" "apim_pdnd_interop_party_mgmt" {
+  name                = format("%s-party-mgmt-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Management Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_pdnd_interop_party_mgmt-v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-party-mgmt-api", local.project)
+  name                = format("%s-party-mgmt-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_pdnd_interop_party_mgmt.id
 
   description  = "This service is the party manager"
-  display_name = "Party Management Micro Service"
+  display_name = "Party Management Micro Service V1"
   path         = "party-management/v1"
   protocols    = ["https"]
 
@@ -252,14 +270,23 @@ module "apim_pdnd_interop_party_mgmt" {
   ]
 }
 
-module "pdnd_interop_party_reg_proxy" {
+resource "azurerm_api_management_api_version_set" "pdnd_interop_party_reg_proxy" {
+  name                = format("%s-party-reg-proxy-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Registry Proxy Server"
+  versioning_scheme   = "Segment"
+}
+
+module "pdnd_interop_party_reg_proxy-v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-party-reg-proxy-api", local.project)
+  name                = format("%s-party-reg-proxy-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.pdnd_interop_party_reg_proxy.id
 
   description  = "This service is the proxy to the party registry"
-  display_name = "Party Registry Proxy Server"
+  display_name = "Party Registry Proxy Server V1"
   path         = "party-registry-proxy/v1"
   protocols    = ["https"]
 
