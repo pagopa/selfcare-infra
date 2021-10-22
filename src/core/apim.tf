@@ -72,9 +72,9 @@ resource "azurerm_api_management_custom_domain" "api_custom_domain" {
   proxy {
     host_name = local.api_domain
     key_vault_id = replace(
-      data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-      "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
-      ""
+    data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
+    "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
+    ""
     )
   }
 }
@@ -114,11 +114,20 @@ module "monitor" {
   ]
 }
 
-module "apim_hub_spid_login_api" {
+resource "azurerm_api_management_api_version_set" "apim_hub_spid_login_api" {
+  name                = format("%s-spid-login-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "SPID"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_hub_spid_login_api_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-spid-login-api", local.project)
+  name                = format("%s-spid-login-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_hub_spid_login_api.id
 
   description  = "Login SPID Service Provider"
   display_name = "SPID"
