@@ -1,0 +1,43 @@
+<!-- TODO these are mocks! remove me after integration -->
+<policies>
+    <inbound>
+        <base/>
+        <return-response>
+            <set-status code="200" reason="OK"/>
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>
+                {
+                    "person": {
+                        "name": "name",
+                        "surname": "surname",
+                        "taxCode": "AAAAAA00A00A000A"
+                    },
+                    "institutions": [
+                        {
+                        "institutionId": "institutionId",
+                        "description": "description",
+                        "digitalAddress": "digitalAddress",
+                        "status": "active",
+                        "role": "Manager",
+                        "platformRole": "admin",
+                        "attributes": [
+                            "string"
+                            ]
+                        }
+                    ]
+                }
+            </set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base/>
+    </backend>
+    <outbound>
+        <base/>
+    </outbound>
+    <on-error>
+        <base/>
+    </on-error>
+</policies>

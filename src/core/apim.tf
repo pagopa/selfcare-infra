@@ -136,3 +136,103 @@ module "apim_hub_spid_login_api" {
 
   subscription_required = false
 }
+
+module "pdnd_interop_party_prc" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-party-prc-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the party process"
+  display_name = "Party Process Micro Service"
+  path         = "party-process/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-process-client", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_process/party-process.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "party-process/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+
+  // TODO these are mocks! remove me after integration
+  api_operation_policies = [
+    {
+      operation_id = "getOnBoardingInfo"
+      xml_content  = file("./api/party_process/getOnBoardingInfo_policy.xml")
+    },
+    {
+      operation_id = "createLegals"
+      xml_content  = file("./api/party_process/createLegals_policy.xml")
+    }
+  ]
+}
+
+module "apim_pdnd_interop_party_mgmt" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-party-mgmt-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the party manager"
+  display_name = "Party Management Micro Service"
+  path         = "party-management/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-management-client", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_management/party-management.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "party-management/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+
+  // TODO these are mocks! remove me after integration
+  api_operation_policies = [
+    {
+      operation_id = "getOrganizationById"
+      xml_content  = file("./api/party_management/getOrganizationById_policy.xml")
+    }
+  ]
+}
+
+module "pdnd_interop_party_reg_proxy" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-party-reg-proxy-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "This service is the proxy to the party registry"
+  display_name = "Party Registry Proxy Server"
+  path         = "party-registry-proxy/v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/pdnd-interop-uservice-party-registry-proxy", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_registry_proxy/party-registry-proxy.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "party-registry-proxy/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+
+  // TODO these are mocks! remove me after integration
+  api_operation_policies = [
+    {
+      operation_id = "searchInstitution"
+      xml_content  = file("./api/party_registry_proxy/searchInstitution_policy.xml")
+    }
+  ]
+}
