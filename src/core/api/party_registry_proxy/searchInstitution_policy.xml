@@ -1,0 +1,54 @@
+<!-- TODO these are mocks! remove me after integration -->
+<policies>
+    <inbound>
+        <base/>
+        <return-response>
+            <set-status code="200" reason="OK"/>
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>
+                {
+                    "items": [
+                        {
+                            "id": "id",
+                            "o": "o",
+                            "ou": "ou",
+                            "aoo": "aoo",
+                            "taxCode": "00000000000",
+                            "administrationCode": "00000000000",
+                            "category": "c7",
+                            "managerName": "Mario",
+                            "managerSurname": "Rossi",
+                            "description": "AGENCY X",
+                            "digitalAddress": "mail@pec.mail.org"
+                        },
+                        {
+                        "id": "error",
+                        "o": "errorO",
+                        "ou": "errorUu",
+                        "aoo": "errorAoo",
+                        "taxCode": "00000000000",
+                        "administrationCode": "00000000000",
+                        "category": "c7",
+                        "managerName": "Mario",
+                        "managerSurname": "Rossi",
+                        "description": "AGENCY ERROR",
+                        "digitalAddress": "mail2@pec.mail.org"
+                        }
+                    ],
+                "count": 0
+                }
+            </set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base/>
+    </backend>
+    <outbound>
+        <base/>
+    </outbound>
+    <on-error>
+        <base/>
+    </on-error>
+</policies>
