@@ -31,7 +31,8 @@ module "postgres_snet" {
 #tfsec:ignore:azure-database-postgres-configuration-log-connection-throttling
 #tfsec:ignore:azure-database-postgres-configuration-log-connections
 module "postgresql" {
-  source = "git::https://github.com/pagopa/azurerm.git//postgresql_server?ref=v1.0.60"
+//  source = "git::https://github.com/pagopa/azurerm.git//postgresql_server?ref=v1.0.60" # TODO after apply of https://github.com/pagopa/azurerm/pull/104, use new version and remove local copy of the module
+  source = "../modules/postgresql_server"
 
   name                             = format("%s-postgresql", local.project)
   location                         = azurerm_resource_group.postgres_rg.location

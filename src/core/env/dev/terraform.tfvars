@@ -67,3 +67,6 @@ postgres_configuration = {
   connection_throttling       = "on"
 }
 postgres_alerts_enabled = false
+
+# spid-testenv
+enable_spid_test = true
