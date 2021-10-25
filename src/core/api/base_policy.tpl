@@ -2,7 +2,9 @@
     <inbound>
         <cors allow-credentials="true">
             <allowed-origins>
-                <origin>https://${apim-name}.developer.azure-api.net</origin>
+              %{ for origin in origins ~}
+              <origin>${origin}</origin>
+              %{ endfor ~}
             </allowed-origins>
             <allowed-methods preflight-result-max-age="300">
                 <method>*</method>

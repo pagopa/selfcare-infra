@@ -21,6 +21,30 @@ locals {
   apim_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", local.project)
 
   api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+
+  origins = {
+    base = concat(
+              [
+                format("https://api.%s.%s", var.dns_zone_prefix, var.external_domain),
+                format("https://%s.%s", var.dns_zone_prefix, var.external_domain),
+               ],
+               var.env_short != "p"? ["https://localhost:3000","http://localhost:3000","https://localhost:3001","http://localhost:3001"]:[]
+            ),
+    spidAcsOrigins = concat(
+                      var.enable_spid_test ? [format("https://%s", module.spid-test-env.spid_testenv_url)] : [],
+                      [
+                        "https://id.lepida.it",
+                        "https://identity.infocert.it",
+                        "https://identity.sieltecloud.it",
+                        "https://idp.namirialtsp.com",
+                        "https://login.id.tim.it",
+                        "https://loginspid.aruba.it",
+                        "https://posteid.poste.it",
+                        "https://spid.intesa.it",
+                        "https://spid.register.it"
+                      ]
+                    )
+  }
 }
 
 ###########################
@@ -55,7 +79,7 @@ module "apim" {
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
 
   xml_content = templatefile("./api/base_policy.tpl", {
-    apim-name = format("%s-apim", local.project)
+    origins = local.origins.base
   })
 
   tags = var.tags
@@ -135,6 +159,20 @@ module "apim_hub_spid_login_api" {
   xml_content = file("./api/hubspidlogin_api/policy.xml")
 
   subscription_required = false
+
+
+  api_operation_policies = [
+    {
+      operation_id = "postACS"
+      xml_content  = templatefile("./api/hubspidlogin_api/postacs_policy.xml.tpl", {
+        origins = local.origins.spidAcsOrigins
+      })
+    },
+    {
+      operation_id = "getMetadata"
+      xml_content  = file("./api/hubspidlogin_api/metadata_policy.xml.tpl")
+    }
+  ]
 }
 
 module "pdnd_interop_party_prc" {
