@@ -718,3 +718,10 @@ EOD
     }
   }
 }
+
+# spid-testenv
+variable "enable_spid_test" {
+  type        = bool
+  description = "to provision italia/spid-testenv2:1.1.0"
+  default     = false
+}
