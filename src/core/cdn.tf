@@ -68,13 +68,18 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value  = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata"
+        value  = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
         name = "Content-Security-Policy-Report-Only"
-        value = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self'  'unsafe-inline'; worker-src 'none';"
+        value = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
+      },
+      {
+        action = "Append"
+        name   = "Content-Security-Policy-Report-Only"
+        value  = "img-src 'self' https://assets.cdn.io.italia.it data:; "
       }
     ]
   }
