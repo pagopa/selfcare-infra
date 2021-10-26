@@ -8,13 +8,31 @@ resource "azurerm_resource_group" "checkout_fe_rg" {
   tags = var.tags
 }
 
+locals {
+  spa = [
+    for i, spa in var.spa:
+      {
+        name                      = replace(format("SPA-%s", spa), "-", "")
+        order                     = i+2 // +2 required because the order start from 1 and 1 is reserved for the https rewrite
+        condition_type            = "url_file_extension_condition"
+        operator                  = "LessThanOrEqual"
+        match_values              = ["0"]
+        url_rewrite_action        = {
+          source_pattern          = format("/%s/", spa)
+          destination             = format("/%s/index.html", spa)
+          preserve_unmatched_path = false
+        }
+      }
+  ]
+}
+
 /**
  * CDN
  */
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.73"
+  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.79"
   name                  = "checkout"
   prefix                = local.project
   resource_group_name   = azurerm_resource_group.checkout_fe_rg.name
@@ -50,30 +68,18 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value  = "default-src 'self'; connect-src 'self' https://api.io.italia.it https://api-eu.mixpanel.com https://wisp2.pagopa.gov.it"
+        value  = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata"
+        , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
-        name   = "Content-Security-Policy-Report-Only"
-        value  = " https://acardste.vaservices.eu;"
-      },
-      {
-        action = "Append"
-        name   = "Content-Security-Policy-Report-Only"
-        value  = "frame-ancestors 'none'; object-src 'none'; frame-src 'self' https://www.google.com;"
-      },
-      {
-        action = "Append"
-        name   = "Content-Security-Policy-Report-Only"
-        value  = "img-src 'self' https://acardste.vaservices.eu https://wisp2.pagopa.gov.it data:;"
-      },
-      {
-        action = "Append"
-        name   = "Content-Security-Policy-Report-Only"
-        value  = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self'  'unsafe-inline'; worker-src 'none';"
+        name = "Content-Security-Policy-Report-Only"
+        value = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self'  'unsafe-inline'; worker-src 'none';"
       }
     ]
   }
+
+  delivery_rule_rewrite = local.spa
 
   tags = var.tags
 }
