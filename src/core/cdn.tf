@@ -14,9 +14,22 @@ locals {
       {
         name                      = replace(format("SPA-%s", spa), "-", "")
         order                     = i+2 // +2 required because the order start from 1 and 1 is reserved for the https rewrite
-        condition_type            = "url_file_extension_condition"
-        operator                  = "LessThanOrEqual"
-        match_values              = ["0"]
+        conditions = [
+          {
+            condition_type   = "url_path_condition"
+            operator         = "BeginsWith"
+            match_values     = [format("/%s/", spa)]
+            negate_condition = false
+            transforms       = null
+          },
+          {
+            condition_type   = "url_file_extension_condition"
+            operator         = "LessThanOrEqual"
+            match_values     = ["0"]
+            negate_condition = false
+            transforms       = null
+          },
+          ]
         url_rewrite_action        = {
           source_pattern          = format("/%s/", spa)
           destination             = format("/%s/index.html", spa)
@@ -32,7 +45,8 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.79"
+//  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.79"
+  source                = "../modules/cdn"
   name                  = "checkout"
   prefix                = local.project
   resource_group_name   = azurerm_resource_group.checkout_fe_rg.name
