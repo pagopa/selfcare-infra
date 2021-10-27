@@ -67,9 +67,22 @@ variable "spid_testenv_url" {
   default = null
 }
 
+variable "enable_postgres_replica" {
+  type        = bool
+  default     = false
+  description = "Enable connection to postgres replica"
+}
 
-# hub-spid-login-ms
+# configs/secrets
 
 variable "configmaps_hub-spid-login-ms" {
+  type = map(string)
+}
+
+variable "configmaps_ms-product" {
+  type = map(string)
+}
+
+variable "configmaps_b4f-dashboard" {
   type = map(string)
 }

@@ -31,7 +31,6 @@ resource "kubernetes_secret" "selc-redis-credentials" {
   type = "Opaque"
 }
 
-# not yet used by any deployment, but maybe useful for the future
 resource "kubernetes_secret" "selc-application-insights" {
   metadata {
     name      = "application-insights"
@@ -40,6 +39,47 @@ resource "kubernetes_secret" "selc-application-insights" {
 
   data = {
     APPLICATIONINSIGHTS_CONNECTION_STRING = local.appinsights_instrumentation_key
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "mongo-credentials" {
+  metadata {
+    name      = "mongo-credentials"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    DB_CONNECTION_URI = module.key_vault_secrets_query.values["mongodb-connection-string"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "postgres-credentials" {
+  metadata {
+    name      = "postgres-credentials"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    #principal database name
+    POSTGRES_DB_NAME = "selc"
+    #principal database hostname or ip
+    POSTGRES_HOST = local.postgres_hostname
+    #principal database username
+    POSTGRES_USERNAME = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, local.postgres_hostname)
+    #principal database password
+    POSTGRES_PASSWORD = module.key_vault_secrets_query.values["db-selc-user-password"].value
+    #replica database name
+    POSTGRES_REPLICA_DB_NAME = "selc"
+    #replica database hostname or ip
+    POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
+    #replica database username
+    POSTGRES_REPLICA_USERNAME = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
+    #replica database password
+    POSTGRES_REPLICA_PASSWORD = module.key_vault_secrets_query.values["db-selc-user-password"].value
   }
 
   type = "Opaque"

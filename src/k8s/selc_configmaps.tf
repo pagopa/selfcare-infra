@@ -49,3 +49,30 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     var.spid_testenv_url != null? {SPID_TESTENV_URL = var.spid_testenv_url}:{}
   )
 }
+
+resource "kubernetes_config_map" "ms-product" {
+  metadata {
+    name      = "ms-product"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+  },
+  var.configmaps_ms-product
+  )
+}
+
+resource "kubernetes_config_map" "b4f-dashboard" {
+  metadata {
+    name      = "b4f-dashboard"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+  },
+  var.configmaps_b4f-dashboard
+  )
+}
+

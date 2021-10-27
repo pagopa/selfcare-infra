@@ -24,6 +24,14 @@ resource "kubernetes_ingress" "selc_ingress" {
           path = "/hub-spid-login-ms/(.*)"
         }
 
+        path {
+          backend {
+            service_name = "b4f-dashboard"
+            service_port = var.default_service_port
+          }
+          path = "/b4f-dashboard/(.*)"
+        }
+
       }
     }
   }
