@@ -8,7 +8,11 @@ module "key_vault_secrets_query" {
     "appinsights-instrumentation-key",
     "redis-primary-access-key",
     "jwt-private-key",
+    "jwt-public-key",
     "agid-spid-cert",
-    "agid-spid-private-key"
+    "agid-spid-private-key",
+    "mongodb-connection-string",
+    "db-selc-login",
+    "db-selc-user-password"
   ]
 }
