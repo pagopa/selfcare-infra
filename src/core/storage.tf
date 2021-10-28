@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg_storage" {
 
 ## Storage account to save blob
 module "selc-blob-storage" {
-  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v1.0.60"
+  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v1.0.79"
 
   name                       = replace(format("%s-blobstorage", local.project), "-", "")
   account_kind               = "StorageV2"
