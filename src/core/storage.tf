@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "rg_storage" {
 }
 
 ## Storage account to save blob
+#tfsec:ignore:azure-storage-default-action-deny
 module "selc-blob-storage" {
   source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v1.0.79"
 
@@ -19,20 +20,6 @@ module "selc-blob-storage" {
   advanced_threat_protection = false
   allow_blob_public_access   = false
 
-  network_rules = {
-    default_action = "Deny"
-    ip_rules       = []
-    bypass = [
-      "Logging",
-      "Metrics",
-      "AzureServices",
-    ]
-    virtual_network_subnet_ids = [
-      module.apim_snet.id,
-      module.k8s_snet.id
-    ]
-  }
-
   tags = var.tags
 }
 
@@ -40,7 +27,7 @@ module "selc-blob-storage" {
 resource "azurerm_storage_container" "selc-contracts" {
   name                  = format("%s-contracts-blob", local.project)
   storage_account_name  = module.selc-blob-storage.name
-  container_access_type = "blob"
+  container_access_type = "private"
 }
 
 #tfsec:ignore:AZU023
