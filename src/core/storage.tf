@@ -44,7 +44,7 @@ resource "azurerm_storage_container" "selc-contracts" {
 }
 
 #tfsec:ignore:AZU023
-resource "azurerm_key_vault_secret" "cstar_blobstorage_key" {
+resource "azurerm_key_vault_secret" "selc_blobstorage_key" {
   name         = "blobstorage-access-key"
   value        = module.selc-blob-storage.primary_access_key
   content_type = "text/plain"
