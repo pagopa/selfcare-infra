@@ -32,6 +32,14 @@ resource "kubernetes_ingress" "selc_ingress" {
           path = "/b4f-dashboard/(.*)"
         }
 
+        path {
+          backend {
+            service_name = "ms-product"
+            service_port = var.default_service_port
+          }
+          path = "/ms-product/(.*)"
+        }
+
       }
     }
   }
