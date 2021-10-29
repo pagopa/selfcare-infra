@@ -184,7 +184,7 @@ module "apim_hub_spid_login_api_v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "pdnd_interop_party_prc" {
+resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" {
   name                = format("%s-party-prc-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
@@ -192,19 +192,19 @@ resource "azurerm_api_management_api_version_set" "pdnd_interop_party_prc" {
   versioning_scheme   = "Segment"
 }
 
-module "pdnd_interop_party_prc_v1" {
+module "apim_uservice_party_process_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-prc-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.pdnd_interop_party_prc.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
 
   description  = "This service is the party process"
   display_name = "Party Process Micro Service V1"
   path         = "party-process/v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-process-client", var.reverse_proxy_ip)
+  service_url = format("http://%s/uservice-party-process", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/party-process.yml.tpl", {
@@ -229,7 +229,7 @@ module "pdnd_interop_party_prc_v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "apim_pdnd_interop_party_mgmt" {
+resource "azurerm_api_management_api_version_set" "apim_uservice_party_management" {
   name                = format("%s-party-mgmt-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
@@ -237,19 +237,19 @@ resource "azurerm_api_management_api_version_set" "apim_pdnd_interop_party_mgmt"
   versioning_scheme   = "Segment"
 }
 
-module "apim_pdnd_interop_party_mgmt-v1" {
+module "apim_uservice_party_management-v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-mgmt-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_pdnd_interop_party_mgmt.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
 
   description  = "This service is the party manager"
   display_name = "Party Management Micro Service V1"
   path         = "party-management/v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-management-client", var.reverse_proxy_ip)
+  service_url = format("http://%s/uservice-party-management", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/party-management.yml.tpl", {
@@ -270,7 +270,7 @@ module "apim_pdnd_interop_party_mgmt-v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "pdnd_interop_party_reg_proxy" {
+resource "azurerm_api_management_api_version_set" "apim_uservice_party_registry_proxy" {
   name                = format("%s-party-reg-proxy-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
@@ -278,19 +278,19 @@ resource "azurerm_api_management_api_version_set" "pdnd_interop_party_reg_proxy"
   versioning_scheme   = "Segment"
 }
 
-module "pdnd_interop_party_reg_proxy-v1" {
+module "apim_uservice_party_registry_proxy-v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-reg-proxy-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.pdnd_interop_party_reg_proxy.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_registry_proxy.id
 
   description  = "This service is the proxy to the party registry"
   display_name = "Party Registry Proxy Server V1"
   path         = "party-registry-proxy/v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-registry-proxy", var.reverse_proxy_ip)
+  service_url = format("http://%s/uservice-party-registry-proxy", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/party-registry-proxy.yml.tpl", {
