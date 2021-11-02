@@ -410,6 +410,11 @@ variable "cidr_subnet_postgres" {
   description = "Database network address space."
 }
 
+variable "cidr_subnet_contract_storage" {
+  type        = list(string)
+  description = "Contracts storage address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
@@ -725,3 +730,11 @@ variable "enable_spid_test" {
   description = "to provision italia/spid-testenv2:1.1.0"
   default     = false
 }
+
+# contracts storage
+variable "contracts_delete_retention_days" {
+  type        = number
+  description = "Number of days to retain deleted contracts"
+  default     = 1
+}
+
