@@ -34,6 +34,30 @@ resource "kubernetes_ingress" "selc_ingress" {
 
         path {
           backend {
+            service_name = "uservice-party-process"
+            service_port = 8088
+          }
+          path = "/uservice-party-process/(.*)"
+        }
+
+        path {
+          backend {
+            service_name = "uservice-party-management"
+            service_port = 8088
+          }
+          path = "/uservice-party-management/(.*)"
+        }
+
+        path {
+          backend {
+            service_name = "uservice-party-registry-proxy"
+            service_port = 8088
+          }
+          path = "/uservice-party-registry-proxy/(.*)"
+        }
+
+        path {
+          backend {
             service_name = "ms-product"
             service_port = var.default_service_port
           }
