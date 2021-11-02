@@ -153,6 +153,8 @@ module "apim_hub_spid_login_api_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_hub_spid_login_api.id
 
+  api_version = "v1"
+
   description  = "Login SPID Service Provider"
   display_name = "SPID V1"
   path         = "spid/v1"
@@ -161,11 +163,11 @@ module "apim_hub_spid_login_api_v1" {
   service_url = format("http://%s/hub-spid-login-ms", var.reverse_proxy_ip)
 
   content_format = "swagger-json"
-  content_value = templatefile("./api/hubspidlogin_api/swagger.json.tpl", {
+  content_value = templatefile("./api/hubspidlogin_api/v1/swagger.json.tpl", {
     host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
   })
 
-  xml_content = file("./api/hubspidlogin_api/policy.xml")
+  xml_content = file("./api/hubspidlogin_api/v1/policy.xml")
 
   subscription_required = false
 
@@ -173,13 +175,13 @@ module "apim_hub_spid_login_api_v1" {
   api_operation_policies = [
     {
       operation_id = "postACS"
-      xml_content  = templatefile("./api/hubspidlogin_api/postacs_policy.xml.tpl", {
+      xml_content  = templatefile("./api/hubspidlogin_api/v1/postacs_policy.xml.tpl", {
         origins = local.origins.spidAcsOrigins
       })
     },
     {
       operation_id = "getMetadata"
-      xml_content  = file("./api/hubspidlogin_api/metadata_policy.xml.tpl")
+      xml_content  = file("./api/hubspidlogin_api/v1/metadata_policy.xml.tpl")
     }
   ]
 }
@@ -199,6 +201,8 @@ module "apim_uservice_party_process_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
 
+  api_version = "v1"
+
   description  = "This service is the party process"
   display_name = "Party Process Micro Service V1"
   path         = "party-process/v1"
@@ -207,7 +211,7 @@ module "apim_uservice_party_process_v1" {
   service_url = format("http://%s/uservice-party-process", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/party_process/party-process.yml.tpl", {
+  content_value = templatefile("./api/party_process/v1/party-process.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-process/v1"
   })
@@ -220,11 +224,11 @@ module "apim_uservice_party_process_v1" {
   api_operation_policies = [
     {
       operation_id = "getOnBoardingInfo"
-      xml_content  = file("./api/party_process/getOnBoardingInfo_policy.xml")
+      xml_content  = file("./api/party_process/v1/getOnBoardingInfo_policy.xml")
     },
     {
       operation_id = "createLegals"
-      xml_content  = file("./api/party_process/createLegals_policy.xml")
+      xml_content  = file("./api/party_process/v1/createLegals_policy.xml")
     }
   ]
 }
@@ -237,12 +241,14 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_managemen
   versioning_scheme   = "Segment"
 }
 
-module "apim_uservice_party_management-v1" {
+module "apim_uservice_party_management_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-mgmt-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
+
+  api_version = "v1"
 
   description  = "This service is the party manager"
   display_name = "Party Management Micro Service V1"
@@ -252,7 +258,7 @@ module "apim_uservice_party_management-v1" {
   service_url = format("http://%s/uservice-party-management", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/party_management/party-management.yml.tpl", {
+  content_value = templatefile("./api/party_management/v1/party-management.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-management/v1"
   })
@@ -265,7 +271,7 @@ module "apim_uservice_party_management-v1" {
   api_operation_policies = [
     {
       operation_id = "getOrganizationById"
-      xml_content  = file("./api/party_management/getOrganizationById_policy.xml")
+      xml_content  = file("./api/party_management/v1/getOrganizationById_policy.xml")
     }
   ]
 }
@@ -278,12 +284,14 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_registry_
   versioning_scheme   = "Segment"
 }
 
-module "apim_uservice_party_registry_proxy-v1" {
+module "apim_uservice_party_registry_proxy_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
   name                = format("%s-party-reg-proxy-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_registry_proxy.id
+
+  api_version = "v1"
 
   description  = "This service is the proxy to the party registry"
   display_name = "Party Registry Proxy Server V1"
@@ -293,7 +301,7 @@ module "apim_uservice_party_registry_proxy-v1" {
   service_url = format("http://%s/uservice-party-registry-proxy", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/party_registry_proxy/party-registry-proxy.yml.tpl", {
+  content_value = templatefile("./api/party_registry_proxy/v1/party-registry-proxy.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-registry-proxy/v1"
   })
@@ -306,7 +314,7 @@ module "apim_uservice_party_registry_proxy-v1" {
   api_operation_policies = [
     {
       operation_id = "searchInstitution"
-      xml_content  = file("./api/party_registry_proxy/searchInstitution_policy.xml")
+      xml_content  = file("./api/party_registry_proxy/v1/searchInstitution_policy.xml")
     }
   ]
 }
