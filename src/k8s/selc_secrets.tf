@@ -57,29 +57,72 @@ resource "kubernetes_secret" "mongo-credentials" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "postgres-credentials" {
+resource "kubernetes_secret" "postgres" {
   metadata {
-    name      = "postgres-credentials"
+    name      = "postgres"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
   data = {
     #principal database name
-    POSTGRES_DB_NAME = "selc"
+    POSTGRES_DB = "selc"
     #principal database hostname or ip
     POSTGRES_HOST = local.postgres_hostname
     #principal database username
-    POSTGRES_USERNAME = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, local.postgres_hostname)
+    POSTGRES_USR = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, local.postgres_hostname)
     #principal database password
-    POSTGRES_PASSWORD = module.key_vault_secrets_query.values["db-selc-user-password"].value
+    POSTGRES_PSW = module.key_vault_secrets_query.values["db-selc-user-password"].value
     #replica database name
-    POSTGRES_REPLICA_DB_NAME = "selc"
+    POSTGRES_REPLICA_DB = "selc"
     #replica database hostname or ip
     POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
     #replica database username
-    POSTGRES_REPLICA_USERNAME = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
+    POSTGRES_REPLICA_USR = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
     #replica database password
-    POSTGRES_REPLICA_PASSWORD = module.key_vault_secrets_query.values["db-selc-user-password"].value
+    POSTGRES_REPLICA_PSW = module.key_vault_secrets_query.values["db-selc-user-password"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "smtp" {
+  metadata {
+    name      = "smtp"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    SMTP_SERVER = "smtps.pec.aruba.it"
+    SMTP_PORT   = 465
+    SMTP_USR    = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW    = module.key_vault_secrets_query.values["smtp-psw"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "mail" {
+  metadata {
+    name      = "mail"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    DESTINATION_MAILS = "" // TODO
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "storage" {
+  metadata {
+    name      = "storage"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    STORAGE_USR = "" // TODO needed contract's storage
+    STORAGE_PSW = "" // TODO needed contract's storage
   }
 
   type = "Opaque"

@@ -13,6 +13,8 @@ module "key_vault_secrets_query" {
     "agid-spid-private-key",
     "mongodb-connection-string",
     "db-selc-login",
-    "db-selc-user-password"
+    "db-selc-user-password",
+    "smtp-usr",
+    "smtp-psw"
   ]
 }
