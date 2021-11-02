@@ -153,11 +153,11 @@ module "apim_hub_spid_login_api_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_hub_spid_login_api.id
 
-  api_version = "v1"
 
   description  = "Login SPID Service Provider"
   display_name = "SPID V1"
-  path         = "spid/v1"
+  path         = "spid"
+  api_version  = "v1"
   protocols    = ["https"]
 
   service_url = format("http://%s/hub-spid-login-ms", var.reverse_proxy_ip)
@@ -201,11 +201,11 @@ module "apim_uservice_party_process_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
 
-  api_version = "v1"
 
   description  = "This service is the party process"
   display_name = "Party Process Micro Service V1"
-  path         = "party-process/v1"
+  path         = "party-process"
+  api_version  = "v1"
   protocols    = ["https"]
 
   service_url = format("http://%s/uservice-party-process", var.reverse_proxy_ip)
@@ -248,11 +248,11 @@ module "apim_uservice_party_management_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
 
-  api_version = "v1"
 
   description  = "This service is the party manager"
   display_name = "Party Management Micro Service V1"
-  path         = "party-management/v1"
+  path         = "party-management"
+  api_version  = "v1"
   protocols    = ["https"]
 
   service_url = format("http://%s/uservice-party-management", var.reverse_proxy_ip)
@@ -291,11 +291,11 @@ module "apim_uservice_party_registry_proxy_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_registry_proxy.id
 
-  api_version = "v1"
 
   description  = "This service is the proxy to the party registry"
   display_name = "Party Registry Proxy Server V1"
-  path         = "party-registry-proxy/v1"
+  path         = "party-registry-proxy"
+  api_version  = "v1"
   protocols    = ["https"]
 
   service_url = format("http://%s/uservice-party-registry-proxy", var.reverse_proxy_ip)
