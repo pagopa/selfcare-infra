@@ -2,9 +2,9 @@
 <policies>
     <inbound>
         <base/>
-        <set-variable name="institutionId" value="@((string)context.Request.Body.As<JObject>(preserveContent: true)["institutionId"])" />
+        <set-variable name="token" value="@(context.Request.MatchedParameters["token"])" />
         <choose>
-            <when condition="@(((string)context.Variables["institutionId"]).Equals("error"))">
+            <when condition="@(((string)context.Variables["token"]).Equals("error"))">
                 <return-response>
                     <set-status code="400" reason="Invalid ID supplied"/>
                     <set-header name="Content-Type" exists-action="override">
@@ -20,18 +20,7 @@
                 </return-response>
             </when>
             <otherwise>
-                <return-response>
-                    <set-status code="201" reason="OK"/>
-                    <set-header name="Content-Type" exists-action="override">
-                        <value>application/json</value>
-                    </set-header>
-                    <set-body>
-                        {
-                        "token": "string",
-                        "document": "string"
-                        }
-                    </set-body>
-                </return-response>
+                <mock-response />
             </otherwise>
         </choose>
     </inbound>
