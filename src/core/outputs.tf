@@ -135,10 +135,6 @@ output "cosmosdb_account_mongodb_connection_strings" {
   sensitive = true
 }
 
-output "cosmosdb_mongodb_id" {
-  value = azurerm_cosmosdb_mongo_database.mongodb.id
-}
-
 ## Postgresql server
 output "postgresql_fqdn" {
   value = module.postgresql.fqdn
