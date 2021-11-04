@@ -69,17 +69,17 @@ resource "kubernetes_secret" "postgres" {
     #principal database hostname or ip
     POSTGRES_HOST = local.postgres_hostname
     #principal database username
-    POSTGRES_USR = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, local.postgres_hostname)
+    POSTGRES_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, local.postgres_hostname)
     #principal database password
-    POSTGRES_PSW = module.key_vault_secrets_query.values["db-selc-user-password"].value
+    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-selc-user-password"].value
     #replica database name
     POSTGRES_REPLICA_DB = "selc"
     #replica database hostname or ip
     POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
     #replica database username
-    POSTGRES_REPLICA_USR = format("%s@%s", module.key_vault_secrets_query.values["db-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
+    POSTGRES_REPLICA_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
     #replica database password
-    POSTGRES_REPLICA_PSW = module.key_vault_secrets_query.values["db-selc-user-password"].value
+    POSTGRES_REPLICA_PSW = module.key_vault_secrets_query.values["postgres-selc-user-password"].value
   }
 
   type = "Opaque"
