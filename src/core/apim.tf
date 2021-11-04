@@ -229,6 +229,14 @@ module "apim_uservice_party_process_v1" {
     {
       operation_id = "createLegals"
       xml_content  = file("./api/party_process/v1/createLegals_policy.xml")
+    },
+    {
+      operation_id = "invalidateOnboarding"
+      xml_content  = file("./api/party_process/v1/invalidateOnboarding_policy.xml")
+    },
+    {
+      operation_id = "confirmOnBoarding"
+      xml_content  = file("./api/party_process/v1/confirmOnboarding_policy.xml")
     }
   ]
 }
