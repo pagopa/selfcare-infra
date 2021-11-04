@@ -443,6 +443,14 @@ variable "apim_sku" {
   type = string
 }
 
+# cdn
+variable "azuread_service_principal_azure_cdn_frontdoor_id" {
+  type        = string
+  description = "Azure CDN Front Door Principal ID"
+  # this is the deafult value for tenant pagopa.it
+  default = "f3b3f72f-4770-47a5-8c1e-aa298003be12"
+}
+
 ## Redis cache
 variable "redis_capacity" {
   type    = number
@@ -731,6 +739,16 @@ variable "enable_spid_test" {
   default     = false
 }
 
+# Single Page Applications
+variable "spa" {
+  type        = list(string)
+  description = "spa root dirs"
+  default     = [
+    "auth",
+    "onboarding",
+    "dashboard"
+  ]
+}
 # contracts storage
 variable "contracts_delete_retention_days" {
   type        = number
