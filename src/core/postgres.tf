@@ -81,3 +81,11 @@ module "postgresql" {
 
   tags = var.tags
 }
+
+resource "azurerm_postgresql_database" "selc_db" {
+  name                = "selc"
+  resource_group_name = azurerm_resource_group.postgres_rg.name
+  server_name         = module.postgresql.name
+  charset             = "UTF8"
+  collation           = "English_United States.1252"
+}

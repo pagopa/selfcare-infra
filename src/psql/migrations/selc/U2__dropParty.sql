@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS public.event_journal CASCADE;
+DROP TABLE IF EXISTS public.event_tag CASCADE;
+DROP TABLE IF EXISTS public.snapshot CASCADE;
