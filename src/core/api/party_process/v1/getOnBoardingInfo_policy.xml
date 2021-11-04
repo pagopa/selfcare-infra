@@ -2,34 +2,102 @@
 <policies>
     <inbound>
         <base/>
-        <return-response>
-            <set-status code="200" reason="OK"/>
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/json</value>
-            </set-header>
-            <set-body>
-                {
-                    "person": {
+        <set-variable name="institutionId" value="@(context.Request.Url.Query.GetValueOrDefault("institutionId",""))" />
+        <choose>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("infoError"))">
+                <return-response>
+                    <set-status code="400" reason="Invalid ID supplied"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "detail": "Request took too long to complete.",
+                        "status": 503,
+                        "title": "Service Unavailable"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("onboarded"))">
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "person": {
                         "name": "name",
                         "surname": "surname",
                         "taxCode": "AAAAAA00A00A000A"
-                    },
-                    "institutions": [
+                        },
+                        "institutions": [
                         {
-                        "institutionId": "institutionId",
-                        "description": "description",
+                        "institutionId": "onboarded",
+                        "description": "AGENCY ONBOARDED",
                         "digitalAddress": "digitalAddress",
                         "status": "active",
                         "role": "Manager",
-                        "platformRole": "admin",
+                        "platformRole": "ADMIN",
                         "attributes": [
-                            "string"
-                            ]
+                        "string"
+                        ]
                         }
-                    ]
-                }
-            </set-body>
-        </return-response>
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pending"))">
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "person": {
+                        "name": "name",
+                        "surname": "surname",
+                        "taxCode": "AAAAAA00A00A000A"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "pending",
+                        "description": "AGENCY PENDING",
+                        "digitalAddress": "digitalAddress",
+                        "status": "pending",
+                        "role": "Manager",
+                        "platformRole": "TECH_REF",
+                        "attributes": [
+                        "string"
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <otherwise>
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                            "person": {
+                                "name": "name",
+                                "surname": "surname",
+                                "taxCode": "AAAAAA00A00A000A"
+                            },
+                            "institutions": []
+                        }
+                    </set-body>
+                </return-response>
+            </otherwise>
+        </choose>
     </inbound>
     <backend>
         <base/>
