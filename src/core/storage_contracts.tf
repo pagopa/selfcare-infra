@@ -13,12 +13,12 @@ module "selc-contracts-storage" {
   name                       = replace(format("%s-contracts-storage", local.project), "-", "")
   account_kind               = "StorageV2"
   account_tier               = "Standard"
-  account_replication_type   = var.env_short == "p" ? "RA-GZRS" : "LRS"
+  account_replication_type   = var.contracts_account_replication_type
   access_tier                = "Hot"
-  enable_versioning          = var.env_short == "p" ? true : false
+  enable_versioning          = var.contracts_enable_versioning
   resource_group_name        = azurerm_resource_group.rg_contracts_storage.name
   location                   = var.location
-  advanced_threat_protection = var.env_short == "p" ? true : false
+  advanced_threat_protection = var.contracts_advanced_threat_protection
   allow_blob_public_access   = false
 
   blob_properties_delete_retention_policy_days = var.contracts_delete_retention_days

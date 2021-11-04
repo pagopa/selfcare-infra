@@ -83,4 +83,7 @@ postgres_configuration = {
 }
 
 # contracts storage
-contracts_delete_retention_days = 7 // TODO
+contracts_account_replication_type   = "RA-GZRS"
+contracts_delete_retention_days      = 7 // TODO
+contracts_enable_versioning          = true
+contracts_advanced_threat_protection = true

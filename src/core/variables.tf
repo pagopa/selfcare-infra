@@ -750,9 +750,27 @@ variable "spa" {
   ]
 }
 # contracts storage
+variable "contracts_account_replication_type" {
+  type        = string
+  description = "Contracts replication type"
+  default     = "LRS"
+}
+
 variable "contracts_delete_retention_days" {
   type        = number
   description = "Number of days to retain deleted contracts"
   default     = 1
+}
+
+variable "contracts_enable_versioning" {
+  type        = bool
+  description = "Enable contract versioning"
+  default     = false
+}
+
+variable "contracts_advanced_threat_protection" {
+  type        = bool
+  description = "Enable contract threat advanced protection"
+  default     = false
 }
 
