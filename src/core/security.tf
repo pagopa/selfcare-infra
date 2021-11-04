@@ -133,6 +133,20 @@ resource "azurerm_key_vault_access_policy" "azdo_sp_tls_cert" {
   ]
 }
 
+resource "azurerm_key_vault_access_policy" "azure_cdn_frontdoor_policy" {
+  key_vault_id = module.key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = var.azuread_service_principal_azure_cdn_frontdoor_id
+
+  secret_permissions = [
+    "Get",
+  ]
+
+  certificate_permissions = [
+    "Get",
+  ]
+}
+
 resource "azurerm_user_assigned_identity" "appgateway" {
   resource_group_name = azurerm_resource_group.sec_rg.name
   location            = azurerm_resource_group.sec_rg.location
