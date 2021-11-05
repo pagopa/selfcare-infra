@@ -73,6 +73,11 @@ variable "enable_postgres_replica" {
   description = "Enable connection to postgres replica"
 }
 
+variable "contracts_storage_account_name" {
+  type    = string
+  description = "Contracts storage account name"
+}
+
 # configs/secrets
 
 variable "configmaps_hub-spid-login-ms" {
