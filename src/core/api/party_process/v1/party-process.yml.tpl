@@ -32,7 +32,7 @@ tags:
       description: Find out more
       url: 'http://swagger.io'
 paths:
-  '/onboarding/info/{taxCode}':
+  '/onboarding/info/':
     get:
       security:
         - bearerAuth: []
@@ -42,10 +42,9 @@ paths:
       description: Return ok
       operationId: getOnBoardingInfo
       parameters:
-        - name: taxCode
-          in: path
-          description: The tax code to get onboarding info
-          required: true
+        - name: institutionId
+          description: UUID of an institution you can filter the retrieval with
+          in: query
           schema:
             type: string
       responses:
@@ -121,12 +120,18 @@ paths:
         - process
       summary: returns the relationships related to the institution
       description: Return ok
-      operationId: getInstitutionRelationships
+      operationId: getUserInstitutionRelationships
       parameters:
         - name: institutionId
           in: path
           description: The identifier of the institution
           required: true
+          schema:
+            type: string
+            format: uuid
+        - name: platformRoles
+          description: comma separated sequence of platform roles to filter the response with
+          in: query
           schema:
             type: string
       responses:
@@ -142,69 +147,90 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /institutions/{institutionId}/relationships/{taxCode}:
+  /relationships/{relationshipId}:
     get:
       security:
         - bearerAuth: [ ]
       tags:
         - process
-      summary: returns the relationship related to the institution and tax code
-      description: Return ok
-      operationId: getInstitutionTaxCodeRelationship
+      summary: Gets the corresponding relationship
+      description: Gets relationship
+      operationId: getRelationship
       parameters:
-        - name: institutionId
+        - name: relationshipId
           in: path
-          description: The identifier of the institution
+          description: The identifier of the relationship
           required: true
           schema:
             type: string
-        - name: taxCode
-          in: path
-          description: The identifier of the operator
-          required: true
-          schema:
-            type: string
+            format: uuid
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RelationshipsResponse'
+                $ref: '#/components/schemas/RelationshipInfo'
         '400':
-          description: Invalid institution id supplied
+          description: Invalid id supplied
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /institutions/{institutionId}/relationships/{taxCode}/activate:
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+    delete:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - process
+      summary: Relationship deletion
+      description: Given a relationship identifier, it relates the corresponding relationship.
+      operationId: deleteRelationshipById
+      parameters:
+        - name: relationshipId
+          description: the identifier of the relationship to be deleted
+          required: true
+          in: path
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: relationship deleted
+        '400':
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Relationship not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /relationships/{relationshipId}/activate:
     post:
       security:
         - bearerAuth: [ ]
       tags:
         - process
-      summary: Activate the relationship related to the institution and tax code
+      summary: Activate the relationship
       description: Activate relationship
-      operationId: activateRelationshipByInstitutionTaxCode
+      operationId: activateRelationship
       parameters:
-        - name: institutionId
+        - name: relationshipId
           in: path
-          description: The identifier of the institution
+          description: The identifier of the relationship
           required: true
           schema:
             type: string
-        - name: taxCode
-          in: path
-          description: The identifier of the operator
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ActivationRequest'
+            format: uuid
       responses:
         '204':
           description: Successful operation
@@ -220,34 +246,23 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /institutions/{institutionId}/relationships/{taxCode}/suspend:
+  /relationships/{relationshipId}/suspend:
     post:
       security:
         - bearerAuth: [ ]
       tags:
         - process
-      summary: Suspend the relationship related to the institution and tax code
+      summary: Suspend the relationship
       description: Suspend relationship
-      operationId: suspendRelationshipByInstitutionTaxCode
+      operationId: suspendRelationship
       parameters:
-        - name: institutionId
+        - name: relationshipId
           in: path
-          description: The identifier of the institution
+          description: The identifier of the relationship
           required: true
           schema:
             type: string
-        - name: taxCode
-          in: path
-          description: The identifier of the operator
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ActivationRequest'
+            format: uuid
       responses:
         '204':
           description: Successful operation
@@ -424,24 +439,15 @@ components:
       required:
         - token
         - document
-    TokenRequest:
-      properties:
-        legals:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        institutionId:
-          type: string
-      additionalProperties: false
-      required:
-        - legals
-        - institutionId
     RelationshipInfo:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
         from:
           type: string
-          description: tax code
+          format: uuid
         role:
           type: string
           description: represents the generic available role types for the relationship
@@ -460,6 +466,7 @@ components:
             - inactive
       additionalProperties: false
       required:
+        - id
         - from
         - role
         - platformRole
@@ -477,6 +484,8 @@ components:
         taxCode:
           type: string
         role:
+          type: string
+        email:
           type: string
           enum:
             - Manager
@@ -544,12 +553,6 @@ components:
       required:
         - person
         - institutions
-    ActivationRequest:
-      properties:
-        platformRole:
-          type: string
-      required:
-        - platformRole
     PlatformRolesResponse:
       title: PlatformRolesResponse
       type: object
