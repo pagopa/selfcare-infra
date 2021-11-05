@@ -52,7 +52,7 @@ module "cosmosdb_account_mongodb" {
   tags = var.tags
 }
 
-resource "azurerm_cosmosdb_mongo_database" "selcProduct" {
+resource "azurerm_cosmosdb_mongo_database" "selc_product" {
   name                = "selcProduct"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
   account_name        = module.cosmosdb_account_mongodb.name
