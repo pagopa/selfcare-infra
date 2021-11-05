@@ -193,6 +193,39 @@ paths:
           description: successful operation
         '404':
           description: Organization not found
+  /organizations/external/{id}:
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: External Organization ID
+    get:
+      summary: Retrieves Organization by ID
+      tags:
+        - party
+      responses:
+        '200':
+          description: Organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Organization not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      operationId: getOrganizationByExternalId
+      description: 'returns the identified organization, if any.'
   /organizations/{id}/attributes:
     parameters:
       - schema:
@@ -296,10 +329,12 @@ paths:
           name: from
           schema:
             type: string
+            format: uuid
         - in: query
           name: to
           schema:
             type: string
+            format: uuid
         - in: query
           name: platformRole
           schema:
@@ -318,6 +353,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
   /relationships/{relationshipId}:
+    delete:
+      tags:
+        - party
+      summary: Deletes relationship
+      description: Deletes the relationship identified by relationshipId
+      operationId: deleteRelationshipById
+      parameters:
+        - name: relationshipId
+          in: path
+          description: The ID of the Relationship to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: relationship deleted
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Relationship not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     get:
       tags:
         - party
@@ -598,6 +662,9 @@ components:
           description: DN
           example: 'aoo=c_f205,o=c_f205,c=it'
           type: string
+        code:
+          description: an accessory code (e.g. codice ipa)
+          type: string
         description:
           type: string
           example: AGENCY X
@@ -605,12 +672,16 @@ components:
           example: email@pec.mail.org
           format: email
           type: string
+        fiscalCode:
+          description: organization fiscal code
+          type: string
         attributes:
           $ref: '#/components/schemas/Attributes'
       required:
         - institutionId
         - description
         - digitalAddress
+        - fiscalCode
         - attributes
       additionalProperties: false
     Organization:
@@ -624,12 +695,18 @@ components:
           description: DN
           example: 'aoo=c_f205,o=c_f205,c=it'
           type: string
+        code:
+          description: an accessory code (e.g. codice ipa)
+          type: string
         description:
           type: string
           example: AGENCY X
         digitalAddress:
           example: email@pec.mail.org
           format: email
+          type: string
+        fiscalCode:
+          description: organization fiscal code
           type: string
         attributes:
           $ref: '#/components/schemas/Attributes'
@@ -638,6 +715,7 @@ components:
         - institutionId
         - description
         - digitalAddress
+        - fiscalCode
         - attributes
       additionalProperties: false
     BulkOrganizations:
