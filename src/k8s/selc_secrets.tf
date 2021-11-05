@@ -108,7 +108,7 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = {
-    DESTINATION_MAILS = "" // TODO
+    DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
   }
 
   type = "Opaque"
@@ -121,8 +121,8 @@ resource "kubernetes_secret" "storage" {
   }
 
   data = {
-    STORAGE_USR = "" // TODO needed contract's storage
-    STORAGE_PSW = "" // TODO needed contract's storage
+    STORAGE_USR = var.contracts_storage_account_name
+    STORAGE_PSW = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
   }
 
   type = "Opaque"

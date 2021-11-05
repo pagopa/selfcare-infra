@@ -35,6 +35,22 @@ resource "azurerm_key_vault_secret" "selc_contracts_storage_access_key" {
   key_vault_id = module.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "selc_contracts_storage_connection_string" {
+  name         = "contracts-storage-connection-string"
+  value        = module.selc-contracts-storage.primary_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "selc_contracts_storage_blob_connection_string" {
+  name         = "contracts-storage-blob-connection-string"
+  value        = module.selc-contracts-storage.primary_blob_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
 resource "azurerm_storage_container" "selc-contracts-container" {
   name                  = format("%s-contracts-blob", local.project)
   storage_account_name  = module.selc-contracts-storage.name
