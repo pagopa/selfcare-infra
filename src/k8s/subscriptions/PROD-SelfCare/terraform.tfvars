@@ -9,6 +9,7 @@ ingress_load_balancer_ip = "10.1.0.250"
 api_gateway_url  = "https://api.selfcare.pagopa.it"
 cdn_frontend_url = "https://selfcare.pagopa.it"
 
+contract_storage_account_name = "selcpcontractsstorage"
 
 # configs/secrets
 
