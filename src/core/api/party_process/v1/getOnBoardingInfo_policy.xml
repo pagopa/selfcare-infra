@@ -79,6 +79,24 @@
                     </set-body>
                 </return-response>
             </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("id"))">
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "person": {
+                        "name": "name",
+                        "surname": "surname",
+                        "taxCode": "AAAAAA00A00A000A"
+                        },
+                        "institutions": []
+                        }
+                    </set-body>
+                </return-response>
+            </when>
             <otherwise>
                 <return-response>
                     <set-status code="200" reason="OK"/>
@@ -92,7 +110,44 @@
                                 "surname": "surname",
                                 "taxCode": "AAAAAA00A00A000A"
                             },
-                            "institutions": []
+                            "institutions": [
+                                {
+                                "role": "Manager",
+                                "description": "Comune di Bari",
+                                "status": "Pending",
+                                "institutionId": "1",
+                                "attributes": [],
+                                "digitalAddress": "",
+                                "platformRole": "admin"
+                                },
+                                {
+                                "role": "Manager",
+                                "description": "Comune di Milano",
+                                "status": "Pending",
+                                "institutionId": "2",
+                                "attributes": [],
+                                "digitalAddress": "",
+                                "platformRole": "admin"
+                                },
+                                {
+                                "role": "Manager",
+                                "description": "Comune di Roma",
+                                "status": "Active",
+                                "institutionId": "3",
+                                "attributes": [],
+                                "digitalAddress": "",
+                                "platformRole": "admin"
+                                },
+                                {
+                                "role": "Manager",
+                                "description": "Comune di Napoli",
+                                "status": "Active",
+                                "institutionId": "4",
+                                "attributes": [],
+                                "digitalAddress": "",
+                                "platformRole": "admin"
+                                }
+                            ]
                         }
                     </set-body>
                 </return-response>
