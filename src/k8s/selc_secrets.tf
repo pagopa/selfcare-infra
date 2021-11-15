@@ -127,3 +127,16 @@ resource "kubernetes_secret" "storage" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "b4f-dashboard" {
+  metadata {
+    name      = "b4f-dashboard"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
+  }
+
+  type = "Opaque"
+}

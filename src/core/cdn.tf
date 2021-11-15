@@ -45,7 +45,8 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.81"
+//  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.81"
+  source                = "../modules/cdn"
 
   name                  = "checkout"
   prefix                = local.project
@@ -101,4 +102,29 @@ module "checkout_cdn" {
   delivery_rule_rewrite = local.spa
 
   tags = var.tags
+}
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "selc_web_storage_access_key" {
+  name         = "web-storage-access-key"
+  value        = module.checkout_cdn.storage_primary_access_key
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "selc_web_storage_connection_string" {
+  name         = "web-storage-connection-string"
+  value        = module.checkout_cdn.storage_primary_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
+  name         = "web-storage-blob-connection-string"
+  value        = module.checkout_cdn.storage_primary_blob_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
 }
