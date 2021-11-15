@@ -46,7 +46,7 @@ locals {
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
 //  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.81"
-  source                = "../modules/cdn"
+  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=cdn-output-storage-info"
 
   name                  = "checkout"
   prefix                = local.project
