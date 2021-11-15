@@ -37,12 +37,15 @@
                         "institutionId": "onboarded",
                         "description": "AGENCY ONBOARDED",
                         "digitalAddress": "digitalAddress",
-                        "status": "active",
-                        "role": "Manager",
-                        "platformRole": "ADMIN",
+                        "state": "active",
+                        "role": "MANAGER",
+                        "productRole": "ADMIN",
                         "attributes": [
-                        "string"
-                        ]
+                            {
+                            "id":"attId",
+                            "name":"attName",
+                            "description":"attDescription"
+                            ]
                         }
                         ]
                         }
@@ -67,11 +70,14 @@
                         "institutionId": "pending",
                         "description": "AGENCY PENDING",
                         "digitalAddress": "digitalAddress",
-                        "status": "pending",
-                        "role": "Manager",
-                        "platformRole": "TECH_REF",
+                        "state": "pending",
+                        "role": "MANAGER",
+                        "productRole": "TECH_REF",
                         "attributes": [
-                        "string"
+                            {
+                            "id":"attId",
+                            "name":"attName",
+                            "description":"attDescription"
                         ]
                         }
                         ]
@@ -112,40 +118,40 @@
                             },
                             "institutions": [
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Bari",
-                                "status": "Pending",
+                                "state": "Pending",
                                 "institutionId": "1",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "productRole": "admin"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Milano",
-                                "status": "Pending",
+                                "state": "Pending",
                                 "institutionId": "2",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "productRole": "admin"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Roma",
-                                "status": "Active",
+                                "state": "Active",
                                 "institutionId": "3",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "productRole": "admin"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Napoli",
-                                "status": "Active",
+                                "state": "Active",
                                 "institutionId": "4",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "productRole": "admin"
                                 }
                             ]
                         }
