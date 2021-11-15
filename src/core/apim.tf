@@ -326,3 +326,38 @@ module "apim_uservice_party_registry_proxy_v1" {
     }
   ]
 }
+
+resource "azurerm_api_management_api_version_set" "apim_b4f_dashboard" {
+  name                = format("%s-b4f-dashboard-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Self Care Dashboard"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_b4f_dashboard_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-b4f-dashboard-api-v1", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_registry_proxy.id
+
+
+  description  = "Self Care Dashboard API documentation"
+  display_name = "Self Care Dashboard V1"
+  path         = "dashboard"
+  api_version  = "v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/b4f-dashboard", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/dashboard/v1/dashboard-openapi.json.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "dashboard/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
+}
