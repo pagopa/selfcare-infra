@@ -1,3 +1,20 @@
+resource "kubernetes_config_map" "inner-service-url" {
+  metadata {
+    name      = "inner-service-url"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
+    B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
+    MS_PRODUCT_URL                             = "http://ms-product:8080"
+    USERVICE_PARTY_PROCESS_URL                 = "https://api.dev.selfcare.pagopa.it/party-process/v1" // TODO "http://uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
+    USERVICE_PARTY_MANAGEMENT_URL              = "https://api.dev.selfcare.pagopa.it/party-management/v1" // TODO "http://uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://api.dev.selfcare.pagopa.it/party-registry-proxy/v1" // TODO "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
+    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "https://api.dev.selfcare.pagopa.it/attribute-registry-management/v1" // TODO "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
+  }
+}
+
 resource "kubernetes_config_map" "hub-spid-login-ms" {
   metadata {
     name      = "hub-spid-login-ms"
