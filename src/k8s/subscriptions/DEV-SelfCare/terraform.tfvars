@@ -10,6 +10,8 @@ api_gateway_url  = "https://api.dev.selfcare.pagopa.it"
 cdn_frontend_url = "https://dev.selfcare.pagopa.it"
 spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
 
+contract_storage_account_name = "selcdcontractsstorage"
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {
