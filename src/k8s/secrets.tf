@@ -16,6 +16,7 @@ module "key_vault_secrets_query" {
     "postgres-selc-user-password",
     "smtp-usr",
     "smtp-psw",
-    "contracts-storage-access-key"
+    "contracts-storage-access-key",
+    "web-storage-connection-string"
   ]
 }
