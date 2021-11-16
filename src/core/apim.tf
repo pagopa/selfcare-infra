@@ -340,7 +340,7 @@ module "apim_b4f_dashboard_v1" {
   name                = format("%s-b4f-dashboard-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_registry_proxy.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_b4f_dashboard.id
 
 
   description  = "Self Care Dashboard API documentation"
