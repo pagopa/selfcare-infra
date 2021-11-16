@@ -44,8 +44,11 @@ app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
 # aks
 aks_alerts_enabled = false
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip = "10.1.0.250"
-aks_max_pods     = 100
+reverse_proxy_ip        = "10.1.0.250"
+aks_max_pods            = 100
+aks_enable_auto_scaling = false
+min_count               = null
+max_count               = null
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless             = true
