@@ -51,7 +51,8 @@ resource "kubernetes_secret" "mongo-credentials" {
   }
 
   data = {
-    DB_CONNECTION_URI = module.key_vault_secrets_query.values["mongodb-connection-string"].value
+    MONGODB_CONNECTION_URI    = module.key_vault_secrets_query.values["mongodb-connection-string"].value
+    MONGODB_NAME_SELC_PRODUCT = local.mongodb_name_selc_product
   }
 
   type = "Opaque"
