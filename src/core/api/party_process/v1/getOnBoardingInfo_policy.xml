@@ -37,9 +37,10 @@
                         "institutionId": "onboarded",
                         "description": "AGENCY ONBOARDED",
                         "digitalAddress": "digitalAddress",
-                        "status": "active",
-                        "role": "Manager",
+                        "state": "ACTIVE",
+                        "role": "MANAGER",
                         "platformRole": "ADMIN",
+                        "productRole": "ADMIN",
                         "attributes": [
                         "string"
                         ]
@@ -67,9 +68,10 @@
                         "institutionId": "pending",
                         "description": "AGENCY PENDING",
                         "digitalAddress": "digitalAddress",
-                        "status": "pending",
-                        "role": "Manager",
+                        "state": "PENDING",
+                        "role": "MANAGER",
                         "platformRole": "TECH_REF",
+                        "productRole": "TECH_REF",
                         "attributes": [
                         "string"
                         ]
@@ -112,40 +114,56 @@
                             },
                             "institutions": [
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Bari",
-                                "status": "Pending",
+                                "state": "PENDING",
                                 "institutionId": "1",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "platformRole": "ADMIN_REF",
+                                "productRole": "ADMIN_REF"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Milano",
-                                "status": "Pending",
+                                "state": "PENDING",
                                 "institutionId": "2",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "platformRole": "TECH_REF",
+                                "productRole": "TECH_REF"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Roma",
-                                "status": "Active",
+                                "state": "ACTIVE",
                                 "institutionId": "3",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "platformRole": "ADMIN_REF",
+                                "productRole": "ADMIN_REF"
                                 },
                                 {
-                                "role": "Manager",
+                                "role": "MANAGER",
                                 "description": "Comune di Napoli",
-                                "status": "Active",
+                                "state": "ACTIVE",
                                 "institutionId": "4",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "admin"
+                                "platformRole": "TECH_REF",
+                                "productRole": "TECH_REF"
+                                },
+                                {
+                                "institutionId": "onboarded",
+                                "description": "AGENCY ONBOARDED",
+                                "digitalAddress": "digitalAddress",
+                                "state": "ACTIVE",
+                                "role": "MANAGER",
+                                "platformRole": "ADMIN",
+                                "productRole": "ADMIN",
+                                "attributes": [
+                                "string"
+                                ]
                                 }
                             ]
                         }
