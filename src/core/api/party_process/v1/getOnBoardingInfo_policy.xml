@@ -41,6 +41,9 @@
                         "role": "MANAGER",
                         "platformRole": "ADMIN",
                         "productRole": "ADMIN",
+                        "institutionProducts": [
+                        "1"
+                        ],
                         "attributes": [
                         "string"
                         ]
