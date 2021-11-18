@@ -69,6 +69,8 @@ resource "kubernetes_secret" "postgres" {
     POSTGRES_DB = "selc"
     #principal database hostname or ip
     POSTGRES_HOST = local.postgres_hostname
+    #principal database hostname or ip
+    POSTGRES_PORT = "5432"
     #principal database username
     POSTGRES_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, local.postgres_hostname)
     #principal database password
@@ -77,6 +79,8 @@ resource "kubernetes_secret" "postgres" {
     POSTGRES_REPLICA_DB = "selc"
     #replica database hostname or ip
     POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
+    #replica database hostname or ip
+    POSTGRES_REPLICA_PORT = "5432"
     #replica database username
     POSTGRES_REPLICA_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
     #replica database password
