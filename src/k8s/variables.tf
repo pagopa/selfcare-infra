@@ -73,11 +73,6 @@ variable "enable_postgres_replica" {
   description = "Enable connection to postgres replica"
 }
 
-variable "contracts_storage_account_name" {
-  type    = string
-  description = "Contracts storage account name"
-}
-
 # uservice versions
 variable "api-version_uservice-attribute-registry-management" {
   type = string

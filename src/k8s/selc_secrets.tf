@@ -109,7 +109,7 @@ resource "kubernetes_secret" "contracts-storage" {
     STORAGE_TYPE               = "BlobStorage"
     STORAGE_CONTAINER          = local.contracts_storage_container
     STORAGE_ENDPOINT           = "core.windows.net"
-    STORAGE_APPLICATION_ID     = var.contracts_storage_account_name
+    STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
     STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
   }
 
