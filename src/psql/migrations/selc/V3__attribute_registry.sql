@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS party.event_journal(
+CREATE TABLE IF NOT EXISTS attribute_registry.event_journal(
   ordering BIGSERIAL,
   persistence_id VARCHAR(255) NOT NULL,
   sequence_number BIGINT NOT NULL,
@@ -18,22 +18,22 @@ CREATE TABLE IF NOT EXISTS party.event_journal(
 
   PRIMARY KEY(persistence_id, sequence_number)
 );
-ALTER TABLE party.event_journal OWNER TO "PARTY_USER";
+ALTER TABLE attribute_registry.event_journal OWNER TO "ATTRIBUTE_REGISTRY_USER";
 
-CREATE UNIQUE INDEX event_journal_ordering_idx ON party.event_journal(ordering);
+CREATE UNIQUE INDEX event_journal_ordering_idx ON attribute_registry.event_journal(ordering);
 
-CREATE TABLE IF NOT EXISTS party.event_tag(
+CREATE TABLE IF NOT EXISTS attribute_registry.event_tag(
     event_id BIGINT,
     tag VARCHAR(256),
     PRIMARY KEY(event_id, tag),
     CONSTRAINT fk_event_journal
       FOREIGN KEY(event_id)
-      REFERENCES party.event_journal(ordering)
+      REFERENCES attribute_registry.event_journal(ordering)
       ON DELETE CASCADE
 );
-ALTER TABLE party.event_tag OWNER TO "PARTY_USER";
+ALTER TABLE attribute_registry.event_tag OWNER TO "ATTRIBUTE_REGISTRY_USER";
 
-CREATE TABLE IF NOT EXISTS party.snapshot (
+CREATE TABLE IF NOT EXISTS attribute_registry.snapshot (
   persistence_id VARCHAR(255) NOT NULL,
   sequence_number BIGINT NOT NULL,
   created BIGINT NOT NULL,
@@ -48,4 +48,4 @@ CREATE TABLE IF NOT EXISTS party.snapshot (
 
   PRIMARY KEY(persistence_id, sequence_number)
 );
-ALTER TABLE party.snapshot OWNER TO "PARTY_USER";
+ALTER TABLE attribute_registry.snapshot OWNER TO "ATTRIBUTE_REGISTRY_USER";
