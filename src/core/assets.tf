@@ -6,7 +6,7 @@ data "local_file" "informativa-privacy" {
 }
 
 
-resource "null_resource" "upload_tc" {
+resource "null_resource" "upload_assets" {
   triggers = {
     "changes-in-tc" : md5(data.local_file.tc.content)
     "changes-in-informativa-privacy" : md5(data.local_file.informativa-privacy.content)
