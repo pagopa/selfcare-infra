@@ -8,10 +8,10 @@ resource "kubernetes_config_map" "inner-service-url" {
     HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
     B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
     MS_PRODUCT_URL                             = "http://ms-product:8080"
-    USERVICE_PARTY_PROCESS_URL                 = "https://api.dev.selfcare.pagopa.it/party-process/v1" // TODO "http://uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
-    USERVICE_PARTY_MANAGEMENT_URL              = "https://api.dev.selfcare.pagopa.it/party-management/v1" // TODO "http://uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://api.dev.selfcare.pagopa.it/party-registry-proxy/v1" // TODO "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
-    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "https://api.dev.selfcare.pagopa.it/attribute-registry-management/v1" // TODO "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
+    USERVICE_PARTY_PROCESS_URL                 = "https://api.dev.selfcare.pagopa.it/party-process/v1" // TODO when mock not more required "http://uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
+    USERVICE_PARTY_MANAGEMENT_URL              = "https://api.dev.selfcare.pagopa.it/party-management/v1" // TODO when mock not more required "http://uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://api.dev.selfcare.pagopa.it/party-registry-proxy/v1" // TODO when mock not more required "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
+    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "https://api.dev.selfcare.pagopa.it/attribute-registry-management/v1" // TODO when mock not more required "http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
   }
 }
 
@@ -94,3 +94,62 @@ resource "kubernetes_config_map" "b4f-dashboard" {
   )
 }
 
+resource "kubernetes_config_map" "uservice-attribute-registry-management" {
+  metadata {
+    name      = "uservice-attribute-registry-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
+    POSTGRES_SCHEMA               = "attribute_registry"
+  },
+  var.configmaps_uservice-attribute-registry-management
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-management" {
+  metadata {
+    name      = "uservice-party-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
+    POSTGRES_SCHEMA               = "party"
+  },
+  var.configmaps_uservice-party-management
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-process" {
+  metadata {
+    name      = "uservice-party-process"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-process"
+    MANAGER_PRODUCT_ROLES         = "ADMIN"//TODO
+    DELEGATE_PRODUCT_ROLES        = "ADMIN"//TODO
+    OPERATOR_PRODUCT_ROLES        = "ADMIN_REF,TECH_REF"//TODO
+    PARTY_MANAGEMENT_URL          = format("http://uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    PARTY_PROXY_URL               = format("http://uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    ATTRIBUTE_REGISTRY_URL        = format("http://uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+  },
+  var.configmaps_uservice-party-process
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-registry-proxy" {
+  metadata {
+    name      = "uservice-party-registry-proxy"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-registry-proxy"
+  },
+  var.configmaps_uservice-party-registry-proxy
+  )
+}

@@ -71,36 +71,12 @@ resource "kubernetes_secret" "postgres" {
     POSTGRES_HOST = local.postgres_hostname
     #principal database hostname or ip
     POSTGRES_PORT = "5432"
-    #principal database username
-    POSTGRES_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, local.postgres_hostname)
-    #principal database password
-    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-selc-user-password"].value
     #replica database name
     POSTGRES_REPLICA_DB = "selc"
     #replica database hostname or ip
     POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
     #replica database hostname or ip
     POSTGRES_REPLICA_PORT = "5432"
-    #replica database username
-    POSTGRES_REPLICA_USR = format("%s@%s", module.key_vault_secrets_query.values["postgres-selc-login"].value, var.enable_postgres_replica ? local.postgres_replica_hostname : local.postgres_hostname)
-    #replica database password
-    POSTGRES_REPLICA_PSW = module.key_vault_secrets_query.values["postgres-selc-user-password"].value
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "smtp" {
-  metadata {
-    name      = "smtp"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    SMTP_SERVER = "smtps.pec.aruba.it"
-    SMTP_PORT   = 465
-    SMTP_USR    = module.key_vault_secrets_query.values["smtp-usr"].value
-    SMTP_PSW    = module.key_vault_secrets_query.values["smtp-psw"].value
   }
 
   type = "Opaque"
@@ -113,21 +89,28 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = {
+    SMTP_SERVER = "smtps.pec.aruba.it"
+    SMTP_PORT   = 465
+    SMTP_USR    = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW    = module.key_vault_secrets_query.values["smtp-psw"].value
     DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
   }
 
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "storage" {
+resource "kubernetes_secret" "contracts-storage" {
   metadata {
-    name      = "storage"
+    name      = "contracts-storage"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
   data = {
-    STORAGE_USR = var.contracts_storage_account_name
-    STORAGE_PSW = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_TYPE               = "BlobStorage"
+    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_ENDPOINT           = "core.windows.net"
+    STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
+    STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
   }
 
   type = "Opaque"
@@ -141,6 +124,34 @@ resource "kubernetes_secret" "b4f-dashboard" {
 
   data = {
     BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "uservice-attribute-registry-management" {
+  metadata {
+    name      = "uservice-attribute-registry-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    POSTGRES_USR = format("%s@%s", "ATTRIBUTE_REGISTRY_USER", local.postgres_hostname)
+    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-attribute-registry-user-password"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "uservice-party-management" {
+  metadata {
+    name      = "uservice-party-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
+    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
   }
 
   type = "Opaque"

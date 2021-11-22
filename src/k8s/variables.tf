@@ -73,9 +73,21 @@ variable "enable_postgres_replica" {
   description = "Enable connection to postgres replica"
 }
 
-variable "contracts_storage_account_name" {
-  type    = string
-  description = "Contracts storage account name"
+# uservice versions
+variable "api-version_uservice-attribute-registry-management" {
+  type = string
+}
+
+variable "api-version_uservice-party-management" {
+  type = string
+}
+
+variable "api-version_uservice-party-process" {
+  type = string
+}
+
+variable "api-version_uservice-party-registry-proxy" {
+  type = string
 }
 
 # configs/secrets
@@ -89,5 +101,21 @@ variable "configmaps_ms-product" {
 }
 
 variable "configmaps_b4f-dashboard" {
+  type = map(string)
+}
+
+variable "configmaps_uservice-attribute-registry-management" {
+  type = map(string)
+}
+
+variable "configmaps_uservice-party-management" {
+  type = map(string)
+}
+
+variable "configmaps_uservice-party-process" {
+  type = map(string)
+}
+
+variable "configmaps_uservice-party-registry-proxy" {
   type = map(string)
 }
