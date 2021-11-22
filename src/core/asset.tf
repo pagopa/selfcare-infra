@@ -8,7 +8,8 @@ resource "null_resource" "upload_tc" {
   }
   provisioner "local-exec" {
     command = <<EOT
-              az storage azcopy blob upload\
+              az config set extension.use_dynamic_install=yes_without_prompt
+              az storage azcopy blob upload \
                  --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                  --account-key ${module.checkout_cdn.storage_primary_access_key} \
                  --container '$web' \
@@ -16,7 +17,8 @@ resource "null_resource" "upload_tc" {
                  --source "${path.module}/assets/tc.pdf"
               az cdn endpoint purge -g ${azurerm_resource_group.checkout_fe_rg.name} -n ${module.checkout_cdn.name} \
                  --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
-                 --content-paths "/assets/tc.pdf"
+                 --content-paths "/assets/tc.pdf" \
+                 --no-wait
           EOT
   }
 }
@@ -31,7 +33,8 @@ resource "null_resource" "upload_informativa-privacy" {
   }
   provisioner "local-exec" {
     command = <<EOT
-              az storage azcopy blob upload\
+              az config set extension.use_dynamic_install=yes_without_prompt
+              az storage azcopy blob upload \
                  --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                  --account-key ${module.checkout_cdn.storage_primary_access_key} \
                  --container '$web' \
@@ -39,7 +42,8 @@ resource "null_resource" "upload_informativa-privacy" {
                  --source "${path.module}/assets/InformativaPrivacy.pdf"
               az cdn endpoint purge -g ${azurerm_resource_group.checkout_fe_rg.name} -n ${module.checkout_cdn.name} \
                  --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
-                 --content-paths "/assets/InformativaPrivacy.pdf"
+                 --content-paths "/assets/InformativaPrivacy.pdf" \
+                 --no-wait
           EOT
   }
 }
