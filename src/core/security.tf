@@ -239,16 +239,67 @@ resource "azurerm_api_management_certificate" "jwt_certificate" {
   data                = pkcs12_from_pem.jwt_pkcs12.result
 }
 
+resource "azurerm_key_vault_certificate" "jwt_certificate" {
+  name         = "jwt-spid-crt"
+  key_vault_id = module.key_vault.id
+
+  certificate {
+    contents = pkcs12_from_pem.jwt_pkcs12.result
+    password = ""
+  }
+
+  # to be provided even if not required due to issue https://github.com/hashicorp/terraform-provider-azurerm/pull/14225
+  certificate_policy {
+    issuer_parameters {
+      name = "Self"
+    }
+
+    key_properties {
+      exportable = true
+      key_size   = 2048
+      key_type   = "RSA"
+      reuse_key  = true
+    }
+
+    secret_properties {
+      content_type = "application/x-pkcs12"
+    }
+  }
+}
+
 resource "null_resource" "upload_jwks" {
   triggers = {
-    "changes-in-jwt" : md5(azurerm_api_management_certificate.jwt_certificate.data)
+    "changes-in-jwt" : azurerm_key_vault_certificate.jwt_certificate.thumbprint
   }
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
-              echo '{                "keys": [                  {                    "alg": "RS256",                    "kty": "RSA",                    "use": "sig",                    "x5c": [                      "${nonsensitive(azurerm_api_management_certificate.jwt_certificate.data)}"                    ],                    "kid": "selfcare",                    "x5t": "${azurerm_api_management_certificate.jwt_certificate.thumbprint}"                  }                ]}' > "${path.module}/.terraform/tmp/jwks.json"
-              az storage blob upload                 --container-name '$web'                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")}                 --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} --file "${path.module}/.terraform/tmp/jwks.json"                 --name '.well-known/jwks.json'
-              az cdn endpoint purge                 -g ${azurerm_resource_group.checkout_fe_rg.name}                 -n ${module.checkout_cdn.name}                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}                  --content-paths "/.well-known/jwks.json"                 --no-wait
+              echo '{
+                    "keys": [
+                        {
+                            "alg": "RS256",
+                            "kty": "RSA",
+                            "use": "sig",
+                            "x5c": [
+                                "${azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64}"
+                            ],
+                            "kid": "selfcare",
+                            "x5t": "${azurerm_key_vault_certificate.jwt_certificate.thumbprint}"
+                        }
+                      ]
+                  }' > "${path.module}/.terraform/tmp/jwks.json"
+              az storage blob upload \
+                --container-name '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "${path.module}/.terraform/tmp/jwks.json" \
+                --name '.well-known/jwks.json'
+              az cdn endpoint purge \
+                -g ${azurerm_resource_group.checkout_fe_rg.name} \
+                -n ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
+                --content-paths "/.well-known/jwks.json" \
+                --no-wait
           EOT
   }
 }
