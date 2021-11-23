@@ -208,7 +208,7 @@ module "apim_uservice_party_process_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-process/pdnd-interop-uservice-party-process/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/pdnd-interop-uservice-party-process/pdnd-interop-uservice-party-process/0.1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/party-process.yml.tpl", {
@@ -263,7 +263,7 @@ module "apim_uservice_party_management_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-management/pdnd-interop-uservice-party-management/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/pdnd-interop-uservice-party-management/pdnd-interop-uservice-party-management/0.1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/party-management.yml.tpl", {
@@ -306,7 +306,7 @@ module "apim_uservice_party_registry_proxy_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-registry-proxy/pdnd-interop-uservice-party-registry-proxy/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/pdnd-interop-uservice-party-registry-proxy/pdnd-interop-uservice-party-registry-proxy/0.1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/party-registry-proxy.yml.tpl", {
