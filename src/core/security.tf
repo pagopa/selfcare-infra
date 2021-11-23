@@ -245,6 +245,7 @@ resource "null_resource" "upload_jwks" {
   }
   provisioner "local-exec" {
     command = <<EOT
+              mkdir -p "${path.module}/.terraform/tmp"
               echo '{                "keys": [                  {                    "alg": "RS256",                    "kty": "RSA",                    "use": "sig",                    "x5c": [                      "${nonsensitive(azurerm_api_management_certificate.jwt_certificate.data)}"                    ],                    "kid": "selfcare",                    "x5t": "${azurerm_api_management_certificate.jwt_certificate.thumbprint}"                  }                ]}' > "${path.module}/.terraform/tmp/jwks.json"
               az storage blob upload                 --container '$web'                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")}                 --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} -s "${path.module}/.terraform/tmp/jwks.json"                 --destination '.well-known/'
               az cdn endpoint purge                 -g ${azurerm_resource_group.checkout_fe_rg.name}                 -n ${module.checkout_cdn.name}                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}                  --content-paths "/.well-known/jwks.json"                 --no-wait
