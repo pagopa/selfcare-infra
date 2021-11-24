@@ -274,7 +274,7 @@ resource "null_resource" "upload_jwks" {
   provisioner "local-exec" { // TODO remove nonsensitive after test
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
-              pip3 install authlib
+              pip install authlib
               jwk=$(python "${path.module}/utils/py/jwkFromPem.py" "-----BEGIN CERTIFICATE-----${azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64}-----END CERTIFICATE-----")
               echo '{
                     "keys": [
