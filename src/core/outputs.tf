@@ -73,27 +73,6 @@ output "container_registry_admin_password" {
   sensitive = true
 }
 
-## Api management ##
-output "apim_name" {
-  value = module.apim.name
-}
-
-output "apim_private_ip_addresses" {
-  value = module.apim.private_ip_addresses
-}
-
-output "apim_public_ip_addresses" {
-  value = module.apim.public_ip_addresses
-}
-
-output "apim_gateway_url" {
-  value = format("https://%s", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
-}
-
-output "apim_gateway_hostname" {
-  value = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-}
-
 ## Application gateway.
 output "app_gateway_public_ip" {
   value = azurerm_public_ip.appgateway_public_ip.ip_address
