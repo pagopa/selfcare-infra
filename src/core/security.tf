@@ -271,9 +271,10 @@ resource "null_resource" "upload_jwks" {
   triggers = {
     "changes-in-jwt" : azurerm_key_vault_certificate.jwt_certificate.thumbprint
   }
-  provisioner "local-exec" {
+  provisioner "local-exec" { // TODO remove nonsensitive after test
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
+              jwk=$(python "${path.module}/utils/py/jwkFromPem.py" "-----BEGIN CERTIFICATE-----${azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64}-----END CERTIFICATE-----")
               echo '{
                     "keys": [
                         {
@@ -283,6 +284,8 @@ resource "null_resource" "upload_jwks" {
                             "x5c": [
                                 "${azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64}"
                             ],
+                            "n": "'$${jwk[0]}'",
+                            "e": "'$${jwk[1]}'",
                             "kid": "selfcare",
                             "x5t": "${azurerm_key_vault_certificate.jwt_certificate.thumbprint}"
                         }
@@ -291,7 +294,7 @@ resource "null_resource" "upload_jwks" {
               az storage blob upload \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} \
                 --file "${path.module}/.terraform/tmp/jwks.json" \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \
