@@ -144,14 +144,14 @@ module "apim_hub_spid_login_api_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/hub-spid-login-ms", var.reverse_proxy_ip)
+  service_url = format("http://%s/spid/v1", var.reverse_proxy_ip)
 
   content_format = "swagger-json"
   content_value = templatefile("./api/hubspidlogin_api/v1/swagger.json.tpl", {
     host = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
   })
 
-  xml_content = file("./api/hubspidlogin_api/v1/policy.xml")
+  xml_content = file("./api/base_policy.xml")
 
   subscription_required = false
 
@@ -192,7 +192,7 @@ module "apim_uservice_party_process_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-process/pdnd-interop-uservice-party-process/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-process/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/party-process.yml.tpl", {
@@ -247,7 +247,7 @@ module "apim_uservice_party_management_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-management/pdnd-interop-uservice-party-management/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-management/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/party-management.yml.tpl", {
@@ -290,7 +290,7 @@ module "apim_uservice_party_registry_proxy_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/pdnd-interop-uservice-party-registry-proxy/pdnd-interop-uservice-party-registry-proxy/0.1", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-registry-proxy/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/party-registry-proxy.yml.tpl", {
@@ -333,7 +333,7 @@ module "apim_b4f_dashboard_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/b4f-dashboard", var.reverse_proxy_ip)
+  service_url = format("http://%s/dashboard/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/dashboard/v1/dashboard-openapi.json.tpl", {

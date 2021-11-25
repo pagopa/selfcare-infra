@@ -57,7 +57,7 @@ module "app_gw" {
       host         = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
       port         = 80
       ip_addresses = [var.reverse_proxy_ip]
-      probe        = "/hub-spid-login-ms/metadata"
+      probe        = "/spid/v1/metadata"
       probe_name   = "probe-aks"
     }
   }
