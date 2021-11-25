@@ -93,7 +93,6 @@ resource "kubernetes_ingress" "selc_pdnd_ingress" {
       "nginx.ingress.kubernetes.io/ssl-redirect"       = "false"
       "nginx.ingress.kubernetes.io/use-regex"          = "true"
       "nginx.ingress.kubernetes.io/enable-cors"        = "true"
-      "nginx.ingress.kubernetes.io/cors-allow-headers" = "*"
       "nginx.ingress.kubernetes.io/cors-allow-headers" = local.cors.headers
       "nginx.ingress.kubernetes.io/cors-allow-origin"  = local.cors.origins
     }
