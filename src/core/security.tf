@@ -232,13 +232,6 @@ resource "azurerm_key_vault_secret" "jwt_public_key" {
   key_vault_id = module.key_vault.id
 }
 
-resource "azurerm_api_management_certificate" "jwt_certificate" {
-  name                = "jwt-spid-crt"
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-  data                = pkcs12_from_pem.jwt_pkcs12.result
-}
-
 resource "azurerm_key_vault_certificate" "jwt_certificate" {
   name         = "jwt-spid-crt"
   key_vault_id = module.key_vault.id
