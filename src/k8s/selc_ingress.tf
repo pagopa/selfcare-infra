@@ -73,7 +73,7 @@ resource "kubernetes_ingress" "selc_ingress" {
             service_name = "ms-product"
             service_port = var.default_service_port
           }
-          path = "/ms-product/(.*)"
+          path = "/ms-product/v1/(.*)"
         }
 
       }
