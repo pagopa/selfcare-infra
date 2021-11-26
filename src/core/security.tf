@@ -233,7 +233,7 @@ resource "azurerm_key_vault_secret" "jwt_public_key" {
 }
 
 resource "azurerm_key_vault_certificate" "jwt_certificate" {
-  name         = "jwt-spid-crt"
+  name         = "jwt-crt"
   key_vault_id = module.key_vault.id
 
   certificate {
@@ -258,6 +258,8 @@ resource "azurerm_key_vault_certificate" "jwt_certificate" {
       content_type = "application/x-pkcs12"
     }
   }
+
+  tags = var.tags
 }
 
 resource "null_resource" "upload_jwks" {
