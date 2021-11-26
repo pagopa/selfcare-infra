@@ -52,13 +52,13 @@ module "app_gw" {
 
   # Configure backends
   backends = {
-    apim = {
-      protocol     = "Https"
+    aks = {
+      protocol     = "Http"
       host         = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
-      port         = 443
-      ip_addresses = module.apim.private_ip_addresses
-      probe        = "/status-0123456789abcdef"
-      probe_name   = "probe-apim"
+      port         = 80
+      ip_addresses = [var.reverse_proxy_ip]
+      probe        = "/ms-product/v1/actuator/health"
+      probe_name   = "probe-aks"
     }
   }
 
@@ -105,7 +105,7 @@ module "app_gw" {
   routes = {
     api = {
       listener = "api"
-      backend  = "apim"
+      backend  = "aks"
     }
   }
 
