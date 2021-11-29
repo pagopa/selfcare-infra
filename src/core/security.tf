@@ -188,89 +188,25 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
 }
 
 # JWT
-resource "tls_private_key" "jwt" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
+module jwt {
+  source = "../modules/jwt"
 
-resource "tls_self_signed_cert" "jwt_self" {
-  allowed_uses = [
-    "crl_signing",
-    "data_encipherment",
-    "digital_signature",
-    "key_agreement",
-    "cert_signing",
-    "key_encipherment"
-  ]
-  key_algorithm         = "RSA"
-  private_key_pem       = tls_private_key.jwt.private_key_pem
-  validity_period_hours = 8640
-  subject {
-    common_name = "apim"
-  }
-}
-
-resource "pkcs12_from_pem" "jwt_pkcs12" {
-  password        = ""
-  cert_pem        = tls_self_signed_cert.jwt_self.cert_pem
-  private_key_pem = tls_private_key.jwt.private_key_pem
-}
-
-resource "azurerm_key_vault_secret" "jwt_private_key" {
-  name         = "jwt-private-key"
-  value        = tls_private_key.jwt.private_key_pem
-  content_type = "text/plain"
-
-  key_vault_id = module.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "jwt_public_key" {
-  name         = "jwt-public-key"
-  value        = tls_private_key.jwt.public_key_pem
-  content_type = "text/plain"
-
-  key_vault_id = module.key_vault.id
-}
-
-resource "azurerm_key_vault_certificate" "jwt_certificate" {
-  name         = "jwt-crt"
-  key_vault_id = module.key_vault.id
-
-  certificate {
-    contents = pkcs12_from_pem.jwt_pkcs12.result
-    password = ""
-  }
-
-  # to be provided even if not required due to issue https://github.com/hashicorp/terraform-provider-azurerm/pull/14225
-  certificate_policy {
-    issuer_parameters {
-      name = "Self"
-    }
-
-    key_properties {
-      exportable = true
-      key_size   = 2048
-      key_type   = "RSA"
-      reuse_key  = true
-    }
-
-    secret_properties {
-      content_type = "application/x-pkcs12"
-    }
-  }
-
-  tags = var.tags
+  jwt_name         = "jwt"
+  key_vault_id     = module.key_vault.id
+  cert_common_name = "apim"
+  cert_password    = ""
+  tags             = var.tags
 }
 
 resource "null_resource" "upload_jwks" {
   triggers = {
-    "changes-in-jwt" : azurerm_key_vault_certificate.jwt_certificate.thumbprint
+    "changes-in-jwt" : module.jwt.thumbprint
   }
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
               pip install authlib
-              jwk=$(python "${path.module}/utils/py/jwkFromPem.py" "${format("%s\n%s\n%s", "-----BEGIN CERTIFICATE-----", replace(azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64, "/(.{64})/", "$1\n"), "-----END CERTIFICATE-----")}")
+              jwk=$(python "${path.module}/utils/py/jwkFromPem.py" "${module.jwt.certificate_data_pem}")
               n=$(echo $jwk | cut -d' ' -f1)
               e=$(echo $jwk | cut -d' ' -f2)
               echo '{
@@ -280,12 +216,12 @@ resource "null_resource" "upload_jwks" {
                             "kty": "RSA",
                             "use": "sig",
                             "x5c": [
-                                "${azurerm_key_vault_certificate.jwt_certificate.certificate_data_base64}"
+                                "${module.jwt.certificate_data_base64}"
                             ],
                             "n": "'$n'",
                             "e": "'$e'",
                             "kid": "selfcare",
-                            "x5t": "${azurerm_key_vault_certificate.jwt_certificate.thumbprint}"
+                            "x5t": "${module.jwt.thumbprint}"
                         }
                       ]
                   }' > "${path.module}/.terraform/tmp/jwks.json"
