@@ -190,7 +190,7 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
 # JWT
 resource "tls_private_key" "jwt" {
   algorithm = "RSA"
-  rsa_bits  = 2048
+  rsa_bits  = 4096
 }
 
 resource "tls_self_signed_cert" "jwt_self" {
@@ -249,7 +249,7 @@ resource "azurerm_key_vault_certificate" "jwt_certificate" {
 
     key_properties {
       exportable = true
-      key_size   = 2048
+      key_size   = 4096
       key_type   = "RSA"
       reuse_key  = true
     }
