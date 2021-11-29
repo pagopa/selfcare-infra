@@ -200,31 +200,19 @@ module jwt {
 
 resource "null_resource" "upload_jwks" {
   triggers = {
-    "changes-in-jwt" : module.jwt.thumbprint
+    "changes-in-jwt" : module.jwt.certificate_data_pem
   }
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
               pip install authlib
-              jwk=$(python "${path.module}/utils/py/jwkFromPem.py" "${module.jwt.certificate_data_pem}")
-              n=$(echo $jwk | cut -d' ' -f1)
-              e=$(echo $jwk | cut -d' ' -f2)
-              echo '{
-                    "keys": [
-                        {
-                            "alg": "RS256",
-                            "kty": "RSA",
-                            "use": "sig",
-                            "x5c": [
-                                "${module.jwt.certificate_data_base64}"
-                            ],
-                            "n": "'$n'",
-                            "e": "'$e'",
-                            "kid": "selfcare",
-                            "x5t": "${module.jwt.thumbprint}"
-                        }
-                      ]
-                  }' > "${path.module}/.terraform/tmp/jwks.json"
+              az storage blob download \
+                --container-name '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "${path.module}/.terraform/tmp/oldJwks.json" \
+                --name '.well-known/jwks.json'
+              python "${path.module}/utils/py/jwkFromPem.py" "${module.jwt.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
               az storage blob upload \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
