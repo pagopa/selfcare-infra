@@ -43,7 +43,7 @@ if exists(sys.argv[1]) :
     old_jwks_data = read_file(sys.argv[1])
     if old_jwks_data != "" :
         old_jwks = JsonWebKey.import_key_set(old_jwks_data.strip())
-        keys.append(re.sub("\s*]\s*}\s*$", "", re.sub('^\s*\{\s*"keys"\s*:\s*\[\s*', "", old_jwks_data)))
+        keys.append(re.sub("\s*]\s*}\s*$", "", re.sub('^\s*\{\s*"keys"\s*:\s*\[\s*', "\n		", old_jwks_data)))
 
 for i in range(2, len(sys.argv)):
     pem = sys.argv[i]
