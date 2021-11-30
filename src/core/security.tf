@@ -205,7 +205,7 @@ resource "null_resource" "upload_jwks" {
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
-              pip install authlib
+              pip install --require-hashes --requirement requirements.txt
               az storage blob download \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
