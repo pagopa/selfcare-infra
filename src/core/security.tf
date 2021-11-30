@@ -201,7 +201,7 @@ module jwt {
 module jwt_exchange {
   source = "../modules/jwt"
 
-  jwt_name         = "jwt_exchange"
+  jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault.id
   cert_common_name = "selfcare.pagopa.it"
   cert_password    = ""

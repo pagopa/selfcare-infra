@@ -124,7 +124,7 @@ resource "kubernetes_secret" "b4f-dashboard" {
 
   data = {
     BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
-    JWT_TOKEN_EXCHANGE_PRIVATE_KEY = module.key_vault_secrets_query.values["jwt_exchange-private-key"].value
+    JWT_TOKEN_EXCHANGE_PRIVATE_KEY = module.key_vault_secrets_query.values["jwt-exchange-private-key"].value
   }
 
   type = "Opaque"
