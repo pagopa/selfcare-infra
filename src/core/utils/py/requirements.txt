@@ -1,1 +1,1 @@
-authlib==0.15.5 --hash=sha256:b83cf6360c8e92b0e9df0d1f32d675790bcc4e3c03977499b1eed24dcdef4252
+authlib==0.15.5 --hash=sha256:ecf4a7a9f2508c0bb07e93a752dd3c495cfaffc20e864ef0ffc95e3f40d2abaf
