@@ -209,7 +209,7 @@ resource "null_resource" "upload_jwks" {
               az storage blob download \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
               python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
@@ -220,7 +220,7 @@ resource "null_resource" "upload_jwks" {
               az storage blob upload \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/jwks.json" \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \
@@ -230,6 +230,5 @@ resource "null_resource" "upload_jwks" {
                 --content-paths "/.well-known/jwks.json" \
                 --no-wait
           EOT
-    on_failure  = "fail"
   }
 }

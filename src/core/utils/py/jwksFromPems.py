@@ -19,18 +19,18 @@ def jwk_from_pem(pem, jwks):
         except ValueError as ve:
             None # kid not exists: do nothing
     return """
-         {{
-             "alg": "RS256",
-             "kty": "RSA",
-             "use": "sig",
-             "x5c": [
-                 "{inline_cert}"
-             ],
-             "n": "{modulus}",
-             "e": "{exponent}",
-             "kid": "{thumbprint}",
-             "x5t": "{thumbprint}"
-         }}""".format(
+		{{
+			"alg": "RS256",
+			"kty": "RSA",
+			"use": "sig",
+			"x5c": [
+			    "{inline_cert}"
+			],
+			"n": "{modulus}",
+			"e": "{exponent}",
+			"kid": "{thumbprint}",
+			"x5t": "{thumbprint}"
+		}}""".format(
             inline_cert=pem.replace("\n","").replace("-----BEGIN CERTIFICATE-----", "").replace("-----END CERTIFICATE-----",""),
             thumbprint=key.thumbprint(),
             modulus=key.as_dict()['n'],
@@ -52,9 +52,8 @@ for i in range(2, len(sys.argv)):
         keys.append(jwk)
 
 print("""{{
-    "keys":[
-        {}
-    ]
+	"keys": [{}
+	]
 }}
 """.format(','.join(keys))
 )
