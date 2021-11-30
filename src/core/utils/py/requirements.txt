@@ -2,5 +2,5 @@ authlib==0.15.5 --hash=sha256:ecf4a7a9f2508c0bb07e93a752dd3c495cfaffc20e864ef0ff
 cryptography==3.3.2 --hash=sha256:e18e6ab84dfb0ab997faf8cca25a86ff15dfea4027b986322026cc99e0a892da
 enum34==1.1.10 --hash=sha256:a98a201d6de3f2ab3db284e70a33b0f896fbf35f8086594e8c9e74b909058d53
 cffi==1.15.0 --hash=sha256:d4d692a89c5cf08a8557fdeb329b82e7bf609aadfaed6c0d79f5a449a3c7c023
-ipaddress=1.0.23 --hash=sha256:6e0f4a39e66cb5bb9a137b00276a2eff74f93b71dcbdad6f10ff7df9d3557fcc
+ipaddress==1.0.23 --hash=sha256:6e0f4a39e66cb5bb9a137b00276a2eff74f93b71dcbdad6f10ff7df9d3557fcc
 six==1.16.0 --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254

@@ -213,7 +213,8 @@ resource "null_resource" "upload_jwks" {
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
               python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
-              if [ $? -eq 1 ] then exit 1
+              if [ $? -eq 1 ] then
+                exit 1
               fi
               az storage blob upload \
                 --container-name '$web' \
@@ -228,5 +229,6 @@ resource "null_resource" "upload_jwks" {
                 --content-paths "/.well-known/jwks.json" \
                 --no-wait
           EOT
+    on_failure  = "fail"
   }
 }
