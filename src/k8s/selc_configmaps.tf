@@ -33,7 +33,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "/error"
+    ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
     ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
