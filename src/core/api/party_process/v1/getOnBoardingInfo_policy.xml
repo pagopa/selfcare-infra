@@ -113,6 +113,140 @@
                     </set-body>
                 </return-response>
             </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pippo"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "pippo",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "MANAGER",
+                        "productInfo": {
+                        "id": "productId",
+                        "role": "productRole",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pluto"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "pluto",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "OPERATOR",
+                        "productInfo": {
+                        "id": "productId",
+                        "role": "productRole",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("paperino"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "paperino",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "MANAGER",
+                        "productInfo": {
+                        "id": "productId1",
+                        "role": "productRole1",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        },
+                        {
+                        "institutionId": "paperino",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "OPERATOR",
+                        "productInfo": {
+                        "id": "productId2",
+                        "role": "productRole2",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
             <otherwise>
                 <return-response>
                     <set-status code="200" reason="OK"/>
