@@ -1,6 +1,6 @@
 resource "null_resource" "upload_assets" {
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/assets", "*"): filesha1(f)])) // TODO try to use **
+    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/assets", "**"): filesha1("${path.module}/assets/${f}")]))
   }
   provisioner "local-exec" {
     command = <<EOT
