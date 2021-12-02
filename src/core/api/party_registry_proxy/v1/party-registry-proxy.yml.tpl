@@ -104,7 +104,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /catergories:
+  /categories:
     get:
       tags:
         - institution
@@ -118,6 +118,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Categories'
+        '404':
+          description: Categories not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /status:
     get:
       tags:
@@ -164,13 +170,7 @@ components:
           maxLength: 12
         taxCode:
           type: string
-          description: institution tax code
-          example: '00000000000'
-          pattern: '[\d]{10,13}'
-          maxLength: 13
-        administrationCode:
-          type: string
-          description: institution tax code
+          description: institution fiscal code
           example: '00000000000'
           pattern: '[\d]{10,13}'
           maxLength: 13
@@ -180,24 +180,8 @@ components:
           example: 'c7'
           pattern: '[a-zA-Z\d]{1,12}'
           maxLength: 13
-        #        managerTaxCode:
-        #          type: string
-        #          description: manager tax code
-        #          example: RSSMRA75L01H501A
-        #          pattern: '^(?:(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]$'
-        #          maxLength: 16
-        managerName:
-          type: string
-          description: manager name
-          example: Mario
-          format: '^[A-Za-z èàòùìÈÀÒÙÌ]{2,30}$'
-          maxLength: 30
-        managerSurname:
-          type: string
-          description: manager surname
-          example: Rossi
-          format: '^[A-Za-z èàòùìÈÀÒÙÌ]{2,30}$'
-          maxLength: 30
+        manager:
+          $ref: '#/components/schemas/Manager'
         description:
           type: string
           description: institution description
@@ -212,7 +196,11 @@ components:
           maxLength: 20
       required:
         - id
+        - category
+        - taxCode
+        - digitalAddress
         - description
+        - manager
     Institutions:
       properties:
         items:
@@ -247,6 +235,25 @@ components:
             $ref: '#/components/schemas/Category'
       required:
         - items
+    Manager:
+      type: object
+      additionalProperties: false
+      properties:
+        givenName:
+          type: string
+          description: manager name
+          example: Mario
+          format: '^[A-Za-z èàòùìÈÀÒÙÌ]{2,30}$'
+          maxLength: 30
+        familyName:
+          type: string
+          description: manager surname
+          example: Rossi
+          format: '^[A-Za-z èàòùìÈÀÒÙÌ]{2,30}$'
+          maxLength: 30
+      required:
+        - givenName
+        - familyName
     Problem:
       properties:
         detail:
