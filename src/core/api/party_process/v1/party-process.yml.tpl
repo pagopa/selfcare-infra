@@ -14,15 +14,10 @@ servers:
   - url: 'https://${host}/${basePath}'
     description: This service is the party process
 security:
-  - bearerAuth: []
+  - bearerAuth: [ ]
 tags:
   - name: process
     description: Implements party process
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
-  - name: platform
-    description: Implements platform endpoints
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
@@ -32,15 +27,15 @@ tags:
       description: Find out more
       url: 'http://swagger.io'
 paths:
-  '/onboarding/info/':
+  '/onboarding/info':
     get:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - process
       summary: get on boarding info
       description: Return ok
-      operationId: getOnBoardingInfo
+      operationId: getOnboardingInfo
       parameters:
         - name: institutionId
           description: UUID of an institution you can filter the retrieval with
@@ -53,7 +48,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnBoardingInfo'
+                $ref: '#/components/schemas/OnboardingInfo'
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /onboarding/organization:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - process
+      summary: Organization onboarding on the platform
+      description: it performs the onboarding of a new organization on the platform
+      operationId: onboardingOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingRequest'
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingResponse'
         '400':
           description: Invalid ID supplied
           content:
@@ -63,25 +86,53 @@ paths:
   /onboarding/legals:
     post:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - process
-      summary: create an onboarding entry
-      description: Return ok
-      operationId: createLegals
+      summary: legals onboarding
+      description: creates legals entries on already onboarded institution
+      operationId: onboardingLegalsOnOrganization
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnBoardingRequest'
+              $ref: '#/components/schemas/OnboardingRequest'
       responses:
-        '201':
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnBoardingResponse'
+                $ref: '#/components/schemas/OnboardingResponse'
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /onboarding/subdelegates:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - process
+      summary: subdelegates onboarding
+      description: creates subdelegates entries on already onboarded institution
+      operationId: onboardingSubDelegatesOnOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingResponse'
         '400':
           description: Invalid ID supplied
           content:
@@ -91,18 +142,18 @@ paths:
   /onboarding/operators:
     post:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - process
-      summary: create an onboarding entry
-      description: Return ok
-      operationId: createOperators
+      summary: operators onboarding
+      description: performs operators onboarding on an already existing organization
+      operationId: onboardingOperators
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnBoardingRequest'
+              $ref: '#/components/schemas/OnboardingRequest'
       responses:
         '201':
           description: successful operation
@@ -129,11 +180,42 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: platformRoles
-          description: comma separated sequence of platform roles to filter the response with
-          in: query
+        - in: query
+          name: roles
+          description: comma separated sequence of role to filter the response with
           schema:
-            type: string
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+            default: [ ]
+          explode: false
+        - in: query
+          name: states
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RelationshipState'
+            default: [ ]
+          explode: false
+        - in: query
+          name: products
+          description: comma separated sequence of products to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
+        - in: query
+          name: productRoles
+          description: comma separated sequence of product roles to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
       responses:
         '200':
           description: successful operation
@@ -143,6 +225,36 @@ paths:
                 $ref: '#/components/schemas/RelationshipsResponse'
         '400':
           description: Invalid institution id supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /institutions/{institutionId}/products:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - process
+      summary: institution products retrieval
+      description: retrieves the products this institution is related to.
+      operationId: retrieveInstitutionProducts
+      parameters:
+        - name: institutionId
+          in: path
+          description: The identifier of the institution
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '404':
+          description: Institution not found
           content:
             application/problem+json:
               schema:
@@ -189,7 +301,7 @@ paths:
       tags:
         - process
       summary: Relationship deletion
-      description: Given a relationship identifier, it relates the corresponding relationship.
+      description: Given a relationship identifier, it deletes the corresponding relationship.
       operationId: deleteRelationshipById
       parameters:
         - name: relationshipId
@@ -281,12 +393,12 @@ paths:
   '/onboarding/complete/{token}':
     post:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - process
       summary: create an onboarding entry
       description: Return ok
-      operationId: confirmOnBoarding
+      operationId: confirmOnboarding
       parameters:
         - name: token
           in: path
@@ -319,9 +431,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '409':
+          description: Document validation failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - process
       summary: invalidate an onboarding request
@@ -381,7 +499,7 @@ paths:
   /status:
     get:
       security:
-        - bearerAuth: []
+        - bearerAuth: [ ]
       tags:
         - health
       summary: Health status endpoint
@@ -394,29 +512,9 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /platform/roles:
-    get:
-      summary: Get Platform Roles
-      tags:
-        - platform
-      responses:
-        '200':
-          description: Available platform roles' bindings.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PlatformRolesResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      operationId: getPlatformRoles
-      description: Returns all the available bindings between roles and platform roles.
 components:
   schemas:
-    OnBoardingRequest:
+    OnboardingRequest:
       properties:
         users:
           type: array
@@ -428,7 +526,7 @@ components:
       required:
         - users
         - institutionId
-    OnBoardingResponse:
+    OnboardingResponse:
       properties:
         token:
           type: string
@@ -448,29 +546,34 @@ components:
         from:
           type: string
           format: uuid
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
         role:
+          $ref: '#/components/schemas/PartyRole'
+        product:
+          $ref: '#/components/schemas/ProductInfo'
+        state:
+          $ref: '#/components/schemas/RelationshipState'
+        createdAt:
           type: string
-          description: represents the generic available role types for the relationship
-          enum:
-            - Manager
-            - Delegate
-            - Operator
-        platformRole:
+          format: date-time
+        updatedAt:
           type: string
-          description: 'user role in the application context (e.g.: administrator, security user). This MUST belong to the configured set of application specific platform roles'
-        status:
-          type: string
-          enum:
-            - pending
-            - active
-            - inactive
+          format: date-time
       additionalProperties: false
       required:
         - id
         - from
+        - name
+        - surname
         - role
-        - platformRole
-        - status
+        - product
+        - state
+        - createdAt
     RelationshipsResponse:
       type: array
       items:
@@ -484,14 +587,12 @@ components:
         taxCode:
           type: string
         role:
-          type: string
+          $ref: '#/components/schemas/PartyRole'
         email:
           type: string
-          enum:
-            - Manager
-            - Delegate
-            - Operator
-        platformRole:
+        product:
+          type: string
+        productRole:
           type: string
       additionalProperties: false
       required:
@@ -499,7 +600,8 @@ components:
         - surname
         - taxCode
         - role
-        - platformRole
+        - product
+        - productRole
     PersonInfo:
       properties:
         name:
@@ -513,48 +615,87 @@ components:
         - name
         - surname
         - taxCode
-    InstitutionInfo:
+    ProductInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - role
+        - createdAt
+    OnboardingData:
       properties:
         institutionId:
           type: string
         description:
           type: string
+        taxCode:
+          type: string
         digitalAddress:
           type: string
-        status:
-          type: string
+        state:
+          $ref: '#/components/schemas/RelationshipState'
         role:
-          type: string
-        platformRole:
-          type: string
+          $ref: '#/components/schemas/PartyRole'
+        productInfo:
+          $ref: '#/components/schemas/ProductInfo'
         attributes:
           type: array
           description: certified attributes bound to this institution
           items:
-            type: string
+            $ref: '#/components/schemas/Attribute'
       additionalProperties: false
       required:
         - institutionId
+        - taxCode
         - description
         - digitalAddress
-        - status
+        - state
         - role
-        - platformRole
+        - productInfo
         - attributes
-    OnBoardingInfo:
+    Attribute:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
+        - description
+    OnboardingInfo:
       properties:
         person:
           $ref: '#/components/schemas/PersonInfo'
         institutions:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionInfo'
+            $ref: '#/components/schemas/OnboardingData'
       additionalProperties: false
       required:
         - person
         - institutions
-    PlatformRolesResponse:
-      title: PlatformRolesResponse
+    Products:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductInfo'
+      required:
+        - products
+    ProductRolesResponse:
+      title: ProductRolesResponse
       type: object
       description: This payload contains the currently defined bindings between roles and platform roles.
       properties:
@@ -577,6 +718,23 @@ components:
         - managerRoles
         - delegateRoles
         - operatorRoles
+    PartyRole:
+      type: string
+      description: Represents the generic available role types for the relationship
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+    RelationshipState:
+      type: string
+      description: Represents the party relationship state
+      enum:
+        - PENDING
+        - ACTIVE
+        - SUSPENDED
+        - DELETED
+        - REJECTED
     Problem:
       properties:
         detail:

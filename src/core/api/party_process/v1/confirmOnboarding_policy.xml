@@ -19,6 +19,36 @@
                     </set-body>
                 </return-response>
             </when>
+            <when condition="@(((string)context.Variables["token"]).Equals("invalidPdf"))">
+                <return-response>
+                    <set-status code="409" reason="Invalid ID supplied"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "detail": "Request took too long to complete.",
+                        "status": 409,
+                        "title": "Service Unavailable"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["token"]).Equals("invalidSign"))">
+                <return-response>
+                    <set-status code="409" reason="Invalid ID supplied"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "detail": "Request took too long to complete.",
+                        "status": 409,
+                        "title": "Service Unavailable"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
             <otherwise>
                 <mock-response />
             </otherwise>

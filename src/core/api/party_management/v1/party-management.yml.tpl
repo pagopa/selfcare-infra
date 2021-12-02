@@ -24,6 +24,8 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+security:
+  - bearerAuth: [ ]
 paths:
   '/persons/{id}':
     get:
@@ -82,8 +84,6 @@ paths:
           description: Person not found
   /persons:
     post:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Create a new person
@@ -110,8 +110,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /organizations:
     post:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Create an organization
@@ -171,8 +169,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     head:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Verify if an organization exists for a given organizationId
@@ -261,9 +257,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
       operationId: getPartyAttributes
       description: 'returns the attributes of the identified party, if any.'
-    patch:
-      #      security:
-      #        - bearerAuth: [ ]
+    post:
       tags:
         - party
       summary: Retrieve the organization attributes for the given organizationId
@@ -290,8 +284,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /relationships:
     post:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Create a new relationship between a Person and an Organization
@@ -317,8 +309,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     get:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Return a list of relationships
@@ -336,9 +326,41 @@ paths:
             type: string
             format: uuid
         - in: query
-          name: platformRole
+          name: roles
+          description: comma separated sequence of role to filter the response with
           schema:
-            type: string
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+            default: [ ]
+          explode: false
+        - in: query
+          name: states
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RelationshipState'
+            default: [ ]
+          explode: false
+        - in: query
+          name: products
+          description: comma separated sequence of products to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
+        - in: query
+          name: productRoles
+          description: comma separated sequence of product roles to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
       responses:
         '200':
           description: successful operation
@@ -465,8 +487,6 @@ paths:
       description: 'Activate Relationship by ID'
   /tokens:
     post:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Create a new token
@@ -493,8 +513,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /tokens/{token}:
     head:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Retrieve token info
@@ -524,8 +542,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     post:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Consume a token
@@ -562,8 +578,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - party
       summary: Invalidate a token
@@ -587,8 +601,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /status:
     get:
-      #      security:
-      #        - bearerAuth: [ ]
       tags:
         - health
       summary: Health status endpoint
@@ -659,11 +671,8 @@ components:
       type: object
       properties:
         institutionId:
-          description: DN
-          example: 'aoo=c_f205,o=c_f205,c=it'
-          type: string
-        code:
-          description: an accessory code (e.g. codice ipa)
+          description: organization id (e.g iPA code)
+          example: 'c_f205'
           type: string
         description:
           type: string
@@ -672,17 +681,24 @@ components:
           example: email@pec.mail.org
           format: email
           type: string
-        fiscalCode:
-          description: organization fiscal code
+        taxCode:
+          description: organization tax code
           type: string
+        products:
+          type: array
+          items:
+            type: string
+            description: product names associated to this organization
+          uniqueItems: true
         attributes:
           $ref: '#/components/schemas/Attributes'
       required:
         - institutionId
         - description
         - digitalAddress
-        - fiscalCode
+        - taxCode
         - attributes
+        - products
       additionalProperties: false
     Organization:
       type: object
@@ -692,11 +708,8 @@ components:
           format: uuid
           example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
         institutionId:
-          description: DN
-          example: 'aoo=c_f205,o=c_f205,c=it'
-          type: string
-        code:
-          description: an accessory code (e.g. codice ipa)
+          description: organization id (e.g iPA code)
+          example: 'c_f205'
           type: string
         description:
           type: string
@@ -705,8 +718,8 @@ components:
           example: email@pec.mail.org
           format: email
           type: string
-        fiscalCode:
-          description: organization fiscal code
+        taxCode:
+          description: organization tax code
           type: string
         attributes:
           $ref: '#/components/schemas/Attributes'
@@ -715,7 +728,7 @@ components:
         - institutionId
         - description
         - digitalAddress
-        - fiscalCode
+        - taxCode
         - attributes
       additionalProperties: false
     BulkOrganizations:
@@ -745,10 +758,37 @@ components:
             type: string
             format: uuid
           description: the identifiers of party
+    PartyRole:
+      type: string
+      description: Represents the generic available role types for the relationship
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+    RelationshipState:
+      type: string
+      description: Represents the party relationship state
+      enum:
+        - PENDING
+        - ACTIVE
+        - SUSPENDED
+        - DELETED
+        - REJECTED
     Attributes:
       type: array
       items:
         type: string
+    RelationshipProductSeed:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+      required:
+        - id
+        - role
     RelationshipSeed:
       type: object
       properties:
@@ -761,21 +801,29 @@ components:
           format: uuid
           description: organization ID
         role:
-          type: string
-          description: represents the generic available role types for the relationship
-          enum:
-            - Manager
-            - Delegate
-            - Operator
-        platformRole:
-          type: string
-          description: 'user role in the application context (e.g.: administrator, security user). This MUST belong to the configured set of application specific platform roles'
+          $ref: '#/components/schemas/PartyRole'
+        product:
+          $ref: '#/components/schemas/RelationshipProductSeed'
       additionalProperties: false
       required:
         - from
         - to
         - role
-        - platformRole
+        - product
+    RelationshipProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - role
+        - createdAt
     Relationship:
       type: object
       properties:
@@ -800,29 +848,26 @@ components:
           type: string
           description: content type of the file containing the signed onboarding document
         role:
+          $ref: '#/components/schemas/PartyRole'
+        product:
+          $ref: '#/components/schemas/RelationshipProduct'
+        state:
+          $ref: '#/components/schemas/RelationshipState'
+        createdAt:
           type: string
-          description: represents the generic available role types for the relationship
-          enum:
-            - Manager
-            - Delegate
-            - Operator
-        platformRole:
+          format: date-time
+        updatedAt:
           type: string
-          description: 'user role in the application context (e.g.: administrator, security user). This MUST belong to the configured set of application specific platform roles'
-        status:
-          type: string
-          enum:
-            - Pending
-            - Active
-            - Suspended
+          format: date-time
       additionalProperties: false
       required:
         - id
         - from
         - to
         - role
-        - platformRole
-        - status
+        - product
+        - state
+        - createdAt
     Relationships:
       type: object
       properties:
@@ -888,9 +933,9 @@ components:
       required:
         - status
         - title
-#  securitySchemes:
-#    bearerAuth:
-#      type: http
-#      description: A bearer token in the format of a JWS and comformed to the specifications included in [RFC8725](https://tools.ietf.org/html/RFC8725).
-#      scheme: bearer
-#      bearerFormat: JWTly in the editor.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: 'A bearer token in the format of a JWS and comformed to the specifications included in [RFC8725](https://tools.ietf.org/html/RFC8725).'
+      scheme: bearer
+      bearerFormat: JWT
