@@ -11,6 +11,7 @@
                 {
                     "id": "97c0f418-bcb3-48d4-825a-fe8b29ae68e5",
                     "institutionId": "aoo=c_f205,o=c_f205,c=it",
+                    "taxCode": "FISCALCODE"
                     "description": "AGENCY X",
                     "digitalAddress": "email@pec.mail.org",
                     "attributes": [
