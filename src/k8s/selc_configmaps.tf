@@ -7,6 +7,7 @@ resource "kubernetes_config_map" "inner-service-url" {
   data = {
     HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
     B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
+    B4F_ONBOARDING_URL                          = "http://b4f-onboarding:8080"
     MS_PRODUCT_URL                             = "http://ms-product:8080"
     USERVICE_PARTY_PROCESS_URL                 = "https://selc-d-apim.azure-api.net/party-process/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
     USERVICE_PARTY_MANAGEMENT_URL              = "https://selc-d-apim.azure-api.net/party-management/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
@@ -33,7 +34,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "/error"
+    ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
     ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
@@ -91,6 +92,19 @@ resource "kubernetes_config_map" "b4f-dashboard" {
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
   },
   var.configmaps_b4f-dashboard
+  )
+}
+
+resource "kubernetes_config_map" "b4f-onboarding" {
+  metadata {
+    name      = "b4f-onboarding"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+  },
+  var.configmaps_b4f-onboarding
   )
 }
 

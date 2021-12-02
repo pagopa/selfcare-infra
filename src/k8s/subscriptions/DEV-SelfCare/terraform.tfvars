@@ -38,6 +38,12 @@ configmaps_b4f-dashboard = {
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }
 
+configmaps_b4f-onboarding = {
+  JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
+  APPLICATIONINSIGHTS_ROLE_NAME                     = "b4f-onboarding"
+  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
+}
+
 configmaps_uservice-attribute-registry-management = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
