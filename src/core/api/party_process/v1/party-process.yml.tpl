@@ -21,18 +21,13 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
-  - name: platform
-    description: Implements platform endpoints
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
   - name: health
     description: Verify service status
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
 paths:
-  '/onboarding/info/':
+  '/onboarding/info':
     get:
       security:
         - bearerAuth: [ ]
@@ -40,7 +35,7 @@ paths:
         - process
       summary: get on boarding info
       description: Return ok
-      operationId: getOnBoardingInfo
+      operationId: getOnboardingInfo
       parameters:
         - name: institutionId
           description: UUID of an institution you can filter the retrieval with
@@ -53,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnBoardingInfo'
+                $ref: '#/components/schemas/OnboardingInfo'
         '400':
           description: Invalid ID supplied
           content:
@@ -74,14 +69,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnBoardingRequest'
+              $ref: '#/components/schemas/OnboardingRequest'
       responses:
         '201':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnBoardingResponse'
+                $ref: '#/components/schemas/OnboardingResponse'
         '400':
           description: Invalid ID supplied
           content:
@@ -102,21 +97,48 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnBoardingRequest'
+              $ref: '#/components/schemas/OnboardingRequest'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnBoardingResponse'
+                $ref: '#/components/schemas/OnboardingResponse'
         '400':
           description: Invalid ID supplied
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-
+  /onboarding/subdelegates:
+    post:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - process
+      summary: subdelegates onboarding
+      description: creates subdelegates entries on already onboarded institution
+      operationId: onboardingSubDelegatesOnOrganization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingResponse'
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /onboarding/operators:
     post:
       security:
@@ -131,7 +153,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnBoardingRequest'
+              $ref: '#/components/schemas/OnboardingRequest'
       responses:
         '201':
           description: successful operation
@@ -158,16 +180,42 @@ paths:
           schema:
             type: string
             format: uuid
-        - name: products
+        - in: query
+          name: roles
+          description: comma separated sequence of role to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+            default: [ ]
+          explode: false
+        - in: query
+          name: states
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RelationshipState'
+            default: [ ]
+          explode: false
+        - in: query
+          name: products
           description: comma separated sequence of products to filter the response with
-          in: query
           schema:
-            type: string
-        - name: productRoles
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
+        - in: query
+          name: productRoles
           description: comma separated sequence of product roles to filter the response with
-          in: query
           schema:
-            type: string
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
       responses:
         '200':
           description: successful operation
@@ -182,41 +230,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
   /institutions/{institutionId}/products:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - process
-      summary: institution products replacement
-      description: replaces institution's products with the set passed as payload
-      operationId: replaceInstitutionProducts
-      parameters:
-        - name: institutionId
-          in: path
-          description: The identifier of the institution
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Products'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Institution'
-        '404':
-          description: Institution not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
     get:
       security:
         - bearerAuth: [ ]
@@ -377,42 +390,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /relationships/{relationshipId}/products:
-    post:
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - process
-      summary: relationship products replacement
-      description: replaces relationships's products with the set passed as payload
-      operationId: replaceRelationshipProducts
-      parameters:
-        - name: relationshipId
-          in: path
-          description: The identifier of the relationship
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Products'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RelationshipInfo'
-        '404':
-          description: Relationship not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
   '/onboarding/complete/{token}':
     post:
       security:
@@ -421,7 +398,7 @@ paths:
         - process
       summary: create an onboarding entry
       description: Return ok
-      operationId: confirmOnBoarding
+      operationId: confirmOnboarding
       parameters:
         - name: token
           in: path
@@ -450,6 +427,12 @@ paths:
           description: successful operation
         '400':
           description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Document validation failed
           content:
             application/problem+json:
               schema:
@@ -529,29 +512,9 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /platform/roles:
-    get:
-      summary: Get Platform Roles
-      tags:
-        - platform
-      responses:
-        '200':
-          description: Available platform roles' bindings.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductRolesResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      operationId: getProductRoles
-      description: Returns all the available bindings between roles and platform roles.
 components:
   schemas:
-    OnBoardingRequest:
+    OnboardingRequest:
       properties:
         users:
           type: array
@@ -563,7 +526,7 @@ components:
       required:
         - users
         - institutionId
-    OnBoardingResponse:
+    OnboardingResponse:
       properties:
         token:
           type: string
@@ -583,27 +546,34 @@ components:
         from:
           type: string
           format: uuid
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
         role:
           $ref: '#/components/schemas/PartyRole'
-        products:
-          type: array
-          description: set of products bound to this relationship
-          uniqueItems: true
-          items:
-            type: string
-        productRole:
-          type: string
-          description: 'user role in the application context (e.g.: administrator, security user). This MUST belong to the configured set of application specific platform roles'
+        product:
+          $ref: '#/components/schemas/ProductInfo'
         state:
           $ref: '#/components/schemas/RelationshipState'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       additionalProperties: false
       required:
         - id
         - from
+        - name
+        - surname
         - role
-        - products
-        - productRole
+        - product
         - state
+        - createdAt
     RelationshipsResponse:
       type: array
       items:
@@ -620,12 +590,8 @@ components:
           $ref: '#/components/schemas/PartyRole'
         email:
           type: string
-        products:
-          type: array
-          description: set of products bound to this user
-          uniqueItems: true
-          items:
-            type: string
+        product:
+          type: string
         productRole:
           type: string
       additionalProperties: false
@@ -634,7 +600,7 @@ components:
         - surname
         - taxCode
         - role
-        - products
+        - product
         - productRole
     PersonInfo:
       properties:
@@ -649,11 +615,27 @@ components:
         - name
         - surname
         - taxCode
+    ProductInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - role
+        - createdAt
     OnboardingData:
       properties:
         institutionId:
           type: string
         description:
+          type: string
+        taxCode:
           type: string
         digitalAddress:
           type: string
@@ -661,20 +643,8 @@ components:
           $ref: '#/components/schemas/RelationshipState'
         role:
           $ref: '#/components/schemas/PartyRole'
-        relationshipProducts:
-          type: array
-          uniqueItems: true
-          description: set of products bound to this relationship
-          items:
-            type: string
-        productRole:
-          type: string
-        institutionProducts:
-          type: array
-          uniqueItems: true
-          description: set of products bound to this institution
-          items:
-            type: string
+        productInfo:
+          $ref: '#/components/schemas/ProductInfo'
         attributes:
           type: array
           description: certified attributes bound to this institution
@@ -683,14 +653,13 @@ components:
       additionalProperties: false
       required:
         - institutionId
+        - taxCode
         - description
         - digitalAddress
         - state
         - role
-        - relationshipProducts
-        - productRole
+        - productInfo
         - attributes
-        - institutionProducts
     Attribute:
       type: object
       properties:
@@ -704,7 +673,7 @@ components:
         - id
         - name
         - description
-    OnBoardingInfo:
+    OnboardingInfo:
       properties:
         person:
           $ref: '#/components/schemas/PersonInfo'
@@ -716,57 +685,15 @@ components:
       required:
         - person
         - institutions
-    Institution:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
-        institutionId:
-          description: organization id (e.g iPA code)
-          example: 'c_f205'
-          type: string
-        description:
-          type: string
-          example: AGENCY X
-        digitalAddress:
-          example: email@pec.mail.org
-          format: email
-          type: string
-        taxCode:
-          description: organization tax code
-          type: string
-        attributes:
-          type: array
-          items:
-            type: string
-        products:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-            description: product names associated to this organization
-      required:
-        - id
-        - institutionId
-        - description
-        - digitalAddress
-        - taxCode
-        - attributes
-        - products
-      additionalProperties: false
     Products:
       type: object
-      required:
-        - products
       properties:
         products:
           type: array
-          uniqueItems: true
           items:
-            type: string
-          description: set of products to define for this institution
+            $ref: '#/components/schemas/ProductInfo'
+      required:
+        - products
     ProductRolesResponse:
       title: ProductRolesResponse
       type: object
@@ -797,6 +724,7 @@ components:
       enum:
         - MANAGER
         - DELEGATE
+        - SUB_DELEGATE
         - OPERATOR
     RelationshipState:
       type: string

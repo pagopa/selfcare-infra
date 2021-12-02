@@ -207,7 +207,7 @@ module "apim_uservice_party_process_v1" {
   // TODO these are mocks! remove me after integration
   api_operation_policies = [
     {
-      operation_id = "getOnBoardingInfo"
+      operation_id = "getOnboardingInfo"
       xml_content  = file("./api/party_process/v1/getOnBoardingInfo_policy.xml")
     },
     {
@@ -219,7 +219,7 @@ module "apim_uservice_party_process_v1" {
       xml_content  = file("./api/party_process/v1/invalidateOnboarding_policy.xml")
     },
     {
-      operation_id = "confirmOnBoarding"
+      operation_id = "confirmOnboarding"
       xml_content  = file("./api/party_process/v1/confirmOnboarding_policy.xml")
     }
   ]

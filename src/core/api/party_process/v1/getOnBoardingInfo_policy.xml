@@ -36,14 +36,15 @@
                         {
                         "institutionId": "onboarded",
                         "description": "AGENCY ONBOARDED",
+                        "taxCode":"onboardedFiscalCode",
                         "digitalAddress": "digitalAddress",
                         "state": "ACTIVE",
                         "role": "MANAGER",
-                        "platformRole": "ADMIN",
-                        "productRole": "ADMIN",
-                        "institutionProducts": [
-                        "1"
-                        ],
+                        "productInfo": {
+                            "id":"pagoPA",
+                            "role":"ADMIN",
+                            "createdAt":"2021-12-02T16:57:02.300Z"
+                        },
                         "attributes": [
                             {
                             "id":"attId",
@@ -73,11 +74,15 @@
                         {
                         "institutionId": "pending",
                         "description": "AGENCY PENDING",
+                        "taxCode":"pendingFiscalCode",
                         "digitalAddress": "digitalAddress",
                         "state": "PENDING",
                         "role": "MANAGER",
-                        "platformRole": "TECH_REF",
-                        "productRole": "TECH_REF",
+                        "productInfo": {
+                        "id":"pagoPA",
+                        "role":"TECH_REF",
+                        "createdAt":"2021-12-02T16:57:02.300Z"
+                        },
                         "attributes": [
                             {
                             "id":"attId",
@@ -125,51 +130,71 @@
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Bari",
+                                "taxCode":"ComunediBariFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "1",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "ADMIN_REF",
-                                "productRole": "ADMIN_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN_REF",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Milano",
+                                "taxCode":"ComunediMilanoFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "2",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "TECH_REF",
-                                "productRole": "TECH_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"TECH_REF",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Roma",
+                                "taxCode":"ComunediRomaFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "3",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "ADMIN_REF",
-                                "productRole": "ADMIN_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN_REF",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Napoli",
+                                "taxCode":"ComunediNapoliFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "4",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "TECH_REF",
-                                "productRole": "TECH_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"TECH_REF",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "institutionId": "onboarded",
                                 "description": "AGENCY ONBOARDED",
+                                "taxCode":"onboardedFiscalCode",
                                 "digitalAddress": "digitalAddress",
                                 "state": "ACTIVE",
                                 "role": "MANAGER",
-                                "platformRole": "ADMIN",
-                                "productRole": "ADMIN",
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 "attributes": [
                                 "string"
                                 ]
