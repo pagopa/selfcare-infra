@@ -41,9 +41,9 @@
                         "state": "ACTIVE",
                         "role": "MANAGER",
                         "productInfo": {
-                            "id":"pagoPA",
-                            "role":"ADMIN",
-                            "createdAt":"2021-12-02T16:57:02.300Z"
+                            "id": "pagoPA",
+                            "role": "ADMIN",
+                            "createdAt": "2021-12-02T16:57:02.300Z"
                         },
                         "attributes": [
                             {
@@ -79,9 +79,9 @@
                         "state": "PENDING",
                         "role": "MANAGER",
                         "productInfo": {
-                        "id":"pagoPA",
-                        "role":"TECH_REF",
-                        "createdAt":"2021-12-02T16:57:02.300Z"
+                        "id": "pagoPA",
+                        "role": "LIMITED",
+                        "createdAt": "2021-12-02T16:57:02.300Z"
                         },
                         "attributes": [
                             {
@@ -135,7 +135,7 @@
                         "role": "MANAGER",
                         "productInfo": {
                         "id": "productId",
-                        "role": "productRole",
+                        "role": "ADMIN",
                         "createdAt": "2021-12-01T17:15:38.101Z"
                         },
                         "attributes": [
@@ -173,7 +173,7 @@
                         "role": "OPERATOR",
                         "productInfo": {
                         "id": "productId",
-                        "role": "productRole",
+                        "role": "LIMITED",
                         "createdAt": "2021-12-01T17:15:38.101Z"
                         },
                         "attributes": [
@@ -211,7 +211,7 @@
                         "role": "MANAGER",
                         "productInfo": {
                         "id": "productId1",
-                        "role": "productRole1",
+                        "role": "ADMIN",
                         "createdAt": "2021-12-01T17:15:38.101Z"
                         },
                         "attributes": [
@@ -231,7 +231,7 @@
                         "role": "OPERATOR",
                         "productInfo": {
                         "id": "productId2",
-                        "role": "productRole2",
+                        "role": "LIMITED",
                         "createdAt": "2021-12-01T17:15:38.101Z"
                         },
                         "attributes": [
@@ -271,7 +271,7 @@
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
-                                "role":"ADMIN_REF",
+                                "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
                                 },
@@ -285,7 +285,7 @@
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
-                                "role":"TECH_REF",
+                                "role":"LIMITED",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
                                 },
@@ -299,7 +299,7 @@
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
-                                "role":"ADMIN_REF",
+                                "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
                                 },
@@ -313,7 +313,7 @@
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
-                                "role":"TECH_REF",
+                                "role":"LIMITED",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
                                 },
