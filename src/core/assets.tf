@@ -1,15 +1,6 @@
-data "local_file" "tc" {
-  filename = "${path.module}/assets/tc.pdf"
-}
-data "local_file" "informativa-privacy" {
-  filename = "${path.module}/assets/InformativaPrivacy.pdf"
-}
-
-
 resource "null_resource" "upload_assets" {
   triggers = {
-    "changes-in-tc" : md5(data.local_file.tc.content)
-    "changes-in-informativa-privacy" : md5(data.local_file.informativa-privacy.content)
+    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/assets", "*"): filesha1(f)])) // TODO try to use **
   }
   provisioner "local-exec" {
     command = <<EOT
