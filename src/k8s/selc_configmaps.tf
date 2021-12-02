@@ -1,3 +1,21 @@
+resource "kubernetes_config_map" "inner-service-url" {
+  metadata {
+    name      = "inner-service-url"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
+    B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
+    B4F_ONBOARDING_URL                          = "http://b4f-onboarding:8080"
+    MS_PRODUCT_URL                             = "http://ms-product:8080"
+    USERVICE_PARTY_PROCESS_URL                 = "https://selc-d-apim.azure-api.net/party-process/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
+    USERVICE_PARTY_MANAGEMENT_URL              = "https://selc-d-apim.azure-api.net/party-management/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://selc-d-apim.azure-api.net/party-registry-proxy/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
+    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "https://selc-d-apim.azure-api.net/attribute-registry-management/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
+  }
+}
+
 resource "kubernetes_config_map" "hub-spid-login-ms" {
   metadata {
     name      = "hub-spid-login-ms"
@@ -16,7 +34,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "/error"
+    ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
     ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
@@ -58,6 +76,7 @@ resource "kubernetes_config_map" "ms-product" {
 
   data = merge({
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+    MONGODB_NAME         = local.mongodb_name_selc_product
   },
   var.configmaps_ms-product
   )
@@ -76,3 +95,75 @@ resource "kubernetes_config_map" "b4f-dashboard" {
   )
 }
 
+resource "kubernetes_config_map" "b4f-onboarding" {
+  metadata {
+    name      = "b4f-onboarding"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+  },
+  var.configmaps_b4f-onboarding
+  )
+}
+
+resource "kubernetes_config_map" "uservice-attribute-registry-management" {
+  metadata {
+    name      = "uservice-attribute-registry-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
+    POSTGRES_SCHEMA               = "attribute_registry"
+  },
+  var.configmaps_uservice-attribute-registry-management
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-management" {
+  metadata {
+    name      = "uservice-party-management"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
+    POSTGRES_SCHEMA               = "party"
+  },
+  var.configmaps_uservice-party-management
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-process" {
+  metadata {
+    name      = "uservice-party-process"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-process"
+    MANAGER_PRODUCT_ROLES         = "ADMIN"//TODO
+    DELEGATE_PRODUCT_ROLES        = "ADMIN"//TODO
+    OPERATOR_PRODUCT_ROLES        = "ADMIN_REF,TECH_REF"//TODO
+    PARTY_MANAGEMENT_URL          = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    PARTY_PROXY_URL               = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+  },
+  var.configmaps_uservice-party-process
+  )
+}
+
+resource "kubernetes_config_map" "uservice-party-registry-proxy" {
+  metadata {
+    name      = "uservice-party-registry-proxy"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-registry-proxy"
+  },
+  var.configmaps_uservice-party-registry-proxy
+  )
+}

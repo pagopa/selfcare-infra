@@ -174,3 +174,34 @@ resource "kubernetes_cluster_role_binding" "view_binding" {
     namespace = "kube-system"
   }
 }
+
+# role required by interop services
+
+resource "kubernetes_role" "pod_reader" {
+  metadata {
+    name = "pod-reader"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  rule {
+    api_groups     = [""]
+    resources      = ["pods"]
+    verbs          = ["get", "watch", "list"]
+  }
+}
+
+resource "kubernetes_role_binding" "pod_reader" {
+  metadata {
+    name = "pod-reader"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "Role"
+    name      = "pod-reader"
+  }
+  subject {
+    kind      = "User"
+    name      = format("system:serviceaccount:%s:default", kubernetes_namespace.selc.metadata[0].name)
+  }
+}

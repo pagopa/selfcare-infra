@@ -12,10 +12,11 @@ module "key_vault_secrets_query" {
     "agid-spid-cert",
     "agid-spid-private-key",
     "mongodb-connection-string",
-    "postgres-selc-login",
-    "postgres-selc-user-password",
+    "postgres-party-user-password",
+    "postgres-attribute-registry-user-password",
     "smtp-usr",
     "smtp-psw",
-    "contracts-storage-access-key"
+    "contracts-storage-access-key",
+    "web-storage-connection-string"
   ]
 }

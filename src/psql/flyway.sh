@@ -52,16 +52,19 @@ export FLYWAY_PASSWORD="${administrator_login_password}"
 export SERVER_NAME="${psql_server_name}"
 export FLYWAY_DOCKER_TAG="7.11.1-alpine"
 
-selc_user_password=$(az keyvault secret show --name postgres-selc-user-password --vault-name "${keyvault_name}" -o tsv --query value)
+party_user_password=$(az keyvault secret show --name postgres-party-user-password --vault-name "${keyvault_name}" -o tsv --query value)
+attribute_registry_user_password=$(az keyvault secret show --name postgres-attribute-registry-user-password --vault-name "${keyvault_name}" -o tsv --query value)
 monitoring_user_password=$(az keyvault secret show --name postgres-monitoring-user-password --vault-name "${keyvault_name}" -o tsv --query value)
 monitoring_external_user_password=$(az keyvault secret show --name postgres-monitoring-external-user-password --vault-name "${keyvault_name}" -o tsv --query value)
 
 # in widows, even if using cygwin, these variables will contain a landing \r character
-selc_user_password=${selc_user_password//[$'\r']}
+party_user_password=${party_user_password//[$'\r']}
+attribute_registry_user_password=${attribute_registry_user_password//[$'\r']}
 monitoring_user_password=${monitoring_user_password//[$'\r']}
 monitoring_external_user_password=${monitoring_external_user_password//[$'\r']}
 
-export SELC_USER_PASSWORD="${selc_user_password}"
+export PARTY_USER_PASSWORD="${party_user_password}"
+export ATTRIBUTE_REGISTRY_USER_PASSWORD="${attribute_registry_user_password}"
 export MONITORING_USER_PASSWORD="${monitoring_user_password}"
 export MONITORING_EXTERNAL_USER_PASSWORD="${monitoring_external_user_password}"
 
@@ -74,7 +77,9 @@ docker run --rm --network=host -v "${WORKDIR}/migrations/${DATABASE}":/flyway/sq
   flyway/flyway:"${FLYWAY_DOCKER_TAG}" \
   -url="${FLYWAY_URL}" -user="${FLYWAY_USER}" -password="${FLYWAY_PASSWORD}" \
   -validateMigrationNaming=true \
-  -placeholders.selcUserPassword="${SELC_USER_PASSWORD}" \
+  -placeholders.flywayUser="${administrator_login}" \
+  -placeholders.partyUserPassword="${PARTY_USER_PASSWORD}" \
+  -placeholders.attributeRegistryUserPassword="${ATTRIBUTE_REGISTRY_USER_PASSWORD}" \
   -placeholders.monitoringUserPassword="${MONITORING_USER_PASSWORD}" \
   -placeholders.monitoringExternalUserPassword="${MONITORING_EXTERNAL_USER_PASSWORD}" \
   -placeholders.serverName="${SERVER_NAME}" "${COMMAND}" ${other}

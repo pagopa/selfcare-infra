@@ -18,9 +18,6 @@ resource "azurerm_resource_group" "rg_api" {
 }
 
 locals {
-  apim_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", local.project)
-
-  api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
 
   origins = {
     base = concat(
@@ -60,7 +57,7 @@ module "apim" {
   publisher_name       = var.apim_publisher_name
   publisher_email      = data.azurerm_key_vault_secret.apim_publisher_email.value
   sku_name             = var.apim_sku
-  virtual_network_type = "Internal"
+  virtual_network_type = "External"
 
   redis_connection_string = module.redis.primary_connection_string
   redis_cache_id          = module.redis.id
@@ -90,19 +87,6 @@ module "apim" {
   ]
 }
 
-resource "azurerm_api_management_custom_domain" "api_custom_domain" {
-  api_management_id = module.apim.id
-
-  proxy {
-    host_name = local.api_domain
-    key_vault_id = replace(
-    data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-    "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
-    ""
-    )
-  }
-}
-
 #########
 ## API ##
 #########
@@ -123,7 +107,7 @@ module "monitor" {
 
   content_format = "openapi"
   content_value = templatefile("./api/monitor/openapi.json.tpl", {
-    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host = "selc-d-apim.azure-api.net"  //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
   })
 
   xml_content = file("./api/base_policy.xml")
@@ -160,14 +144,14 @@ module "apim_hub_spid_login_api_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/hub-spid-login-ms", var.reverse_proxy_ip)
+  service_url = format("http://%s/spid/v1", var.reverse_proxy_ip)
 
   content_format = "swagger-json"
   content_value = templatefile("./api/hubspidlogin_api/v1/swagger.json.tpl", {
-    host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
   })
 
-  xml_content = file("./api/hubspidlogin_api/v1/policy.xml")
+  xml_content = file("./api/base_policy.xml")
 
   subscription_required = false
 
@@ -208,11 +192,11 @@ module "apim_uservice_party_process_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-process", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-process/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/party-process.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-process/v1"
   })
 
@@ -263,11 +247,11 @@ module "apim_uservice_party_management_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-management", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-management/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/party-management.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = "selc-d-apim.azure-api.net"// azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-management/v1"
   })
 
@@ -306,11 +290,11 @@ module "apim_uservice_party_registry_proxy_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/uservice-party-registry-proxy", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-registry-proxy/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/party-registry-proxy.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-registry-proxy/v1"
   })
 
@@ -325,4 +309,39 @@ module "apim_uservice_party_registry_proxy_v1" {
       xml_content  = file("./api/party_registry_proxy/v1/searchInstitution_policy.xml")
     }
   ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_b4f_dashboard" {
+  name                = format("%s-b4f-dashboard-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Self Care Dashboard"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_b4f_dashboard_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-b4f-dashboard-api-v1", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_b4f_dashboard.id
+
+
+  description  = "Self Care Dashboard API documentation"
+  display_name = "Self Care Dashboard V1"
+  path         = "dashboard"
+  api_version  = "v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/dashboard/v1", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/dashboard/v1/dashboard-openapi.json.tpl", {
+    host     = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "dashboard/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = false
 }

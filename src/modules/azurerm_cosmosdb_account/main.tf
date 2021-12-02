@@ -51,6 +51,10 @@ resource "azurerm_cosmosdb_account" "this" {
     }
   }
 
+  backup {
+    type = "Continuous"
+  }
+
   // IP filtering
   ip_range_filter = var.ip_range
 

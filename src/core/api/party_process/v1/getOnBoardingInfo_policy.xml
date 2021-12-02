@@ -37,9 +37,13 @@
                         "institutionId": "onboarded",
                         "description": "AGENCY ONBOARDED",
                         "digitalAddress": "digitalAddress",
-                        "state": "active",
+                        "state": "ACTIVE",
                         "role": "MANAGER",
+                        "platformRole": "ADMIN",
                         "productRole": "ADMIN",
+                        "institutionProducts": [
+                        "1"
+                        ],
                         "attributes": [
                             {
                             "id":"attId",
@@ -70,8 +74,9 @@
                         "institutionId": "pending",
                         "description": "AGENCY PENDING",
                         "digitalAddress": "digitalAddress",
-                        "state": "pending",
+                        "state": "PENDING",
                         "role": "MANAGER",
+                        "platformRole": "TECH_REF",
                         "productRole": "TECH_REF",
                         "attributes": [
                             {
@@ -120,38 +125,54 @@
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Bari",
-                                "state": "Pending",
+                                "state": "PENDING",
                                 "institutionId": "1",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "productRole": "admin"
+                                "platformRole": "ADMIN_REF",
+                                "productRole": "ADMIN_REF"
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Milano",
-                                "state": "Pending",
+                                "state": "PENDING",
                                 "institutionId": "2",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "productRole": "admin"
+                                "platformRole": "TECH_REF",
+                                "productRole": "TECH_REF"
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Roma",
-                                "state": "Active",
+                                "state": "ACTIVE",
                                 "institutionId": "3",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "productRole": "admin"
+                                "platformRole": "ADMIN_REF",
+                                "productRole": "ADMIN_REF"
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Napoli",
-                                "state": "Active",
+                                "state": "ACTIVE",
                                 "institutionId": "4",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "productRole": "admin"
+                                "platformRole": "TECH_REF",
+                                "productRole": "TECH_REF"
+                                },
+                                {
+                                "institutionId": "onboarded",
+                                "description": "AGENCY ONBOARDED",
+                                "digitalAddress": "digitalAddress",
+                                "state": "ACTIVE",
+                                "role": "MANAGER",
+                                "platformRole": "ADMIN",
+                                "productRole": "ADMIN",
+                                "attributes": [
+                                "string"
+                                ]
                                 }
                             ]
                         }
