@@ -36,17 +36,21 @@
                         {
                         "institutionId": "onboarded",
                         "description": "AGENCY ONBOARDED",
+                        "taxCode":"onboardedFiscalCode",
                         "digitalAddress": "digitalAddress",
                         "state": "ACTIVE",
                         "role": "MANAGER",
-                        "platformRole": "ADMIN",
-                        "productRole": "ADMIN",
-                        "institutionProducts": [
-                        "1"
-                        ],
+                        "productInfo": {
+                            "id": "pagoPA",
+                            "role": "ADMIN",
+                            "createdAt": "2021-12-02T16:57:02.300Z"
+                        },
                         "attributes": [
-                        "string"
-                        ]
+                            {
+                            "id":"attId",
+                            "name":"attName",
+                            "description":"attDescription"
+                            ]
                         }
                         ]
                         }
@@ -70,13 +74,20 @@
                         {
                         "institutionId": "pending",
                         "description": "AGENCY PENDING",
+                        "taxCode":"pendingFiscalCode",
                         "digitalAddress": "digitalAddress",
                         "state": "PENDING",
                         "role": "MANAGER",
-                        "platformRole": "TECH_REF",
-                        "productRole": "TECH_REF",
+                        "productInfo": {
+                        "id": "pagoPA",
+                        "role": "LIMITED",
+                        "createdAt": "2021-12-02T16:57:02.300Z"
+                        },
                         "attributes": [
-                        "string"
+                            {
+                            "id":"attId",
+                            "name":"attName",
+                            "description":"attDescription"
                         ]
                         }
                         ]
@@ -102,6 +113,140 @@
                     </set-body>
                 </return-response>
             </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pippo"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "pippo",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "MANAGER",
+                        "productInfo": {
+                        "id": "productId",
+                        "role": "ADMIN",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pluto"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "pluto",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "OPERATOR",
+                        "productInfo": {
+                        "id": "productId",
+                        "role": "LIMITED",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("paperino"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "string",
+                        "surname": "string",
+                        "taxCode": "string"
+                        },
+                        "institutions": [
+                        {
+                        "institutionId": "paperino",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "MANAGER",
+                        "productInfo": {
+                        "id": "productId1",
+                        "role": "ADMIN",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        },
+                        {
+                        "institutionId": "paperino",
+                        "description": "string",
+                        "taxCode": "string",
+                        "digitalAddress": "string",
+                        "state": "ACTIVE",
+                        "role": "OPERATOR",
+                        "productInfo": {
+                        "id": "productId2",
+                        "role": "LIMITED",
+                        "createdAt": "2021-12-01T17:15:38.101Z"
+                        },
+                        "attributes": [
+                        {
+                        "id": "string",
+                        "name": "string",
+                        "description": "category"
+                        }
+                        ]
+                        }
+                        ]
+                        }
+                    </set-body>
+                </return-response>
+            </when>
             <otherwise>
                 <return-response>
                     <set-status code="200" reason="OK"/>
@@ -119,51 +264,71 @@
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Bari",
+                                "taxCode":"ComunediBariFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "1",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "ADMIN_REF",
-                                "productRole": "ADMIN_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Milano",
+                                "taxCode":"ComunediMilanoFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "2",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "TECH_REF",
-                                "productRole": "TECH_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"LIMITED",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Roma",
+                                "taxCode":"ComunediRomaFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "3",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "ADMIN_REF",
-                                "productRole": "ADMIN_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "role": "MANAGER",
                                 "description": "Comune di Napoli",
+                                "taxCode":"ComunediNapoliFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "4",
                                 "attributes": [],
                                 "digitalAddress": "",
-                                "platformRole": "TECH_REF",
-                                "productRole": "TECH_REF"
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"LIMITED",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 },
                                 {
                                 "institutionId": "onboarded",
                                 "description": "AGENCY ONBOARDED",
+                                "taxCode":"onboardedFiscalCode",
                                 "digitalAddress": "digitalAddress",
                                 "state": "ACTIVE",
                                 "role": "MANAGER",
-                                "platformRole": "ADMIN",
-                                "productRole": "ADMIN",
+                                "productInfo": {
+                                "id":"pagoPA",
+                                "role":"ADMIN",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                },
                                 "attributes": [
                                 "string"
                                 ]
