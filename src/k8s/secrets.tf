@@ -9,6 +9,8 @@ module "key_vault_secrets_query" {
     "redis-primary-access-key",
     "jwt-private-key",
     "jwt-public-key",
+    "jwt-exchange-private-key",
+    "jwt-exchange-public-key",
     "agid-spid-cert",
     "agid-spid-private-key",
     "mongodb-connection-string",
