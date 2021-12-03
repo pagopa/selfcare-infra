@@ -56,7 +56,7 @@ module "checkout_cdn" {
   lock_enabled          = var.lock_enable
 
   index_document     = "index.html"
-  error_404_document = "not_found.html"
+  error_404_document = "dashboard/index.html"
 
   dns_zone_name                = azurerm_dns_zone.selfcare_public[0].name
   dns_zone_resource_group_name = azurerm_dns_zone.selfcare_public[0].resource_group_name
