@@ -90,6 +90,7 @@ resource "kubernetes_config_map" "b4f-dashboard" {
 
   data = merge({
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+    JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
   },
   var.configmaps_b4f-dashboard
   )

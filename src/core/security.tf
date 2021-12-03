@@ -198,9 +198,20 @@ module jwt {
   tags             = var.tags
 }
 
+module jwt_exchange {
+  source = "../modules/jwt"
+
+  jwt_name         = "jwt-exchange"
+  key_vault_id     = module.key_vault.id
+  cert_common_name = "selfcare.pagopa.it"
+  cert_password    = ""
+  tags             = var.tags
+}
+
 resource "null_resource" "upload_jwks" {
   triggers = {
     "changes-in-jwt" : module.jwt.certificate_data_pem
+    "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
   }
   provisioner "local-exec" {
     command = <<EOT
@@ -212,7 +223,7 @@ resource "null_resource" "upload_jwks" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
-              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
               if [ $? -eq 1 ]
               then
                 exit 1
