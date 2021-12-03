@@ -188,46 +188,47 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
 }
 
 # JWT
-resource "tls_private_key" "jwt" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
+module jwt {
+  source = "../modules/jwt"
+
+  jwt_name         = "jwt"
+  key_vault_id     = module.key_vault.id
+  cert_common_name = "apim"
+  cert_password    = ""
+  tags             = var.tags
 }
 
-resource "tls_self_signed_cert" "jwt_self" {
-  allowed_uses = [
-    "crl_signing",
-    "data_encipherment",
-    "digital_signature",
-    "key_agreement",
-    "cert_signing",
-    "key_encipherment"
-  ]
-  key_algorithm         = "RSA"
-  private_key_pem       = tls_private_key.jwt.private_key_pem
-  validity_period_hours = 8640
-  subject {
-    common_name = "apim"
+resource "null_resource" "upload_jwks" {
+  triggers = {
+    "changes-in-jwt" : module.jwt.certificate_data_pem
   }
-}
-
-resource "pkcs12_from_pem" "jwt_pkcs12" {
-  password        = ""
-  cert_pem        = tls_self_signed_cert.jwt_self.cert_pem
-  private_key_pem = tls_private_key.jwt.private_key_pem
-}
-
-resource "azurerm_key_vault_secret" "jwt_private_key" {
-  name         = "jwt-private-key"
-  value        = tls_private_key.jwt.private_key_pem
-  content_type = "text/plain"
-
-  key_vault_id = module.key_vault.id
-}
-
-resource "azurerm_key_vault_secret" "jwt_public_key" {
-  name         = "jwt-public-key"
-  value        = tls_private_key.jwt.public_key_pem
-  content_type = "text/plain"
-
-  key_vault_id = module.key_vault.id
+  provisioner "local-exec" {
+    command = <<EOT
+              mkdir -p "${path.module}/.terraform/tmp"
+              pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
+              az storage blob download \
+                --container-name '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "${path.module}/.terraform/tmp/oldJwks.json" \
+                --name '.well-known/jwks.json'
+              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+              if [ $? -eq 1 ]
+              then
+                exit 1
+              fi
+              az storage blob upload \
+                --container-name '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "${path.module}/.terraform/tmp/jwks.json" \
+                --name '.well-known/jwks.json'
+              az cdn endpoint purge \
+                -g ${azurerm_resource_group.checkout_fe_rg.name} \
+                -n ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
+                --content-paths "/.well-known/jwks.json" \
+                --no-wait
+          EOT
+  }
 }
