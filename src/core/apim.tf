@@ -307,6 +307,9 @@ module "apim_uservice_party_registry_proxy_v1" {
     {
       operation_id = "searchInstitution"
       xml_content  = file("./api/party_registry_proxy/v1/searchInstitution_policy.xml")
+    },{
+      operation_id = "getInstitutionById"
+      xml_content  = file("./api/party_registry_proxy/v1/getInstitutionById_policy.xml")
     }
   ]
 }
