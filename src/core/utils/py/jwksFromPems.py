@@ -46,9 +46,10 @@ if exists(sys.argv[1]) :
         old_jwks = JsonWebKey.import_key_set(old_jwks_data.strip())
         keys.append(re.sub("\s*]\s*}\s*$", "", re.sub('^\s*\{\s*"keys"\s*:\s*\[\s*', "\n		", old_jwks_data)))
 
-for i in range(2, len(sys.argv)/2):
-    kid = sys.argv[i]
-    pem = sys.argv[i+1]
+for i in range(0, (len(sys.argv) -1 )/2 - 1):
+    baseIndex = 2 + i*2
+    kid = sys.argv[baseIndex]
+    pem = sys.argv[baseIndex+1]
     jwk = jwk_from_pem(kid, pem, old_jwks)
     if jwk is not None:
         keys.append(jwk)
