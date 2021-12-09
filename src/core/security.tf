@@ -223,7 +223,7 @@ resource "null_resource" "upload_jwks" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
-              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
               if [ $? -eq 1 ]
               then
                 exit 1
