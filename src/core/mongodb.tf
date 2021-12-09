@@ -24,30 +24,29 @@ module "cosmosdb_mongodb_snet" {
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "../modules/azurerm_cosmosdb_account"
+  source     = "git::https://github.com/pagopa/azurerm.git//cosmosdb?ref=v2.0.5"
 
   name                 = format("%s-cosmosdb-mongodb-account", local.project)
   location             = azurerm_resource_group.mongodb_rg.location
   resource_group_name  = azurerm_resource_group.mongodb_rg.name
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
-  subnet_id            = module.cosmosdb_mongodb_snet.id
-  private_dns_zone_ids = [azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id]
-
-  enable_free_tier = var.cosmosdb_mongodb_enable_free_tier
-
-  public_network_access_enabled     = var.cosmosdb_mongodb_public_network_access_enabled
-  is_virtual_network_filter_enabled = true
-
+  capabilities = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
   mongo_server_version = "4.0"
 
-  capabilities = var.cosmosdb_mongodb_enable_serverless ? concat(local.base_capabilities, ["EnableServerless"]) : local.base_capabilities
+  public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
+  private_endpoint_enabled          = var.cosmosdb_mongodb_private_endpoint_enabled
+  subnet_id                         = module.cosmosdb_mongodb_snet.id
+  private_dns_zone_ids              = var.cosmosdb_mongodb_private_endpoint_enabled ? [azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id] : []
+  is_virtual_network_filter_enabled = true
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
 
   main_geo_location_location = azurerm_resource_group.mongodb_rg.location
 
   additional_geo_locations = var.cosmosdb_mongodb_additional_geo_locations
+
+  backup_continuous_enabled = true
 
   tags = var.tags
 }

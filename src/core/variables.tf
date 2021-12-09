@@ -620,6 +620,18 @@ variable "cosmosdb_mongodb_max_throughput" {
   default     = 4000
 }
 
+variable "cosmosdb_mongodb_extra_capabilities" {
+  type        = list(string)
+  default     = []
+  description = "Enable cosmosdb extra capabilities"
+}
+
+variable "cosmosdb_mongodb_private_endpoint_enabled" {
+  type        = bool
+  description = "Enable private endpoint for Comsmos DB"
+  default     = true
+}
+
 ## Database server postgresl
 variable "postgres_sku_name" {
   type        = string

@@ -51,8 +51,7 @@ min_count               = null
 max_count               = null
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless             = true
-cosmosdb_mongodb_public_network_access_enabled = true
+cosmosdb_mongodb_extra_capabilities = ["EnableServerless"]
 
 # postgres
 postgres_sku_name       = "GP_Gen5_2"
