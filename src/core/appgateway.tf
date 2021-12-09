@@ -18,33 +18,20 @@ module "appgateway_snet" {
   virtual_network_name = module.vnet.name
 }
 
-## Application gateway ##
-# Since these variables are re-used - a locals block makes this more maintainable
-locals {
-  backend_address_pool_name       = format("%s-appgw-be-address-pool", local.project)
-  frontend_http_port_name         = format("%s-appgw-fe-http-port", local.project)
-  frontend_https_port_name        = format("%s-appgw-fe-https-port", local.project)
-  frontend_ip_configuration_name  = format("%s-appgw-fe-ip-configuration", local.project)
-  http_setting_name               = format("%s-appgw-be-http-settings", local.project)
-  http_listener_name              = format("%s-appgw-fe-http-settings", local.project)
-  https_listener_name             = format("%s-appgw-fe-https-settings", local.project)
-  http_request_routing_rule_name  = format("%s-appgw-http-reqs-routing-rule", local.project)
-  https_request_routing_rule_name = format("%s-appgw-https-reqs-routing-rule", local.project)
-  acme_le_ssl_cert_name           = format("%s-appgw-acme-le-ssl-cert", local.project)
-  http_to_https_redirect_rule     = format("%s-appgw-http-to-https-redirect-rule", local.project)
-}
-
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v1.0.58"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.0.9"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
   name                = format("%s-app-gw", local.project)
 
   # SKU
-  sku_name = "WAF_v2"
-  sku_tier = "WAF_v2"
+  sku_name = var.app_gateway_sku_name
+  sku_tier = var.app_gateway_sku_tier
+
+  # WAF
+  waf_enabled = var.app_gateway_waf_enabled
 
   # Networking
   subnet_id    = module.appgateway_snet.id
@@ -53,12 +40,15 @@ module "app_gw" {
   # Configure backends
   backends = {
     aks = {
-      protocol     = "Http"
-      host         = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
-      port         = 80
-      ip_addresses = [var.reverse_proxy_ip]
-      probe        = "/ms-product/v1/actuator/health"
-      probe_name   = "probe-aks"
+      protocol                    = "Http"
+      host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
+      port                        = 80
+      ip_addresses                = [var.reverse_proxy_ip]
+      probe                       = "/ms-product/v1/actuator/health"
+      probe_name                  = "probe-aks"
+      request_timeout             = 10
+      fqdns                       = null
+      pick_host_name_from_backend = false
     }
   }
 
@@ -84,18 +74,19 @@ module "app_gw" {
 
   # Configure listeners
   listeners = {
-
     api = {
-      protocol         = "Https"
-      host             = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
-      port             = 443
-      ssl_profile_name = format("%s-ssl-profile", local.project)
+      protocol           = "Https"
+      host               = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+      port               = 443
+      ssl_profile_name   = null
+      firewall_policy_id = null
 
       certificate = {
         name = var.app_gateway_api_certificate_name
-        id = trimsuffix(
+        id = replace(
           data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-          data.azurerm_key_vault_certificate.app_gw_platform.version
+          "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
+          ""
         )
       }
     }
@@ -104,10 +95,33 @@ module "app_gw" {
   # maps listener to backend
   routes = {
     api = {
-      listener = "api"
-      backend  = "aks"
+      listener              = "api"
+      backend               = "aks"
+      rewrite_rule_set_name = "rewrite-rule-set-api"
     }
   }
+
+  rewrite_rule_sets = [
+    {
+      name = "rewrite-rule-set-api"
+      rewrite_rules = [{
+        name          = "http-headers-api"
+        rule_sequence = 100
+        condition     = null
+        request_header_configurations = [
+          {
+            header_name  = "X-Forwarded-For"
+            header_value = "{var_client_ip}"
+          },
+          {
+            header_name  = "X-Client-Ip"
+            header_value = "{var_client_ip}"
+          },
+        ]
+        response_header_configurations = []
+      }]
+    },
+  ]
 
   # TLS
   identity_ids = [azurerm_user_assigned_identity.appgateway.id]
@@ -115,6 +129,127 @@ module "app_gw" {
   # Scaling
   app_gateway_min_capacity = var.app_gateway_min_capacity
   app_gateway_max_capacity = var.app_gateway_max_capacity
+
+  alerts_enabled = var.app_gateway_alerts_enabled
+
+  action = [
+    {
+      action_group_id    = azurerm_monitor_action_group.slack.id
+      webhook_properties = null
+    },
+    {
+      action_group_id    = azurerm_monitor_action_group.email.id
+      webhook_properties = null
+    }
+  ]
+
+  # metrics docs
+  # https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported#microsoftnetworkapplicationgateways
+  monitor_metric_alert_criteria = {
+
+    compute_units_usage = {
+      description   = "Abnormal compute units usage, probably an high traffic peak"
+      frequency     = "PT5M"
+      window_size   = "PT5M"
+      severity      = 2
+      auto_mitigate = true
+
+      criteria = []
+      dynamic_criteria = [
+        {
+          aggregation              = "Average"
+          metric_name              = "ComputeUnits"
+          operator                 = "GreaterOrLessThan"
+          alert_sensitivity        = "High"
+          evaluation_total_count   = 2
+          evaluation_failure_count = 2
+          dimension                = []
+        }
+      ]
+    }
+
+    backend_pools_status = {
+      description   = "One or more backend pools are down, check Backend Health on Azure portal"
+      frequency     = "PT5M"
+      window_size   = "PT5M"
+      severity      = 0
+      auto_mitigate = true
+
+      criteria = [
+        {
+          aggregation = "Average"
+          metric_name = "UnhealthyHostCount"
+          operator    = "GreaterThan"
+          threshold   = 0
+          dimension   = []
+        }
+      ]
+      dynamic_criteria = []
+    }
+
+    response_time = {
+      description   = "Backends response time is too high"
+      frequency     = "PT5M"
+      window_size   = "PT5M"
+      severity      = 2
+      auto_mitigate = true
+
+      criteria = []
+      dynamic_criteria = [
+        {
+          aggregation              = "Average"
+          metric_name              = "BackendLastByteResponseTime"
+          operator                 = "GreaterThan"
+          alert_sensitivity        = "High"
+          evaluation_total_count   = 2
+          evaluation_failure_count = 2
+          dimension                = []
+        }
+      ]
+    }
+
+    total_requests = {
+      description   = "Traffic is raising"
+      frequency     = "PT5M"
+      window_size   = "PT15M"
+      severity      = 3
+      auto_mitigate = true
+
+      criteria = []
+      dynamic_criteria = [
+        {
+          aggregation              = "Total"
+          metric_name              = "TotalRequests"
+          operator                 = "GreaterThan"
+          alert_sensitivity        = "Medium"
+          evaluation_total_count   = 1
+          evaluation_failure_count = 1
+          dimension                = []
+        }
+      ]
+    }
+
+    failed_requests = {
+      description   = "Abnormal failed requests"
+      frequency     = "PT5M"
+      window_size   = "PT5M"
+      severity      = 1
+      auto_mitigate = true
+
+      criteria = []
+      dynamic_criteria = [
+        {
+          aggregation              = "Total"
+          metric_name              = "FailedRequests"
+          operator                 = "GreaterThan"
+          alert_sensitivity        = "High"
+          evaluation_total_count   = 2
+          evaluation_failure_count = 2
+          dimension                = []
+        }
+      ]
+    }
+  }
 
   # Logs
   sec_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : azurerm_log_analytics_workspace.log_analytics_workspace.id

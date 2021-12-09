@@ -10,32 +10,32 @@ resource "azurerm_resource_group" "checkout_fe_rg" {
 
 locals {
   spa = [
-    for i, spa in var.spa:
-      {
-        name                      = replace(format("SPA-%s", spa), "-", "")
-        order                     = i+2 // +2 required because the order start from 1 and 1 is reserved for the https rewrite
-        conditions = [
-          {
-            condition_type   = "url_path_condition"
-            operator         = "BeginsWith"
-            match_values     = [format("/%s/", spa)]
-            negate_condition = false
-            transforms       = null
-          },
-          {
-            condition_type   = "url_file_extension_condition"
-            operator         = "LessThanOrEqual"
-            match_values     = ["0"]
-            negate_condition = false
-            transforms       = null
-          },
-          ]
-        url_rewrite_action        = {
-          source_pattern          = format("/%s/", spa)
-          destination             = format("/%s/index.html", spa)
-          preserve_unmatched_path = false
-        }
+    for i, spa in var.spa :
+    {
+      name  = replace(format("SPA-%s", spa), "-", "")
+      order = i + 2 // +2 required because the order start from 1 and 1 is reserved for the https rewrite
+      conditions = [
+        {
+          condition_type   = "url_path_condition"
+          operator         = "BeginsWith"
+          match_values     = [format("/%s/", spa)]
+          negate_condition = false
+          transforms       = null
+        },
+        {
+          condition_type   = "url_file_extension_condition"
+          operator         = "LessThanOrEqual"
+          match_values     = ["0"]
+          negate_condition = false
+          transforms       = null
+        },
+      ]
+      url_rewrite_action = {
+        source_pattern          = format("/%s/", spa)
+        destination             = format("/%s/index.html", spa)
+        preserve_unmatched_path = false
       }
+    }
   ]
 }
 
@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source                = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.85"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v1.0.85"
 
   name                  = "checkout"
   prefix                = local.project
@@ -82,13 +82,13 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value  = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata; "
+        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
-        name = "Content-Security-Policy-Report-Only"
-        value = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
+        name   = "Content-Security-Policy-Report-Only"
+        value  = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
       },
       {
         action = "Append"
