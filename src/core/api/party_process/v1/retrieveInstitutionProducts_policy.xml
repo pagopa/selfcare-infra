@@ -1,0 +1,40 @@
+<!-- TODO these are mocks! remove me after integration -->
+<policies>
+    <inbound>
+        <base />
+        <return-response>
+            <set-status code="200" reason="OK" />
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>{
+                "products": [
+                {
+                "id": "productId1",
+                "role": "string",
+                "createdAt": "2021-12-03T17:00:48.638Z"
+                },
+                {
+                "id": "productId2",
+                "role": "string",
+                "createdAt": "2021-12-03T17:00:48.638Z"
+                },
+                {
+                "id": "productId3",
+                "role": "string",
+                "createdAt": "2021-12-03T17:00:48.638Z"
+                }
+                ]
+                }</set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
