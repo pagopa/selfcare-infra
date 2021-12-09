@@ -221,7 +221,15 @@ module "apim_uservice_party_process_v1" {
     {
       operation_id = "confirmOnboarding"
       xml_content  = file("./api/party_process/v1/confirmOnboarding_policy.xml")
-    }
+    },
+    {
+      operation_id = "retrieveInstitutionProducts"
+      xml_content  = file("./api/party_process/v1/retrieveInstitutionProducts_policy.xml")
+    },
+    {
+      operation_id = "onboardingOrganization"
+      xml_content  = file("./api/party_process/v1/onboardingOrganization_policy.xml")
+    },
   ]
 }
 
@@ -307,6 +315,9 @@ module "apim_uservice_party_registry_proxy_v1" {
     {
       operation_id = "searchInstitution"
       xml_content  = file("./api/party_registry_proxy/v1/searchInstitution_policy.xml")
+    },{
+      operation_id = "getInstitutionById"
+      xml_content  = file("./api/party_registry_proxy/v1/getInstitutionById_policy.xml")
     }
   ]
 }

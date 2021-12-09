@@ -1,0 +1,133 @@
+<!-- TODO these are mocks! remove me after integration -->
+<policies>
+    <inbound>
+        <base/>
+        <set-variable name="institutionId" value="@(context.Request.MatchedParameters["institutionId"])" />
+        <choose>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("id"))">
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "id": "id",
+                        "o": "o",
+                        "ou": "ou",
+                        "aoo": "aoo",
+                        "taxCode": "00000000000",
+                        "administrationCode": "00000000000",
+                        "category": "c7",
+                        "managerName": "Mario",
+                        "managerSurname": "Rossi",
+                        "description": "AGENCY X",
+                        "digitalAddress": "mail@pec.mail.org"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("error"))">
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "id": "error",
+                        "o": "errorO",
+                        "ou": "errorUu",
+                        "aoo": "errorAoo",
+                        "taxCode": "11111111111",
+                        "administrationCode": "11111111111",
+                        "category": "c7",
+                        "managerName": "Mario:ERROR",
+                        "managerSurname": "Rossi_ERROR",
+                        "description": "AGENCY ERROR",
+                        "digitalAddress": "mail_ERROR_@pec.mail.org"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("onboarded"))">
+                <return-response>
+                <set-status code="200" reason="OK"/>
+                <set-header name="Content-Type" exists-action="override">
+                    <value>application/json</value>
+                </set-header>
+                <set-body>
+                    {
+                    "id": "onboarded",
+                    "o": "onboardedO",
+                    "ou": "onboardedUu",
+                    "aoo": "onboardedAoo",
+                    "taxCode": "22222222222",
+                    "administrationCode": "22222222222",
+                    "category": "c7",
+                    "managerName": "Mario_ONBOARDED",
+                    "managerSurname": "Rossi_ONBOARDED",
+                    "description": "AGENCY ONBOARDED",
+                    "digitalAddress": "mail_ONBOARDED_@pec.mail.org"
+                    }
+                </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("pending"))">
+                <return-response>
+                <set-status code="200" reason="OK"/>
+                <set-header name="Content-Type" exists-action="override">
+                    <value>application/json</value>
+                </set-header>
+                <set-body>
+                    {
+                    "id": "pending",
+                    "o": "pendingO",
+                    "ou": "pendingUu",
+                    "aoo": "pendingAoo",
+                    "taxCode": "33333333333",
+                    "administrationCode": "33333333333",
+                    "category": "c7",
+                    "managerName": "Mario_PENDING",
+                    "managerSurname": "Rossi_PENDING",
+                    "description": "AGENCY PENDING",
+                    "digitalAddress": "mail_PENDING_@pec.mail.org"
+                    }
+                </set-body>
+                </return-response>
+            </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("infoError"))">
+                <return-response>
+                <set-status code="200" reason="OK"/>
+                <set-header name="Content-Type" exists-action="override">
+                    <value>application/json</value>
+                </set-header>
+                <set-body>
+                    {
+                    "id": "infoError",
+                    "o": "infoErrorO",
+                    "ou": "infoErrorUu",
+                    "aoo": "infoErrorAoo",
+                    "taxCode": "99999999999",
+                    "administrationCode": "99999999999",
+                    "category": "c7",
+                    "managerName": "Mario_INFOERROR",
+                    "managerSurname": "Rossi_INFOERROR",
+                    "description": "AGENCY INFO ERROR",
+                    "digitalAddress": "mail_INFOERROR_@pec.mail.org"
+                    }
+                </set-body>
+                </return-response>
+            </when>
+        </choose>
+    </inbound>
+    <backend>
+        <base/>
+    </backend>
+    <outbound>
+        <base/>
+    </outbound>
+    <on-error>
+        <base/>
+    </on-error>
+</policies>
