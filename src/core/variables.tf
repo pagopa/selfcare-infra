@@ -821,4 +821,3 @@ variable "contracts_advanced_threat_protection" {
   description = "Enable contract threat advanced protection"
   default     = false
 }
-
