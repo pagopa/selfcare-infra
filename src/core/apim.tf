@@ -21,26 +21,26 @@ locals {
 
   origins = {
     base = concat(
-              [
-                format("https://api.%s.%s", var.dns_zone_prefix, var.external_domain),
-                format("https://%s.%s", var.dns_zone_prefix, var.external_domain),
-               ],
-               var.env_short != "p"? ["https://localhost:3000","http://localhost:3000","https://localhost:3001","http://localhost:3001"]:[]
-            ),
+      [
+        format("https://api.%s.%s", var.dns_zone_prefix, var.external_domain),
+        format("https://%s.%s", var.dns_zone_prefix, var.external_domain),
+      ],
+      var.env_short != "p" ? ["https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001"] : []
+    ),
     spidAcsOrigins = concat(
-                      var.enable_spid_test ? [format("https://%s", module.spid-test-env.spid_testenv_url)] : [],
-                      [
-                        "https://id.lepida.it",
-                        "https://identity.infocert.it",
-                        "https://identity.sieltecloud.it",
-                        "https://idp.namirialtsp.com",
-                        "https://login.id.tim.it",
-                        "https://loginspid.aruba.it",
-                        "https://posteid.poste.it",
-                        "https://spid.intesa.it",
-                        "https://spid.register.it"
-                      ]
-                    )
+      var.enable_spid_test ? [format("https://%s", module.spid-test-env.spid_testenv_url)] : [],
+      [
+        "https://id.lepida.it",
+        "https://identity.infocert.it",
+        "https://identity.sieltecloud.it",
+        "https://idp.namirialtsp.com",
+        "https://login.id.tim.it",
+        "https://loginspid.aruba.it",
+        "https://posteid.poste.it",
+        "https://spid.intesa.it",
+        "https://spid.register.it"
+      ]
+    )
   }
 }
 
@@ -107,7 +107,7 @@ module "monitor" {
 
   content_format = "openapi"
   content_value = templatefile("./api/monitor/openapi.json.tpl", {
-    host = "selc-d-apim.azure-api.net"  //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host = "selc-d-apim.azure-api.net" //azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
   })
 
   xml_content = file("./api/base_policy.xml")
@@ -159,7 +159,7 @@ module "apim_hub_spid_login_api_v1" {
   api_operation_policies = [
     {
       operation_id = "postACS"
-      xml_content  = templatefile("./api/hubspidlogin_api/v1/postacs_policy.xml.tpl", {
+      xml_content = templatefile("./api/hubspidlogin_api/v1/postacs_policy.xml.tpl", {
         origins = local.origins.spidAcsOrigins
       })
     },
@@ -259,7 +259,7 @@ module "apim_uservice_party_management_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/party-management.yml.tpl", {
-    host     = "selc-d-apim.azure-api.net"// azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = "selc-d-apim.azure-api.net" // azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-management/v1"
   })
 
@@ -315,7 +315,7 @@ module "apim_uservice_party_registry_proxy_v1" {
     {
       operation_id = "searchInstitution"
       xml_content  = file("./api/party_registry_proxy/v1/searchInstitution_policy.xml")
-    },{
+      }, {
       operation_id = "getInstitutionById"
       xml_content  = file("./api/party_registry_proxy/v1/getInstitutionById_policy.xml")
     }

@@ -38,6 +38,27 @@ resource "azurerm_dns_ns_record" "uat_selfcare" {
   tags = var.tags
 }
 
+resource "azurerm_dns_caa_record" "caa_selfcare" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  ttl                 = var.dns_default_ttl_sec
+
+  record {
+    flags = 0
+    tag   = "issue"
+    value = "letsencrypt.org"
+  }
+
+  record {
+    flags = 0
+    tag   = "iodef"
+    value = "mailto:security+caa@pagopa.it"
+  }
+
+  tags = var.tags
+}
+
 # application gateway records
 resource "azurerm_dns_a_record" "dns_a_api" {
   name                = "api"

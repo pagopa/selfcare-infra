@@ -501,6 +501,30 @@ variable "app_gateway_api_certificate_name" {
   description = "Application gateway api certificate name on Key Vault"
 }
 
+variable "app_gateway_sku_name" {
+  type        = string
+  description = "SKU Name of the App GW"
+  default     = "Standard_v2"
+}
+
+variable "app_gateway_sku_tier" {
+  type        = string
+  description = "SKU tier of the App GW"
+  default     = "Standard_v2"
+}
+
+variable "app_gateway_alerts_enabled" {
+  type        = bool
+  description = "Enable alerts"
+  default     = false
+}
+
+variable "app_gateway_waf_enabled" {
+  type        = bool
+  description = "Enable WAF"
+  default     = false
+}
+
 # Scaling
 
 variable "app_gateway_min_capacity" {
@@ -767,7 +791,7 @@ variable "enable_spid_test" {
 variable "spa" {
   type        = list(string)
   description = "spa root dirs"
-  default     = [
+  default = [
     "auth",
     "onboarding",
     "dashboard"
@@ -797,4 +821,3 @@ variable "contracts_advanced_threat_protection" {
   description = "Enable contract threat advanced protection"
   default     = false
 }
-
