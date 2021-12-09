@@ -1,32 +1,29 @@
 <!-- TODO these are mocks! remove me after integration -->
 <policies>
     <inbound>
-        <base/>
+        <base />
         <set-variable name="institutionId" value="@(context.Request.Url.Query.GetValueOrDefault("institutionId",""))" />
         <choose>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("infoError"))">
                 <return-response>
-                    <set-status code="400" reason="Invalid ID supplied"/>
+                    <set-status code="400" reason="Invalid ID supplied" />
                     <set-header name="Content-Type" exists-action="override">
                         <value>application/json</value>
                     </set-header>
-                    <set-body>
-                        {
+                    <set-body>{
                         "detail": "Request took too long to complete.",
                         "status": 503,
                         "title": "Service Unavailable"
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("onboarded"))">
                 <return-response>
-                    <set-status code="200" reason="OK"/>
+                    <set-status code="200" reason="OK" />
                     <set-header name="Content-Type" exists-action="override">
                         <value>application/json</value>
                     </set-header>
-                    <set-body>
-                        {
+                    <set-body>{
                         "person": {
                         "name": "name",
                         "surname": "surname",
@@ -50,21 +47,20 @@
                             "id":"attId",
                             "name":"attName",
                             "description":"attDescription"
+                            }
                             ]
                         }
                         ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("pending"))">
                 <return-response>
-                    <set-status code="200" reason="OK"/>
+                    <set-status code="200" reason="OK" />
                     <set-header name="Content-Type" exists-action="override">
                         <value>application/json</value>
                     </set-header>
-                    <set-body>
-                        {
+                    <set-body>{
                         "person": {
                         "name": "name",
                         "surname": "surname",
@@ -88,29 +84,27 @@
                             "id":"attId",
                             "name":"attName",
                             "description":"attDescription"
-                        ]
+                            }
+                            ]
                         }
                         ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("id"))">
                 <return-response>
-                    <set-status code="200" reason="OK"/>
+                    <set-status code="200" reason="OK" />
                     <set-header name="Content-Type" exists-action="override">
                         <value>application/json</value>
                     </set-header>
-                    <set-body>
-                        {
+                    <set-body>{
                         "person": {
                         "name": "name",
                         "surname": "surname",
                         "taxCode": "AAAAAA00A00A000A"
                         },
                         "institutions": []
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("pippo"))">
@@ -147,8 +141,7 @@
                         ]
                         }
                         ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("pluto"))">
@@ -185,8 +178,7 @@
                         ]
                         }
                         ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("paperino"))">
@@ -243,18 +235,16 @@
                         ]
                         }
                         ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </when>
             <otherwise>
                 <return-response>
-                    <set-status code="200" reason="OK"/>
+                    <set-status code="200" reason="OK" />
                     <set-header name="Content-Type" exists-action="override">
                         <value>application/json</value>
                     </set-header>
-                    <set-body>
-                        {
+                    <set-body>{
                             "person": {
                                 "name": "name",
                                 "surname": "surname",
@@ -273,7 +263,7 @@
                                 "id":"pagoPA",
                                 "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
-                                },
+                                }
                                 },
                                 {
                                 "role": "MANAGER",
@@ -287,7 +277,7 @@
                                 "id":"pagoPA",
                                 "role":"LIMITED",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
-                                },
+                                }
                                 },
                                 {
                                 "role": "MANAGER",
@@ -301,7 +291,7 @@
                                 "id":"pagoPA",
                                 "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
-                                },
+                                }
                                 },
                                 {
                                 "role": "MANAGER",
@@ -315,7 +305,21 @@
                                 "id":"pagoPA",
                                 "role":"LIMITED",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
+                                }
                                 },
+                                {
+                                "role": "OPERATOR",
+                                "description": "Comune di Napoli",
+                                "taxCode":"ComunediNapoliFiscalCode",
+                                "state": "PENDING",
+                                "institutionId": "4",
+                                "attributes": [],
+                                "digitalAddress": "",
+                                "productInfo": {
+                                "id":"PDND",
+                                "role":"LIMITED",
+                                "createdAt":"2021-12-02T16:57:02.300Z"
+                                }
                                 },
                                 {
                                 "institutionId": "onboarded",
@@ -329,24 +333,21 @@
                                 "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
-                                "attributes": [
-                                "string"
-                                ]
+                                "attributes": []
                                 }
                             ]
-                        }
-                    </set-body>
+                        }</set-body>
                 </return-response>
             </otherwise>
         </choose>
     </inbound>
     <backend>
-        <base/>
+        <base />
     </backend>
     <outbound>
-        <base/>
+        <base />
     </outbound>
     <on-error>
-        <base/>
+        <base />
     </on-error>
 </policies>
