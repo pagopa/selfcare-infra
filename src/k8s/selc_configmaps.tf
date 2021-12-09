@@ -22,12 +22,10 @@ resource "kubernetes_config_map" "jwt" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = merge({
+  data = {
     JWT_TOKEN_KID = module.key_vault_secrets_query.values["jwt-kid"].value
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
-  },
-  var.configmaps_b4f-dashboard
-  )
+  }
 }
 
 resource "kubernetes_config_map" "jwt-exchange" {
@@ -36,12 +34,10 @@ resource "kubernetes_config_map" "jwt-exchange" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = merge({
+  data = {
     JWT_TOKEN_EXCHANGE_KID = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-  },
-  var.configmaps_b4f-dashboard
-  )
+  }
 }
 
 resource "kubernetes_config_map" "hub-spid-login-ms" {
