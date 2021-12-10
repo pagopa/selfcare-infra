@@ -107,6 +107,22 @@
                         }</set-body>
                 </return-response>
             </when>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("error"))">
+                <return-response>
+                    <set-status code="200" reason="OK" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "person": {
+                        "name": "name",
+                        "surname": "surname",
+                        "taxCode": "AAAAAA00A00A000A"
+                        },
+                        "institutions": []
+                        }</set-body>
+                </return-response>
+            </when>
             <when condition="@(((string)context.Variables["institutionId"]).Equals("pippo"))">
                 <return-response>
                     <set-status code="200" reason="OK" />
