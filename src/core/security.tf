@@ -221,7 +221,7 @@ resource "null_resource" "upload_jwks" {
               az storage blob download \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
               python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
@@ -232,7 +232,7 @@ resource "null_resource" "upload_jwks" {
               az storage blob upload \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${nonsensitive(module.checkout_cdn.storage_primary_access_key)} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/jwks.json" \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \

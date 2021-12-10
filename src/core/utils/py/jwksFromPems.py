@@ -14,7 +14,7 @@ def jwk_from_pem(kid, pem, jwks):
     key = JsonWebKey.import_key(pem, {'kty': 'RSA'})
     if jwks != None :
         try:
-            jwks.find_by_kid(key.thumbprint())
+            jwks.find_by_kid(kid)
             return None
         except ValueError as ve:
             None # kid not exists: do nothing
