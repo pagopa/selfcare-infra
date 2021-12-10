@@ -168,13 +168,11 @@ resource "kubernetes_config_map" "uservice-party-process" {
   }
 
   data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-process"
-    MANAGER_PRODUCT_ROLES         = "ADMIN"//TODO
-    DELEGATE_PRODUCT_ROLES        = "ADMIN"//TODO
-    OPERATOR_PRODUCT_ROLES        = "ADMIN_REF,TECH_REF"//TODO
-    PARTY_MANAGEMENT_URL          = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
-    PARTY_PROXY_URL               = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
-    ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+    APPLICATIONINSIGHTS_ROLE_NAME     = "uservice-party-process"
+    PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    PARTY_PROXY_URL                   = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    ATTRIBUTE_REGISTRY_URL            = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+    MAIL_TEMPLATE_PATH                = "/contracts/template/mail/1.0.0.json"
   },
   var.configmaps_uservice-party-process
   )

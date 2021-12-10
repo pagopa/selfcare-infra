@@ -89,11 +89,12 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = {
-    SMTP_SERVER = "smtps.pec.aruba.it"
-    SMTP_PORT   = 465
-    SMTP_USR    = module.key_vault_secrets_query.values["smtp-usr"].value
-    SMTP_PSW    = module.key_vault_secrets_query.values["smtp-psw"].value
-    DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_SERVER         = "smtps.pec.aruba.it"
+    SMTP_PORT           = 465
+    SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
+    MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
+    DESTINATION_MAILS   = module.key_vault_secrets_query.values["smtp-usr"].value
   }
 
   type = "Opaque"
@@ -125,6 +126,19 @@ resource "kubernetes_secret" "b4f-dashboard" {
   data = {
     BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
     JWT_TOKEN_EXCHANGE_PRIVATE_KEY = module.key_vault_secrets_query.values["jwt-exchange-private-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "uservice-party-process" {
+  metadata {
+    name      = "uservice-party-process"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
