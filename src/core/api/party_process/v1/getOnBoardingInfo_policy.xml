@@ -257,7 +257,13 @@
                                 "taxCode":"ComunediBariFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "1",
-                                "attributes": [],
+                                "attributes": [
+                                    {
+                                    "id":"attId1",
+                                    "name":"attName1",
+                                    "description":"category1"
+                                    }
+                                    ],
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
@@ -271,7 +277,13 @@
                                 "taxCode":"ComunediMilanoFiscalCode",
                                 "state": "PENDING",
                                 "institutionId": "2",
-                                "attributes": [],
+                                "attributes": [
+                                    {
+                                    "id":"attId2",
+                                    "name":"attName2",
+                                    "description":"category2"
+                                    }
+                                    ],
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
@@ -285,7 +297,13 @@
                                 "taxCode":"ComunediRomaFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "3",
-                                "attributes": [],
+                                "attributes": [
+                                    {
+                                    "id":"attId3",
+                                    "name":"attName3",
+                                    "description":"category3"
+                                    }
+                                    ],
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
@@ -299,7 +317,13 @@
                                 "taxCode":"ComunediNapoliFiscalCode",
                                 "state": "ACTIVE",
                                 "institutionId": "4",
-                                "attributes": [],
+                                "attributes": [
+                                    {
+                                    "id":"attId4",
+                                    "name":"attName4",
+                                    "description":"category4"
+                                    }
+                                    ],
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"pagoPA",
@@ -312,8 +336,14 @@
                                 "description": "Comune di Napoli",
                                 "taxCode":"ComunediNapoliFiscalCode",
                                 "state": "PENDING",
-                                "institutionId": "4",
-                                "attributes": [],
+                                "institutionId": "5",
+                                "attributes": [
+                                    {
+                                    "id":"attId5",
+                                    "name":"attName5",
+                                    "description":"category5"
+                                    }
+                                    ],
                                 "digitalAddress": "",
                                 "productInfo": {
                                 "id":"PDND",
@@ -333,7 +363,13 @@
                                 "role":"ADMIN",
                                 "createdAt":"2021-12-02T16:57:02.300Z"
                                 },
-                                "attributes": []
+                                "attributes": [
+                                    {
+                                    "id":"attId",
+                                    "name":"attName",
+                                    "description":"category"
+                                    }
+                                    ]
                                 }
                             ]
                         }</set-body>
