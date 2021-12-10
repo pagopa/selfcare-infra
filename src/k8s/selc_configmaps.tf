@@ -16,6 +16,30 @@ resource "kubernetes_config_map" "inner-service-url" {
   }
 }
 
+resource "kubernetes_config_map" "jwt" {
+  metadata {
+    name      = "jwt"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    JWT_TOKEN_KID = module.key_vault_secrets_query.values["jwt-kid"].value
+    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+  }
+}
+
+resource "kubernetes_config_map" "jwt-exchange" {
+  metadata {
+    name      = "jwt-exchange"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    JWT_TOKEN_EXCHANGE_KID = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
+    JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
+  }
+}
+
 resource "kubernetes_config_map" "hub-spid-login-ms" {
   metadata {
     name      = "hub-spid-login-ms"
