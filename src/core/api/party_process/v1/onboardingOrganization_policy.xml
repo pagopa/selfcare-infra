@@ -1,25 +1,47 @@
 <!-- TODO these are mocks! remove me after integration -->
 <policies>
     <inbound>
-        <base />
-        <return-response>
-            <set-status code="201" reason="Created" />
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/json</value>
-            </set-header>
-            <set-body>{
-                "token": "string",
-                "document": "string"
-                }</set-body>
-        </return-response>
+        <base/>
+        <set-variable name="institutionId" value="@((string)context.Request.Body.As<JObject>(preserveContent: true)["institutionId"])" />
+        <choose>
+            <when condition="@(((string)context.Variables["institutionId"]).Equals("error"))">
+                <return-response>
+                    <set-status code="400" reason="Invalid ID supplied"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                            "detail": "Request took too long to complete.",
+                            "status": 503,
+                            "title": "Service Unavailable"
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+            <otherwise>
+                <return-response>
+                    <set-status code="200" reason="OK"/>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>
+                        {
+                        "token": "string",
+                        "document": "string"
+                        }
+                    </set-body>
+                </return-response>
+            </otherwise>
+        </choose>
     </inbound>
     <backend>
-        <base />
+        <base/>
     </backend>
     <outbound>
-        <base />
+        <base/>
     </outbound>
     <on-error>
-        <base />
+        <base/>
     </on-error>
 </policies>

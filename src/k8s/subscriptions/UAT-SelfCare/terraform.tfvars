@@ -56,7 +56,9 @@ configmaps_uservice-party-management = {
 configmaps_uservice-party-process = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-  USER_REGISTRY_MANAGEMENT_URL                      = "https://api.dev.user-registry.pagopa.it/pdnd-interop-uservice-user-registry-management/0.1" // TODO
+  USER_REGISTRY_MANAGEMENT_URL                      = "https://api.uat.userregistry.pagopa.it/user-registry-management/v1"
+  MAIL_ONBOARDING_CONFIRMATION_LINK                 = "https://uat.selfcare.pagopa.it/onboarding/confirm#jwt="
+  MAIL_ONBOARDING_REJECTION_LINK                    = "https://uat.selfcare.pagopa.it/onboarding/cancel#jwt="
 }
 
 configmaps_uservice-party-registry-proxy = {

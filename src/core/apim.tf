@@ -211,10 +211,6 @@ module "apim_uservice_party_process_v1" {
       xml_content  = file("./api/party_process/v1/getOnBoardingInfo_policy.xml")
     },
     {
-      operation_id = "onboardingLegalsOnOrganization"
-      xml_content  = file("./api/party_process/v1/createLegals_policy.xml")
-    },
-    {
       operation_id = "invalidateOnboarding"
       xml_content  = file("./api/party_process/v1/invalidateOnboarding_policy.xml")
     },

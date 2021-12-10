@@ -21,6 +21,7 @@ module "key_vault_secrets_query" {
     "smtp-usr",
     "smtp-psw",
     "contracts-storage-access-key",
-    "web-storage-connection-string"
+    "web-storage-connection-string",
+    "user-registry-api-key"
   ]
 }
