@@ -82,7 +82,7 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/spid/v1/metadata; "
+        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
@@ -93,7 +93,7 @@ module "checkout_cdn" {
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
-        value  = "img-src 'self' https://assets.cdn.io.italia.it data:; "
+        value  = format("img-src 'self' https://assets.cdn.io.italia.it https://%s data:; ", module.checkout_cdn.storage_primary_web_host)
       }
     ]
   }
