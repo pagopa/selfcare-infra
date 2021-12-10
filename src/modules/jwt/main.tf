@@ -1,3 +1,7 @@
+locals {
+  kid = format("%s_%s", var.jwt_name, tls_private_key.jwt.public_key_fingerprint_md5)
+}
+
 resource "tls_private_key" "jwt" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -31,6 +35,14 @@ resource "azurerm_key_vault_secret" "jwt_private_key" {
 resource "azurerm_key_vault_secret" "jwt_public_key" {
   name         = format("%s-public-key", var.jwt_name)
   value        = tls_private_key.jwt.public_key_pem
+  content_type = "text/plain"
+
+  key_vault_id = var.key_vault_id
+}
+
+resource "azurerm_key_vault_secret" "jwt_kid" {
+  name         = format("%s-kid", var.jwt_name)
+  value        = local.kid
   content_type = "text/plain"
 
   key_vault_id = var.key_vault_id
