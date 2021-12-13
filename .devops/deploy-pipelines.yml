@@ -85,50 +85,50 @@ stages:
                     ENVIRONMENT: dev
                     WORKINGDIR: 'src/core'
 
-  # # UAT
-  # - stage: plan_UAT
-  #   dependsOn: []
-  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-  #   pool:
-  #     name: selfcare-uat-linux
-  #   jobs:
-  #     - job: plan
-  #       timeoutInMinutes: $[variables.TIME_OUT]
-  #       steps:
-  #         # 1. Install terraform
-  #         - template: templates/terraform-setup/template.yaml@terraform
-  #         # 2. Run terraform plan
-  #         - template: templates/terraform-plan/template.yaml@terraform
-  #           parameters:
-  #             SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-  #             ENVIRONMENT: uat
-  #             WORKINGDIR: 'src/core'
+  # UAT
+  - stage: plan_UAT
+    dependsOn: []
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: selfcare-uat-linux
+    jobs:
+      - job: plan
+        timeoutInMinutes: $[variables.TIME_OUT]
+        steps:
+          # 1. Install terraform
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan
+          - template: templates/terraform-plan/template.yaml@terraform
+            parameters:
+              SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
+              ENVIRONMENT: uat
+              WORKINGDIR: 'src/core'
 
-  # - stage: apply_UAT
-  #   dependsOn: [plan_UAT]
-  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-  #   pool:
-  #     name: selfcare-uat-linux
-  #   jobs:
-  #     # - job: init
-  #     #   steps:
-  #     #     # 1. Install terraform
-  #     #     - template: templates/terraform-setup/template.yaml@terraform
-  #     - deployment: apply
-  #       continueOnError: false
-  #       # dependsOn: init
-  #       environment: 'UAT'
-  #       strategy:
-  #         runOnce:
-  #           deploy:
-  #             steps:
-  #               - checkout: self
-  #               # 3. Run terraform apply
-  #               - template: templates/terraform-apply/template.yaml@terraform
-  #                 parameters:
-  #                   SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-  #                   ENVIRONMENT: uat
-  #                   WORKINGDIR: 'src/core'
+  - stage: apply_UAT
+    dependsOn: [plan_UAT]
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: selfcare-uat-linux
+    jobs:
+      # - job: init
+      #   steps:
+      #     # 1. Install terraform
+      #     - template: templates/terraform-setup/template.yaml@terraform
+      - deployment: apply
+        continueOnError: false
+        # dependsOn: init
+        environment: 'UAT'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                # 3. Run terraform apply
+                - template: templates/terraform-apply/template.yaml@terraform
+                  parameters:
+                    SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
+                    ENVIRONMENT: uat
+                    WORKINGDIR: 'src/core'
 
   # PROD
   - stage: plan_PROD
