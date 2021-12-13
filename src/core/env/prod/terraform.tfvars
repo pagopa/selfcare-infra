@@ -42,6 +42,10 @@ apim_sku            = "Developer_1" # todo change to Premium_1 before launch
 app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
 app_gateway_min_capacity         = 0 # todo change to at least 1
 app_gateway_max_capacity         = 2
+app_gateway_sku_name             = "Standard_v2" # TODO change to WAF_v2
+app_gateway_sku_tier             = "Standard_v2" # TODO change to WAF_v2
+app_gateway_alerts_enabled       = true          # TODO change to true
+app_gateway_waf_enabled          = false         # TODO change to true
 
 # todo change to Premium before launch
 # redis_sku_name = "Premium"
@@ -50,18 +54,19 @@ app_gateway_max_capacity         = 2
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.0.250"
-# aks_availability_zones = [1, 2, 3]         # TODO to define and uncomment before release to prod
+aks_availability_zones = [1, 2, 3]         # TODO to define and uncomment before release to prod
 aks_node_count             = 1 # TODO to define before release to prod
 aks_max_pods               = 100
 aks_enable_auto_scaling    = true
 min_count                  = 1 # TODO to define before release to prod
-max_count                  = 1 # TODO to define before release to prod
+max_count                  = 3 # TODO to define before release to prod
 upgrade_settings_max_surge = "33%"
+aks_vm_size                = "Standard_D4s_v3"
 # aks_vm_size            = "Standard_D8S_v3" # TODO to define and uncomment before release to prod
 # aks_sku_tier           = "Paid"            # TODO to define and uncomment before release to prod
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless = true # TODO set to false before launch
+cosmosdb_mongodb_enable_serverless = false # TODO set to false before launch
 # cosmosdb_mongodb_enable_autoscaling = true TODO uncomment befor launch
 # cosmosdb_mongodb_max_throughput TODO define before launch
 cosmosdb_mongodb_enable_free_tier = true # TODO change to false before launch
@@ -87,7 +92,7 @@ postgres_configuration = {
 }
 
 # contracts storage
-contracts_account_replication_type   = "RA-GZRS"
+contracts_account_replication_type   = "RAGZRS"
 contracts_delete_retention_days      = 14
 contracts_enable_versioning          = true
 contracts_advanced_threat_protection = true
