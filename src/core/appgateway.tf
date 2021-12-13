@@ -44,7 +44,7 @@ module "app_gw" {
       host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
       port                        = 80
       ip_addresses                = [var.reverse_proxy_ip]
-      probe                       = "/ms-product/v1/actuator/health"
+      probe                       = "/health"
       probe_name                  = "probe-aks"
       request_timeout             = 10
       fqdns                       = null
