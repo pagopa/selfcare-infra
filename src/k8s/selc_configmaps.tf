@@ -64,7 +64,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"
 
-    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
+    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber,email"
     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
     REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
