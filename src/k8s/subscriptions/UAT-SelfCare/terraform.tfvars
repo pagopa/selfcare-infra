@@ -8,6 +8,7 @@ ingress_load_balancer_ip = "10.1.0.250"
 # Gateway
 api_gateway_url  = "https://api.uat.selfcare.pagopa.it"
 cdn_frontend_url = "https://uat.selfcare.pagopa.it"
+spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
 api-version_uservice-attribute-registry-management = "0.1"
