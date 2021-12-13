@@ -40,6 +40,14 @@ resource "azurerm_key_vault_secret" "jwt_public_key" {
   key_vault_id = var.key_vault_id
 }
 
+resource "azurerm_key_vault_secret" "jwt_cert" {
+  name         = format("%s-cert", var.jwt_name)
+  value        = tls_self_signed_cert.jwt_self.cert_pem
+  content_type = "text/plain"
+
+  key_vault_id = var.key_vault_id
+}
+
 resource "azurerm_key_vault_secret" "jwt_kid" {
   name         = format("%s-kid", var.jwt_name)
   value        = local.kid
