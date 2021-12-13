@@ -70,27 +70,27 @@ stages:
               ENVIRONMENT: dev
               WORKINGDIR: 'src/core'
 
-  # - stage: UAT
-  #   dependsOn: []
-  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-  #   pool:
-  #     name: selfcare-uat-linux
-  #   jobs:
-  #     - job: terraform_install
-  #       steps:
-  #         # 1. Install terraform and terragrunt
-  #         - template: templates/terraform-setup/template.yaml@terraform
-  #     - job: terraform_plan
-  #       dependsOn: terraform_install
-  #       timeoutInMinutes: $[variables.TIME_OUT]
-  #       steps:
-  #         - checkout: self
-  #         # 2. Run terragrunt plan
-  #         - template: templates/terraform-plan/template.yaml@terraform
-  #           parameters:
-  #             SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-  #             ENVIRONMENT: uat
-  #             WORKINGDIR: 'src/core'
+  - stage: UAT
+    dependsOn: []
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: selfcare-uat-linux
+    jobs:
+      - job: terraform_install
+        steps:
+          # 1. Install terraform and terragrunt
+          - template: templates/terraform-setup/template.yaml@terraform
+      - job: terraform_plan
+        dependsOn: terraform_install
+        timeoutInMinutes: $[variables.TIME_OUT]
+        steps:
+          - checkout: self
+          # 2. Run terragrunt plan
+          - template: templates/terraform-plan/template.yaml@terraform
+            parameters:
+              SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
+              ENVIRONMENT: uat
+              WORKINGDIR: 'src/core'
 
   - stage: PROD
     dependsOn: []
