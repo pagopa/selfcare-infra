@@ -1,18 +1,18 @@
 locals {
   cors = {
     origins = join(",", concat(
-    [
-      format("https://%s", var.api_gateway_url),
-      format("https://%s", var.cdn_frontend_url),
-    ],
-    var.env_short != "p"
-    ? [
-      "https://localhost:3000",
-      "http://localhost:3000",
-      "https://localhost:3001",
-      "http://localhost:3001",
+      [
+        format("https://%s", var.api_gateway_url),
+        format("https://%s", var.cdn_frontend_url),
+      ],
+      var.env_short != "p"
+      ? [
+        "https://localhost:3000",
+        "http://localhost:3000",
+        "https://localhost:3001",
+        "http://localhost:3001",
       format("https://%s", var.spid_testenv_url)]
-    :[]
+      : []
     )),
     headers = join(",", [
       // default headers
@@ -136,4 +136,3 @@ resource "kubernetes_ingress" "selc_pdnd_ingress" {
     }
   }
 }
-

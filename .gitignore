@@ -37,3 +37,4 @@ __TMP
 __azurite_*
 /.idea
 .bastianhost.ini
+**/modules/**/.terraform.lock.hcl

@@ -10,10 +10,10 @@ api_gateway_url  = "https://api.selfcare.pagopa.it"
 cdn_frontend_url = "https://selfcare.pagopa.it"
 
 # uservice versions
-api-version_uservice-attribute-registry-management="0.1"
-api-version_uservice-party-management="0.1"
-api-version_uservice-party-process="0.1"
-api-version_uservice-party-registry-proxy="0.1"
+api-version_uservice-attribute-registry-management = "0.1"
+api-version_uservice-party-management              = "0.1"
+api-version_uservice-party-process                 = "0.1"
+api-version_uservice-party-registry-proxy          = "0.1"
 
 # configs/secrets
 

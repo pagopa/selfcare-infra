@@ -179,20 +179,20 @@ resource "kubernetes_cluster_role_binding" "view_binding" {
 
 resource "kubernetes_role" "pod_reader" {
   metadata {
-    name = "pod-reader"
+    name      = "pod-reader"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
   rule {
-    api_groups     = [""]
-    resources      = ["pods"]
-    verbs          = ["get", "watch", "list"]
+    api_groups = [""]
+    resources  = ["pods"]
+    verbs      = ["get", "watch", "list"]
   }
 }
 
 resource "kubernetes_role_binding" "pod_reader" {
   metadata {
-    name = "pod-reader"
+    name      = "pod-reader"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
   role_ref {
@@ -201,7 +201,7 @@ resource "kubernetes_role_binding" "pod_reader" {
     name      = "pod-reader"
   }
   subject {
-    kind      = "User"
-    name      = format("system:serviceaccount:%s:default", kubernetes_namespace.selc.metadata[0].name)
+    kind = "User"
+    name = format("system:serviceaccount:%s:default", kubernetes_namespace.selc.metadata[0].name)
   }
 }

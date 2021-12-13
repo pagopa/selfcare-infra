@@ -7,11 +7,11 @@ resource "kubernetes_config_map" "inner-service-url" {
   data = {
     HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
     B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
-    B4F_ONBOARDING_URL                          = "http://b4f-onboarding:8080"
+    B4F_ONBOARDING_URL                         = "http://b4f-onboarding:8080"
     MS_PRODUCT_URL                             = "http://ms-product:8080"
-    USERVICE_PARTY_PROCESS_URL                 = "https://selc-d-apim.azure-api.net/party-process/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
-    USERVICE_PARTY_MANAGEMENT_URL              = "https://selc-d-apim.azure-api.net/party-management/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://selc-d-apim.azure-api.net/party-registry-proxy/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
+    USERVICE_PARTY_PROCESS_URL                 = "https://selc-d-apim.azure-api.net/party-process/v1"                 // TODO when mock not more required "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
+    USERVICE_PARTY_MANAGEMENT_URL              = "https://selc-d-apim.azure-api.net/party-management/v1"              // TODO when mock not more required "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = "https://selc-d-apim.azure-api.net/party-registry-proxy/v1"          // TODO when mock not more required "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
     USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "https://selc-d-apim.azure-api.net/attribute-registry-management/v1" // TODO when mock not more required "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
   }
 }
@@ -23,7 +23,7 @@ resource "kubernetes_config_map" "jwt" {
   }
 
   data = {
-    JWT_TOKEN_KID = module.key_vault_secrets_query.values["jwt-kid"].value
+    JWT_TOKEN_KID        = module.key_vault_secrets_query.values["jwt-kid"].value
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
   }
 }
@@ -35,7 +35,7 @@ resource "kubernetes_config_map" "jwt-exchange" {
   }
 
   data = {
-    JWT_TOKEN_EXCHANGE_KID = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
+    JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
   }
 }
@@ -88,7 +88,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     APPINSIGHTS_DISABLED = true
     },
     var.configmaps_hub-spid-login-ms,
-    var.spid_testenv_url != null? {SPID_TESTENV_URL = var.spid_testenv_url}:{}
+    var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}
   )
 }
 
@@ -101,8 +101,8 @@ resource "kubernetes_config_map" "ms-product" {
   data = merge({
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
     MONGODB_NAME         = local.mongodb_name_selc_product
-  },
-  var.configmaps_ms-product
+    },
+    var.configmaps_ms-product
   )
 }
 
@@ -113,10 +113,10 @@ resource "kubernetes_config_map" "b4f-dashboard" {
   }
 
   data = merge({
-    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+    JWT_TOKEN_PUBLIC_KEY          = module.key_vault_secrets_query.values["jwt-public-key"].value
     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-  },
-  var.configmaps_b4f-dashboard
+    },
+    var.configmaps_b4f-dashboard
   )
 }
 
@@ -128,8 +128,8 @@ resource "kubernetes_config_map" "b4f-onboarding" {
 
   data = merge({
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
-  },
-  var.configmaps_b4f-onboarding
+    },
+    var.configmaps_b4f-onboarding
   )
 }
 
@@ -142,8 +142,8 @@ resource "kubernetes_config_map" "uservice-attribute-registry-management" {
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
     POSTGRES_SCHEMA               = "attribute_registry"
-  },
-  var.configmaps_uservice-attribute-registry-management
+    },
+    var.configmaps_uservice-attribute-registry-management
   )
 }
 
@@ -156,8 +156,8 @@ resource "kubernetes_config_map" "uservice-party-management" {
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
     POSTGRES_SCHEMA               = "party"
-  },
-  var.configmaps_uservice-party-management
+    },
+    var.configmaps_uservice-party-management
   )
 }
 
@@ -168,13 +168,13 @@ resource "kubernetes_config_map" "uservice-party-process" {
   }
 
   data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME     = "uservice-party-process"
-    PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
-    PARTY_PROXY_URL                   = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
-    ATTRIBUTE_REGISTRY_URL            = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
-    MAIL_TEMPLATE_PATH                = "/contracts/template/mail/1.0.0.json"
-  },
-  var.configmaps_uservice-party-process
+    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-process"
+    PARTY_MANAGEMENT_URL          = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    PARTY_PROXY_URL               = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+    MAIL_TEMPLATE_PATH            = "/contracts/template/mail/1.0.0.json"
+    },
+    var.configmaps_uservice-party-process
   )
 }
 
@@ -186,7 +186,7 @@ resource "kubernetes_config_map" "uservice-party-registry-proxy" {
 
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-registry-proxy"
-  },
-  var.configmaps_uservice-party-registry-proxy
+    },
+    var.configmaps_uservice-party-registry-proxy
   )
 }
