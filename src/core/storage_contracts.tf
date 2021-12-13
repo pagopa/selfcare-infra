@@ -15,6 +15,7 @@ module "selc-contracts-storage" {
   account_tier               = "Standard"
   account_replication_type   = var.contracts_account_replication_type
   access_tier                = "Hot"
+  versioning_name            = "versioning"
   enable_versioning          = var.contracts_enable_versioning
   resource_group_name        = azurerm_resource_group.rg_contracts_storage.name
   location                   = var.location
