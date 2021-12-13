@@ -24,14 +24,14 @@ module "cosmosdb_mongodb_snet" {
 }
 
 module "cosmosdb_account_mongodb" {
-  source     = "git::https://github.com/pagopa/azurerm.git//cosmosdb?ref=v2.0.5"
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb?ref=v2.0.5"
 
   name                 = format("%s-cosmosdb-mongodb-account", local.project)
   location             = azurerm_resource_group.mongodb_rg.location
   resource_group_name  = azurerm_resource_group.mongodb_rg.name
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
-  capabilities = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
+  capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
   mongo_server_version = "4.0"
 
   public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
