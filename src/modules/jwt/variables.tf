@@ -1,9 +1,9 @@
 variable "jwt_name" {
-  type    = string
+  type = string
 }
 
 variable "key_vault_id" {
-  type    = string
+  type = string
 }
 
 variable "tags" {
@@ -15,11 +15,11 @@ variable "tags" {
 
 # cert info
 variable "cert_common_name" {
-  type    = string
+  type = string
 }
 
 variable "cert_password" {
-  type    = string
+  type = string
 }
 
 variable "cert_validity_hours" {

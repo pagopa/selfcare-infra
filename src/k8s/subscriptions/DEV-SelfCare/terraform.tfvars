@@ -11,10 +11,10 @@ cdn_frontend_url = "https://dev.selfcare.pagopa.it"
 spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
-api-version_uservice-attribute-registry-management="0.1"
-api-version_uservice-party-management="0.1"
-api-version_uservice-party-process="0.1"
-api-version_uservice-party-registry-proxy="0.1"
+api-version_uservice-attribute-registry-management = "0.1"
+api-version_uservice-party-management              = "0.1"
+api-version_uservice-party-process                 = "0.1"
+api-version_uservice-party-registry-proxy          = "0.1"
 
 # configs/secrets
 

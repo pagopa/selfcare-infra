@@ -53,9 +53,9 @@ app_gateway_waf_enabled          = false         # TODO change to true
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip = "10.1.0.250"
-aks_availability_zones = [1, 2, 3]         # TODO to define and uncomment before release to prod
-aks_node_count             = 1 # TODO to define before release to prod
+reverse_proxy_ip           = "10.1.0.250"
+aks_availability_zones     = [1, 2, 3] # TODO to define and uncomment before release to prod
+aks_node_count             = 1         # TODO to define before release to prod
 aks_max_pods               = 100
 aks_enable_auto_scaling    = true
 min_count                  = 1 # TODO to define before release to prod

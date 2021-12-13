@@ -5,14 +5,17 @@ repos:
     hooks:
       # Common errors
       - id: end-of-file-fixer
+        exclude_types: [sql]
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
+        exclude_types: [sql]
       - id: check-yaml
       - id: check-executables-have-shebangs
       # Cross platform
       - id: check-case-conflict
       - id: mixed-line-ending
         args: [--fix=lf]
+        exclude_types: [sql]
       # Security
       - id: detect-aws-credentials
         args: ['--allow-missing-credentials']
