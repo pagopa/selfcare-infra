@@ -11,6 +11,7 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
     METADATA_PUBLIC_CERT  = module.key_vault_secrets_query.values["agid-spid-cert"].value
     METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value
 
+    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
@@ -88,14 +89,19 @@ resource "kubernetes_secret" "mail" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = {
-    SMTP_SERVER         = "smtps.pec.aruba.it"
-    SMTP_PORT           = 465
-    SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
-    SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
-    MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
-    DESTINATION_MAILS   = module.key_vault_secrets_query.values["smtp-usr"].value
-  }
+  data = merge({
+            SMTP_SERVER         = "smtps.pec.aruba.it"
+            SMTP_PORT           = 465
+            SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
+            SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
+            MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
+          },
+          var.env_short != "p"
+          ? {
+            DESTINATION_MAILS   = module.key_vault_secrets_query.values["smtp-usr"].value
+          }
+          : {}
+          )
 
   type = "Opaque"
 }

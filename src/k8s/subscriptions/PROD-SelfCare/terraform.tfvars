@@ -8,6 +8,7 @@ ingress_load_balancer_ip = "10.1.0.250"
 # Gateway
 api_gateway_url  = "https://api.selfcare.pagopa.it"
 cdn_frontend_url = "https://selfcare.pagopa.it"
+cdn_storage_url  = "https://selcpcheckoutsa.z6.web.core.windows.net"
 
 # uservice versions
 api-version_uservice-attribute-registry-management = "0.1"
@@ -22,7 +23,7 @@ configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 
   # SPID
-  ORG_ISSUER = "https://selfcare.pagopa.it" # TODO to verify
+  ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
 configmaps_ms-product = {

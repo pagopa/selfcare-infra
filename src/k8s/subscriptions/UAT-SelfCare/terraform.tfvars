@@ -8,6 +8,7 @@ ingress_load_balancer_ip = "10.1.0.250"
 # Gateway
 api_gateway_url  = "https://api.uat.selfcare.pagopa.it"
 cdn_frontend_url = "https://uat.selfcare.pagopa.it"
+cdn_storage_url  = "https://selcucheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
@@ -23,7 +24,7 @@ configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 
   # SPID
-  ORG_ISSUER = "https://uat.selfcare.pagopa.it" # TODO to verify
+  ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
 configmaps_ms-product = {

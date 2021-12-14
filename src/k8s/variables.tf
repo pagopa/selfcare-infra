@@ -62,6 +62,9 @@ variable "api_gateway_url" {
 variable "cdn_frontend_url" {
   type = string
 }
+variable "cdn_storage_url" {
+  type = string
+}
 variable "spid_testenv_url" {
   type    = string
   default = null

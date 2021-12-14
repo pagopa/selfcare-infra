@@ -142,6 +142,7 @@ resource "kubernetes_config_map" "uservice-attribute-registry-management" {
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
     POSTGRES_SCHEMA               = "attribute_registry"
+    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
     },
     var.configmaps_uservice-attribute-registry-management
   )
@@ -156,6 +157,7 @@ resource "kubernetes_config_map" "uservice-party-management" {
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
     POSTGRES_SCHEMA               = "party"
+    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
     },
     var.configmaps_uservice-party-management
   )
@@ -173,6 +175,11 @@ resource "kubernetes_config_map" "uservice-party-process" {
     PARTY_PROXY_URL               = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
     ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
     MAIL_TEMPLATE_PATH            = "/contracts/template/mail/1.0.0.json"
+    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
+    # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
+    EU_LIST_OF_TRUSTED_LISTS_URL  = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
+    # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
+    EU_OFFICIAL_JOURNAL_URL       = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
     },
     var.configmaps_uservice-party-process
   )
@@ -185,7 +192,9 @@ resource "kubernetes_config_map" "uservice-party-registry-proxy" {
   }
 
   data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-registry-proxy"
+    APPLICATIONINSIGHTS_ROLE_NAME   = "uservice-party-registry-proxy"
+    PARTY_REGISTRY_CATEGORIES_URL   = "https://indicepa.gov.it/ipa-dati/datastore/dump/84ebb2e7-0e61-427b-a1dd-ab8bb2a84f07?format=json"
+    PARTY_REGISTRY_INSTITUTIONS_URL = "https://indicepa.gov.it/ipa-dati/datastore/dump/d09adf99-dc10-4349-8c53-27b1e5aa97b6?format=json"
     },
     var.configmaps_uservice-party-registry-proxy
   )
