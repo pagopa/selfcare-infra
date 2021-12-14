@@ -9,3 +9,9 @@ resource "kubernetes_namespace" "selc" {
     name = "selc"
   }
 }
+
+resource "kubernetes_namespace" "health" {
+  metadata {
+    name = "health"
+  }
+}
