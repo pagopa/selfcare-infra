@@ -209,6 +209,16 @@ module "jwt_exchange" {
   tags             = var.tags
 }
 
+module "agid_spid" {
+  source = "../modules/jwt"
+
+  jwt_name         = "agid-spid"
+  key_vault_id     = module.key_vault.id
+  cert_common_name = "selfcare.pagopa.it"
+  cert_password    = ""
+  tags             = var.tags
+}
+
 resource "null_resource" "upload_jwks" {
   triggers = {
     "changes-in-jwt" : module.jwt.certificate_data_pem
