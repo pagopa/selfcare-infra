@@ -59,19 +59,12 @@ module "apim" {
   sku_name             = var.apim_sku
   virtual_network_type = "External"
 
-  redis_connection_string = module.redis.primary_connection_string
-  redis_cache_id          = module.redis.id
+  redis_connection_string = null
+  redis_cache_id          = null
 
   # This enables the Username and Password Identity Provider
   sign_up_enabled = false
-
-  lock_enable = false
-
-  # sign_up_terms_of_service = {
-  #   consent_required = false
-  #   enabled          = false
-  #   text             = ""
-  # }
+  lock_enable     = false
 
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
 
@@ -82,8 +75,7 @@ module "apim" {
   tags = var.tags
 
   depends_on = [
-    azurerm_application_insights.application_insights,
-    module.redis
+    azurerm_application_insights.application_insights
   ]
 }
 

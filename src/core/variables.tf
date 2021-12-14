@@ -490,6 +490,12 @@ variable "redis_family" {
   type    = string
   default = "C"
 }
+
+variable "redis_private_endpoint_enabled" {
+  type    = bool
+  default = true
+}
+
 variable "cidr_subnet_redis" {
   type        = list(string)
   description = "Redis network address space."

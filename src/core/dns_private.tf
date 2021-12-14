@@ -52,3 +52,22 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_blob_core_
 
   tags = var.tags
 }
+
+resource "azurerm_private_dns_zone" "privatelink_redis_cache_windows_net" {
+  count               = var.redis_private_endpoint_enabled ? 1 : 0
+  name                = "privatelink.redis.cache.windows.net"
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_redis_cache_windows_net_vnet" {
+  count                 = var.redis_private_endpoint_enabled ? 1 : 0
+  name                  = module.vnet.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_redis_cache_windows_net[0].name
+  virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}

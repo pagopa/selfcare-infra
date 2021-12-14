@@ -41,6 +41,12 @@ apim_sku            = "Developer_1"
 # app_gateway
 app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
 
+# redis
+redis_sku_name                 = "Basic"
+redis_family                   = "C"
+redis_capacity                 = 0
+redis_private_endpoint_enabled = false
+
 # aks
 aks_alerts_enabled = false
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
