@@ -21,30 +21,44 @@
             </when>
             <when condition="@(((string)context.Variables["token"]).Equals("invalidPdf"))">
                 <return-response>
-                    <set-status code="409" reason="Invalid ID supplied"/>
+                    <set-status code="409" reason="Document validation failed"/>
                     <set-header name="Content-Type" exists-action="override">
-                        <value>application/json</value>
+                        <value>application/problem+json</value>
                     </set-header>
                     <set-body>
                         {
-                        "detail": "Request took too long to complete.",
+                        "type": "string",
                         "status": 409,
-                        "title": "Service Unavailable"
+                        "title": "Document validation failed",
+                        "detail": "string",
+                        "errors": [
+                            {
+                                "code": "002-100",
+                                "detail": "document validation fails",
+                            }
+                        ]
                         }
                     </set-body>
                 </return-response>
             </when>
             <when condition="@(((string)context.Variables["token"]).Equals("invalidSign"))">
                 <return-response>
-                    <set-status code="409" reason="Invalid ID supplied"/>
+                    <set-status code="409" reason="Document validation failed"/>
                     <set-header name="Content-Type" exists-action="override">
-                        <value>application/json</value>
+                        <value>application/problem+json</value>
                     </set-header>
                     <set-body>
                         {
-                        "detail": "Request took too long to complete.",
+                        "type": "string",
                         "status": 409,
-                        "title": "Service Unavailable"
+                        "title": "Document validation failed",
+                        "detail": "string",
+                        "errors": [
+                        {
+                        "code": "002-102",
+                        "detail": "signature is invalid",
+                        }
+                        ]
                         }
                     </set-body>
                 </return-response>
