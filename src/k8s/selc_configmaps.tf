@@ -84,8 +84,10 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     # ADE
     ENABLE_ADE_AA = "false"
 
-    # application insights key
-    APPINSIGHTS_DISABLED = true
+    APPINSIGHTS_DISABLED = "false"
+
+    ENABLE_USER_REGISTRY = "true"
+
     },
     var.configmaps_hub-spid-login-ms,
     var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}

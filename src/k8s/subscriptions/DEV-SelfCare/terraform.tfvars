@@ -23,6 +23,8 @@ configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_ROLE_NAME                     = "hub-spid-login-ms"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 
+  USER_REGISTRY_URL = "https://api.dev.userregistry.pagopa.it/user-registry-management/v1/users"
+
   # SPID
   ORG_ISSUER = "https://selfcare.pagopa.it"
 }
