@@ -36,7 +36,7 @@ enable_iac_pipeline      = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"
-apim_sku            = "Developer_1" # todo change to Premium_1 before launch
+apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
@@ -47,36 +47,35 @@ app_gateway_sku_tier             = "Standard_v2" # TODO change to WAF_v2
 app_gateway_alerts_enabled       = true          # TODO change to true
 app_gateway_waf_enabled          = false         # TODO change to true
 
-# todo change to Premium before launch
-# redis_sku_name = "Premium"
-# redis_family   = "P"
+# redis
+redis_sku_name = "Standard"
+redis_family   = "C"
+redis_capacity = 0
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip           = "10.1.0.250"
-aks_availability_zones     = [1, 2, 3] # TODO to define and uncomment before release to prod
-aks_node_count             = 1         # TODO to define before release to prod
+aks_availability_zones     = [1, 2, 3]
+aks_node_count             = 1
 aks_max_pods               = 100
 aks_enable_auto_scaling    = true
-min_count                  = 1 # TODO to define before release to prod
-max_count                  = 3 # TODO to define before release to prod
+min_count                  = 1
+max_count                  = 3
 upgrade_settings_max_surge = "33%"
 aks_vm_size                = "Standard_D4s_v3"
-# aks_vm_size            = "Standard_D8S_v3" # TODO to define and uncomment before release to prod
-# aks_sku_tier           = "Paid"            # TODO to define and uncomment before release to prod
+# aks_sku_tier           = "Paid" # TODO to define and uncomment before release to prod
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless = false # TODO set to false before launch
+cosmosdb_mongodb_enable_serverless = false
 # cosmosdb_mongodb_enable_autoscaling = true TODO uncomment befor launch
 # cosmosdb_mongodb_max_throughput TODO define before launch
 cosmosdb_mongodb_enable_free_tier = true # TODO change to false before launch
 # cosmosdb_mongodb_additional_geo_locations TODO do we want replication?
 
 #postgres
-postgres_sku_name                     = "GP_Gen5_2" # TODO to define
+postgres_sku_name                     = "GP_Gen5_2"
 postgres_geo_redundant_backup_enabled = false
-postgres_enable_replica               = false #TODO to define
-# postgres_storage_mb                   = 5242880 # 5TB TODO to define
+postgres_enable_replica               = false
 postgres_configuration = {
   autovacuum_work_mem         = "-1"
   effective_cache_size        = "5242880"
