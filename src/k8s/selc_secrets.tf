@@ -91,18 +91,18 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = merge({
-            SMTP_HOST           = "smtps.pec.aruba.it"
-            SMTP_PORT           = 465
-            SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
-            SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
-            MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
-          },
-          var.env_short != "p"
-          ? {
-            DESTINATION_MAILS   = module.key_vault_secrets_query.values["smtp-usr"].value
-          }
-          : {}
-          )
+    SMTP_HOST           = "smtps.pec.aruba.it"
+    SMTP_PORT           = 465
+    SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
+    MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
+    },
+    var.env_short != "p"
+    ? {
+      DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
+    }
+    : {}
+  )
 
   type = "Opaque"
 }
