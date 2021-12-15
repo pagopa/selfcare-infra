@@ -73,7 +73,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     COMPANY_FISCAL_CODE              = 15376371009
     COMPANY_IPA_CODE                 = "PagoPA"
     COMPANY_NAME                     = "PagoPA S.p.A"
-    COMPANY_VAT_NUMBER               = 15376371009
+    COMPANY_VAT_NUMBER               = "IT15376371009"
 
     ENABLE_JWT                         = "true"
     INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
