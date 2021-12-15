@@ -62,6 +62,9 @@ variable "api_gateway_url" {
 variable "cdn_frontend_url" {
   type = string
 }
+variable "cdn_storage_url" {
+  type = string
+}
 variable "spid_testenv_url" {
   type    = string
   default = null
@@ -91,6 +94,10 @@ variable "api-version_uservice-party-registry-proxy" {
 }
 
 # configs/secrets
+variable "token_expiration_minutes" {
+  type    = number
+  default = 3600
+}
 
 variable "configmaps_hub-spid-login-ms" {
   type = map(string)
