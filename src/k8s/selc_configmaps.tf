@@ -180,9 +180,9 @@ resource "kubernetes_config_map" "uservice-party-process" {
     MAIL_TEMPLATE_PATH            = "contracts/template/mail/1.0.0.json"
     WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
-    EU_LIST_OF_TRUSTED_LISTS_URL  = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
+    EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
     # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
-    EU_OFFICIAL_JOURNAL_URL       = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
+    EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
     },
     var.configmaps_uservice-party-process
   )

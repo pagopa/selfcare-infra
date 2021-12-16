@@ -419,7 +419,7 @@ variable "cidr_subnet_vpn" {
   description = "VPN network address space."
 }
 
-variable "cidr_subnet_dnsforwarder" {
+variable "cidr_subnet_dns_forwarder" {
   type        = list(string)
   description = "DNS Forwarder network address space."
 }
