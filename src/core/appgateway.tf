@@ -46,7 +46,7 @@ module "app_gw" {
       ip_addresses                = [var.reverse_proxy_ip]
       probe                       = "/health"
       probe_name                  = "probe-aks"
-      request_timeout             = 10
+      request_timeout             = 60
       fqdns                       = null
       pick_host_name_from_backend = false
     }
