@@ -151,7 +151,6 @@ resource "null_resource" "upload_config_spid_testenv" {
                 --share-name ${azurerm_storage_share.spid_testenv_storage_share[0].name} \
                 --source "./spid_testenv_conf/config.yaml" \
                 --path "config.yaml" && \
-              az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID && \
               az account set -s ${var.subscription_name} && \
               az container restart \
                 --name ${azurerm_container_group.spid_testenv[0].name} \
