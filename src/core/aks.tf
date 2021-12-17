@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/azurerm.git//kubernetes_cluster?ref=v1.0.75"
+  source = "git::https://github.com/pagopa/azurerm.git//kubernetes_cluster?ref=v2.0.13"
 
   name                       = format("%s-aks", local.project)
   location                   = azurerm_resource_group.rg_aks.location
@@ -61,7 +61,7 @@ module "aks" {
 }
 
 module "acr" {
-  source              = "git::https://github.com/pagopa/azurerm.git//container_registry?ref=v1.0.58"
+  source              = "git::https://github.com/pagopa/azurerm.git//container_registry?ref=v2.0.13"
   name                = replace(format("%s-acr", local.project), "-", "")
   resource_group_name = azurerm_resource_group.rg_aks.name
   location            = azurerm_resource_group.rg_aks.location
@@ -79,7 +79,7 @@ resource "azurerm_role_assignment" "aks_to_acr" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.0.13"
   name                                           = format("%s-k8s-snet", local.project)
   address_prefixes                               = var.cidr_subnet_k8s
   resource_group_name                            = azurerm_resource_group.rg_vnet.name

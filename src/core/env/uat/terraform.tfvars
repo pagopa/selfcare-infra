@@ -55,6 +55,7 @@ aks_max_pods            = 100
 aks_enable_auto_scaling = false
 min_count               = null
 max_count               = null
+aks_vm_size             = "Standard_B4ms"
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless = true
