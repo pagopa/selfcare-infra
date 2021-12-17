@@ -63,22 +63,20 @@ resource "azurerm_key_vault_access_policy" "adgroup_admin_policy" {
 }
 
 data "azuread_group" "adgroup_developers" {
-  display_name = format("%s-adgroup-developers", local.project)
+  display_name = "${local.project}-adgroup-developers"
 }
 
 ## ad group policy ##
 resource "azurerm_key_vault_access_policy" "adgroup_developers_policy" {
-  count = var.env_short == "d" ? 1 : 0
-
   key_vault_id = module.key_vault.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
   object_id = data.azuread_group.adgroup_developers.object_id
 
-  key_permissions         = ["Get", "List", "Update", "Create", "Import", "Delete", ]
-  secret_permissions      = ["Get", "List", "Set", "Delete", ]
+  key_permissions         = var.env_short == "d" ? ["Get", "List", "Update", "Create", "Import", "Delete", ] : ["Get", "List", "Update", "Create", "Import", ]
+  secret_permissions      = var.env_short == "d" ? ["Get", "List", "Set", "Delete", ] : ["Get", "List", "Set", ]
   storage_permissions     = []
-  certificate_permissions = ["Get", "List", "Update", "Create", "Import", "Delete", "Restore", "Purge", "Recover", ]
+  certificate_permissions = var.env_short == "d" ? ["Get", "List", "Update", "Create", "Import", "Delete", "Restore", "Purge", "Recover", ] : ["Get", "List", "Update", "Create", "Import", "Restore", "Recover", ]
 }
 
 data "azuread_group" "adgroup_externals" {
