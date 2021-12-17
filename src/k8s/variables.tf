@@ -93,6 +93,11 @@ variable "api-version_uservice-party-registry-proxy" {
   type = string
 }
 
+variable "jwt_token_exchange_duration" {
+  type = string
+  default = "PT15S"
+}
+
 # configs/secrets
 variable "token_expiration_minutes" {
   type    = number

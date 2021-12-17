@@ -17,6 +17,9 @@ api-version_uservice-party-management              = "0.1"
 api-version_uservice-party-process                 = "0.1"
 api-version_uservice-party-registry-proxy          = "0.1"
 
+# jwt exchange duration
+jwt_token_exchange_duration = "PT15M"
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {
@@ -33,18 +36,23 @@ configmaps_ms-product = {
   JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_ROLE_NAME                     = "ms-product"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
+  MS_PRODUCT_LOG_LEVEL                              = "DEBUG"
 }
 
 configmaps_b4f-dashboard = {
   JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_ROLE_NAME                     = "b4f-dashboard"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
+  B4F_DASHBOARD_LOG_LEVEL                           = "DEBUG"
+  REST_CLIENT_LOGGER_LEVEL                          = "FULL"
 }
 
 configmaps_b4f-onboarding = {
   JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_ROLE_NAME                     = "b4f-onboarding"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
+  B4F_ONBOARDING_LOG_LEVEL                          = "DEBUG"
+  REST_CLIENT_LOGGER_LEVEL                          = "FULL"
 }
 
 configmaps_uservice-attribute-registry-management = {
