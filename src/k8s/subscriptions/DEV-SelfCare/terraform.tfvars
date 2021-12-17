@@ -17,6 +17,9 @@ api-version_uservice-party-management              = "0.1"
 api-version_uservice-party-process                 = "0.1"
 api-version_uservice-party-registry-proxy          = "0.1"
 
+# jwt exchange duration
+jwt_token_exchange_duration = "PT15M"
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {

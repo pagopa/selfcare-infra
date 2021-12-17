@@ -35,6 +35,7 @@ resource "kubernetes_config_map" "jwt-exchange" {
   }
 
   data = {
+    JWT_TOKEN_EXCHANGE_DURATION   = var.jwt_token_exchange_duration
     JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
   }
