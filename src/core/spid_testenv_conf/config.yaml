@@ -3,7 +3,7 @@
 #########################
 
 # The base URL where spid-testenv2 is reachable at.
-base_url: "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
+base_url: "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 
 # Key and certificate used to sign SAML messages.
 key_file: "./conf/idp.key"
@@ -16,7 +16,7 @@ cert_file: "./conf/idp.crt"
 # using different sources.
 metadata:
   remote:
-    - "https://api.dev.selfcare.pagopa.it/spid/v1/metadata"
+    - "https://api.uat.selfcare.pagopa.it/spid/v1/metadata"
 
 
 # Application configuration
