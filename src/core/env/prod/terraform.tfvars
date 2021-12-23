@@ -62,7 +62,7 @@ aks_enable_auto_scaling    = true
 min_count                  = 1
 max_count                  = 3
 upgrade_settings_max_surge = "33%"
-aks_vm_size                = "Standard_D4s_v3"
+aks_vm_size                = "Standard_D4s_v4"
 # aks_sku_tier           = "Paid" # TODO to define and uncomment before release to prod
 
 # CosmosDb MongoDb
