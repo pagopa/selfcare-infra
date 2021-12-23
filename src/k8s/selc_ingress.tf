@@ -76,7 +76,7 @@ resource "kubernetes_ingress" "selc_ingress" {
           path = "/onboarding/v1/(.*)"
         }
 
-        path { // TODO remove me
+        path {
           backend {
             service_name = "ms-product"
             service_port = var.default_service_port
