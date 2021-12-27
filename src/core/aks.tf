@@ -12,16 +12,16 @@ module "aks" {
   dns_prefix                 = format("%s-aks", local.project)
   resource_group_name        = azurerm_resource_group.rg_aks.name
   availability_zones         = var.aks_availability_zones
-  kubernetes_version         = var.kubernetes_version
+  kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
   vm_size                    = var.aks_vm_size
   enable_auto_scaling        = var.aks_enable_auto_scaling
   node_count                 = var.aks_node_count
-  min_count                  = var.min_count
-  max_count                  = var.max_count
+  min_count                  = var.aks_min_count
+  max_count                  = var.aks_max_count
   max_pods                   = var.aks_max_pods
-  upgrade_settings_max_surge = var.upgrade_settings_max_surge
+  upgrade_settings_max_surge = var.aks_upgrade_settings_max_surge
   sku_tier                   = var.aks_sku_tier
 
   private_cluster_enabled = true

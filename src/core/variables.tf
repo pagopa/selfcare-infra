@@ -95,25 +95,25 @@ variable "aks_enable_auto_scaling" {
   default     = false
 }
 
-variable "min_count" {
+variable "aks_min_count" {
   type        = number
   description = "The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
   default     = null
 }
 
-variable "max_count" {
+variable "aks_max_count" {
   type        = number
   description = "The maximum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
   default     = null
 }
 
-variable "upgrade_settings_max_surge" {
+variable "aks_upgrade_settings_max_surge" {
   type        = string
   description = "The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade."
   default     = "33%"
 }
 
-variable "kubernetes_version" {
+variable "aks_kubernetes_version" {
   type    = string
   default = "1.21.2"
 }

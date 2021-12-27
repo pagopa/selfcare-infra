@@ -54,27 +54,30 @@ redis_capacity = 0
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip           = "10.1.0.250"
-aks_availability_zones     = [1, 2, 3]
-aks_node_count             = 1
-aks_max_pods               = 100
-aks_enable_auto_scaling    = true
-min_count                  = 1
-max_count                  = 3
-upgrade_settings_max_surge = "33%"
-aks_vm_size                = "Standard_D4s_v4"
-# aks_sku_tier           = "Paid" # TODO to define and uncomment before release to prod
+reverse_proxy_ip               = "10.1.0.250"
+aks_availability_zones         = [1, 2, 3]
+aks_node_count                 = 1
+aks_max_pods                   = 100
+aks_enable_auto_scaling        = true
+aks_min_count                  = 1
+aks_max_count                  = 3
+aks_upgrade_settings_max_surge = "33%"
+aks_vm_size                    = "Standard_D4s_v4"
+aks_sku_tier                   = "Paid"
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless = false
-# cosmosdb_mongodb_enable_autoscaling = true TODO uncomment befor launch
+cosmosdb_mongodb_enable_serverless  = false
+cosmosdb_mongodb_enable_autoscaling = true
 # cosmosdb_mongodb_max_throughput TODO define before launch
-cosmosdb_mongodb_enable_free_tier = true # TODO change to false before launch
-# cosmosdb_mongodb_additional_geo_locations TODO do we want replication?
+cosmosdb_mongodb_enable_free_tier = true
+cosmosdb_mongodb_additional_geo_locations = {
+  location          = "northeurope"
+  failover_priority = 1
+}
 
 #postgres
 postgres_sku_name                     = "GP_Gen5_2"
-postgres_geo_redundant_backup_enabled = false
+postgres_geo_redundant_backup_enabled = true
 postgres_enable_replica               = false
 postgres_configuration = {
   autovacuum_work_mem         = "-1"
