@@ -70,11 +70,11 @@ cosmosdb_mongodb_enable_serverless  = false
 cosmosdb_mongodb_enable_autoscaling = true
 # cosmosdb_mongodb_max_throughput TODO define before launch
 cosmosdb_mongodb_enable_free_tier                 = true
-cosmosdb_mongodb_main_geo_location_zone_redundant = true
+cosmosdb_mongodb_main_geo_location_zone_redundant = false
 cosmosdb_mongodb_additional_geo_locations = [{
   location          = "northeurope"
   failover_priority = 1
-  zone_redundant    = true
+  zone_redundant    = false
 }]
 
 #postgres
