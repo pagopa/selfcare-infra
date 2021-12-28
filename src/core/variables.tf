@@ -593,10 +593,16 @@ variable "cosmosdb_mongodb_consistency_policy" {
   }
 }
 
+variable "cosmosdb_mongodb_main_geo_location_zone_redundant" {
+  type        = bool
+  description = "Enable zone redundant Comsmos DB"
+}
+
 variable "cosmosdb_mongodb_additional_geo_locations" {
   type = list(object({
     location          = string
     failover_priority = number
+    zone_redundant    = bool
   }))
   description = "The name of the Azure region to host replicated data and the priority to apply starting from 1. Not used when cosmosdb_mongodb_enable_serverless"
   default     = []

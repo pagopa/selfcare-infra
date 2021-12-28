@@ -62,18 +62,20 @@ aks_enable_auto_scaling        = true
 aks_min_count                  = 1
 aks_max_count                  = 3
 aks_upgrade_settings_max_surge = "33%"
-aks_vm_size                    = "Standard_D4s_v4"
+aks_vm_size                    = "Standard_D4s_v5"
 aks_sku_tier                   = "Paid"
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_enable_serverless  = false
 cosmosdb_mongodb_enable_autoscaling = true
 # cosmosdb_mongodb_max_throughput TODO define before launch
-cosmosdb_mongodb_enable_free_tier = true
-cosmosdb_mongodb_additional_geo_locations = {
+cosmosdb_mongodb_enable_free_tier                 = true
+cosmosdb_mongodb_main_geo_location_zone_redundant = false
+cosmosdb_mongodb_additional_geo_locations = [{
   location          = "northeurope"
   failover_priority = 1
-}
+  zone_redundant    = false
+}]
 
 #postgres
 postgres_sku_name                     = "GP_Gen5_2"
