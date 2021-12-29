@@ -53,11 +53,13 @@ aks_alerts_enabled = false
 reverse_proxy_ip        = "10.1.0.250"
 aks_max_pods            = 100
 aks_enable_auto_scaling = false
-min_count               = null
-max_count               = null
+aks_min_count           = null
+aks_max_count           = null
+# aks_vm_size             = "Standard_B4ms" TODO apply in maintenence window
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_extra_capabilities = ["EnableServerless"]
+cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
+cosmosdb_mongodb_main_geo_location_zone_redundant = false
 
 # postgres
 postgres_sku_name       = "GP_Gen5_2"

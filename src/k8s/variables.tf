@@ -93,8 +93,9 @@ variable "api-version_uservice-party-registry-proxy" {
   type = string
 }
 
+#tfsec:ignore:GEN001
 variable "jwt_token_exchange_duration" {
-  type = string
+  type    = string
   default = "PT15S"
 }
 

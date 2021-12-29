@@ -10,6 +10,8 @@
 #  ./terraform.sh apply UAT-SelfCare
 #  ./terraform.sh apply PROD-SelfCare
 
+# shellcheck disable=SC2124,SC1090,SC2086
+
 BASHDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WORKDIR="$BASHDIR"
 
@@ -29,6 +31,11 @@ if [ ! -d "${WORKDIR}/subscriptions/${SUBSCRIPTION}" ]; then
     printf "\e[1;31mYou must provide a subscription for which a variable file is defined. You provided: '%s'.\n" "${SUBSCRIPTION}" > /dev/stderr
     exit 1
 fi
+
+resource_group_name=""
+storage_account_name=""
+aks_private_fqdn=""
+kube_config_path=""
 
 az account set -s "${SUBSCRIPTION}"
 
@@ -58,10 +65,10 @@ fi
 
 export HELM_DEBUG=1
 if echo "plan apply refresh import output destroy" | grep -w ${COMMAND} > /dev/null; then
-  if [ ${COMMAND} = "output" ]; then
-    terraform ${COMMAND} $other
+  if [ "${COMMAND}" = "output" ]; then
+    terraform "${COMMAND}" $other
   else
-    terraform ${COMMAND} --var-file="${WORKDIR}/subscriptions/${SUBSCRIPTION}/terraform.tfvars" $other
+    terraform "${COMMAND}" --var-file="${WORKDIR}/subscriptions/${SUBSCRIPTION}/terraform.tfvars" $other
   fi
 else
     echo "Action not allowed."
