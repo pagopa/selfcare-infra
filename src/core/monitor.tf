@@ -72,11 +72,13 @@ resource "azurerm_monitor_action_group" "slack" {
 locals {
 
   test_urls = [
+    # https://api.selfcare.pagopa.it/health
     {
       host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                 = "/",
+      path                 = "/health",
       expected_http_status = 200
     },
+    # https://selfcare.pagopa.it/auth/login
     ## CDN custom domains ##
     {
       host                 = trimsuffix(module.checkout_cdn.fqdn, "."),
