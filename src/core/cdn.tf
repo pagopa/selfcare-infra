@@ -13,7 +13,7 @@ locals {
     for i, spa in var.spa :
     {
       name  = replace(format("SPA-%s", spa), "-", "")
-      order = i + 2 // +2 required because the order start from 1 and 1 is reserved for the https rewrite
+      order = i + 3 // +3 required because the order start from 1: 1 is reserved for default application redirect; 2 is reserved for the https rewrite;
       conditions = [
         {
           condition_type   = "url_path_condition"
@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.0.22"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=cdn_delivery_rule_config"
 
   name                  = "checkout"
   prefix                = local.project
@@ -56,7 +56,7 @@ module "checkout_cdn" {
   lock_enabled          = var.lock_enable
 
   index_document     = "index.html"
-  error_404_document = "dashboard/index.html"
+  error_404_document = "error.html"
 
   dns_zone_name                = azurerm_dns_zone.selfcare_public[0].name
   dns_zone_resource_group_name = azurerm_dns_zone.selfcare_public[0].resource_group_name
@@ -98,7 +98,64 @@ module "checkout_cdn" {
     ]
   }
 
-  delivery_rule_rewrite = local.spa
+  delivery_rule_rewrite = concat([{
+    name  = "defaultApplication"
+    order = 2
+    conditions = [
+      {
+        condition_type   = "url_path_condition"
+        operator         = "Equal"
+        match_values     = ["/"]
+        negate_condition = false
+        transforms       = null
+      }
+    ]
+    url_rewrite_action = {
+      source_pattern          = "/"
+      destination             = "/dashboard/index.html"
+      preserve_unmatched_path = false
+    }
+  }],
+  local.spa
+          )
+
+  delivery_rule = [{
+    name  = "robotsNoIndex"
+    order = 3 + length(local.spa)
+
+    // conditions
+    url_path_conditions = [{
+        operator         = "Equal"
+        match_values     = length(var.robots_indexed_paths)>0 ? var.robots_indexed_paths : ["dummy"]
+        negate_condition = true
+        transforms       = null
+      }]
+    cookies_conditions=[]
+    device_conditions=[]
+    http_version_conditions=[]
+    post_arg_conditions=[]
+    query_string_conditions=[]
+    remote_address_conditions=[]
+    request_body_conditions=[]
+    request_header_conditions=[]
+    request_method_conditions=[]
+    request_scheme_conditions=[]
+    request_uri_conditions=[]
+    url_file_extension_conditions=[]
+    url_file_name_conditions=[]
+
+    // actions
+    modify_response_header_actions = [{
+      action = "Overwrite"
+      name   = "X-Robots-Tag"
+      value  = "noindex, nofollow"
+    }]
+    cache_expiration_actions=[]
+    cache_key_query_string_actions=[]
+    modify_request_header_actions=[]
+    url_redirect_actions=[]
+    url_rewrite_actions=[]
+  }]
 
   tags = var.tags
 }
