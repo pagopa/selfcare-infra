@@ -9,10 +9,10 @@ resource "kubernetes_config_map" "inner-service-url" {
     B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
     B4F_ONBOARDING_URL                         = "http://b4f-onboarding:8080"
     MS_PRODUCT_URL                             = "http://ms-product:8080"
-    USERVICE_PARTY_PROCESS_URL                 = "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
-    USERVICE_PARTY_MANAGEMENT_URL              = "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
-    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
+    USERVICE_PARTY_PROCESS_URL                 = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
+    USERVICE_PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
   }
 }
 
