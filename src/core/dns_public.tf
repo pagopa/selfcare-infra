@@ -54,6 +54,10 @@ resource "azurerm_dns_ns_record" "io_selfcare" {
   tags = var.tags
 }
 
+#
+# @Records
+#
+
 resource "azurerm_dns_caa_record" "caa_selfcare" {
   name                = "@"
   zone_name           = azurerm_dns_zone.selfcare_public[0].name
@@ -74,6 +78,10 @@ resource "azurerm_dns_caa_record" "caa_selfcare" {
 
   tags = var.tags
 }
+
+#
+# 🅰️ DNS A records
+#
 
 # application gateway records
 resource "azurerm_dns_a_record" "dns_a_api" {

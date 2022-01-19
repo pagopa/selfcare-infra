@@ -10,6 +10,8 @@
 #  ./terraform.sh apply UAT-SelfCare
 #  ./terraform.sh apply PROD-SelfCare
 
+# shellcheck disable=SC2124,SC1090,SC2086
+
 BASHDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WORKDIR="$BASHDIR"
 
@@ -30,6 +32,11 @@ if [ ! -d "${WORKDIR}/subscriptions/${SUBSCRIPTION}" ]; then
     exit 1
 fi
 
+resource_group_name=""
+storage_account_name=""
+aks_private_fqdn=""
+kube_config_path=""
+
 az account set -s "${SUBSCRIPTION}"
 
 # shellcheck disable=SC1090
@@ -48,7 +55,9 @@ export TF_VAR_k8s_kube_config_path="${kube_config_path}"
 # init terraform backend
 terraform init -reconfigure \
     -backend-config="storage_account_name=${storage_account_name}" \
-    -backend-config="resource_group_name=${resource_group_name}"
+    -backend-config="resource_group_name=${resource_group_name}" \
+    -backend-config="container_name=${container_name}" \
+    -backend-config="key=${key}"
 
 # if using cygwin, we have to transcode the WORKDIR
 if [[ $WORKDIR == /cygdrive/* ]]; then
@@ -58,10 +67,10 @@ fi
 
 export HELM_DEBUG=1
 if echo "plan apply refresh import output destroy" | grep -w ${COMMAND} > /dev/null; then
-  if [ ${COMMAND} = "output" ]; then
-    terraform ${COMMAND} $other
+  if [ "${COMMAND}" = "output" ]; then
+    terraform "${COMMAND}" $other
   else
-    terraform ${COMMAND} --var-file="${WORKDIR}/subscriptions/${SUBSCRIPTION}/terraform.tfvars" $other
+    terraform "${COMMAND}" --var-file="${WORKDIR}/subscriptions/${SUBSCRIPTION}/terraform.tfvars" $other
   fi
 else
     echo "Action not allowed."

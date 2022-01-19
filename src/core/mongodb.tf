@@ -24,7 +24,7 @@ module "cosmosdb_mongodb_snet" {
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb?ref=v2.0.5"
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb?ref=v2.0.19"
 
   name                 = format("%s-cosmosdb-mongodb-account", local.project)
   location             = azurerm_resource_group.mongodb_rg.location
@@ -42,7 +42,8 @@ module "cosmosdb_account_mongodb" {
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
 
-  main_geo_location_location = azurerm_resource_group.mongodb_rg.location
+  main_geo_location_location       = azurerm_resource_group.mongodb_rg.location
+  main_geo_location_zone_redundant = var.cosmosdb_mongodb_main_geo_location_zone_redundant
 
   additional_geo_locations = var.cosmosdb_mongodb_additional_geo_locations
 

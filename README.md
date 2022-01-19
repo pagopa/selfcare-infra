@@ -2,6 +2,12 @@
 
 Self Care project infrastructure
 
+## Architecture
+
+This is the architecture of Azure Selfcare
+
+![azure architecture](./docs/architectures/selfcare-architecture.drawio.png)
+
 ## Requirements
 
 ### 1. terraform
