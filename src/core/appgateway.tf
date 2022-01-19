@@ -118,7 +118,7 @@ module "app_gw" {
         {
           name          = "ingres-private-urls"
           rule_sequence = 1
-          condition     = {
+          condition = {
             variable    = "var_uri_path"
             pattern     = join("|", local.allowedIngressPathRegexps)
             ignore_case = true
@@ -126,27 +126,27 @@ module "app_gw" {
           }
           request_header_configurations  = []
           response_header_configurations = []
-          url                            = {
+          url = {
             path         = "dummy"
             query_string = null
           }
         },
         {
-        name          = "http-headers-api"
-        rule_sequence = 100
-        condition     = null
-        request_header_configurations = [
-          {
-            header_name  = "X-Forwarded-For"
-            header_value = "{var_client_ip}"
-          },
-          {
-            header_name  = "X-Client-Ip"
-            header_value = "{var_client_ip}"
-          },
-        ]
-        response_header_configurations = []
-        url                            = null
+          name          = "http-headers-api"
+          rule_sequence = 100
+          condition     = null
+          request_header_configurations = [
+            {
+              header_name  = "X-Forwarded-For"
+              header_value = "{var_client_ip}"
+            },
+            {
+              header_name  = "X-Client-Ip"
+              header_value = "{var_client_ip}"
+            },
+          ]
+          response_header_configurations = []
+          url                            = null
       }]
     },
   ]
