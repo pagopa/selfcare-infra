@@ -115,9 +115,9 @@ module "checkout_cdn" {
       destination             = "/dashboard/index.html"
       preserve_unmatched_path = false
     }
-  }],
-  local.spa
-          )
+    }],
+    local.spa
+  )
 
   delivery_rule = [{
     name  = "robotsNoIndex"
@@ -125,24 +125,24 @@ module "checkout_cdn" {
 
     // conditions
     url_path_conditions = [{
-        operator         = "Equal"
-        match_values     = length(var.robots_indexed_paths)>0 ? var.robots_indexed_paths : ["dummy"]
-        negate_condition = true
-        transforms       = null
-      }]
-    cookies_conditions=[]
-    device_conditions=[]
-    http_version_conditions=[]
-    post_arg_conditions=[]
-    query_string_conditions=[]
-    remote_address_conditions=[]
-    request_body_conditions=[]
-    request_header_conditions=[]
-    request_method_conditions=[]
-    request_scheme_conditions=[]
-    request_uri_conditions=[]
-    url_file_extension_conditions=[]
-    url_file_name_conditions=[]
+      operator         = "Equal"
+      match_values     = length(var.robots_indexed_paths) > 0 ? var.robots_indexed_paths : ["dummy"]
+      negate_condition = true
+      transforms       = null
+    }]
+    cookies_conditions            = []
+    device_conditions             = []
+    http_version_conditions       = []
+    post_arg_conditions           = []
+    query_string_conditions       = []
+    remote_address_conditions     = []
+    request_body_conditions       = []
+    request_header_conditions     = []
+    request_method_conditions     = []
+    request_scheme_conditions     = []
+    request_uri_conditions        = []
+    url_file_extension_conditions = []
+    url_file_name_conditions      = []
 
     // actions
     modify_response_header_actions = [{
@@ -150,11 +150,11 @@ module "checkout_cdn" {
       name   = "X-Robots-Tag"
       value  = "noindex, nofollow"
     }]
-    cache_expiration_actions=[]
-    cache_key_query_string_actions=[]
-    modify_request_header_actions=[]
-    url_redirect_actions=[]
-    url_rewrite_actions=[]
+    cache_expiration_actions       = []
+    cache_key_query_string_actions = []
+    modify_request_header_actions  = []
+    url_redirect_actions           = []
+    url_rewrite_actions            = []
   }]
 
   tags = var.tags
