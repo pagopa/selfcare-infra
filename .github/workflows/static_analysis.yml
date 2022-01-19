@@ -15,16 +15,16 @@ jobs:
       - name: init_src_core
         run: |
           TAG=$(cat .terraform-version)
-          cd src/core
-          sed -i -e 's/  backend "azurerm" {}//g' 99_main.tf # use local backend
-          docker run -v $(pwd):/tmp -w /tmp hashicorp/terraform:$TAG init
+          cd src
+          sed -i -e 's/  backend "azurerm" {}//g' core/99_main.tf # use local backend
+          docker run -v $(pwd):/tmp -w /tmp/core hashicorp/terraform:$TAG init
 
       - name: init_src_k8s
         run: |
           TAG=$(cat .terraform-version)
-          cd src/k8s
-          sed -i -e 's/  backend "azurerm" {}//g' main.tf # use local backend
-          docker run -v $(pwd):/tmp -w /tmp hashicorp/terraform:$TAG init
+          cd src
+          sed -i -e 's/  backend "azurerm" {}//g' k8s/main.tf # use local backend
+          docker run -v $(pwd):/tmp -w /tmp/k8s hashicorp/terraform:$TAG init
 
       - name: run_test
         run: |
