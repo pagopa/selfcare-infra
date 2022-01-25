@@ -58,6 +58,7 @@ aks_vm_size             = "Standard_B4ms"
 
 # CosmosDb MongoDb
 # cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"] TODO apply in maintenence window
+cosmosdb_mongodb_enable_autoscaling = true
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
 
 # postgres
