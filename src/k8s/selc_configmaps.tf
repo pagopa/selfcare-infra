@@ -205,3 +205,28 @@ resource "kubernetes_config_map" "uservice-party-registry-proxy" {
     var.configmaps_uservice-party-registry-proxy
   )
 }
+
+resource "kubernetes_config_map" "ms-notification-manager" {
+  metadata {
+    name      = "ms-notification-manager"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    NO_REPLY_MAIL = "noreply@pagopa.it"
+  },
+  var.configmaps_ms-notification-manager
+  )
+}
+
+resource "kubernetes_config_map" "common" {
+  metadata {
+    name      = "common"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+  },
+  var.configmaps_common
+  )
+}
