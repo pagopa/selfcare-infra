@@ -84,5 +84,4 @@ configmaps_ms-notification-manager = {
 }
 
 configmaps_common = {
-  ENV_VAR = "PROD"
 }

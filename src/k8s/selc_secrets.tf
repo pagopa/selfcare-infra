@@ -108,9 +108,9 @@ resource "kubernetes_secret" "mail" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "mail_not_pec" {
+resource "kubernetes_secret" "mail-not-pec" {
   metadata {
-    name      = "mail_not_pec"
+    name      = "mail-not-pec"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
