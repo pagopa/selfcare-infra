@@ -31,7 +31,7 @@ locals {
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=app_gateway_url_rewrite"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.1.20"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
