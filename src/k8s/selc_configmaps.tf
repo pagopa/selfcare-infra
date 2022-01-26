@@ -214,8 +214,8 @@ resource "kubernetes_config_map" "ms-notification-manager" {
 
   data = merge({
     NO_REPLY_MAIL = "noreply@pagopa.it"
-  },
-  var.configmaps_ms-notification-manager
+    },
+    var.configmaps_ms-notification-manager
   )
 }
 
@@ -226,7 +226,7 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-  },
-  var.configmaps_common
+    },
+    var.configmaps_common
   )
 }
