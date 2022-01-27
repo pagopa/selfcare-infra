@@ -89,7 +89,7 @@ resource "kubernetes_ingress" "selc_ingress" {
             service_name = "ms-notification-manager"
             service_port = var.default_service_port
           }
-          path = "/notifications/(.*)"
+          path = "/ms-notification-manager/(.*)"
         }
 
       }
