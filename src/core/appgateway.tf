@@ -18,9 +18,20 @@ module "appgateway_snet" {
   virtual_network_name = module.vnet.name
 }
 
+locals {
+  allowedIngressPathRegexps = [
+    "/spid/*",
+    "/dashboard/*",
+    "/onboarding/*",
+    "/notifications/*",
+    "/party-process/*",
+    "/party-registry-proxy/*",
+  ]
+}
+
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.0.9"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.1.20"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -104,21 +115,39 @@ module "app_gw" {
   rewrite_rule_sets = [
     {
       name = "rewrite-rule-set-api"
-      rewrite_rules = [{
-        name          = "http-headers-api"
-        rule_sequence = 100
-        condition     = null
-        request_header_configurations = [
-          {
-            header_name  = "X-Forwarded-For"
-            header_value = "{var_client_ip}"
-          },
-          {
-            header_name  = "X-Client-Ip"
-            header_value = "{var_client_ip}"
-          },
-        ]
-        response_header_configurations = []
+      rewrite_rules = [
+        {
+          name          = "ingres-private-urls"
+          rule_sequence = 1
+          condition = {
+            variable    = "var_uri_path"
+            pattern     = join("|", local.allowedIngressPathRegexps)
+            ignore_case = true
+            negate      = true
+          }
+          request_header_configurations  = []
+          response_header_configurations = []
+          url = {
+            path         = "dummy"
+            query_string = null
+          }
+        },
+        {
+          name          = "http-headers-api"
+          rule_sequence = 100
+          condition     = null
+          request_header_configurations = [
+            {
+              header_name  = "X-Forwarded-For"
+              header_value = "{var_client_ip}"
+            },
+            {
+              header_name  = "X-Client-Ip"
+              header_value = "{var_client_ip}"
+            },
+          ]
+          response_header_configurations = []
+          url                            = null
       }]
     },
   ]
