@@ -9,10 +9,10 @@ resource "kubernetes_config_map" "inner-service-url" {
     B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
     B4F_ONBOARDING_URL                         = "http://b4f-onboarding:8080"
     MS_PRODUCT_URL                             = "http://ms-product:8080"
-    USERVICE_PARTY_PROCESS_URL                 = "http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/0.1"
-    USERVICE_PARTY_MANAGEMENT_URL              = "http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/0.1"
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/0.1"
-    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = "http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-attribute-registry-management/0.1"
+    USERVICE_PARTY_PROCESS_URL                 = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
+    USERVICE_PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_REGISTRY_PROXY_URL          = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
   }
 }
 
@@ -203,5 +203,31 @@ resource "kubernetes_config_map" "uservice-party-registry-proxy" {
     PARTY_REGISTRY_INSTITUTIONS_URL = "https://indicepa.gov.it/ipa-dati/datastore/dump/d09adf99-dc10-4349-8c53-27b1e5aa97b6?format=json"
     },
     var.configmaps_uservice-party-registry-proxy
+  )
+}
+
+resource "kubernetes_config_map" "ms-notification-manager" {
+  metadata {
+    name      = "ms-notification-manager"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    NO_REPLY_MAIL = "noreply@pagopa.it"
+    },
+    var.configmaps_ms-notification-manager
+  )
+}
+
+resource "kubernetes_config_map" "common" {
+  metadata {
+    name      = "common"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    ENV_VAR = upper(var.env)
+    },
+    var.configmaps_common
   )
 }
