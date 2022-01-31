@@ -23,7 +23,7 @@ locals {
     "/spid/*",
     "/dashboard/*",
     "/onboarding/*",
-    "/notifications/*",
+    "/ms-notification-manager/*",
     "/party-process/*",
     "/party-registry-proxy/*",
   ]
