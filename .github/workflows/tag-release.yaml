@@ -1,0 +1,20 @@
+---
+name: "generate-tag"
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  generate-tag:
+    name: "Generate TAG"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Conventional Changelog Action
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          skip-on-empty: "false"
+          skip-commit: "true"
