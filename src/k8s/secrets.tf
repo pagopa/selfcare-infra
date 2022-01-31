@@ -20,6 +20,8 @@ module "key_vault_secrets_query" {
     "postgres-attribute-registry-user-password",
     "smtp-usr",
     "smtp-psw",
+    "smtp-not-pec-usr",
+    "smtp-not-pec-psw",
     "contracts-storage-access-key",
     "web-storage-connection-string",
     "user-registry-api-key"
