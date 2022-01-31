@@ -73,3 +73,15 @@ configmaps_uservice-party-registry-proxy = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }
+
+configmaps_ms-notification-manager = {
+  JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
+  APPLICATIONINSIGHTS_ROLE_NAME                     = "ms-notification-manager"
+  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
+  MS_NOTIFICATION_MANAGER_LOG_LEVEL                 = "INFO"
+  CUSTOMER_CARE_MAIL                                = "noreply@pagopa.it"
+  CUSTOMER_CARE_MAIL_SUBJECT_PREFIX                 = ""
+}
+
+configmaps_common = {
+}
