@@ -108,6 +108,22 @@ resource "kubernetes_secret" "mail" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "mail-not-pec" {
+  metadata {
+    name      = "mail-not-pec"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    MAIL_SERVER_HOST     = "smtp.gmail.com"
+    MAIL_SERVER_PORT     = 465
+    MAIL_SERVER_USERNAME = module.key_vault_secrets_query.values["smtp-not-pec-usr"].value
+    MAIL_SERVER_PASSWORD = module.key_vault_secrets_query.values["smtp-not-pec-psw"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "contracts-storage" {
   metadata {
     name      = "contracts-storage"
