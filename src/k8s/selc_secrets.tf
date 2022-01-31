@@ -116,7 +116,7 @@ resource "kubernetes_secret" "mail-not-pec" {
 
   data = {
     MAIL_SERVER_HOST     = "smtp.gmail.com"
-    MAIL_SERVER_PORT     = 465
+    MAIL_SERVER_PORT     = 587
     MAIL_SERVER_USERNAME = module.key_vault_secrets_query.values["smtp-not-pec-usr"].value
     MAIL_SERVER_PASSWORD = module.key_vault_secrets_query.values["smtp-not-pec-psw"].value
   }
