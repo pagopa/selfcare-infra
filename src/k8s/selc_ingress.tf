@@ -84,6 +84,14 @@ resource "kubernetes_ingress" "selc_ingress" {
           path = "/ms-product/v1/(.*)"
         }
 
+        path {
+          backend {
+            service_name = "ms-notification-manager"
+            service_port = var.default_service_port
+          }
+          path = "/ms-notification-manager/(.*)"
+        }
+
       }
     }
   }

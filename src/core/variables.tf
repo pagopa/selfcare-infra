@@ -845,3 +845,8 @@ variable "contracts_advanced_threat_protection" {
   description = "Enable contract threat advanced protection"
   default     = false
 }
+
+variable "robots_indexed_paths" {
+  type        = list(string)
+  description = "List of cdn paths to allow robots index"
+}
