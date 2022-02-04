@@ -11,7 +11,7 @@ locals {
   ]
 }
 
-# APIM subnet
+# cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
   source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
   name                 = format("%s-cosmosb-mongodb-snet", local.project)
