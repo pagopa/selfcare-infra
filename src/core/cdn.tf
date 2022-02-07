@@ -82,13 +82,13 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/; "
+        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/ https://cdn.cookielaw.org/consent/ https://cdn.cookielaw.org/scripttemplates/ https://geolocation.onetrust.com/cookieconsentpub/ https://privacyportal-de.onetrust.com/request/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
-        value  = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
+        value  = "script-src 'self' https://cdn.cookielaw.org/scripttemplates/otSDKStub.js https://cdn.cookielaw.org/scripttemplates/6.26.0/otBannerSdk.js; style-src 'self' 'unsafe-inline' https://selfcare.pagopa.it/assets/font/selfhostedfonts.css; worker-src 'none'; font-src 'self' https://selfcare.pagopa.it/assets/font/; "
       },
       {
         action = "Append"
