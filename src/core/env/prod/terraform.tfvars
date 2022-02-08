@@ -61,7 +61,6 @@ aks_vm_size                    = "Standard_D4s_v5"
 aks_sku_tier                   = "Paid"
 
 # CosmosDb MongoDb
-cosmosdb_mongodb_enable_serverless  = false
 cosmosdb_mongodb_enable_autoscaling = true
 # cosmosdb_mongodb_max_throughput TODO define before launch
 cosmosdb_mongodb_enable_free_tier                 = true
