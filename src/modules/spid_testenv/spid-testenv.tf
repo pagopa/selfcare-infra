@@ -128,8 +128,8 @@ resource "azurerm_container_group" "spid_testenv" {
 
 resource "local_file" "spid_testenv_config" {
   count    = var.enable_spid_test ? 1 : 0
-  filename = "./spid_testenv_conf/config.yaml"
-  content = templatefile(
+  filename = format("%s/config.yaml", var.spid_testenv_local_config_dir)
+  content  = templatefile(
     "${path.module}/spid_testenv_conf/config.yaml.tpl",
     {
       base_url                      = format("https://%s", trim(azurerm_container_group.spid_testenv[0].fqdn, "."))
@@ -149,7 +149,7 @@ resource "null_resource" "upload_config_spid_testenv" {
                 --account-name ${azurerm_storage_account.spid_testenv_storage_account[0].name} \
                 --account-key ${azurerm_storage_account.spid_testenv_storage_account[0].primary_access_key} \
                 --share-name ${azurerm_storage_share.spid_testenv_storage_share[0].name} \
-                --source "./spid_testenv_conf/config.yaml" \
+                --source "${var.spid_testenv_local_config_dir}/config.yaml" \
                 --path "config.yaml" && \
               az container restart \
                 --name ${azurerm_container_group.spid_testenv[0].name} \
