@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "mongodb_rg" {
 locals {
   base_capabilities = [
     "EnableMongo"
-  ],
+  ]
   cosmosdb_mongodb_enable_serverless = contains(var.cosmosdb_mongodb_extra_capabilities, "EnableServerless")
 }
 
