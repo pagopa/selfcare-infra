@@ -129,7 +129,7 @@ resource "azurerm_container_group" "spid_testenv" {
 resource "local_file" "spid_testenv_config" {
   count    = var.enable_spid_test ? 1 : 0
   filename = format("%s/config.yaml", var.spid_testenv_local_config_dir)
-  content  = templatefile(
+  content = templatefile(
     "${path.module}/spid_testenv_conf/config.yaml.tpl",
     {
       base_url                      = format("https://%s", trim(azurerm_container_group.spid_testenv[0].fqdn, "."))

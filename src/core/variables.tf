@@ -12,7 +12,7 @@ variable "prefix" {
 }
 
 variable "env" {
-  type = string
+  type        = string
   description = "env directory name"
 }
 
@@ -20,7 +20,7 @@ variable "env_short" {
   type = string
   validation {
     condition = (
-    length(var.env_short) <= 1
+      length(var.env_short) <= 1
     )
     error_message = "Max length is 1 chars."
   }
