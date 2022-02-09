@@ -226,7 +226,7 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-    ENV_VAR = upper(var.env)
+    ENV_TARGET = upper(var.env)
     },
     var.configmaps_common
   )
