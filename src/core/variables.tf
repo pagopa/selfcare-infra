@@ -599,12 +599,6 @@ variable "cosmosdb_mongodb_throughput" {
   default     = 400
 }
 
-variable "cosmosdb_mongodb_enable_serverless" {
-  type        = bool
-  description = "It will enable serverless mode. If true, cosmosdb_mongodb_throughput and cosmosdb_mongodb_enable_autoscaling will be ignored"
-  default     = false
-}
-
 variable "cosmosdb_mongodb_enable_autoscaling" {
   type        = bool
   description = "It will enable autoscaling mode. If true, cosmosdb_mongodb_throughput must be unset"
