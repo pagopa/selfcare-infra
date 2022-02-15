@@ -16,6 +16,10 @@ variable "enable_spid_test" {
   type = bool
 }
 
+variable "spid_testenv_local_config_dir" {
+  type = string
+}
+
 variable "hub_spid_login_metadata_url" {
   type = string
 }

@@ -1,4 +1,5 @@
 # general
+env       = "prod"
 env_short = "p"
 
 tags = {
