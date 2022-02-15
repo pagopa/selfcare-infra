@@ -11,6 +11,11 @@ variable "prefix" {
   }
 }
 
+variable "env" {
+  type        = string
+  description = "env directory name"
+}
+
 variable "env_short" {
   type = string
   validation {

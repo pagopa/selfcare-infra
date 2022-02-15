@@ -1,4 +1,5 @@
 # general
+env       = "dev"
 env_short = "d"
 
 tags = {
