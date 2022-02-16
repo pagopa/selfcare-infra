@@ -89,4 +89,5 @@ configmaps_ms-notification-manager = {
 }
 
 configmaps_common = {
+  ENABLE_CONFIDENTIAL_FILTER = "FALSE"
 }
