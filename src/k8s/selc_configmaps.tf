@@ -79,7 +79,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     ENABLE_JWT                         = "true"
     INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
 
-    TOKEN_EXPIRATION = var.token_expiration_minutes
+    # TOKEN_EXPIRATION requires seconds
+    TOKEN_EXPIRATION = var.token_expiration_minutes * 60
     JWT_TOKEN_ISSUER = "SPID"
 
     # ADE
@@ -163,7 +164,7 @@ resource "kubernetes_config_map" "uservice-party-management" {
     APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
     POSTGRES_SCHEMA               = "party"
     WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    TOKEN_VALIDITY_HOURS          = var.token_expiration_minutes
+    TOKEN_VALIDITY_HOURS          = var.token_expiration_minutes / 60
     },
     var.configmaps_uservice-party-management
   )

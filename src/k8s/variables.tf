@@ -102,7 +102,7 @@ variable "jwt_token_exchange_duration" {
 # configs/secrets
 variable "token_expiration_minutes" {
   type    = number
-  default = 3600
+  default = 540 # 9 hours
 }
 
 variable "configmaps_hub-spid-login-ms" {
