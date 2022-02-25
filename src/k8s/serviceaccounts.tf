@@ -13,13 +13,7 @@ resource "kubernetes_cluster_role" "cluster_deployer" {
 
   rule {
     api_groups = [""]
-    resources  = ["services"]
-    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
-  }
-
-  rule {
-    api_groups = ["extensions", "apps"]
-    resources  = ["deployments"]
+    resources  = ["deployments","horizontalpodautoscalers","services","pods","jobs","scheduledjobs","crontabs","configmaps","secrets"]
     verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
   }
 }
