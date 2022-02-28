@@ -167,7 +167,7 @@ resource "kubernetes_config_map" "uservice-party-management" {
     POSTGRES_SCHEMA               = "party"
     WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
     TOKEN_VALIDITY_HOURS          = 1140 # 60 days
-    MAIN_AUDIENCE                 = var.jwt_audience
+    # MAIN_AUDIENCE                 = var.jwt_audience TODO uncomment when ready to accept
     },
     var.configmaps_uservice-party-management
   )
@@ -186,7 +186,7 @@ resource "kubernetes_config_map" "uservice-party-process" {
     ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
     MAIL_TEMPLATE_PATH            = "contracts/template/mail/1.0.0.json"
     WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    MAIN_AUDIENCE                 = var.jwt_audience
+    # MAIN_AUDIENCE                 = var.jwt_audience TODO uncomment when ready to accept
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
     EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
     # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
