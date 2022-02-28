@@ -11,9 +11,17 @@ resource "kubernetes_cluster_role" "cluster_deployer" {
     name = "cluster-deployer"
   }
 
+  # required to run helm
   rule {
     api_groups = [""]
     resources  = ["deployments","horizontalpodautoscalers","services","pods","jobs","scheduledjobs","crontabs","configmaps","secrets"]
+    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
+
+  # required to run kubernetes apply
+  rule {
+    api_groups = ["extensions", "apps"]
+    resources  = ["deployments"]
     verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
   }
 }
