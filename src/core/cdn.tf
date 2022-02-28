@@ -82,7 +82,7 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; object-src none; connect-src 'self' https://api.%s.%s/ https://cdn.cookielaw.org/consent/ https://cdn.cookielaw.org/scripttemplates/ https://geolocation.onetrust.com/cookieconsentpub/ https://privacyportal-de.onetrust.com/request/; "
+        value = format("default-src 'self'; object-src none; connect-src 'self' https://api.%s.%s/ https://cdn.cookielaw.org/consent/ https://cdn.cookielaw.org/scripttemplates/ https://geolocation.onetrust.com/cookieconsentpub/ https://privacyportal-de.onetrust.com/request/ https://api-eu.mixpanel.com/track/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
