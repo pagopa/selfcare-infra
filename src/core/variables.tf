@@ -11,6 +11,11 @@ variable "prefix" {
   }
 }
 
+variable "env" {
+  type        = string
+  description = "env directory name"
+}
+
 variable "env_short" {
   type = string
   validation {
@@ -597,12 +602,6 @@ variable "cosmosdb_mongodb_throughput" {
   type        = number
   description = "The throughput of the MongoDB database (RU/s). Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply."
   default     = 400
-}
-
-variable "cosmosdb_mongodb_enable_serverless" {
-  type        = bool
-  description = "It will enable serverless mode. If true, cosmosdb_mongodb_throughput and cosmosdb_mongodb_enable_autoscaling will be ignored"
-  default     = false
 }
 
 variable "cosmosdb_mongodb_enable_autoscaling" {

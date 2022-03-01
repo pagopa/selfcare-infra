@@ -9,6 +9,7 @@ locals {
   base_capabilities = [
     "EnableMongo"
   ]
+  cosmosdb_mongodb_enable_serverless = contains(var.cosmosdb_mongodb_extra_capabilities, "EnableServerless")
 }
 
 # cosmosdb-Mongo subnet
@@ -57,10 +58,10 @@ resource "azurerm_cosmosdb_mongo_database" "selc_product" {
   resource_group_name = azurerm_resource_group.mongodb_rg.name
   account_name        = module.cosmosdb_account_mongodb.name
 
-  throughput = var.cosmosdb_mongodb_enable_autoscaling || var.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
+  throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
 
   dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !var.cosmosdb_mongodb_enable_serverless ? [""] : []
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
     content {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
