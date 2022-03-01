@@ -1,4 +1,4 @@
-resource "null_resource" "upload_resources" {
+resource "null_resource" "upload_resources_templates" {
   triggers = {
     dir_sha1 = sha1(join("", [for f in fileset("${path.module}/resources_templates", "**") : filesha1("${path.module}/resources_templates/${f}")]))
   }
