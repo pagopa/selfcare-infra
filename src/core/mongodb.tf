@@ -150,8 +150,8 @@ module "mongdb_collection_user-groups" {
   cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_user_group.name
 
   indexes = [{
-      keys   = ["_id"]
-      unique = true
+    keys   = ["_id"]
+    unique = true
     },
     {
       keys   = ["institutionId", "productId", "name"]
