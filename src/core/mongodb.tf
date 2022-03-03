@@ -124,7 +124,7 @@ resource "azurerm_cosmosdb_mongo_collection" "products" {
 }
 
 module "mongdb_collection_products" {
-  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=mongodb-collection"
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=v2.3.0"
 
   name                = "products"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
@@ -141,7 +141,7 @@ module "mongdb_collection_products" {
 }
 
 module "mongdb_collection_user-groups" {
-  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=mongodb-collection"
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=v2.3.0"
 
   name                = "userGroups"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
