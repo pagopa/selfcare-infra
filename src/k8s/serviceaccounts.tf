@@ -11,15 +11,10 @@ resource "kubernetes_cluster_role" "cluster_deployer" {
     name = "cluster-deployer"
   }
 
+  # required to run helm
   rule {
-    api_groups = [""]
-    resources  = ["services"]
-    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
-  }
-
-  rule {
-    api_groups = ["extensions", "apps"]
-    resources  = ["deployments"]
+    api_groups = ["", "extensions", "apps"]
+    resources  = ["deployments", "replicasets", "horizontalpodautoscalers", "services", "pods", "jobs", "scheduledjobs", "crontabs", "configmaps", "secrets"]
     verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
   }
 }
@@ -39,6 +34,42 @@ resource "kubernetes_role_binding" "deployer_binding" {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
     name      = "cluster-deployer"
+  }
+  subject {
+    kind      = "ServiceAccount"
+    name      = "azure-devops"
+    namespace = "kube-system"
+  }
+}
+
+resource "kubernetes_cluster_role" "helm_system_deployer" {
+  metadata {
+    name = "helm-system-deployer"
+  }
+
+  # required to run helm
+  rule {
+    api_groups = [""]
+    resources  = ["services"]
+    verbs      = ["get", "list"]
+  }
+}
+
+resource "kubernetes_role_binding" "helm_system_deployer_binding" {
+  depends_on = [
+    kubernetes_namespace.selc
+  ]
+
+  for_each = toset(["kube-system"])
+
+  metadata {
+    name      = "helm-system-deployer-binding"
+    namespace = each.key
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "helm-system-deployer"
   }
   subject {
     kind      = "ServiceAccount"
