@@ -143,6 +143,23 @@ resource "kubernetes_secret" "contracts-storage" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "cdn-storage" {
+  metadata {
+    name      = "cdn-storage"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
+    BLOB_CONTAINER_REF       = "$web"
+    BLOBSTORAGE_PUBLIC_HOST  = replace(var.cdn_storage_url, "/https?:\\/\\//", "")
+    BLOBSTORAGE_PUBLIC_URL   = var.cdn_storage_url
+    CDN_PUBLIC_URL           = var.cdn_frontend_url
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "b4f-dashboard" {
   metadata {
     name      = "b4f-dashboard"
