@@ -100,6 +100,10 @@ variable "jwt_token_exchange_duration" {
 }
 
 # configs/secrets
+variable "jwt_audience" {
+  type = string
+}
+
 variable "token_expiration_minutes" {
   type    = number
   default = 540 # 9 hours
