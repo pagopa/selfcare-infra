@@ -20,7 +20,6 @@ module "appgateway_snet" {
 
 locals {
   allowedIngressPathRegexps = [
-    "/health",
     "/spid/*",
     "/dashboard/*",
     "/onboarding/*",

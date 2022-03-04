@@ -76,7 +76,7 @@ locals {
     {
       host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
       path                 = "/health",
-      expected_http_status = 200
+      expected_http_status = 404
     },
     # https://selfcare.pagopa.it/auth/login
     ## CDN custom domains ##
