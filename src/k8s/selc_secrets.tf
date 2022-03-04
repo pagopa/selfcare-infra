@@ -214,3 +214,16 @@ resource "kubernetes_secret" "uservice-party-management" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "common-secrets" {
+  metadata {
+    name      = "common-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}

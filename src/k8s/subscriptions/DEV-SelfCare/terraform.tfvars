@@ -89,5 +89,6 @@ configmaps_ms-notification-manager = {
 }
 
 configmaps_common = {
+  USERVICE_USER_REGISTRY_URL = "https://api.dev.userregistry.pagopa.it/user-registry-management/v1"
   ENABLE_CONFIDENTIAL_FILTER = "FALSE"
 }
