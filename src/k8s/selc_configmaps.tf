@@ -104,6 +104,7 @@ resource "kubernetes_config_map" "ms-product" {
   data = merge({
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
     MONGODB_NAME         = local.mongodb_name_selc_product
+    LOGO_STORAGE_URL     = format("%s/resources/products/default/logo.png", var.cdn_storage_url)
     },
     var.configmaps_ms-product
   )
