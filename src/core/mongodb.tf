@@ -158,6 +158,14 @@ module "mongdb_collection_user-groups" {
       unique = true
     },
     {
+      keys   = ["institutionId"]
+      unique = false
+    },
+    {
+      keys   = ["productId"]
+      unique = false
+    },
+    {
       keys   = ["members"]
       unique = false
     }
