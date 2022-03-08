@@ -62,14 +62,6 @@ resource "kubernetes_ingress" "selc_ingress" {
 
         path {
           backend {
-            service_name = "b4f-dashboard"
-            service_port = var.default_service_port
-          }
-          path = "/dashboard/v1/(.*)"
-        }
-
-        path {
-          backend {
             service_name = "b4f-onboarding"
             service_port = var.default_service_port
           }
