@@ -137,10 +137,6 @@ variable "configmaps_uservice-party-registry-proxy" {
   type = map(string)
 }
 
-variable "configmaps_ms-notification-manager" {
-  type = map(string)
-}
-
 variable "configmaps_common" {
   type = map(string)
 }

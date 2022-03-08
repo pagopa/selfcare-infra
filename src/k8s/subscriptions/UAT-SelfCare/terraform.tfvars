@@ -73,15 +73,6 @@ configmaps_uservice-party-registry-proxy = {
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }
 
-configmaps_ms-notification-manager = {
-  JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_ROLE_NAME                     = "ms-notification-manager"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-  MS_NOTIFICATION_MANAGER_LOG_LEVEL                 = "INFO"
-  CUSTOMER_CARE_MAIL                                = "noreply@pagopa.it"
-  CUSTOMER_CARE_MAIL_SUBJECT_PREFIX                 = "[UAT] "
-}
-
 configmaps_common = {
   USERVICE_USER_REGISTRY_URL = "https://api.uat.userregistry.pagopa.it/user-registry-management/v1"
   ENABLE_CONFIDENTIAL_FILTER = "TRUE"
