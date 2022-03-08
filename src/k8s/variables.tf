@@ -113,10 +113,6 @@ variable "configmaps_hub-spid-login-ms" {
   type = map(string)
 }
 
-variable "configmaps_b4f-onboarding" {
-  type = map(string)
-}
-
 variable "configmaps_uservice-attribute-registry-management" {
   type = map(string)
 }

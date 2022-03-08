@@ -102,20 +102,6 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
-resource "kubernetes_config_map" "b4f-onboarding" {
-  metadata {
-    name      = "b4f-onboarding"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    JWT_TOKEN_PUBLIC_KEY     = module.key_vault_secrets_query.values["jwt-public-key"].value
-    REST_CLIENT_READ_TIMEOUT = "10000"
-    },
-    var.configmaps_b4f-onboarding
-  )
-}
-
 resource "kubernetes_config_map" "uservice-attribute-registry-management" {
   metadata {
     name      = "uservice-attribute-registry-management"
