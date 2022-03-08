@@ -31,13 +31,6 @@ configmaps_hub-spid-login-ms = {
   ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
-configmaps_ms-product = {
-  JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_ROLE_NAME                     = "ms-product"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-  MS_PRODUCT_LOG_LEVEL                              = "INFO"
-}
-
 configmaps_b4f-dashboard = {
   JAVA_TOOL_OPTIONS                                 = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_ROLE_NAME                     = "b4f-dashboard"

@@ -101,21 +101,6 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
-resource "kubernetes_config_map" "ms-product" {
-  metadata {
-    name      = "ms-product"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
-    MONGODB_NAME         = local.mongodb_name_selc_product
-    LOGO_STORAGE_URL     = format("%s/resources/products/default/logo.png", var.cdn_storage_url)
-    },
-    var.configmaps_ms-product
-  )
-}
-
 resource "kubernetes_config_map" "b4f-dashboard" {
   metadata {
     name      = "b4f-dashboard"

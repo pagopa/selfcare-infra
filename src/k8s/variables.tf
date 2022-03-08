@@ -113,10 +113,6 @@ variable "configmaps_hub-spid-login-ms" {
   type = map(string)
 }
 
-variable "configmaps_ms-product" {
-  type = map(string)
-}
-
 variable "configmaps_b4f-dashboard" {
   type = map(string)
 }
