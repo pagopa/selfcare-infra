@@ -5,15 +5,15 @@ resource "kubernetes_config_map" "inner-service-url" {
   }
 
   data = {
-    HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
-    B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
-    B4F_ONBOARDING_URL                         = "http://b4f-onboarding:8080"
-    MS_PRODUCT_URL                             = "http://ms-product:8080"
-    MS_NOTIFICATION_MANAGER_URL                = "http://ms-notification-manager:8080"
-    MS_USER_GROUP_URL                          = "http://ms-user-group:8080"
-    USERVICE_PARTY_PROCESS_URL                 = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
-    USERVICE_PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    HUB_SPID_LOGIN_URL                = "http://hub-spid-login-ms:8080"
+    B4F_DASHBOARD_URL                 = "http://b4f-dashboard:8080"
+    B4F_ONBOARDING_URL                = "http://b4f-onboarding:8080"
+    MS_PRODUCT_URL                    = "http://ms-product:8080"
+    MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
+    MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
+    USERVICE_PARTY_PROCESS_URL        = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
+    USERVICE_PARTY_MANAGEMENT_URL     = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_REGISTRY_PROXY_URL = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
   }
 }
 
