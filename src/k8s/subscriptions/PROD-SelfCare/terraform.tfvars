@@ -11,7 +11,6 @@ cdn_frontend_url = "https://selfcare.pagopa.it"
 cdn_storage_url  = "https://selcpcheckoutsa.z6.web.core.windows.net"
 
 # uservice versions
-api-version_uservice-attribute-registry-management = "0.1"
 api-version_uservice-party-management              = "0.1"
 api-version_uservice-party-process                 = "0.1"
 api-version_uservice-party-registry-proxy          = "0.1"
@@ -32,11 +31,6 @@ configmaps_hub-spid-login-ms = {
 }
 
 configmaps_uservice-attribute-registry-management = {
-  JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-}
-
-configmaps_uservice-party-management = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }

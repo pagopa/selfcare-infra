@@ -77,10 +77,6 @@ variable "enable_postgres_replica" {
 }
 
 # uservice versions
-variable "api-version_uservice-attribute-registry-management" {
-  type = string
-}
-
 variable "api-version_uservice-party-management" {
   type = string
 }
@@ -114,10 +110,6 @@ variable "configmaps_hub-spid-login-ms" {
 }
 
 variable "configmaps_uservice-attribute-registry-management" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-party-management" {
   type = map(string)
 }
 

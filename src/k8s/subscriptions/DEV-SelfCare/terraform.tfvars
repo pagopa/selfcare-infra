@@ -12,7 +12,6 @@ cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
-api-version_uservice-attribute-registry-management = "0.1"
 api-version_uservice-party-management              = "0.1"
 api-version_uservice-party-process                 = "0.1"
 api-version_uservice-party-registry-proxy          = "0.1"
@@ -36,11 +35,6 @@ configmaps_hub-spid-login-ms = {
 }
 
 configmaps_uservice-attribute-registry-management = {
-  JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-}
-
-configmaps_uservice-party-management = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }
