@@ -109,10 +109,6 @@ variable "configmaps_hub-spid-login-ms" {
   type = map(string)
 }
 
-variable "configmaps_uservice-party-process" {
-  type = map(string)
-}
-
 variable "configmaps_common" {
   type = map(string)
 }

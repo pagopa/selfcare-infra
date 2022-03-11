@@ -64,36 +64,3 @@ resource "kubernetes_ingress" "selc_ingress" {
     }
   }
 }
-
-resource "kubernetes_ingress" "selc_pdnd_ingress" {
-  depends_on = [helm_release.ingress]
-
-  metadata {
-    name      = "${kubernetes_namespace.selc.metadata[0].name}-pdnd-ingress"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-    annotations = {
-      "kubernetes.io/ingress.class"                    = "nginx"
-      "nginx.ingress.kubernetes.io/rewrite-target"     = "/pdnd-interop-uservice-$1/0.1/$2"
-      "nginx.ingress.kubernetes.io/ssl-redirect"       = "false"
-      "nginx.ingress.kubernetes.io/use-regex"          = "true"
-      "nginx.ingress.kubernetes.io/enable-cors"        = "true"
-      "nginx.ingress.kubernetes.io/cors-allow-headers" = local.cors.headers
-      "nginx.ingress.kubernetes.io/cors-allow-origin"  = local.cors.origins
-    }
-  }
-
-  spec {
-    rule {
-      http {
-        path {
-          backend {
-            service_name = "pdnd-interop-uservice-party-process"
-            service_port = 8088
-          }
-          path = "/(party-process)/v1/(.*)"
-        }
-
-      }
-    }
-  }
-}
