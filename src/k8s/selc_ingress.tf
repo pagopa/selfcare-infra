@@ -93,13 +93,6 @@ resource "kubernetes_ingress" "selc_pdnd_ingress" {
           path = "/(party-process)/v1/(.*)"
         }
 
-        path {
-          backend {
-            service_name = "pdnd-interop-uservice-party-registry-proxy"
-            service_port = 8088
-          }
-          path = "/(party-registry-proxy)/v1/(.*)"
-        }
       }
     }
   }

@@ -102,21 +102,6 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
-resource "kubernetes_config_map" "uservice-attribute-registry-management" {
-  metadata {
-    name      = "uservice-attribute-registry-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
-    POSTGRES_SCHEMA               = "attribute_registry"
-    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    },
-    var.configmaps_uservice-attribute-registry-management
-  )
-}
-
 resource "kubernetes_config_map" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
@@ -136,21 +121,6 @@ resource "kubernetes_config_map" "uservice-party-process" {
     EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
     },
     var.configmaps_uservice-party-process
-  )
-}
-
-resource "kubernetes_config_map" "uservice-party-registry-proxy" {
-  metadata {
-    name      = "uservice-party-registry-proxy"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME   = "uservice-party-registry-proxy"
-    PARTY_REGISTRY_CATEGORIES_URL   = "https://indicepa.gov.it/ipa-dati/datastore/dump/84ebb2e7-0e61-427b-a1dd-ab8bb2a84f07?format=json"
-    PARTY_REGISTRY_INSTITUTIONS_URL = "https://indicepa.gov.it/ipa-dati/datastore/dump/d09adf99-dc10-4349-8c53-27b1e5aa97b6?format=json"
-    },
-    var.configmaps_uservice-party-registry-proxy
   )
 }
 

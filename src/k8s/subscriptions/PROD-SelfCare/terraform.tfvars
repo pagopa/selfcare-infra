@@ -30,11 +30,6 @@ configmaps_hub-spid-login-ms = {
   ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
-configmaps_uservice-attribute-registry-management = {
-  JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
-}
-
 configmaps_uservice-party-process = {
   JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
@@ -42,11 +37,6 @@ configmaps_uservice-party-process = {
   MAIL_ONBOARDING_CONFIRMATION_LINK                 = "https://selfcare.pagopa.it/onboarding/confirm?jwt="
   MAIL_ONBOARDING_REJECTION_LINK                    = "https://selfcare.pagopa.it/onboarding/cancel?jwt="
   SIGNATURE_VALIDATION_ENABLED                      = true
-}
-
-configmaps_uservice-party-registry-proxy = {
-  JAVA_OPTS                                         = "-javaagent:/applicationinsights-agent.jar"
-  APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 }
 
 configmaps_common = {

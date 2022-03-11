@@ -109,15 +109,7 @@ variable "configmaps_hub-spid-login-ms" {
   type = map(string)
 }
 
-variable "configmaps_uservice-attribute-registry-management" {
-  type = map(string)
-}
-
 variable "configmaps_uservice-party-process" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-party-registry-proxy" {
   type = map(string)
 }
 
