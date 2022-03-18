@@ -109,7 +109,8 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-    ENV_TARGET = upper(var.env)
+    ENV_TARGET                   = upper(var.env)
+    PUBLIC_FILE_STORAGE_BASE_URL = var.cdn_storage_url
     },
     var.configmaps_common
   )
