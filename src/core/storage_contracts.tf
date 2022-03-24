@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_contracts_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc-contracts-storage" {
-  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v1.0.79"
+  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v2.7.0"
 
   name                       = replace(format("%s-contracts-storage", local.project), "-", "")
   account_kind               = "StorageV2"
@@ -36,6 +36,7 @@ resource "azurerm_key_vault_secret" "selc_contracts_storage_access_key" {
   key_vault_id = module.key_vault.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "selc_contracts_storage_connection_string" {
   name         = "contracts-storage-connection-string"
   value        = module.selc-contracts-storage.primary_connection_string
@@ -44,6 +45,7 @@ resource "azurerm_key_vault_secret" "selc_contracts_storage_connection_string" {
   key_vault_id = module.key_vault.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "selc_contracts_storage_blob_connection_string" {
   name         = "contracts-storage-blob-connection-string"
   value        = module.selc-contracts-storage.primary_blob_connection_string
