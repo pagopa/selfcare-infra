@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.1.6"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.7.0"
 
   name                  = "checkout"
   prefix                = local.project
@@ -160,7 +160,7 @@ module "checkout_cdn" {
   tags = var.tags
 }
 
-#tfsec:ignore:AZU023
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "selc_web_storage_access_key" {
   name         = "web-storage-access-key"
   value        = module.checkout_cdn.storage_primary_access_key
@@ -169,6 +169,7 @@ resource "azurerm_key_vault_secret" "selc_web_storage_access_key" {
   key_vault_id = module.key_vault.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "selc_web_storage_connection_string" {
   name         = "web-storage-connection-string"
   value        = module.checkout_cdn.storage_primary_connection_string
@@ -177,6 +178,7 @@ resource "azurerm_key_vault_secret" "selc_web_storage_connection_string" {
   key_vault_id = module.key_vault.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
   name         = "web-storage-blob-connection-string"
   value        = module.checkout_cdn.storage_primary_blob_connection_string
