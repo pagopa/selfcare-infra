@@ -135,7 +135,12 @@ module "mongdb_collection_products" {
   indexes = [{
     keys   = ["_id"]
     unique = true
-  }]
+  },
+    {
+      keys   = ["parent"]
+      unique = false
+    }
+  ]
 
   lock_enable = true
 }
