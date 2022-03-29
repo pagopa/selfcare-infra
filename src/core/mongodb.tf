@@ -133,9 +133,9 @@ module "mongdb_collection_products" {
   cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_product.name
 
   indexes = [{
-    keys   = ["_id"]
-    unique = true
-  },
+      keys   = ["_id"]
+      unique = true
+    },
     {
       keys   = ["parent"]
       unique = false
