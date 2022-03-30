@@ -45,7 +45,7 @@ resource "azurerm_container_group" "spid_testenv" {
   name                = var.name
   location            = azurerm_resource_group.rg_spid_testenv[0].location
   resource_group_name = azurerm_resource_group.rg_spid_testenv[0].name
-  ip_address_type     = "public"
+  ip_address_type     = "Public"
   dns_name_label      = var.name
   os_type             = "Linux"
 
