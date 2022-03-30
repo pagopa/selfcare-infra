@@ -408,6 +408,12 @@ variable "cidr_vnet" {
   description = "Virtual network address space."
 }
 
+variable "cidr_subnet_apim" {
+  type        = list(string)
+  description = "Address prefixes subnet api management."
+  default     = null
+}
+
 variable "cidr_subnet_appgateway" {
   type        = list(string)
   description = "Application gateway address space."
@@ -455,6 +461,15 @@ variable "dns_zone_prefix" {
   type        = string
   default     = "selfcare"
   description = "The dns subdomain."
+}
+
+# apim
+variable "apim_publisher_name" {
+  type = string
+}
+
+variable "apim_sku" {
+  type = string
 }
 
 # cdn
