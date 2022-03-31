@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "monitor",
+        "title": "jwt-gen",
         "description": "",
         "version": "1.0"
     },
@@ -9,10 +9,20 @@
         "url": "https://${host}"
     }],
     "paths": {
-        "/*": {
+        "/": {
             "get": {
                 "summary": "GET",
                 "operationId": "get",
+                "parameters": [
+                  {
+                    "name": "uid",
+                    "in": "header",
+                    "description": "User UID",
+                    "required": true,
+                    "allowReserved": false,
+                    "schema": { "type": "string" }
+                  }
+                ],
                 "responses": {
                     "200": {
                         "description": null

@@ -31,8 +31,7 @@ locals {
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-//  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.1.20"
-  source = "../../../azurerm/app_gateway"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=app-gateway-route-by-path"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -67,7 +66,7 @@ module "app_gw" {
       host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
       port                        = 443
       ip_addresses                = module.apim.private_ip_addresses
-      probe                       = "external/status-0123456789abcdef"
+      probe                       = "/external/status"
       probe_name                  = "probe-apim"
       request_timeout             = 60
       fqdns                       = null
@@ -121,33 +120,21 @@ module "app_gw" {
   routes_path_based = {
     api = {
       listener              = "api"
-      backend               = "apim"
-      rewrite_rule_set_name = "rewrite-rule-set-api"
-      url_map_name          = "external_api"
-      priority              = 1
-    }
-    api = {
-      listener              = "api"
-      backend               = "aks"
-      rewrite_rule_set_name = "rewrite-rule-set-api"
+      priority              = null
       url_map_name          = "api"
-      priority              = 2
     }
   }
 
   url_path_map = {
-    external_api = {
-      default_backend               = "apim"
-      default_rewrite_rule_set_name = null
-      path_rule                     = {
-        external_api = ["/external/*"]
-      }
-    }
     api = {
       default_backend               = "aks"
-      default_rewrite_rule_set_name = null
+      default_rewrite_rule_set_name = "rewrite-rule-set-api"
       path_rule                     = {
-       api = ["/*"]
+       external_api = {
+         paths                 = ["/external/*"]
+         backend               = "apim"
+         rewrite_rule_set_name = null
+       }
       }
     }
   }

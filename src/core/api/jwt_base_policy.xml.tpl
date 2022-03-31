@@ -1,12 +1,7 @@
 <policies>
     <inbound>
         <base />
-        <return-response response-variable-name="existing response variable">
-            <set-status code="200" reason="OK" />
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/json</value>
-            </set-header>
-            <set-body>@{
+        <set-variable name="jwt" value="@{
                 // 1) Construct the Base64Url-encoded header
                 var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
                 var jwtHeaderBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
@@ -16,9 +11,7 @@
                 // 2) Construct the Base64Url-encoded payload
                 // TODO config duration
                 var exp = new DateTimeOffset(DateTime.Now.AddMinutes(10)).ToUnixTimeSeconds();  // sets the expiration of the token to be 10 minutes from now
-                // TODO read uid from Headers
-                var uid = "9b17ce70-f79f-42d9-8b0e-4e7eb4d88074";
-                // var fiscal_number = "SRTNLM09T06G635S";
+                var uid = context.Request.Headers.GetValueOrDefault("uid","");
                 var payload = new { exp, uid };
                 var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
@@ -33,8 +26,7 @@
                 return $"Bearer {jwtHeaderBase64UrlEncoded}.{jwtPayloadBase64UrlEncoded}.{jwtSignatureBase64UrlEncoded}";
                 }
 
-                }</set-body>
-        </return-response>
+                }"/>
     </inbound>
     <backend>
         <base />

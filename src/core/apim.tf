@@ -21,6 +21,8 @@ locals {
   apim_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", local.project)
 
   api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+
+  apim_base_url = format("%s/external", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
 }
 
 resource "azurerm_api_management_custom_domain" "api_custom_domain" {
@@ -82,14 +84,14 @@ module "monitor" {
 
   description  = "Monitor"
   display_name = "Monitor"
-  path         = "external"
+  path         = "external/status"
   protocols    = ["https"]
 
   service_url = null
 
   content_format = "openapi"
   content_value = templatefile("./api/monitor/openapi.json.tpl", {
-    host = format("%s/external", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
+    host = local.apim_base_url
   })
 
   xml_content = file("./api/base_policy.xml")
@@ -105,35 +107,60 @@ module "monitor" {
 }
 
 ## JWT generator ##
-#module "jwt_gen_api" {
-#  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-#  name                = format("%s-jwt-gen", var.env_short)
-#  api_management_name = module.apim.name
-#  resource_group_name = azurerm_resource_group.rg_api.name
-#
-#  description  = "JWT Generator"
-#  display_name = "JWT Generator"
-#  path         = "external"
-#  protocols    = ["https"]
-#
-#  service_url = null
-#
-#  content_format = "openapi"
-#  content_value = templatefile("./api/jwt_gen/openapi.json.tpl", {
-#    host = format("%s/external_api", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
-#  })
-#
-#  xml_content = file("./api/base_policy.xml")
-#
-#  subscription_required = false
-#
-#  api_operation_policies = [
-#    {
-#      operation_id = "get"
-#      xml_content  = templatefile("./api/jwt_gen/get_policy.xml.tpl", {
-#        KID                        = module.jwt.jwt_kid
-#        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-#      })
-#    }
-#  ]
-#}
+module "jwt_gen_api" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-jwt-gen", var.env_short)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  description  = "JWT Generator"
+  display_name = "JWT Generator"
+  path         = "external/jwt"
+  protocols    = ["https"]
+
+  service_url = null
+
+  content_format = "openapi"
+  content_value = templatefile("./api/jwt_gen/openapi.json.tpl", {
+    host = format("%s/external_api", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "get"
+      xml_content  = file("./api/jwt_gen/get_policy.xml")
+    }
+  ]
+}
+
+module "apim_uservice_party_process" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-party-prc-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+
+  description  = "This service is the party process"
+  display_name = "Party Process Micro Service"
+  path         = "external/party-process"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/party-process", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_process/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "party-process/v1"
+  })
+
+  xml_content = file("./api/base_policy.xml")
+
+  subscription_required = true
+}
