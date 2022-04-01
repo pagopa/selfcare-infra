@@ -140,27 +140,116 @@ module "jwt_gen_api" {
   ]
 }
 
-module "apim_uservice_party_process" {
+resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" {
+  name                = format("%s-party-prc-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Process Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_uservice_party_process_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-party-prc-api", local.project)
+  name                = format("%s-party-prc-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
 
 
   description  = "This service is the party process"
   display_name = "Party Process Micro Service"
   path         = "external/party-process"
+  api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/party-process", var.reverse_proxy_ip)
+  service_url = format("http://%s/party-process/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/party_process/open-api.yml.tpl", {
+  content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-process/v1"
   })
 
-  xml_content = file("./api/base_policy.xml")
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
 
   subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getOnboardingInfo"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "verifyOnboarding"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getUserInstitutionRelationships"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "retrieveInstitutionProducts"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getRelationship"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getOnboardingDocument"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getStatus"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
+  ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_uservice_party_management" {
+  name                = format("%s-party-mgmt-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Management Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_uservice_party_management_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  name                = format("%s-party-mgmt-api-v1", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
+
+
+  description  = "This service is the party manager"
+  display_name = "Party Management Micro Service V1"
+  path         = "party-management"
+  api_version  = "v1"
+  protocols    = ["https"]
+
+  service_url = format("http://%s/party-management/v1", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
+    host     = "selc-d-apim.azure-api.net" // azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "party-management/v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getOrganizationById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
+  ]
 }

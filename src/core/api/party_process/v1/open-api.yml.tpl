@@ -21,6 +21,11 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+  - name: public
+    description: Public endpoints
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: health
     description: Verify service status
     externalDocs:
@@ -29,8 +34,6 @@ tags:
 paths:
   '/onboarding/info':
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: get on boarding info
@@ -38,10 +41,19 @@ paths:
       operationId: getOnboardingInfo
       parameters:
         - name: institutionId
-          description: UUID of an institution you can filter the retrieval with
+          description: The external Id of an institution you can filter the retrieval with
           in: query
           schema:
             type: string
+        - name: states
+          in: query
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RelationshipState'
+            default: [ ]
+          explode: false
       responses:
         '200':
           description: successful operation
@@ -49,6 +61,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OnboardingInfo'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
@@ -57,8 +75,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /onboarding/organization:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Organization onboarding on the platform
@@ -71,22 +87,57 @@ paths:
             schema:
               $ref: '#/components/schemas/OnboardingRequest'
       responses:
-        '201':
+        '204':
           description: successful operation
+        '404':
+          description: Not found
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/OnboardingResponse'
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  '/onboarding/organization/{institutionId}/products/{productId}':
+    head:
+      tags:
+        - process
+      summary: verify onboarding info
+      description: Checks if the specified institution has been onboarded on the specified product.
+      operationId: verifyOnboarding
+      parameters:
+        - name: institutionId
+          in: path
+          description: The external identifier of the institution
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: The identifier of the product
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /onboarding/legals:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: legals onboarding
@@ -99,12 +150,14 @@ paths:
             schema:
               $ref: '#/components/schemas/OnboardingRequest'
       responses:
-        '200':
+        '204':
           description: successful operation
+        '404':
+          description: Not found
           content:
-            application/json:
+            application/problem+json:
               schema:
-                $ref: '#/components/schemas/OnboardingResponse'
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
@@ -113,8 +166,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /onboarding/subdelegates:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: subdelegates onboarding
@@ -132,7 +183,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OnboardingResponse'
+                $ref: '#/components/schemas/RelationshipsResponse'
         '400':
           description: Invalid ID supplied
           content:
@@ -141,8 +192,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /onboarding/operators:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: operators onboarding
@@ -155,8 +204,12 @@ paths:
             schema:
               $ref: '#/components/schemas/OnboardingRequest'
       responses:
-        '201':
+        '200':
           description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipsResponse'
         '400':
           description: Invalid ID supplied
           content:
@@ -165,8 +218,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /institutions/{institutionId}/relationships:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: returns the relationships related to the institution
@@ -175,8 +226,13 @@ paths:
       parameters:
         - name: institutionId
           in: path
-          description: The identifier of the institution
+          description: The external identifier of the institution
           required: true
+          schema:
+            type: string
+        - in: query
+          name: personId
+          description: the person identifier
           schema:
             type: string
             format: uuid
@@ -231,8 +287,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /institutions/{institutionId}/products:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: institution products retrieval
@@ -241,11 +295,19 @@ paths:
       parameters:
         - name: institutionId
           in: path
-          description: The identifier of the institution
+          description: The external identifier of the institution
           required: true
           schema:
             type: string
-            format: uuid
+        - name: states
+          in: query
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProductState'
+            default: [ ]
+          explode: false
       responses:
         '200':
           description: successful operation
@@ -261,8 +323,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /relationships/{relationshipId}:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Gets the corresponding relationship
@@ -296,8 +356,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Relationship deletion
@@ -328,8 +386,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /relationships/{relationshipId}/activate:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Activate the relationship
@@ -360,8 +416,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /relationships/{relationshipId}/suspend:
     post:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Suspend the relationship
@@ -390,19 +444,18 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/onboarding/complete/{token}':
+  '/onboarding/complete/{tokenId}':
     post:
-      security:
-        - bearerAuth: [ ]
+      security: [{}]
       tags:
-        - process
+        - public
       summary: create an onboarding entry
       description: Return ok
       operationId: confirmOnboarding
       parameters:
-        - name: token
+        - name: tokenId
           in: path
-          description: the token containing the onboardind information
+          description: the token id containing the onboardind information
           required: true
           schema:
             type: string
@@ -423,7 +476,7 @@ paths:
                 contentType: application/octet-stream
         required: true
       responses:
-        '200':
+        '204':
           description: successful operation
         '400':
           description: Invalid ID supplied
@@ -432,28 +485,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
         '409':
-          description: Document validation failed
+          description: |
+            Document validation failed
+
+            These are the error code used in the document validation process:
+
+            * 002-100: document validation fails
+
+            * 002-101: original document digest differs from incoming document digest
+
+            * 002-102: signature is invalid
+
+            * 002-103: signature form is not CAdES
+
+            * 002-104: signature tax code is not equal to tax code in document
+
+            * 002-105: signature tax code has an invalid format
+
+            * 002-106: missing signature tax code
+
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
     delete:
-      security:
-        - bearerAuth: [ ]
+      security: [{}]
       tags:
-        - process
+        - public
       summary: invalidate an onboarding request
       description: Return ok
       operationId: invalidateOnboarding
       parameters:
-        - name: token
+        - name: tokenId
           in: path
-          description: The token to invalidate
+          description: The token id to invalidate
           required: true
           schema:
             type: string
       responses:
-        '200':
+        '204':
           description: successful operation
         '400':
           description: Invalid ID supplied
@@ -463,8 +533,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   /onboarding/relationship/{relationshipId}/document:
     get:
-      security:
-        - bearerAuth: [ ]
       tags:
         - process
       summary: Get an onboarding document
@@ -486,12 +554,6 @@ paths:
                 format: binary
         "404":
           description: Document not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        "400":
-          description: Bad request
           content:
             application/problem+json:
               schema:
@@ -522,21 +584,22 @@ components:
             $ref: '#/components/schemas/User'
         institutionId:
           type: string
+        contract:
+          $ref: '#/components/schemas/OnboardingContract'
       additionalProperties: false
       required:
         - users
         - institutionId
-    OnboardingResponse:
+    OnboardingContract:
       properties:
-        token:
+        version:
           type: string
-        document:
+        path:
           type: string
-          format: binary
       additionalProperties: false
       required:
-        - token
-        - document
+        - version
+        - path
     RelationshipInfo:
       type: object
       properties:
@@ -550,8 +613,12 @@ components:
           type: string
         surname:
           type: string
-        email:
+        taxCode:
           type: string
+        certification:
+          $ref: '#/components/schemas/Certification'
+        institutionContacts:
+          $ref: '#/components/schemas/Contacts'
         role:
           $ref: '#/components/schemas/PartyRole'
         product:
@@ -570,6 +637,9 @@ components:
         - from
         - name
         - surname
+        - taxCode
+        - certification
+        - institutionContacts
         - role
         - product
         - state
@@ -602,6 +672,23 @@ components:
         - role
         - product
         - productRole
+    Certification:
+      type: string
+      enum:
+        - SPID
+        - NONE
+    Contact:
+      properties:
+        email:
+          type: string
+      additionalProperties: false
+      required:
+        - email
+    Contacts:
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/Contact'
     PersonInfo:
       properties:
         name:
@@ -610,11 +697,17 @@ components:
           type: string
         taxCode:
           type: string
+        certification:
+          $ref: '#/components/schemas/Certification'
+        institutionContacts:
+          $ref: '#/components/schemas/Contacts'
       additionalProperties: false
       required:
         - name
         - surname
         - taxCode
+        - certification
+        - institutionContacts
     ProductInfo:
       type: object
       properties:
@@ -631,6 +724,9 @@ components:
         - createdAt
     OnboardingData:
       properties:
+        id:
+          type: string
+          format: uuid
         institutionId:
           type: string
         description:
@@ -638,6 +734,10 @@ components:
         taxCode:
           type: string
         digitalAddress:
+          type: string
+        address:
+          type: string
+        zipCode:
           type: string
         state:
           $ref: '#/components/schemas/RelationshipState'
@@ -652,10 +752,13 @@ components:
             $ref: '#/components/schemas/Attribute'
       additionalProperties: false
       required:
+        - id
         - institutionId
         - taxCode
         - description
         - digitalAddress
+        - address
+        - zipCode
         - state
         - role
         - productInfo
@@ -663,15 +766,15 @@ components:
     Attribute:
       type: object
       properties:
-        id:
+        origin:
           type: string
-        name:
+        code:
           type: string
         description:
           type: string
       required:
-        - id
-        - name
+        - origin
+        - code
         - description
     OnboardingInfo:
       properties:
@@ -685,13 +788,23 @@ components:
       required:
         - person
         - institutions
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          $ref: '#/components/schemas/ProductState'
+      required:
+        - id
+        - state
     Products:
       type: object
       properties:
         products:
           type: array
           items:
-            $ref: '#/components/schemas/ProductInfo'
+            $ref: '#/components/schemas/Product'
       required:
         - products
     ProductRolesResponse:
@@ -735,13 +848,16 @@ components:
         - SUSPENDED
         - DELETED
         - REJECTED
+    ProductState:
+      type: string
+      description: Represents the product state
+      enum:
+        - PENDING
+        - ACTIVE
     Problem:
       properties:
-        detail:
-          description: A human readable explanation specific to this occurrence of the problem.
-          example: Request took too long to complete.
-          maxLength: 4096
-          pattern: '^.{0,1024}$'
+        type:
+          description: URI reference of type definition
           type: string
         status:
           description: The HTTP status code generated by the origin server for this occurrence of the problem.
@@ -752,18 +868,49 @@ components:
           minimum: 100
           type: integer
         title:
-          description: 'A short, summary of the problem type. Written in english and readable'
+          description: A short, summary of the problem type. Written in english and readable
           example: Service Unavailable
           maxLength: 64
           pattern: '^[ -~]{0,64}$'
           type: string
+        detail:
+          description: A human readable explanation of the problem.
+          example: Request took too long to complete.
+          maxLength: 4096
+          pattern: '^.{0,1024}$'
+          type: string
+        errors:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ProblemError'
       additionalProperties: false
       required:
+        - type
         - status
         - title
+        - errors
+    ProblemError:
+      properties:
+        code:
+          description: Internal code of the error
+          example: 123-4567
+          minLength: 8
+          maxLength: 8
+          pattern: '^[0-9]{3}-[0-9]{4}$'
+          type: string
+        detail:
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Parameter not valid
+          maxLength: 4096
+          pattern: '^.{0,1024}$'
+          type: string
+      required:
+        - code
+        - detail
   securitySchemes:
     bearerAuth:
       type: http
-      description: 'A bearer token in the format of a JWS and comformed to the specifications included in [RFC8725](https://tools.ietf.org/html/RFC8725).'
+      description: 'A bearer token in the format of a JWS and conformed to the specifications included in [RFC8725](https://tools.ietf.org/html/RFC8725).'
       scheme: bearer
       bearerFormat: JWT
