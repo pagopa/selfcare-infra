@@ -227,7 +227,7 @@ module "apim_uservice_party_management_v1" {
 
   description  = "This service is the party manager"
   display_name = "Party Management Micro Service V1"
-  path         = "party-management"
+  path         = "external/party-management"
   api_version  = "v1"
   protocols    = ["https"]
 
@@ -248,7 +248,43 @@ module "apim_uservice_party_management_v1" {
 
   api_operation_policies = [
     {
+      operation_id = "getPersonById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "existsPersonById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
       operation_id = "getOrganizationById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "existsOrganizationById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getOrganizationByExternalId"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getPartyAttributes"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getRelationships"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getRelationshipById"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getToken"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getStatus"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]

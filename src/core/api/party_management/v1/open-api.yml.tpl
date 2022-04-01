@@ -19,6 +19,11 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+  - name: public
+    description: Public endpoints
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: health
     description: Verify service status
     externalDocs:
@@ -102,6 +107,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
+        '409':
+          description: Person already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
@@ -128,6 +139,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Organization'
+        '409':
+          description: Organization already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
@@ -190,17 +207,19 @@ paths:
         '404':
           description: Organization not found
   /organizations/external/{id}:
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: External Organization ID
     get:
       summary: Retrieves Organization by ID
       tags:
         - party
+      operationId: getOrganizationByExternalId
+      description: 'returns the identified organization, if any.'
+      parameters:
+        - schema:
+            type: string
+          name: id
+          in: path
+          required: true
+          description: External Organization ID
       responses:
         '200':
           description: Organization
@@ -220,22 +239,22 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: getOrganizationByExternalId
-      description: 'returns the identified organization, if any.'
   /organizations/{id}/attributes:
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-          example: e72dd279-5f52-4039-afbe-2b7e432c490e
-        name: id
-        in: path
-        required: true
-        description: Organization ID
     get:
       summary: Retrieves attributes
       tags:
         - party
+      operationId: getPartyAttributes
+      description: 'returns the attributes of the identified party, if any.'
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: e72dd279-5f52-4039-afbe-2b7e432c490e
+          name: id
+          in: path
+          required: true
+          description: Organization ID
       responses:
         '200':
           description: Party Attributes
@@ -255,14 +274,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: getPartyAttributes
-      description: 'returns the attributes of the identified party, if any.'
     post:
       tags:
         - party
       summary: Retrieve the organization attributes for the given organizationId
       description: Return ok
       operationId: addOrganizationAttributes
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+            example: e72dd279-5f52-4039-afbe-2b7e432c490e
+          name: id
+          in: path
+          required: true
+          description: Organization ID
       requestBody:
         required: true
         content:
@@ -302,6 +328,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Relationship'
+        '409':
+          description: Relationship already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '400':
           description: Invalid ID supplied
           content:
@@ -438,18 +470,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
   '/relationships/{relationshipId}/suspend':
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-        name: relationshipId
-        in: path
-        required: true
-        description: Relationship ID
     post:
       summary: Suspend Relationship by ID
       tags:
         - party
+      operationId: suspendPartyRelationshipById
+      description: 'Suspend relationship by ID'
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          name: relationshipId
+          in: path
+          required: true
+          description: Relationship ID
       responses:
         '204':
           description: Relationship suspended
@@ -459,21 +493,21 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: suspendPartyRelationshipById
-      description: 'Suspend relationship by ID'
   '/relationships/{relationshipId}/activate':
-    parameters:
-      - schema:
-          type: string
-          format: uuid
-        name: relationshipId
-        in: path
-        required: true
-        description: Relationship ID
     post:
       summary: Activate Relationship by plaftorm ID
       tags:
         - party
+      operationId: activatePartyRelationshipById
+      description: 'Activate Relationship by ID'
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          name: relationshipId
+          in: path
+          required: true
+          description: Relationship ID
       responses:
         '204':
           description: Relationship activated
@@ -483,8 +517,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      operationId: activatePartyRelationshipById
-      description: 'Activate Relationship by ID'
   /tokens:
     post:
       tags:
@@ -511,50 +543,52 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /tokens/{token}:
-    head:
+  /tokens/{tokenId}:
+    get:
+      security: []
       tags:
-        - party
+        - public
       summary: Retrieve token info
       description: Return ok
-      operationId: verifyToken
+      operationId: getToken
       parameters:
-        - name: token
+        - name: tokenId
           in: path
-          description: The token to verify
+          description: The token id to retrieve
           required: true
           schema:
             description: to be defined
             type: string
+            format: uuid
       responses:
         '200':
           description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
         '404':
           description: Token not found
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-        '400':
-          description: Invalid ID supplied
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
     post:
+      security: []
       tags:
-        - party
+        - public
       summary: Consume a token
       description: Return ok
       operationId: consumeToken
       parameters:
-        - name: token
+        - name: tokenId
           in: path
-          description: The token to consume
+          description: The token id to consume
           required: true
           schema:
             description: to be defined
             type: string
+            format: uuid
       requestBody:
         description: onboarding signed document
         content:
@@ -577,24 +611,80 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '404':
+          description: Token not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
     delete:
+      security: []
       tags:
-        - party
+        - public
       summary: Invalidate a token
       description: Return ok
       operationId: invalidateToken
       parameters:
-        - name: token
+        - name: tokenId
           in: path
-          description: The token to invalidate
+          description: The token id to invalidate
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: successful operation
         '400':
           description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Token not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /tokens/{tokenId}/verify:
+    post:
+      security: [ ]
+      tags:
+        - public
+      summary: Verify if the token is already consumed
+      description: Return ok
+      operationId: verifyToken
+      parameters:
+        - name: tokenId
+          in: path
+          description: The token id to verify
+          required: true
+          schema:
+            description: to be defined
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenInfo'
+        '400':
+          description: Invalid ID supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Token not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Token already consumed
           content:
             application/problem+json:
               schema:
@@ -681,6 +771,12 @@ components:
           example: email@pec.mail.org
           format: email
           type: string
+        address:
+          example: via del campo
+          type: string
+        zipCode:
+          example: 20100
+          type: string
         taxCode:
           description: organization tax code
           type: string
@@ -696,6 +792,8 @@ components:
         - institutionId
         - description
         - digitalAddress
+        - address
+        - zipCode
         - taxCode
         - attributes
         - products
@@ -718,6 +816,12 @@ components:
           example: email@pec.mail.org
           format: email
           type: string
+        address:
+          example: via del campo
+          type: string
+        zipCode:
+          example: 20100
+          type: string
         taxCode:
           description: organization tax code
           type: string
@@ -728,6 +832,8 @@ components:
         - institutionId
         - description
         - digitalAddress
+        - address
+        - zipCode
         - taxCode
         - attributes
       additionalProperties: false
@@ -778,7 +884,24 @@ components:
     Attributes:
       type: array
       items:
-        type: string
+        $ref: '#/components/schemas/Attribute'
+    Attribute:
+      type: object
+      additionalProperties: false
+      properties:
+        origin:
+          type: string
+          description: 'origin of the certified attribute, e.g.: IPA'
+        code:
+          type: string
+          description: 'original identifier as defined at origin side, e.g.: IPA attribute code'
+        description:
+          type: string
+          description: 'human readable description of the attribute'
+      required:
+        - origin
+        - code
+        - description
     RelationshipProductSeed:
       type: object
       properties:
@@ -847,6 +970,10 @@ components:
         contentType:
           type: string
           description: content type of the file containing the signed onboarding document
+        tokenId:
+          type: string
+          format: uuid
+          description: confirmation token identifier
         role:
           $ref: '#/components/schemas/PartyRole'
         product:
@@ -891,18 +1018,67 @@ components:
     TokenSeed:
       type: object
       properties:
-        seed:
+        id:
           type: string
           example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
         relationships:
-          $ref: '#/components/schemas/RelationshipsSeed'
+          $ref: '#/components/schemas/Relationships'
         checksum:
           type: string
+        contractInfo:
+          $ref: '#/components/schemas/OnboardingContractInfo'
       additionalProperties: false
       required:
-        - seed
+        - id
         - relationships
         - checksum
+        - contractInfo
+    RelationshipBinding:
+      type: object
+      properties:
+        partyId:
+          type: string
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+        relationshipId:
+          type: string
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+      additionalProperties: false
+      required:
+        - partyId
+        - relationshipId
+    OnboardingContractInfo:
+      type: object
+      properties:
+        version:
+          type: string
+          description: 'contains the version of the contract this onboarding belongs to'
+        path:
+          type: string
+          description: 'contains the path of the contract used for this onboarding'
+      additionalProperties: false
+      required:
+        - version
+        - path
+    TokenInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+        checksum:
+          type: string
+        legals:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelationshipBinding'
+      additionalProperties: false
+      required:
+        - id
+        - checksum
+        - legals
     TokenText:
       properties:
         token:
@@ -912,9 +1088,8 @@ components:
         - token
     Problem:
       properties:
-        detail:
-          description: A human readable explanation specific to this occurrence of the problem.
-          example: Request took too long to complete.
+        type:
+          description: URI reference of type definition
           type: string
         status:
           description: The HTTP status code generated by the origin server for this occurrence of the problem.
@@ -925,14 +1100,46 @@ components:
           minimum: 100
           type: integer
         title:
-          description:
-            A short, summary of the problem type. Written in english and readable
+          description: A short, summary of the problem type. Written in english and readable
           example: Service Unavailable
+          maxLength: 64
+          pattern: '^[ -~]{0,64}$'
           type: string
+        detail:
+          description: A human readable explanation of the problem.
+          example: Request took too long to complete.
+          maxLength: 4096
+          pattern: '^.{0,1024}$'
+          type: string
+        errors:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ProblemError'
       additionalProperties: false
       required:
+        - type
         - status
         - title
+        - errors
+    ProblemError:
+      properties:
+        code:
+          description: Internal code of the error
+          example: 123-4567
+          minLength: 8
+          maxLength: 8
+          pattern: '^[0-9]{3}-[0-9]{4}$'
+          type: string
+        detail:
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Parameter not valid
+          maxLength: 4096
+          pattern: '^.{0,1024}$'
+          type: string
+      required:
+        - code
+        - detail
   securitySchemes:
     bearerAuth:
       type: http
