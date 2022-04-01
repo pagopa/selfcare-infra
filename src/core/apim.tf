@@ -107,39 +107,6 @@ module "monitor" {
 }
 
 ## JWT generator ##
-module "jwt_gen_api" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
-  name                = format("%s-jwt-gen", var.env_short)
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-
-  description  = "JWT Generator"
-  display_name = "JWT Generator"
-  path         = "external/jwt"
-  protocols    = ["https"]
-
-  service_url = null
-
-  content_format = "openapi"
-  content_value = templatefile("./api/jwt_gen/openapi.json.tpl", {
-    host = format("%s/external_api", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
-  })
-
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
-    KID                        = module.jwt.jwt_kid
-    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-  })
-
-  subscription_required = true
-
-  api_operation_policies = [
-    {
-      operation_id = "get"
-      xml_content  = file("./api/jwt_gen/get_policy.xml")
-    }
-  ]
-}
-
 resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" {
   name                = format("%s-party-prc-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -171,6 +138,7 @@ module "apim_uservice_party_process_v1" {
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
   })
@@ -240,6 +208,7 @@ module "apim_uservice_party_management_v1" {
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
   })

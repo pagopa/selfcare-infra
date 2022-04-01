@@ -9,10 +9,16 @@
                 // var jwtHeaderBase64UrlEncoded = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9";
 
                 // 2) Construct the Base64Url-encoded payload
-                // TODO config duration
-                var exp = new DateTimeOffset(DateTime.Now.AddMinutes(10)).ToUnixTimeSeconds();  // sets the expiration of the token to be 10 minutes from now
+                var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
                 var uid = context.Request.Headers.GetValueOrDefault("uid","");
-                var payload = new { exp, uid };
+
+                if(uid == "") {
+                  return "";
+                }
+
+                var aud = "${API_DOMAIN}";
+                var iss = context.Subscription.Id;
+                var payload = new { exp, uid, aud, iss };
                 var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
                 // 3) Construct the Base64Url-encoded signature
