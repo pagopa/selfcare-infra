@@ -116,12 +116,12 @@ module "app_gw" {
 
 
   # maps listener to backend
-  routes            = {}
+  routes = {}
   routes_path_based = {
     api = {
-      listener              = "api"
-      priority              = null
-      url_map_name          = "api"
+      listener     = "api"
+      priority     = null
+      url_map_name = "api"
     }
   }
 
@@ -129,12 +129,12 @@ module "app_gw" {
     api = {
       default_backend               = "aks"
       default_rewrite_rule_set_name = "rewrite-rule-set-api"
-      path_rule                     = {
-       external_api = {
-         paths                 = ["/external/*"]
-         backend               = "apim"
-         rewrite_rule_set_name = null
-       }
+      path_rule = {
+        external_api = {
+          paths                 = ["/external/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
       }
     }
   }
