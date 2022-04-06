@@ -14,6 +14,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     USERVICE_PARTY_PROCESS_URL        = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
     USERVICE_PARTY_MANAGEMENT_URL     = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
     USERVICE_PARTY_REGISTRY_PROXY_URL = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    USERVICE_PARTY_MOCK_REGISTRY_URL  = format("http://pdnd-interop-uservice-party-mock-registry:8088/pdnd-interop-uservice-party-mock-registry/%s", var.api-version_uservice-party-mock-registry)
   }
 }
 
