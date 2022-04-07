@@ -19,6 +19,11 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+  - name: external
+    description: External id endpoints
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: public
     description: Public endpoints
     externalDocs:
@@ -119,28 +124,28 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /organizations:
+  /institutions:
     post:
       tags:
         - party
-      summary: Create an organization
+      summary: Create an institution
       description: Return ok
-      operationId: createOrganization
+      operationId: createInstitution
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrganizationSeed'
+              $ref: '#/components/schemas/InstitutionSeed'
       responses:
         '201':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Organization'
+                $ref: '#/components/schemas/Institution'
         '409':
-          description: Organization already exists
+          description: Institution already exists
           content:
             application/problem+json:
               schema:
@@ -151,13 +156,13 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /organizations/{id}:
+  /institutions/{id}:
     get:
-      summary: Retrieves Organization by ID
+      summary: Retrieves Institution by ID
       tags:
         - party
-      operationId: getOrganizationById
-      description: 'returns the identified organization, if any.'
+      operationId: getInstitutionById
+      description: 'returns the identified institution, if any.'
       parameters:
         - schema:
             type: string
@@ -165,14 +170,14 @@ paths:
           name: id
           in: path
           required: true
-          description: Organization ID
+          description: Institution ID
       responses:
         '200':
-          description: Organization
+          description: Institution
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Organization'
+                $ref: '#/components/schemas/Institution'
         '400':
           description: Bad Request
           content:
@@ -180,7 +185,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Problem'
         '404':
-          description: Organization not found
+          description: Institution not found
           content:
             application/problem+json:
               schema:
@@ -188,13 +193,13 @@ paths:
     head:
       tags:
         - party
-      summary: Verify if an organization exists for a given organizationId
+      summary: Verify if an institution exists for a given institutionId
       description: Return ok
-      operationId: existsOrganizationById
+      operationId: existsInstitutionById
       parameters:
         - name: id
           in: path
-          description: The ID of the Organization to check
+          description: The ID of the Institution to check
           required: true
           schema:
             description: to be defined
@@ -205,41 +210,8 @@ paths:
         '200':
           description: successful operation
         '404':
-          description: Organization not found
-  /organizations/external/{id}:
-    get:
-      summary: Retrieves Organization by ID
-      tags:
-        - party
-      operationId: getOrganizationByExternalId
-      description: 'returns the identified organization, if any.'
-      parameters:
-        - schema:
-            type: string
-          name: id
-          in: path
-          required: true
-          description: External Organization ID
-      responses:
-        '200':
-          description: Organization
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organization'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Organization not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-  /organizations/{id}/attributes:
+          description: Institution not found
+  /institutions/{id}/attributes:
     get:
       summary: Retrieves attributes
       tags:
@@ -254,7 +226,7 @@ paths:
           name: id
           in: path
           required: true
-          description: Organization ID
+          description: Institution ID
       responses:
         '200':
           description: Party Attributes
@@ -277,9 +249,9 @@ paths:
     post:
       tags:
         - party
-      summary: Retrieve the organization attributes for the given organizationId
+      summary: Retrieve the institution attributes for the given institutionId
       description: Return ok
-      operationId: addOrganizationAttributes
+      operationId: addInstitutionAttributes
       parameters:
         - schema:
             type: string
@@ -288,7 +260,7 @@ paths:
           name: id
           in: path
           required: true
-          description: Organization ID
+          description: Institution ID
       requestBody:
         required: true
         content:
@@ -301,9 +273,42 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Organization'
+                $ref: '#/components/schemas/Institution'
         '404':
-          description: Organization not found
+          description: Institution not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /external/institutions/{institutionId}:
+    get:
+      summary: Retrieves Institution by ID
+      tags:
+        - external
+      operationId: getInstitutionByExternalId
+      description: 'returns the identified institution, if any.'
+      parameters:
+        - schema:
+            type: string
+          name: institutionId
+          in: path
+          required: true
+          description: External Institution ID
+      responses:
+        '200':
+          description: Institution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Institution not found
           content:
             application/problem+json:
               schema:
@@ -312,7 +317,7 @@ paths:
     post:
       tags:
         - party
-      summary: Create a new relationship between a Person and an Organization
+      summary: Create a new relationship between a Person and an Institution
       description: Return ok
       operationId: createRelationship
       requestBody:
@@ -689,6 +694,38 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  '/bulk/institutions':
+    post:
+      summary: Retrieves a collection of institutions
+      tags:
+        - party
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPartiesSeed'
+      responses:
+        '200':
+          description: collection of institutions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkInstitutions'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Institutions not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      operationId: bulkInstitutions
+      description: 'returns a collection of all the parties for the corresponding identifiers.'
   /status:
     get:
       tags:
@@ -703,38 +740,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/bulk/organizations':
-    post:
-      summary: Retrieves a collection of organizations
-      tags:
-        - party
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BulkPartiesSeed'
-      responses:
-        '200':
-          description: collection of organizations
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BulkOrganizations'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Organizations not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      operationId: bulkOrganizations
-      description: 'returns a collection of all the parties for the corresponding identifiers.'
 components:
   schemas:
     PersonSeed:
@@ -757,11 +762,11 @@ components:
       required:
         - id
       additionalProperties: false
-    OrganizationSeed:
+    InstitutionSeed:
       type: object
       properties:
         institutionId:
-          description: organization id (e.g iPA code)
+          description: institution id (e.g iPA code)
           example: 'c_f205'
           type: string
         description:
@@ -778,13 +783,13 @@ components:
           example: 20100
           type: string
         taxCode:
-          description: organization tax code
+          description: institution tax code
           type: string
         products:
           type: array
           items:
             type: string
-            description: product names associated to this organization
+            description: product names associated to this institution
           uniqueItems: true
         attributes:
           $ref: '#/components/schemas/Attributes'
@@ -798,7 +803,7 @@ components:
         - attributes
         - products
       additionalProperties: false
-    Organization:
+    Institution:
       type: object
       properties:
         id:
@@ -806,7 +811,7 @@ components:
           format: uuid
           example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
         institutionId:
-          description: organization id (e.g iPA code)
+          description: institution id (e.g iPA code)
           example: 'c_f205'
           type: string
         description:
@@ -823,7 +828,7 @@ components:
           example: 20100
           type: string
         taxCode:
-          description: organization tax code
+          description: institution tax code
           type: string
         attributes:
           $ref: '#/components/schemas/Attributes'
@@ -837,7 +842,7 @@ components:
         - taxCode
         - attributes
       additionalProperties: false
-    BulkOrganizations:
+    BulkInstitutions:
       type: object
       required:
         - found
@@ -845,14 +850,14 @@ components:
       properties:
         found:
           type: array
-          description: the collection of organizations found.
+          description: the collection of institutions found.
           items:
-            $ref: '#/components/schemas/Organization'
+            $ref: '#/components/schemas/Institution'
         notFound:
           type: array
           items:
             type: string
-          description: the identifiers of organizations not found.
+          description: the identifiers of institutions not found.
     BulkPartiesSeed:
       type: object
       required:
@@ -922,7 +927,7 @@ components:
         to:
           type: string
           format: uuid
-          description: organization ID
+          description: institution ID
         role:
           $ref: '#/components/schemas/PartyRole'
         product:
@@ -960,7 +965,7 @@ components:
         to:
           type: string
           format: uuid
-          description: organization ID
+          description: institution ID
         filePath:
           type: string
           description: path of the file containing the signed onboarding document

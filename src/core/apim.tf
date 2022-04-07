@@ -233,19 +233,19 @@ module "apim_uservice_party_management_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "getOrganizationById"
+      operation_id = "getInstitutionById"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "existsOrganizationById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getOrganizationByExternalId"
+      operation_id = "existsInstitutionById"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
       operation_id = "getPartyAttributes"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getInstitutionByExternalId"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
