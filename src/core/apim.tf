@@ -167,6 +167,14 @@ module "apim_uservice_party_process_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
+      operation_id = "getInstitution"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getInstitutionByExternalId"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
       operation_id = "getOnboardingDocument"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },

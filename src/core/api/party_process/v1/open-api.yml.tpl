@@ -21,6 +21,11 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+  - name: external
+    description: Implements external endpoints
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
   - name: public
     description: Public endpoints
     externalDocs:
@@ -73,13 +78,13 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /onboarding/organization:
+  /onboarding/institution:
     post:
       tags:
         - process
-      summary: Organization onboarding on the platform
-      description: it performs the onboarding of a new organization on the platform
-      operationId: onboardingOrganization
+      summary: Institution onboarding on the platform
+      description: it performs the onboarding of a new institution on the platform
+      operationId: onboardingInstitution
       requestBody:
         required: true
         content:
@@ -101,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/onboarding/organization/{institutionId}/products/{productId}':
+  '/onboarding/institution/{institutionId}/products/{productId}':
     head:
       tags:
         - process
@@ -142,7 +147,7 @@ paths:
         - process
       summary: legals onboarding
       description: creates legals entries on already onboarded institution
-      operationId: onboardingLegalsOnOrganization
+      operationId: onboardingLegalsOnInstitution
       requestBody:
         required: true
         content:
@@ -170,7 +175,7 @@ paths:
         - process
       summary: subdelegates onboarding
       description: creates subdelegates entries on already onboarded institution
-      operationId: onboardingSubDelegatesOnOrganization
+      operationId: onboardingSubDelegatesOnInstitution
       requestBody:
         required: true
         content:
@@ -195,7 +200,7 @@ paths:
       tags:
         - process
       summary: operators onboarding
-      description: performs operators onboarding on an already existing organization
+      description: performs operators onboarding on an already existing institution
       operationId: onboardingOperators
       requestBody:
         required: true
@@ -216,15 +221,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /institutions/{institutionId}/relationships:
+  /external/institutions/{externalId}/relationships:
     get:
       tags:
-        - process
+        - external
       summary: returns the relationships related to the institution
       description: Return ok
       operationId: getUserInstitutionRelationships
       parameters:
-        - name: institutionId
+        - name: externalId
           in: path
           description: The external identifier of the institution
           required: true
@@ -285,15 +290,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  /institutions/{institutionId}/products:
+  /external/institutions/{externalId}/products:
     get:
       tags:
-        - process
+        - external
       summary: institution products retrieval
       description: retrieves the products this institution is related to.
       operationId: retrieveInstitutionProducts
       parameters:
-        - name: institutionId
+        - name: externalId
           in: path
           description: The external identifier of the institution
           required: true
@@ -432,6 +437,76 @@ paths:
       responses:
         '204':
           description: Successful operation
+        '400':
+          description: Invalid id supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  '/institutions/{id}':
+    get:
+      security: [ { } ]
+      tags:
+        - process
+      summary: Gets the corresponding institution using internal institution id
+      description: Gets institution using internal institution id
+      operationId: getInstitution
+      parameters:
+        - name: id
+          in: path
+          description: The internal identifier of the institution
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
+        '400':
+          description: Invalid id supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  '/external/institutions/{externalId}':
+    get:
+      security: [{}]
+      tags:
+        - external
+      summary: Gets the corresponding institution using external institution id
+      description: Gets institution using external institution id
+      operationId: getInstitutionByExternalId
+      parameters:
+        - name: externalId
+          in: path
+          description: The external identifier of the institution
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
         '400':
           description: Invalid id supplied
           content:
@@ -609,6 +684,9 @@ components:
         from:
           type: string
           format: uuid
+        to:
+          type: string
+          format: uuid
         name:
           type: string
         surname:
@@ -635,6 +713,7 @@ components:
       required:
         - id
         - from
+        - to
         - name
         - surname
         - taxCode
@@ -776,6 +855,10 @@ components:
         - origin
         - code
         - description
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
     OnboardingInfo:
       properties:
         person:
@@ -854,6 +937,45 @@ components:
       enum:
         - PENDING
         - ACTIVE
+    Institution:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+        institutionId:
+          description: institution id (e.g iPA code)
+          example: 'c_f205'
+          type: string
+        description:
+          type: string
+          example: AGENCY X
+        digitalAddress:
+          example: email@pec.mail.org
+          format: email
+          type: string
+        address:
+          example: via del campo
+          type: string
+        zipCode:
+          example: 20100
+          type: string
+        taxCode:
+          description: institution tax code
+          type: string
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+      required:
+        - id
+        - institutionId
+        - description
+        - digitalAddress
+        - address
+        - zipCode
+        - taxCode
+        - attributes
+      additionalProperties: false
     Problem:
       properties:
         type:
