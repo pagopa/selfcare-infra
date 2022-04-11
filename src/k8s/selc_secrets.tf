@@ -143,6 +143,23 @@ resource "kubernetes_secret" "contracts-storage" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "cdn-storage" {
+  metadata {
+    name      = "cdn-storage"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
+    BLOB_CONTAINER_REF       = "$web"
+    BLOBSTORAGE_PUBLIC_HOST  = replace(var.cdn_storage_url, "/https?:\\/\\//", "")
+    BLOBSTORAGE_PUBLIC_URL   = var.cdn_storage_url
+    CDN_PUBLIC_URL           = var.cdn_frontend_url
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "b4f-dashboard" {
   metadata {
     name      = "b4f-dashboard"
@@ -193,6 +210,19 @@ resource "kubernetes_secret" "uservice-party-management" {
   data = {
     POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
     POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "common-secrets" {
+  metadata {
+    name      = "common-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
