@@ -94,6 +94,11 @@ module "checkout_cdn" {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
         value  = format("img-src 'self' https://assets.cdn.io.italia.it https://%s data:; ", module.checkout_cdn.storage_primary_web_host)
+      },
+      {
+        action = "Append"
+        name   = "X-Content-Type-Options"
+        value  = "nosniff"
       }
     ]
   }
