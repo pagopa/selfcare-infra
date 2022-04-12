@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.12.1"
 
   name                  = "checkout"
   prefix                = local.project
