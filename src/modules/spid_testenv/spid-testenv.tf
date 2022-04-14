@@ -7,6 +7,7 @@ resource "azurerm_resource_group" "rg_spid_testenv" {
 }
 
 # tfsec:ignore:azure-storage-default-action-deny
+# tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "spid_testenv_storage_account" {
   count                     = var.enable_spid_test ? 1 : 0
   name                      = replace(format("%s-sa-st", var.name), "-", "")

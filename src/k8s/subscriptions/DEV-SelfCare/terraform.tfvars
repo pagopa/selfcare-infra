@@ -20,6 +20,9 @@ api-version_uservice-party-registry-proxy          = "0.1"
 # jwt exchange duration
 jwt_token_exchange_duration = "PT15M"
 
+# session jwt audience
+jwt_audience = "https://api.dev.selfcare.pagopa.it"
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {
@@ -89,4 +92,6 @@ configmaps_ms-notification-manager = {
 }
 
 configmaps_common = {
+  USERVICE_USER_REGISTRY_URL = "https://api.dev.userregistry.pagopa.it/user-registry-management/v1"
+  ENABLE_CONFIDENTIAL_FILTER = "FALSE"
 }
