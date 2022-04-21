@@ -188,15 +188,15 @@ resource "kubernetes_secret" "uservice-party-process" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "uservice-attribute-registry-management" {
+resource "kubernetes_secret" "uservice-party-mock-registry" {
   metadata {
-    name      = "uservice-attribute-registry-management"
+    name      = "uservice-party-mock-registry"
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
   data = {
-    POSTGRES_USR = format("%s@%s", "ATTRIBUTE_REGISTRY_USER", local.postgres_hostname)
-    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-attribute-registry-user-password"].value
+    POSTGRES_USR = format("%s@%s", "MOCK_REGISTRY_USER", local.postgres_hostname)
+    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-mock-registry-user-password"].value
   }
 
   type = "Opaque"
