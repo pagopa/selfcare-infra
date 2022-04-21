@@ -1,6 +1,6 @@
 # APIM subnet
 module "apim_snet" {
-  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
+  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.12.5"
   name                 = format("%s-apim-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
@@ -77,7 +77,7 @@ module "apim" {
 
 ## monitor ##
 module "monitor" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = format("%s-monitor", var.env_short)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -116,7 +116,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" 
 }
 
 module "apim_uservice_party_process_v1" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = format("%s-party-prc-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -194,7 +194,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_managemen
 }
 
 module "apim_uservice_party_management_v1" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.58"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = format("%s-party-mgmt-api-v1", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
