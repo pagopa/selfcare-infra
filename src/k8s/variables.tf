@@ -77,10 +77,6 @@ variable "enable_postgres_replica" {
 }
 
 # uservice versions
-variable "api-version_uservice-attribute-registry-management" {
-  type = string
-}
-
 variable "api-version_uservice-party-management" {
   type = string
 }
@@ -90,6 +86,10 @@ variable "api-version_uservice-party-process" {
 }
 
 variable "api-version_uservice-party-registry-proxy" {
+  type = string
+}
+
+variable "api-version_uservice-party-mock-registry" {
   type = string
 }
 
@@ -110,38 +110,6 @@ variable "token_expiration_minutes" {
 }
 
 variable "configmaps_hub-spid-login-ms" {
-  type = map(string)
-}
-
-variable "configmaps_ms-product" {
-  type = map(string)
-}
-
-variable "configmaps_b4f-dashboard" {
-  type = map(string)
-}
-
-variable "configmaps_b4f-onboarding" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-attribute-registry-management" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-party-management" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-party-process" {
-  type = map(string)
-}
-
-variable "configmaps_uservice-party-registry-proxy" {
-  type = map(string)
-}
-
-variable "configmaps_ms-notification-manager" {
   type = map(string)
 }
 
