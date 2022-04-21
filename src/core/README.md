@@ -37,6 +37,8 @@
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/azurerm.git//jwt_keys | v2.7.0 |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v1.0.58 |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | git::https://github.com/pagopa/azurerm.git//key_vault | v1.0.90 |
+| <a name="module_mongdb_collection_products"></a> [mongdb\_collection\_products](#module\_mongdb\_collection\_products) | git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection | v2.3.0 |
+| <a name="module_mongdb_collection_user-groups"></a> [mongdb\_collection\_user-groups](#module\_mongdb\_collection\_user-groups) | git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection | v2.3.0 |
 | <a name="module_postgres_snet"></a> [postgres\_snet](#module\_postgres\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v1.0.60 |
 | <a name="module_postgresql"></a> [postgresql](#module\_postgresql) | git::https://github.com/pagopa/azurerm.git//postgresql_server | v1.0.79 |
 | <a name="module_redis"></a> [redis](#module\_redis) | git::https://github.com/pagopa/azurerm.git//redis_cache | v2.0.11 |
@@ -53,7 +55,9 @@
 | Name | Type |
 |------|------|
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/application_insights) | resource |
+| [azurerm_cosmosdb_mongo_collection.products](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/cosmosdb_mongo_collection) | resource |
 | [azurerm_cosmosdb_mongo_database.selc_product](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/cosmosdb_mongo_database) | resource |
+| [azurerm_cosmosdb_mongo_database.selc_user_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/cosmosdb_mongo_database) | resource |
 | [azurerm_dns_a_record.dns_a_api](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_a_record) | resource |
 | [azurerm_dns_caa_record.caa_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_caa_record) | resource |
 | [azurerm_dns_ns_record.dev_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_ns_record) | resource |
@@ -78,6 +82,8 @@
 | [azurerm_key_vault_secret.selc_web_storage_blob_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.selc_web_storage_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_log_analytics_workspace.log_analytics_workspace](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_management_lock.mongodb_selc_product](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/management_lock) | resource |
+| [azurerm_management_lock.mongodb_selc_user_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/management_lock) | resource |
 | [azurerm_monitor_action_group.email](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_postgresql_database.selc_db](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/postgresql_database) | resource |
