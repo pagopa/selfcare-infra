@@ -42,6 +42,8 @@
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/azurerm.git//jwt_keys | v2.7.0 |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v1.0.58 |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | git::https://github.com/pagopa/azurerm.git//key_vault | v1.0.90 |
+| <a name="module_mongdb_collection_products"></a> [mongdb\_collection\_products](#module\_mongdb\_collection\_products) | git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection | v2.3.0 |
+| <a name="module_mongdb_collection_user-groups"></a> [mongdb\_collection\_user-groups](#module\_mongdb\_collection\_user-groups) | git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection | v2.3.0 |
 | <a name="module_monitor"></a> [monitor](#module\_monitor) | git::https://github.com/pagopa/azurerm.git//api_management_api | v1.0.58 |
 | <a name="module_postgres_snet"></a> [postgres\_snet](#module\_postgres\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v1.0.60 |
 | <a name="module_postgresql"></a> [postgresql](#module\_postgresql) | git::https://github.com/pagopa/azurerm.git//postgresql_server | v1.0.79 |
@@ -125,11 +127,8 @@
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_contract_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_jwks](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-<<<<<<< HEAD
-| [pkcs12_from_pem.jwt_pkcs12](https://registry.terraform.io/providers/chilicat/pkcs12/0.0.7/docs/resources/from_pem) | resource |
-=======
 | [null_resource.upload_resources_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
->>>>>>> origin/main
+| [pkcs12_from_pem.jwt_pkcs12](https://registry.terraform.io/providers/chilicat/pkcs12/0.0.7/docs/resources/from_pem) | resource |
 | [azuread_application.vpn_app](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/application) | data source |
 | [azuread_group.adgroup_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
