@@ -224,7 +224,9 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#17324D;"
-      ><p> Ti abbiamo sospeso dal ruolo di <b>${productRole}</b> per <b>${productName}</b> nel portale Self Care di PagoPA, come richiesto da <b>${requesterName} ${requesterSurname}</b>.</p></div>
+      ><p>Ciao,</p>
+            <p><b>${requesterName} ${requesterSurname}</b> ha sospeso il tuo ruolo di <b>${productRole}</b> per il prodotto <b>${productName}</b> nell’Area Riservata di <b>${institutionName}</b>.</p> 
+            <p>Questo significa che per il momento non puoi più operare sul prodotto.</p></div>
     
                 </td>
               </tr>

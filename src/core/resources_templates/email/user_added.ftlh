@@ -3,7 +3,7 @@
     <html lang="it" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
         <title>
-          Nuovo Accesso
+          Aggiunta nuovo utente
         </title>
         <!--[if !mso]><!-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -211,7 +211,7 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:13px;font-weight:bold;line-height:1;text-align:left;color:#17324D;"
-      ><h1 style="font-size:32px; line-height:40px;">Accesso al portale Self Care</h1></div>
+      ><h1 style="font-size:32px; line-height:40px;">Hai un nuovo ruolo per un prodotto PagoPA</h1></div>
     
                 </td>
               </tr>
@@ -223,7 +223,9 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#17324D;"
-      ><p><b>${requesterName} ${requesterSurname}</b> ti ha aggiunto al prodotto <b>${productName}</b> nel portale Self Care di <b>${institutionName}</b> </p></div>
+      ><p>Ciao,</p>
+            <p><b>${requesterName} ${requesterSurname}</b> ti ha assegnato un ruolo per il prodotto <b>${productName}</b> nell’Area Riservata di <b>${institutionName}</b>. </p>
+             <p>Per operare sul prodotto, vai su <a href="https://selfcare.pagopa.it" style="color: #0073E6;">selfcare.pagopa.it</a> e accedi con SPID o CIE.</p></div>
     
                 </td>
               </tr>

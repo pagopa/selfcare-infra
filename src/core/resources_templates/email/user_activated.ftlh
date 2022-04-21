@@ -3,7 +3,7 @@
     <html lang="it" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
         <title>
-          Utenza riabilitata
+          Utenza Riabilitata
         </title>
         <!--[if !mso]><!-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -211,7 +211,8 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:13px;font-weight:bold;line-height:1;text-align:left;color:#17324D;"
-      ><h1 style="font-size:32px; line-height:40px;">Il tuo ruolo è stato riabilitato</h1></div>
+      ><h1 style="font-size:32px; line-height:40px;">Il tuo ruolo è stato riabilitato
+</h1></div>
     
                 </td>
               </tr>
@@ -223,7 +224,9 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#17324D;"
-      ><p>Ti abbiamo riabilitato nel ruolo di <b>${productRole}</b> per <b>${productName}</b> nel portale Self Care di PagoPA, come richiesto da <b>${productName} ${institutionName}</b>. </p></div>
+      ><p>Ciao,</p>
+            <p><b>${requesterName} ${requesterSurname}</b> ha riabilitato il tuo ruolo di <b>${productRole}</b> per il prodotto <b>${productName}</b> nell’Area Riservata di <b>${institutionName}</b>.</p> 
+            <p>Questo significa che puoi operare di nuovo sul prodotto.</p></div>
     
                 </td>
               </tr>
