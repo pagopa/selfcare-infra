@@ -5,14 +5,16 @@ resource "kubernetes_config_map" "inner-service-url" {
   }
 
   data = {
-    HUB_SPID_LOGIN_URL                         = "http://hub-spid-login-ms:8080"
-    B4F_DASHBOARD_URL                          = "http://b4f-dashboard:8080"
-    B4F_ONBOARDING_URL                         = "http://b4f-onboarding:8080"
-    MS_PRODUCT_URL                             = "http://ms-product:8080"
-    USERVICE_PARTY_PROCESS_URL                 = format("http://pdnd-interop-uservice-party-process:8088/pdnd-interop-uservice-party-process/%s", var.api-version_uservice-party-process)
-    USERVICE_PARTY_MANAGEMENT_URL              = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
-    USERVICE_PARTY_REGISTRY_PROXY_URL          = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
-    USERVICE_ATTRIBUTE_REGISTRY_MANAGEMENT_URL = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
+    HUB_SPID_LOGIN_URL                = "http://hub-spid-login-ms:8080"
+    B4F_DASHBOARD_URL                 = "http://b4f-dashboard:8080"
+    B4F_ONBOARDING_URL                = "http://b4f-onboarding:8080"
+    MS_PRODUCT_URL                    = "http://ms-product:8080"
+    MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
+    MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
+    USERVICE_PARTY_PROCESS_URL        = format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
+    USERVICE_PARTY_MANAGEMENT_URL     = format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_REGISTRY_PROXY_URL = format("http://interop-be-party-registry-proxy:8088/party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    USERVICE_PARTY_MOCK_REGISTRY_URL  = format("http://interop-be-party-mock-registry:8088/party-mock-registry/%s", var.api-version_uservice-party-mock-registry)
   }
 }
 
@@ -101,133 +103,6 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
-resource "kubernetes_config_map" "ms-product" {
-  metadata {
-    name      = "ms-product"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
-    MONGODB_NAME         = local.mongodb_name_selc_product
-    LOGO_STORAGE_URL     = format("%s/resources/products/default/logo.png", var.cdn_storage_url)
-    },
-    var.configmaps_ms-product
-  )
-}
-
-resource "kubernetes_config_map" "b4f-dashboard" {
-  metadata {
-    name      = "b4f-dashboard"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    JWT_TOKEN_PUBLIC_KEY          = module.key_vault_secrets_query.values["jwt-public-key"].value
-    JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-    REST_CLIENT_READ_TIMEOUT      = "10000"
-    },
-    var.configmaps_b4f-dashboard
-  )
-}
-
-resource "kubernetes_config_map" "b4f-onboarding" {
-  metadata {
-    name      = "b4f-onboarding"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    JWT_TOKEN_PUBLIC_KEY     = module.key_vault_secrets_query.values["jwt-public-key"].value
-    REST_CLIENT_READ_TIMEOUT = "10000"
-    },
-    var.configmaps_b4f-onboarding
-  )
-}
-
-resource "kubernetes_config_map" "uservice-attribute-registry-management" {
-  metadata {
-    name      = "uservice-attribute-registry-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-attribute-registry-management"
-    POSTGRES_SCHEMA               = "attribute_registry"
-    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    },
-    var.configmaps_uservice-attribute-registry-management
-  )
-}
-
-resource "kubernetes_config_map" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-management"
-    POSTGRES_SCHEMA               = "party"
-    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    TOKEN_VALIDITY_HOURS          = 1140 # 60 days
-    # MAIN_AUDIENCE                 = var.jwt_audience TODO uncomment when ready to accept
-    },
-    var.configmaps_uservice-party-management
-  )
-}
-
-resource "kubernetes_config_map" "uservice-party-process" {
-  metadata {
-    name      = "uservice-party-process"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME = "uservice-party-process"
-    PARTY_MANAGEMENT_URL          = format("http://pdnd-interop-uservice-party-management:8088/pdnd-interop-uservice-party-management/%s", var.api-version_uservice-party-management)
-    PARTY_PROXY_URL               = format("http://pdnd-interop-uservice-party-registry-proxy:8088/pdnd-interop-uservice-party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
-    ATTRIBUTE_REGISTRY_URL        = format("http://pdnd-interop-uservice-attribute-registry-management:8088/pdnd-interop-uservice-attribute-registry-management/%s", var.api-version_uservice-attribute-registry-management)
-    MAIL_TEMPLATE_PATH            = "contracts/template/mail/1.0.0.json"
-    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-    # MAIN_AUDIENCE                 = var.jwt_audience TODO uncomment when ready to accept
-    # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
-    EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
-    # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
-    EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
-    },
-    var.configmaps_uservice-party-process
-  )
-}
-
-resource "kubernetes_config_map" "uservice-party-registry-proxy" {
-  metadata {
-    name      = "uservice-party-registry-proxy"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    APPLICATIONINSIGHTS_ROLE_NAME   = "uservice-party-registry-proxy"
-    PARTY_REGISTRY_CATEGORIES_URL   = "https://indicepa.gov.it/ipa-dati/datastore/dump/84ebb2e7-0e61-427b-a1dd-ab8bb2a84f07?format=json"
-    PARTY_REGISTRY_INSTITUTIONS_URL = "https://indicepa.gov.it/ipa-dati/datastore/dump/d09adf99-dc10-4349-8c53-27b1e5aa97b6?format=json"
-    },
-    var.configmaps_uservice-party-registry-proxy
-  )
-}
-
-resource "kubernetes_config_map" "ms-notification-manager" {
-  metadata {
-    name      = "ms-notification-manager"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = merge({
-    NO_REPLY_MAIL = "noreply@pagopa.it"
-    },
-    var.configmaps_ms-notification-manager
-  )
-}
-
 resource "kubernetes_config_map" "common" {
   metadata {
     name      = "common"
@@ -235,7 +110,8 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-    ENV_TARGET = upper(var.env)
+    ENV_TARGET                   = upper(var.env)
+    PUBLIC_FILE_STORAGE_BASE_URL = var.cdn_storage_url
     },
     var.configmaps_common
   )
