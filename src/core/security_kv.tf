@@ -20,6 +20,18 @@ module "key_vault" {
   tags = var.tags
 }
 
+# ## api management policy ##
+resource "azurerm_key_vault_access_policy" "api_management_policy" {
+  key_vault_id = module.key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = module.apim.principal_id
+
+  key_permissions         = []
+  secret_permissions      = ["Get", "List"]
+  certificate_permissions = ["Get", "List"]
+  storage_permissions     = []
+}
+
 ## user assined identity: (application gateway) ##
 resource "azurerm_key_vault_access_policy" "app_gateway_policy" {
   key_vault_id = module.key_vault.id
@@ -243,4 +255,17 @@ resource "null_resource" "upload_jwks" {
                 --no-wait
           EOT
   }
+}
+
+resource "pkcs12_from_pem" "jwt_pkcs12" {
+  password        = ""
+  cert_pem        = module.jwt.certificate_data_pem
+  private_key_pem = module.jwt.jwt_private_key_pem
+}
+
+resource "azurerm_api_management_certificate" "jwt_certificate" {
+  name                = "jwt-spid-crt"
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  data                = pkcs12_from_pem.jwt_pkcs12.result
 }

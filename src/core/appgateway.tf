@@ -31,7 +31,7 @@ locals {
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.1.20"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.9.0"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -57,6 +57,17 @@ module "app_gw" {
       ip_addresses                = [var.reverse_proxy_ip]
       probe                       = "/health"
       probe_name                  = "probe-aks"
+      request_timeout             = 60
+      fqdns                       = null
+      pick_host_name_from_backend = false
+    }
+    apim = {
+      protocol                    = "Https"
+      host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
+      port                        = 443
+      ip_addresses                = module.apim.private_ip_addresses
+      probe                       = "/external/status"
+      probe_name                  = "probe-apim"
       request_timeout             = 60
       fqdns                       = null
       pick_host_name_from_backend = false
@@ -103,12 +114,28 @@ module "app_gw" {
     }
   }
 
+
   # maps listener to backend
-  routes = {
+  routes = {}
+  routes_path_based = {
     api = {
-      listener              = "api"
-      backend               = "aks"
-      rewrite_rule_set_name = "rewrite-rule-set-api"
+      listener     = "api"
+      priority     = null
+      url_map_name = "api"
+    }
+  }
+
+  url_path_map = {
+    api = {
+      default_backend               = "aks"
+      default_rewrite_rule_set_name = "rewrite-rule-set-api"
+      path_rule = {
+        external_api = {
+          paths                 = ["/external/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
+      }
     }
   }
 
