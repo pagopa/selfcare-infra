@@ -211,7 +211,7 @@ module "apim_uservice_party_management_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
-    host     = "selc-d-apim.azure-api.net" // azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "party-management/v1"
   })
 
