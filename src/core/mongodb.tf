@@ -50,6 +50,8 @@ module "cosmosdb_account_mongodb" {
 
   backup_continuous_enabled = true
 
+  lock_enable = true
+
   tags = var.tags
 }
 
@@ -68,6 +70,35 @@ resource "azurerm_cosmosdb_mongo_database" "selc_product" {
   }
 }
 
+resource "azurerm_management_lock" "mongodb_selc_product" {
+  name       = "mongodb-selc-product-lock"
+  scope      = azurerm_cosmosdb_mongo_database.selc_product.id
+  lock_level = "CanNotDelete"
+  notes      = "This items can't be deleted in this subscription!"
+}
+
+resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
+  name                = "selcUserGroup"
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
+  account_name        = module.cosmosdb_account_mongodb.name
+
+  throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
+
+  dynamic "autoscale_settings" {
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
+    content {
+      max_throughput = var.cosmosdb_mongodb_max_throughput
+    }
+  }
+}
+
+resource "azurerm_management_lock" "mongodb_selc_user_group" {
+  name       = "mongodb-selc-user-group-lock"
+  scope      = azurerm_cosmosdb_mongo_database.selc_user_group.id
+  lock_level = "CanNotDelete"
+  notes      = "This items can't be deleted in this subscription!"
+}
+
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings" {
   name         = "mongodb-connection-string"
@@ -75,4 +106,75 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
   content_type = "text/plain"
 
   key_vault_id = module.key_vault.id
+}
+
+# Collections
+resource "azurerm_cosmosdb_mongo_collection" "products" {
+  name                = "products"
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
+  account_name        = module.cosmosdb_account_mongodb.name
+  database_name       = azurerm_cosmosdb_mongo_database.selc_product.name
+
+  default_ttl_seconds = 0 # no TTL
+
+  index {
+    keys   = ["_id"]
+    unique = true
+  }
+}
+
+module "mongdb_collection_products" {
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=v2.3.0"
+
+  name                = "products"
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
+
+  cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
+  cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_product.name
+
+  indexes = [{
+    keys   = ["_id"]
+    unique = true
+    },
+    {
+      keys   = ["parent"]
+      unique = false
+    }
+  ]
+
+  lock_enable = true
+}
+
+module "mongdb_collection_user-groups" {
+  source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=v2.3.0"
+
+  name                = "userGroups"
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
+
+  cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
+  cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_user_group.name
+
+  indexes = [{
+    keys   = ["_id"]
+    unique = true
+    },
+    {
+      keys   = ["institutionId", "productId", "name"]
+      unique = true
+    },
+    {
+      keys   = ["institutionId"]
+      unique = false
+    },
+    {
+      keys   = ["productId"]
+      unique = false
+    },
+    {
+      keys   = ["members"]
+      unique = false
+    }
+  ]
+
+  lock_enable = true
 }
