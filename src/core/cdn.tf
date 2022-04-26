@@ -176,7 +176,7 @@ module "checkout_cdn" {
       request_scheme_conditions = []
       request_uri_conditions    = []
 
-      url_file_name_conditions      = [{
+      url_file_name_conditions = [{
         operator         = "Equal"
         match_values     = ["remoteEntry"]
         negate_condition = false
