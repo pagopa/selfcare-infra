@@ -163,28 +163,23 @@ module "checkout_cdn" {
       order = 4 + length(local.spa)
 
       // conditions
-      url_path_conditions       = []
-      cookies_conditions        = []
-      device_conditions         = []
-      http_version_conditions   = []
-      post_arg_conditions       = []
-      query_string_conditions   = []
-      remote_address_conditions = []
-      request_body_conditions   = []
-      request_header_conditions = []
-      request_method_conditions = []
-      request_scheme_conditions = []
-      request_uri_conditions    = []
+      url_path_conditions           = []
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_header_conditions     = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
 
       url_file_name_conditions = [{
         operator         = "Equal"
-        match_values     = ["remoteEntry"]
-        negate_condition = false
-        transforms       = null
-      }]
-      url_file_extension_conditions = [{
-        operator         = "Equal"
-        match_values     = ["js"]
+        match_values     = ["remoteEntry.js"]
         negate_condition = false
         transforms       = null
       }]
