@@ -45,7 +45,7 @@ paths:
       description: Return ok
       operationId: getOnboardingInfo
       parameters:
-        - name: institutionId
+        - name: externalId
           description: The external Id of an institution you can filter the retrieval with
           in: query
           schema:
@@ -106,7 +106,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/onboarding/institution/{institutionId}/products/{productId}':
+  '/onboarding/institution/{externalId}/products/{productId}':
     head:
       tags:
         - process
@@ -114,7 +114,7 @@ paths:
       description: Checks if the specified institution has been onboarded on the specified product.
       operationId: verifyOnboarding
       parameters:
-        - name: institutionId
+        - name: externalId
           in: path
           description: The external identifier of the institution
           required: true
@@ -499,7 +499,6 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
           description: successful operation
@@ -657,14 +656,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-        institutionId:
+        externalId:
           type: string
+        origin:
+          type: string
+          description: The origin form which the institution has been retrieved
+          example: IPA
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        pricingPlan:
+          type: string
+          description: pricing plan
+        billing:
+          $ref: '#/components/schemas/Billing'
         contract:
           $ref: '#/components/schemas/OnboardingContract'
       additionalProperties: false
       required:
         - users
-        - institutionId
+        - externalId
+        - origin
     OnboardingContract:
       properties:
         version:
@@ -703,6 +714,13 @@ components:
           $ref: '#/components/schemas/ProductInfo'
         state:
           $ref: '#/components/schemas/RelationshipState'
+        pricingPlan:
+          type: string
+          description: pricing plan
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        billing:
+          $ref: '#/components/schemas/Billing'
         createdAt:
           type: string
           format: date-time
@@ -806,7 +824,9 @@ components:
         id:
           type: string
           format: uuid
-        institutionId:
+        externalId:
+          type: string
+        originId:
           type: string
         description:
           type: string
@@ -824,6 +844,19 @@ components:
           $ref: '#/components/schemas/PartyRole'
         productInfo:
           $ref: '#/components/schemas/ProductInfo'
+        institutionType:
+          type: string
+          description: institution type
+          example: PA
+        pricingPlan:
+          type: string
+          description: pricing plan
+        billing:
+          $ref: '#/components/schemas/Billing'
+        origin:
+          type: string
+          description: The origin form which the institution has been retrieved
+          example: IPA
         attributes:
           type: array
           description: certified attributes bound to this institution
@@ -832,7 +865,9 @@ components:
       additionalProperties: false
       required:
         - id
-        - institutionId
+        - externalId
+        - originId
+        - origin
         - taxCode
         - description
         - digitalAddress
@@ -944,8 +979,12 @@ components:
           type: string
           format: uuid
           example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
-        institutionId:
-          description: institution id (e.g iPA code)
+        externalId:
+          description: external institution id
+          example: 'c_f205'
+          type: string
+        originId:
+          description: origin institution id (e.g iPA code)
           example: 'c_f205'
           type: string
         description:
@@ -964,17 +1003,27 @@ components:
         taxCode:
           description: institution tax code
           type: string
+        origin:
+          type: string
+          description: The origin form which the institution has been retrieved
+          example: IPA
+        institutionType:
+          type: string
+          description: institution type
+          example: PA
         attributes:
           $ref: '#/components/schemas/Attributes'
       required:
         - id
-        - institutionId
+        - externalId
+        - originId
         - description
         - digitalAddress
         - address
         - zipCode
         - taxCode
         - attributes
+        - origin
       additionalProperties: false
     Problem:
       properties:
@@ -1030,6 +1079,42 @@ components:
       required:
         - code
         - detail
+    InstitutionUpdate:
+      type: object
+      properties:
+        institutionType:
+          type: string
+          example: PA
+          description: The type of the institution
+        description:
+          type: string
+          example: AGENCY X
+        digitalAddress:
+          example: email@pec.mail.org
+          format: email
+          type: string
+        address:
+          example: via del campo
+          type: string
+        taxCode:
+          description: institution tax code
+          type: string
+    Billing:
+      type: object
+      properties:
+        vatNumber:
+          description: institution vat number
+          type: string
+        recipientCode:
+          description: institution recipient code
+          type: string
+        publicServices:
+          description: institution recipient code
+          type: boolean
+      required:
+        - vatNumber
+        - recipientCode
+      additionalProperties: false
   securitySchemes:
     bearerAuth:
       type: http

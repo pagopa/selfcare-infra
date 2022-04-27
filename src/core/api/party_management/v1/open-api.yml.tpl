@@ -856,7 +856,6 @@ components:
         - attributes
         - products
         - origin
-        - institutionType
       additionalProperties: false
     Institution:
       type: object
@@ -910,7 +909,6 @@ components:
         - taxCode
         - attributes
         - origin
-        - institutionType
       additionalProperties: false
     BulkInstitutions:
       type: object
