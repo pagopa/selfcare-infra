@@ -628,7 +628,7 @@ variable "cosmosdb_mongodb_enable_autoscaling" {
 variable "cosmosdb_mongodb_max_throughput" {
   type        = number
   description = "The maximum throughput of the MongoDB database (RU/s). Must be between 4,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput"
-  default     = 4000
+  default     = 1000
 }
 
 variable "cosmosdb_mongodb_extra_capabilities" {
