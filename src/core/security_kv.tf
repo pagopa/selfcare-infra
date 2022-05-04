@@ -248,8 +248,8 @@ resource "null_resource" "upload_jwks" {
                 --file "${path.module}/.terraform/tmp/jwks.json" \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \
-                -g ${azurerm_resource_group.checkout_fe_rg.name} \
-                -n ${module.checkout_cdn.name} \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
                 --content-paths "/.well-known/jwks.json" \
                 --no-wait
