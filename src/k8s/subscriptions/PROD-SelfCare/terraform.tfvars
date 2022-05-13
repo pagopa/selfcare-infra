@@ -25,13 +25,13 @@ configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_ROLE_NAME                     = "hub-spid-login-ms"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 
-  USER_REGISTRY_URL = "https://api.userregistry.pagopa.it/user-registry-management/v1"
+  USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
 
   # SPID
   ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
 configmaps_common = {
-  USERVICE_USER_REGISTRY_URL = "https://api.userregistry.pagopa.it/user-registry-management/v1"
+  USERVICE_USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
   ENABLE_CONFIDENTIAL_FILTER = "TRUE"
 }
