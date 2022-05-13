@@ -45,7 +45,13 @@ paths:
       description: Return ok
       operationId: getOnboardingInfo
       parameters:
-        - name: externalId
+        - name: institutionId
+          description: The internal identifier of the institution
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: institutionExternalId
           description: The external Id of an institution you can filter the retrieval with
           in: query
           schema:
@@ -90,7 +96,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnboardingRequest'
+              $ref: '#/components/schemas/OnboardingInstitutionRequest'
       responses:
         '204':
           description: successful operation
@@ -153,7 +159,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnboardingRequest'
+              $ref: '#/components/schemas/OnboardingLegalUsersRequest'
       responses:
         '204':
           description: successful operation
@@ -181,7 +187,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnboardingRequest'
+              $ref: '#/components/schemas/OnboardingUsersRequest'
       responses:
         '200':
           description: successful operation
@@ -207,7 +213,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnboardingRequest'
+              $ref: '#/components/schemas/OnboardingUsersRequest'
       responses:
         '200':
           description: successful operation
@@ -221,13 +227,83 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /institutions/{id}/relationships:
+    get:
+      tags:
+        - process
+      summary: returns the relationships related to the institution
+      description: Return ok
+      operationId: getUserInstitutionRelationships
+      parameters:
+        - name: id
+          in: path
+          description: The internal identifier of the institution
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: personId
+          description: the person identifier
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: roles
+          description: comma separated sequence of role to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+            default: [ ]
+          explode: false
+        - in: query
+          name: states
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RelationshipState'
+            default: [ ]
+          explode: false
+        - in: query
+          name: products
+          description: comma separated sequence of products to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
+        - in: query
+          name: productRoles
+          description: comma separated sequence of product roles to filter the response with
+          schema:
+            type: array
+            items:
+              type: string
+            default: [ ]
+          explode: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipsResponse'
+        '400':
+          description: Invalid institution id supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /external/institutions/{externalId}/relationships:
     get:
       tags:
         - external
       summary: returns the relationships related to the institution
       description: Return ok
-      operationId: getUserInstitutionRelationships
+      operationId: getUserInstitutionRelationshipsByExternalId
       parameters:
         - name: externalId
           in: path
@@ -290,13 +366,50 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /institutions/{id}/products:
+    get:
+      tags:
+        - process
+      summary: institution products retrieval
+      description: retrieves the products this institution is related to.
+      operationId: retrieveInstitutionProducts
+      parameters:
+        - name: id
+          in: path
+          description: The internal identifier of the institution
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: states
+          in: query
+          description: comma separated sequence of states to filter the response with
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProductState'
+            default: [ ]
+          explode: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '404':
+          description: Institution not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /external/institutions/{externalId}/products:
     get:
       tags:
         - external
       summary: institution products retrieval
       description: retrieves the products this institution is related to.
-      operationId: retrieveInstitutionProducts
+      operationId: retrieveInstitutionProductsByExternalId
       parameters:
         - name: externalId
           in: path
@@ -650,18 +763,14 @@ paths:
                 $ref: '#/components/schemas/Problem'
 components:
   schemas:
-    OnboardingRequest:
+    OnboardingInstitutionRequest:
       properties:
         users:
           type: array
           items:
             $ref: '#/components/schemas/User'
-        externalId:
+        institutionExternalId:
           type: string
-        origin:
-          type: string
-          description: The origin form which the institution has been retrieved
-          example: IPA
         institutionUpdate:
           $ref: '#/components/schemas/InstitutionUpdate'
         pricingPlan:
@@ -674,8 +783,43 @@ components:
       additionalProperties: false
       required:
         - users
-        - externalId
-        - origin
+        - institutionExternalId
+        - billing
+        - contract
+    OnboardingLegalUsersRequest:
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        institutionId:
+          type: string
+          description: institution id
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+        institutionExternalId:
+          type: string
+        contract:
+          $ref: '#/components/schemas/OnboardingContract'
+      additionalProperties: false
+      required:
+        - users
+        - contract
+    OnboardingUsersRequest:
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        institutionId:
+          type: string
+          description: institution id
+          format: uuid
+          example: 97c0f418-bcb3-48d4-825a-fe8b29ae68e5
+      additionalProperties: false
+      required:
+        - users
+        - institutionId
     OnboardingContract:
       properties:
         version:
@@ -698,16 +842,6 @@ components:
         to:
           type: string
           format: uuid
-        name:
-          type: string
-        surname:
-          type: string
-        taxCode:
-          type: string
-        certification:
-          $ref: '#/components/schemas/Certification'
-        institutionContacts:
-          $ref: '#/components/schemas/Contacts'
         role:
           $ref: '#/components/schemas/PartyRole'
         product:
@@ -732,11 +866,6 @@ components:
         - id
         - from
         - to
-        - name
-        - surname
-        - taxCode
-        - certification
-        - institutionContacts
         - role
         - product
         - state
@@ -747,64 +876,33 @@ components:
         $ref: '#/components/schemas/RelationshipInfo'
     User:
       properties:
+        id:
+          type: string
+          description: User internal id
+          format: uuid
+        taxCode:
+          type: string
         name:
           type: string
         surname:
           type: string
-        taxCode:
+        email:
           type: string
         role:
           $ref: '#/components/schemas/PartyRole'
-        email:
-          type: string
         product:
           type: string
         productRole:
           type: string
       additionalProperties: false
       required:
+        - id
+        - taxCode
         - name
         - surname
-        - taxCode
         - role
         - product
         - productRole
-    Certification:
-      type: string
-      enum:
-        - SPID
-        - NONE
-    Contact:
-      properties:
-        email:
-          type: string
-      additionalProperties: false
-      required:
-        - email
-    Contacts:
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/Contact'
-    PersonInfo:
-      properties:
-        name:
-          type: string
-        surname:
-          type: string
-        taxCode:
-          type: string
-        certification:
-          $ref: '#/components/schemas/Certification'
-        institutionContacts:
-          $ref: '#/components/schemas/Contacts'
-      additionalProperties: false
-      required:
-        - name
-        - surname
-        - taxCode
-        - certification
-        - institutionContacts
     ProductInfo:
       type: object
       properties:
@@ -896,8 +994,10 @@ components:
         $ref: '#/components/schemas/Attribute'
     OnboardingInfo:
       properties:
-        person:
-          $ref: '#/components/schemas/PersonInfo'
+        userId:
+          type: string
+          description: User internal id
+          format: uuid
         institutions:
           type: array
           items:
@@ -1095,6 +1195,9 @@ components:
           type: string
         address:
           example: via del campo
+          type: string
+        zipCode:
+          example: 20100
           type: string
         taxCode:
           description: institution tax code
