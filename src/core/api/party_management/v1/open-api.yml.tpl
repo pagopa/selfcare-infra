@@ -829,12 +829,6 @@ components:
         taxCode:
           description: institution tax code
           type: string
-        products:
-          type: array
-          items:
-            type: string
-            description: product names associated to this institution
-          uniqueItems: true
         origin:
           type: string
           description: The origin form which the institution has been retrieved
@@ -845,6 +839,11 @@ components:
           example: PA
         attributes:
           $ref: '#/components/schemas/Attributes'
+        products:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/InstitutionProduct'
+          description: Institution products info
       required:
         - externalId
         - originId
@@ -854,7 +853,6 @@ components:
         - zipCode
         - taxCode
         - attributes
-        - products
         - origin
       additionalProperties: false
     Institution:
@@ -896,6 +894,11 @@ components:
           type: string
           description: institution type
           example: PA
+        products:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/InstitutionProduct'
+            description: Institution products info
         attributes:
           $ref: '#/components/schemas/Attributes'
       required:
@@ -909,6 +912,7 @@ components:
         - taxCode
         - attributes
         - origin
+        - products
       additionalProperties: false
     BulkInstitutions:
       type: object
@@ -1244,6 +1248,9 @@ components:
         address:
           example: via del campo
           type: string
+        zipCode:
+          example: 20100
+          type: string
         taxCode:
           description: institution tax code
           type: string
@@ -1263,6 +1270,20 @@ components:
         - vatNumber
         - recipientCode
       additionalProperties: false
+    InstitutionProduct:
+      type: object
+      properties:
+        product:
+          type: string
+        pricingPlan:
+          type: string
+          description: pricing plan
+        billing:
+          $ref: '#/components/schemas/Billing'
+      additionalProperties: false
+      required:
+        - product
+        - billing
   securitySchemes:
     bearerAuth:
       type: http
