@@ -15,7 +15,6 @@ spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 api-version_uservice-party-management     = "0.1"
 api-version_uservice-party-process        = "0.1"
 api-version_uservice-party-registry-proxy = "0.1"
-api-version_uservice-party-mock-registry  = "0.1"
 
 # session jwt audience
 jwt_audience = "https://api.uat.selfcare.pagopa.it"

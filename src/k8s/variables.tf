@@ -89,10 +89,6 @@ variable "api-version_uservice-party-registry-proxy" {
   type = string
 }
 
-variable "api-version_uservice-party-mock-registry" {
-  type = string
-}
-
 #tfsec:ignore:general-secrets-no-plaintext-exposure
 variable "jwt_token_exchange_duration" {
   type    = string
