@@ -55,16 +55,11 @@ redis_capacity = 0
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip               = "10.1.0.250"
-aks_availability_zones         = [1, 2, 3]
-aks_node_count                 = 1
-aks_max_pods                   = 100
-aks_enable_auto_scaling        = true
-aks_min_count                  = 1
-aks_max_count                  = 3
-aks_upgrade_settings_max_surge = "33%"
-aks_vm_size                    = "Standard_D4s_v5"
-aks_sku_tier                   = "Paid"
+reverse_proxy_ip                    = "10.1.0.250"
+aks_upgrade_settings_max_surge      = "33%"
+aks_system_node_pool_vm_size        = "Standard_D4s_v5"
+aks_system_node_pool_node_count_max = 3
+aks_sku_tier                        = "Paid"
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities = []
