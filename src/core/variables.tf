@@ -444,12 +444,6 @@ variable "cidr_subnet_contract_storage" {
   description = "Contracts storage address space."
 }
 
-variable "cidr_subnet_spid_test_env_private" {
-  type        = list(string)
-  description = "Spid test env private container address space."
-  default     = []
-}
-
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
