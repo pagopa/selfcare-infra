@@ -6,7 +6,7 @@ selc-d-spid-testenv.westeurope.azurecontainer.io
 	}
 }
 
-reverse_proxy @matcher localhost:8088 {
+reverse_proxy @matcher 10.1.138.4:8088 {
 	header_up Host selc-d-spid-testenv.westeurope.azurecontainer.io
 	header_up X-Forwarded-Host {host}
 }

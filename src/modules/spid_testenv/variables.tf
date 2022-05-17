@@ -24,6 +24,18 @@ variable "hub_spid_login_metadata_url" {
   type = string
 }
 
+variable "cidr_subnet_spid_test_env_private" {
+  type = list(string)
+}
+
+variable "virtual_network_resource_group" {
+  type = string
+}
+
+variable "virtual_network_name" {
+  type = string
+}
+
 variable "tags" {
   type = map(any)
 }
