@@ -101,7 +101,7 @@ resource "azurerm_container_group" "spid_testenv" {
     image    = "caddy:2"
     cpu      = "0.5"
     memory   = "0.5"
-    commands = ["caddy", "reverse-proxy", "--from", "${var.name}.${var.location}.azurecontainer.io", "--to", "localhost:8088"]
+    commands = ["caddy", "run", "--config", "/data/Caddyfile"]
 
     ports {
       port     = 443
@@ -138,10 +138,21 @@ resource "local_file" "spid_testenv_config" {
   })
 }
 
+resource "local_file" "caddyfile" {
+  count    = var.enable_spid_test ? 1 : 0
+  filename = format("%s/Caddyfile", var.spid_testenv_local_config_dir)
+  content = templatefile(
+  "${path.module}/spid_testenv_conf/Caddyfile.tpl",
+  {
+    CONTAINER_HOSTNAME = "${var.name}.${var.location}.azurecontainer.io"
+  })
+}
+
 resource "null_resource" "upload_config_spid_testenv" {
   count = var.enable_spid_test ? 1 : 0
   triggers = {
     "changes-in-config" : md5(local_file.spid_testenv_config[count.index].content)
+    "changes-in-caddyfile" : md5(local_file.caddyfile[count.index].content)
   }
 
   provisioner "local-exec" {
@@ -152,6 +163,11 @@ resource "null_resource" "upload_config_spid_testenv" {
                 --share-name ${azurerm_storage_share.spid_testenv_storage_share[0].name} \
                 --source "${var.spid_testenv_local_config_dir}/config.yaml" \
                 --path "config.yaml" && \
+              az storage file upload \
+                --account-name ${azurerm_storage_account.spid_testenv_storage_account[0].name} \
+                --account-key ${azurerm_storage_account.spid_testenv_storage_account[0].primary_access_key} \
+                --share-name ${azurerm_storage_share.spid_testenv_caddy_storage_share[0].name} \
+                --source "${var.spid_testenv_local_config_dir}/Caddyfile" && \
               az container restart \
                 --name ${azurerm_container_group.spid_testenv[0].name} \
                 --resource-group  ${azurerm_resource_group.rg_spid_testenv[0].name}
