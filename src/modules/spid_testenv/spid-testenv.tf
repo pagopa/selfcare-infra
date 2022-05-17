@@ -142,9 +142,9 @@ resource "local_file" "caddyfile" {
   count    = var.enable_spid_test ? 1 : 0
   filename = format("%s/Caddyfile", var.spid_testenv_local_config_dir)
   content = templatefile(
-  "${path.module}/spid_testenv_conf/Caddyfile.tpl",
-  {
-    CONTAINER_HOSTNAME = "${var.name}.${var.location}.azurecontainer.io"
+    "${path.module}/spid_testenv_conf/Caddyfile.tpl",
+    {
+      CONTAINER_HOSTNAME = "${var.name}.${var.location}.azurecontainer.io"
   })
 }
 
