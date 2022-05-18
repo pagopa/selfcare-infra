@@ -597,6 +597,40 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  '/institutions/{externalId}':
+    post:
+      security: [ { } ]
+      tags:
+        - process
+      summary: Create an institution using external institution id fetching data from user-registry
+      description: Create an institution using external institution id fetching data from user-registry
+      operationId: createInstitution
+      parameters:
+        - name: externalId
+          in: path
+          description: The externalId of the institution
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
+        '404':
+          description: Invalid externalId supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: institution having externalId already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   '/external/institutions/{externalId}':
     get:
       security: [{}]
