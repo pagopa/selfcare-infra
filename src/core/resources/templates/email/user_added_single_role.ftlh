@@ -3,7 +3,7 @@
     <html lang="it" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
         <title>
-          Aggiunta nuovo utente
+          Accesso al portale Self Care
         </title>
         <!--[if !mso]><!-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -211,7 +211,7 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:13px;font-weight:bold;line-height:1;text-align:left;color:#17324D;"
-      ><h1 style="font-size:32px; line-height:40px;">Hai un nuovo ruolo per un prodotto PagoPA</h1></div>
+      ><h1 style="font-size:32px; line-height:40px;">Accordo di Adesione</h1></div>
     
                 </td>
               </tr>
@@ -223,9 +223,7 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:16px;font-weight:400;line-height:24px;text-align:left;color:#17324D;"
-      ><p>Ciao,</p>
-            <p><b>${requesterName} ${requesterSurname}</b> ti ha assegnato un ruolo per il prodotto <b>${productName}</b> nell’Area Riservata di <b>${institutionName}</b>. </p>
-             <p>Per operare sul prodotto, vai su <a href="https://selfcare.pagopa.it" style="color: #0073E6;">selfcare.pagopa.it</a> e accedi con SPID o CIE.</p></div>
+      ><p><b>${requesterName} ${requesterSurname}</b> ti ha assegnato il ruolo di ${productRole} per il prodotto ${productName} nell'Area Riservata di ${institutionName}.</p></div>
     
                 </td>
               </tr>
@@ -237,8 +235,8 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:16px;font-weight:regular;line-height:24px;text-align:left;color:#17324D;"
-      ><h4>Serve aiuto?</h4>
-            <p>Puoi contattare il <a href="https://www.pagopa.gov.it/it/pagopa/helpdesk/" style="color: #0073E6;">servizio di assistenza</a>.</p></div>
+      >
+            <p>Se hai domande o ti servono maggiori informazioni, contatta il servizio di assistenza scrivendo a <a href="mailto:selfcare@assistenza.pagopa.it" style="color: #0073E6;">selfcare@assistenza.pagopa.it</a>.</p></div>
     
                 </td>
               </tr>
@@ -312,7 +310,7 @@
                   
       <div
          style="font-family:Titillium Web, Arial;font-size:13px;line-height:1;text-align:left;color:#000000;"
-      ><p style="color: #17324D">Ricevi questo messaggio a seguito della richiesta di adesione al portale Self Care</p></div>
+      ><p style="color: #17324D">Ricevi questo messaggio a seguito della richiesta di aggiunta di un nuovo referente al portale Self Care</p></div>
     
                 </td>
               </tr>
