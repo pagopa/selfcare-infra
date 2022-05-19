@@ -72,6 +72,7 @@
 | [azurerm_dns_a_record.dns_a_api](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_a_record) | resource |
 | [azurerm_dns_caa_record.caa_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_caa_record) | resource |
 | [azurerm_dns_ns_record.dev_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_ns_record) | resource |
+| [azurerm_dns_ns_record.interop_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_ns_record) | resource |
 | [azurerm_dns_ns_record.io_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_ns_record) | resource |
 | [azurerm_dns_ns_record.uat_selfcare](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_ns_record) | resource |
 | [azurerm_dns_zone.selfcare_public](https://registry.terraform.io/providers/hashicorp/azurerm/2.91.0/docs/resources/dns_zone) | resource |
@@ -207,6 +208,7 @@
 | <a name="input_cosmosdb_mongodb_public_network_access_enabled"></a> [cosmosdb\_mongodb\_public\_network\_access\_enabled](#input\_cosmosdb\_mongodb\_public\_network\_access\_enabled) | Whether or not public network access is allowed for this CosmosDB account | `bool` | `false` | no |
 | <a name="input_cosmosdb_mongodb_throughput"></a> [cosmosdb\_mongodb\_throughput](#input\_cosmosdb\_mongodb\_throughput) | The throughput of the MongoDB database (RU/s). Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply. | `number` | `400` | no |
 | <a name="input_dns_default_ttl_sec"></a> [dns\_default\_ttl\_sec](#input\_dns\_default\_ttl\_sec) | value | `number` | `3600` | no |
+| <a name="input_dns_ns_interop_selfcare"></a> [dns\_ns\_interop\_selfcare](#input\_dns\_ns\_interop\_selfcare) | value | `list(string)` | `null` | no |
 | <a name="input_dns_zone_prefix"></a> [dns\_zone\_prefix](#input\_dns\_zone\_prefix) | The dns subdomain. | `string` | `"selfcare"` | no |
 | <a name="input_enable_azdoa"></a> [enable\_azdoa](#input\_enable\_azdoa) | Enable Azure DevOps agent. | `bool` | n/a | yes |
 | <a name="input_enable_iac_pipeline"></a> [enable\_iac\_pipeline](#input\_enable\_iac\_pipeline) | If true create the key vault policy to allow used by azure devops iac pipelines. | `bool` | `false` | no |
