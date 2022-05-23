@@ -3,7 +3,7 @@ env_short = "u"
 
 # ingress
 ingress_replica_count    = "2"
-ingress_load_balancer_ip = "10.1.0.250"
+ingress_load_balancer_ip = "10.1.1.250"
 
 # Gateway
 api_gateway_url  = "https://api.uat.selfcare.pagopa.it"

@@ -106,6 +106,12 @@ variable "aks_system_node_pool_node_count_max" {
   default     = 1
 }
 
+variable "aks_system_node_pool_only_critical_addons_enabled" {
+  type        = bool
+  description = "(Optional) Enabling this option will taint default node pool with CriticalAddonsOnly=true:NoSchedule taint. Changing this forces a new resource to be created."
+  default     = true
+}
+
 #
 # User Node Pool
 #
