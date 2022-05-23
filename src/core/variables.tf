@@ -1,5 +1,12 @@
 # general
 
+locals {
+  project                        = format("%s-%s", var.prefix, var.env_short)
+  aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
+  aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
+}
+
+
 variable "prefix" {
   type    = string
   default = "selc"
@@ -78,8 +85,7 @@ variable "aks_system_node_pool_vm_size" {
 
 variable "aks_system_node_pool_os_disk_type" {
   type        = string
-  description = "(Optional) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
-  default     = "Managed"
+  description = "(Required) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
 }
 
 variable "aks_system_node_pool_os_disk_size_gb" {
@@ -100,6 +106,9 @@ variable "aks_system_node_pool_node_count_max" {
   default     = 1
 }
 
+#
+# User Node Pool
+#
 variable "aks_user_node_pool_enabled" {
   type        = bool
   default     = false
@@ -143,8 +152,8 @@ variable "aks_upgrade_settings_max_surge" {
 }
 
 variable "aks_kubernetes_version" {
-  type    = string
-  default = "1.24"
+  type        = string
+  description = "Kubernetes version for AKS"
 }
 
 variable "aks_sku_tier" {

@@ -50,8 +50,10 @@ redis_capacity = 0
 # aks
 aks_alerts_enabled = false
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip             = "10.1.0.250"
-aks_system_node_pool_vm_size = "Standard_B4ms"
+reverse_proxy_ip                  = "10.1.0.250"
+aks_kubernetes_version            = "1.23.5"
+aks_system_node_pool_os_disk_type = "Managed"
+aks_system_node_pool_vm_size      = "Standard_B4ms"
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]

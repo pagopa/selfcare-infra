@@ -22,7 +22,7 @@ module "aks" {
   system_node_pool_vm_size         = var.aks_system_node_pool_vm_size
   system_node_pool_os_disk_type    = var.aks_system_node_pool_os_disk_type
   system_node_pool_os_disk_size_gb = var.aks_system_node_pool_os_disk_size_gb
-  system_node_pool_name            = "default"
+  system_node_pool_name            = local.aks_system_node_pool_node_name
   system_node_pool_node_count_min  = var.aks_system_node_pool_node_count_min
   system_node_pool_node_count_max  = var.aks_system_node_pool_node_count_max
 
@@ -30,7 +30,7 @@ module "aks" {
   user_node_pool_os_disk_type    = var.aks_user_node_pool_os_disk_type
   user_node_pool_vm_size         = var.aks_user_node_pool_vm_size
   user_node_pool_os_disk_size_gb = var.aks_user_node_pool_os_disk_size_gb
-  user_node_pool_name            = "usr_nodepool"
+  user_node_pool_name            = local.aks_user_node_pool_node_name
   user_node_pool_node_count_min  = var.aks_user_node_pool_node_count_min
   user_node_pool_node_count_max  = var.aks_user_node_pool_node_count_max
 
@@ -79,7 +79,7 @@ module "aks" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.1.15"
   name                                           = "${local.project}-k8s-snet"
   address_prefixes                               = var.cidr_subnet_k8s
   resource_group_name                            = azurerm_resource_group.rg_vnet.name

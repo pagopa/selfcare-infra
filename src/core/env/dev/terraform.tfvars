@@ -49,7 +49,9 @@ redis_capacity                 = 0
 redis_private_endpoint_enabled = false
 
 # aks
-aks_alerts_enabled = false
+aks_alerts_enabled                = false
+aks_kubernetes_version            = "1.23.5"
+aks_system_node_pool_os_disk_type = "Managed"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip             = "10.1.0.250"
 aks_system_node_pool_vm_size = "Standard_B4ms"
