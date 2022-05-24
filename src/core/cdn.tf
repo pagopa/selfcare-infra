@@ -38,10 +38,7 @@ locals {
     }
   ]
   cors = {
-    paths   = ["/assets/"]
-    allowedOrigins = concat(["https://${var.dns_zone_prefix}.${var.external_domain}"], var.allowedOrigins)
-    allowedMethods = ["GET"]
-    allowedHeaders = ["*"]
+    paths = ["/assets/"]
   }
 }
 
@@ -51,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.12.1"
 
   name                  = "checkout"
   prefix                = local.project
@@ -161,9 +158,9 @@ module "checkout_cdn" {
     modify_request_header_actions  = []
     url_redirect_actions           = []
     url_rewrite_actions            = []
-  },{
+    }, {
     name  = "cors"
-    order = 4 + length(local.spa)
+    order = 5 + length(local.spa)
 
     // conditions
     url_path_conditions = [{
@@ -172,6 +169,7 @@ module "checkout_cdn" {
       negate_condition = false
       transforms       = null
     }]
+    request_header_conditions     = []
     cookies_conditions            = []
     device_conditions             = []
     http_version_conditions       = []
@@ -179,7 +177,6 @@ module "checkout_cdn" {
     query_string_conditions       = []
     remote_address_conditions     = []
     request_body_conditions       = []
-    request_header_conditions     = []
     request_method_conditions     = []
     request_scheme_conditions     = []
     request_uri_conditions        = []
@@ -189,20 +186,8 @@ module "checkout_cdn" {
     // actions
     modify_response_header_actions = [{
       action = "Overwrite"
-      name   = "Access-Control-Allow-Credentials"
-      value  = "true"
-    },{
-      action = "Overwrite"
-      name   = "Access-Control-Allow-Headers"
-      value  = join(",", local.cors.allowedHeaders)
-    },{
-      action = "Overwrite"
-      name   = "Access-Control-Allow-Methods"
-      value  = join(",", local.cors.allowedMethods)
-    },{
-      action = "Overwrite"
       name   = "Access-Control-Allow-Origin"
-      value  = join(",", local.cors.allowedOrigins)
+      value  = ""
     }]
     cache_expiration_actions       = []
     cache_key_query_string_actions = []

@@ -84,5 +84,3 @@ postgres_alerts_enabled = false
 enable_spid_test = true
 
 robots_indexed_paths = []
-
-allowedOrigins = []

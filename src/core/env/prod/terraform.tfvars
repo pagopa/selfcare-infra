@@ -103,5 +103,3 @@ contracts_enable_versioning          = true
 contracts_advanced_threat_protection = true
 
 robots_indexed_paths = ["/"]
-
-allowedOrigins = []
