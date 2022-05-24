@@ -490,6 +490,12 @@ variable "dns_default_ttl_sec" {
   default     = 3600
 }
 
+variable "dns_ns_interop_selfcare" {
+  type        = list(string)
+  description = "value"
+  default     = null
+}
+
 variable "external_domain" {
   type        = string
   default     = "pagopa.it"

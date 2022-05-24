@@ -84,3 +84,10 @@ postgres_alerts_enabled = false
 enable_spid_test = true
 
 robots_indexed_paths = []
+
+dns_ns_interop_selfcare = [
+  "ns-415.awsdns-51.com",
+  "ns-1446.awsdns-52.org",
+  "ns-944.awsdns-54.net",
+  "ns-1742.awsdns-25.co.uk",
+]
