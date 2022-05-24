@@ -54,6 +54,17 @@ resource "azurerm_dns_ns_record" "io_selfcare" {
   tags = var.tags
 }
 
+# INTEROP public DNS delegation
+resource "azurerm_dns_ns_record" "interop_selfcare" {
+  count               = var.dns_ns_interop_selfcare != null ? 1 : 0
+  name                = "interop"
+  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  records             = var.dns_ns_interop_selfcare
+  ttl                 = var.dns_default_ttl_sec
+  tags                = var.tags
+}
+
 #
 # @Records
 #
