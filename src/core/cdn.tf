@@ -187,7 +187,7 @@ module "checkout_cdn" {
     modify_response_header_actions = [{
       action = "Overwrite"
       name   = "Access-Control-Allow-Origin"
-      value  = ""
+      value  = "*"
     }]
     cache_expiration_actions       = []
     cache_key_query_string_actions = []
