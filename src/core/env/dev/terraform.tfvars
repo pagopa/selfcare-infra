@@ -84,3 +84,13 @@ postgres_alerts_enabled = false
 enable_spid_test = true
 
 robots_indexed_paths = []
+
+allowedOrigins = [
+  // development environments
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "http://localhost:6006",
+  // mui-italia storybook
+  "https://mui-italia.vercel.app/",
+]

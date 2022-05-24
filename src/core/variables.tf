@@ -849,3 +849,8 @@ variable "robots_indexed_paths" {
   type        = list(string)
   description = "List of cdn paths to allow robots index"
 }
+
+variable "allowedOrigins" {
+  type        = list(string)
+  description = "List of origins allowed to access to CDN cors configured paths"
+}

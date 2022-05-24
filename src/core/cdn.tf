@@ -37,6 +37,12 @@ locals {
       }
     }
   ]
+  cors = {
+    paths   = ["/assets/"]
+    allowedOrigins = concat(["https://${var.dns_zone_prefix}.${var.external_domain}"], var.allowedOrigins)
+    allowedMethods = ["GET"]
+    allowedHeaders = ["*"]
+  }
 }
 
 /**
@@ -149,6 +155,54 @@ module "checkout_cdn" {
       action = "Overwrite"
       name   = "X-Robots-Tag"
       value  = "noindex, nofollow"
+    }]
+    cache_expiration_actions       = []
+    cache_key_query_string_actions = []
+    modify_request_header_actions  = []
+    url_redirect_actions           = []
+    url_rewrite_actions            = []
+  },{
+    name  = "cors"
+    order = 4 + length(local.spa)
+
+    // conditions
+    url_path_conditions = [{
+      operator         = "BeginsWith"
+      match_values     = local.cors.paths
+      negate_condition = false
+      transforms       = null
+    }]
+    cookies_conditions            = []
+    device_conditions             = []
+    http_version_conditions       = []
+    post_arg_conditions           = []
+    query_string_conditions       = []
+    remote_address_conditions     = []
+    request_body_conditions       = []
+    request_header_conditions     = []
+    request_method_conditions     = []
+    request_scheme_conditions     = []
+    request_uri_conditions        = []
+    url_file_extension_conditions = []
+    url_file_name_conditions      = []
+
+    // actions
+    modify_response_header_actions = [{
+      action = "Overwrite"
+      name   = "Access-Control-Allow-Credentials"
+      value  = "true"
+    },{
+      action = "Overwrite"
+      name   = "Access-Control-Allow-Headers"
+      value  = join(",", local.cors.allowedHeaders)
+    },{
+      action = "Overwrite"
+      name   = "Access-Control-Allow-Methods"
+      value  = join(",", local.cors.allowedMethods)
+    },{
+      action = "Overwrite"
+      name   = "Access-Control-Allow-Origin"
+      value  = join(",", local.cors.allowedOrigins)
     }]
     cache_expiration_actions       = []
     cache_key_query_string_actions = []
