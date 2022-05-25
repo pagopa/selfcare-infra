@@ -49,14 +49,14 @@ redis_capacity                 = 0
 redis_private_endpoint_enabled = false
 
 # aks
-aks_alerts_enabled = false
+aks_alerts_enabled                = false
+aks_kubernetes_version            = "1.23.5"
+aks_system_node_pool_os_disk_type = "Managed"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip        = "10.1.0.250"
-aks_max_pods            = 100
-aks_enable_auto_scaling = false
-aks_min_count           = null
-aks_max_count           = null
-aks_vm_size             = "Standard_B4ms"
+reverse_proxy_ip = "10.1.1.250"
+
+aks_system_node_pool_vm_size                      = "Standard_B4ms"
+aks_system_node_pool_only_critical_addons_enabled = false
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
@@ -84,3 +84,10 @@ postgres_alerts_enabled = false
 enable_spid_test = true
 
 robots_indexed_paths = []
+
+dns_ns_interop_selfcare = [
+  "ns-415.awsdns-51.com",
+  "ns-1446.awsdns-52.org",
+  "ns-944.awsdns-54.net",
+  "ns-1742.awsdns-25.co.uk",
+]

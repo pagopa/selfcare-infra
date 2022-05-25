@@ -1,5 +1,12 @@
 # general
 
+locals {
+  project                        = format("%s-%s", var.prefix, var.env_short)
+  aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
+  aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
+}
+
+
 variable "prefix" {
   type    = string
   default = "selc"
@@ -70,46 +77,78 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
-variable "aks_availability_zones" {
-  type        = list(number)
-  description = "A list of Availability Zones across which the Node Pool should be spread."
-  default     = []
-}
-
-variable "aks_vm_size" {
+variable "aks_system_node_pool_vm_size" {
   type        = string
   default     = "Standard_DS3_v2"
   description = "The size of the AKS Virtual Machine in the Node Pool."
 }
 
-variable "aks_node_count" {
+variable "aks_system_node_pool_os_disk_type" {
+  type        = string
+  description = "(Required) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
+}
+
+variable "aks_system_node_pool_os_disk_size_gb" {
   type        = number
-  description = "The initial number of the AKS nodes which should exist in this Node Pool."
+  default     = null
+  description = "(Optional) The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created."
+}
+
+variable "aks_system_node_pool_node_count_min" {
+  type        = number
+  description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
   default     = 1
 }
 
-variable "aks_max_pods" {
+variable "aks_system_node_pool_node_count_max" {
   type        = number
-  description = "The maximum number of pods"
-  default     = 100
+  description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
 }
 
-variable "aks_enable_auto_scaling" {
+variable "aks_system_node_pool_only_critical_addons_enabled" {
   type        = bool
-  description = "Should the Kubernetes Auto Scaler be enabled for this Node Pool? "
+  description = "(Optional) Enabling this option will taint default node pool with CriticalAddonsOnly=true:NoSchedule taint. Changing this forces a new resource to be created."
+  default     = true
+}
+
+#
+# User Node Pool
+#
+variable "aks_user_node_pool_enabled" {
+  type        = bool
   default     = false
+  description = "Is user node pool enabled?"
 }
 
-variable "aks_min_count" {
-  type        = number
-  description = "The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
-  default     = null
+variable "aks_user_node_pool_os_disk_type" {
+  type        = string
+  description = "(Optional) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
+  default     = "Managed"
 }
 
-variable "aks_max_count" {
+variable "aks_user_node_pool_vm_size" {
+  type        = string
+  default     = "Standard_DS3_v2"
+  description = "The size of the AKS Virtual Machine in the Node Pool."
+}
+
+variable "aks_user_node_pool_os_disk_size_gb" {
   type        = number
-  description = "The maximum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
   default     = null
+  description = "(Optional) The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created."
+}
+
+variable "aks_user_node_pool_node_count_min" {
+  type        = number
+  description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
+}
+
+variable "aks_user_node_pool_node_count_max" {
+  type        = number
+  description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
 }
 
 variable "aks_upgrade_settings_max_surge" {
@@ -119,8 +158,8 @@ variable "aks_upgrade_settings_max_surge" {
 }
 
 variable "aks_kubernetes_version" {
-  type    = string
-  default = "1.21.2"
+  type        = string
+  description = "Kubernetes version for AKS"
 }
 
 variable "aks_sku_tier" {
@@ -449,6 +488,12 @@ variable "dns_default_ttl_sec" {
   type        = number
   description = "value"
   default     = 3600
+}
+
+variable "dns_ns_interop_selfcare" {
+  type        = list(string)
+  description = "value"
+  default     = null
 }
 
 variable "external_domain" {

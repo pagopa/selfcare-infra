@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/azurerm.git//kubernetes_cluster?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/azurerm.git//kubernetes_cluster?ref=v2.15.1"
 
   depends_on = [
     module.k8s_snet,
@@ -16,16 +16,26 @@ module "aks" {
   location                   = azurerm_resource_group.rg_aks.location
   dns_prefix                 = "${local.project}-aks"
   resource_group_name        = azurerm_resource_group.rg_aks.name
-  availability_zones         = var.aks_availability_zones
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
-  vm_size                    = var.aks_vm_size
-  enable_auto_scaling        = var.aks_enable_auto_scaling
-  node_count                 = var.aks_node_count
-  min_count                  = var.aks_min_count
-  max_count                  = var.aks_max_count
-  max_pods                   = var.aks_max_pods
+  system_node_pool_vm_size         = var.aks_system_node_pool_vm_size
+  system_node_pool_os_disk_type    = var.aks_system_node_pool_os_disk_type
+  system_node_pool_os_disk_size_gb = var.aks_system_node_pool_os_disk_size_gb
+  system_node_pool_name            = local.aks_system_node_pool_node_name
+  system_node_pool_node_count_min  = var.aks_system_node_pool_node_count_min
+  system_node_pool_node_count_max  = var.aks_system_node_pool_node_count_max
+
+  system_node_pool_only_critical_addons_enabled = var.aks_system_node_pool_only_critical_addons_enabled
+
+  user_node_pool_enabled         = var.aks_user_node_pool_enabled
+  user_node_pool_os_disk_type    = var.aks_user_node_pool_os_disk_type
+  user_node_pool_vm_size         = var.aks_user_node_pool_vm_size
+  user_node_pool_os_disk_size_gb = var.aks_user_node_pool_os_disk_size_gb
+  user_node_pool_name            = local.aks_user_node_pool_node_name
+  user_node_pool_node_count_min  = var.aks_user_node_pool_node_count_min
+  user_node_pool_node_count_max  = var.aks_user_node_pool_node_count_max
+
   upgrade_settings_max_surge = var.aks_upgrade_settings_max_surge
   sku_tier                   = var.aks_sku_tier
 
@@ -50,7 +60,7 @@ module "aks" {
     service_cidr       = "10.2.0.0/16"
   }
 
-  metric_alerts = var.aks_metric_alerts
+  default_metric_alerts = var.aks_metric_alerts
   action = [
     {
       action_group_id    = azurerm_monitor_action_group.slack.id
@@ -71,7 +81,7 @@ module "aks" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.1.15"
   name                                           = "${local.project}-k8s-snet"
   address_prefixes                               = var.cidr_subnet_k8s
   resource_group_name                            = azurerm_resource_group.rg_vnet.name
