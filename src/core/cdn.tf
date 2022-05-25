@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.12.1"
 
   name                  = "checkout"
   prefix                = local.project
@@ -82,18 +82,23 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/; "
+        value = format("default-src 'self'; object-src 'none'; connect-src 'self' https://api.%s.%s/ https://api-eu.mixpanel.com/track/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
-        value  = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
+        value  = "script-src 'self'; style-src 'self' 'unsafe-inline' https://selfcare.pagopa.it/assets/font/selfhostedfonts.css; worker-src 'none'; font-src 'self' https://selfcare.pagopa.it/assets/font/; "
       },
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
         value  = format("img-src 'self' https://assets.cdn.io.italia.it https://%s data:; ", module.checkout_cdn.storage_primary_web_host)
+      },
+      {
+        action = "Append"
+        name   = "X-Content-Type-Options"
+        value  = "nosniff"
       }
     ]
   }
