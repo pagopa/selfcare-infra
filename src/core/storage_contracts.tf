@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_contracts_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc-contracts-storage" {
-  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v2.12.1"
 
   name                       = replace(format("%s-contracts-storage", local.project), "-", "")
   account_kind               = "StorageV2"

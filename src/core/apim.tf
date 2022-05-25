@@ -155,7 +155,15 @@ module "apim_uservice_party_process_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
+      operation_id = "getUserInstitutionRelationshipsByExternalId"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
       operation_id = "getUserInstitutionRelationships"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "retrieveInstitutionProductsByExternalId"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {

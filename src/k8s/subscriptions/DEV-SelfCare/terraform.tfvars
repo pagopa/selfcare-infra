@@ -3,7 +3,7 @@ env_short = "d"
 
 # ingress
 ingress_replica_count    = "2"
-ingress_load_balancer_ip = "10.1.0.250"
+ingress_load_balancer_ip = "10.1.1.250"
 
 # Gateway
 api_gateway_url  = "https://api.dev.selfcare.pagopa.it"
@@ -21,7 +21,7 @@ api-version_uservice-party-mock-registry  = "0.1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience = "https://api.dev.selfcare.pagopa.it"
+jwt_audience = "api.dev.selfcare.pagopa.it"
 
 # configs/secrets
 
