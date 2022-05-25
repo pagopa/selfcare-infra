@@ -5,6 +5,7 @@ resource "helm_release" "ingress" {
   chart      = "ingress-nginx"
   version    = "4.1.1"
   namespace  = kubernetes_namespace.ingress.metadata[0].name
+  wait       = false
 
   values = [
     "${templatefile("${path.module}/ingress/loadbalancer.yaml.tpl", { load_balancer_ip = var.ingress_load_balancer_ip })}"
