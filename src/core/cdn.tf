@@ -124,43 +124,84 @@ module "checkout_cdn" {
     local.spa
   )
 
-  delivery_rule = [{
-    name  = "robotsNoIndex"
-    order = 3 + length(local.spa)
+  delivery_rule = [
+    {
+      name  = "robotsNoIndex"
+      order = 3 + length(local.spa)
 
-    // conditions
-    url_path_conditions = [{
-      operator         = "Equal"
-      match_values     = length(var.robots_indexed_paths) > 0 ? var.robots_indexed_paths : ["dummy"]
-      negate_condition = true
-      transforms       = null
-    }]
-    cookies_conditions            = []
-    device_conditions             = []
-    http_version_conditions       = []
-    post_arg_conditions           = []
-    query_string_conditions       = []
-    remote_address_conditions     = []
-    request_body_conditions       = []
-    request_header_conditions     = []
-    request_method_conditions     = []
-    request_scheme_conditions     = []
-    request_uri_conditions        = []
-    url_file_extension_conditions = []
-    url_file_name_conditions      = []
+      // conditions
+      url_path_conditions = [{
+        operator         = "Equal"
+        match_values     = length(var.robots_indexed_paths) > 0 ? var.robots_indexed_paths : ["dummy"]
+        negate_condition = true
+        transforms       = null
+      }]
 
-    // actions
-    modify_response_header_actions = [{
-      action = "Overwrite"
-      name   = "X-Robots-Tag"
-      value  = "noindex, nofollow"
-    }]
-    cache_expiration_actions       = []
-    cache_key_query_string_actions = []
-    modify_request_header_actions  = []
-    url_redirect_actions           = []
-    url_rewrite_actions            = []
-  }]
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_header_conditions     = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
+      url_file_name_conditions      = []
+
+      // actions
+      modify_response_header_actions = [{
+        action = "Overwrite"
+        name   = "X-Robots-Tag"
+        value  = "noindex, nofollow"
+      }]
+      cache_expiration_actions       = []
+      cache_key_query_string_actions = []
+      modify_request_header_actions  = []
+      url_redirect_actions           = []
+      url_rewrite_actions            = []
+    },
+    {
+      name  = "microcomponentsNoCache"
+      order = 4 + length(local.spa)
+
+      // conditions
+      url_path_conditions           = []
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_header_conditions     = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
+
+      url_file_name_conditions = [{
+        operator         = "Equal"
+        match_values     = ["remoteEntry.js"]
+        negate_condition = false
+        transforms       = null
+      }]
+
+      // actions
+      modify_response_header_actions = [{
+        action = "Overwrite"
+        name   = "Cache-Control"
+        value  = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+      }]
+      cache_expiration_actions       = []
+      cache_key_query_string_actions = []
+      modify_request_header_actions  = []
+      url_redirect_actions           = []
+      url_rewrite_actions            = []
+    }
+  ]
 
   tags = var.tags
 }
