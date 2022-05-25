@@ -3,7 +3,7 @@ env_short = "u"
 
 # ingress
 ingress_replica_count    = "2"
-ingress_load_balancer_ip = "10.1.0.250"
+ingress_load_balancer_ip = "10.1.1.250"
 
 # Gateway
 api_gateway_url  = "https://api.uat.selfcare.pagopa.it"
@@ -18,7 +18,7 @@ api-version_uservice-party-registry-proxy = "0.1"
 api-version_uservice-party-mock-registry  = "0.1"
 
 # session jwt audience
-jwt_audience = "https://api.uat.selfcare.pagopa.it"
+jwt_audience = "api.uat.selfcare.pagopa.it"
 
 # configs/secrets
 
