@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "sec_rg" {
 }
 
 module "key_vault" {
-  source              = "git::https://github.com/pagopa/azurerm.git//key_vault?ref=v1.0.90"
+  source              = "git::https://github.com/pagopa/azurerm.git//key_vault?ref=v2.12.1"
   name                = format("%s-kv", local.project)
   location            = azurerm_resource_group.sec_rg.location
   resource_group_name = azurerm_resource_group.sec_rg.name
@@ -192,7 +192,7 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
 
 # JWT
 module "jwt" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "jwt"
   key_vault_id     = module.key_vault.id
@@ -202,7 +202,7 @@ module "jwt" {
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault.id
@@ -212,7 +212,7 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "agid-spid"
   key_vault_id     = module.key_vault.id
