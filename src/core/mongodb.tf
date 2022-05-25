@@ -109,20 +109,6 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
 }
 
 # Collections
-resource "azurerm_cosmosdb_mongo_collection" "products" {
-  name                = "products"
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-  account_name        = module.cosmosdb_account_mongodb.name
-  database_name       = azurerm_cosmosdb_mongo_database.selc_product.name
-
-  default_ttl_seconds = 0 # no TTL
-
-  index {
-    keys   = ["_id"]
-    unique = true
-  }
-}
-
 module "mongdb_collection_products" {
   source = "git::https://github.com/pagopa/azurerm.git//cosmosdb_mongodb_collection?ref=v2.3.0"
 

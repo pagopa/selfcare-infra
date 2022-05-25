@@ -1,4 +1,6 @@
-resource "kubernetes_ingress" "health_ingress" {
+resource "kubernetes_ingress_v1" "health_ingress" {
+  depends_on = [helm_release.ingress]
+
   metadata {
     name      = "${kubernetes_namespace.health.metadata[0].name}-ingress"
     namespace = kubernetes_namespace.health.metadata[0].name
@@ -15,8 +17,12 @@ resource "kubernetes_ingress" "health_ingress" {
       http {
         path {
           backend {
-            service_name = "health"
-            service_port = var.default_service_port
+            service {
+              name = "health"
+              port {
+                number = var.default_service_port
+              }
+            }
           }
           path = "/health(.*)"
         }
