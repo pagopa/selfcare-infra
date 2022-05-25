@@ -17,7 +17,6 @@ module "key_vault_secrets_query" {
     "agid-spid-private-key",
     "mongodb-connection-string",
     "postgres-party-user-password",
-    "postgres-mock-registry-user-password",
     "smtp-usr",
     "smtp-psw",
     "smtp-not-pec-usr",

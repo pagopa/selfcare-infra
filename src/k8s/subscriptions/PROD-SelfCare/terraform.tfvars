@@ -14,7 +14,6 @@ cdn_storage_url  = "https://selcpcheckoutsa.z6.web.core.windows.net"
 api-version_uservice-party-management     = "0.1"
 api-version_uservice-party-process        = "0.1"
 api-version_uservice-party-registry-proxy = "0.1"
-api-version_uservice-party-mock-registry  = "0.1"
 
 # session jwt audience
 jwt_audience = "api.selfcare.pagopa.it"
