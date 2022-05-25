@@ -312,7 +312,7 @@
 
       <div
          style="font-family:Titillium Web, Arial;font-size:13px;line-height:1;text-align:left;color:#000000;"
-      ><p style="color: #17324D">Ricevi questo messaggio a seguito dell’assegnazione di un nuovo ruolo per un prodotto di PagoPA nell’Area Riservata dell’ente.</p></div>
+      ><p style="color: #17324D">Ricevi questo messaggio perché hai un’utenza attiva nell’Area Riservata dell’ente.</p></div>
 
                 </td>
               </tr>
