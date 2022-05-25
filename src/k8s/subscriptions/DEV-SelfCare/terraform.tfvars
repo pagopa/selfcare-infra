@@ -3,7 +3,7 @@ env_short = "d"
 
 # ingress
 ingress_replica_count    = "2"
-ingress_load_balancer_ip = "10.1.0.250"
+ingress_load_balancer_ip = "10.1.1.250"
 
 # Gateway
 api_gateway_url  = "https://api.dev.selfcare.pagopa.it"
@@ -20,7 +20,7 @@ api-version_uservice-party-registry-proxy = "0.1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience = "https://api.dev.selfcare.pagopa.it"
+jwt_audience = "api.dev.selfcare.pagopa.it"
 
 # configs/secrets
 
@@ -28,13 +28,13 @@ configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_ROLE_NAME                     = "hub-spid-login-ms"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
 
-  USER_REGISTRY_URL = "https://api.dev.userregistry.pagopa.it/user-registry-management/v1"
+  USER_REGISTRY_URL = "https://api.uat.pdv.pagopa.it/user-registry/v1"
 
   # SPID
   ORG_ISSUER = "https://selfcare.pagopa.it"
 }
 
 configmaps_common = {
-  USERVICE_USER_REGISTRY_URL = "https://api.dev.userregistry.pagopa.it/user-registry-management/v1"
+  USERVICE_USER_REGISTRY_URL = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   ENABLE_CONFIDENTIAL_FILTER = "FALSE"
 }

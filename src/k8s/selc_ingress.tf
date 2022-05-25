@@ -31,7 +31,7 @@ locals {
   }
 }
 
-resource "kubernetes_ingress" "selc_ingress" {
+resource "kubernetes_ingress_v1" "selc_ingress" {
   depends_on = [helm_release.ingress]
 
   metadata {
@@ -54,8 +54,12 @@ resource "kubernetes_ingress" "selc_ingress" {
 
         path {
           backend {
-            service_name = "hub-spid-login-ms"
-            service_port = var.default_service_port
+            service {
+              name = "hub-spid-login-ms"
+              port {
+                number = var.default_service_port
+              }
+            }
           }
           path = "/spid/v1/(.*)"
         }
