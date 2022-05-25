@@ -17,7 +17,7 @@ api-version_uservice-party-registry-proxy = "0.1"
 api-version_uservice-party-mock-registry  = "0.1"
 
 # session jwt audience
-jwt_audience = "https://api.selfcare.pagopa.it"
+jwt_audience = "api.selfcare.pagopa.it"
 
 # configs/secrets
 

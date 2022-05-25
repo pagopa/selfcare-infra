@@ -21,7 +21,7 @@ api-version_uservice-party-mock-registry  = "0.1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience = "https://api.dev.selfcare.pagopa.it"
+jwt_audience = "api.dev.selfcare.pagopa.it"
 
 # configs/secrets
 
