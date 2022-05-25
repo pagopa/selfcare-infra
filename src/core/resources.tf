@@ -7,7 +7,8 @@ resource "null_resource" "upload_resources_templates" {
     command = <<EOT
               az storage blob sync --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} -s "./resources/templates" \
+                --account-key ${module.checkout_cdn.storage_primary_access_key}
+                --source "./resources/templates" \
                 --destination 'resources/templates/'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
@@ -33,7 +34,7 @@ resource "null_resource" "upload_resources_default_product_logo" {
     command = <<EOT
               az storage blob upload --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} -s "./resources/templates" \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file ${data.local_file.resources_default_product_logo.filename} \
                 --name resources/products/default/logo.png
           EOT

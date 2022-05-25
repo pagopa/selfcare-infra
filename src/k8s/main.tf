@@ -22,6 +22,14 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = false
+    }
+  }
+}
+
 provider "kubernetes" {
   host        = "https://${var.k8s_apiserver_host}:${var.k8s_apiserver_port}"
   insecure    = var.k8s_apiserver_insecure
@@ -34,10 +42,6 @@ provider "helm" {
     insecure    = var.k8s_apiserver_insecure
     config_path = var.k8s_kube_config_path
   }
-}
-
-provider "azurerm" {
-  features {}
 }
 
 data "azurerm_subscription" "current" {}
