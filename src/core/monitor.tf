@@ -112,3 +112,16 @@ module "web_test_api" {
   ]
 
 }
+
+resource "azurerm_dashboard" "monitoring-dashboard" {
+  name                = "${local.project}-monitoring-dashboard"
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  location            = azurerm_resource_group.monitor_rg.location
+  tags = var.tags
+
+  dashboard_properties = templatefile("${path.module}/dashboards/monitoring.json.tpl",
+  {
+    subscription_id = data.azurerm_subscription.current.subscription_id
+    prefix          = "${var.prefix}-${var.env_short}"
+  })
+}
