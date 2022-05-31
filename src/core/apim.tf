@@ -271,6 +271,10 @@ module "apim_uservice_party_management_v1" {
     {
       operation_id = "getStatus"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "bulkInstitutions"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
 }
