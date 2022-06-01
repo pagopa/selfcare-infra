@@ -366,6 +366,45 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+  /external/institutions/{externalId}/products/{productId}/manager:
+    get:
+      tags:
+        - external
+      summary: returns the manager related to the institution even if the current user is not related to the institution/product
+      description: Return ok
+      operationId: getManagerInstitutionByExternalId
+      parameters:
+        - name: externalId
+          in: path
+          description: The external identifier of the institution
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: The id of the product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelationshipInfo'
+        '404':
+          description: There is not a relationship between an ACTIVE manager and the institution/product
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '400':
+          description: Invalid institution id supplied
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
   /institutions/{id}/products:
     get:
       tags:
@@ -599,7 +638,6 @@ paths:
                 $ref: '#/components/schemas/Problem'
   '/institutions/{externalId}':
     post:
-      security: [ { } ]
       tags:
         - process
       summary: Create an institution using external institution id fetching data from user-registry
