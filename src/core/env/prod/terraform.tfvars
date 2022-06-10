@@ -102,3 +102,10 @@ contracts_enable_versioning          = true
 contracts_advanced_threat_protection = true
 
 robots_indexed_paths = ["/"]
+
+dns_ns_interop_selfcare = [
+  "ns-1355.awsdns-41.org",
+  "ns-601.awsdns-11.net",
+  "ns-2030.awsdns-61.co.uk",
+  "ns-119.awsdns-14.com",
+]
