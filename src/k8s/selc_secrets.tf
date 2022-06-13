@@ -101,7 +101,7 @@ resource "kubernetes_secret" "mail" {
     },
     var.env_short != "p"
     ? {
-      DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
+      DESTINATION_MAILS = "pectest@pec.pagopa.it"
     }
     : {}
   )
