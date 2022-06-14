@@ -76,6 +76,8 @@ module "aks" {
 
   outbound_ip_address_ids = azurerm_public_ip.aks_outbound.*.id
 
+  addon_azure_policy_enabled = true
+
   tags = var.tags
 }
 
