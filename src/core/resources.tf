@@ -7,7 +7,7 @@ resource "null_resource" "upload_resources_templates" {
     command = <<EOT
               az storage blob sync --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key}
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --source "./resources/templates" \
                 --destination 'resources/templates/'
               az cdn endpoint purge \
