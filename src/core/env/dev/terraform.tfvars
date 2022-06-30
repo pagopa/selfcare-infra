@@ -86,8 +86,8 @@ enable_spid_test = true
 robots_indexed_paths = []
 
 dns_ns_interop_selfcare = [
-  "ns-415.awsdns-51.com",
-  "ns-1446.awsdns-52.org",
-  "ns-944.awsdns-54.net",
-  "ns-1742.awsdns-25.co.uk",
+  "ns-774.awsdns-32.net",
+  "ns-394.awsdns-49.com",
+  "ns-1704.awsdns-21.co.uk",
+  "ns-1091.awsdns-08.org",
 ]
