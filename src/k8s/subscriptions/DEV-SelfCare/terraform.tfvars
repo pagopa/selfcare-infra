@@ -35,7 +35,7 @@ configmaps_hub-spid-login-ms = {
 }
 
 configmaps_common = {
-  USERVICE_USER_REGISTRY_URL = "https://api.uat.pdv.pagopa.it/user-registry/v1"
-  ENABLE_CONFIDENTIAL_FILTER = "FALSE"
+  USERVICE_USER_REGISTRY_URL             = "https://api.uat.pdv.pagopa.it/user-registry/v1"
+  ENABLE_CONFIDENTIAL_FILTER             = "FALSE"
   ENABLE_SINGLE_LINE_STACK_TRACE_LOGGING = "true"
 }
