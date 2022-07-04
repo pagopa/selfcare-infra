@@ -483,6 +483,11 @@ variable "cidr_subnet_contract_storage" {
   description = "Contracts storage address space."
 }
 
+variable "cidr_subnet_eventhub" {
+  type        = list(string)
+  description = "EventHub address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
@@ -894,3 +899,117 @@ variable "robots_indexed_paths" {
   type        = list(string)
   description = "List of cdn paths to allow robots index"
 }
+
+## Event hub
+variable "eventhub_sku_name" {
+  type        = string
+  description = "Defines which tier to use."
+  default     = "Basic"
+}
+
+variable "eventhub_capacity" {
+  type        = number
+  description = "Specifies the Capacity / Throughput Units for a Standard SKU namespace."
+  default     = null
+}
+
+variable "eventhub_maximum_throughput_units" {
+  type        = number
+  description = "Specifies the maximum number of throughput units when Auto Inflate is Enabled"
+  default     = null
+}
+
+variable "eventhub_auto_inflate_enabled" {
+  type        = bool
+  description = "Is Auto Inflate enabled for the EventHub Namespace?"
+  default     = false
+}
+
+variable "eventhub_zone_redundant" {
+  type        = bool
+  description = "Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones)."
+  default     = false
+}
+
+variable "eventhub_ip_rules" {
+  description = "eventhub network rules"
+  type = list(object({
+    ip_mask = string
+    action  = string
+  }))
+  default = []
+}
+
+variable "eventhubs" {
+  description = "A list of event hub topics to add to namespace."
+  type = list(object({
+    name              = string
+    partitions        = number
+    message_retention = number
+    consumers         = list(string)
+    keys = list(object({
+      name   = string
+      listen = bool
+      send   = bool
+      manage = bool
+    }))
+  }))
+  default = [
+    {
+      name              = "SC_Contracts"
+      partitions        = 30
+      message_retention = 7
+      keys = [
+        {
+          name   = "selfcare-wo"
+          listen = false
+          send   = true
+          manage = false
+        },
+        {
+          name   = "datalake"
+          listen = true
+          send   = false
+          manage = false
+        }
+      ]
+    }
+  ]
+}
+
+variable "eventhub_alerts_enabled" {
+  type        = bool
+  default     = false
+  description = "Event hub alerts enabled?"
+}
+
+variable "eventhub_metric_alerts" {
+  default = {}
+
+  description = <<EOD
+Map of name = criteria objects
+EOD
+
+  type = map(object({
+    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]
+    aggregation = string
+    metric_name = string
+    description = string
+    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]
+    operator  = string
+    threshold = number
+    # Possible values are PT1M, PT5M, PT15M, PT30M and PT1H
+    frequency = string
+    # Possible values are PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H and P1D.
+    window_size = string
+
+    dimension = list(object(
+    {
+      name     = string
+      operator = string
+      values   = list(string)
+    }
+    ))
+  }))
+}
+##
