@@ -959,15 +959,16 @@ variable "eventhubs" {
       name              = "SC_Contracts"
       partitions        = 30
       message_retention = 7
+      consumers         = []
       keys = [
         {
-          name   = "selfcare-wo"
+          name   = "contracts-selfcare-wo"
           listen = false
           send   = true
           manage = false
         },
         {
-          name   = "datalake"
+          name   = "contracts-datalake"
           listen = true
           send   = false
           manage = false

@@ -214,3 +214,17 @@ resource "kubernetes_secret" "common-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "event-secrets" {
+  metadata {
+    name      = "event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER                                 = "${format("%s-eventhub-ns", local.project)}.servicebus.windows.net:9093"
+    KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = module.key_vault_secrets_query.values["eventhub-contracts-selfcare-wo-key"].value
+  }
+
+  type = "Opaque"
+}
