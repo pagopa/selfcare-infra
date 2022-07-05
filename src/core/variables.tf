@@ -956,7 +956,7 @@ variable "eventhubs" {
   }))
   default = [
     {
-      name              = "SC_Contracts"
+      name              = "SC-Contracts"
       partitions        = 30
       message_retention = 7
       consumers         = []
