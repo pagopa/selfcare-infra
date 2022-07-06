@@ -35,9 +35,9 @@ module "event_hub" {
 
   network_rulesets = [
     {
-      default_action = "Deny",
+      default_action       = "Deny",
       virtual_network_rule = [],
-      ip_rule = var.eventhub_ip_rules
+      ip_rule              = var.eventhub_ip_rules
     }
   ]
 

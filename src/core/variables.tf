@@ -1005,11 +1005,11 @@ EOD
     window_size = string
 
     dimension = list(object(
-    {
-      name     = string
-      operator = string
-      values   = list(string)
-    }
+      {
+        name     = string
+        operator = string
+        values   = list(string)
+      }
     ))
   }))
 }
