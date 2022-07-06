@@ -103,7 +103,7 @@ eventhub_alerts_enabled           = false
 
 eventhub_ip_rules = [
   {
-    ip_mask = "127.0.0.1", # TODO DataLake ip
+    ip_mask = "18.192.147.151",
     action  = "Allow"
   }
 ]

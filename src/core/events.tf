@@ -16,7 +16,7 @@ module "eventhub_snet" {
 }
 
 module "event_hub" {
-  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.6"
+  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.6" // TODO update version after merge of https://github.com/pagopa/azurerm/pull/244
   name                     = format("%s-eventhub-ns", local.project)
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
@@ -29,20 +29,22 @@ module "event_hub" {
   virtual_network_ids = [module.vnet.id]
   subnet_id           = module.eventhub_snet.id
 
+  private_dns_zone_record_A_name = null
+
   eventhubs = var.eventhubs
 
   network_rulesets = [
     {
       default_action = "Deny",
-      virtual_network_rule = [
-        {
-          subnet_id                                       = module.k8s_snet.id,
-          ignore_missing_virtual_network_service_endpoint = false
-        }
-      ],
+      virtual_network_rule = [],
       ip_rule = var.eventhub_ip_rules
     }
   ]
+
+  private_dns_zones = {
+    id   = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
+    name = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+  }
 
   alerts_enabled = var.eventhub_alerts_enabled
   metric_alerts  = var.eventhub_metric_alerts
@@ -58,12 +60,6 @@ module "event_hub" {
   ]
 
   tags = var.tags
-}
-
-locals {
-  event_hub = {
-    connection = "${format("%s-eventhub-ns", local.project)}.servicebus.windows.net:9093"
-  }
 }
 
 #tfsec:ignore:AZU023
