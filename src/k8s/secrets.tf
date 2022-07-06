@@ -24,6 +24,6 @@ module "key_vault_secrets_query" {
     "contracts-storage-access-key",
     "web-storage-connection-string",
     "user-registry-api-key",
-    "eventhub-contracts-selfcare-wo-key"
+    "eventhub-SC-Contracts-selfcare-wo-connection-string"
   ]
 }

@@ -962,13 +962,13 @@ variable "eventhubs" {
       consumers         = []
       keys = [
         {
-          name   = "contracts-selfcare-wo"
+          name   = "selfcare-wo"
           listen = false
           send   = true
           manage = false
         },
         {
-          name   = "contracts-datalake"
+          name   = "datalake"
           listen = true
           send   = false
           manage = false
