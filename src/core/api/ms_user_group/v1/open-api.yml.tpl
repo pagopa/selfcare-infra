@@ -12,7 +12,7 @@ tags:
 - name: user-group
   description: User group endpoint CRUD operations
 paths:
-  "/user-groups/v1/":
+  "/":
     get:
       tags:
       - user-group
