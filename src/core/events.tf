@@ -16,7 +16,7 @@ module "eventhub_snet" {
 }
 
 module "event_hub" {
-  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.6" // TODO update version after merge of https://github.com/pagopa/azurerm/pull/244
+  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.7"
   name                     = format("%s-eventhub-ns", local.project)
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
