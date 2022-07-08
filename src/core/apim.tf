@@ -287,7 +287,7 @@ resource "azurerm_api_management_api_version_set" "apim_user_group_ms" {
   versioning_scheme = "Segment"
 }
 
-module "apim_ms_user_group_management" {
+module "apim_user_group_ms_v1" {
   source = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name = format("%s-ms-user-group-api-v1", local.project)
   api_management_name = module.apim.name
@@ -302,12 +302,12 @@ module "apim_ms_user_group_management" {
   protocols = [
     "https"]
 
-  service_url = format("http://%s/ms-user-group/user-groups/v1", var.reverse_proxy_ip)
+  service_url = format("http://%s/ms-user-group/user-groups/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
     host = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "user-groups/v1"
+    basePath = "user-groups/v1/"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
