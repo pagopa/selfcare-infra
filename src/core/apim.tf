@@ -321,7 +321,7 @@ module "apim_user_group_ms_v1" {
   api_operation_policies = [
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content = file("./api/jwt_auth_op_policy.xml")
+      xml_content = file("./api/jwt_auth_op_policy_user_group.xml")
     }
   ]
 }
