@@ -109,3 +109,9 @@ dns_ns_interop_selfcare = [
   "ns-2030.awsdns-61.co.uk",
   "ns-119.awsdns-14.com",
 ]
+
+# logs storage
+contracts_account_replication_type   = "RAGZRS"
+contracts_delete_retention_days      = 14
+contracts_enable_versioning          = false
+contracts_advanced_threat_protection = true

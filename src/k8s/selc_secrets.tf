@@ -13,6 +13,8 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
     METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value
 
     USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+
+    SPID_LOGS_STORAGE_CONNECTION_STRING = module.key_vault_secrets_query.values["logs-storage-connection-string"].value
   }
 
   type = "Opaque"
