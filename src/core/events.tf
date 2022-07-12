@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "event_rg" {
 
 module "eventhub_snet" {
   source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.18.6"
-  name                                           = format("%s-eventhub-snet", local.project)
+  name                                           = "${local.project}-eventhub-snet"
   address_prefixes                               = var.cidr_subnet_eventhub
   resource_group_name                            = azurerm_resource_group.rg_vnet.name
   virtual_network_name                           = module.vnet.name
@@ -17,7 +17,7 @@ module "eventhub_snet" {
 
 module "event_hub" {
   source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.7"
-  name                     = format("%s-eventhub-ns", local.project)
+  name                     = "${local.project}-eventhub-ns"
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
   auto_inflate_enabled     = var.eventhub_auto_inflate_enabled

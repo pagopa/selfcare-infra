@@ -222,7 +222,7 @@ resource "kubernetes_secret" "event-secrets" {
   }
 
   data = {
-    KAFKA_BROKER            = "${format("%s-eventhub-ns", local.project)}.servicebus.windows.net:9093"
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
     KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
     KAFKA_SASL_MECHANISM    = "PLAIN"
 

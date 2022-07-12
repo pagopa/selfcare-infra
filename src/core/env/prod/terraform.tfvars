@@ -125,4 +125,25 @@ eventhub_ip_rules = [
     action  = "Allow"
   }
 ]
+
+eventhubs = {
+  name              = "SC-Contracts"
+  partitions        = 30
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "selfcare-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "datalake"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+}
 ##

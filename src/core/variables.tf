@@ -954,28 +954,7 @@ variable "eventhubs" {
       manage = bool
     }))
   }))
-  default = [
-    {
-      name              = "SC-Contracts"
-      partitions        = 30
-      message_retention = 7
-      consumers         = []
-      keys = [
-        {
-          name   = "selfcare-wo"
-          listen = false
-          send   = true
-          manage = false
-        },
-        {
-          name   = "datalake"
-          listen = true
-          send   = false
-          manage = false
-        }
-      ]
-    }
-  ]
+  default = []
 }
 
 variable "eventhub_alerts_enabled" {
