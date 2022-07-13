@@ -108,7 +108,7 @@ eventhub_ip_rules = [
   }
 ]
 
-eventhubs = {
+eventhubs = [{
   name              = "SC-Contracts"
   partitions        = 30
   message_retention = 7
@@ -127,5 +127,5 @@ eventhubs = {
       manage = false
     }
   ]
-}
+}]
 ##
