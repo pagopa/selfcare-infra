@@ -71,7 +71,7 @@ paths:
         schema:
           type: string
           format: uuid
-      - name: allowedStatus
+      - name: status
         in: query
         description: If filter on status is present, it must be used with at least
           one of the other filters
