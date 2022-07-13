@@ -483,6 +483,11 @@ variable "cidr_subnet_contract_storage" {
   description = "Contracts storage address space."
 }
 
+variable "cidr_subnet_logs_storage" {
+  type        = list(string)
+  description = "Logs storage address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number

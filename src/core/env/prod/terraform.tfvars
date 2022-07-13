@@ -25,6 +25,7 @@ cidr_subnet_dns_forwarder    = ["10.1.134.0/29"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
+cidr_subnet_logs_storage     = ["10.1.138.0/24"]
 
 # dns
 external_domain = "pagopa.it"
