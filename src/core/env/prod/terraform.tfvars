@@ -111,7 +111,7 @@ dns_ns_interop_selfcare = [
 ]
 
 # logs storage
-contracts_account_replication_type   = "RAGZRS"
-contracts_delete_retention_days      = 14
-contracts_enable_versioning          = false
-contracts_advanced_threat_protection = true
+logs_account_replication_type   = "RAGZRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true
