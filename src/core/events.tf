@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "event_rg" {
-  name     = format("%s-event-rg", local.project)
+  name     = "${local.project}-event-rg"
   location = var.location
 
   tags = var.tags
