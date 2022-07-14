@@ -25,6 +25,7 @@ cidr_subnet_dns_forwarder    = ["10.1.134.0/29"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
+cidr_subnet_logs_storage     = ["10.1.138.0/24"]
 
 # dns
 external_domain = "pagopa.it"
@@ -109,3 +110,9 @@ dns_ns_interop_selfcare = [
   "ns-2030.awsdns-61.co.uk",
   "ns-119.awsdns-14.com",
 ]
+
+# logs storage
+logs_account_replication_type   = "RAGZRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true
