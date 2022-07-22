@@ -214,3 +214,21 @@ resource "kubernetes_secret" "common-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "event-secrets" {
+  metadata {
+    name      = "event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
+  }
+
+  type = "Opaque"
+}

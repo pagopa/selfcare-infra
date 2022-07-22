@@ -71,3 +71,20 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_redis_cach
 
   tags = var.tags
 }
+
+resource "azurerm_private_dns_zone" "privatelink_servicebus_windows_net" {
+  name                = "privatelink.servicebus.windows.net"
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus_windows_net_vnet" {
+  name                  = module.vnet.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_servicebus_windows_net.name
+  virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}

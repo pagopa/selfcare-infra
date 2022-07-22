@@ -92,7 +92,8 @@ module "k8s_snet" {
 
   service_endpoints = [
     "Microsoft.Web",
-    "Microsoft.Storage"
+    "Microsoft.Storage",
+    "Microsoft.EventHub"
   ]
 }
 
