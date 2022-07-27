@@ -327,7 +327,7 @@ module "apim_user_group_ms_v1" {
 }
 
 resource "azurerm_api_management_api_version_set" "apim_external_api_ms" {
-  name                = format("%s-ms-user-group-api", var.env_short)
+  name                = format("%s-ms-external-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
   display_name        = "External API Service"
@@ -354,7 +354,7 @@ module "apim_external_api_ms_v1" {
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "user-groups/v1"
+    basePath = "external-api/v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
