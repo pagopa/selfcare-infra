@@ -1185,6 +1185,10 @@ components:
           example: PA
         attributes:
           $ref: '#/components/schemas/Attributes'
+        logo:
+          description: URL to institution logo
+          format: url
+          type: string
       required:
         - id
         - externalId
