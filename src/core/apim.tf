@@ -347,7 +347,7 @@ module "apim_external_api_ms_v1" {
   path         = "external/external-api"
   api_version  = "v1"
   protocols = [
-    "https"]
+  "https"]
 
   service_url = format("http://%s/ms-external-api/external-api/v1/", var.reverse_proxy_ip)
 
