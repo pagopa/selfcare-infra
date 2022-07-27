@@ -349,7 +349,7 @@ module "apim_external_api_ms_v1" {
   protocols = [
     "https"]
 
-  service_url = format("http://%s/ms-external-api/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
