@@ -177,14 +177,14 @@ module "apim_uservice_party_process_v1" {
     {
       operation_id = "getInstitution"
       xml_content  = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
-                         CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
-                       })
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
     },
     {
       operation_id = "getInstitutionByExternalId"
       xml_content  = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
-                               CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
-                             })
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
     },
     {
       operation_id = "getOnboardingDocument"
