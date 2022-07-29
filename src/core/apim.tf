@@ -372,7 +372,9 @@ module "apim_external_api_ms_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content  = file("./api/jwt_auth_op_policy_user_group.xml")
+      xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
     }
   ]
 }
