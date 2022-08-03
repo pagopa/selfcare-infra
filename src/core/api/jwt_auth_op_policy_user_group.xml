@@ -13,8 +13,8 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 200)">
                 <set-body>@{
-                    JArray response = context.Response.Body.As<JArray>();
-                    foreach(JObject item in response.Children()) {
+                    JObject response = context.Response.Body.As<JObject>();
+                    foreach(JObject item in response.GetValue("content").Children()) {
                     foreach (var key in new [] {"members", "createdAt", "createdBy", "modifiedAt", "modifiedBy"}) {
                     try {
                     item.Property(key).Remove();
