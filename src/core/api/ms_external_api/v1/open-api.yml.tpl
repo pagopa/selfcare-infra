@@ -63,6 +63,56 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/{institutionId}/products':
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionUserProducts
+      operationId: getInstitutionUserProductsUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: Institution's unique internal Id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     InstitutionResource:
@@ -172,6 +222,32 @@ components:
       description: >-
         A "problem detail" as a way to carry machine-readable details of errors
         (https://datatracker.ietf.org/doc/html/rfc7807)
+    ProductResource:
+      title: ProductResource
+      required:
+        - description
+        - id
+        - title
+        - urlBO
+      type: object
+      properties:
+        description:
+          type: string
+          description: Product's description
+        id:
+          type: string
+          description: Product's unique identifier
+        title:
+          type: string
+          description: Product's title
+        urlBO:
+          type: string
+          description: >-
+            URL that redirects to the back-office section, where is possible to
+            manage the product
+        urlPublic:
+          type: string
+          description: URL that redirects to the public information webpage of the product
   securitySchemes:
     bearerAuth:
       type: http

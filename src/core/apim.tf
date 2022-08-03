@@ -375,6 +375,10 @@ module "apim_external_api_ms_v1" {
       xml_content = templatefile("./api/ms_external_api/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
       })
+    },
+    {
+      operation_id = "getInstitutionUserProductsUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
 }
