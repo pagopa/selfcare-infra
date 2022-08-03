@@ -19,6 +19,14 @@ paths:
         The service retrieves all the onboarded institutions related to the
         logged user
       operationId: getInstitutionsUsingGET
+      parameters:
+              - name: productId
+                in: query
+                description: Product's unique identifier
+                required: true
+                style: form
+                schema:
+                  type: string
       responses:
         '200':
           description: OK
