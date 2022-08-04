@@ -20,13 +20,19 @@ paths:
         logged user
       operationId: getInstitutionsUsingGET
       parameters:
-              - name: productId
-                in: query
-                description: Product's unique identifier
-                required: true
-                style: form
-                schema:
-                  type: string
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -70,6 +76,12 @@ paths:
       summary: getInstitutionUserProducts
       operationId: getInstitutionUserProductsUsingGET
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: institutionId
           in: path
           description: Institution's unique internal Id
