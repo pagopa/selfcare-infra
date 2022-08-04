@@ -20,6 +20,12 @@ paths:
       description: Service that allows to get a list of UserGroup entities
       operationId: getUserGroupsUsingGET
       parameters:
+      - name: x-selfcare-uid
+        in: header
+        description: Logged user's unique identifier
+        required: true
+        schema:
+          type: string
       - name: institutionId
         in: query
         description: Users group's institutionId
