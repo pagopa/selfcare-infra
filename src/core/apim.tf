@@ -117,7 +117,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" 
 
 module "apim_uservice_party_process_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-party-prc-api-v1", local.project)
+  name                = format("%s-party-prc-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
@@ -179,7 +179,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_managemen
 
 module "apim_uservice_party_management_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-party-mgmt-api-v1", local.project)
+  name                = format("%s-party-mgmt-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
@@ -241,7 +241,7 @@ resource "azurerm_api_management_api_version_set" "apim_user_group_ms" {
 
 module "apim_user_group_ms_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-ms-user-group-api-v1", local.project)
+  name                = format("%s-ms-user-group-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_user_group_ms.id
@@ -288,7 +288,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_ms" {
 
 module "apim_external_api_ms_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-ms-external-api-v1", local.project)
+  name                = format("%s-ms-external-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
@@ -296,7 +296,7 @@ module "apim_external_api_ms_v1" {
 
   description  = "This service is the proxy for external services"
   display_name = "External API service"
-  path         = "external/external-api"
+  path         = "external"
   api_version  = "v1"
   protocols = [
   "https"]
@@ -306,7 +306,7 @@ module "apim_external_api_ms_v1" {
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "external-api/v1"
+    basePath = "v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
@@ -327,6 +327,19 @@ module "apim_external_api_ms_v1" {
     {
       operation_id = "getInstitutionUserProductsUsingGET"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/jwt_auth_op_policy_user_group.xml.tpl", {
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content = templatefile("./api/ms_external_api/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+      })
     }
   ]
 }
