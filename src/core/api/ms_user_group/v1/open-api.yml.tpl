@@ -118,6 +118,7 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Problem"
+      deprecated: true
       security:
       - bearerAuth:
         - global
