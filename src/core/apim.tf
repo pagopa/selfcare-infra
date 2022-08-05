@@ -147,27 +147,7 @@ module "apim_uservice_party_process_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "getOnboardingInfo"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "verifyOnboarding"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getUserInstitutionRelationshipsByExternalId"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getUserInstitutionRelationships"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "retrieveInstitutionProductsByExternalId"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "retrieveInstitutionProducts"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
@@ -185,14 +165,6 @@ module "apim_uservice_party_process_v1" {
       xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
       })
-    },
-    {
-      operation_id = "getOnboardingDocument"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getStatus"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
 }
@@ -237,27 +209,11 @@ module "apim_uservice_party_management_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "getPersonById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "existsPersonById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getInstitutionById"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "existsInstitutionById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getPartyAttributes"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getInstitutionByExternalId"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
@@ -266,14 +222,6 @@ module "apim_uservice_party_management_v1" {
     },
     {
       operation_id = "getRelationshipById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getToken"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getStatus"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
