@@ -333,7 +333,7 @@ components:
           description: Institution's taxCode
         userProductRoles:
                  type: array
-                 description: Logged user's role on products
+                 description: Logged user's roles on product
                  items:
                    type: string
         zipCode:
