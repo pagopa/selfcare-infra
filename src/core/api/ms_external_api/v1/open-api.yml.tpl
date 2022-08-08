@@ -74,6 +74,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutionUserProducts
+      description: Service to retrieve all active products for given institution and logged user
       operationId: getInstitutionUserProductsUsingGET
       parameters:
         - name: x-selfcare-uid
@@ -290,7 +291,7 @@ components:
         - originId
         - status
         - taxCode
-        - userRole
+        - userProductRoles
         - zipCode
       type: object
       properties:
@@ -330,12 +331,11 @@ components:
         taxCode:
           type: string
           description: Institution's taxCode
-        userRole:
-          type: string
-          description: Logged user's role
-          enum:
-            - ADMIN
-            - LIMITED
+        userProductRoles:
+                 type: array
+                 description: Logged user's role on products
+                 items:
+                   type: string
         zipCode:
           type: string
           description: Institution's zipCode
