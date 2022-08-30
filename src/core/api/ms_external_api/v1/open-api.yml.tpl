@@ -126,7 +126,7 @@ paths:
       security:
         - bearerAuth:
             - global
-   '/institutions/{id}':
+  '/institutions/{id}':
     get:
       security: [ { } ]
       tags:
@@ -284,6 +284,12 @@ paths:
       description: The service retrieves Product information from product id
       operationId: getProductUsingGET
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: productId
           in: path
           description: Product's unique identifier
