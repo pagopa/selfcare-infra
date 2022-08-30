@@ -9,15 +9,15 @@ servers:
 tags:
   - name: institutions
     description: Institution Controller
+  - name: product
+    description: Product Controller
 paths:
   '/institutions':
     get:
       tags:
         - institutions
       summary: getInstitutions
-      description: >-
-        The service retrieves all the onboarded institutions related to the
-        logged user
+      description: The service retrieves all the onboarded institutions related to the logged user
       operationId: getInstitutionsUsingGET
       parameters:
         - name: x-selfcare-uid
@@ -126,7 +126,7 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/institutions/{id}':
+   '/institutions/{id}':
     get:
       security: [ { } ]
       tags:
@@ -275,7 +275,56 @@ paths:
                 "$ref": "#/components/schemas/Problem"
       security:
       - bearerAuth:
-        - global
+        - global    
+  '/products/{productId}':
+    get:
+      tags:
+        - product
+      summary: getProduct
+      description: The service retrieves Product information from product id
+      operationId: getProductUsingGET
+      parameters:
+        - name: productId
+          in: path
+          description: Product's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     InstitutionResource:
@@ -332,10 +381,10 @@ components:
           type: string
           description: Institution's taxCode
         userProductRoles:
-                 type: array
-                 description: Logged user's roles on product
-                 items:
-                   type: string
+          type: array
+          description: Logged user's roles on product
+          items:
+            type: string
         zipCode:
           type: string
           description: Institution's zipCode
