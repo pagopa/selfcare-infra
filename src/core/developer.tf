@@ -8,7 +8,7 @@ locals {
 resource "null_resource" "read_apim_api" {
   triggers = {
     #build_number = "${timestamp()}"
-    dir_sha1 = sha1(join("", [for f in fileset(format("./api/ms_external_api", var.env), "**") : filesha1("./api/ms_external_api/${f}")]))
+    dir_sha1 = sha1(join("", [for f in fileset("./api/ms_external_api", "**") : filesha1("./api/ms_external_api/${f}")]))
   }
 
   depends_on = [module.apim_external_api_ms_v1]
