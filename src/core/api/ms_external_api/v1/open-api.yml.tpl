@@ -439,32 +439,103 @@ components:
       description: >-
         A "problem detail" as a way to carry machine-readable details of errors
         (https://datatracker.ietf.org/doc/html/rfc7807)
-    ProductResource:
+    ProductResource: 
       title: ProductResource
-      required:
-        - description
+      required: 
+        - contractTemplatePath
+        - contractTemplateUpdatedAt
+        - contractTemplateVersion
+        - createdAt
         - id
-        - title
-        - urlBO
+        - title      
       type: object
-      properties:
-        description:
+      properties: 
+        contractTemplatePath: 
+          type: string
+          description: The path of contract
+        contractTemplateUpdatedAt: 
+          type: string
+          description: Date the contract was postponed
+          format: date-time
+        contractTemplateVersion: 
+          type: string
+          description: Version of the contract
+        createdAt: 
+          type: string
+          description: Date the products was activated/created
+          format: date-time
+        depictImageUrl: 
+          type: string
+          description: Product's depiction image url
+        description: 
           type: string
           description: Product's description
-        id:
+        id: 
           type: string
           description: Product's unique identifier
-        title:
+        identityTokenAudience: 
+          type: string
+          description: Product's identity token audience
+        logo: 
+          type: string
+          description: Product's logo url
+        logoBgColor: 
+          pattern: ^#0-9A-F6$
+          type: string
+          description: Product logo's background color
+        parentId: 
+          type: string
+          description: Root parent of the sub product
+        roleManagementURL: 
+          type: string
+          description: Url of the utilities management
+        roleMappings: 
+          type: object
+          additionalProperties: 
+            $ref: '#/components/schemas/ProductRoleInfoRes'
+          description: Mappings between Party's and Product's role
+        title: 
           type: string
           description: Product's title
-        urlBO:
+        urlBO: 
           type: string
-          description: >-
-            URL that redirects to the back-office section, where is possible to
-            manage the product
-        urlPublic:
+          description: URL that redirects to the back-office section where is possible to manage the product
+        urlPublic: 
           type: string
           description: URL that redirects to the public information webpage of the product
+    ProductRoleInfoRes: 
+      title: ProductRoleInfoRes
+      required: 
+        - multiroleAllowed
+        - roles
+      type: object
+      properties: 
+        multiroleAllowed: 
+          type: boolean
+          description: Flag indicating if a User can have more than one product role
+          example: false
+        roles: 
+          type: array
+          description: Available product roles
+          items: 
+            $ref: '#/components/schemas/ProductRole'
+    ProductRole: 
+      title: ProductRole
+      required: 
+        - code
+        - description
+        - label
+      type: object
+      properties: 
+        code: 
+          type: string
+          description: Product role internal code
+        description: 
+          type: string
+          description: Product role description
+        label: 
+          type: string
+          description: Product role label
     PageOfUserGroupResource:
       title: PageOfUserGroupResource
       required:
