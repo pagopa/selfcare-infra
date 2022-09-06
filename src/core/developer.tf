@@ -1,7 +1,7 @@
 locals {
-  resource_groups_name = format("%s-api-rg", local.project)
-  service_name = format("%s-apim", local.project)
-  api_id = format("%s-ms-external-api-v1", local.project)
+  resource_groups_name   = format("%s-api-rg", local.project)
+  service_name           = format("%s-apim", local.project)
+  api_id                 = format("%s-ms-external-api-v1", local.project)
   azure_apim_api_version = "2021-08-01"
 }
 
@@ -11,7 +11,7 @@ resource "null_resource" "download_apim_external_api_v1" {
   }
 
   depends_on = [module.apim_external_api_ms_v1]
-  
+
   provisioner "local-exec" {
     command = <<EOT
       az rest \
@@ -27,7 +27,7 @@ resource "null_resource" "upload_developer_external_api_v1" {
   triggers = {
     file_sha1 = filesha1("./api/ms_external_api/v1/open-api.yml.tpl")
   }
-  
+
   depends_on = [null_resource.download_apim_external_api_v1]
 
   provisioner "local-exec" {
@@ -52,7 +52,7 @@ resource "null_resource" "upload_developer_index" {
   triggers = {
     file_sha1 = filesha1("./env/${var.env}/developer/external/index.html")
   }
-  
+
   provisioner "local-exec" {
     command = <<EOT
               az storage blob sync \
