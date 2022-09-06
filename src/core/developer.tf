@@ -78,8 +78,8 @@ resource "null_resource" "purge_cdn_developer" {
     provisioner "local-exec" {
     command = <<EOT
               az cdn endpoint purge \
-                -g ${azurerm_resource_group.checkout_fe_rg.name} \
-                -n ${module.checkout_cdn.name} \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
                 --content-paths "/developer/external/*" \
                 --no-wait
