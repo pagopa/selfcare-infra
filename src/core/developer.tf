@@ -26,7 +26,9 @@ resource "null_resource" "download_apim_external_api_v1" {
 
 resource "null_resource" "upload_developer_external_api_v1" {
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset(format("./env/%s/developer/external", var.env), "**") : filesha1("./env/${var.env}/developer/external/${f}")]))
+    dir_sha1 = sha1(fileexists("./env/${var.env}/developer/external/ms-external-api-v1.yaml") 
+      ? filesha1("./env/${var.env}/developer/external/ms-external-api-v1.yaml") 
+      : sha1(""))
   }
   
   depends_on = [null_resource.download_apim_external_api_v1]
