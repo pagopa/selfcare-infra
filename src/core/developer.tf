@@ -7,8 +7,8 @@ locals {
 
 resource "null_resource" "download_apim_external_api_v1" {
   triggers = {
-    #build_number = "${timestamp()}"
-    dir_sha1 = sha1(join("", [for f in fileset("./api/ms_external_api", "**") : filesha1("./api/ms_external_api/${f}")]))
+    build_number = "${timestamp()}"
+    # dir_sha1 = sha1(join("", [for f in fileset("./api/ms_external_api", "**") : filesha1("./api/ms_external_api/${f}")]))
   }
 
   depends_on = [module.apim_external_api_ms_v1]
@@ -68,10 +68,22 @@ resource "null_resource" "upload_developer_index" {
                 -g ${azurerm_resource_group.checkout_fe_rg.name} \
                 -n ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
-                --content-paths "/developer/external/index.html" \
+                --content-paths "/developer/external/*" \
                 --no-wait
           EOT
   }
 }
 
+resource "null_resource" "purge_cdn_developer" {
+    provisioner "local-exec" {
+    command = <<EOT
+              az cdn endpoint purge \
+                -g ${azurerm_resource_group.checkout_fe_rg.name} \
+                -n ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/developer/external/*" \
+                --no-wait
+          EOT
+  }
+}
 
