@@ -61,3 +61,19 @@ resource "null_resource" "upload_resources_default_product_resources_depict-imag
           EOT
   }
 }
+
+# uploading a pagopa logo to contract storage
+resource "null_resource" "upload_resources_logo" {
+  triggers = {
+    "changes-in-config" : md5(data.local_file.resources_default_product_logo.content)
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload --container ${azurerm_storage_container.selc-contracts-container.name} \
+                --account-name ${module.selc-contracts-storage.name} \
+                --account-key "${module.selc-contracts-storage.primary_access_key}" \
+                --file ${data.local_file.resources_default_product_logo.filename} \
+                --name resources/logo.png
+          EOT
+  }
+}
