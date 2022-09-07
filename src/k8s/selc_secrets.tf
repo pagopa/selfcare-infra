@@ -175,6 +175,20 @@ resource "kubernetes_secret" "b4f-dashboard" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-external-api" {
+  metadata {
+    name      = "product-external-api"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
