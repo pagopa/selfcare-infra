@@ -97,6 +97,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     JWT_TOKEN_AUDIENCE = var.jwt_audience
 
     ENABLE_SPID_ACCESS_LOGS          = "true"
+    SPID_LOGS_PUBLIC_KEY             = module.key_vault_secrets_query.values["spid-logs-encryption-public-key"].value
     SPID_LOGS_STORAGE_KIND           = "azurestorage"
     SPID_LOGS_STORAGE_CONTAINER_NAME = "selc-${var.env_short}-logs-blob"
 
