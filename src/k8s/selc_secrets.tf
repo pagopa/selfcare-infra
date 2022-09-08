@@ -177,6 +177,20 @@ resource "kubernetes_secret" "b4f-dashboard" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-external-api" {
+  metadata {
+    name      = "product-external-api"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
@@ -212,6 +226,24 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "event-secrets" {
+  metadata {
+    name      = "event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
   }
 
   type = "Opaque"

@@ -20,6 +20,12 @@ paths:
       description: Service that allows to get a list of UserGroup entities
       operationId: getUserGroupsUsingGET
       parameters:
+      - name: x-selfcare-uid
+        in: header
+        description: Logged user's unique identifier
+        required: true
+        schema:
+          type: string
       - name: institutionId
         in: query
         description: Users group's institutionId
@@ -29,7 +35,7 @@ paths:
           type: string
       - name: page
         in: query
-        description: Results page you want to retrieve (0..N)
+        description: The page number to access (0 indexed, defaults to 0)
         required: false
         style: form
         allowReserved: true
@@ -38,7 +44,7 @@ paths:
           format: int32
       - name: size
         in: query
-        description: Number of records per page
+        description: Number of records per page (defaults to 20, max 2000)
         required: false
         style: form
         allowReserved: true
@@ -47,8 +53,7 @@ paths:
           format: int32
       - name: sort
         in: query
-        description: 'Sorting criteria in the format: property(,asc|desc). Default
-          sort order is ascending. Multiple sort criteria are supported.'
+        description: 'Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.'
         required: false
         style: form
         allowReserved: true
@@ -71,7 +76,7 @@ paths:
         schema:
           type: string
           format: uuid
-      - name: allowedStatus
+      - name: status
         in: query
         description: If filter on status is present, it must be used with at least
           one of the other filters
@@ -88,9 +93,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/UserGroupResource"
+                "$ref": "#/components/schemas/PageOfUserGroupResource"
         '400':
           description: Bad Request
           content:
@@ -115,6 +118,7 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Problem"
+      deprecated: true
       security:
       - bearerAuth:
         - global
@@ -133,6 +137,37 @@ components:
         reason:
           type: string
           description: Invalid parameter reason.
+    PageOfUserGroupResource:
+      title: PageOfUserGroupResource
+      required:
+        - content
+        - number
+        - size
+        - totalElements
+        - totalPages
+      type: object
+      properties:
+        content:
+          type: array
+          description: The page content
+          items:
+            "$ref": "#/components/schemas/UserGroupResource"
+        number:
+          type: integer
+          description: The number of the current page
+          format: int32
+        size:
+          type: integer
+          description: The size of the page
+          format: int32
+        totalElements:
+          type: integer
+          description: The total amount of elements
+          format: int64
+        totalPages:
+          type: integer
+          description: The number of total pages
+          format: int32
     Problem:
       title: Problem
       required:

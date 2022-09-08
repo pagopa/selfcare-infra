@@ -23,6 +23,10 @@ module "key_vault_secrets_query" {
     "smtp-not-pec-psw",
     "contracts-storage-access-key",
     "web-storage-connection-string",
+    "user-registry-api-key",
+    "eventhub-SC-Contracts-selfcare-wo-connection-string",
+    "external-api-key",
+    "external-user-api"
     "logs-storage-connection-string",
     "user-registry-api-key"
   ]

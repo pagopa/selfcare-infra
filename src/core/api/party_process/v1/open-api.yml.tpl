@@ -45,6 +45,12 @@ paths:
       description: Return ok
       operationId: getOnboardingInfo
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: institutionId
           description: The internal identifier of the institution
           in: query
@@ -91,6 +97,13 @@ paths:
       summary: Institution onboarding on the platform
       description: it performs the onboarding of a new institution on the platform
       operationId: onboardingInstitution
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -120,6 +133,12 @@ paths:
       description: Checks if the specified institution has been onboarded on the specified product.
       operationId: verifyOnboarding
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The external identifier of the institution
@@ -154,6 +173,13 @@ paths:
       summary: legals onboarding
       description: creates legals entries on already onboarded institution
       operationId: onboardingLegalsOnInstitution
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -182,6 +208,13 @@ paths:
       summary: subdelegates onboarding
       description: creates subdelegates entries on already onboarded institution
       operationId: onboardingSubDelegatesOnInstitution
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -208,6 +241,13 @@ paths:
       summary: operators onboarding
       description: performs operators onboarding on an already existing institution
       operationId: onboardingOperators
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -235,6 +275,12 @@ paths:
       description: Return ok
       operationId: getUserInstitutionRelationships
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The internal identifier of the institution
@@ -305,6 +351,12 @@ paths:
       description: Return ok
       operationId: getUserInstitutionRelationshipsByExternalId
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The external identifier of the institution
@@ -374,6 +426,12 @@ paths:
       description: Return ok
       operationId: getManagerInstitutionByExternalId
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The external identifier of the institution
@@ -413,6 +471,12 @@ paths:
       description: retrieves the products this institution is related to.
       operationId: retrieveInstitutionProducts
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The internal identifier of the institution
@@ -450,6 +514,12 @@ paths:
       description: retrieves the products this institution is related to.
       operationId: retrieveInstitutionProductsByExternalId
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The external identifier of the institution
@@ -486,6 +556,12 @@ paths:
       description: Gets relationship
       operationId: getRelationship
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: The identifier of the relationship
@@ -519,6 +595,12 @@ paths:
       description: Given a relationship identifier, it deletes the corresponding relationship.
       operationId: deleteRelationshipById
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           description: the identifier of the relationship to be deleted
           required: true
@@ -549,6 +631,12 @@ paths:
       description: Activate relationship
       operationId: activateRelationship
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: The identifier of the relationship
@@ -579,6 +667,12 @@ paths:
       description: Suspend relationship
       operationId: suspendRelationship
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: The identifier of the relationship
@@ -610,6 +704,12 @@ paths:
       description: Gets institution using internal institution id
       operationId: getInstitution
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The internal identifier of the institution
@@ -644,6 +744,12 @@ paths:
       description: Create an institution using external institution id fetching data from user-registry
       operationId: createInstitution
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The externalId of the institution
@@ -678,6 +784,12 @@ paths:
       description: Gets institution using external institution id
       operationId: getInstitutionByExternalId
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: externalId
           in: path
           description: The external identifier of the institution
@@ -712,6 +824,12 @@ paths:
       description: Return ok
       operationId: confirmOnboarding
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: the token id containing the onboardind information
@@ -775,6 +893,12 @@ paths:
       description: Return ok
       operationId: invalidateOnboarding
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: The token id to invalidate
@@ -797,6 +921,12 @@ paths:
       summary: Get an onboarding document
       operationId: getOnboardingDocument
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: the relationship id
@@ -826,6 +956,13 @@ paths:
       summary: Health status endpoint
       description: Return ok
       operationId: getStatus
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: successful operation
@@ -1185,6 +1322,10 @@ components:
           example: PA
         attributes:
           $ref: '#/components/schemas/Attributes'
+        logo:
+          description: URL to institution logo
+          format: url
+          type: string
       required:
         - id
         - externalId

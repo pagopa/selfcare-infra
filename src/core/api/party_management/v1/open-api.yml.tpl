@@ -45,6 +45,12 @@ paths:
       operationId: getPersonById
       description: 'returns the identified person, if any.'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           schema:
@@ -78,6 +84,12 @@ paths:
       description: Return ok
       operationId: existsPersonById
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The ID of the Person to check
@@ -99,6 +111,13 @@ paths:
       summary: Create a new person
       description: Return ok
       operationId: createPerson
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -131,6 +150,13 @@ paths:
       summary: Create an institution
       description: Return ok
       operationId: createInstitution
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -164,6 +190,12 @@ paths:
       operationId: getInstitutionById
       description: 'returns the identified institution, if any.'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -197,6 +229,12 @@ paths:
       description: Return ok
       operationId: existsInstitutionById
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The ID of the Institution to check
@@ -219,6 +257,12 @@ paths:
       operationId: updateInstitutionById
       description: 'update the identified institution, if any.'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -259,6 +303,12 @@ paths:
       operationId: getPartyAttributes
       description: 'returns the attributes of the identified party, if any.'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -293,6 +343,12 @@ paths:
       description: Return ok
       operationId: addInstitutionAttributes
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -328,6 +384,12 @@ paths:
       operationId: getInstitutionByExternalId
       description: 'returns the identified institution, if any.'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
           name: externalId
@@ -360,6 +422,13 @@ paths:
       summary: Create a new relationship between a Person and an Institution
       description: Return ok
       operationId: createRelationship
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -392,6 +461,12 @@ paths:
       description: Return ok
       operationId: getRelationships
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - in: query
           name: from
           schema:
@@ -459,6 +534,12 @@ paths:
       description: Deletes the relationship identified by relationshipId
       operationId: deleteRelationshipById
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: The ID of the Relationship to delete
@@ -488,6 +569,12 @@ paths:
       description: Return relationship
       operationId: getRelationshipById
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: relationshipId
           in: path
           description: The ID of the Relationship to retrieve
@@ -522,6 +609,12 @@ paths:
       operationId: suspendPartyRelationshipById
       description: 'Suspend relationship by ID'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -546,6 +639,12 @@ paths:
       operationId: activatePartyRelationshipById
       description: 'Activate Relationship by ID'
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - schema:
             type: string
             format: uuid
@@ -569,6 +668,13 @@ paths:
       summary: Create a new token
       description: Return ok
       operationId: createToken
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -597,6 +703,12 @@ paths:
       description: Return ok
       operationId: getToken
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: The token id to retrieve
@@ -626,6 +738,12 @@ paths:
       description: Return ok
       operationId: consumeToken
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: The token id to consume
@@ -670,6 +788,12 @@ paths:
       description: Return ok
       operationId: invalidateToken
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: The token id to invalidate
@@ -701,6 +825,12 @@ paths:
       description: Return ok
       operationId: verifyToken
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: tokenId
           in: path
           description: The token id to verify
@@ -739,6 +869,13 @@ paths:
       summary: Retrieves a collection of institutions
       tags:
         - party
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -773,6 +910,13 @@ paths:
       summary: Health status endpoint
       description: Return ok
       operationId: getStatus
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: successful operation

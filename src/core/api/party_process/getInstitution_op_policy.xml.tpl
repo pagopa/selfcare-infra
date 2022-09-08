@@ -14,18 +14,9 @@
             <when condition="@(context.Response.StatusCode == 200)">
                 <set-body>@{
                     JObject response = context.Response.Body.As<JObject>();
-                    foreach(JObject item in response.GetValue("content").Children()) {
-                    foreach (var key in new [] {"members", "createdAt", "createdBy", "modifiedAt", "modifiedBy"}) {
-                    try {
-                    item.Property(key).Remove();
-                    } catch (Exception ex) {
-                    // do nothing
-                    }
-                    }
-                    }
+                    response.Add("logo", new JValue(new Uri("${CDN_STORAGE_URL}/institutions/" + response.GetValue("id") + "/logo.png")));
                     return response.ToString();
-                    }
-                </set-body>
+                    }</set-body>
             </when>
         </choose>
     </outbound>
