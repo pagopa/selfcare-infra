@@ -26,6 +26,9 @@ module "key_vault_secrets_query" {
     "user-registry-api-key",
     "eventhub-SC-Contracts-selfcare-wo-connection-string",
     "external-api-key",
-    "external-user-api"
+    "external-user-api",
+    "user-registry-api-key",
+    "logs-storage-connection-string",
+    "spid-logs-encryption-public-key"
   ]
 }
