@@ -26,6 +26,7 @@ cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
 cidr_subnet_eventhub         = ["10.1.138.0/24"]
+cidr_subnet_logs_storage     = ["10.1.139.0/24"]
 
 # dns
 external_domain = "pagopa.it"
@@ -147,3 +148,9 @@ eventhubs = [{
   ]
 }]
 ##
+
+# logs storage
+logs_account_replication_type   = "RAGZRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true

@@ -488,6 +488,11 @@ variable "cidr_subnet_eventhub" {
   description = "EventHub address space."
 }
 
+variable "cidr_subnet_logs_storage" {
+  type        = list(string)
+  description = "Logs storage address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
@@ -898,6 +903,30 @@ variable "contracts_advanced_threat_protection" {
 variable "robots_indexed_paths" {
   type        = list(string)
   description = "List of cdn paths to allow robots index"
+}
+# logs storage
+variable "logs_account_replication_type" {
+  type        = string
+  description = "logs replication type"
+  default     = "LRS"
+}
+
+variable "logs_delete_retention_days" {
+  type        = number
+  description = "Number of days to retain deleted logs"
+  default     = 1
+}
+
+variable "logs_enable_versioning" {
+  type        = bool
+  description = "Enable logs versioning"
+  default     = false
+}
+
+variable "logs_advanced_threat_protection" {
+  type        = bool
+  description = "Enable logs threat advanced protection"
+  default     = false
 }
 
 ## Event hub
