@@ -36,6 +36,7 @@ resource "null_resource" "upload_resources_default_product_logo" {
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file ${data.local_file.resources_default_product_logo.filename} \
+                --overwrite true \
                 --name resources/products/default/logo.png
           EOT
   }
@@ -57,6 +58,7 @@ resource "null_resource" "upload_resources_default_product_resources_depict-imag
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file ${data.local_file.resources_default_product_depict-image.filename} \
+                --overwrite true \
                 --name resources/products/default/depict-image.jpeg
           EOT
   }
@@ -73,6 +75,7 @@ resource "null_resource" "upload_resources_logo" {
                 --account-name ${module.selc-contracts-storage.name} \
                 --account-key "${module.selc-contracts-storage.primary_access_key}" \
                 --file ${data.local_file.resources_default_product_logo.filename} \
+                --overwrite true \
                 --name resources/logo.png
           EOT
   }
