@@ -19,7 +19,7 @@ resource "null_resource" "download_apim_external_api_v1" {
         --method get \
         --url https://management.azure.com/subscriptions/${data.azurerm_subscription.current.subscription_id}/resourceGroups/${local.resource_groups_name}/providers/Microsoft.ApiManagement/service/${local.service_name}/apis/${local.api_id} \
         --url-parameters api-version=${local.azure_apim_api_version} export=true format=openapi \
- 	--output-file ${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v1.yaml
+ 	      --output-file ${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v1.yaml
     EOT
   }
 }
@@ -33,12 +33,13 @@ resource "null_resource" "upload_developer_external_api_v1" {
 
   provisioner "local-exec" {
     command = <<EOT
-              az storage blob sync \
+              az storage blob upload \
                 --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
-                --source "${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v1.yaml" \
-                --destination 'developer/external/ms-external-api-v1.yaml'
+                --file "${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v1.yaml" \
+                --overwrite true \
+                --name 'developer/external/ms-external-api-v1.yaml'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
@@ -56,12 +57,13 @@ resource "null_resource" "upload_developer_index" {
 
   provisioner "local-exec" {
     command = <<EOT
-              az storage blob sync \
+              az storage blob upload \
                 --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
-                --source "./env/${var.env}/developer/external/index.html" \
-                --destination 'developer/external/index.html'
+                --file "./env/${var.env}/developer/external/index.html" \
+                --overwrite true \
+                --name 'developer/external/index.html'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
@@ -71,4 +73,3 @@ resource "null_resource" "upload_developer_index" {
           EOT
   }
 }
-
