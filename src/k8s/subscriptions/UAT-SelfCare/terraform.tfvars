@@ -29,6 +29,10 @@ configmaps_hub-spid-login-ms = {
 
   # SPID
   ORG_ISSUER = "https://selfcare.pagopa.it"
+
+  CIE_URL          = "https://preproduzione.idserver.servizicie.interno.gov.it/idp/shibboleth?Metadata"
+  SERVER_PORT      = "8080"
+  IDP_METADATA_URL = "https://api.is.eng.pagopa.it/idp-keys/spid/latest"
 }
 
 configmaps_common = {
