@@ -96,16 +96,6 @@ paths:
             style: simple
             schema:
               type: string
-          - name: role
-            in: query
-            description: User's role
-            required: false
-            style: form
-            schema:
-              type: string
-              enum:
-                - ADMIN
-                - LIMITED
           - name: productRoles
             in: query
             description: User's roles in product
