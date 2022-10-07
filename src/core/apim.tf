@@ -401,7 +401,7 @@ module "apim_external_api_ms_v1" {
     },
     {
       operation_id = "getInstitutionProductUsers"
-      xml_content=templatefile("./api/ms_external_api/getInstitutionProductUsers.xml",{
+      xml_content=templatefile("./api/ms_external_api/getInstitutionProductUsers.xml.tpl",{
         MS_SELFCARE_DASHBOARD_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/dashboard/v1/"
       })
     }
