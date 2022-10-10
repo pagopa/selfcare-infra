@@ -77,11 +77,11 @@ paths:
         operationId: getInstitutionProductUsersUsingGET
         parameters:
           - name: x-selfcare-uid
-                  in: header
-                  description: Logged user's unique identifier
-                  required: true
-                  schema:
-                    type: string
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
           - name: institutionId
             in: path
             description: Institution's unique internal identifier
@@ -670,6 +670,87 @@ components:
           enum:
           - ACTIVE
           - SUSPENDED
+    ProductUserResource:
+      title: ProductUserResource
+      required:
+        - email
+        - id
+        - name
+        - product
+        - role
+        - status
+        - surname
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's personal email
+          format: email
+          example: email@example.com
+        id:
+          type: string
+          description: User's unique identifier
+          format: uuid
+        name:
+          type: string
+          description: User's name
+        product:
+          description: Authorized user product
+          $ref: '#/components/schemas/ProductInfoResource'
+        role:
+          type: string
+          description: User's role
+          enum:
+            - ADMIN
+            - LIMITED
+        status:
+          type: string
+          description: User's status
+        surname:
+          type: string
+          description: User's surname
+    ProductInfoResource:
+      title: ProductInfoResource
+      required:
+        - id
+        - roleInfos
+      type: object
+      properties:
+        id:
+          type: string
+          description: Product's unique identifier
+        roleInfos:
+          type: array
+          description: User's role infos in product
+          items:
+            $ref: '#/components/schemas/ProductRoleInfoResource'
+        title:
+          type: string
+          description: Product's title
+    ProductRoleInfoResource:
+      title: ProductRoleInfoResource
+      required:
+        - relationshipId
+        - role
+        - selcRole
+        - status
+      type: object
+      properties:
+        relationshipId:
+          type: string
+          description: Unique relationship identifier between User and Product
+        role:
+          type: string
+          description: User's role in product
+        selcRole:
+          type: string
+          description: User's role
+          enum:
+            - ADMIN
+            - LIMITED
+        status:
+          type: string
+          description: User's status
     Institution:
       type: object
       properties:
