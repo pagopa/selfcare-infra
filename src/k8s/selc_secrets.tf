@@ -198,7 +198,7 @@ resource "kubernetes_secret" "uservice-party-process" {
   }
 
   data = {
-    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    USER_REGISTRY_API_KEY                    = module.key_vault_secrets_query.values["user-registry-api-key"].value
     ONBOARDING_INSTITUTION_ALTERNATIVE_EMAIL = module.key_vault_secrets_query.values["party-test-institution-email"].value
     #"  pectest@pec.pagopa.it  text/plain
   }
