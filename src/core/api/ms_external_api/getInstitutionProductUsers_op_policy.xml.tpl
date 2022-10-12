@@ -23,7 +23,7 @@
                         roles.Add(role["role"].ToString());
                         }
                         
-                        foreach (var key in new [] {"id", "role", "status", "product"}) 
+                        foreach (var key in new [] {"id", "role", "product"}) 
                         {
                             try {
                             item.Property(key).Remove();
