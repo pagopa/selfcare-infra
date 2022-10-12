@@ -687,9 +687,9 @@ components:
         name:
           type: string
           description: User's name
-        role:
+        roles:
           type: array
-          description: User's role
+          description: User's roles on product
         status:
           type: string
           description: User's status
