@@ -13,7 +13,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
     USERVICE_PARTY_PROCESS_URL        = format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
     USERVICE_PARTY_MANAGEMENT_URL     = format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
-    USERVICE_PARTY_REGISTRY_PROXY_URL = format("http://interop-be-party-registry-proxy:8088/party-registry-proxy/%s", var.api-version_uservice-party-registry-proxy)
+    USERVICE_PARTY_REGISTRY_PROXY_URL = format("http://ms-party-registry-proxy:8080/%s", var.api-version_uservice-party-registry-proxy)
   }
 }
 
