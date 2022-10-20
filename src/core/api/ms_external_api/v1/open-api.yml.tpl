@@ -73,7 +73,7 @@ paths:
         tags:
           - institutions
         summary: getInstitutionProductUsers
-        description: Service to get all the users related to a specific pair of institution-product
+        description: Service to get all the active users related to a specific pair of institution-product
         operationId: getInstitutionProductUsersUsingGET
         parameters:
           - name: x-selfcare-uid
@@ -96,14 +96,23 @@ paths:
             style: simple
             schema:
               type: string
+          - name: userId
+            in: query
+            description: User's unique identifier
+            required: false
+            style: form
+            schema:
+              type: string
           - name: productRoles
             in: query
             description: User's roles in product
             required: false
             style: form
-            explode: true
             schema:
-              type: string
+              type: array
+              items:
+                type: string
+            explode: false
         responses:
           '200':
             description: OK
@@ -112,7 +121,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/ProductUserResource'
+                    $ref: '#/components/schemas/UserResource'
           '400':
             description: Bad Request
             content:
@@ -670,21 +679,19 @@ components:
           enum:
           - ACTIVE
           - SUSPENDED
-    ProductUserResource:
-      title: ProductUserResource
+    UserResource:
+      title: UserResource
       required:
         - email
         - id
         - name
-        - product
-        - role
-        - status
+        - roles
         - surname
       type: object
       properties:
         email:
           type: string
-          description: User's personal email
+          description: User's institutional email
           format: email
           example: email@example.com
         id:
@@ -694,63 +701,14 @@ components:
         name:
           type: string
           description: User's name
-        product:
-          description: Authorized user product
-          $ref: '#/components/schemas/ProductInfoResource'
-        role:
-          type: string
-          description: User's role
-          enum:
-            - ADMIN
-            - LIMITED
-        status:
-          type: string
-          description: User's status
+        roles:
+          type: array
+          description: User's roles in product
+          items:
+            type: string
         surname:
           type: string
           description: User's surname
-    ProductInfoResource:
-      title: ProductInfoResource
-      required:
-        - id
-        - roleInfos
-      type: object
-      properties:
-        id:
-          type: string
-          description: Product's unique identifier
-        roleInfos:
-          type: array
-          description: User's role infos in product
-          items:
-            $ref: '#/components/schemas/ProductRoleInfoResource'
-        title:
-          type: string
-          description: Product's title
-    ProductRoleInfoResource:
-      title: ProductRoleInfoResource
-      required:
-        - relationshipId
-        - role
-        - selcRole
-        - status
-      type: object
-      properties:
-        relationshipId:
-          type: string
-          description: Unique relationship identifier between User and Product
-        role:
-          type: string
-          description: User's role in product
-        selcRole:
-          type: string
-          description: User's role
-          enum:
-            - ADMIN
-            - LIMITED
-        status:
-          type: string
-          description: User's status
     Institution:
       type: object
       properties:
