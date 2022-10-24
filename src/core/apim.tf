@@ -345,7 +345,6 @@ module "apim_external_api_ms_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
 
-
   description  = "This service is the proxy for external services"
   display_name = "External API service"
   path         = "external"
@@ -368,6 +367,12 @@ module "apim_external_api_ms_v1" {
   })
 
   subscription_required = true
+  product_ids = [
+    module.apim_product_interop.product_id,
+    module.apim_product_pn.product_id,
+    module.apim_product_pagopa.product_id,
+    module.apim_product_idpay.product_id
+  ]
 
   api_operation_policies = [
     {
@@ -401,7 +406,80 @@ module "apim_external_api_ms_v1" {
     },
     {
       operation_id = "getInstitutionProductUsersUsingGET"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      xml_content  = file("./api/ms_external_api/getInstitutionProductUsersUsingGET_op_policy.xml")
     }
   ]
+}
+
+
+##############
+## Products ##
+##############
+
+module "apim_product_interop" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "interop"
+  display_name = "INTEROP"
+  description  = "Interoperabilità"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop/policy.xml")
+}
+
+module "apim_product_pn" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn"
+  display_name = "PN"
+  description  = "Piattaforma Notifiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pn/policy.xml")
+}
+
+module "apim_product_pagopa" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pagopa"
+  display_name = "PAGOPA"
+  description  = "Pagamenti pagoPA"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pagopa/policy.xml")
+}
+
+module "apim_product_idpay" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "idpay"
+  display_name = "IDPAY"
+  description  = "ID Pay"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/idpay/policy.xml")
 }

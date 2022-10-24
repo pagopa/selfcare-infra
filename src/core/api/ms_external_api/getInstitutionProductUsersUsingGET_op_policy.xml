@@ -4,12 +4,15 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-backend-service base-url="${MS_PRODUCT_BACKEND_BASE_URL}" />
-        <rewrite-uri template="@("/products/"+(string)context.Variables["productId"])" />
+        <rewrite-uri template="@("
+        /institutions/{institutionId}/products/"+(string)context.Variables["productId"]+"/users")" />
     </inbound>
     <backend>
         <base/>
     </backend>
+    <outbound>
+        <base/>
+    </outbound>
     <on-error>
         <base/>
     </on-error>

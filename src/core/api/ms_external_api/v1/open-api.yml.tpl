@@ -25,13 +25,6 @@ paths:
           required: true
           schema:
             type: string
-        - name: productId
-          in: query
-          description: Product's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -68,7 +61,7 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/institutions/{institutionId}/products/{productId}/users':
+  '/institutions/{institutionId}/users':
       get:
         tags:
           - institutions
@@ -85,13 +78,6 @@ paths:
           - name: institutionId
             in: path
             description: Institution's unique internal identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-          - name: productId
-            in: path
-            description: Product's unique identifier
             required: true
             style: simple
             schema:
@@ -296,13 +282,6 @@ paths:
           type: array
           items:
             type: string
-      - name: productId
-        in: query
-        description: Users group's productId
-        required: false
-        style: form
-        schema:
-          type: string
       - name: userId
         in: query
         description: Member's unique identifier
@@ -356,25 +335,18 @@ paths:
       security:
       - bearerAuth:
         - global    
-  '/products/{productId}':
+  '/product':
     get:
       tags:
         - product
       summary: getProduct
-      description: The service retrieves Product information from product id
+      description: The service retrieves Product information associated to Subscription Key
       operationId: getProductUsingGET
       parameters:
         - name: x-selfcare-uid
           in: header
           description: Logged user's unique identifier
           required: true
-          schema:
-            type: string
-        - name: productId
-          in: path
-          description: Product's unique identifier
-          required: true
-          style: simple
           schema:
             type: string
       responses:
