@@ -4,7 +4,7 @@
         <choose>
             <when condition="@(!context.Variables.ContainsKey("productId"))">
                <return-response>
-                    <set-status code="403" reason="Subscription key not associated to any Product" />
+                    <set-status code="403" reason="Subscription key not related to any Product" />
                 </return-response>
             </when>
         </choose>

@@ -16,7 +16,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutions
-      description: The service retrieves all the onboarded institutions related to the logged user
+      description: The service retrieves all the onboarded institutions related to the logged user and the product retrieved from Subscription Key
       operationId: getInstitutionsUsingGET
       parameters:
         - name: x-selfcare-uid
@@ -66,7 +66,7 @@ paths:
         tags:
           - institutions
         summary: getInstitutionProductUsers
-        description: Service to get all the active users related to a specific pair of institution-product
+        description: Service to get all the active users related to the provided institution and the product retrieved from Subscription Key
         operationId: getInstitutionProductUsersUsingGET
         parameters:
           - name: x-selfcare-uid
@@ -238,7 +238,7 @@ paths:
       tags:
       - user-group
       summary: getUserGroups
-      description: Service that allows to get a list of UserGroup entities
+      description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
       operationId: getUserGroupsUsingGET
       parameters:
       - name: x-selfcare-uid
@@ -340,7 +340,7 @@ paths:
       tags:
         - product
       summary: getProduct
-      description: The service retrieves Product information associated to Subscription Key
+      description: The service retrieves Product information related to Subscription Key
       operationId: getProductUsingGET
       parameters:
         - name: x-selfcare-uid
