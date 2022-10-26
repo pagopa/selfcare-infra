@@ -39,7 +39,7 @@ enable_iac_pipeline      = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"
-apim_sku            = "Developer_1" # TODO
+apim_sku            = "Premium_1" # TODO
 
 # app_gateway
 app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
