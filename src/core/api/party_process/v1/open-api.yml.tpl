@@ -21,11 +21,6 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
-  - name: external
-    description: Implements external endpoints
-    externalDocs:
-      description: Find out more
-      url: 'http://swagger.io'
 paths:
   /institutions/{id}/relationships:
     get:
@@ -165,46 +160,6 @@ paths:
           schema:
             type: string
             format: uuid
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Institution'
-        '400':
-          description: Invalid id supplied
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-  '/external/institutions/{externalId}':
-    get:
-      security: [{}]
-      tags:
-        - external
-      summary: Gets the corresponding institution using external institution id
-      description: Gets institution using external institution id
-      operationId: getInstitutionByExternalId
-      parameters:
-        - name: x-selfcare-uid
-          in: header
-          description: Logged user's unique identifier
-          required: true
-          schema:
-            type: string
-        - name: externalId
-          in: path
-          description: The external identifier of the institution
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: successful operation

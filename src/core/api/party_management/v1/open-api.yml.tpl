@@ -19,6 +19,11 @@ tags:
     externalDocs:
       description: Find out more
       url: 'http://swagger.io'
+  - name: external
+    description: External id endpoints
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
 security:
   - bearerAuth: [ ]
 paths:
@@ -99,6 +104,45 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '404':
           description: Party not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+  /external/institutions/{externalId}:
+    get:
+      summary: Retrieves Institution by ID
+      tags:
+        - external
+      operationId: getInstitutionByExternalId
+      description: 'returns the identified institution, if any.'
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - schema:
+            type: string
+          name: externalId
+          in: path
+          required: true
+          description: External Institution ID
+      responses:
+        '200':
+          description: Institution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Institution'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Institution not found
           content:
             application/problem+json:
               schema:
