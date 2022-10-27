@@ -246,6 +246,7 @@ resource "null_resource" "upload_jwks" {
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/jwks.json" \
+                --overwrite true \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \

@@ -340,6 +340,16 @@ module "apim_external_api_ms_v1" {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
       })
+    },
+    {
+      operation_id = "getProductUsingGET"
+      xml_content = templatefile("./api/ms_external_api/getProduct_op_policy.xml.tpl", {
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitutionProductUsersUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
 }

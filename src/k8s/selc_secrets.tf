@@ -13,6 +13,8 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
     METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value
 
     USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+
+    SPID_LOGS_STORAGE_CONNECTION_STRING = module.key_vault_secrets_query.values["logs-storage-connection-string"].value
   }
 
   type = "Opaque"
@@ -175,6 +177,20 @@ resource "kubernetes_secret" "b4f-dashboard" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-external-api" {
+  metadata {
+    name      = "product-external-api"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
@@ -182,7 +198,9 @@ resource "kubernetes_secret" "uservice-party-process" {
   }
 
   data = {
-    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    USER_REGISTRY_API_KEY                    = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    ONBOARDING_INSTITUTION_ALTERNATIVE_EMAIL = module.key_vault_secrets_query.values["party-test-institution-email"].value
+    #"  pectest@pec.pagopa.it  text/plain
   }
 
   type = "Opaque"

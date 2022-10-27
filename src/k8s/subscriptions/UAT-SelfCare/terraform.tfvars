@@ -14,7 +14,7 @@ spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 # uservice versions
 api-version_uservice-party-management     = "0.1"
 api-version_uservice-party-process        = "0.1"
-api-version_uservice-party-registry-proxy = "0.1"
+api-version_uservice-party-registry-proxy = "v1"
 
 # session jwt audience
 jwt_audience = "api.uat.selfcare.pagopa.it"
@@ -29,6 +29,10 @@ configmaps_hub-spid-login-ms = {
 
   # SPID
   ORG_ISSUER = "https://selfcare.pagopa.it"
+
+  CIE_URL          = "https://preproduzione.idserver.servizicie.interno.gov.it/idp/shibboleth?Metadata"
+  SERVER_PORT      = "8080"
+  IDP_METADATA_URL = "https://api.is.eng.pagopa.it/idp-keys/spid/latest"
 }
 
 configmaps_common = {

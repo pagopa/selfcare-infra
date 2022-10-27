@@ -1,23 +1,22 @@
 openapi: 3.0.3
 info:
   title: selc-external-api
-  description: This service acts as an orchestrator for information coming from different services
-    and as a proxy
+  description: This service acts as an orchestrator for information coming from different services and as a proxy
   version: 0.0.1-SNAPSHOT
 servers:
   - url: 'https://${host}/${basePath}'
 tags:
   - name: institutions
     description: Institution Controller
+  - name: product
+    description: Product Controller
 paths:
   '/institutions':
     get:
       tags:
         - institutions
       summary: getInstitutions
-      description: >-
-        The service retrieves all the onboarded institutions related to the
-        logged user
+      description: The service retrieves all the onboarded institutions related to the logged user
       operationId: getInstitutionsUsingGET
       parameters:
         - name: x-selfcare-uid
@@ -69,6 +68,87 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/{institutionId}/products/{productId}/users':
+      get:
+        tags:
+          - institutions
+        summary: getInstitutionProductUsers
+        description: Service to get all the active users related to a specific pair of institution-product
+        operationId: getInstitutionProductUsersUsingGET
+        parameters:
+          - name: x-selfcare-uid
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
+          - name: institutionId
+            in: path
+            description: Institution's unique internal identifier
+            required: true
+            style: simple
+            schema:
+              type: string
+          - name: productId
+            in: path
+            description: Product's unique identifier
+            required: true
+            style: simple
+            schema:
+              type: string
+          - name: userId
+            in: query
+            description: User's unique identifier
+            required: false
+            style: form
+            schema:
+              type: string
+          - name: productRoles
+            in: query
+            description: User's roles in product
+            required: false
+            style: form
+            schema:
+              type: array
+              items:
+                type: string
+            explode: false
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UserResource'
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '401':
+            description: Unauthorized
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '404':
+            description: Not Found
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '500':
+            description: Internal Server Error
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+              - global 
   '/institutions/{institutionId}/products':
     get:
       tags:
@@ -275,7 +355,62 @@ paths:
                 "$ref": "#/components/schemas/Problem"
       security:
       - bearerAuth:
-        - global
+        - global    
+  '/products/{productId}':
+    get:
+      tags:
+        - product
+      summary: getProduct
+      description: The service retrieves Product information from product id
+      operationId: getProductUsingGET
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          description: Product's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     InstitutionResource:
@@ -332,10 +467,10 @@ components:
           type: string
           description: Institution's taxCode
         userProductRoles:
-                 type: array
-                 description: Logged user's roles on product
-                 items:
-                   type: string
+          type: array
+          description: Logged user's roles on product
+          items:
+            type: string
         zipCode:
           type: string
           description: Institution's zipCode
@@ -384,32 +519,103 @@ components:
       description: >-
         A "problem detail" as a way to carry machine-readable details of errors
         (https://datatracker.ietf.org/doc/html/rfc7807)
-    ProductResource:
+    ProductResource: 
       title: ProductResource
-      required:
-        - description
+      required: 
+        - contractTemplatePath
+        - contractTemplateUpdatedAt
+        - contractTemplateVersion
+        - createdAt
         - id
-        - title
-        - urlBO
+        - title      
       type: object
-      properties:
-        description:
+      properties: 
+        contractTemplatePath: 
+          type: string
+          description: The path of contract
+        contractTemplateUpdatedAt: 
+          type: string
+          description: Date the contract was postponed
+          format: date-time
+        contractTemplateVersion: 
+          type: string
+          description: Version of the contract
+        createdAt: 
+          type: string
+          description: Date the products was activated/created
+          format: date-time
+        depictImageUrl: 
+          type: string
+          description: Product's depiction image url
+        description: 
           type: string
           description: Product's description
-        id:
+        id: 
           type: string
           description: Product's unique identifier
-        title:
+        identityTokenAudience: 
+          type: string
+          description: Product's identity token audience
+        logo: 
+          type: string
+          description: Product's logo url
+        logoBgColor: 
+          pattern: ^#0-9A-F6$
+          type: string
+          description: Product logo's background color
+        parentId: 
+          type: string
+          description: Root parent of the sub product
+        roleManagementURL: 
+          type: string
+          description: Url of the utilities management
+        roleMappings: 
+          type: object
+          additionalProperties: 
+            $ref: '#/components/schemas/ProductRoleInfoRes'
+          description: Mappings between Party's and Product's role
+        title: 
           type: string
           description: Product's title
-        urlBO:
+        urlBO: 
           type: string
-          description: >-
-            URL that redirects to the back-office section, where is possible to
-            manage the product
-        urlPublic:
+          description: URL that redirects to the back-office section where is possible to manage the product
+        urlPublic: 
           type: string
           description: URL that redirects to the public information webpage of the product
+    ProductRoleInfoRes: 
+      title: ProductRoleInfoRes
+      required: 
+        - multiroleAllowed
+        - roles
+      type: object
+      properties: 
+        multiroleAllowed: 
+          type: boolean
+          description: Flag indicating if a User can have more than one product role
+          example: false
+        roles: 
+          type: array
+          description: Available product roles
+          items: 
+            $ref: '#/components/schemas/ProductRole'
+    ProductRole: 
+      title: ProductRole
+      required: 
+        - code
+        - description
+        - label
+      type: object
+      properties: 
+        code: 
+          type: string
+          description: Product role internal code
+        description: 
+          type: string
+          description: Product role description
+        label: 
+          type: string
+          description: Product role label
     PageOfUserGroupResource:
       title: PageOfUserGroupResource
       required:
@@ -473,6 +679,36 @@ components:
           enum:
           - ACTIVE
           - SUSPENDED
+    UserResource:
+      title: UserResource
+      required:
+        - email
+        - id
+        - name
+        - roles
+        - surname
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's institutional email
+          format: email
+          example: email@example.com
+        id:
+          type: string
+          description: User's unique identifier
+          format: uuid
+        name:
+          type: string
+          description: User's name
+        roles:
+          type: array
+          description: User's roles in product
+          items:
+            type: string
+        surname:
+          type: string
+          description: User's surname
     Institution:
       type: object
       properties:
