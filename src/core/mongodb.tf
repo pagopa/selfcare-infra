@@ -68,6 +68,12 @@ resource "azurerm_cosmosdb_mongo_database" "selc_product" {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      autoscale_settings
+    ]
+  }
 }
 
 resource "azurerm_management_lock" "mongodb_selc_product" {
@@ -89,6 +95,12 @@ resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
     content {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      autoscale_settings
+    ]
   }
 }
 
