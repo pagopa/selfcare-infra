@@ -205,3 +205,38 @@ resource "kubernetes_role_binding" "pod_reader" {
     name = format("system:serviceaccount:%s:default", kubernetes_namespace.selc.metadata[0].name)
   }
 }
+
+
+# service account required by apim in order to authenticate with microservices
+resource "kubernetes_service_account" "apim_service_account" {
+  metadata {
+    name      = "apim"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+}
+
+# service_account required by internal microservices authentication
+resource "kubernetes_service_account" "in_cluster_app_service_account" {
+  metadata {
+    name      = "in-cluster-app"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+}
+
+# role binding required by internal microservices in order to call k8s tokenreview API
+resource "kubernetes_role_binding" "tokenreview_role_binding" {
+  metadata {
+    name      = "role-tokenreview-binding"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "system:auth-delegator"
+  }
+  subject {
+    kind = "ServiceAccount"
+    name = kubernetes_service_account.in_cluster_app_service_account.metadata[0].name
+    namespace = kubernetes_service_account.in_cluster_app_service_account.metadata[0].namespace
+  }
+}
