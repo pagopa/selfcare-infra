@@ -1,7 +1,7 @@
 # general
 
 locals {
-  project                        = format("%s-%s", var.prefix, var.env_short)
+  project                        = "${var.prefix}-${var.env_short}"
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
 }
