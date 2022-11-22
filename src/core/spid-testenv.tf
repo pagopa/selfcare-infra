@@ -1,5 +1,5 @@
 module "spid-test-env" {
-  source = "../modules/spid_testenv"
+  source = "./modules/spid_testenv"
 
   enable_spid_test = var.enable_spid_test
 
