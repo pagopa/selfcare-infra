@@ -5,26 +5,48 @@ on:
 
 jobs:
   static_analysis:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v2
+      # from https://github.com/actions/checkout/commits/main
+      - uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
-      - name: init_src_core
+      - name: init_terraform_folders
+        env:
+          FOLDERS: >
+            src/core
+            src/k8s
         run: |
+          pids=()
+
           TAG=$(cat .terraform-version)
-          cd src
-          sed -i -e 's/  backend "azurerm" {}//g' core/99_main.tf # use local backend
-          docker run -v $(pwd):/tmp -w /tmp/core hashicorp/terraform:$TAG init
+          for f in $FOLDERS; do
+            pushd "$(pwd)/${f}"
+              sed -i -e 's/  backend "azurerm" {}//g' 99_main.tf # use local backend
+              docker run -v $(pwd):/tmp -w /tmp hashicorp/terraform:$TAG init &
+              pids+=($!)
+            popd
+          done
 
-      - name: init_src_k8s
-        run: |
-          TAG=$(cat .terraform-version)
-          cd src
-          sed -i -e 's/  backend "azurerm" {}//g' k8s/main.tf # use local backend
-          docker run -v $(pwd):/tmp -w /tmp/k8s hashicorp/terraform:$TAG init
+          # Wait for each specific process to terminate.
+          # Instead of this loop, a single call to 'wait' would wait for all the jobs
+          # to terminate, but it would not give us their exit status.
+          #
+          for pid in "${pids[@]}"; do
+            #
+            # Waiting on a specific PID makes the wait command return with the exit
+            # status of that process. Because of the 'set -e' setting, any exit status
+            # other than zero causes the current shell to terminate with that exit
+            # status as well.
+            #
+            wait "$pid"
+          done
 
-      - name: run_test
+      - name: run_pre_commit_terraform
         run: |
-          TAG=v1.64.0
+          # from https://github.com/antonbabenko/pre-commit-terraform/pkgs/container/pre-commit-terraform
+          TAG=v1.76.0@sha256:50ed39dc67b6a5b198e45fa7b06aa73b50ccc20613bc795f1a7841fd41b2c838
           docker run -v $(pwd):/lint -w /lint ghcr.io/antonbabenko/pre-commit-terraform:$TAG run -a
