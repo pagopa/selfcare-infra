@@ -54,6 +54,17 @@ resource "azurerm_dns_ns_record" "io_selfcare" {
   tags = var.tags
 }
 
+# INTEROP public DNS delegation
+resource "azurerm_dns_ns_record" "interop_selfcare" {
+  count               = var.dns_ns_interop_selfcare != null ? 1 : 0
+  name                = "interop"
+  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  records             = var.dns_ns_interop_selfcare
+  ttl                 = var.dns_default_ttl_sec
+  tags                = var.tags
+}
+
 #
 # @Records
 #
@@ -68,6 +79,30 @@ resource "azurerm_dns_caa_record" "caa_selfcare" {
     flags = 0
     tag   = "issue"
     value = "letsencrypt.org"
+  }
+
+  record {
+    flags = 0
+    tag   = "issue"
+    value = "amazon.com"
+  }
+
+  record {
+    flags = 0
+    tag   = "issue"
+    value = "amazontrust.com"
+  }
+
+  record {
+    flags = 0
+    tag   = "issue"
+    value = "awstrust.com"
+  }
+
+  record {
+    flags = 0
+    tag   = "issue"
+    value = "amazonaws.com"
   }
 
   record {

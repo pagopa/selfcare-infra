@@ -117,7 +117,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" 
 
 module "apim_uservice_party_process_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-party-prc-api-v1", local.project)
+  name                = format("%s-party-prc-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
@@ -147,19 +147,7 @@ module "apim_uservice_party_process_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "getOnboardingInfo"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "verifyOnboarding"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getUserInstitutionRelationships"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "retrieveInstitutionProducts"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
@@ -168,19 +156,9 @@ module "apim_uservice_party_process_v1" {
     },
     {
       operation_id = "getInstitution"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getInstitutionByExternalId"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getOnboardingDocument"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getStatus"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
     }
   ]
 }
@@ -195,7 +173,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_managemen
 
 module "apim_uservice_party_management_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-party-mgmt-api-v1", local.project)
+  name                = format("%s-party-mgmt-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
@@ -225,19 +203,7 @@ module "apim_uservice_party_management_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "getPersonById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "existsPersonById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getInstitutionById"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "existsInstitutionById"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
@@ -257,11 +223,130 @@ module "apim_uservice_party_management_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "getToken"
+      operation_id = "bulkInstitutions"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
+  ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_user_group_ms" {
+  name                = format("%s-ms-user-group-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "User Group Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_user_group_ms_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-user-group-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_user_group_ms.id
+
+
+  description  = "This service is the user group micro service"
+  display_name = "User Group Micro Service"
+  path         = "external/user-groups"
+  api_version  = "v1"
+  protocols = [
+  "https"]
+
+  service_url = format("http://%s/ms-user-group/user-groups/v1/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "user-groups/v1/"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy_user_group.xml")
+    }
+  ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_external_api_ms" {
+  name                = format("%s-ms-external-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "External API Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_external_api_ms_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-external-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
+
+
+  description  = "This service is the proxy for external services"
+  display_name = "External API service"
+  path         = "external"
+  api_version  = "v1"
+  protocols = [
+  "https"]
+
+  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getInstitutionsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/getInstitutions_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
+    },
+    {
+      operation_id = "getInstitutionUserProductsUsingGET"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "getStatus"
+      operation_id = "getUserGroupsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/jwt_auth_op_policy_user_group.xml.tpl", {
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content = templatefile("./api/ms_external_api/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+      })
+    },
+    {
+      operation_id = "getProductUsingGET"
+      xml_content = templatefile("./api/ms_external_api/getProduct_op_policy.xml.tpl", {
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitutionProductUsersUsingGET"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]

@@ -25,6 +25,8 @@ cidr_subnet_dns_forwarder    = ["10.1.134.0/29"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
+cidr_subnet_eventhub         = ["10.1.138.0/24"]
+cidr_subnet_logs_storage     = ["10.1.139.0/24"]
 
 # dns
 external_domain = "pagopa.it"
@@ -37,7 +39,7 @@ enable_iac_pipeline      = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"
-apim_sku            = "Developer_1" # TODO
+apim_sku            = "Premium_1" # TODO
 
 # app_gateway
 app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
@@ -55,16 +57,15 @@ redis_capacity = 0
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip               = "10.1.0.250"
-aks_availability_zones         = [1, 2, 3]
-aks_node_count                 = 1
-aks_max_pods                   = 100
-aks_enable_auto_scaling        = true
-aks_min_count                  = 1
-aks_max_count                  = 3
-aks_upgrade_settings_max_surge = "33%"
-aks_vm_size                    = "Standard_D4s_v5"
-aks_sku_tier                   = "Paid"
+reverse_proxy_ip                  = "10.1.1.250"
+aks_kubernetes_version            = "1.23.5"
+aks_system_node_pool_os_disk_type = "Ephemeral"
+aks_upgrade_settings_max_surge    = "33%"
+aks_sku_tier                      = "Paid"
+
+aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
+aks_system_node_pool_node_count_max               = 3
+aks_system_node_pool_only_critical_addons_enabled = false
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities = []
@@ -103,3 +104,53 @@ contracts_enable_versioning          = true
 contracts_advanced_threat_protection = true
 
 robots_indexed_paths = ["/"]
+
+dns_ns_interop_selfcare = [
+  "ns-1355.awsdns-41.org",
+  "ns-601.awsdns-11.net",
+  "ns-2030.awsdns-61.co.uk",
+  "ns-119.awsdns-14.com",
+]
+
+## Event hub
+eventhub_sku_name                 = "Standard"
+eventhub_capacity                 = 2
+eventhub_auto_inflate_enabled     = true
+eventhub_maximum_throughput_units = 4
+eventhub_zone_redundant           = true
+eventhub_alerts_enabled           = false
+
+eventhub_ip_rules = [
+  {
+    ip_mask = "18.192.147.151",
+    action  = "Allow"
+  }
+]
+
+eventhubs = [{
+  name              = "SC-Contracts"
+  partitions        = 30
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "selfcare-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "datalake"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+}]
+##
+
+# logs storage
+logs_account_replication_type   = "RAGZRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true

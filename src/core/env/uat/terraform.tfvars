@@ -25,6 +25,8 @@ cidr_subnet_dns_forwarder    = ["10.1.134.0/29"]
 cidr_subnet_cosmosdb_mongodb = ["10.1.135.0/24"]
 cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
+cidr_subnet_eventhub         = ["10.1.138.0/24"]
+cidr_subnet_logs_storage     = ["10.1.139.0/24"]
 
 # dns
 external_domain = "pagopa.it"
@@ -50,12 +52,12 @@ redis_capacity = 0
 # aks
 aks_alerts_enabled = false
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip        = "10.1.0.250"
-aks_max_pods            = 100
-aks_enable_auto_scaling = false
-aks_min_count           = null
-aks_max_count           = null
-aks_vm_size             = "Standard_B4ms"
+reverse_proxy_ip       = "10.1.1.250"
+aks_kubernetes_version = "1.23.5"
+
+aks_system_node_pool_os_disk_type                 = "Managed"
+aks_system_node_pool_vm_size                      = "Standard_B4ms"
+aks_system_node_pool_only_critical_addons_enabled = false
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
@@ -84,3 +86,47 @@ postgres_alerts_enabled = false
 enable_spid_test = true
 
 robots_indexed_paths = []
+
+dns_ns_interop_selfcare = [
+  "ns-875.awsdns-45.net",
+  "ns-1323.awsdns-37.org",
+  "ns-387.awsdns-48.com",
+  "ns-2032.awsdns-62.co.uk",
+]
+
+## Event hub
+eventhub_sku_name                 = "Standard"
+eventhub_capacity                 = 2
+eventhub_auto_inflate_enabled     = true
+eventhub_maximum_throughput_units = 4
+eventhub_zone_redundant           = true
+eventhub_alerts_enabled           = false
+
+eventhub_ip_rules = [
+  {
+    ip_mask = "18.192.147.151",
+    action  = "Allow"
+  }
+]
+
+eventhubs = [{
+  name              = "SC-Contracts"
+  partitions        = 30
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "selfcare-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "datalake"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+}]
+##

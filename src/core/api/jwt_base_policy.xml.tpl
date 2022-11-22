@@ -33,6 +33,9 @@
                 }
 
                 }"/>
+        <set-header name="X-Client-Ip" exists-action="override">
+            <value>@(context.Request.IpAddress)</value>
+        </set-header>
     </inbound>
     <backend>
         <base />

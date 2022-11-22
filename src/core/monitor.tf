@@ -1,12 +1,24 @@
+data "azurerm_key_vault_secret" "alert_error_notification_email" {
+  name         = "alert-error-notification-email"
+  key_vault_id = module.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "alert_error_notification_slack" {
+  name         = "alert-error-notification-slack"
+  key_vault_id = module.key_vault.id
+}
+
+# -----------------------------------------------------------------------
+
 resource "azurerm_resource_group" "monitor_rg" {
-  name     = format("%s-monitor-rg", local.project)
+  name     = "${local.project}-monitor-rg"
   location = var.location
 
   tags = var.tags
 }
 
 resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
-  name                = format("%s-law", local.project)
+  name                = "${local.project}-law"
   location            = azurerm_resource_group.monitor_rg.location
   resource_group_name = azurerm_resource_group.monitor_rg.name
   sku                 = var.law_sku
@@ -18,7 +30,7 @@ resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
 
 # Application insights
 resource "azurerm_application_insights" "application_insights" {
-  name                = format("%s-appinsights", local.project)
+  name                = "${local.project}-appinsights"
   location            = azurerm_resource_group.monitor_rg.location
   resource_group_name = azurerm_resource_group.monitor_rg.name
   application_type    = "other"
@@ -35,6 +47,29 @@ resource "azurerm_key_vault_secret" "application_insights_key" {
   content_type = "text/plain"
 
   key_vault_id = module.key_vault.id
+}
+
+#
+# Actions Groups
+#
+resource "azurerm_monitor_action_group" "error_action_group" {
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  name                = "${var.prefix}${var.env_short}error"
+  short_name          = "${var.prefix}${var.env_short}error"
+
+  email_receiver {
+    name                    = "email"
+    email_address           = data.azurerm_key_vault_secret.alert_error_notification_email.value
+    use_common_alert_schema = true
+  }
+
+  email_receiver {
+    name                    = "slack"
+    email_address           = data.azurerm_key_vault_secret.alert_error_notification_slack.value
+    use_common_alert_schema = true
+  }
+
+  tags = var.tags
 }
 
 resource "azurerm_monitor_action_group" "email" {
@@ -111,4 +146,17 @@ module "web_test_api" {
     },
   ]
 
+}
+
+resource "azurerm_dashboard" "monitoring-dashboard" {
+  name                = "${local.project}-monitoring-dashboard"
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  location            = azurerm_resource_group.monitor_rg.location
+  tags                = var.tags
+
+  dashboard_properties = templatefile("${path.module}/dashboards/monitoring.json.tpl",
+    {
+      subscription_id = data.azurerm_subscription.current.subscription_id
+      prefix          = "${var.prefix}-${var.env_short}"
+  })
 }

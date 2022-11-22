@@ -37,6 +37,9 @@ locals {
       }
     }
   ]
+  cors = {
+    paths = ["/assets/"]
+  }
 }
 
 /**
@@ -45,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.12.1"
 
   name                  = "checkout"
   prefix                = local.project
@@ -82,18 +85,23 @@ module "checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; connect-src 'self' https://api.%s.%s/; "
+        value = format("default-src 'self'; object-src 'none'; connect-src 'self' https://api.%s.%s/ https://api-eu.mixpanel.com/track/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
-        value  = "script-src 'self' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; worker-src 'none'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; "
+        value  = "script-src 'self'; style-src 'self' 'unsafe-inline' https://selfcare.pagopa.it/assets/font/selfhostedfonts.css; worker-src 'none'; font-src 'self' https://selfcare.pagopa.it/assets/font/; "
       },
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
         value  = format("img-src 'self' https://assets.cdn.io.italia.it https://%s data:; ", module.checkout_cdn.storage_primary_web_host)
+      },
+      {
+        action = "Append"
+        name   = "X-Content-Type-Options"
+        value  = "nosniff"
       }
     ]
   }
@@ -119,42 +127,118 @@ module "checkout_cdn" {
     local.spa
   )
 
-  delivery_rule = [{
-    name  = "robotsNoIndex"
-    order = 3 + length(local.spa)
+  delivery_rule = [
+    {
+      name  = "robotsNoIndex"
+      order = 3 + length(local.spa)
 
-    // conditions
-    url_path_conditions = [{
-      operator         = "Equal"
-      match_values     = length(var.robots_indexed_paths) > 0 ? var.robots_indexed_paths : ["dummy"]
-      negate_condition = true
-      transforms       = null
-    }]
-    cookies_conditions            = []
-    device_conditions             = []
-    http_version_conditions       = []
-    post_arg_conditions           = []
-    query_string_conditions       = []
-    remote_address_conditions     = []
-    request_body_conditions       = []
-    request_header_conditions     = []
-    request_method_conditions     = []
-    request_scheme_conditions     = []
-    request_uri_conditions        = []
-    url_file_extension_conditions = []
-    url_file_name_conditions      = []
+      // conditions
+      url_path_conditions = [{
+        operator         = "Equal"
+        match_values     = length(var.robots_indexed_paths) > 0 ? var.robots_indexed_paths : ["dummy"]
+        negate_condition = true
+        transforms       = null
+      }]
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_header_conditions     = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
+      url_file_name_conditions      = []
 
-    // actions
-    modify_response_header_actions = [{
-      action = "Overwrite"
-      name   = "X-Robots-Tag"
-      value  = "noindex, nofollow"
-    }]
-    cache_expiration_actions       = []
-    cache_key_query_string_actions = []
-    modify_request_header_actions  = []
-    url_redirect_actions           = []
-    url_rewrite_actions            = []
+      // actions
+      modify_response_header_actions = [{
+        action = "Overwrite"
+        name   = "X-Robots-Tag"
+        value  = "noindex, nofollow"
+      }]
+      cache_expiration_actions       = []
+      cache_key_query_string_actions = []
+      modify_request_header_actions  = []
+      url_redirect_actions           = []
+      url_rewrite_actions            = []
+    },
+    {
+      name  = "microcomponentsNoCache"
+      order = 4 + length(local.spa)
+
+      // conditions
+      url_path_conditions           = []
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_header_conditions     = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
+
+      url_file_name_conditions = [{
+        operator         = "Equal"
+        match_values     = ["remoteEntry.js"]
+        negate_condition = false
+        transforms       = null
+      }]
+
+      // actions
+      modify_response_header_actions = [{
+        action = "Overwrite"
+        name   = "Cache-Control"
+        value  = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+      }]
+      cache_expiration_actions       = []
+      cache_key_query_string_actions = []
+      modify_request_header_actions  = []
+      url_redirect_actions           = []
+      url_rewrite_actions            = []
+    },
+    {
+      name  = "cors"
+      order = 5 + length(local.spa)
+
+      // conditions
+      url_path_conditions = [{
+        operator         = "BeginsWith"
+        match_values     = local.cors.paths
+        negate_condition = false
+        transforms       = null
+      }]
+      request_header_conditions     = []
+      cookies_conditions            = []
+      device_conditions             = []
+      http_version_conditions       = []
+      post_arg_conditions           = []
+      query_string_conditions       = []
+      remote_address_conditions     = []
+      request_body_conditions       = []
+      request_method_conditions     = []
+      request_scheme_conditions     = []
+      request_uri_conditions        = []
+      url_file_extension_conditions = []
+      url_file_name_conditions      = []
+
+      // actions
+      modify_response_header_actions = [{
+        action = "Overwrite"
+        name   = "Access-Control-Allow-Origin"
+        value  = "*"
+      }]
+      cache_expiration_actions       = []
+      cache_key_query_string_actions = []
+      modify_request_header_actions  = []
+      url_redirect_actions           = []
+      url_rewrite_actions            = []
   }]
 
   tags = var.tags

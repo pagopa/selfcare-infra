@@ -1,5 +1,12 @@
 # general
 
+locals {
+  project                        = "${var.prefix}-${var.env_short}"
+  aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
+  aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
+}
+
+
 variable "prefix" {
   type    = string
   default = "selc"
@@ -70,46 +77,78 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
-variable "aks_availability_zones" {
-  type        = list(number)
-  description = "A list of Availability Zones across which the Node Pool should be spread."
-  default     = []
-}
-
-variable "aks_vm_size" {
+variable "aks_system_node_pool_vm_size" {
   type        = string
   default     = "Standard_DS3_v2"
   description = "The size of the AKS Virtual Machine in the Node Pool."
 }
 
-variable "aks_node_count" {
+variable "aks_system_node_pool_os_disk_type" {
+  type        = string
+  description = "(Required) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
+}
+
+variable "aks_system_node_pool_os_disk_size_gb" {
   type        = number
-  description = "The initial number of the AKS nodes which should exist in this Node Pool."
+  default     = null
+  description = "(Optional) The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created."
+}
+
+variable "aks_system_node_pool_node_count_min" {
+  type        = number
+  description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
   default     = 1
 }
 
-variable "aks_max_pods" {
+variable "aks_system_node_pool_node_count_max" {
   type        = number
-  description = "The maximum number of pods"
-  default     = 100
+  description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
 }
 
-variable "aks_enable_auto_scaling" {
+variable "aks_system_node_pool_only_critical_addons_enabled" {
   type        = bool
-  description = "Should the Kubernetes Auto Scaler be enabled for this Node Pool? "
+  description = "(Optional) Enabling this option will taint default node pool with CriticalAddonsOnly=true:NoSchedule taint. Changing this forces a new resource to be created."
+  default     = true
+}
+
+#
+# User Node Pool
+#
+variable "aks_user_node_pool_enabled" {
+  type        = bool
   default     = false
+  description = "Is user node pool enabled?"
 }
 
-variable "aks_min_count" {
-  type        = number
-  description = "The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
-  default     = null
+variable "aks_user_node_pool_os_disk_type" {
+  type        = string
+  description = "(Optional) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed."
+  default     = "Managed"
 }
 
-variable "aks_max_count" {
+variable "aks_user_node_pool_vm_size" {
+  type        = string
+  default     = "Standard_DS3_v2"
+  description = "The size of the AKS Virtual Machine in the Node Pool."
+}
+
+variable "aks_user_node_pool_os_disk_size_gb" {
   type        = number
-  description = "The maximum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000"
   default     = null
+  description = "(Optional) The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created."
+}
+
+variable "aks_user_node_pool_node_count_min" {
+  type        = number
+  description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
+}
+
+variable "aks_user_node_pool_node_count_max" {
+  type        = number
+  description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
+  default     = 1
 }
 
 variable "aks_upgrade_settings_max_surge" {
@@ -119,8 +158,8 @@ variable "aks_upgrade_settings_max_surge" {
 }
 
 variable "aks_kubernetes_version" {
-  type    = string
-  default = "1.21.2"
+  type        = string
+  description = "Kubernetes version for AKS"
 }
 
 variable "aks_sku_tier" {
@@ -444,11 +483,27 @@ variable "cidr_subnet_contract_storage" {
   description = "Contracts storage address space."
 }
 
+variable "cidr_subnet_eventhub" {
+  type        = list(string)
+  description = "EventHub address space."
+}
+
+variable "cidr_subnet_logs_storage" {
+  type        = list(string)
+  description = "Logs storage address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
   description = "value"
   default     = 3600
+}
+
+variable "dns_ns_interop_selfcare" {
+  type        = list(string)
+  description = "value"
+  default     = null
 }
 
 variable "external_domain" {
@@ -849,3 +904,121 @@ variable "robots_indexed_paths" {
   type        = list(string)
   description = "List of cdn paths to allow robots index"
 }
+# logs storage
+variable "logs_account_replication_type" {
+  type        = string
+  description = "logs replication type"
+  default     = "LRS"
+}
+
+variable "logs_delete_retention_days" {
+  type        = number
+  description = "Number of days to retain deleted logs"
+  default     = 1
+}
+
+variable "logs_enable_versioning" {
+  type        = bool
+  description = "Enable logs versioning"
+  default     = false
+}
+
+variable "logs_advanced_threat_protection" {
+  type        = bool
+  description = "Enable logs threat advanced protection"
+  default     = false
+}
+
+## Event hub
+variable "eventhub_sku_name" {
+  type        = string
+  description = "Defines which tier to use."
+  default     = "Basic"
+}
+
+variable "eventhub_capacity" {
+  type        = number
+  description = "Specifies the Capacity / Throughput Units for a Standard SKU namespace."
+  default     = null
+}
+
+variable "eventhub_maximum_throughput_units" {
+  type        = number
+  description = "Specifies the maximum number of throughput units when Auto Inflate is Enabled"
+  default     = null
+}
+
+variable "eventhub_auto_inflate_enabled" {
+  type        = bool
+  description = "Is Auto Inflate enabled for the EventHub Namespace?"
+  default     = false
+}
+
+variable "eventhub_zone_redundant" {
+  type        = bool
+  description = "Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones)."
+  default     = false
+}
+
+variable "eventhub_ip_rules" {
+  description = "eventhub network rules"
+  type = list(object({
+    ip_mask = string
+    action  = string
+  }))
+  default = []
+}
+
+variable "eventhubs" {
+  description = "A list of event hub topics to add to namespace."
+  type = list(object({
+    name              = string
+    partitions        = number
+    message_retention = number
+    consumers         = list(string)
+    keys = list(object({
+      name   = string
+      listen = bool
+      send   = bool
+      manage = bool
+    }))
+  }))
+  default = []
+}
+
+variable "eventhub_alerts_enabled" {
+  type        = bool
+  default     = false
+  description = "Event hub alerts enabled?"
+}
+
+variable "eventhub_metric_alerts" {
+  default = {}
+
+  description = <<EOD
+Map of name = criteria objects
+EOD
+
+  type = map(object({
+    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]
+    aggregation = string
+    metric_name = string
+    description = string
+    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]
+    operator  = string
+    threshold = number
+    # Possible values are PT1M, PT5M, PT15M, PT30M and PT1H
+    frequency = string
+    # Possible values are PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H and P1D.
+    window_size = string
+
+    dimension = list(object(
+      {
+        name     = string
+        operator = string
+        values   = list(string)
+      }
+    ))
+  }))
+}
+##

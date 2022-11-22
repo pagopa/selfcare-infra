@@ -6,16 +6,11 @@ resource "azurerm_resource_group" "sec_rg" {
 }
 
 module "key_vault" {
-  source              = "git::https://github.com/pagopa/azurerm.git//key_vault?ref=v1.0.90"
+  source              = "git::https://github.com/pagopa/azurerm.git//key_vault?ref=v2.12.1"
   name                = format("%s-kv", local.project)
   location            = azurerm_resource_group.sec_rg.location
   resource_group_name = azurerm_resource_group.sec_rg.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
-  lock_enable         = var.lock_enable
-
-  # Security Logs
-  sec_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_workspace_id[0].value : null
-  sec_storage_id                 = var.env_short == "p" ? data.azurerm_key_vault_secret.sec_storage_id[0].value : null
 
   tags = var.tags
 }
@@ -192,7 +187,7 @@ data "azurerm_key_vault_secret" "sec_storage_id" {
 
 # JWT
 module "jwt" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "jwt"
   key_vault_id     = module.key_vault.id
@@ -202,7 +197,7 @@ module "jwt" {
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault.id
@@ -212,7 +207,7 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.7.0"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
 
   jwt_name         = "agid-spid"
   key_vault_id     = module.key_vault.id
@@ -246,10 +241,11 @@ resource "null_resource" "upload_jwks" {
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/jwks.json" \
+                --overwrite true \
                 --name '.well-known/jwks.json'
               az cdn endpoint purge \
-                -g ${azurerm_resource_group.checkout_fe_rg.name} \
-                -n ${module.checkout_cdn.name} \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
                 --content-paths "/.well-known/jwks.json" \
                 --no-wait

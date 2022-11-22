@@ -17,13 +17,19 @@ module "key_vault_secrets_query" {
     "agid-spid-private-key",
     "mongodb-connection-string",
     "postgres-party-user-password",
-    "postgres-mock-registry-user-password",
     "smtp-usr",
     "smtp-psw",
     "smtp-not-pec-usr",
     "smtp-not-pec-psw",
     "contracts-storage-access-key",
     "web-storage-connection-string",
-    "user-registry-api-key"
+    "user-registry-api-key",
+    "party-test-institution-email",
+    "eventhub-SC-Contracts-selfcare-wo-connection-string",
+    "external-api-key",
+    "external-user-api",
+    "user-registry-api-key",
+    "logs-storage-connection-string",
+    "spid-logs-encryption-public-key"
   ]
 }

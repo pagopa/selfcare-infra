@@ -13,6 +13,8 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
     METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value
 
     USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+
+    SPID_LOGS_STORAGE_CONNECTION_STRING = module.key_vault_secrets_query.values["logs-storage-connection-string"].value
   }
 
   type = "Opaque"
@@ -101,7 +103,7 @@ resource "kubernetes_secret" "mail" {
     },
     var.env_short != "p"
     ? {
-      DESTINATION_MAILS = module.key_vault_secrets_query.values["smtp-usr"].value
+      DESTINATION_MAILS = "pectest@pec.pagopa.it"
     }
     : {}
   )
@@ -175,6 +177,20 @@ resource "kubernetes_secret" "b4f-dashboard" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-external-api" {
+  metadata {
+    name      = "product-external-api"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
@@ -182,21 +198,9 @@ resource "kubernetes_secret" "uservice-party-process" {
   }
 
   data = {
-    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "uservice-party-mock-registry" {
-  metadata {
-    name      = "uservice-party-mock-registry"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    POSTGRES_USR = format("%s@%s", "MOCK_REGISTRY_USER", local.postgres_hostname)
-    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-mock-registry-user-password"].value
+    USER_REGISTRY_API_KEY                    = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    ONBOARDING_INSTITUTION_ALTERNATIVE_EMAIL = module.key_vault_secrets_query.values["party-test-institution-email"].value
+    #"  pectest@pec.pagopa.it  text/plain
   }
 
   type = "Opaque"
@@ -224,6 +228,24 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "event-secrets" {
+  metadata {
+    name      = "event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
   }
 
   type = "Opaque"
