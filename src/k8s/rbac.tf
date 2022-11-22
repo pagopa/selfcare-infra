@@ -215,6 +215,26 @@ resource "kubernetes_service_account" "apim_service_account" {
   }
 }
 
+data "kubernetes_secret" "apim_service_account_secret" {
+  metadata {
+    name      = kubernetes_service_account.apim_service_account.default_secret_name
+    namespace = kubernetes_service_account.apim_service_account.metadata.namespace
+  }
+  binary_data = {
+    "ca.crt" = ""
+    "token"  = ""
+  }
+}
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "apim_service_account_access_token" {
+  name         = "apim-backend-access-token"
+  value        = data.kubernetes_secret.apim_service_account_secret.binary_data.token
+  content_type = "text/plain"
+
+  key_vault_id = local.key_vault_id
+}
+
 # service_account required by internal microservices authentication
 resource "kubernetes_service_account" "in_cluster_app_service_account" {
   metadata {
