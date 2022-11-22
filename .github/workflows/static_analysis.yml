@@ -19,6 +19,7 @@ jobs:
           FOLDERS: >
             src/core
             src/k8s
+            src/modules/spid_testenv
         run: |
           pids=()
 
