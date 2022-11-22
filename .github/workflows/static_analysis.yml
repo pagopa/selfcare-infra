@@ -18,8 +18,8 @@ jobs:
         env:
           FOLDERS: >
             src/core
+            src/core/modules/spid_testenv
             src/k8s
-            src/modules/spid_testenv
         run: |
           pids=()
 
