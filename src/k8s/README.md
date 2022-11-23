@@ -9,15 +9,6 @@
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.2.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.11.0 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.5.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.79.1 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.11.0 |
-
 ## Modules
 
 | Name | Source | Version |
