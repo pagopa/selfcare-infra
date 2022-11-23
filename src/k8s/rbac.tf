@@ -218,7 +218,7 @@ resource "kubernetes_service_account" "apim_service_account" {
 data "kubernetes_secret" "apim_service_account_secret" {
   metadata {
     name      = kubernetes_service_account.apim_service_account.default_secret_name
-    namespace = kubernetes_service_account.apim_service_account.metadata.namespace
+    namespace = kubernetes_service_account.apim_service_account.metadata[0].namespace
   }
   binary_data = {
     "ca.crt" = ""
@@ -255,8 +255,8 @@ resource "kubernetes_role_binding" "tokenreview_role_binding" {
     name      = "system:auth-delegator"
   }
   subject {
-    kind = "ServiceAccount"
-    name = kubernetes_service_account.in_cluster_app_service_account.metadata[0].name
+    kind      = "ServiceAccount"
+    name      = kubernetes_service_account.in_cluster_app_service_account.metadata[0].name
     namespace = kubernetes_service_account.in_cluster_app_service_account.metadata[0].namespace
   }
 }
