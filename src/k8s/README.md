@@ -1,132 +1,3 @@
-# kubernetes-infrastructure
-
-This is a kubernetes infrastructure configuration.
-
-## Requirements
-
-### 1. terraform
-
-In order to manage the suitable version of terraform it is strongly recommended to install the following tool:
-
-- [tfenv](https://github.com/tfutils/tfenv): **Terraform** version manager inspired by rbenv.
-
-Once these tools have been installed, install the terraform version shown in:
-
-- .terraform-version
-
-After installation install terraform:
-
-```sh
-tfenv install
-```
-
-### 2. Azure CLI
-
-In order to authenticate to Azure portal and manage terraform state it's necessary to install and login to Azure subscription.
-
-- [Azure CLI](https://docs.microsoft.com/it-it/cli/azure/install-azure-cli)
-
-After installation login to Azure:
-
-```sh
-az login
-```
-
-### 3. kubectl
-
-In order to run commands against Kubernetes clusters it's necessary to install kubectl.
-
-- [kubectl](https://kubernetes.io/docs/tasks/tools/)
-
-### 4. helm
-
-In order to use Helm package manager for Kubernetes it's necessary to install helm.
-
-- [helm](https://helm.sh/docs/helm/helm_install/)
-
-### 5. Access to bastian host (jumpbox)
-
-We deploy a kubernetes in private mode so it is not public accessible.
-We use an SSH connection to a bastian host started on demand (jumpbox).
-
-```sh
-## ~/.ssh/config file configuration
-# Change project_aks_env_user, user and bastian_host_env_ip with correct values
-# Ask to an Azure Administrator the id_rsa_project_aks_env_user private key
-Host project_aks_env_user
-  AddKeysToAgent yes
-  UseKeychain yes
-  HostName bastian_host_env_ip
-  User user
-  IdentityFile ~/.ssh/id_rsa_project_aks_env_user
-```
-
-```sh
-# set rw permission to id_rsa_project_aks_env_user key only for current user
-chmod 600 ~/.ssh/id_rsa_project_aks_env_user
-ssh-add ~/.ssh/id_rsa_project_aks_env_user
-# if nedded, restart ssh-agent
-eval "$(ssh-agent -s)"
-```
-
-## Terraform modules
-
-As PagoPA we build our standard Terraform modules, check available modules:
-
-- [PagoPA Terraform modules](https://github.com/search?q=topic%3Aterraform-modules+org%3Apagopa&type=repositories)
-
-## Setup configuration
-
-Before first use we need to run a setup script to configure `.bastianhost.ini` and download kube config.
-
-```sh
-bash scripts/setup.sh ENV-PROJECT
-
-# example for SelfCare project in DEV environment
-bash scripts/setup.sh DEV-SelfCare
-```
-
-## Apply changes
-
-To apply changes use `terraform.sh` script as follow:
-
-```sh
-bash terraform.sh apply|plan|destroy ENV-PROJECT
-
-# example to apply configuration for SelfCare project in DEV environment
-bash terraform.sh apply DEV-SelfCare
-```
-
-## Terraform lock.hcl
-
-We have both developers who work with your Terraform configuration on their Linux, macOS or Windows workstations and automated systems that apply the configuration while running on Linux.
-https://www.terraform.io/docs/cli/commands/providers/lock.html#specifying-target-platforms
-
-So we need to specify this in terraform lock providers:
-
-```sh
-terraform init
-
-rm .terraform.lock.hcl
-
-terraform providers lock \
-  -platform=windows_amd64 \
-  -platform=darwin_amd64 \
-  -platform=linux_amd64
-```
-
-## Precommit checks
-
-Check your code before commit.
-
-https://github.com/antonbabenko/pre-commit-terraform#how-to-install
-
-```sh
-pre-commit run -a
-```
-
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -138,6 +9,15 @@ pre-commit run -a
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.2.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.11.0 |
 
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.5.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.79.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.11.0 |
+
 ## Modules
 
 | Name | Source | Version |
@@ -148,6 +28,7 @@ pre-commit run -a
 
 | Name | Type |
 |------|------|
+| [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_cacrt](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [helm_release.ingress](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
@@ -174,6 +55,7 @@ pre-commit run -a
 | [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.helm_system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.pod_reader](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role_binding) | resource |
 | [kubernetes_secret.b4f-dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.cdn-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.common-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
@@ -190,7 +72,9 @@ pre-commit run -a
 | [kubernetes_secret.uservice-party-management](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_service.health](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service) | resource |
+| [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
+| [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_externals](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_operations](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
@@ -198,6 +82,7 @@ pre-commit run -a
 | [azuread_group.adgroup_technical_project_managers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/client_config) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/subscription) | data source |
+| [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
 | [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
 
 ## Inputs
@@ -237,3 +122,4 @@ pre-commit run -a
 | <a name="output_azure_devops_sa_cacrt"></a> [azure\_devops\_sa\_cacrt](#output\_azure\_devops\_sa\_cacrt) | n/a |
 | <a name="output_azure_devops_sa_token"></a> [azure\_devops\_sa\_token](#output\_azure\_devops\_sa\_token) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
