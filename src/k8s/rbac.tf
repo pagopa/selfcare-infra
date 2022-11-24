@@ -246,7 +246,7 @@ resource "kubernetes_service_account" "in_cluster_app_service_account" {
 # role binding required by internal microservices in order to call k8s tokenreview API
 resource "kubernetes_cluster_role_binding" "tokenreview_role_binding" {
   metadata {
-    name      = "role-tokenreview-binding"
+    name = "role-tokenreview-binding"
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
