@@ -24,7 +24,7 @@
                 }
 
                 var aud = "${API_DOMAIN}";
-                var iss = context.Subscription.Id;
+                var iss = "SPID";
                 var payload = new { exp, uid, aud, iss };
                 var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 

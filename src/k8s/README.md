@@ -126,7 +126,8 @@ pre-commit run -a
 ```
 
 
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -136,15 +137,6 @@ pre-commit run -a
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | = 2.79.1 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.2.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.11.0 |
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_azuread"></a> [azuread](#provider\_azuread) | 2.5.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 2.79.1 |
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.2.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.11.0 |
 
 ## Modules
 
@@ -156,6 +148,7 @@ pre-commit run -a
 
 | Name | Type |
 |------|------|
+| [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_cacrt](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [helm_release.ingress](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) | resource |
@@ -165,6 +158,7 @@ pre-commit run -a
 | [kubernetes_cluster_role.view_extra](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role) | resource |
 | [kubernetes_cluster_role_binding.edit_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.edit_extra_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_cluster_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.view_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_cluster_role_binding.view_extra_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/cluster_role_binding) | resource |
 | [kubernetes_config_map.common](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/config_map) | resource |
@@ -192,13 +186,15 @@ pre-commit run -a
 | [kubernetes_secret.mail-not-pec](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.mongo-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
-| [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.uservice-party-management](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_service.health](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service) | resource |
+| [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
+| [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_externals](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_operations](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
@@ -206,6 +202,7 @@ pre-commit run -a
 | [azuread_group.adgroup_technical_project_managers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/client_config) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/subscription) | data source |
+| [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
 | [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
 
 ## Inputs
@@ -244,4 +241,5 @@ pre-commit run -a
 |------|-------------|
 | <a name="output_azure_devops_sa_cacrt"></a> [azure\_devops\_sa\_cacrt](#output\_azure\_devops\_sa\_cacrt) | n/a |
 | <a name="output_azure_devops_sa_token"></a> [azure\_devops\_sa\_token](#output\_azure\_devops\_sa\_token) | n/a |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
