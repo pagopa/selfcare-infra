@@ -512,13 +512,6 @@ resource "azurerm_api_management_named_value" "apim_named_value_backend_access_t
 
 }
 
-//      xml_content = templatefile("./api/idpay_notification_email/get-institution-user-info-policy.xml.tpl", {
-//        ingress_load_balancer_hostname  = var.ingress_load_balancer_hostname,
-//        selc_base_url                   = var.selc_base_url,
-//        selc_timeout_sec                = var.selc_timeout_sec
-//        selc_external_api_key_reference = azurerm_api_management_named_value.apim_named_value_backend_access_token.display_name
-//      })
-
 data "azurerm_key_vault_secret" "apim_backend_access_token" {
   name         = "apim-backend-access-token"
   key_vault_id = module.key_vault.id
