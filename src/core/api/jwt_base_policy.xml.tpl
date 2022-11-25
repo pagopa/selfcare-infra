@@ -1,13 +1,6 @@
 <policies>
     <inbound>
         <base />
-        <choose>
-            <when condition="@(!context.Variables.ContainsKey("productId"))">
-               <return-response>
-                    <set-status code="403" reason="Subscription key not related to any Product" />
-                </return-response>
-            </when>
-        </choose>
         <set-variable name="jwt" value="@{
                 // 1) Construct the Base64Url-encoded header
                 var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };

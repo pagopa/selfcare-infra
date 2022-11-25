@@ -313,6 +313,69 @@ module "apim_external_api_ms_v1" {
   })
 
   subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getInstitutionsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v1/getInstitutions_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
+    },
+    {
+      operation_id = "getInstitutionUserProductsUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v1/jwt_auth_op_policy_user_group.xml.tpl", {
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content = templatefile("./api/ms_external_api/v1/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+      })
+    },
+    {
+      operation_id = "getProductUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v1/getProduct_op_policy.xml.tpl", {
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitutionProductUsersUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
+  ]
+}
+
+module "apim_external_api_ms_v2" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-external-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
+
+  description  = "This service is the proxy for external services"
+  display_name = "External API service"
+  path         = "external"
+  api_version  = "v2"
+  protocols = [
+  "https"]
+
+  service_url = format("http://%s/external-api/v2/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "v2"
+  })
+
+  xml_content = file("./api/ms_external_api/v2/base_policy.xml")
+
+  subscription_required = true
   product_ids = [
     module.apim_product_interop.product_id,
     module.apim_product_pn.product_id,
@@ -323,7 +386,7 @@ module "apim_external_api_ms_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content = templatefile("./api/ms_external_api/getInstitutions_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
       })
     },
@@ -333,26 +396,26 @@ module "apim_external_api_ms_v1" {
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content = templatefile("./api/ms_external_api/jwt_auth_op_policy_user_group.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
-      xml_content = templatefile("./api/ms_external_api/getInstitution_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content = templatefile("./api/ms_external_api/getProduct_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
       })
     },
     {
       operation_id = "getInstitutionProductUsersUsingGET"
-      xml_content  = file("./api/ms_external_api/getInstitutionProductUsersUsingGET_op_policy.xml")
+      xml_content  = file("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml")
     }
   ]
 }
@@ -428,4 +491,35 @@ module "apim_product_idpay" {
   approval_required     = false
 
   policy_xml = file("./api_product/idpay/policy.xml")
+}
+
+
+##################
+## Named values ##
+##################
+
+resource "azurerm_api_management_named_value" "apim_named_value_backend_access_token" {
+
+  name                = "backend-access-token"
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  display_name = "backend-access-token"
+  secret       = true
+  value_from_key_vault {
+    secret_id = data.azurerm_key_vault_secret.apim_backend_access_token.id
+  }
+
+}
+
+//      xml_content = templatefile("./api/idpay_notification_email/get-institution-user-info-policy.xml.tpl", {
+//        ingress_load_balancer_hostname  = var.ingress_load_balancer_hostname,
+//        selc_base_url                   = var.selc_base_url,
+//        selc_timeout_sec                = var.selc_timeout_sec
+//        selc_external_api_key_reference = azurerm_api_management_named_value.apim_named_value_backend_access_token.display_name
+//      })
+
+data "azurerm_key_vault_secret" "apim_backend_access_token" {
+  name         = "apim-backend-access-token"
+  key_vault_id = module.key_vault.id
 }

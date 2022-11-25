@@ -16,19 +16,13 @@ paths:
       tags:
         - institutions
       summary: getInstitutions
-      description: The service retrieves all the onboarded institutions related to the logged user
+      description: The service retrieves all the onboarded institutions related to the provided user and the product retrieved from Subscription Key
       operationId: getInstitutionsUsingGET
       parameters:
-        - name: x-selfcare-uid
-          in: header
-          description: Logged user's unique identifier
-          required: true
-          schema:
-            type: string
-        - name: productId
+        - name: userId
           in: query
-          description: Product's unique identifier
-          required: true
+          description: User's unique identifier
+          required: false
           style: form
           schema:
             type: string
@@ -68,12 +62,12 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/institutions/{institutionId}/products/{productId}/users':
+  '/institutions/{institutionId}/users':
       get:
         tags:
           - institutions
         summary: getInstitutionProductUsers
-        description: Service to get all the active users related to a specific pair of institution-product
+        description: Service to get all the active users related to the provided institution and the product retrieved from Subscription Key
         operationId: getInstitutionProductUsersUsingGET
         parameters:
           - name: x-selfcare-uid
@@ -85,13 +79,6 @@ paths:
           - name: institutionId
             in: path
             description: Institution's unique internal identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-          - name: productId
-            in: path
-            description: Product's unique identifier
             required: true
             style: simple
             schema:
@@ -148,7 +135,7 @@ paths:
                   $ref: '#/components/schemas/Problem'
         security:
           - bearerAuth:
-              - global
+              - global 
   '/institutions/{institutionId}/products':
     get:
       tags:
@@ -252,7 +239,7 @@ paths:
       tags:
       - user-group
       summary: getUserGroups
-      description: Service that allows to get a list of UserGroup entities
+      description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
       operationId: getUserGroupsUsingGET
       parameters:
       - name: x-selfcare-uid
@@ -296,13 +283,6 @@ paths:
           type: array
           items:
             type: string
-      - name: productId
-        in: query
-        description: Users group's productId
-        required: false
-        style: form
-        schema:
-          type: string
       - name: userId
         in: query
         description: Member's unique identifier
@@ -355,26 +335,19 @@ paths:
                 "$ref": "#/components/schemas/Problem"
       security:
       - bearerAuth:
-        - global
-  '/products/{productId}':
+        - global    
+  '/product':
     get:
       tags:
         - product
       summary: getProduct
-      description: The service retrieves Product information from product id
+      description: The service retrieves Product information related to Subscription Key
       operationId: getProductUsingGET
       parameters:
         - name: x-selfcare-uid
           in: header
           description: Logged user's unique identifier
           required: true
-          schema:
-            type: string
-        - name: productId
-          in: path
-          description: Product's unique identifier
-          required: true
-          style: simple
           schema:
             type: string
       responses:
