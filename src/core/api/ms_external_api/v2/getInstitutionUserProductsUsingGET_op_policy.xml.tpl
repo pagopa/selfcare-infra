@@ -3,7 +3,7 @@
         <base/>
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
-            var header = new { typ = " JWT", alg = "RS256", kid = "${KID}" };
+            var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
         var jwtHeaderBase64UrlEncoded =
         Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header))).Replace("/",
         "_").Replace("+", "-"). Replace("=", "");
