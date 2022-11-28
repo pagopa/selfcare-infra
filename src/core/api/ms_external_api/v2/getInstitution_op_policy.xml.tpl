@@ -36,7 +36,7 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <!-- TODO: remove previous elements and uncomment this one after Party will accept k8s token -->
+        <!-- TODO: remove previous elements after Party will accept k8s token -->
         <set-backend-service base-url="${PARTY_PROCESS_BACKEND_BASE_URL}" />
     </inbound>
     <backend>

@@ -36,7 +36,7 @@
         <set-header name="Authorization" exists-action="override">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <!-- TODO: remove previous elements and uncomment this one after Party will accept k8s token and after a refactor from external-api backend -->
+        <!-- TODO: remove previous elements after Party will accept k8s token and after a refactor from external-api backend -->
         <set-query-parameter name="productId" exists-action="override">
             <value>@((string)context.Variables["productId"])</value>
         </set-query-parameter>

@@ -70,12 +70,6 @@ paths:
         description: Service to get all the active users related to the provided institution and the product retrieved from Subscription Key
         operationId: getInstitutionProductUsersUsingGET
         parameters:
-          - name: x-selfcare-uid
-            in: header
-            description: Logged user's unique identifier
-            required: true
-            schema:
-              type: string
           - name: institutionId
             in: path
             description: Institution's unique internal identifier
@@ -144,17 +138,18 @@ paths:
       description: Service to retrieve all active products for given institution and logged user
       operationId: getInstitutionUserProductsUsingGET
       parameters:
-        - name: x-selfcare-uid
-          in: header
-          description: Logged user's unique identifier
-          required: true
-          schema:
-            type: string
         - name: institutionId
           in: path
           description: Institution's unique internal Id
           required: true
           style: simple
+          schema:
+            type: string
+        - name: userId
+          in: query
+          description: User's unique identifier
+          required: false
+          style: form
           schema:
             type: string
       responses:
@@ -202,12 +197,6 @@ paths:
       description: Gets institution using internal institution id
       operationId: getInstitution
       parameters:
-        - name: x-selfcare-uid
-          in: header
-          description: Logged user's unique identifier
-          required: true
-          schema:
-            type: string
         - name: id
           in: path
           description: The internal identifier of the institution
@@ -242,12 +231,6 @@ paths:
       description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
       operationId: getUserGroupsUsingGET
       parameters:
-      - name: x-selfcare-uid
-        in: header
-        description: Logged user's unique identifier
-        required: true
-        schema:
-          type: string
       - name: institutionId
         in: query
         description: Users group's institutionId
@@ -343,13 +326,6 @@ paths:
       summary: getProduct
       description: The service retrieves Product information related to Subscription Key
       operationId: getProductUsingGET
-      parameters:
-        - name: x-selfcare-uid
-          in: header
-          description: Logged user's unique identifier
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK

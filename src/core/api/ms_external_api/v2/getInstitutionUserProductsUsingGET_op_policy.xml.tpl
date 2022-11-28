@@ -43,9 +43,7 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <!-- TODO: remove previous elements and uncomment this one after Party will accept k8s token -->
-        <rewrite-uri template="@("
-        /institutions/{institutionId}/products/"+(string)context.Variables["productId"]+"/users")" />
+        <!-- TODO: remove previous elements after Party will accept k8s token -->
     </inbound>
     <backend>
         <base/>
