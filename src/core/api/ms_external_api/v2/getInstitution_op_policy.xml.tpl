@@ -10,12 +10,7 @@
 
             // 2) Construct the Base64Url-encoded payload
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
-            var uid = context.Request.Headers.GetValueOrDefault("x-selfcare-uid","");
-
-            if(uid == "") {
-            return "";
-            }
-
+            var uid = "m2m";
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
             var payload = new { exp, uid, aud, iss };

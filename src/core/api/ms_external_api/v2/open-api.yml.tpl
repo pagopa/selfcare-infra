@@ -135,7 +135,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutionUserProducts
-      description: Service to retrieve all active products for given institution and logged user
+      description: Service to retrieve all active products for given institution and user
       operationId: getInstitutionUserProductsUsingGET
       parameters:
         - name: institutionId
@@ -417,7 +417,7 @@ components:
           description: Institution's taxCode
         userProductRoles:
           type: array
-          description: Logged user's roles on product
+          description: User's roles on product
           items:
             type: string
         zipCode:
