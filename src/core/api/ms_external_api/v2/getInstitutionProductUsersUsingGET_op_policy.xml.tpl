@@ -10,7 +10,7 @@
 
             // 2) Construct the Base64Url-encoded payload
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
-            var uid = context.Request.MatchedParameters["userId"];
+            var uid = context.Request.Url.Query.GetValueOrDefault("userId", "");
 
             if(uid == "") {
               return "";

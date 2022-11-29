@@ -22,7 +22,7 @@ paths:
         - name: userId
           in: query
           description: User's unique identifier
-          required: false
+          required: true
           style: form
           schema:
             type: string
@@ -148,7 +148,7 @@ paths:
         - name: userId
           in: query
           description: User's unique identifier
-          required: false
+          required: true
           style: form
           schema:
             type: string
