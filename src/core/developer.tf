@@ -107,12 +107,12 @@ resource "null_resource" "upload_developer_external_api_v2" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v2.yaml" \
                 --overwrite true \
-                --name 'developer/external/v1/ms-external-api.yaml'
+                --name 'developer/external/v2/ms-external-api.yaml'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
-                --content-paths "/developer/external/v1/ms-external-api.yaml" \
+                --content-paths "/developer/external/v2/ms-external-api.yaml" \
                 --no-wait
           EOT
   }
