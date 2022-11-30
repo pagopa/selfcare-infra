@@ -38,7 +38,7 @@ resource "null_resource" "upload_developer_external_api_v1" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v1.yaml" \
                 --overwrite true \
-                --name 'developer/external/v1/ms-external-api.yaml'
+                --name 'developer/external/v1/ms-external-api.yaml' &&
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
@@ -62,7 +62,7 @@ resource "null_resource" "upload_developer_index_v1" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "./env/${var.env}/developer/external/v1/index.html" \
                 --overwrite true \
-                --name 'developer/external/v1/index.html'
+                --name 'developer/external/v1/index.html' &&
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
@@ -107,7 +107,7 @@ resource "null_resource" "upload_developer_external_api_v2" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/env/${var.env}/developer/external/ms-external-api-v2.yaml" \
                 --overwrite true \
-                --name 'developer/external/v2/ms-external-api.yaml'
+                --name 'developer/external/v2/ms-external-api.yaml' &&
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
@@ -131,7 +131,7 @@ resource "null_resource" "upload_developer_index_v2" {
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "./env/${var.env}/developer/external/v2/index.html" \
                 --overwrite true \
-                --name 'developer/external/v2/index.html'
+                --name 'developer/external/v2/index.html' &&
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
