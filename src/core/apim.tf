@@ -387,7 +387,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getInstitutionsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitutions_op_policy.xml.tpl", {
-        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -412,9 +412,9 @@ module "apim_external_api_ms_v2" {
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     },
     {
