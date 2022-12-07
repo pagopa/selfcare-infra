@@ -25,6 +25,7 @@ module "key_vault_secrets_query" {
     "web-storage-connection-string",
     "user-registry-api-key",
     "party-test-institution-email",
+    "portal-admin-operator-email",
     "eventhub-SC-Contracts-selfcare-wo-connection-string",
     "external-api-key",
     "external-user-api",

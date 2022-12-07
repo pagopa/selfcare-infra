@@ -116,3 +116,7 @@ variable "configmaps_hub-spid-login-ms" {
 variable "configmaps_common" {
   type = map(string)
 }
+
+variable "configmaps_ms_core" {
+  type = map(string)
+}

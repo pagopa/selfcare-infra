@@ -21,7 +21,7 @@ jwt_audience = "api.uat.selfcare.pagopa.it"
 
 jwt_social_expire = "10000000"
 
-ms_core = {
+configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://uat.selfcare.pagopa.it/onboarding/confirm?jwt="
   MAIL_ONBOARDING_REJECTION_LINK       = "https://uat.selfcare.pagopa.it/onboarding/cancel?jwt="

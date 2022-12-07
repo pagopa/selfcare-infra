@@ -142,7 +142,7 @@ resource "kubernetes_config_map" "selfcare-core" {
 
     # module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     },
-    var.ms_core
+    var.configmaps_ms_core
   )
 }
 
