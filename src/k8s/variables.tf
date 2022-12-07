@@ -100,6 +100,10 @@ variable "jwt_audience" {
   type = string
 }
 
+variable "jwt_social_expire" {
+  type = string
+}
+
 variable "token_expiration_minutes" {
   type    = number
   default = 540 # 9 hours

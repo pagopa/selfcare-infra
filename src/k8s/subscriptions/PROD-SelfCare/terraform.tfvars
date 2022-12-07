@@ -18,6 +18,20 @@ api-version_uservice-party-registry-proxy = "v1"
 # session jwt audience
 jwt_audience = "api.selfcare.pagopa.it"
 
+jwt_social_expire = "10000000"
+
+ms_core = {
+  USER_REGISTRY_MANAGEMENT_URL         = "https://api.pdv.pagopa.it/user-registry/v1"
+  MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://selfcare.pagopa.it/onboarding/confirm?jwt="
+  MAIL_ONBOARDING_REJECTION_LINK       = "https://selfcare.pagopa.it/onboarding/cancel?jwt="
+  PRODUCT_MANAGEMENT_URL               = "https://api.selfcare.pagopa.it/external/v1"
+  SIGNATURE_VALIDATION_ENABLED         = "true"
+  CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
+  ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "true"
+  SELFCARE_ADMIN_NOTIFICATION_URL      = "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
+}
+
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {
