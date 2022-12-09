@@ -207,6 +207,21 @@ resource "kubernetes_secret" "uservice-party-process" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "social-login" {
+  metadata {
+    name      = "social-login"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google_client_secret"].value
+    GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google_client_id"].value
+    JWT_SECRET           = module.key_vault_secrets_query.values["jwt_secret"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "uservice-party-management" {
   metadata {
     name      = "uservice-party-management"
