@@ -214,9 +214,9 @@ resource "kubernetes_secret" "social-login" {
   }
 
   data = {
-    GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google_client_secret"].value
-    GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google_client_id"].value
-    JWT_SECRET           = module.key_vault_secrets_query.values["jwt_secret"].value
+    GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google-client-secret"].value
+    GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google-client-id"].value
+    JWT_SECRET           = module.key_vault_secrets_query.values["jwt-secret"].value
   }
 
   type = "Opaque"
