@@ -321,7 +321,9 @@ paths:
           type: string
           enum:
           - ACTIVE
-          - SUSPENDED
+          - INACTIVE
+          - PHASE_OUT
+          - TESTING
       responses:
         '200':
           description: OK
