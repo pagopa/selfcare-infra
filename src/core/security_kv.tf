@@ -207,7 +207,7 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v3.8.1"
 
   jwt_name         = "agid-spid"
   key_vault_id     = module.key_vault.id

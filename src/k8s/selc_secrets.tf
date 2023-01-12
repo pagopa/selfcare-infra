@@ -200,7 +200,23 @@ resource "kubernetes_secret" "uservice-party-process" {
   data = {
     USER_REGISTRY_API_KEY                    = module.key_vault_secrets_query.values["user-registry-api-key"].value
     ONBOARDING_INSTITUTION_ALTERNATIVE_EMAIL = module.key_vault_secrets_query.values["party-test-institution-email"].value
+    ADDRESS_EMAIL_NOTIFICATION_ADMIN         = module.key_vault_secrets_query.values["portal-admin-operator-email"].value
     #"  pectest@pec.pagopa.it  text/plain
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "social-login" {
+  metadata {
+    name      = "social-login"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google-client-secret"].value
+    GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google-client-id"].value
+    JWT_SECRET           = module.key_vault_secrets_query.values["jwt-secret"].value
   }
 
   type = "Opaque"
