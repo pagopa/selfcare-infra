@@ -159,3 +159,16 @@ resource "kubernetes_config_map" "common" {
     var.configmaps_common
   )
 }
+
+resource "kubernetes_config_map" "aruba-sign-service" {
+  metadata {
+    name      = "aruba-sign-service"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    ARUBA_SIGN_SERVICE_IDENTITY_OTP_PWD = "dsign"
+    },
+    var.aruba_sign_service
+  )
+}
