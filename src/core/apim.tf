@@ -276,6 +276,54 @@ module "apim_user_group_ms_v1" {
   ]
 }
 
+resource "azurerm_api_management_api_version_set" "apim_ms_product" {
+  name                = format("%s-ms-product-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "SelfCare Product Micro Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_ms_product_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-product-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_ms_product.id
+
+
+  description  = "This service is the product micro service"
+  display_name = "SelfCare Product Micro Service"
+  path         = "external/products"
+  api_version  = "v1"
+  protocols    = [
+    "https"
+  ]
+
+  service_url = format("http://%s/ms-product/v1", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value  = templatefile("./api/ms_products/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "/products"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getProductUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
+  ]
+}
+
 resource "azurerm_api_management_api_version_set" "apim_external_api_ms" {
   name                = format("%s-ms-external-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
