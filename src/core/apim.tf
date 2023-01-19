@@ -303,9 +303,9 @@ module "apim_ms_product_v1" {
   service_url = format("http://%s/ms-product/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/ms_products/v1/open-api.yml.tpl", {
+  content_value  = templatefile("./api/ms_product/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "/products"
+    basePath = "/ms-product/v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
