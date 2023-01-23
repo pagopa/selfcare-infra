@@ -296,14 +296,14 @@ module "apim_ms_product_v1" {
   display_name = "SelfCare Product Micro Service"
   path         = "external/products"
   api_version  = "v1"
-  protocols    = [
+  protocols = [
     "https"
   ]
 
   service_url = format("http://%s/ms-product/v1", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/ms_product/v1/open-api.yml.tpl", {
+  content_value = templatefile("./api/ms_product/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "/ms-product/v1"
   })
