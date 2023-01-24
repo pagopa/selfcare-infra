@@ -17,6 +17,12 @@ paths:
       description: Service that returns the information for a single product given its product id
       operationId: getProductUsingGET
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: Product's unique identifier
