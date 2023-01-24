@@ -18,11 +18,11 @@ paths:
       operationId: getProductUsingGET
       parameters:
         - name: x-selfcare-uid
-                in: header
-                description: Logged user's unique identifier
-                required: true
-                schema:
-                  type: string
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: Product's unique identifier
