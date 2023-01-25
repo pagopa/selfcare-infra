@@ -266,3 +266,18 @@ resource "kubernetes_secret" "event-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "aruba-sign-service-secrets" {
+  metadata {
+    name      = "aruba-sign-service-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    ARUBA_SIGN_SERVICE_IDENTITY_USER               = module.key_vault_secrets_query.values["aruba-sign-service-user"].value
+    ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_USER     = module.key_vault_secrets_query.values["aruba-sign-service-delegated-user"].value
+    ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_PASSWORD = module.key_vault_secrets_query.values["aruba-sign-service-delegated-psw"].value
+  }
+
+  type = "Opaque"
+}
