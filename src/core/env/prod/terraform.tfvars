@@ -121,7 +121,7 @@ eventhub_zone_redundant           = true
 eventhub_alerts_enabled           = false
 
 eventhub_ip_rules = [
-  {
+  { // DATALAKE
     ip_mask = "18.192.147.151",
     action  = "Allow"
   }
@@ -141,6 +141,12 @@ eventhubs = [{
     },
     {
       name   = "datalake"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "pn"
       listen = true
       send   = false
       manage = false
