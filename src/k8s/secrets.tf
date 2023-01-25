@@ -34,6 +34,9 @@ module "key_vault_secrets_query" {
     "external-user-api",
     "user-registry-api-key",
     "logs-storage-connection-string",
-    "spid-logs-encryption-public-key"
+    "spid-logs-encryption-public-key",
+    "aruba-sign-service-user",
+    "aruba-sign-service-delegated-user",
+    "aruba-sign-service-delegated-psw",
   ]
 }

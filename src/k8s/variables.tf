@@ -120,3 +120,7 @@ variable "configmaps_common" {
 variable "configmaps_ms_core" {
   type = map(string)
 }
+
+variable "aruba_sign_service" {
+  type = map(string)
+}
