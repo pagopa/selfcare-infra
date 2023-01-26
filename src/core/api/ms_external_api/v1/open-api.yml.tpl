@@ -377,6 +377,19 @@ paths:
           style: simple
           schema:
             type: string
+        - name: institutionType
+          in: query
+          description: Institution's type
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - GSP
+              - PA
+              - PSP
+              - PT
+              - SCP
       responses:
         '200':
           description: OK
@@ -452,6 +465,7 @@ components:
           enum:
             - GSP
             - PA
+            - PSP
             - PT
             - SCP
         origin:

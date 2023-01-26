@@ -103,8 +103,56 @@ eventhub_zone_redundant           = true
 eventhub_alerts_enabled           = false
 
 eventhub_ip_rules = [
-  {
+  { // DATALAKE
     ip_mask = "18.192.147.151",
+    action  = "Allow"
+  },
+  { // PN - DEV
+    ip_mask = "15.160.101.29",
+    action  = "Allow"
+  },
+  { // PN - DEV
+    ip_mask = "15.161.210.71",
+    action  = "Allow"
+  },
+  { // PN - DEV
+    ip_mask = "35.152.45.223",
+    action  = "Allow"
+  },
+  { // PN - SVIL
+    ip_mask = "35.152.100.243",
+    action  = "Allow"
+  },
+  { // PN - SVIL
+    ip_mask = "15.160.72.148",
+    action  = "Allow"
+  },
+  { // PN - SVIL
+    ip_mask = "15.160.13.35",
+    action  = "Allow"
+  },
+  { // PN - COLL
+    ip_mask = "18.102.20.123",
+    action  = "Allow"
+  },
+  { // PN - COLL
+    ip_mask = "18.102.29.57",
+    action  = "Allow"
+  },
+  { // PN - COLL
+    ip_mask = "15.161.109.164",
+    action  = "Allow"
+  },
+  { // PN - HOTFIX
+    ip_mask = "15.160.107.164",
+    action  = "Allow"
+  },
+  { // PN - HOTFIX
+    ip_mask = "15.161.191.7",
+    action  = "Allow"
+  },
+  { // PN - HOTFIX
+    ip_mask = "18.102.83.181",
     action  = "Allow"
   }
 ]
@@ -123,6 +171,12 @@ eventhubs = [{
     },
     {
       name   = "datalake"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "pn"
       listen = true
       send   = false
       manage = false

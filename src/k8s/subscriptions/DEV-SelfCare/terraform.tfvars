@@ -56,3 +56,9 @@ configmaps_common = {
   ENABLE_CONFIDENTIAL_FILTER             = "FALSE"
   ENABLE_SINGLE_LINE_STACK_TRACE_LOGGING = "true"
 }
+
+aruba_sign_service = {
+  ARUBA_SIGN_SERVICE_BASE_URL                  = "https://arss.demo.firma-automatica.it:443/ArubaSignService/ArubaSignService"
+  ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH    = "demoprod"
+  ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN = "demoprod"
+}
