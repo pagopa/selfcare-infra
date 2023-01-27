@@ -124,3 +124,7 @@ variable "configmaps_ms_core" {
 variable "aruba_sign_service" {
   type = map(string)
 }
+
+variable "geo-taxonomies" {
+  type = map(string)
+}
