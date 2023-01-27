@@ -9,7 +9,7 @@ tags:
   - name: onboarding
     description: Onboarding Controller
 paths:
-  "/onboarding/{externalInstitutionId}/products/{productId}/onboarding/oldContract":
+  "/onboarding/{externalInstitutionId}":
     post:
       tags:
         - onboarding
