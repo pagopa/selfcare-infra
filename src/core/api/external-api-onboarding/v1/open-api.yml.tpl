@@ -1,15 +1,22 @@
 openapi: 3.0.3
 info:
-  title: selc-external-api-onboarding
+  title: selc-external-api
   description: Self Care External Api Documentation
   version: 0.0.1-SNAPSHOT
 servers:
-- url: 'https://${host}/${basePath}'
+  - url: '{url}:{port}{basePath}'
+    variables:
+      url:
+        default: http://localhost
+      port:
+        default: '80'
+      basePath:
+        default: ''
 tags:
   - name: onboarding
     description: Onboarding Controller
 paths:
-  "/onboarding/{externalInstitutionId}":
+  /onboarding/{externalInstitutionId}:
     post:
       tags:
         - onboarding
@@ -20,13 +27,6 @@ paths:
         - name: externalInstitutionId
           in: path
           description: Institution's unique external identifier
-          required: true
-          style: simple
-          schema:
-            type: string
-        - name: productId
-          in: path
-          description: Product's unique identifier
           required: true
           style: simple
           schema:
