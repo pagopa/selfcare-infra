@@ -326,6 +326,20 @@ paths:
       summary: getProduct
       description: The service retrieves Product information related to Subscription Key
       operationId: getProductUsingGET
+      parameters:
+       - name: institutionType
+         in: query
+         description: Institution's type
+         required: false
+         style: form
+         schema:
+           type: string
+           enum:
+             - GSP
+             - PA
+             - PSP
+             - PT
+             - SCP
       responses:
         '200':
           description: OK
