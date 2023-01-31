@@ -1,44 +1,55 @@
 openapi: 3.0.3
 info:
-  title: selc-external-api
-  description: Self Care External Api Documentation
+  title: selc-product
+  description: The services described in this section deal with the management of the Product entity, providing the necessary methods for its creation, consultation and activation.
   version: 0.0.1-SNAPSHOT
 servers:
-  - url: '{url}:{port}{basePath}'
-    variables:
-      url:
-        default: http://localhost
-      port:
-        default: '80'
-      basePath:
-        default: ''
+- url: 'https://${host}/${basePath}'
 tags:
-  - name: onboarding
-    description: Onboarding Controller
+  - name: product
+    description: Product's endpoints for CRUD operations
 paths:
-  /onboarding/{externalInstitutionId}:
-    post:
+  "/products/{id}":
+    get:
       tags:
-        - onboarding
-      summary: oldContractOnboarding
-      description: The service allows the import of old institutions' contracts
-      operationId: oldContractOnboardingUsingPOST
+        - product
+      summary: getProduct
+      description: Service that returns the information for a single product given its product id
+      operationId: getProductUsingGET
       parameters:
-        - name: externalInstitutionId
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: id
           in: path
-          description: Institution's unique external identifier
+          description: Product's unique identifier
           required: true
           style: simple
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OnboardingImportDto'
+        - name: institutionType
+          in: query
+          description: Institution's type
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - GSP
+              - PA
+              - PSP
+              - PT
+              - SCP
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResource'
         '400':
           description: Bad Request
           content:
@@ -51,8 +62,8 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-        '403':
-          description: Forbidden
+        '404':
+          description: Not Found
           content:
             application/problem+json:
               schema:
@@ -68,19 +79,19 @@ paths:
             - global
 components:
   schemas:
-    ImportContractDto:
-      title: ImportContractDto
+    BackOfficeConfigurationsResource:
+      title: BackOfficeConfigurationsResource
+      required:
+        - identityTokenAudience
+        - url
       type: object
       properties:
-        contractType:
+        identityTokenAudience:
           type: string
-          description: Institution's old contract version
-        fileName:
+          description: Product's identity token audience
+        url:
           type: string
-          description: Institution's old contract file name
-        filePath:
-          type: string
-          description: Institution's old contract file path
+          description: URL that redirects to the back-office section, where is possible to manage the product
     InvalidParam:
       title: InvalidParam
       required:
@@ -94,20 +105,6 @@ components:
         reason:
           type: string
           description: Invalid parameter reason.
-    OnboardingImportDto:
-      title: OnboardingImportDto
-      required:
-        - users
-      type: object
-      properties:
-        importContract:
-          description: Institution's old contract information
-          $ref: '#/components/schemas/ImportContractDto'
-        users:
-          type: array
-          description: List of onboarding users
-          items:
-            $ref: '#/components/schemas/UserDto'
     Problem:
       title: Problem
       required:
@@ -138,38 +135,127 @@ components:
           type: string
           description: A URL to a page with more details regarding the problem.
       description: A "problem detail" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)
-    UserDto:
-      title: UserDto
+    ProductResource:
+      title: ProductResource
       required:
-        - email
-        - name
-        - role
-        - surname
-        - taxCode
+        - contractTemplatePath
+        - contractTemplateUpdatedAt
+        - contractTemplateVersion
+        - createdAt
+        - id
+        - status
+        - title
       type: object
       properties:
-        email:
+        backOfficeEnvironmentConfigurations:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BackOfficeConfigurationsResource'
+          description: Environment-specific configurations for back-office redirection with Token Exchange
+        contractTemplatePath:
           type: string
-          description: User's email
-          format: email
-          example: email@example.com
-        name:
+          description: The path of contract
+        contractTemplateUpdatedAt:
           type: string
-          description: User's name
-        role:
+          description: Date the contract was postponed
+          format: date-time
+        contractTemplateVersion:
           type: string
-          description: User's role
+          description: Version of the contract
+        createdAt:
+          type: string
+          description: Creation/activation date and time
+          format: date-time
+        createdBy:
+          type: string
+          description: User who created/activated the resource
+          format: uuid
+        depictImageUrl:
+          type: string
+          description: Product's depiction image url
+        description:
+          type: string
+          description: Product's description
+        id:
+          type: string
+          description: Product's unique identifier
+        identityTokenAudience:
+          type: string
+          description: Product's identity token audience
+        logo:
+          type: string
+          description: Product's logo url
+        logoBgColor:
+          pattern: ^#[0-9A-F]{6}$
+          type: string
+          description: Product logo's background color
+          example: '#000000'
+        modifiedAt:
+          type: string
+          description: Last modified date and time
+          format: date-time
+        modifiedBy:
+          type: string
+          description: User who modified the resource
+          format: uuid
+        parentId:
+          type: string
+          description: Root parent of the sub product
+        roleMappings:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductRoleInfo'
+          description: Mappings between Party's and Product's role
+        status:
+          type: string
+          description: Product's status
           enum:
-            - DELEGATE
-            - MANAGER
-            - OPERATOR
-            - SUB_DELEGATE
-        surname:
+            - ACTIVE
+            - INACTIVE
+            - PHASE_OUT
+            - TESTING
+        title:
           type: string
-          description: User's surname
-        taxCode:
+          description: Product's title
+        urlBO:
           type: string
-          description: User's fiscal code
+          description: URL that redirects to the back-office section, where is possible to manage the product
+        urlPublic:
+          type: string
+          description: URL that redirects to the public information webpage of the product
+    ProductRole:
+      title: ProductRole
+      required:
+        - code
+        - description
+        - label
+      type: object
+      properties:
+        code:
+          type: string
+          description: Product role internal code
+        description:
+          type: string
+          description: Product role description
+        label:
+          type: string
+          description: Product role label
+    ProductRoleInfo:
+      title: ProductRoleInfo
+      required:
+        - multiroleAllowed
+        - roles
+      type: object
+      properties:
+        multiroleAllowed:
+          type: boolean
+          description: Flag indicating if a User can have more than one product role
+          example: false
+        roles:
+          type: array
+          description: Available product roles
+          items:
+            $ref: '#/components/schemas/ProductRole'
   securitySchemes:
     bearerAuth:
       type: http
