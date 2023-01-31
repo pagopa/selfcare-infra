@@ -13,9 +13,9 @@ paths:
     post:
       tags:
         - onboarding
-      summary: oldContractOnboarding
-      description: The service allows the import of old institutions' contracts
-      operationId: oldContractOnboardingUsingPOST
+      summary: contractOnboarding
+      description: The service allows the import of institutions' contracts
+      operationId: contractOnboardingUsingPOST
       parameters:
         - name: externalInstitutionId
           in: path
@@ -67,13 +67,13 @@ components:
       properties:
         contractType:
           type: string
-          description: Institution's old contract version
+          description: Institution's contract version
         fileName:
           type: string
-          description: Institution's old contract file name
+          description: Institution's contract file name
         filePath:
           type: string
-          description: Institution's old contract file path
+          description: Institution's contract file path
     InvalidParam:
       title: InvalidParam
       required:
@@ -94,7 +94,7 @@ components:
       type: object
       properties:
         importContract:
-          description: Institution's old contract information
+          description: Institution's contract information
           $ref: '#/components/schemas/ImportContractDto'
         users:
           type: array

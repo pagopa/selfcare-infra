@@ -317,7 +317,7 @@ module "apim_external_api_onboarding_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "oldContractOnboardingUsingPOST"
+      operation_id = "contractOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
