@@ -304,7 +304,7 @@ module "apim_external_api_onboarding_v1" {
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "/external-api/v1"
+    basePath = "/onboarding-api/v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
