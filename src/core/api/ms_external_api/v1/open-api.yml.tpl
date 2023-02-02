@@ -11,6 +11,132 @@ tags:
   - name: product
     description: Product Controller
 paths:
+ /institutions/byGeoTaxonomies:
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionByGeoTaxonomies
+      description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode
+      operationId: getInstitutionsByGeoTaxonomiesUsingGET
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+          type: string
+        - name: geoTaxonomies
+          in: query
+          description: Geotaxonomy's internal Id
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: searchMode
+          in: query
+          description: Searching mode to find institutions based on geotax
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - all
+              - any
+              - exact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstitutionResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  /institutions/{institutionId}/geographicTaxonomy:
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionGeographicTaxonomies
+      description: The service retrieve the institution's geographic taxonomy
+      operationId: getInstitutionGeographicTaxonomiesUsingGET
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+          type: string
+        - name: institutionId
+          in: path
+          description: Institution's unique internal Id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeographicTaxonomyResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions':
     get:
       tags:
@@ -426,6 +552,19 @@ paths:
             - global
 components:
   schemas:
+    GeographicTaxonomyResource:
+       title: GeographicTaxonomyResource
+       required:
+         - code
+         - desc
+       type: object
+       properties:
+         code:
+           type: string
+           description: Institution's geographic taxonomy ISTAT code
+         desc:
+           type: string
+           description: Institution's geographic taxonomy extended name
     InstitutionResource:
       title: InstitutionResource
       required:
