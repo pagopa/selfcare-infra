@@ -19,6 +19,19 @@ api-version_uservice-party-registry-proxy = "v1"
 # session jwt audience
 jwt_audience = "api.uat.selfcare.pagopa.it"
 
+jwt_social_expire = "10000000"
+
+configmaps_ms_core = {
+  USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"
+  MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://uat.selfcare.pagopa.it/onboarding/confirm?jwt="
+  MAIL_ONBOARDING_REJECTION_LINK       = "https://uat.selfcare.pagopa.it/onboarding/cancel?jwt="
+  PRODUCT_MANAGEMENT_URL               = "https://api.uat.selfcare.pagopa.it/external/v1"
+  SIGNATURE_VALIDATION_ENABLED         = "true"
+  CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
+  ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
+  SELFCARE_ADMIN_NOTIFICATION_URL      = "https://uat.selfcare.pagopa.it/dashboard/admin/onboarding/"
+}
+
 # configs/secrets
 
 configmaps_hub-spid-login-ms = {
@@ -39,4 +52,10 @@ configmaps_common = {
   USERVICE_USER_REGISTRY_URL             = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   ENABLE_CONFIDENTIAL_FILTER             = "FALSE"
   ENABLE_SINGLE_LINE_STACK_TRACE_LOGGING = "true"
+}
+
+aruba_sign_service = {
+  ARUBA_SIGN_SERVICE_BASE_URL                  = "https://asbr-pagopa.arubapec.it/ArubaSignService/ArubaSignService"
+  ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH    = "faPagoPa"
+  ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN = "faPagoPa"
 }

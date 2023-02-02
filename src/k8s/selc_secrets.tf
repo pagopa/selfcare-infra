@@ -200,7 +200,23 @@ resource "kubernetes_secret" "uservice-party-process" {
   data = {
     USER_REGISTRY_API_KEY                    = module.key_vault_secrets_query.values["user-registry-api-key"].value
     ONBOARDING_INSTITUTION_ALTERNATIVE_EMAIL = module.key_vault_secrets_query.values["party-test-institution-email"].value
+    ADDRESS_EMAIL_NOTIFICATION_ADMIN         = module.key_vault_secrets_query.values["portal-admin-operator-email"].value
     #"  pectest@pec.pagopa.it  text/plain
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "social-login" {
+  metadata {
+    name      = "social-login"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google-client-secret"].value
+    GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google-client-id"].value
+    JWT_SECRET           = module.key_vault_secrets_query.values["jwt-secret"].value
   }
 
   type = "Opaque"
@@ -246,6 +262,37 @@ resource "kubernetes_secret" "event-secrets" {
 
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "aruba-sign-service-secrets" {
+  metadata {
+    name      = "aruba-sign-service-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    ARUBA_SIGN_SERVICE_IDENTITY_USER               = module.key_vault_secrets_query.values["aruba-sign-service-user"].value
+    ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_USER     = module.key_vault_secrets_query.values["aruba-sign-service-delegated-user"].value
+    ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_PASSWORD = module.key_vault_secrets_query.values["aruba-sign-service-delegated-psw"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "infocamere-service-secrets" {
+  metadata {
+    name      = "infocamere-service-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    INFO_CAMERE_CLIENT_ID          = module.key_vault_secrets_query.values["infocamere-client-id"].value
+    INFO_CAMERE_SECRET_PUBLIC_KEY  = module.key_vault_secrets_query.values["infocamere-secret-public-key"].value
+    INFO_CAMERE_SECRET_PRIVATE_KEY = module.key_vault_secrets_query.values["infocamere-secret-private-key"].value
+    INFO_CAMERE_SECRET_CERTIFICATE = module.key_vault_secrets_query.values["infocamere-secret-certificate"].value
   }
 
   type = "Opaque"

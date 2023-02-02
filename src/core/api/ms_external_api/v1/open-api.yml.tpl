@@ -465,6 +465,7 @@ components:
           enum:
             - GSP
             - PA
+            - PSP
             - PT
             - SCP
         origin:

@@ -25,11 +25,22 @@ module "key_vault_secrets_query" {
     "web-storage-connection-string",
     "user-registry-api-key",
     "party-test-institution-email",
+    "portal-admin-operator-email",
+    "google-client-secret",
+    "google-client-id",
+    "jwt-secret",
     "eventhub-SC-Contracts-selfcare-wo-connection-string",
     "external-api-key",
     "external-user-api",
     "user-registry-api-key",
     "logs-storage-connection-string",
-    "spid-logs-encryption-public-key"
+    "spid-logs-encryption-public-key",
+    "aruba-sign-service-user",
+    "aruba-sign-service-delegated-user",
+    "aruba-sign-service-delegated-psw",
+    "infocamere-client-id",
+    "infocamere-secret-public-key",
+    "infocamere-secret-private-key",
+    "infocamere-secret-certificate"
   ]
 }

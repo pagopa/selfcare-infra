@@ -100,6 +100,10 @@ variable "jwt_audience" {
   type = string
 }
 
+variable "jwt_social_expire" {
+  type = string
+}
+
 variable "token_expiration_minutes" {
   type    = number
   default = 540 # 9 hours
@@ -110,5 +114,17 @@ variable "configmaps_hub-spid-login-ms" {
 }
 
 variable "configmaps_common" {
+  type = map(string)
+}
+
+variable "configmaps_ms_core" {
+  type = map(string)
+}
+
+variable "aruba_sign_service" {
+  type = map(string)
+}
+
+variable "geo-taxonomies" {
   type = map(string)
 }
