@@ -339,7 +339,6 @@ module "apim_external_api_ms_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
 
-
   description  = "This service is the proxy for external services"
   display_name = "External API service"
   path         = "external"
@@ -366,7 +365,7 @@ module "apim_external_api_ms_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content = templatefile("./api/ms_external_api/getInstitutions_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v1/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
       })
     },
@@ -376,20 +375,20 @@ module "apim_external_api_ms_v1" {
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content = templatefile("./api/ms_external_api/jwt_auth_op_policy_user_group.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
-      xml_content = templatefile("./api/ms_external_api/getInstitution_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content = templatefile("./api/ms_external_api/getProduct_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v1/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
       })
     },
@@ -398,4 +397,184 @@ module "apim_external_api_ms_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
+}
+
+module "apim_external_api_ms_v2" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-external-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
+
+  description  = "This service is the proxy for external services"
+  display_name = "External API service"
+  path         = "external"
+  api_version  = "v2"
+  protocols = [
+  "https"]
+
+  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "v2"
+  })
+
+  xml_content = file("./api/ms_external_api/v2/base_policy.xml")
+
+  subscription_required = true
+  product_ids = [
+    module.apim_product_interop.product_id,
+    module.apim_product_pn.product_id,
+    module.apim_product_pagopa.product_id,
+    module.apim_product_idpay.product_id
+  ]
+
+  api_operation_policies = [
+    {
+      operation_id = "getInstitutionsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutions_op_policy.xml.tpl", {
+        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getInstitutionUserProductsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutionUserProductsUsingGET_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getProductUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getProduct_op_policy.xml.tpl", {
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+      })
+    },
+    {
+      operation_id = "getInstitutionProductUsersUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    }
+  ]
+}
+
+
+##############
+## Products ##
+##############
+
+module "apim_product_interop" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "interop"
+  display_name = "INTEROP"
+  description  = "Interoperabilità"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop/policy.xml")
+}
+
+module "apim_product_pn" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn"
+  display_name = "PN"
+  description  = "Piattaforma Notifiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pn/policy.xml")
+}
+
+module "apim_product_pagopa" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pagopa"
+  display_name = "PAGOPA"
+  description  = "Pagamenti pagoPA"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pagopa/policy.xml")
+}
+
+module "apim_product_idpay" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "idpay"
+  display_name = "IDPAY"
+  description  = "ID Pay"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/idpay/policy.xml")
+}
+
+
+##################
+## Named values ##
+##################
+
+resource "azurerm_api_management_named_value" "apim_named_value_backend_access_token" {
+
+  name                = "backend-access-token"
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  display_name = "backend-access-token"
+  secret       = true
+  value_from_key_vault {
+    secret_id = data.azurerm_key_vault_secret.apim_backend_access_token.id
+  }
+
+}
+
+data "azurerm_key_vault_secret" "apim_backend_access_token" {
+  name         = "apim-backend-access-token"
+  key_vault_id = module.key_vault.id
 }

@@ -229,8 +229,8 @@ data "kubernetes_secret" "apim_service_account_secret" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "apim_service_account_access_token" {
   name         = "apim-backend-access-token"
-  value        = data.kubernetes_secret.apim_service_account_secret.binary_data.token
-  content_type = "text/plain"
+  value        = base64decode(data.kubernetes_secret.apim_service_account_secret.binary_data.token)
+  content_type = "JWT"
 
   key_vault_id = local.key_vault_id
 }
