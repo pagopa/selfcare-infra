@@ -373,6 +373,14 @@ module "apim_external_api_ms_v1" {
       operation_id = "getInstitutionUserProductsUsingGET"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
+     {
+      operation_id = "getInstitutionGeographicTaxonomiesUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+     },
+     {
+      operation_id = "getInstitutionsByGeoTaxonomiesUsingGET"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+     },
     {
       operation_id = "getInstitutionGeographicTaxonomiesUsingGET"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
