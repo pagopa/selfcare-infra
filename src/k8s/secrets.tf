@@ -38,5 +38,9 @@ module "key_vault_secrets_query" {
     "aruba-sign-service-user",
     "aruba-sign-service-delegated-user",
     "aruba-sign-service-delegated-psw",
+    "infocamere-client-id",
+    "infocamere-secret-public-key",
+    "infocamere-secret-private-key",
+    "infocamere-secret-certificate"
   ]
 }
