@@ -59,3 +59,7 @@ aruba_sign_service = {
   ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH    = "faPagoPa"
   ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN = "faPagoPa"
 }
+
+geo-taxonomies = {
+  GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
+}
