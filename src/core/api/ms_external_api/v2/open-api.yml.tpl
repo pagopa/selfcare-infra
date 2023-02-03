@@ -376,6 +376,19 @@ paths:
             - global
 components:
   schemas:
+    GeographicTaxonomyResource:
+      title: GeographicTaxonomyResource
+      required:
+        - code
+        - desc
+      type: object
+      properties:
+        code:
+          type: string
+          description: Institution's geographic taxonomy ISTAT code
+        desc:
+          type: string
+          description: Institution's geographic taxonomy extended name
     InstitutionResource:
       title: InstitutionResource
       required:
