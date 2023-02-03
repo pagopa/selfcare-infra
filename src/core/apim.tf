@@ -382,14 +382,6 @@ module "apim_external_api_ms_v1" {
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {
-      operation_id = "getInstitutionGeographicTaxonomiesUsingGET"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
-      operation_id = "getInstitutionsByGeoTaxonomiesUsingGET"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
