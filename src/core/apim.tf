@@ -319,7 +319,11 @@ module "apim_external_api_onboarding_v1" {
     {
       operation_id = "contractOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
-    }
+    },
+    {
+      operation_id = "autoApprovalOnboardingUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
   ]
 }
 
@@ -513,8 +517,6 @@ module "apim_external_api_ms_v2" {
       })
     },
     {
-<<<<<<<<< Temporary merge branch 1
-=========
       operation_id = "getInstitutionsByGeoTaxonomiesUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitutionsByGeoTaxonomiesUsingGET_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
@@ -531,7 +533,6 @@ module "apim_external_api_ms_v2" {
       })
     },
     {
->>>>>>>>> Temporary merge branch 2
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
