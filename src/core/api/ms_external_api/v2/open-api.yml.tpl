@@ -27,6 +27,13 @@ paths:
           explode: true
           schema:
             type: string
+        - name: userId
+          in: query
+          description: User's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
         - name: searchMode
           in: query
           description: Searching mode to find institutions based on geotax
