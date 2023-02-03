@@ -11,6 +11,127 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/institutions/byGeoTaxonomies':
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionsByGeoTaxonomies
+      description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode
+      operationId: getInstitutionsByGeoTaxonomiesUsingGET
+      parameters:
+        - name: geoTaxonomies
+          in: query
+          description: Geotaxonomy's internal Id
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: searchMode
+          in: query
+          description: Searching mode to find institutions based on geotax
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - all
+              - any
+              - exact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstitutionDetailResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/institutions/{institutionId}/geographicTaxonomy':
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionGeographicTaxonomies
+      description: The service retrieve the institution's geographic taxonomy
+      operationId: getInstitutionGeographicTaxonomiesUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: Institution's unique internal Id
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: userId
+          in: query
+          description: User's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GeographicTaxonomyResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions':
     get:
       tags:
@@ -129,7 +250,7 @@ paths:
                   $ref: '#/components/schemas/Problem'
         security:
           - bearerAuth:
-              - global 
+              - global
   '/institutions/{institutionId}/products':
     get:
       tags:
@@ -318,7 +439,7 @@ paths:
                 "$ref": "#/components/schemas/Problem"
       security:
       - bearerAuth:
-        - global    
+        - global
   '/product':
     get:
       tags:
@@ -376,6 +497,98 @@ paths:
             - global
 components:
   schemas:
+    GeographicTaxonomyResource:
+      title: GeographicTaxonomyResource
+      required:
+        - code
+        - desc
+      type: object
+      properties:
+        code:
+          type: string
+          description: Institution's geographic taxonomy ISTAT code
+        desc:
+          type: string
+          description: Institution's geographic taxonomy extended name
+    InstitutionDetailResource:
+      title: InstitutionDetailResource
+      required:
+        - address
+        - description
+        - digitalAddress
+        - externalId
+        - geographicTaxonomies
+        - id
+        - institutionType
+        - origin
+        - originId
+        - taxCode
+        - zipCode
+      type: object
+      properties:
+        address:
+          type: string
+          description: Institution's physical address
+        businessRegisterPlace:
+          type: string
+          description: Institution's business register place
+        description:
+          type: string
+          description: Institution's legal name
+        digitalAddress:
+          type: string
+          description: Institution's digitalAddress
+        externalId:
+          type: string
+          description: Institution's unique external identifier
+        geographicTaxonomies:
+          type: array
+          description: Institution's geographic taxonomy list
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomyResource'
+        id:
+          type: string
+          description: Institution's unique internal Id
+          format: uuid
+        imported:
+          type: boolean
+          description: True if institution is stored from batch api
+          example: false
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PSP
+            - PT
+            - SCP
+        origin:
+          type: string
+          description: Institution data origin
+        originId:
+          type: string
+          description: Institution's details origin Id
+        rea:
+          type: string
+          description: Institution's REA
+        shareCapital:
+          type: string
+          description: Institution's share capital value
+        supportEmail:
+          type: string
+          description: Institution's support email contact
+          format: email
+          example: email@example.com
+        supportPhone:
+          type: string
+          description: Institution's support phone contact
+        taxCode:
+          type: string
+          description: Institution's taxCode
+        zipCode:
+          type: string
+          description: Institution's zipCode
     InstitutionResource:
       title: InstitutionResource
       required:
