@@ -1,5 +1,5 @@
 # general
-prefix          = "cstar"
+prefix          = "selc"
 env_short       = "u"
 env             = "uat"
 domain          = "uat01"
@@ -10,14 +10,14 @@ location_short  = "weu"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "UAT"
-  Owner       = "CSTAR"
-  Source      = "https://github.com/pagopa/cstar-infrastructure"
+  Owner       = "selc"
+  Source      = "https://github.com/pagopa/selc-infrastructure"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
 # # 🔐 key vault
-# key_vault_name    = "cstar-u-xyz"
-# key_vault_rg_name = "cstar-u-xyz"
+# key_vault_name    = "selc-u-xyz"
+# key_vault_rg_name = "selc-u-xyz"
 
 ### Network
 
@@ -25,18 +25,18 @@ cidr_subnet_aks = ["10.11.0.0/17"]
 
 ### External resources
 
-monitor_resource_group_name                 = "cstar-u-monitor-rg"
-log_analytics_workspace_name                = "cstar-u-law"
-log_analytics_workspace_resource_group_name = "cstar-u-monitor-rg"
+monitor_resource_group_name                 = "selc-u-monitor-rg"
+log_analytics_workspace_name                = "selc-u-law"
+log_analytics_workspace_resource_group_name = "selc-u-monitor-rg"
 
 ### Aks
 
 #
 # ⛴ AKS
 #
-rg_vnet_aks_name           = "cstar-u-weu-uat01-vnet-rg"
-vnet_aks_name              = "cstar-u-weu-uat01-vnet"
-public_ip_aksoutbound_name = "cstar-u-weu-uat01-aksoutbound-pip-1"
+rg_vnet_aks_name           = "selc-u-weu-uat01-vnet-rg"
+vnet_aks_name              = "selc-u-weu-uat01-vnet"
+public_ip_aksoutbound_name = "selc-u-weu-uat01-aksoutbound-pip-1"
 
 aks_enabled                 = true
 aks_private_cluster_enabled = true
