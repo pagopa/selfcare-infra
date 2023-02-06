@@ -2,7 +2,7 @@
 prefix          = "selc"
 env_short       = "d"
 env             = "dev"
-domain          = "dev"
+domain          = "core"
 location        = "westeurope"
 location_string = "West Europe"
 location_short  = "weu"
@@ -10,7 +10,7 @@ location_short  = "weu"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Dev"
-  Owner       = "DevOps"
+  Owner       = "SelfCare"
   Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
@@ -37,12 +37,12 @@ log_analytics_workspace_resource_group_name = "selc-d-monitor-rg"
 public_ip_aksoutbound_name = "selc-d-aksoutbound-pip-01"
 
 aks_enabled                 = true
-aks_private_cluster_enabled = false
+aks_private_cluster_enabled = true
 aks_alerts_enabled          = false
-aks_kubernetes_version      = "1.23.6"
+aks_kubernetes_version      = "1.23.12"
 aks_system_node_pool = {
-  name            = "seldevsys",
-  vm_size         = "Standard_B2ms",
+  name            = "selcdsys",
+  vm_size         = "Standard_B4ms",
   os_disk_type    = "Managed",
   os_disk_size_gb = 75,
   node_count_min  = 1,
@@ -52,11 +52,11 @@ aks_system_node_pool = {
 }
 aks_user_node_pool = {
   enabled         = true,
-  name            = "seldevusr",
+  name            = "seldusr",
   vm_size         = "Standard_B4ms",
   os_disk_type    = "Managed",
   os_disk_size_gb = 75,
-  node_count_min  = 3,
+  node_count_min  = 1,
   node_count_max  = 5,
   node_labels     = { node_name : "aks-dev-user", node_type : "user" },
   node_taints     = [],
@@ -91,7 +91,7 @@ aks_addons = {
   pod_identity_enabled             = true,
 }
 
-ingress_replica_count = "2"
+ingress_replica_count = "1"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 ingress_load_balancer_ip = "10.11.100.250"
 nginx_helm_version       = "4.1.0"
