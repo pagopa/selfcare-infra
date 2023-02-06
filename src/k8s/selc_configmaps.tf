@@ -172,3 +172,25 @@ resource "kubernetes_config_map" "aruba-sign-service" {
     var.aruba_sign_service
   )
 }
+
+resource "kubernetes_config_map" "infocamere-service" {
+  metadata {
+    name      = "infocamere-service"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    INFO_CAMERE_URL                            = "https://icapiscl.infocamere.it/ic/ce/wspa/wspa/rest/"
+    INFO_CAMERE_AUTHENTICATION_ENDPOINT        = "authentication"
+    INFO_CAMERE_INSTITUTIONS_BY_LEGAL_ENDPOINT = "listaLegaleRappresentante/{taxId}"
+  }
+}
+
+resource "kubernetes_config_map" "geo-taxonomies" {
+  metadata {
+    name      = "geo-taxonomies"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = var.geo-taxonomies
+}

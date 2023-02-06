@@ -281,3 +281,19 @@ resource "kubernetes_secret" "aruba-sign-service-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "infocamere-service-secrets" {
+  metadata {
+    name      = "infocamere-service-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    INFO_CAMERE_CLIENT_ID          = module.key_vault_secrets_query.values["infocamere-client-id"].value
+    INFO_CAMERE_SECRET_PUBLIC_KEY  = module.key_vault_secrets_query.values["infocamere-secret-public-key"].value
+    INFO_CAMERE_SECRET_PRIVATE_KEY = module.key_vault_secrets_query.values["infocamere-secret-private-key"].value
+    INFO_CAMERE_SECRET_CERTIFICATE = module.key_vault_secrets_query.values["infocamere-secret-certificate"].value
+  }
+
+  type = "Opaque"
+}
