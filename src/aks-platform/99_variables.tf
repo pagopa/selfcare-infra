@@ -3,16 +3,16 @@ locals {
   project = "${var.prefix}-${var.env_short}-${var.location_short}-${var.domain}"
 
   # AKS
-  aks_rg_name      = "${local.product}-aks-rg"
-  aks_cluster_name = "${local.product}-aks"
+  aks_rg_name      = "${local.project}-aks-rg"
+  aks_cluster_name = "${local.project}-aks"
 
   # VNET
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
   vnet_core_name                = "${local.product}-vnet"
 
   # ACR DOCKER
-  docker_rg_name       = "${local.product}-aks-rg"
-  docker_registry_name = replace("${var.prefix}-${var.env_short}-acr", "-", "")
+  docker_rg_name       = "${local.product}-docker-rg"
+  docker_registry_name = replace("${local.product}-common-acr", "-", "")
 
   # monitor
   monitor_rg_name                      = "${local.product}-monitor-rg"

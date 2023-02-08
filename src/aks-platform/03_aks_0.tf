@@ -30,7 +30,7 @@ module "aks" {
 
   name                       = local.aks_cluster_name
   location                   = azurerm_resource_group.rg_aks.location
-  dns_prefix                 = "${local.product}-aks"
+  dns_prefix                 = "${local.project}-aks"
   resource_group_name        = azurerm_resource_group.rg_aks.name
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
@@ -79,11 +79,11 @@ module "aks" {
   private_cluster_enabled = var.aks_private_cluster_enabled
   network_profile = {
     docker_bridge_cidr = "172.17.0.1/16"
-    dns_service_ip     = "10.250.0.10"
+    dns_service_ip     = "10.2.0.10"
     network_plugin     = "azure"
     network_policy     = "azure"
     outbound_type      = "loadBalancer"
-    service_cidr       = "10.250.0.0/16"
+    service_cidr       = "10.2.0.0/16"
   }
   # end network
 
@@ -112,12 +112,12 @@ module "aks" {
 
 }
 
-# #
-# # ACR connection
-# #
-# # add the role to the identity the kubernetes cluster was assigned
-# resource "azurerm_role_assignment" "aks_to_acr" {
-#   scope                = data.azurerm_container_registry.acr.id
-#   role_definition_name = "AcrPull"
-#   principal_id         = module.aks[0].kubelet_identity_id
-# }
+#
+# ACR connection
+#
+# add the role to the identity the kubernetes cluster was assigned
+resource "azurerm_role_assignment" "aks_to_acr" {
+  scope                = data.azurerm_container_registry.acr.id
+  role_definition_name = "AcrPull"
+  principal_id         = module.aks[0].kubelet_identity_id
+}
