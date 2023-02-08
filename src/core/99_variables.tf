@@ -38,6 +38,21 @@ variable "location" {
   default = "westeurope"
 }
 
+variable "location_pair" {
+  type        = string
+  description = "Pair (Secondary) location region (e.g. northeurope)"
+}
+
+variable "location_short" {
+  type        = string
+  description = "Primary location in short form (e.g. westeurope=weu)"
+}
+
+variable "location_pair_short" {
+  type        = string
+  description = "Pair (Secondary) location in short form (e.g. northeurope=neu)"
+}
+
 variable "lock_enable" {
   type        = bool
   default     = false
@@ -1022,3 +1037,16 @@ EOD
   }))
 }
 ##
+
+variable "docker_registry" {
+  description = "ACR docker registry configuration"
+  type = object({
+    sku = string
+    zone_redundancy_enabled = bool
+    geo_replication = object({
+      enabled = bool
+      regional_endpoint_enabled = bool
+      zone_redundancy_enabled = bool
+    })
+  })
+}

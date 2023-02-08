@@ -1,6 +1,10 @@
 # general
-env       = "dev"
 env_short = "d"
+env       = "dev"
+location            = "westeurope"
+location_pair       = "northeurope"
+location_short      = "weu"
+location_pair_short = "neu"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -59,6 +63,19 @@ reverse_proxy_ip = "10.1.1.250"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
+
+#
+# Docker
+#
+docker_registry = {
+  sku = "Basic"
+  zone_redundancy_enabled = false
+  geo_replication = {
+    enabled = false
+    regional_endpoint_enabled = false
+    zone_redundancy_enabled = false
+  }
+}
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
