@@ -7,10 +7,10 @@ resource "azurerm_resource_group" "rg_vnet_aks" {
 }
 
 # vnet
-module "vnet_aks" {
+module "vnet_aks_platform" {
   source = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.3.2"
 
-  name                 = "${local.project}-${var.location_short}-vnet"
+  name                 = "${local.project}-${var.location_short}-aks-dev01-vnet"
   location             = var.location
   resource_group_name  = azurerm_resource_group.rg_vnet_aks.name
   address_space        = var.cidr_aks_vnet
@@ -24,8 +24,8 @@ module "vnet_aks" {
 
 resource "azurerm_public_ip" "outbound_ip_aks_platform" {
 
-  name                = "${local.project}-${var.location_short}-aksplatformoutbound-pip"
-  domain_name_label   = "${local.project}-${var.location_short}-aksplatformoutbound-pip"
+  name                = "${local.project}-${var.location_short}-aks-platform-outbound-pip"
+  domain_name_label   = "${local.project}-${var.location_short}-aks-platform-outbound-pip"
   location            = azurerm_resource_group.rg_vnet_aks.location
   resource_group_name = azurerm_resource_group.rg_vnet_aks.name
   sku                 = "Standard"
