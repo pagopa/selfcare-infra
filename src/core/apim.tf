@@ -524,7 +524,7 @@ module "apim_product_pn" {
   policy_xml = file("./api_product/pn/policy.xml")
 }
 
-module "apim_product_pn_svil" {
+module "apim_product_pn_svi" {
   source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
 
   product_id   = "pn-svil"
