@@ -92,6 +92,16 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
+variable "cidr_aks_vnet" {
+  type        = list(string)
+  description = "vnet for aks platform."
+}
+
+variable "vnet_aks_ddos_protection_plan" {
+  type        = bool
+  description = "vnet enable ddos protection plan"
+}
+
 variable "aks_system_node_pool_vm_size" {
   type        = string
   default     = "Standard_DS3_v2"
