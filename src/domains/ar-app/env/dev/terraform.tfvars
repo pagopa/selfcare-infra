@@ -1,7 +1,7 @@
 prefix          = "selc"
 env_short       = "d"
 env             = "dev"
-domain          = "selc"
+domain          = "ar"
 location        = "westeurope"
 location_string = "West Europe"
 location_short  = "weu"
