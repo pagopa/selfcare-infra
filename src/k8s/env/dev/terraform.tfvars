@@ -1,5 +1,11 @@
-env       = "dev"
-env_short = "d"
+prefix          = "selc"
+env_short       = "d"
+env             = "dev"
+domain          = "selc"
+location        = "westeurope"
+location_string = "West Europe"
+location_short  = "weu"
+instance        = "dev01"
 
 aks_name = "selc-d-weu-dev01-aks"
 aks_resource_group_name = "selc-d-weu-dev01-aks-rg"
