@@ -4,6 +4,8 @@ locals {
   project                        = "${var.prefix}-${var.env_short}"
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
+
+  internal_selfcare_private_domain = var.env_short == "p" ? "internal.selfcare.pagopa.it" : "internal.${var.env}.selfcare.pagopa.it"
 }
 
 
