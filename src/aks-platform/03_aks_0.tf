@@ -5,12 +5,12 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 # k8s cluster subnet
-module "snet_aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v4.1.9"
-  name   = "${local.product}-k8s-snet"
+module "snet_aks_platform" {
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v4.1.15"
+  name   = "${local.product}-aks-platform-snet"
 
-  resource_group_name  = data.azurerm_resource_group.vnet_core_rg.name
-  virtual_network_name = data.azurerm_virtual_network.vnet_core.name
+  resource_group_name  = data.azurerm_resource_group.vnet_aks_rg.name
+  virtual_network_name = data.azurerm_virtual_network.vnet_aks.name
 
   address_prefixes                          = var.cidr_subnet_aks
   private_endpoint_network_policies_enabled = var.aks_private_cluster_enabled
@@ -24,13 +24,13 @@ module "snet_aks" {
 
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v4.1.9"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v4.1.15"
 
   count = var.aks_enabled ? 1 : 0
 
   name                       = local.aks_cluster_name
   location                   = azurerm_resource_group.rg_aks.location
-  dns_prefix                 = "${local.project}-aks"
+  dns_prefix                 = local.aks_cluster_name
   resource_group_name        = azurerm_resource_group.rg_aks.name
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
@@ -72,18 +72,18 @@ module "aks" {
   #
   # ☁️ Network
   #
-  vnet_id        = data.azurerm_virtual_network.vnet_core.id
-  vnet_subnet_id = module.snet_aks.id
+  vnet_id        = data.azurerm_virtual_network.vnet_aks.id
+  vnet_subnet_id = module.snet_aks_platform.id
 
   outbound_ip_address_ids = [data.azurerm_public_ip.pip_aks_outboud.id]
   private_cluster_enabled = var.aks_private_cluster_enabled
   network_profile = {
     docker_bridge_cidr = "172.17.0.1/16"
-    dns_service_ip     = "10.2.0.10"
+    dns_service_ip     = "10.250.0.10"
     network_plugin     = "azure"
     network_policy     = "azure"
     outbound_type      = "loadBalancer"
-    service_cidr       = "10.2.0.0/16"
+    service_cidr       = "10.250.0.0/16"
   }
   # end network
 
