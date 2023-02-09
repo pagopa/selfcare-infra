@@ -21,7 +21,7 @@ tags = {
 
 ### Network
 
-cidr_subnet_aks = ["10.1.0.0/17"]
+cidr_subnet_aks = ["10.11.0.0/17"]
 
 ### External resources
 
@@ -34,7 +34,7 @@ log_analytics_workspace_resource_group_name = "selc-d-monitor-rg"
 #
 # ⛴ AKS
 #
-public_ip_aksoutbound_name = "selc-d-aksoutbound-pip-01"
+public_ip_aksoutbound_name = "selc-d-weu-aks-platform-outbound-pip"
 
 aks_enabled                 = true
 aks_private_cluster_enabled = true
@@ -95,7 +95,7 @@ ingress_replica_count = "1"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 ingress_load_balancer_ip = "10.11.100.250"
 nginx_helm_version       = "4.1.0"
-keda_helm_version        = "2.6.2"
+keda_helm_version        = "2.9.1"
 
 # chart releases: https://github.com/stakater/Reloader/releases
 # image tags: https://hub.docker.com/r/stakater/reloader/tags
