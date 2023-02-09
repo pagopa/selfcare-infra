@@ -28,7 +28,7 @@
 
 # resource "kubernetes_role_binding" "deployer_binding" {
 #   depends_on = [
-#     kubernetes_namespace.selc
+#     kubernetes_namespace.domain_namespace
 #   ]
 
 #   for_each = toset(var.rbac_namespaces)
@@ -64,7 +64,7 @@
 
 # resource "kubernetes_role_binding" "helm_system_deployer_binding" {
 #   depends_on = [
-#     kubernetes_namespace.selc
+#     kubernetes_namespace.domain_namespace
 #   ]
 
 #   for_each = toset(["kube-system"])

@@ -1,7 +1,7 @@
 resource "kubernetes_config_map" "inner-service-url" {
   metadata {
     name      = "inner-service-url"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -22,7 +22,7 @@ resource "kubernetes_config_map" "inner-service-url" {
 resource "kubernetes_config_map" "jwt" {
   metadata {
     name      = "jwt"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -36,7 +36,7 @@ resource "kubernetes_config_map" "jwt" {
 resource "kubernetes_config_map" "jwt-exchange" {
   metadata {
     name      = "jwt-exchange"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -50,7 +50,7 @@ resource "kubernetes_config_map" "jwt-exchange" {
 resource "kubernetes_config_map" "jwt-social" {
   metadata {
     name      = "jwt-social"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -62,7 +62,7 @@ resource "kubernetes_config_map" "jwt-social" {
 resource "kubernetes_config_map" "hub-spid-login-ms" {
   metadata {
     name      = "hub-spid-login-ms"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = merge({
@@ -125,7 +125,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
 resource "kubernetes_config_map" "selfcare-core" {
   metadata {
     name      = "selfcare-core"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = merge({
@@ -149,7 +149,7 @@ resource "kubernetes_config_map" "selfcare-core" {
 resource "kubernetes_config_map" "common" {
   metadata {
     name      = "common"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = merge({
@@ -163,7 +163,7 @@ resource "kubernetes_config_map" "common" {
 resource "kubernetes_config_map" "aruba-sign-service" {
   metadata {
     name      = "aruba-sign-service"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = merge({
@@ -176,7 +176,7 @@ resource "kubernetes_config_map" "aruba-sign-service" {
 resource "kubernetes_config_map" "infocamere-service" {
   metadata {
     name      = "infocamere-service"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -189,7 +189,7 @@ resource "kubernetes_config_map" "infocamere-service" {
 resource "kubernetes_config_map" "geo-taxonomies" {
   metadata {
     name      = "geo-taxonomies"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = var.geo-taxonomies

@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "hub-spid-login-ms" {
   metadata {
     name      = "hub-spid-login-ms"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -23,7 +23,7 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
 resource "kubernetes_secret" "selc-redis-credentials" {
   metadata {
     name      = "redis-credentials"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -38,7 +38,7 @@ resource "kubernetes_secret" "selc-redis-credentials" {
 resource "kubernetes_secret" "selc-application-insights" {
   metadata {
     name      = "application-insights"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -51,7 +51,7 @@ resource "kubernetes_secret" "selc-application-insights" {
 resource "kubernetes_secret" "mongo-credentials" {
   metadata {
     name      = "mongo-credentials"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -66,7 +66,7 @@ resource "kubernetes_secret" "mongo-credentials" {
 resource "kubernetes_secret" "postgres" {
   metadata {
     name      = "postgres"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -90,7 +90,7 @@ resource "kubernetes_secret" "postgres" {
 resource "kubernetes_secret" "mail" {
   metadata {
     name      = "mail"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = merge({
@@ -114,7 +114,7 @@ resource "kubernetes_secret" "mail" {
 resource "kubernetes_secret" "mail-not-pec" {
   metadata {
     name      = "mail-not-pec"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -130,7 +130,7 @@ resource "kubernetes_secret" "mail-not-pec" {
 resource "kubernetes_secret" "contracts-storage" {
   metadata {
     name      = "contracts-storage"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -149,7 +149,7 @@ resource "kubernetes_secret" "contracts-storage" {
 resource "kubernetes_secret" "cdn-storage" {
   metadata {
     name      = "cdn-storage"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -166,7 +166,7 @@ resource "kubernetes_secret" "cdn-storage" {
 resource "kubernetes_secret" "b4f-dashboard" {
   metadata {
     name      = "b4f-dashboard"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -180,7 +180,7 @@ resource "kubernetes_secret" "b4f-dashboard" {
 resource "kubernetes_secret" "product-external-api" {
   metadata {
     name      = "product-external-api"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -194,7 +194,7 @@ resource "kubernetes_secret" "product-external-api" {
 resource "kubernetes_secret" "uservice-party-process" {
   metadata {
     name      = "uservice-party-process"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -210,7 +210,7 @@ resource "kubernetes_secret" "uservice-party-process" {
 resource "kubernetes_secret" "social-login" {
   metadata {
     name      = "social-login"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -225,7 +225,7 @@ resource "kubernetes_secret" "social-login" {
 resource "kubernetes_secret" "uservice-party-management" {
   metadata {
     name      = "uservice-party-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -239,7 +239,7 @@ resource "kubernetes_secret" "uservice-party-management" {
 resource "kubernetes_secret" "common-secrets" {
   metadata {
     name      = "common-secrets"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -252,7 +252,7 @@ resource "kubernetes_secret" "common-secrets" {
 resource "kubernetes_secret" "event-secrets" {
   metadata {
     name      = "event-secrets"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -270,7 +270,7 @@ resource "kubernetes_secret" "event-secrets" {
 resource "kubernetes_secret" "aruba-sign-service-secrets" {
   metadata {
     name      = "aruba-sign-service-secrets"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {
@@ -285,7 +285,7 @@ resource "kubernetes_secret" "aruba-sign-service-secrets" {
 resource "kubernetes_secret" "infocamere-service-secrets" {
   metadata {
     name      = "infocamere-service-secrets"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   data = {

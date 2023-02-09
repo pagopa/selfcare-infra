@@ -160,7 +160,7 @@ resource "kubernetes_cluster_role_binding" "view_binding" {
 resource "kubernetes_role" "pod_reader" {
   metadata {
     name      = "pod-reader"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 
   rule {
@@ -173,7 +173,7 @@ resource "kubernetes_role" "pod_reader" {
 resource "kubernetes_role_binding" "pod_reader" {
   metadata {
     name      = "pod-reader"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
@@ -182,7 +182,7 @@ resource "kubernetes_role_binding" "pod_reader" {
   }
   subject {
     kind = "User"
-    name = format("system:serviceaccount:%s:default", kubernetes_namespace.selc.metadata[0].name)
+    name = format("system:serviceaccount:%s:default", kubernetes_namespace.domain_namespace.metadata[0].name)
   }
 }
 
@@ -191,7 +191,7 @@ resource "kubernetes_role_binding" "pod_reader" {
 resource "kubernetes_service_account" "apim_service_account" {
   metadata {
     name      = "apim"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 }
 
@@ -219,7 +219,7 @@ resource "azurerm_key_vault_secret" "apim_service_account_access_token" {
 resource "kubernetes_service_account" "in_cluster_app_service_account" {
   metadata {
     name      = "in-cluster-app"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = kubernetes_namespace.domain_namespace.metadata[0].name
   }
 }
 

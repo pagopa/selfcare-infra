@@ -18,6 +18,9 @@ locals {
   
   appinsights_instrumentation_key = format("InstrumentationKey=%s", module.key_vault_secrets_query.values["appinsights-instrumentation-key"].value)
 
+  # DOMAINS
+  system_domain_namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
+  domain_namespace        = kubernetes_namespace.domain_namespace.metadata[0].name
 }
 
 variable "prefix" {
@@ -91,9 +94,14 @@ variable "k8s_kube_config_path" {
   default = "~/.kube/config"
 }
 
-variable "k8s_apiserver_host" {
-  type = string
+variable "k8s_kube_config_path_prefix" {
+  type    = string
+  default = "~/.kube"
 }
+
+# variable "k8s_apiserver_host" {
+#   type = string
+# }
 
 variable "k8s_apiserver_port" {
   type    = number
