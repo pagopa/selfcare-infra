@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "docker_registry" {
   tags = var.tags
 }
 
-module "acr" {
+module "acr_common" {
   source              = "git::https://github.com/pagopa/azurerm.git//container_registry?ref=v4.3.2"
   name                = replace("${local.project}-common-acr", "-", "")
   resource_group_name = azurerm_resource_group.docker_registry.name

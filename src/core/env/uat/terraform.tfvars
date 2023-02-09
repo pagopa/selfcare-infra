@@ -1,6 +1,10 @@
 # general
 env       = "uat"
 env_short = "u"
+location            = "westeurope"
+location_pair       = "northeurope"
+location_short      = "weu"
+location_pair_short = "neu"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -58,6 +62,19 @@ aks_kubernetes_version = "1.23.12"
 aks_system_node_pool_os_disk_type                 = "Managed"
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
+
+#
+# Docker
+#
+docker_registry = {
+  sku = "Basic"
+  zone_redundancy_enabled = false
+  geo_replication = {
+    enabled = false
+    regional_endpoint_enabled = false
+    zone_redundancy_enabled = false
+  }
+}
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
