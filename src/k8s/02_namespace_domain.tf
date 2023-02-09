@@ -15,7 +15,7 @@ source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_po
   namespace     = kubernetes_namespace.domain_namespace.metadata[0].name
   key_vault_id     = data.azurerm_key_vault.kv_core.id
 
-  secret_permissions = ["get"]
+  secret_permissions = ["Get"]
 }
 
 resource "helm_release" "reloader" {

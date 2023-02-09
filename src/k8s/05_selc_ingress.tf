@@ -32,7 +32,6 @@ locals {
 }
 
 resource "kubernetes_ingress_v1" "selc_ingress" {
-  depends_on = [helm_release.ingress]
 
   metadata {
     name      = "${kubernetes_namespace.domain_namespace.metadata[0].name}-ingress"

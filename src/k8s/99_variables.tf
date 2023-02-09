@@ -21,6 +21,20 @@ locals {
   # DOMAINS
   system_domain_namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
   domain_namespace        = kubernetes_namespace.domain_namespace.metadata[0].name
+
+  # Service Account
+  apim_service_account_name = "apim"
+  apim_service_account_secret_name = "${local.apim_service_account_name}-token"
+
+  # Service Account
+  in_cluster_app_service_account_name = "in-cluster-app"
+  in_cluster_app_service_account_secret_name = "${local.in_cluster_app_service_account_name}-token"
+
+  azure_devops_app_service_account_name = "azure-devops"
+  azure_devops_app_service_account_secret_name = "${local.azure_devops_app_service_account_name}-token"
+
+
+
 }
 
 variable "prefix" {
