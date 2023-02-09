@@ -428,6 +428,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_interop.product_id,
     module.apim_product_pn.product_id,
     module.apim_product_pn_svil.product_id,
+    module.apim_product_pn_dev.product_id,
+    module.apim_product_pn_coll.product_id,
     module.apim_product_pagopa.product_id,
     module.apim_product_idpay.product_id
   ]
@@ -537,6 +539,40 @@ module "apim_product_pn_svil" {
   approval_required     = false
 
   policy_xml = file("./api_product/pn_svil/policy.xml")
+}
+
+module "apim_product_pn_dev" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-dev"
+  display_name = "PN DEV"
+  description  = "Piattaforma Notifiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pn_dev/policy.xml")
+}
+
+module "apim_product_pn_coll" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-coll"
+  display_name = "PN COLL"
+  description  = "Piattaforma Notifiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pn_coll/policy.xml")
 }
 
 module "apim_product_pagopa" {
