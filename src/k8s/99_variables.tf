@@ -21,6 +21,11 @@ variable "k8s_kube_config_path" {
   default = "~/.kube/config"
 }
 
+variable "k8s_kube_config_path_prefix" {
+  type    = string
+  default = "~/.kube"
+}
+
 variable "k8s_apiserver_host" {
   type = string
 }
