@@ -148,6 +148,7 @@ pre-commit run -a
 
 | Name | Type |
 |------|------|
+| [azurerm_key_vault_secret.aks_apiserver_url](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_cacrt](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/resources/key_vault_secret) | resource |
@@ -209,6 +210,7 @@ pre-commit run -a
 | [azuread_group.adgroup_security](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_technical_project_managers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/client_config) | data source |
+| [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/subscription) | data source |
 | [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
 | [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/secret) | data source |
@@ -217,6 +219,8 @@ pre-commit run -a
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | AKS Name | `string` | n/a | yes |
+| <a name="input_aks_resource_group_name"></a> [aks\_resource\_group\_name](#input\_aks\_resource\_group\_name) | AKS resource group name | `string` | n/a | yes |
 | <a name="input_api-version_uservice-party-management"></a> [api-version\_uservice-party-management](#input\_api-version\_uservice-party-management) | uservice versions | `string` | n/a | yes |
 | <a name="input_api-version_uservice-party-process"></a> [api-version\_uservice-party-process](#input\_api-version\_uservice-party-process) | n/a | `string` | n/a | yes |
 | <a name="input_api-version_uservice-party-registry-proxy"></a> [api-version\_uservice-party-registry-proxy](#input\_api-version\_uservice-party-registry-proxy) | n/a | `string` | n/a | yes |
@@ -241,6 +245,7 @@ pre-commit run -a
 | <a name="input_k8s_apiserver_insecure"></a> [k8s\_apiserver\_insecure](#input\_k8s\_apiserver\_insecure) | n/a | `bool` | `false` | no |
 | <a name="input_k8s_apiserver_port"></a> [k8s\_apiserver\_port](#input\_k8s\_apiserver\_port) | n/a | `number` | `443` | no |
 | <a name="input_k8s_kube_config_path"></a> [k8s\_kube\_config\_path](#input\_k8s\_kube\_config\_path) | n/a | `string` | `"~/.kube/config"` | no |
+| <a name="input_k8s_kube_config_path_prefix"></a> [k8s\_kube\_config\_path\_prefix](#input\_k8s\_kube\_config\_path\_prefix) | n/a | `string` | `"~/.kube"` | no |
 | <a name="input_location"></a> [location](#input\_location) | n/a | `string` | `"westeurope"` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
 | <a name="input_rbac_namespaces"></a> [rbac\_namespaces](#input\_rbac\_namespaces) | n/a | `list(string)` | <pre>[<br>  "selc"<br>]</pre> | no |

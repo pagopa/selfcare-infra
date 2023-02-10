@@ -12,6 +12,7 @@
 
 BASHDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 WORKDIR="${BASHDIR//scripts/}"
+aks_name=""
 
 set -e
 
@@ -27,11 +28,13 @@ if [ ! -d "${WORKDIR}/subscriptions/${SUBSCRIPTION}" ]; then
     exit 1
 fi
 
+source ../subscriptions/${SUBSCRIPTION}/backend.ini
+
 az account set -s "${SUBSCRIPTION}"
 
-aks_name=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:name}")
-aks_resource_group_name=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:resourceGroup}")
-aks_private_fqdn=$(az aks list -o tsv --query "[?contains(name,'aks')].{Name:privateFqdn}")
+aks_name=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:name}")
+aks_resource_group_name=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:resourceGroup}")
+aks_private_fqdn=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:privateFqdn}")
 
 # in widows, even if using cygwin, these variables will contain a landing \r character
 aks_name=${aks_name//[$'\r']}
