@@ -7,7 +7,7 @@ location_string = "West Europe"
 location_short  = "weu"
 instance        = "dev01"
 
-aks_name = "selc-d-weu-dev01-aks"
+aks_name                = "selc-d-weu-dev01-aks"
 aks_resource_group_name = "selc-d-weu-dev01-aks-rg"
 
 # ingress

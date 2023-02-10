@@ -1,7 +1,7 @@
 env       = "dev"
 env_short = "d"
 
-aks_name = "selc-d-aks"
+aks_name                = "selc-d-aks"
 aks_resource_group_name = "selc-d-aks-rg"
 
 # ingress

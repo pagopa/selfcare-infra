@@ -14,7 +14,7 @@ resource "kubernetes_service_account" "azure_devops" {
 
 resource "kubernetes_secret_v1" "azure_devops_service_account_default_secret" {
   metadata {
-    name = local.azure_devops_app_service_account_secret_name
+    name      = local.azure_devops_app_service_account_secret_name
     namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
     annotations = {
       "kubernetes.io/service-account.name" = local.azure_devops_app_service_account_name
@@ -110,7 +110,7 @@ resource "kubernetes_service_account" "apim_service_account" {
 
 resource "kubernetes_secret_v1" "apim_service_account_default_secret" {
   metadata {
-    name = local.apim_service_account_secret_name
+    name      = local.apim_service_account_secret_name
     namespace = kubernetes_namespace.domain_namespace.metadata[0].name
     annotations = {
       "kubernetes.io/service-account.name" = local.apim_service_account_name

@@ -1,6 +1,6 @@
 # general
-env_short = "d"
-env       = "dev"
+env_short           = "d"
+env                 = "dev"
 location            = "westeurope"
 location_short      = "weu"
 location_pair       = "northeurope"
@@ -36,7 +36,7 @@ cidr_subnet_aks_platform     = ["10.1.139.0/24"]
 #
 # AKS
 #
-cidr_aks_vnet                = ["10.11.0.0/16"]
+cidr_aks_vnet                 = ["10.11.0.0/16"]
 vnet_aks_ddos_protection_plan = false
 
 
@@ -76,12 +76,12 @@ aks_system_node_pool_only_critical_addons_enabled = false
 # Docker
 #
 docker_registry = {
-  sku = "Basic"
+  sku                     = "Basic"
   zone_redundancy_enabled = false
   geo_replication = {
-    enabled = false
+    enabled                   = false
     regional_endpoint_enabled = false
-    zone_redundancy_enabled = false
+    zone_redundancy_enabled   = false
   }
 }
 

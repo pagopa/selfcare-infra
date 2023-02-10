@@ -6,11 +6,11 @@ resource "azurerm_resource_group" "docker_registry" {
 }
 
 module "acr_common" {
-  source              = "git::https://github.com/pagopa/azurerm.git//container_registry?ref=v4.3.2"
-  name                = replace("${local.project}-common-acr", "-", "")
-  resource_group_name = azurerm_resource_group.docker_registry.name
-  location            = azurerm_resource_group.docker_registry.location
-  admin_enabled       = false
+  source                        = "git::https://github.com/pagopa/azurerm.git//container_registry?ref=v4.3.2"
+  name                          = replace("${local.project}-common-acr", "-", "")
+  resource_group_name           = azurerm_resource_group.docker_registry.name
+  location                      = azurerm_resource_group.docker_registry.location
+  admin_enabled                 = false
   sku                           = var.docker_registry.sku
   anonymous_pull_enabled        = false
   zone_redundancy_enabled       = var.docker_registry.zone_redundancy_enabled

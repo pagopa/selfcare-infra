@@ -1,7 +1,7 @@
 env       = "prod"
 env_short = "p"
 
-aks_name = "selc-p-aks"
+aks_name                = "selc-p-aks"
 aks_resource_group_name = "selc-p-aks-rg"
 
 # ingress

@@ -1,7 +1,7 @@
 env       = "uat"
 env_short = "u"
 
-aks_name = "selc-u-aks"
+aks_name                = "selc-u-aks"
 aks_resource_group_name = "selc-u-aks-rg"
 
 # ingress

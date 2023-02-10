@@ -135,11 +135,11 @@ variable "geo-taxonomies" {
 }
 
 variable "aks_name" {
-  type = string
+  type        = string
   description = "AKS Name"
 }
 
 variable "aks_resource_group_name" {
-  type = string
+  type        = string
   description = "AKS resource group name"
 }

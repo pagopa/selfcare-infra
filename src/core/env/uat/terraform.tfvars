@@ -1,6 +1,6 @@
 # general
-env       = "uat"
-env_short = "u"
+env                 = "uat"
+env_short           = "u"
 location            = "westeurope"
 location_pair       = "northeurope"
 location_short      = "weu"
@@ -67,12 +67,12 @@ aks_system_node_pool_only_critical_addons_enabled = false
 # Docker
 #
 docker_registry = {
-  sku = "Basic"
+  sku                     = "Basic"
   zone_redundancy_enabled = false
   geo_replication = {
-    enabled = false
+    enabled                   = false
     regional_endpoint_enabled = false
-    zone_redundancy_enabled = false
+    zone_redundancy_enabled   = false
   }
 }
 

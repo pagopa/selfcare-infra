@@ -1053,12 +1053,12 @@ EOD
 variable "docker_registry" {
   description = "ACR docker registry configuration"
   type = object({
-    sku = string
+    sku                     = string
     zone_redundancy_enabled = bool
     geo_replication = object({
-      enabled = bool
+      enabled                   = bool
       regional_endpoint_enabled = bool
-      zone_redundancy_enabled = bool
+      zone_redundancy_enabled   = bool
     })
   })
 }
