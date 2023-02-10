@@ -128,3 +128,13 @@ variable "aruba_sign_service" {
 variable "geo-taxonomies" {
   type = map(string)
 }
+
+variable "aks_name" {
+  type = string
+  description = "AKS Name"
+}
+
+variable "aks_resource_group_name" {
+  type = string
+  description = "AKS resource group name"
+}

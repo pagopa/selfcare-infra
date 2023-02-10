@@ -1,6 +1,9 @@
 env       = "dev"
 env_short = "d"
 
+aks_name = "selc-d-aks"
+aks_resource_group_name = "selc-d-aks-rg"
+
 # ingress
 ingress_replica_count    = "2"
 ingress_load_balancer_ip = "10.1.1.250"
