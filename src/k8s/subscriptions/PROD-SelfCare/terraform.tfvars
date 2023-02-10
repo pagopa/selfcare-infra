@@ -1,6 +1,9 @@
 env       = "prod"
 env_short = "p"
 
+aks_name = "selc-p-aks"
+aks_resource_group_name = "selc-p-aks-rg"
+
 # ingress
 ingress_replica_count    = "2"
 ingress_load_balancer_ip = "10.1.1.250"
