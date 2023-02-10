@@ -31,16 +31,12 @@ provider "azurerm" {
 }
 
 provider "kubernetes" {
-  host        = "https://${var.k8s_apiserver_host}:${var.k8s_apiserver_port}"
-  insecure    = var.k8s_apiserver_insecure
-  config_path = var.k8s_kube_config_path
+  config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_cluster_name}"
 }
 
 provider "helm" {
   kubernetes {
-    host        = "https://${var.k8s_apiserver_host}:${var.k8s_apiserver_port}"
-    insecure    = var.k8s_apiserver_insecure
-    config_path = var.k8s_kube_config_path
+    config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_cluster_name}"
   }
 }
 
