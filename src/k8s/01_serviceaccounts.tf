@@ -99,7 +99,7 @@ data "kubernetes_secret" "azure_devops_secret" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "azure_devops_sa_token" {
   depends_on   = [kubernetes_service_account.azure_devops]
-  name         = "aks-azure-devops-sa-token"
+  name         = "${var.env}-selfcare-aks-azure-devops-sa-token"
   value        = data.kubernetes_secret.azure_devops_secret.binary_data["token"] # base64 value
   content_type = "text/plain"
 
@@ -109,8 +109,17 @@ resource "azurerm_key_vault_secret" "azure_devops_sa_token" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "azure_devops_sa_cacrt" {
   depends_on   = [kubernetes_service_account.azure_devops]
-  name         = "aks-azure-devops-sa-cacrt"
+  name         = "${var.env}-selfcare-aks-azure-devops-sa-cacrt"
   value        = data.kubernetes_secret.azure_devops_secret.binary_data["ca.crt"] # base64 value
+  content_type = "text/plain"
+
+  key_vault_id = local.key_vault_id
+}
+
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "aks_apiserver_url" {
+  name         = "${var.env}-selfcare-aks-apiserver-url"
+  value        = "https://${data.azurerm_kubernetes_cluster.aks.private_fqdn}:443"
   content_type = "text/plain"
 
   key_vault_id = local.key_vault_id
