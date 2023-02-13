@@ -1,6 +1,9 @@
 env       = "uat"
 env_short = "u"
 
+aks_name                = "selc-u-aks"
+aks_resource_group_name = "selc-u-aks-rg"
+
 # ingress
 ingress_replica_count    = "2"
 ingress_load_balancer_ip = "10.1.1.250"
@@ -58,4 +61,8 @@ aruba_sign_service = {
   ARUBA_SIGN_SERVICE_BASE_URL                  = "https://asbr-pagopa.arubapec.it/ArubaSignService/ArubaSignService"
   ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH    = "faPagoPa"
   ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN = "faPagoPa"
+}
+
+geo-taxonomies = {
+  GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
 }

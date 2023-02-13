@@ -11,4 +11,6 @@ locals {
   contracts_storage_account_name  = replace(format("%s-contracts-storage", local.project), "-", "")
   contracts_storage_container     = format("%s-contracts-blob", local.project)
   appinsights_instrumentation_key = format("InstrumentationKey=%s", module.key_vault_secrets_query.values["appinsights-instrumentation-key"].value)
+
+  aks_cluster_name = var.aks_name
 }

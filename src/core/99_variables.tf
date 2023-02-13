@@ -4,6 +4,8 @@ locals {
   project                        = "${var.prefix}-${var.env_short}"
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
+
+  internal_selfcare_private_domain = var.env_short == "p" ? "internal.selfcare.pagopa.it" : "internal.${var.env}.selfcare.pagopa.it"
 }
 
 
@@ -36,6 +38,21 @@ variable "env_short" {
 variable "location" {
   type    = string
   default = "westeurope"
+}
+
+variable "location_pair" {
+  type        = string
+  description = "Pair (Secondary) location region (e.g. northeurope)"
+}
+
+variable "location_short" {
+  type        = string
+  description = "Primary location in short form (e.g. westeurope=weu)"
+}
+
+variable "location_pair_short" {
+  type        = string
+  description = "Pair (Secondary) location in short form (e.g. northeurope=neu)"
 }
 
 variable "lock_enable" {
@@ -75,6 +92,16 @@ variable "vpn_pip_sku" {
 variable "cidr_subnet_k8s" {
   type        = list(string)
   description = "Subnet cluster kubernetes."
+}
+
+variable "cidr_aks_vnet" {
+  type        = list(string)
+  description = "vnet for aks platform."
+}
+
+variable "vnet_aks_ddos_protection_plan" {
+  type        = bool
+  description = "vnet enable ddos protection plan"
 }
 
 variable "aks_system_node_pool_vm_size" {
@@ -1022,3 +1049,16 @@ EOD
   }))
 }
 ##
+
+variable "docker_registry" {
+  description = "ACR docker registry configuration"
+  type = object({
+    sku                     = string
+    zone_redundancy_enabled = bool
+    geo_replication = object({
+      enabled                   = bool
+      regional_endpoint_enabled = bool
+      zone_redundancy_enabled   = bool
+    })
+  })
+}
