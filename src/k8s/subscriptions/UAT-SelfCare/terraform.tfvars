@@ -1,6 +1,9 @@
 env       = "uat"
 env_short = "u"
 
+aks_name                = "selc-u-aks"
+aks_resource_group_name = "selc-u-aks-rg"
+
 # ingress
 ingress_replica_count    = "2"
 ingress_load_balancer_ip = "10.1.1.250"

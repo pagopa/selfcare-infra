@@ -108,3 +108,4 @@ resource "azurerm_public_ip" "aks_outbound" {
 
   tags = var.tags
 }
+
