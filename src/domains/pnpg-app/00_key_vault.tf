@@ -18,7 +18,7 @@ resource "azurerm_key_vault_access_policy" "apim" {
   ]
 }
 
-data "azurerm_key_vault" "kv_cstar" {
+data "azurerm_key_vault" "kv_selfcare" {
   name                = "${local.product}-kv"
   resource_group_name = "${local.product}-sec-rg"
 }

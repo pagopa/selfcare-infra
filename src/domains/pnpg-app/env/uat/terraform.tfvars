@@ -1,4 +1,4 @@
-prefix          = "cstar"
+prefix          = "selfcare"
 env_short       = "u"
 env             = "uat"
 domain          = "pnpg"
@@ -11,29 +11,29 @@ tags = {
   CreatedBy   = "Terraform"
   Environment = "UAT"
   Owner       = "CSTAR"
-  Source      = "https://github.com/pagopa/cstar-infrastructure"
+  Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
 ### External resources
 
-monitor_resource_group_name                 = "cstar-u-monitor-rg"
-log_analytics_workspace_name                = "cstar-u-law"
-log_analytics_workspace_resource_group_name = "cstar-u-monitor-rg"
+monitor_resource_group_name                 = "selfcare-u-monitor-rg"
+log_analytics_workspace_name                = "selfcare-u-law"
+log_analytics_workspace_resource_group_name = "selfcare-u-monitor-rg"
 
 ### Aks
 
-aks_name                = "cstar-u-weu-uat01-aks"
-aks_resource_group_name = "cstar-u-weu-uat01-aks-rg"
+aks_name                = "selfcare-u-weu-uat01-aks"
+aks_resource_group_name = "selfcare-u-weu-uat01-aks-rg"
 
 ingress_load_balancer_ip       = "10.11.100.250"
-ingress_load_balancer_hostname = "uat01.pnpg.internal.uat.cstar.pagopa.it"
+ingress_load_balancer_hostname = "uat01.pnpg.internal.uat.selfcare.pagopa.it"
 reverse_proxy_be_io            = "10.1.0.250"
 
 #
 # Dns
 #
-dns_zone_internal_prefix = "internal.uat.cstar"
+dns_zone_internal_prefix = "internal.uat.selfcare"
 external_domain          = "pagopa.it"
 
 #
@@ -49,9 +49,9 @@ enable = {
 eventhub_pim = {
   enrolled_pi_eventhub  = "rtd-enrolled-pi"
   revoked_pi_eventhub   = "rtd-revoked-pi"
-  namespace_enrolled_pi = "cstar-u-evh-ns"
-  namespace_revoked_pi  = "cstar-u-evh-ns"
-  resource_group_name   = "cstar-u-msg-rg"
+  namespace_enrolled_pi = "selfcare-u-evh-ns"
+  namespace_revoked_pi  = "selfcare-u-evh-ns"
+  resource_group_name   = "selfcare-u-msg-rg"
 }
 
 #
@@ -62,7 +62,7 @@ pdv_timeout_sec   = 5
 #
 # PM
 #
-pm_service_base_url = "https://api-io.uat.cstar.pagopa.it"
+pm_service_base_url = "https://api-io.uat.selfcare.pagopa.it"
 pm_backend_url      = "https://api.uat.platform.pagopa.it"
 
 #
@@ -78,7 +78,7 @@ selc_base_url = "https://api.uat.selfcare.pagopa.it"
 #
 # BE IO API
 #
-io_backend_base_url = "https://api-io.uat.cstar.pagopa.it/pnpg/mock"
+io_backend_base_url = "https://api-io.uat.selfcare.pagopa.it/pnpg/mock"
 
 #
 # TLS Checker

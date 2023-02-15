@@ -124,7 +124,7 @@ variable "external_domain" {
 
 variable "dns_zone_prefix" {
   type        = string
-  default     = "cstar"
+  default     = "selfcare"
   description = "The dns subdomain."
 }
 

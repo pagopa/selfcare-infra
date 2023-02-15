@@ -17,8 +17,8 @@ locals {
   aks_name                = var.aks_name
   aks_resource_group_name = var.aks_resource_group_name
 
-  apim_rg_name                  = "cstar-${var.env_short}-api-rg"
-  apim_name                     = "cstar-${var.env_short}-apim"
+  apim_rg_name                  = "selfcare-${var.env_short}-api-rg"
+  apim_name                     = "selfcare-${var.env_short}-apim"
   vnet_core_name                = "${local.product}-vnet"
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
   # DOMAINS
@@ -49,5 +49,5 @@ locals {
     }
   }
 
-  domain_aks_hostname = var.env == "prod" ? "${var.instance}.${var.domain}.internal.cstar.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.cstar.pagopa.it"
+  domain_aks_hostname = var.env == "prod" ? "${var.instance}.${var.domain}.internal.selfcare.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.selfcare.pagopa.it"
 }
