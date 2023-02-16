@@ -1,6 +1,10 @@
 # general
 env       = "prod"
 env_short = "p"
+location            = "westeurope"
+location_short      = "weu"
+location_pair       = "northeurope"
+location_pair_short = "neu"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -32,6 +36,13 @@ cidr_subnet_logs_storage     = ["10.1.139.0/24"]
 #
 cidr_aks_vnet                 = ["10.11.0.0/16"]
 vnet_aks_ddos_protection_plan = false
+
+#
+# AKS
+#
+cidr_aks_vnet                 = ["10.11.0.0/16"]
+vnet_aks_ddos_protection_plan = false
+
 
 # dns
 external_domain = "pagopa.it"
@@ -71,6 +82,19 @@ aks_sku_tier                      = "Paid"
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
 aks_system_node_pool_node_count_max               = 3
 aks_system_node_pool_only_critical_addons_enabled = false
+
+#
+# Docker
+#
+docker_registry = {
+  sku                     = "Premium"
+  zone_redundancy_enabled = true
+  geo_replication = {
+    enabled                   = true
+    regional_endpoint_enabled = true
+    zone_redundancy_enabled   = true
+  }
+}
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities = []
