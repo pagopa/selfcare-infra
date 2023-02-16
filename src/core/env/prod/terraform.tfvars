@@ -1,6 +1,6 @@
 # general
-env       = "prod"
-env_short = "p"
+env                 = "prod"
+env_short           = "p"
 location            = "westeurope"
 location_short      = "weu"
 location_pair       = "northeurope"
@@ -36,13 +36,6 @@ cidr_subnet_logs_storage     = ["10.1.139.0/24"]
 #
 cidr_aks_vnet                 = ["10.11.0.0/16"]
 vnet_aks_ddos_protection_plan = false
-
-#
-# AKS
-#
-cidr_aks_vnet                 = ["10.11.0.0/16"]
-vnet_aks_ddos_protection_plan = false
-
 
 # dns
 external_domain = "pagopa.it"
