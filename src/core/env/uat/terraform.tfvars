@@ -31,6 +31,11 @@ cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
 cidr_subnet_eventhub         = ["10.1.138.0/24"]
 cidr_subnet_logs_storage     = ["10.1.139.0/24"]
+#
+# AKS
+#
+cidr_aks_vnet                 = ["10.11.0.0/16"]
+vnet_aks_ddos_protection_plan = false
 
 # dns
 external_domain = "pagopa.it"
