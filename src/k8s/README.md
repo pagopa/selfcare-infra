@@ -124,9 +124,7 @@ https://github.com/antonbabenko/pre-commit-terraform#how-to-install
 ```sh
 pre-commit run -a
 ```
-
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- markdownlint-disable -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 

@@ -1,5 +1,4 @@
 terraform {
-  required_version = ">=1.3.0"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -7,7 +6,18 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = ">= 2.33.0"
+      version = "= 2.33.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "= 2.17.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "= 2.8.0"
+    }
+    local = {
+      source = "hashicorp/local"
     }
   }
 
@@ -22,16 +32,17 @@ provider "azurerm" {
   }
 }
 
+
 data "azurerm_subscription" "current" {}
 
 data "azurerm_client_config" "current" {}
 
 provider "kubernetes" {
-  config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_cluster_name}"
+  config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_name}"
 }
 
 provider "helm" {
   kubernetes {
-    config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_cluster_name}"
+    config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_name}"
   }
 }
