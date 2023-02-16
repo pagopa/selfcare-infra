@@ -28,8 +28,8 @@ Re-enable all the resource, commented before to complete the procedure
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.3.5 |
-| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | > 2.10.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.3.0 |
+| <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | > 2.33.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.40.0 |
 
 ## Modules
