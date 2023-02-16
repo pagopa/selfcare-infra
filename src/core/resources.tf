@@ -20,6 +20,27 @@ resource "null_resource" "upload_resources_templates" {
   }
 }
 
+resource "null_resource" "upload_resources_products_logo" {
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/resources/products", "**") : filesha1("${path.module}/resources/products/${f}")]))
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob sync --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --source "./resources/templates" \
+                --destination 'resources/templates/'
+              az cdn endpoint purge \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/resources/products/*" \
+                --no-wait
+          EOT
+  }
+}
+
 # default product logo
 data "local_file" "resources_default_product_logo" {
   filename = "${path.module}/resources/defaultProductLogo.png"
