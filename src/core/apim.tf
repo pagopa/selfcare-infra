@@ -163,8 +163,8 @@ module "apim_uservice_party_process_v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding" {
-  name                = format("%s-external-api-onboarding", var.env_short)
+resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding_auto" {
+  name                = format("%s-external-api-onboarding-auto", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
   display_name        = "SelfCare Onboarding"
@@ -179,17 +179,17 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding-
   versioning_scheme   = "Segment"
 }
 
-module "apim_external_api_onboarding_v1" {
+module "apim_external_api_onboarding_auto_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-external-api-onboarding", local.project)
+  name                = format("%s-external-api-onboarding-auto", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding-auto.id
 
 
   description  = "Onboarding API for PA only for io product"
   display_name = "SelfCare Onboarding"
-  path         = "external/onboarding"
+  path         = "external/onboarding-auto"
   api_version  = "v1"
   protocols = [
     "https"
@@ -198,7 +198,7 @@ module "apim_external_api_onboarding_v1" {
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/external-api-onboarding/v1/open-api.yml.tpl", {
+  content_value = templatefile("./api/external-api-onboarding-auto/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "/onboarding-api/v1"
   })
@@ -221,7 +221,7 @@ module "apim_external_api_onboarding_v1" {
 
 module "apim_external_api_onboarding-io_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
-  name                = format("%s-external-api-onboarding", local.project)
+  name                = format("%s-external-api-onboarding-io", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding-io.id
