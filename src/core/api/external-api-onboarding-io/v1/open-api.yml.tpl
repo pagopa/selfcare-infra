@@ -9,13 +9,13 @@ tags:
   - name: onboarding
     description: Onboarding Controller
 paths:
-  /onboarding/{externalInstitutionId}/products/{productId}:
+  "/onboarding/{externalInstitutionId}":
     post:
       tags:
         - onboarding
-      summary: autoApprovalOnboarding
-      description: The service allows the onboarding of institutions with auto approval
-      operationId: autoApprovalOnboardingUsingPOST
+      summary: contractOnboarding
+      description: The service allows the import of institutions' contracts
+      operationId: contractOnboardingUsingPOST
       parameters:
         - name: externalInstitutionId
           in: path
@@ -24,18 +24,11 @@ paths:
           style: simple
           schema:
             type: string
-        - name: productId
-          in: path
-          description: Product's unique identifier
-          required: true
-          style: simple
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OnboardingDto'
+              $ref: '#/components/schemas/OnboardingImportDto'
       responses:
         '201':
           description: Created

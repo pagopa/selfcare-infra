@@ -167,6 +167,14 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding"
   name                = format("%s-external-api-onboarding", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
+  display_name        = "SelfCare Onboarding"
+  versioning_scheme   = "Segment"
+}
+
+resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding-io" {
+  name                = format("%s-external-api-onboarding-io", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
   display_name        = "SelfCare Onboarding PA prod-io"
   versioning_scheme   = "Segment"
 }
@@ -180,7 +188,7 @@ module "apim_external_api_onboarding_v1" {
 
 
   description  = "Onboarding API for PA only for io product"
-  display_name = "SelfCare Onboarding PA prod-io"
+  display_name = "SelfCare Onboarding"
   path         = "external/onboarding"
   api_version  = "v1"
   protocols = [
@@ -205,13 +213,49 @@ module "apim_external_api_onboarding_v1" {
 
   api_operation_policies = [
     {
-      operation_id = "contractOnboardingUsingPOST"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "autoApprovalOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
+  ]
+}
+
+module "apim_external_api_onboarding-io_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-external-api-onboarding", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding-io.id
+
+
+  description  = "Onboarding API for PA only for io product"
+  display_name = "SelfCare Onboarding PA prod-io"
+  path         = "external/onboarding-io"
+  api_version  = "v1"
+  protocols = [
+    "https"
+  ]
+
+  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "/onboarding-api/v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "contractOnboardingUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    }
   ]
 }
 
