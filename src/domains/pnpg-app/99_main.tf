@@ -8,21 +8,13 @@ terraform {
       source  = "hashicorp/azuread"
       version = "= 2.33.0"
     }
-    # null = {
-    #   source  = "hashicorp/null"
-    #   version = "= 3.2.1"
-    # }
-    # tls = {
-    #   source  = "hashicorp/tls"
-    #   version = "= 4.0.4"
-    # }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "= 2.17.0"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "= 2.8.1"
+      version = "= 2.8.0"
     }
     local = {
       source = "hashicorp/local"
@@ -33,12 +25,13 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    key_vault {
+      purge_soft_delete_on_destroy = false
+    }
+  }
 }
 
-provider "azapi" {
-  skip_provider_registration = true
-}
 
 data "azurerm_subscription" "current" {}
 

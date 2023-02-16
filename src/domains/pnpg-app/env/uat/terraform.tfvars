@@ -1,4 +1,4 @@
-prefix          = "selfcare"
+prefix          = "selc"
 env_short       = "u"
 env             = "uat"
 domain          = "pnpg"

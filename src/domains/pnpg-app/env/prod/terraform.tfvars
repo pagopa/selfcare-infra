@@ -1,4 +1,4 @@
-prefix          = "selfcare"
+prefix          = "selc"
 env_short       = "p"
 env             = "prod"
 domain          = "pnpg"

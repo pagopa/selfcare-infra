@@ -1,4 +1,4 @@
-prefix          = "selfcare"
+prefix          = "selc"
 env_short       = "d"
 env             = "dev"
 domain          = "pnpg"
@@ -17,14 +17,14 @@ tags = {
 
 ### External resources
 
-monitor_resource_group_name                 = "selfcare-d-monitor-rg"
-log_analytics_workspace_name                = "selfcare-d-law"
-log_analytics_workspace_resource_group_name = "selfcare-d-monitor-rg"
+monitor_resource_group_name                 = "selc-d-monitor-rg"
+log_analytics_workspace_name                = "selc-d-law"
+log_analytics_workspace_resource_group_name = "selc-d-monitor-rg"
 
 ### Aks
 
-aks_name                = "selfcare-d-weu-dev01-aks"
-aks_resource_group_name = "selfcare-d-weu-dev01-aks-rg"
+aks_name                = "selc-d-weu-dev01-aks"
+aks_resource_group_name = "selc-d-weu-dev01-aks-rg"
 
 ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "dev01.pnpg.internal.dev.selfcare.pagopa.it"
@@ -36,72 +36,16 @@ reverse_proxy_be_io            = "10.1.0.250"
 dns_zone_internal_prefix = "internal.dev.selfcare"
 external_domain          = "pagopa.it"
 
-#
-# Enable components
-#
-enable = {
-  pnpg = {
-    eventhub = true
-  }
+reloader_helm = {
+  chart_version = "v0.0.118"
+  image_name    = "stakater/reloader"
+  image_tag     = "v0.0.118@sha256:2d423cab8d0e83d1428ebc70c5c5cafc44bd92a597bff94007f93cddaa607b02"
 }
 
-# Enrolled payment instrument event hub
-eventhub_pim = {
-  enrolled_pi_eventhub  = "rtd-enrolled-pi"
-  revoked_pi_eventhub   = "rtd-revoked-pi"
-  namespace_enrolled_pi = "selfcare-d-evh-ns"
-  namespace_revoked_pi  = "selfcare-d-evh-ns"
-  resource_group_name   = "selfcare-d-msg-rg"
-}
-
-#
-# PDV
-#
-pdv_tokenizer_url = "https://api.uat.tokenizer.pdv.pagopa.it/tokenizer/v1"
-pdv_timeout_sec   = 15
-
-#
-# PM
-#
-pm_service_base_url = "https://api-io.uat.selfcare.pagopa.it"
-pm_backend_url      = "https://api.dev.platform.pagopa.it"
-
-#
-# Check IBAN
-#
-checkiban_base_url = "https://bankingservices-sandbox.pagopa.it"
-
-#
-# SelfCare API
-#
-selc_base_url = "https://api.dev.selfcare.pagopa.it"
-
-#
-# BE IO API
-#
-io_backend_base_url = "https://api-io.dev.selfcare.pagopa.it/pnpg/mock"
-
-#
-# TLS Checker
-#
 # chart releases: https://github.com/pagopa/aks-microservice-chart-blueprint/releases
 # image tags: https://github.com/pagopa/infra-ssl-check/releases
 tls_cert_check_helm = {
-  chart_version = "1.21.0"
+  chart_version = "2.0.0"
   image_name    = "ghcr.io/pagopa/infra-ssl-check"
-  image_tag     = "v1.2.2@sha256:22f4b53177cc8891bf10cbd0deb39f60e1cd12877021c3048a01e7738f63e0f9"
+  image_tag     = "v1.3.4@sha256:c3d45736706c981493b6216451fc65e99a69d5d64409ccb1c4ca93fef57c921d"
 }
-
-# Storage
-storage_delete_retention_days = 5
-storage_enable_versioning     = true
-
-#
-# RTD reverse proxy
-#
-reverse_proxy_rtd = "10.1.0.250"
-
-#
-# SMTP Server
-#
-mail_server_host = "smtp.ethereal.email"
