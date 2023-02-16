@@ -11,7 +11,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_key_vault_pnpg"></a> [key\_vault\_pnpg](#module\_key\_vault\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault | v4.1.16 |
+| <a name="module_key_vault_pnpg"></a> [key\_vault\_pnpg](#module\_key\_vault\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault | v4.1.18 |
 
 ## Resources
 
