@@ -171,7 +171,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding_
   versioning_scheme   = "Segment"
 }
 
-resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding-io" {
+resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding_io" {
   name                = format("%s-external-api-onboarding-io", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
@@ -184,8 +184,7 @@ module "apim_external_api_onboarding_auto_v1" {
   name                = format("%s-external-api-onboarding-auto", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding-auto.id
-
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding_auto.id
 
   description  = "Onboarding API for PA only for io product"
   display_name = "SelfCare Onboarding"
@@ -219,13 +218,12 @@ module "apim_external_api_onboarding_auto_v1" {
   ]
 }
 
-module "apim_external_api_onboarding-io_v1" {
+module "apim_external_api_onboarding_io_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = format("%s-external-api-onboarding-io", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding-io.id
-
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding_io.id
 
   description  = "Onboarding API for PA only for io product"
   display_name = "SelfCare Onboarding PA prod-io"
