@@ -186,7 +186,6 @@ module "apim_external_api_onboarding_auto_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding_auto.id
 
-
   description  = "Onboarding API for PA only for io product"
   display_name = "SelfCare Onboarding"
   path         = "external/onboarding-auto"
@@ -225,7 +224,6 @@ module "apim_external_api_onboarding_io_v1" {
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_onboarding_io.id
-
 
   description  = "Onboarding API for PA only for io product"
   display_name = "SelfCare Onboarding PA prod-io"
