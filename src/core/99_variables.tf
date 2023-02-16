@@ -6,6 +6,10 @@ locals {
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
 
   internal_selfcare_private_domain = var.env_short == "p" ? "internal.selfcare.pagopa.it" : "internal.${var.env}.selfcare.pagopa.it"
+
+  # Monitor
+  action_group_selfcare_dev_name = "selcdev"
+  action_group_selfcare_uat_name = "selcuat"
 }
 
 

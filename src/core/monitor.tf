@@ -8,6 +8,8 @@ data "azurerm_key_vault_secret" "alert_error_notification_slack" {
   key_vault_id = module.key_vault.id
 }
 
+
+
 # -----------------------------------------------------------------------
 
 resource "azurerm_resource_group" "monitor_rg" {
@@ -66,6 +68,50 @@ resource "azurerm_monitor_action_group" "error_action_group" {
   email_receiver {
     name                    = "slack"
     email_address           = data.azurerm_key_vault_secret.alert_error_notification_slack.value
+    use_common_alert_schema = true
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_monitor_action_group" "selfcare_status_dev" {
+  count = var.env_short == "d" ? 1 : 0
+
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  name                = local.action_group_selfcare_dev_name
+  short_name          = local.action_group_selfcare_dev_name
+
+  email_receiver {
+    name                    = "email"
+    email_address           = module.secrets_selfcare_status_dev[0].values["alert-selfcare-status-dev-email"].value
+    use_common_alert_schema = true
+  }
+
+  email_receiver {
+    name                    = "slack"
+    email_address           = module.secrets_selfcare_status_dev[0].values["alert-selfcare-status-dev-slack"].value
+    use_common_alert_schema = true
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_monitor_action_group" "selfcare_status_uat" {
+  count = var.env_short == "u" ? 1 : 0
+
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  name                = local.action_group_selfcare_uat_name
+  short_name          = local.action_group_selfcare_uat_name
+
+  email_receiver {
+    name                    = "email"
+    email_address           = module.secrets_selfcare_status_uat[0].values["alert-selfcare-status-uat-email"].value
+    use_common_alert_schema = true
+  }
+
+  email_receiver {
+    name                    = "slack"
+    email_address           = module.secrets_selfcare_status_uat[0].values["alert-selfcare-status-uat-slack"].value
     use_common_alert_schema = true
   }
 
