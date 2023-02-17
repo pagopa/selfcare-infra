@@ -444,7 +444,7 @@ components:
           description: Institution's contract file name
         filePath:
           type: string
-              description: Institution's contract file path
+          description: Institution's contract file path
     OnboardingDto:
       title: OnboardingDto
       required:
