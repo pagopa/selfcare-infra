@@ -623,7 +623,7 @@ module "apim_internal_api_ms_v1" {
 
   description  = "This service is the proxy for internal services"
   display_name = "Internal API service"
-  path         = "internal"
+  path         = "external/internal"
   api_version  = "v1"
   protocols    = [
     "https"
