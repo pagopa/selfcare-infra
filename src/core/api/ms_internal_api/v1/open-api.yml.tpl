@@ -11,193 +11,20 @@ tags:
   - name: product
     description: Product Controller
 paths:
-  '/institutions/byGeoTaxonomies':
-    get:
-      tags:
-        - institutions
-      summary: getInstitutionsByGeoTaxonomies
-      description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode
-      operationId: getInstitutionsByGeoTaxonomiesUsingGET
-      parameters:
-        - name: geoTaxonomies
-          in: query
-          description: Geotaxonomy's internal Id
-          required: true
-          style: form
-          explode: true
-          schema:
-            type: string
-        - name: userIdForAuth
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
-        - name: searchMode
-          in: query
-          description: Searching mode to find institutions based on geotax
-          required: false
-          style: form
-          schema:
-            type: string
-            enum:
-              - all
-              - any
-              - exact
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InstitutionDetailResource'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
-  '/institutions/{institutionId}/geographicTaxonomy':
-    get:
-      tags:
-        - institutions
-      summary: getInstitutionGeographicTaxonomies
-      description: The service retrieve the institution's geographic taxonomy
-      operationId: getInstitutionGeographicTaxonomiesUsingGET
-      parameters:
-        - name: institutionId
-          in: path
-          description: Institution's unique internal Id
-          required: true
-          style: simple
-          schema:
-            type: string
-        - name: userIdForAuth
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GeographicTaxonomyResource'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
-  '/institutions':
-    get:
-      tags:
-        - institutions
-      summary: getInstitutions
-      description: The service retrieves all the onboarded institutions related to the provided user and the product retrieved from Subscription Key
-      operationId: getInstitutionsUsingGET
-      parameters:
-        - name: userIdForAuth
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InstitutionResource'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
-  '/institutions/{institutionId}/users':
+  '/institutions/{institutionId}/products/{productId}/users':
       get:
         tags:
           - institutions
         summary: getInstitutionProductUsers
-        description: Service to get all the active users related to the provided institution and the product retrieved from Subscription Key
+        description: Service to get all the active users related to a specific pair of institution-product
         operationId: getInstitutionProductUsersUsingGET
         parameters:
+          - name: x-selfcare-uid
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
           - name: institutionId
             in: path
             description: Institution's unique internal identifier
@@ -205,11 +32,11 @@ paths:
             style: simple
             schema:
               type: string
-          - name: userIdForAuth
-            in: query
-            description: User's unique identifier
+          - name: productId
+            in: path
+            description: Product's unique identifier
             required: true
-            style: form
+            style: simple
             schema:
               type: string
           - name: userId
@@ -265,64 +92,6 @@ paths:
         security:
           - bearerAuth:
               - global
-  '/institutions/{institutionId}/products':
-    get:
-      tags:
-        - institutions
-      summary: getInstitutionUserProducts
-      description: Service to retrieve all active products for given institution and user
-      operationId: getInstitutionUserProductsUsingGET
-      parameters:
-        - name: institutionId
-          in: path
-          description: Institution's unique internal Id
-          required: true
-          style: simple
-          schema:
-            type: string
-        - name: userId
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ProductResource'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
   '/institutions/{id}':
     get:
       security: [ { } ]
@@ -332,6 +101,12 @@ paths:
       description: Gets institution using internal institution id
       operationId: getInstitution
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: id
           in: path
           description: The internal identifier of the institution
@@ -358,157 +133,63 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/user-groups':
-    get:
-      tags:
-      - user-group
-      summary: getUserGroups
-      description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
-      operationId: getUserGroupsUsingGET
-      parameters:
-      - name: institutionId
-        in: query
-        description: Users group's institutionId
-        required: false
-        style: form
-        schema:
-          type: string
-      - name: page
-        in: query
-        description: The page number to access (0 indexed, defaults to 0)
-        required: false
-        style: form
-        allowReserved: true
-        schema:
-          type: integer
-          format: int32
-      - name: size
-        in: query
-        description: Number of records per page (defaults to 20, max 2000)
-        required: false
-        style: form
-        allowReserved: true
-        schema:
-          type: integer
-          format: int32
-      - name: sort
-        in: query
-        description: 'Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.'
-        required: false
-        style: form
-        allowReserved: true
-        schema:
-          type: array
-          items:
-            type: string
-      - name: userId
-        in: query
-        description: Member's unique identifier
-        required: false
-        style: form
-        schema:
-          type: string
-          format: uuid
-      - name: status
-        in: query
-        description: If filter on status is present, it must be used with at least
-          one of the other filters
-        required: false
-        style: form
-        schema:
-          type: string
-          enum:
-          - ACTIVE
-          - SUSPENDED
-      responses:
-        '200':
-          description: OK
+  '/onboarding/{externalInstitutionId}/products/{productId}':
+      post:
+        tags:
+          - onboarding
+        summary: autoApprovalOnboarding
+        description: The service allows the onboarding of institutions with auto approval
+        operationId: autoApprovalOnboardingUsingPOST
+        parameters:
+          - name: x-selfcare-uid
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
+          - name: externalInstitutionId
+            in: path
+            description: Institution's unique external identifier
+            required: true
+            style: simple
+            schema:
+              type: string
+          - name: productId
+            in: path
+            description: Product's unique identifier
+            required: true
+            style: simple
+            schema:
+              type: string
+        requestBody:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/PageOfUserGroupResource"
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                "$ref": "#/components/schemas/Problem"
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                "$ref": "#/components/schemas/Problem"
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                "$ref": "#/components/schemas/Problem"
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                "$ref": "#/components/schemas/Problem"
-      security:
-      - bearerAuth:
-        - global
-  '/product':
-    get:
-      tags:
-        - product
-      summary: getProduct
-      description: The service retrieves Product information related to Subscription Key
-      operationId: getProductUsingGET
-      parameters:
-       - name: institutionType
-         in: query
-         description: Institution's type
-         required: false
-         style: form
-         schema:
-           type: string
-           enum:
-             - GSP
-             - PA
-             - PSP
-             - PT
-             - SCP
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductResource'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
+                $ref: '#/components/schemas/OnboardingDto'
+        responses:
+          '201':
+            description: Created
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '401':
+            description: Unauthorized
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '500':
+            description: Internal Server Error
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+              - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -519,11 +200,11 @@ components:
       type: object
       properties:
         code:
-          type: string
-          description: Institution's geographic taxonomy ISTAT code
+         type: string
+         description: Institution's geographic taxonomy ISTAT code
         desc:
-          type: string
-          description: Institution's geographic taxonomy extended name
+         type: string
+         description: Institution's geographic taxonomy extended name
     InstitutionDetailResource:
       title: InstitutionDetailResource
       required:
@@ -642,6 +323,7 @@ components:
           enum:
             - GSP
             - PA
+            - PSP
             - PT
             - SCP
         origin:
@@ -658,12 +340,219 @@ components:
           description: Institution's taxCode
         userProductRoles:
           type: array
-          description: User's roles on product
+          description: Logged user's roles on product
           items:
             type: string
         zipCode:
           type: string
           description: Institution's zipCode
+    AssistanceContactsDto:
+      title: AssistanceContactsDto
+      type: object
+      properties:
+        supportEmail:
+          type: string
+          description: Institution's support email contact
+          format: email
+          example: email@example.com
+        supportPhone:
+          type: string
+          description: Institution's support phone contact
+    BillingDataDto:
+      title: BillingDataDto
+      required:
+        - businessName
+        - digitalAddress
+        - recipientCode
+        - registeredOffice
+        - taxCode
+        - vatNumber
+        - zipCode
+      type: object
+      properties:
+        businessName:
+          type: string
+          description: Institution's legal name
+        digitalAddress:
+          type: string
+          description: Institution's digitalAddress
+        publicServices:
+          type: boolean
+          description: Institution's service type
+          example: false
+        recipientCode:
+          type: string
+          description: Billing recipient code
+        registeredOffice:
+          type: string
+          description: Institution's physical address
+        taxCode:
+          type: string
+          description: Institution's taxCode
+        vatNumber:
+          type: string
+          description: Institution's VAT number
+        zipCode:
+          type: string
+          description: Institution's zipCode
+    CompanyInformationsDto:
+      title: CompanyInformationsDto
+      type: object
+    DpoDataDto:
+      title: DpoDataDto
+      required:
+        - address
+        - email
+        - pec
+      type: object
+      properties:
+        address:
+          type: string
+          description: DPO's address
+        email:
+          type: string
+          description: DPO's email
+          format: email
+          example: email@example.com
+        pec:
+          type: string
+          description: DPO's PEC
+          format: email
+          example: email@example.com
+    GeographicTaxonomyDto:
+      title: GeographicTaxonomyDto
+      required:
+        - code
+        - desc
+      type: object
+      properties:
+        code:
+          type: string
+          description: Institution's geographic taxonomy ISTAT code
+        desc:
+          type: string
+          description: Institution's geographic taxonomy extended name
+    ImportContractDto:
+      title: ImportContractDto
+      type: object
+      properties:
+        contractType:
+          type: string
+          description: Institution's contract version
+        fileName:
+          type: string
+          description: Institution's contract file name
+        filePath:
+          type: string
+              description: Institution's contract file path
+    OnboardingDto:
+      title: OnboardingDto
+      required:
+        - billingData
+        - geographicTaxonomies
+        - institutionType
+        - users
+      type: object
+      properties:
+        assistanceContacts:
+          description: Institution's assistance contacts
+          $ref: '#/components/schemas/AssistanceContactsDto'
+        billingData:
+          description: Institution's billing information
+          $ref: '#/components/schemas/BillingDataDto'
+        companyInformations:
+          description: GPS, SCP, PT optional data
+          $ref: '#/components/schemas/CompanyInformationsDto'
+        geographicTaxonomies:
+          type: array
+          description: Institution's geographic taxonomy
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomyDto'
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PSP
+            - PT
+            - SCP
+        origin:
+          type: string
+          description: Institution data origin
+        pricingPlan:
+          type: string
+          description: Product's pricing plan
+        pspData:
+          description: Payment Service Provider (PSP) specific data
+          $ref: '#/components/schemas/PspDataDto'
+        users:
+          type: array
+          description: List of onboarding users
+          items:
+            $ref: '#/components/schemas/UserDto'
+    PspDataDto:
+      title: PspDataDto
+      required:
+        - abiCode
+        - businessRegisterNumber
+        - dpoData
+        - legalRegisterName
+        - legalRegisterNumber
+        - vatNumberGroup
+      type: object
+      properties:
+        abiCode:
+          type: string
+          description: PSP's ABI code
+        businessRegisterNumber:
+          type: string
+          description: PSP's Business Register number
+        dpoData:
+          description: Data Protection Officer (DPO) specific data
+          $ref: '#/components/schemas/DpoDataDto'
+        legalRegisterName:
+          type: string
+          description: PSP's legal register name
+        legalRegisterNumber:
+          type: string
+          description: PSP's legal register number
+        vatNumberGroup:
+          type: boolean
+          description: PSP's Vat Number group
+          example: false
+    UserDto:
+      title: UserDto
+      required:
+        - email
+        - name
+        - role
+        - surname
+        - taxCode
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's email
+          format: email
+          example: email@example.com
+        name:
+          type: string
+          description: User's name
+        role:
+          type: string
+          description: User's role
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        surname:
+          type: string
+          description: User's surname
+        taxCode:
+          type: string
+          description: User's fiscal code
     InvalidParam:
       title: InvalidParam
       required:

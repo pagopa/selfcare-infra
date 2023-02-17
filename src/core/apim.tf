@@ -597,12 +597,72 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getInstitutionProductUsersUsingGET"
-      xml_content = templatefile("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     }
+  ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_internal_api_ms" {
+  name                = format("%s-ms-internal-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Internal API Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_internal_api_ms_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  name                = format("%s-ms-internal-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
+
+  description  = "This service is the proxy for internal services"
+  display_name = "Internal API service"
+  path         = "internal"
+  api_version  = "v1"
+  protocols    = [
+    "https"
+  ]
+
+  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+
+  content_format = "openapi"
+  content_value  = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    basePath = "v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getInstitutionsUsingGET"
+      xml_content  = templatefile("./api/ms_internal_api/v1/getInstitutions_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content  = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+      })
+    },
+    {
+      operation_id = "autoApprovalOnboardingUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
   ]
 }
 
