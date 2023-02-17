@@ -619,7 +619,7 @@ module "apim_internal_api_ms_v1" {
   name                = format("%s-ms-internal-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_ms.id
+  version_set_id      = azurerm_api_management_api_version_set.apim_internal_api_ms.id
 
   description  = "This service is the proxy for internal services"
   display_name = "Internal API service"
