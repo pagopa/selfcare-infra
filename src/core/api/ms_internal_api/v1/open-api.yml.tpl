@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: selc-external-api
+  title: selc-internal-api
   description: This service acts as an orchestrator for information coming from different services and as a proxy
   version: 0.0.1-SNAPSHOT
 servers:

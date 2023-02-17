@@ -660,7 +660,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "autoApprovalOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
+    }
   ]
 }
 
