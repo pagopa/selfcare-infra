@@ -8,8 +8,6 @@ servers:
 tags:
   - name: institutions
     description: Institution Controller
-  - name: product
-    description: Product Controller
 paths:
   '/institutions/{institutionId}/products/{productId}/users':
       get:
