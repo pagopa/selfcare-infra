@@ -1,5 +1,6 @@
 # core
 
+<!-- markdownlint-disable -->
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -20,11 +21,18 @@
 | <a name="module_apim"></a> [apim](#module\_apim) | git::https://github.com/pagopa/azurerm.git//api_management | v2.12.5 |
 | <a name="module_apim_external_api_ms_v1"></a> [apim\_external\_api\_ms\_v1](#module\_apim\_external\_api\_ms\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
 | <a name="module_apim_external_api_ms_v2"></a> [apim\_external\_api\_ms\_v2](#module\_apim\_external\_api\_ms\_v2) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
+| <a name="module_apim_external_api_onboarding_v1"></a> [apim\_external\_api\_onboarding\_v1](#module\_apim\_external\_api\_onboarding\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
 | <a name="module_apim_ms_product_v1"></a> [apim\_ms\_product\_v1](#module\_apim\_ms\_product\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
 | <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_interop"></a> [apim\_product\_interop](#module\_apim\_product\_interop) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pagopa"></a> [apim\_product\_pagopa](#module\_apim\_product\_pagopa) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pn"></a> [apim\_product\_pn](#module\_apim\_product\_pn) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_cert"></a> [apim\_product\_pn\_cert](#module\_apim\_product\_pn\_cert) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_coll"></a> [apim\_product\_pn\_coll](#module\_apim\_product\_pn\_coll) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_dev"></a> [apim\_product\_pn\_dev](#module\_apim\_product\_pn\_dev) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_hotfix"></a> [apim\_product\_pn\_hotfix](#module\_apim\_product\_pn\_hotfix) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_prod"></a> [apim\_product\_pn\_prod](#module\_apim\_product\_pn\_prod) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_pn_svil"></a> [apim\_product\_pn\_svil](#module\_apim\_product\_pn\_svil) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_snet"></a> [apim\_snet](#module\_apim\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v2.12.5 |
 | <a name="module_apim_user_group_ms_v1"></a> [apim\_user\_group\_ms\_v1](#module\_apim\_user\_group\_ms\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
 | <a name="module_apim_uservice_party_management_v1"></a> [apim\_uservice\_party\_management\_v1](#module\_apim\_uservice\_party\_management\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
@@ -53,6 +61,8 @@
 | <a name="module_postgresql"></a> [postgresql](#module\_postgresql) | git::https://github.com/pagopa/azurerm.git//postgresql_server | v1.0.79 |
 | <a name="module_redis"></a> [redis](#module\_redis) | git::https://github.com/pagopa/azurerm.git//redis_cache | v2.0.11 |
 | <a name="module_redis_snet"></a> [redis\_snet](#module\_redis\_snet) | git::https://github.com/pagopa/azurerm.git//subnet | v1.0.58 |
+| <a name="module_secrets_selfcare_status_dev"></a> [secrets\_selfcare\_status\_dev](#module\_secrets\_selfcare\_status\_dev) | git::https://github.com/pagopa/azurerm.git//key_vault_secrets_query | v4.3.2 |
+| <a name="module_secrets_selfcare_status_uat"></a> [secrets\_selfcare\_status\_uat](#module\_secrets\_selfcare\_status\_uat) | git::https://github.com/pagopa/azurerm.git//key_vault_secrets_query | v4.3.2 |
 | <a name="module_selc-contracts-storage"></a> [selc-contracts-storage](#module\_selc-contracts-storage) | git::https://github.com/pagopa/azurerm.git//storage_account | v2.12.1 |
 | <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | git::https://github.com/pagopa/azurerm.git//storage_account | v2.18.10 |
 | <a name="module_spid-test-env"></a> [spid-test-env](#module\_spid-test-env) | ./modules/spid_testenv | n/a |
@@ -69,6 +79,7 @@
 | Name | Type |
 |------|------|
 | [azurerm_api_management_api_version_set.apim_external_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/api_management_api_version_set) | resource |
+| [azurerm_api_management_api_version_set.apim_external_api_onboarding](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_ms_product](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_user_group_ms](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_uservice_party_management](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/api_management_api_version_set) | resource |
@@ -115,6 +126,8 @@
 | [azurerm_management_lock.mongodb_selc_user_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/management_lock) | resource |
 | [azurerm_monitor_action_group.email](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_action_group.error_action_group](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/monitor_action_group) | resource |
+| [azurerm_monitor_action_group.selfcare_status_dev](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/monitor_action_group) | resource |
+| [azurerm_monitor_action_group.selfcare_status_uat](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/monitor_action_group) | resource |
 | [azurerm_postgresql_database.selc_db](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/postgresql_database) | resource |
 | [azurerm_private_dns_zone.internal_private_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/private_dns_zone) | resource |
@@ -168,6 +181,7 @@
 | [null_resource.upload_resources_default_product_logo](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_resources_default_product_resources_depict-image](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_resources_logo](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [null_resource.upload_resources_products_logo](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_resources_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [pkcs12_from_pem.jwt_pkcs12](https://registry.terraform.io/providers/chilicat/pkcs12/0.0.7/docs/resources/from_pem) | resource |
 | [azuread_application.vpn_app](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/application) | data source |
