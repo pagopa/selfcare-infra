@@ -30,6 +30,7 @@ module "key_vault_secrets_query" {
     "google-client-id",
     "jwt-secret",
     "eventhub-SC-Contracts-selfcare-wo-connection-string",
+    "eventhub-SC-Contracts-selfcare-ro-connection-string",
     "external-api-key",
     "external-user-api",
     "user-registry-api-key",
@@ -41,6 +42,7 @@ module "key_vault_secrets_query" {
     "infocamere-client-id",
     "infocamere-secret-public-key",
     "infocamere-secret-private-key",
-    "infocamere-secret-certificate"
+    "infocamere-secret-certificate",
+    "onboarding-interceptor-apim-internal"
   ]
 }
