@@ -292,7 +292,7 @@ resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
   }
 
   data = {
-    SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["selfcare-apim-internal-api-key"].value
+    SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["onboarding-interceptor-apim-internal"].value
   }
 
   type = "Opaque"
