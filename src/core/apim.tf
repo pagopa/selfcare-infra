@@ -648,7 +648,7 @@ module "apim_internal_api_ms_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionProductUsersUsingGET"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      xml_content  = file("./api/ms_internal_api/v1/getInstitutionProductUsers_op_policy.xml")
     },
     {
       operation_id = "getInstitution"
