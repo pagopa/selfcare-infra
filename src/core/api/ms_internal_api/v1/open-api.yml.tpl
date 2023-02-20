@@ -188,6 +188,74 @@ paths:
         security:
           - bearerAuth:
               - global
+  '/products/{productId}':
+      get:
+        tags:
+          - product
+        summary: getProduct
+        description: The service retrieves Product information from product id
+        operationId: getProductUsingGET
+        parameters:
+          - name: x-selfcare-uid
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
+          - name: productId
+            in: path
+            description: Product's unique identifier
+            required: true
+            style: simple
+            schema:
+              type: string
+          - name: institutionType
+            in: query
+            description: Institution's type
+            required: false
+            style: form
+            schema:
+              type: string
+              enum:
+                - GSP
+                - PA
+                - PSP
+                - PT
+                - SCP
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ProductResource'
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '401':
+            description: Unauthorized
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '404':
+            description: Not Found
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '500':
+            description: Internal Server Error
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+              - global
 components:
   schemas:
     GeographicTaxonomyResource:
