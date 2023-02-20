@@ -279,7 +279,7 @@ resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
     KAFKA_SASL_MECHANISM    = "PLAIN"
 
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
-    KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-ro-connection-string"].value}\";"
+    KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
   }
 
   type = "Opaque"
