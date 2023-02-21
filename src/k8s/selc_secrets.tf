@@ -267,6 +267,38 @@ resource "kubernetes_secret" "event-secrets" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
+  metadata {
+    name      = "onboarding-interceptor-event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
+  metadata {
+    name      = "onboarding-interceptor-apim-internal"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["onboarding-interceptor-apim-internal"].value
+  }
+
+  type = "Opaque"
+}
+
+
 resource "kubernetes_secret" "aruba-sign-service-secrets" {
   metadata {
     name      = "aruba-sign-service-secrets"

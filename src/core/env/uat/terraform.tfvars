@@ -202,6 +202,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "interceptor"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
