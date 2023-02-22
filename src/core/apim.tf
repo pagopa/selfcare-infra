@@ -550,7 +550,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getInstitutionProductUsersUsingGET"
-      xml_content  = templatefile("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutionProductUsersUsingGET_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -578,14 +578,14 @@ module "apim_internal_api_ms_v1" {
   display_name = "Internal API service"
   path         = "external/internal"
   api_version  = "v1"
-  protocols    = [
+  protocols = [
     "https"
   ]
 
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
+  content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
     basePath = "v1"
   })
@@ -605,7 +605,7 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "getInstitution"
-      xml_content  = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
       })
@@ -616,7 +616,7 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content  = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
       })
     }
