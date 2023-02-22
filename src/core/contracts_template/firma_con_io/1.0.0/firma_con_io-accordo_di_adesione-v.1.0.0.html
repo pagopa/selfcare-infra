@@ -399,7 +399,7 @@
 
 
 </span></li>
-    <li class="c2 c18 li-bullet-1"><span class="c1">Le fatture dovranno essere intestate come segue:  __________________, Partita IVA. n.  __________________ con la dicitura “ Importi riconosciuti per l’erogazione del servizio Firma con IO” comprensivi dell’indicazione del periodo di riferimento - calcolati sulla base di quanto previsto al comma 1 del presente articolo - e dovranno essere inviate esclusivamente in formato xml, tramite il Sistema di interscambio, riportando nel campo Codice Destinatario il codice ${institutionRecipientCode}. L’Ente è soggetto al regime della scissione dei pagamenti di cui all’art. 17-ter del D.P.R. 633/1972, da indicare in fattura.
+    <li class="c2 c18 li-bullet-1"><span class="c1">Le fatture dovranno essere intestate come segue:  ${institutionName}, Partita IVA. n.  ${institutionVatNumber} con la dicitura “ Importi riconosciuti per l’erogazione del servizio Firma con IO” comprensivi dell’indicazione del periodo di riferimento - calcolati sulla base di quanto previsto al comma 1 del presente articolo - e dovranno essere inviate esclusivamente in formato xml, tramite il Sistema di interscambio, riportando nel campo Codice Destinatario il codice ${institutionRecipientCode}. L’Ente è soggetto al regime della scissione dei pagamenti di cui all’art. 17-ter del D.P.R. 633/1972, da indicare in fattura.
 
 </span></li>
     <li class="c2 c18 li-bullet-1"><span class="c1">All’Ente spetterà l’onere di comunicare a PagoPA, ogni eventuale modifica dei dati di cui al comma che precede, utilizzando il seguente indirizzo mail:  <span
@@ -555,7 +555,7 @@
         <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente:
 </span>
           <ul class="c34 lst-kix_list_6-0 start">
-            <li class="c2 c12 li-bullet-1"><span class="c1">PEC: __________________
+            <li class="c2 c12 li-bullet-1"><span class="c1">PEC: ${institutionMail}
 </span>
             </li>
             <li class="c2 c12 li-bullet-1"><span class="c1">e-mail:  __________________
@@ -601,7 +601,7 @@
       <ul class="c34 lst-kix_list_6-0 start">
         <li class="c2 c12 li-bullet-1"><span class="c1">per PagoPA: pagopa@pec.governo.it; </span>
         </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente:  __________________
+        <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente:  ${institutionMail}
 </span></li>
 
 
@@ -734,7 +734,7 @@
   <table class="c94">
     <tr class="c104">
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
-        class="c3">L’Ente <br> _______________<br> f.to digitalmente
+        class="c3">L’Ente <br> ${institutionName}<br> f.to digitalmente
 </span>
       </p></td>
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
@@ -768,7 +768,7 @@ f.to digitalmente
   <table class="c94">
     <tr class="c104">
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
-        class="c3">L’Ente <br> _______________<br> f.to digitalmente
+        class="c3">L’Ente <br> ${institutionName}<br> f.to digitalmente
 </span>
       </p></td>
 
