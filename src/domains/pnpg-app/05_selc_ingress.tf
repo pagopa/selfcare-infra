@@ -2,17 +2,16 @@ locals {
   cors = {
     origins = join(",", concat(
       [
-        format("https://%s", var.api_gateway_url),
-        format("https://%s", var.cdn_frontend_url),
+        "https://${var.api_gateway_url}",
+        "https://${var.cdn_frontend_url}",
       ],
-      var.env_short != "p"
-      ? [
+      var.env_short != "p" ? [
         "https://localhost:3000",
         "http://localhost:3000",
         "https://localhost:3001",
         "http://localhost:3001",
-      format("https://%s", var.spid_testenv_url)]
-      : []
+      "https://${var.spid_testenv_url}"
+      ] : []
     )),
     headers = join(",", [
       // default headers
@@ -32,11 +31,10 @@ locals {
 }
 
 resource "kubernetes_ingress_v1" "selc_ingress" {
-  depends_on = [helm_release.ingress]
 
   metadata {
-    name      = "${kubernetes_namespace.selc.metadata[0].name}-ingress"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    name      = "${var.domain}-ingress"
+    namespace = var.domain
     annotations = {
       "kubernetes.io/ingress.class"                    = "nginx"
       "nginx.ingress.kubernetes.io/rewrite-target"     = "/$1"

@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "health" {
+  metadata {
+    name = "health"
+  }
+}
+
 resource "kubernetes_deployment" "health" {
   metadata {
     name      = "health"
