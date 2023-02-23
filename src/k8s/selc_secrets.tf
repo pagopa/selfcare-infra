@@ -329,3 +329,16 @@ resource "kubernetes_secret" "infocamere-service-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "national-registry-secrets" {
+  metadata {
+    name      = "national-registry-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    NATIONAL_REGISTRY_API_KEY = module.key_vault_secrets_query.values["national-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}

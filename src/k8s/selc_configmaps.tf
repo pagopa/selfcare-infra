@@ -186,6 +186,20 @@ resource "kubernetes_config_map" "infocamere-service" {
   }
 }
 
+
+resource "kubernetes_config_map" "national-registries-service" {
+  metadata {
+    name      = "national-registries-service"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/"
+  }
+}
+
+
+
 resource "kubernetes_config_map" "geo-taxonomies" {
   metadata {
     name      = "geo-taxonomies"
