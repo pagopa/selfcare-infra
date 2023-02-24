@@ -39,9 +39,12 @@ locals {
 
   domain_aks_hostname = var.env == "prod" ? "${var.instance}.${var.domain}.internal.selfcare.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.selfcare.pagopa.it"
 
+  # Service account
   azure_devops_app_service_account_name        = "azure-devops"
   azure_devops_app_service_account_secret_name = "${local.azure_devops_app_service_account_name}-token"
 
+  apim_service_account_name        = "apim"
+  apim_service_account_secret_name = "${local.apim_service_account_name}-token"
 }
 
 variable "prefix" {
@@ -242,4 +245,8 @@ variable "spid_testenv_url" {
 
 variable "cdn_storage_url" {
   type = string
+}
+
+variable "configmaps_hub-spid-login-ms" {
+  type = map(string)
 }
