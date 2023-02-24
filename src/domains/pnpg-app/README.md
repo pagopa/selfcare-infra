@@ -14,23 +14,63 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_domain_pod_identity"></a> [domain\_pod\_identity](#module\_domain\_pod\_identity) | git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_pod_identity | v4.1.17 |
+| <a name="module_key_vault_secrets_query"></a> [key\_vault\_secrets\_query](#module\_key\_vault\_secrets\_query) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v5.1.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [azurerm_key_vault_secret.aks_apiserver_url](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.appinsights-instrumentation-key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_cacrt](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_private_dns_a_record.ingress](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [helm_release.reloader](https://registry.terraform.io/providers/hashicorp/helm/2.8.0/docs/resources/release) | resource |
+| [kubernetes_cluster_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_config_map.aruba-sign-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.common](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.geo-taxonomies](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.infocamere-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.inner-service-url](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt-exchange](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt-social](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_config_map.selfcare-core](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
+| [kubernetes_deployment.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/deployment) | resource |
+| [kubernetes_ingress_v1.health_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
+| [kubernetes_ingress_v1.selc_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
 | [kubernetes_namespace.domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
+| [kubernetes_namespace.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
 | [kubernetes_namespace.system_domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
 | [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
+| [kubernetes_secret.aruba-sign-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.b4f-dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.cdn-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.common-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.contracts-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.infocamere-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.mail](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.mail-not-pec](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.mongo-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.onboarding-interceptor-apim-internal](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.onboarding-interceptor-event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.social-login](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.uservice-party-management](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
+| [kubernetes_secret_v1.apim_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.azure_devops_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
+| [kubernetes_service.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service) | resource |
+| [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
 | [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
+| [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
 | [azuread_group.adgroup_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_externals](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
@@ -44,6 +84,7 @@
 | [azurerm_private_dns_zone.internal](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
 | [azurerm_resource_group.monitor_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
+| [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/data-sources/secret) | data source |
 | [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/data-sources/secret) | data source |
 
 ## Inputs
@@ -52,15 +93,27 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | AKS cluster name | `string` | n/a | yes |
 | <a name="input_aks_resource_group_name"></a> [aks\_resource\_group\_name](#input\_aks\_resource\_group\_name) | AKS cluster resource name | `string` | n/a | yes |
+| <a name="input_api_gateway_url"></a> [api\_gateway\_url](#input\_api\_gateway\_url) | n/a | `string` | n/a | yes |
+| <a name="input_aruba_sign_service"></a> [aruba\_sign\_service](#input\_aruba\_sign\_service) | n/a | `map(string)` | n/a | yes |
+| <a name="input_cdn_frontend_url"></a> [cdn\_frontend\_url](#input\_cdn\_frontend\_url) | n/a | `string` | n/a | yes |
+| <a name="input_cdn_storage_url"></a> [cdn\_storage\_url](#input\_cdn\_storage\_url) | n/a | `string` | n/a | yes |
+| <a name="input_configmaps_common"></a> [configmaps\_common](#input\_configmaps\_common) | n/a | `map(string)` | n/a | yes |
+| <a name="input_configmaps_hub-spid-login-ms"></a> [configmaps\_hub-spid-login-ms](#input\_configmaps\_hub-spid-login-ms) | n/a | `map(string)` | n/a | yes |
+| <a name="input_configmaps_ms_core"></a> [configmaps\_ms\_core](#input\_configmaps\_ms\_core) | ConfigMaps & Secrets | `map(string)` | n/a | yes |
+| <a name="input_default_service_port"></a> [default\_service\_port](#input\_default\_service\_port) | n/a | `number` | `8080` | no |
 | <a name="input_dns_zone_internal_prefix"></a> [dns\_zone\_internal\_prefix](#input\_dns\_zone\_internal\_prefix) | The dns subdomain. | `string` | `null` | no |
 | <a name="input_dns_zone_prefix"></a> [dns\_zone\_prefix](#input\_dns\_zone\_prefix) | The dns subdomain. | `string` | `"selfcare"` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | n/a | `string` | n/a | yes |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | n/a | `string` | n/a | yes |
 | <a name="input_external_domain"></a> [external\_domain](#input\_external\_domain) | Domain for delegation | `string` | `"pagopa.it"` | no |
+| <a name="input_geo-taxonomies"></a> [geo-taxonomies](#input\_geo-taxonomies) | n/a | `map(string)` | n/a | yes |
 | <a name="input_ingress_load_balancer_hostname"></a> [ingress\_load\_balancer\_hostname](#input\_ingress\_load\_balancer\_hostname) | n/a | `string` | n/a | yes |
 | <a name="input_ingress_load_balancer_ip"></a> [ingress\_load\_balancer\_ip](#input\_ingress\_load\_balancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_instance"></a> [instance](#input\_instance) | One of beta, prod01, prod02 | `string` | n/a | yes |
+| <a name="input_jwt_audience"></a> [jwt\_audience](#input\_jwt\_audience) | configs/secrets | `string` | n/a | yes |
+| <a name="input_jwt_social_expire"></a> [jwt\_social\_expire](#input\_jwt\_social\_expire) | n/a | `string` | n/a | yes |
+| <a name="input_jwt_token_exchange_duration"></a> [jwt\_token\_exchange\_duration](#input\_jwt\_token\_exchange\_duration) | n/a | `string` | `"PT15S"` | no |
 | <a name="input_k8s_kube_config_path_prefix"></a> [k8s\_kube\_config\_path\_prefix](#input\_k8s\_kube\_config\_path\_prefix) | n/a | `string` | `"~/.kube"` | no |
 | <a name="input_location"></a> [location](#input\_location) | One of westeurope, northeurope | `string` | n/a | yes |
 | <a name="input_location_short"></a> [location\_short](#input\_location\_short) | One of wue, neu | `string` | n/a | yes |
@@ -71,10 +124,15 @@
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | n/a | yes |
 | <a name="input_reloader_helm"></a> [reloader\_helm](#input\_reloader\_helm) | reloader helm chart configuration | <pre>object({<br>    chart_version = string,<br>    image_name    = string,<br>    image_tag     = string<br>  })</pre> | n/a | yes |
 | <a name="input_reverse_proxy_rtd"></a> [reverse\_proxy\_rtd](#input\_reverse\_proxy\_rtd) | AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller. | `string` | `"127.0.0.1"` | no |
+| <a name="input_spid_testenv_url"></a> [spid\_testenv\_url](#input\_spid\_testenv\_url) | n/a | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br>  "CreatedBy": "Terraform"<br>}</pre> | no |
 | <a name="input_tls_cert_check_helm"></a> [tls\_cert\_check\_helm](#input\_tls\_cert\_check\_helm) | tls cert helm chart configuration | <pre>object({<br>    chart_version = string,<br>    image_name    = string,<br>    image_tag     = string<br>  })</pre> | n/a | yes |
+| <a name="input_token_expiration_minutes"></a> [token\_expiration\_minutes](#input\_token\_expiration\_minutes) | n/a | `number` | `540` | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_azure_devops_sa_cacrt"></a> [azure\_devops\_sa\_cacrt](#output\_azure\_devops\_sa\_cacrt) | n/a |
+| <a name="output_azure_devops_sa_token"></a> [azure\_devops\_sa\_token](#output\_azure\_devops\_sa\_token) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
