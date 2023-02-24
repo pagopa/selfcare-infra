@@ -250,3 +250,22 @@ variable "cdn_storage_url" {
 variable "configmaps_hub-spid-login-ms" {
   type = map(string)
 }
+
+variable "jwt_token_exchange_duration" {
+  type    = string
+  default = "PT15S"
+}
+
+# configs/secrets
+variable "jwt_audience" {
+  type = string
+}
+
+variable "jwt_social_expire" {
+  type = string
+}
+
+variable "token_expiration_minutes" {
+  type    = number
+  default = 540 # 9 hours
+}
