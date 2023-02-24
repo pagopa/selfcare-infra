@@ -74,14 +74,12 @@ variable "tags" {
 # DNS
 variable "external_domain" {
   type        = string
-  default     = "pagopa.it"
-  description = "Domain for delegation"
+  description = "Domain for delegation. E.g pagopa.it"
 }
 
 variable "dns_zone_prefix" {
   type        = string
-  default     = "selfcare"
-  description = "The dns subdomain."
+  description = "The dns subdomain. E.g: selfcare"
 }
 
 
@@ -178,4 +176,22 @@ variable "cosmosdb_mongodb_private_endpoint_enabled" {
   type        = bool
   description = "Enable private endpoint for Comsmos DB"
   default     = true
+}
+
+#
+# CDN
+#
+variable "spa" {
+  type        = list(string)
+  description = "spa root dirs"
+  default = [
+    "auth",
+    "onboarding",
+    "dashboard"
+  ]
+}
+
+variable "robots_indexed_paths" {
+  type        = list(string)
+  description = "List of cdn paths to allow robots index"
 }
