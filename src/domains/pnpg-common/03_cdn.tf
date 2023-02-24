@@ -48,10 +48,10 @@ module "pnpg_checkout_cdn" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=cdn-fixs"
 
   name                  = "checkout"
-  prefix                = "ciao"
+  prefix                = local.project
   resource_group_name   = azurerm_resource_group.checkout_fe_pnpg_rg.name
   location              = var.location
-  hostname              = "${var.dns_zone_prefix}.${var.external_domain}"
+  hostname              = "${var.domain}.${var.dns_zone_prefix}.${var.external_domain}"
   https_rewrite_enabled = true
   lock_enabled          = false
 

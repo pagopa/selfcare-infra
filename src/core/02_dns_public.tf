@@ -107,6 +107,12 @@ resource "azurerm_dns_caa_record" "caa_selfcare" {
 
   record {
     flags = 0
+    tag   = "issue"
+    value = "digicert.com"
+  }
+
+  record {
+    flags = 0
     tag   = "iodef"
     value = "mailto:security+caa@pagopa.it"
   }
