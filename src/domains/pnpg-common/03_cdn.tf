@@ -242,8 +242,8 @@ module "pnpg_checkout_cdn" {
 }
 
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
-resource "azurerm_key_vault_secret" "selc_web_storage_access_key" {
-  name         = "web-storage-access-key"
+resource "azurerm_key_vault_secret" "cdn__storage_access_key" {
+  name         = "cdn-storage-access-key"
   value        = module.pnpg_checkout_cdn.storage_primary_access_key
   content_type = "text/plain"
 
@@ -251,8 +251,8 @@ resource "azurerm_key_vault_secret" "selc_web_storage_access_key" {
 }
 
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
-resource "azurerm_key_vault_secret" "selc_web_storage_connection_string" {
-  name         = "web-storage-connection-string"
+resource "azurerm_key_vault_secret" "cdn_storage_connection_string" {
+  name         = "cdn-storage-connection-string"
   value        = module.pnpg_checkout_cdn.storage_primary_connection_string
   content_type = "text/plain"
 
@@ -260,9 +260,25 @@ resource "azurerm_key_vault_secret" "selc_web_storage_connection_string" {
 }
 
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
-resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
-  name         = "web-storage-blob-connection-string"
+resource "azurerm_key_vault_secret" "cdn_storage_blob_connection_string" {
+  name         = "cdn-storage-blob-connection-string"
   value        = module.pnpg_checkout_cdn.storage_primary_blob_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault_pnpg.id
+}
+
+resource "azurerm_key_vault_secret" "cdn_storage_blob_primary_web_host" {
+  name         = "cdn-storage-blob-primary-web-host"
+  value        = module.pnpg_checkout_cdn.storage_primary_web_host
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault_pnpg.id
+}
+
+resource "azurerm_key_vault_secret" "cdn_fqdn" {
+  name         = "cdn-fqdn"
+  value        = module.pnpg_checkout_cdn.fqdn
   content_type = "text/plain"
 
   key_vault_id = module.key_vault_pnpg.id
