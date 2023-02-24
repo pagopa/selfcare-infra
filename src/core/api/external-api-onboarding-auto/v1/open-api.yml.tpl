@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: selc-external-api
+  title: selc-external-api-onboarding-auto
   description: Self Care External Api Documentation
   version: 0.0.1-SNAPSHOT
 servers:
