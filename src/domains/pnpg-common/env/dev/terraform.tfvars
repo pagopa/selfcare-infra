@@ -7,6 +7,7 @@ location_short = "weu"
 instance       = "dev"
 
 dns_zone_prefix = "dev.selfcare"
+external_domain = "pagopa.it"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -44,5 +45,8 @@ cosmosdb_mongodb_throughput                       = 1000
 cosmosdb_mongodb_max_throughput                   = 1000
 cosmosdb_mongodb_enable_autoscaling               = true
 cosmosdb_mongodb_private_endpoint_enabled         = true
+
+# CDN
+robots_indexed_paths = []
 
 
