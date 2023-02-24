@@ -16,107 +16,107 @@ resource "kubernetes_config_map" "inner-service-url" {
   }
 }
 
-# resource "kubernetes_config_map" "jwt" {
-#   metadata {
-#     name      = "jwt"
-#     namespace = var.domain
-#   }
+resource "kubernetes_config_map" "jwt" {
+  metadata {
+    name      = "jwt"
+    namespace = var.domain
+  }
 
-#   data = {
-#     JWT_TOKEN_KID        = module.key_vault_secrets_query.values["jwt-kid"].value
-#     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
-#     JWT_TOKEN_AUDIENCE   = var.jwt_audience
-#     WELL_KNOWN_URL       = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-#   }
-# }
+  data = {
+    # JWT_TOKEN_KID        = module.key_vault_secrets_query.values["jwt-kid"].value
+    # JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
+    # JWT_TOKEN_AUDIENCE   = var.jwt_audience
+    # WELL_KNOWN_URL       = format("%s/.well-known/jwks.json", var.cdn_storage_url)
+  }
+}
 
-# resource "kubernetes_config_map" "jwt-exchange" {
-#   metadata {
-#     name      = "jwt-exchange"
-#     namespace = var.domain
-#   }
+resource "kubernetes_config_map" "jwt-exchange" {
+  metadata {
+    name      = "jwt-exchange"
+    namespace = var.domain
+  }
 
-#   data = {
-#     JWT_TOKEN_EXCHANGE_DURATION   = var.jwt_token_exchange_duration
-#     JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
-#     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-#     WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
-#   }
-# }
+  data = {
+    # JWT_TOKEN_EXCHANGE_DURATION   = var.jwt_token_exchange_duration
+    # JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
+    # JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
+    # WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
+  }
+}
 
-# resource "kubernetes_config_map" "jwt-social" {
-#   metadata {
-#     name      = "jwt-social"
-#     namespace = var.domain
-#   }
+resource "kubernetes_config_map" "jwt-social" {
+  metadata {
+    name      = "jwt-social"
+    namespace = var.domain
+  }
 
-#   data = {
-#     JWT_SOCIAL_EXPIRE    = var.jwt_social_expire
-#     EMAIL_ALLOWED_DOMAIN = "@pagopa.it,@pagopa.com,@gmail.com"
-#   }
-# }
+  data = {
+    # JWT_SOCIAL_EXPIRE    = var.jwt_social_expire
+    # EMAIL_ALLOWED_DOMAIN = "@pagopa.it,@pagopa.com,@gmail.com"
+  }
+}
 
-# resource "kubernetes_config_map" "hub-spid-login-ms" {
-#   metadata {
-#     name      = "hub-spid-login-ms"
-#     namespace = var.domain
-#   }
+resource "kubernetes_config_map" "hub-spid-login-ms" {
+  metadata {
+    name      = "hub-spid-login-ms"
+    namespace = var.domain
+  }
 
-#   data = merge({
-#     JAVA_TOOL_OPTIONS = ""
+  data = merge({
+    # JAVA_TOOL_OPTIONS = ""
 
-#     # SPID
-#     ORG_URL          = "https://pagopa.gov.it"
-#     ACS_BASE_URL     = format("%s/spid/v1", var.api_gateway_url)
-#     ORG_DISPLAY_NAME = "PagoPA S.p.A"
-#     ORG_NAME         = "PagoPA"
+    # # SPID
+    # ORG_URL          = "https://pagopa.gov.it"
+    # ACS_BASE_URL     = format("%s/spid/v1", var.api_gateway_url)
+    # ORG_DISPLAY_NAME = "PagoPA S.p.A"
+    # ORG_NAME         = "PagoPA"
 
-#     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
+    # AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
-#     ENDPOINT_ACS      = "/acs"
-#     ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
-#     ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
-#     ENDPOINT_LOGIN    = "/login"
-#     ENDPOINT_METADATA = "/metadata"
-#     ENDPOINT_LOGOUT   = "/logout"
+    # ENDPOINT_ACS      = "/acs"
+    # ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
+    # ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
+    # ENDPOINT_LOGIN    = "/login"
+    # ENDPOINT_METADATA = "/metadata"
+    # ENDPOINT_LOGOUT   = "/logout"
 
-#     SPID_ATTRIBUTES    = "name,familyName,fiscalNumber,email"
-#     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
+    # SPID_ATTRIBUTES    = "name,familyName,fiscalNumber,email"
+    # SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
-#     REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
-#     ENABLE_FULL_OPERATOR_METADATA    = true
-#     COMPANY_EMAIL                    = "pagopa@pec.governo.it"
-#     COMPANY_FISCAL_CODE              = 15376371009
-#     COMPANY_IPA_CODE                 = "PagoPA"
-#     COMPANY_NAME                     = "PagoPA S.p.A"
-#     COMPANY_VAT_NUMBER               = "IT15376371009"
+    # REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
+    # ENABLE_FULL_OPERATOR_METADATA    = true
+    # COMPANY_EMAIL                    = "pagopa@pec.governo.it"
+    # COMPANY_FISCAL_CODE              = 15376371009
+    # COMPANY_IPA_CODE                 = "PagoPA"
+    # COMPANY_NAME                     = "PagoPA S.p.A"
+    # COMPANY_VAT_NUMBER               = "IT15376371009"
 
-#     ENABLE_JWT                         = "true"
-#     INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
+    # ENABLE_JWT                         = "true"
+    # INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
 
-#     # TOKEN_EXPIRATION requires seconds
-#     TOKEN_EXPIRATION = var.token_expiration_minutes * 60
-#     JWT_TOKEN_ISSUER = "SPID"
+    # # TOKEN_EXPIRATION requires seconds
+    # TOKEN_EXPIRATION = var.token_expiration_minutes * 60
+    # JWT_TOKEN_ISSUER = "SPID"
 
-#     # ADE
-#     ENABLE_ADE_AA = "false"
+    # # ADE
+    # ENABLE_ADE_AA = "false"
 
-#     APPINSIGHTS_DISABLED = "false"
+    # APPINSIGHTS_DISABLED = "false"
 
-#     ENABLE_USER_REGISTRY = "true"
+    # ENABLE_USER_REGISTRY = "true"
 
-#     JWT_TOKEN_AUDIENCE = var.jwt_audience
+    # JWT_TOKEN_AUDIENCE = var.jwt_audience
 
-#     ENABLE_SPID_ACCESS_LOGS          = "true"
-#     SPID_LOGS_PUBLIC_KEY             = module.key_vault_secrets_query.values["spid-logs-encryption-public-key"].value
-#     SPID_LOGS_STORAGE_KIND           = "azurestorage"
-#     SPID_LOGS_STORAGE_CONTAINER_NAME = "selc-${var.env_short}-logs-blob"
+    # ENABLE_SPID_ACCESS_LOGS          = "true"
+    # SPID_LOGS_PUBLIC_KEY             = module.key_vault_secrets_query.values["spid-logs-encryption-public-key"].value
+    # SPID_LOGS_STORAGE_KIND           = "azurestorage"
+    # SPID_LOGS_STORAGE_CONTAINER_NAME = "selc-${var.env_short}-logs-blob"
 
-#     },
-#     var.configmaps_hub-spid-login-ms,
-#     var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}
-#   )
-# }
+    },
+    var.configmaps_hub-spid-login-ms,
+    var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}
+  )
+}
 
 
 resource "kubernetes_config_map" "selfcare-core" {
@@ -126,16 +126,16 @@ resource "kubernetes_config_map" "selfcare-core" {
   }
 
   data = merge({
-    MAIL_TEMPLATE_PATH              = "contracts/template/mail/1.0.0.json"
-    MAIL_TEMPLATE_COMPLETE_PATH     = "contracts/template/mail/onboarding-complete/1.0.0.json"
-    MAIL_TEMPLATE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-notification/1.0.0.json"
-    MAIL_TEMPLATE_REJECT_PATH       = "contracts/template/mail/onboarding-refused/1.0.0.json"
-    # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
-    EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
-    # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
-    EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
-    SELFCARE_URL            = "https://selfcare.pagopa.it"
-    PAGOPA_LOGO_URL         = "resources/logo.png"
+    # MAIL_TEMPLATE_PATH              = "contracts/template/mail/1.0.0.json"
+    # MAIL_TEMPLATE_COMPLETE_PATH     = "contracts/template/mail/onboarding-complete/1.0.0.json"
+    # MAIL_TEMPLATE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-notification/1.0.0.json"
+    # MAIL_TEMPLATE_REJECT_PATH       = "contracts/template/mail/onboarding-refused/1.0.0.json"
+    # # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
+    # EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
+    # # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
+    # EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
+    # SELFCARE_URL            = "https://selfcare.pagopa.it"
+    # PAGOPA_LOGO_URL         = "resources/logo.png"
 
     # module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     },
@@ -150,8 +150,8 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-    ENV_TARGET                   = upper(var.env)
-    PUBLIC_FILE_STORAGE_BASE_URL = var.cdn_storage_url
+    # ENV_TARGET                   = upper(var.env)
+    # PUBLIC_FILE_STORAGE_BASE_URL = var.cdn_storage_url
     },
     var.configmaps_common
   )
