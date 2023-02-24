@@ -1,20 +1,40 @@
 # service account required by apim in order to authenticate with microservices
 resource "kubernetes_service_account" "apim_service_account" {
   metadata {
-    name      = "apim"
+    name      = local.apim_service_account_name
     namespace = var.domain
   }
 }
 
+resource "kubernetes_secret_v1" "apim_service_account_default_secret" {
+  metadata {
+    name      = local.apim_service_account_secret_name
+    namespace = var.domain
+    annotations = {
+      "kubernetes.io/service-account.name" = local.apim_service_account_name
+    }
+  }
+
+  type = "kubernetes.io/service-account-token"
+
+  depends_on = [
+    kubernetes_service_account.apim_service_account
+  ]
+}
+
 data "kubernetes_secret" "apim_service_account_secret" {
   metadata {
-    name      = kubernetes_service_account.apim_service_account.default_secret_name
-    namespace = kubernetes_service_account.apim_service_account.metadata[0].namespace
+    name      = local.apim_service_account_secret_name
+    namespace = var.domain
   }
   binary_data = {
     "ca.crt" = ""
     "token"  = ""
   }
+
+  depends_on = [
+    kubernetes_secret_v1.apim_service_account_default_secret
+  ]
 }
 
 #tfsec:ignore:AZU023
@@ -24,6 +44,10 @@ resource "azurerm_key_vault_secret" "apim_service_account_access_token" {
   content_type = "JWT"
 
   key_vault_id = data.azurerm_key_vault.kv_domain.id
+
+  depends_on = [
+    data.kubernetes_secret.apim_service_account_secret
+  ]
 }
 
 # service_account required by internal microservices authentication
