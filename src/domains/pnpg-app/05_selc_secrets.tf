@@ -153,11 +153,11 @@ resource "kubernetes_secret" "cdn-storage" {
   }
 
   data = {
-    # BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
-    # BLOB_CONTAINER_REF       = "$web"
-    # BLOBSTORAGE_PUBLIC_HOST  = replace(var.cdn_storage_url, "/https?:\\/\\//", "")
-    # BLOBSTORAGE_PUBLIC_URL   = var.cdn_storage_url
-    # CDN_PUBLIC_URL           = var.cdn_frontend_url
+    BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["cdn-storage-blob-connection-string"].value
+    BLOB_CONTAINER_REF       = "$web"
+    BLOBSTORAGE_PUBLIC_HOST  = replace(local.cdn_storage_url, "/https?:\\/\\//", "")
+    BLOBSTORAGE_PUBLIC_URL   = local.cdn_storage_url
+    CDN_PUBLIC_URL           = local.cdn_fqdn_url
   }
 
   type = "Opaque"

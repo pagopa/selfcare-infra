@@ -26,7 +26,7 @@ resource "kubernetes_config_map" "jwt" {
     JWT_TOKEN_KID        = module.key_vault_secrets_query.values["jwt-kid"].value
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
     JWT_TOKEN_AUDIENCE   = var.jwt_audience
-    # WELL_KNOWN_URL       = "${var.cdn_storage_url}/.well-known/jwks.json"
+    WELL_KNOWN_URL       = "${local.cdn_storage_url}/.well-known/jwks.json"
   }
 }
 
@@ -40,7 +40,7 @@ resource "kubernetes_config_map" "jwt-exchange" {
     JWT_TOKEN_EXCHANGE_DURATION   = var.jwt_token_exchange_duration
     JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-    WELL_KNOWN_URL                = "${var.cdn_storage_url}/.well-known/jwks.json"
+    WELL_KNOWN_URL                = "${local.cdn_storage_url}/.well-known/jwks.json"
   }
 }
 
@@ -74,8 +74,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "${var.cdn_frontend_url}/auth/login/error"
-    ENDPOINT_SUCCESS  = "${var.cdn_frontend_url}/auth/login/success"
+    ENDPOINT_ERROR    = "${local.cdn_fqdn_url}/auth/login/error"
+    ENDPOINT_SUCCESS  = "${local.cdn_fqdn_url}/auth/login/success"
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"
@@ -150,8 +150,8 @@ resource "kubernetes_config_map" "common" {
   }
 
   data = merge({
-    # ENV_TARGET                   = upper(var.env)
-    # PUBLIC_FILE_STORAGE_BASE_URL = var.cdn_storage_url
+    ENV_TARGET                   = upper(var.env)
+    PUBLIC_FILE_STORAGE_BASE_URL = local.cdn_storage_url
     },
     var.configmaps_common
   )

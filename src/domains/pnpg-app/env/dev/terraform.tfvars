@@ -52,8 +52,8 @@ tls_cert_check_helm = {
 
 # Gateway
 api_gateway_url  = "https://api.dev.selfcare.pagopa.it"
-cdn_frontend_url = "https://dev.selfcare.pagopa.it"
-cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
+# cdn_frontend_url = "https://dev.selfcare.pagopa.it"
+# cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
