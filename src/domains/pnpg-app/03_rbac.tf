@@ -23,7 +23,7 @@ resource "azurerm_key_vault_secret" "apim_service_account_access_token" {
   value        = base64decode(data.kubernetes_secret.apim_service_account_secret.binary_data.token)
   content_type = "JWT"
 
-  key_vault_id = local.key_vault_id
+  key_vault_id = data.azurerm_key_vault.kv_domain.id
 }
 
 # service_account required by internal microservices authentication
