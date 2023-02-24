@@ -5,14 +5,14 @@ resource "kubernetes_config_map" "inner-service-url" {
   }
 
   data = {
-    HUB_SPID_LOGIN_URL                = "http://hub-spid-login-ms:8080"
-    HUB-SOCIAL-LOGIN_URL              = "http://hub-social-login:8080"
-    B4F_DASHBOARD_URL                 = "http://b4f-dashboard:8080"
-    B4F_ONBOARDING_URL                = "http://b4f-onboarding:8080"
-    MS_CORE_URL                       = "http://ms-core:8080"
-    MS_PRODUCT_URL                    = "http://ms-product:8080"
-    MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
-    MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
+    HUB_SPID_LOGIN_URL          = "http://hub-spid-login-ms:8080"
+    HUB-SOCIAL-LOGIN_URL        = "http://hub-social-login:8080"
+    B4F_DASHBOARD_URL           = "http://b4f-dashboard:8080"
+    B4F_ONBOARDING_URL          = "http://b4f-onboarding:8080"
+    MS_CORE_URL                 = "http://ms-core:8080"
+    MS_PRODUCT_URL              = "http://ms-product:8080"
+    MS_NOTIFICATION_MANAGER_URL = "http://ms-notification-manager:8080"
+    MS_USER_GROUP_URL           = "http://ms-user-group:8080"
   }
 }
 

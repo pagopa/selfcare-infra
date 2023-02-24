@@ -10,7 +10,7 @@ locals {
         "http://localhost:3000",
         "https://localhost:3001",
         "http://localhost:3001",
-      "https://${var.spid_testenv_url}"
+        "https://${var.spid_testenv_url}"
       ] : []
     )),
     headers = join(",", [

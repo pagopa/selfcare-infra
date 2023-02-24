@@ -6,8 +6,8 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
 
   data = {
     # APPINSIGHTS_INSTRUMENTATIONKEY = local.appinsights_instrumentation_key
-    JWT_TOKEN_PRIVATE_KEY          = module.key_vault_secrets_query.values["jwt-private-key"].value
-    JWT_TOKEN_KID                  = module.key_vault_secrets_query.values["jwt-kid"].value
+    JWT_TOKEN_PRIVATE_KEY = module.key_vault_secrets_query.values["jwt-private-key"].value
+    JWT_TOKEN_KID         = module.key_vault_secrets_query.values["jwt-kid"].value
 
     METADATA_PUBLIC_CERT  = module.key_vault_secrets_query.values["agid-spid-cert"].value
     METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-spid-private-key"].value

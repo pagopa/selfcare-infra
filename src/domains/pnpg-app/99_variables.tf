@@ -2,14 +2,14 @@ locals {
   product = "${var.prefix}-${var.env_short}"
   project = "${var.prefix}-${var.env_short}-${var.location_short}-${var.domain}"
 
-  key_vault_name                  = "${local.product}-${var.domain}-kv"
-  key_vault_resource_group        = "${local.product}-${var.domain}-sec-rg"
+  key_vault_name           = "${local.product}-${var.domain}-kv"
+  key_vault_resource_group = "${local.product}-${var.domain}-sec-rg"
 
   # redis_url                       = "${format("%s-redis", local.project)}.redis.cache.windows.net"
   # postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
   # postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
-  mongodb_name_selc_product       = "selcProduct"
-  mongodb_name_selc_user_group    = "selcUserGroup"
+  mongodb_name_selc_product    = "selcProduct"
+  mongodb_name_selc_user_group = "selcUserGroup"
   # contracts_storage_account_name  = replace(format("%s-contracts-storage", local.project), "-", "")
   # contracts_storage_container     = format("%s-contracts-blob", local.project)
   appinsights_instrumentation_key = data.azurerm_application_insights.application_insights.instrumentation_key
