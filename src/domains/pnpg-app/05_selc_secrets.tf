@@ -42,7 +42,7 @@ resource "kubernetes_secret" "selc-application-insights" {
   }
 
   data = {
-    # APPLICATIONINSIGHTS_CONNECTION_STRING = local.appinsights_instrumentation_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING = data.azurerm_application_insights.application_insights.connection_string
   }
 
   type = "Opaque"
