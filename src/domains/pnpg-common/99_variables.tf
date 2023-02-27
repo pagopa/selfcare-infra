@@ -4,7 +4,7 @@ locals {
 
   vnet_core_name                = "${local.product}-vnet"
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
-  private_endpoint_subnet_name = "${local.product}-private-endpoints-snet"
+  private_endpoint_subnet_name  = "${local.product}-private-endpoints-snet"
 
   container_registry_common_name    = "${local.project}-common-acr"
   rg_container_registry_common_name = "${local.project}-docker-rg"

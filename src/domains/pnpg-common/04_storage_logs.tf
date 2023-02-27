@@ -10,16 +10,16 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 module "selc_logs_storage" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v5.3.0"
 
-  name                       = replace("${local.project}-st-logs", "-", "")
-  account_kind               = "StorageV2"
-  account_tier               = "Standard"
-  account_replication_type   = var.logs_account_replication_type
-  access_tier                = "Hot"
-  blob_versioning_enabled          = var.logs_enable_versioning
-  resource_group_name        = azurerm_resource_group.rg_logs_storage.name
-  location                   = var.location
-  advanced_threat_protection = var.logs_advanced_threat_protection
-  allow_nested_items_to_be_public   = false
+  name                            = replace("${local.project}-st-logs", "-", "")
+  account_kind                    = "StorageV2"
+  account_tier                    = "Standard"
+  account_replication_type        = var.logs_account_replication_type
+  access_tier                     = "Hot"
+  blob_versioning_enabled         = var.logs_enable_versioning
+  resource_group_name             = azurerm_resource_group.rg_logs_storage.name
+  location                        = var.location
+  advanced_threat_protection      = var.logs_advanced_threat_protection
+  allow_nested_items_to_be_public = false
 
   blob_delete_retention_days = var.logs_delete_retention_days
 

@@ -46,8 +46,8 @@ locals {
   apim_service_account_name        = "apim"
   apim_service_account_secret_name = "${local.apim_service_account_name}-token"
 
-  cdn_name = "${local.project}-checkout-cdn-endpoint"
-  cdn_rg_name = "${local.project}-checkout-fe-rg"
+  cdn_name        = "${local.project}-checkout-cdn-endpoint"
+  cdn_rg_name     = "${local.project}-checkout-fe-rg"
   cdn_fqdn_url    = "https://${module.key_vault_secrets_query.values["cdn-fqdn"].value}"
   cdn_storage_url = "https://${module.key_vault_secrets_query.values["cdn-storage-blob-primary-web-host"].value}"
 }
