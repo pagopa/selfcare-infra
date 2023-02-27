@@ -4,6 +4,7 @@ locals {
 
   vnet_core_name                = "${local.product}-vnet"
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
+  private_endpoint_subnet_name = "${local.product}-private-endpoints-snet"
 
   container_registry_common_name    = "${local.project}-common-acr"
   rg_container_registry_common_name = "${local.project}-docker-rg"
@@ -194,4 +195,28 @@ variable "spa" {
 variable "robots_indexed_paths" {
   type        = list(string)
   description = "List of cdn paths to allow robots index"
+}
+
+#
+# Storage logs
+#
+variable "logs_account_replication_type" {
+  type        = string
+  description = "logs replication type"
+}
+
+variable "logs_delete_retention_days" {
+  type        = number
+  description = "Number of days to retain deleted logs"
+}
+
+variable "logs_enable_versioning" {
+  type        = bool
+  description = "Enable logs versioning"
+}
+
+variable "logs_advanced_threat_protection" {
+  type        = bool
+  description = "Enable logs threat advanced protection"
+  default     = false
 }

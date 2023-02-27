@@ -49,4 +49,9 @@ cosmosdb_mongodb_private_endpoint_enabled         = true
 # CDN
 robots_indexed_paths = []
 
-
+# Storage Logs
+# logs storage
+logs_account_replication_type   = "LRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true
