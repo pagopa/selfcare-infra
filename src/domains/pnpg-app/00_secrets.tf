@@ -13,6 +13,7 @@ module "key_vault_secrets_query" {
     "aruba-sign-service-delegated-user",
     "aruba-sign-service-user",
     "cdn-fqdn",
+    "cdn-storage-access-key",
     "cdn-storage-blob-connection-string",
     "cdn-storage-blob-primary-web-host",
     "contracts-storage-access-key",
