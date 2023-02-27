@@ -6,15 +6,15 @@ resource "null_resource" "upload_one_trust" {
     command = <<EOT
               az storage blob sync \
                 --container '$web' \
-                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --account-name ${replace(replace(local.cdn_name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${local.storage_primary_access_key} \
                 --source "./env/${var.env}/oneTrust" \
                 --destination 'ot/' \
               && \
               az cdn endpoint purge \
-                -g ${azurerm_resource_group.checkout_fe_rg.name} \
-                -n ${module.checkout_cdn.name} \
-                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                -g ${local.cdn_rg_name} \
+                -n ${local.cdn_name} \
+                --profile-name ${replace(local.cdn_name, "-cdn-endpoint", "-cdn-profile")}  \
                 --content-paths "/ot/*" \
                 --no-wait
           EOT
