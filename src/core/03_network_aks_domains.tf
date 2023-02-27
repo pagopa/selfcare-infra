@@ -60,10 +60,68 @@ module "vnet_peering_core_2_aks" {
 #
 # DNS private integration
 #
-resource "azurerm_private_dns_zone_virtual_network_link" "internal_env_selfcare_pagopa_it_2_aks_vnet" {
 
+# INTERNAL
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_env_selfcare_pagopa_it_2_aks_vnet" {
   name                  = "${local.project}-integration-aks-platform-vnet"
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.internal_private_dns_zone.name
   virtual_network_id    = module.vnet_aks_platform.id
 }
+
+# STORAGE
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_documents_azure_com_vnet_vs_aks_vnet" {
+  name                  = "${local.project}-aks-platform-vnet"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_documents_azure_com.name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+# COSMOS-MONGO
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_mongo_cosmos_azure_com_vnet_vs_aks_vnet" {
+  name                  = "${local.project}-aks-platform-vnet"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+# BLOB
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_blob_core_windows_net_vnet_vs_aks_vnet" {
+  name                  = "${local.project}-aks-platform-vnet"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_blob_core_windows_net.name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+# REDIS
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_redis_cache_windows_net_vnet_vs_aks_vnet" {
+  count                 = var.redis_private_endpoint_enabled ? 1 : 0
+  name                  = "${local.project}-aks-platform-vnet"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_redis_cache_windows_net[0].name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+# SERVICE BUS
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus_windows_net_vnet_vs_aks_vnet" {
+  name                  = "${local.project}-aks-platform-vnet"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_servicebus_windows_net.name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+

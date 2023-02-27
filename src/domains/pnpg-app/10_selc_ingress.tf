@@ -3,7 +3,7 @@ locals {
     origins = join(",", concat(
       [
         "https://${var.api_gateway_url}",
-        "https://${var.cdn_frontend_url}",
+        "https://${local.cdn_fqdn_url}",
       ],
       var.env_short != "p" ? [
         "https://localhost:3000",

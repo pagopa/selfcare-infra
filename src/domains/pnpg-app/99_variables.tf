@@ -8,10 +8,10 @@ locals {
   # redis_url                       = "${format("%s-redis", local.project)}.redis.cache.windows.net"
   # postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
   # postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
-  mongodb_name_selc_product    = "selcProduct"
-  mongodb_name_selc_user_group = "selcUserGroup"
-  # contracts_storage_account_name  = replace(format("%s-contracts-storage", local.project), "-", "")
-  # contracts_storage_container     = format("%s-contracts-blob", local.project)
+  mongodb_name_selc_product       = "selcProduct"
+  mongodb_name_selc_user_group    = "selcUserGroup"
+  contracts_storage_account_name  = replace("${local.project}-contracts-storage", "-", "")
+  contracts_storage_container     = "${local.project}-contracts-blob"
   appinsights_instrumentation_key = data.azurerm_application_insights.application_insights.instrumentation_key
 
   aks_cluster_name = var.aks_name
@@ -45,6 +45,11 @@ locals {
 
   apim_service_account_name        = "apim"
   apim_service_account_secret_name = "${local.apim_service_account_name}-token"
+
+  cdn_name        = "${local.project}-checkout-cdn-endpoint"
+  cdn_rg_name     = "${local.project}-checkout-fe-rg"
+  cdn_fqdn_url    = "https://${module.key_vault_secrets_query.values["cdn-fqdn"].value}"
+  cdn_storage_url = "https://${module.key_vault_secrets_query.values["cdn-storage-blob-primary-web-host"].value}"
 }
 
 variable "prefix" {
@@ -234,17 +239,9 @@ variable "default_service_port" {
   default = 8080
 }
 
-variable "cdn_frontend_url" {
-  type = string
-}
-
 variable "spid_testenv_url" {
   type    = string
   default = null
-}
-
-variable "cdn_storage_url" {
-  type = string
 }
 
 variable "configmaps_hub-spid-login-ms" {
@@ -269,3 +266,5 @@ variable "token_expiration_minutes" {
   type    = number
   default = 540 # 9 hours
 }
+
+

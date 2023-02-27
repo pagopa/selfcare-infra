@@ -42,7 +42,7 @@ resource "kubernetes_secret" "selc-application-insights" {
   }
 
   data = {
-    # APPLICATIONINSIGHTS_CONNECTION_STRING = local.appinsights_instrumentation_key
+    APPLICATIONINSIGHTS_CONNECTION_STRING = data.azurerm_application_insights.application_insights.connection_string
   }
 
   type = "Opaque"
@@ -58,30 +58,6 @@ resource "kubernetes_secret" "mongo-credentials" {
     MONGODB_CONNECTION_URI       = module.key_vault_secrets_query.values["mongodb-connection-string"].value
     MONGODB_NAME_SELC_PRODUCT    = local.mongodb_name_selc_product
     MONGODB_NAME_SELC_USER_GROUP = local.mongodb_name_selc_user_group
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "postgres" {
-  metadata {
-    name      = "postgres"
-    namespace = var.domain
-  }
-
-  data = {
-    # #principal database name
-    # POSTGRES_DB = "selc"
-    # #principal database hostname or ip
-    # POSTGRES_HOST = local.postgres_hostname
-    # #principal database hostname or ip
-    # POSTGRES_PORT = "5432"
-    # #replica database name
-    # POSTGRES_REPLICA_DB = "selc"
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_PORT = "5432"
   }
 
   type = "Opaque"
@@ -134,13 +110,13 @@ resource "kubernetes_secret" "contracts-storage" {
   }
 
   data = {
-    # STORAGE_TYPE               = "BlobStorage"
-    # STORAGE_CONTAINER          = local.contracts_storage_container
-    # STORAGE_ENDPOINT           = "core.windows.net"
-    # STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
-    # STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
-    # STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
-    # STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_TYPE               = "BlobStorage"
+    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_ENDPOINT           = "core.windows.net"
+    STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
+    STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
+    STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
   }
 
   type = "Opaque"
@@ -153,11 +129,11 @@ resource "kubernetes_secret" "cdn-storage" {
   }
 
   data = {
-    # BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["web-storage-connection-string"].value
-    # BLOB_CONTAINER_REF       = "$web"
-    # BLOBSTORAGE_PUBLIC_HOST  = replace(var.cdn_storage_url, "/https?:\\/\\//", "")
-    # BLOBSTORAGE_PUBLIC_URL   = var.cdn_storage_url
-    # CDN_PUBLIC_URL           = var.cdn_frontend_url
+    BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["cdn-storage-blob-connection-string"].value
+    BLOB_CONTAINER_REF       = "$web"
+    BLOBSTORAGE_PUBLIC_HOST  = replace(local.cdn_storage_url, "/https?:\\/\\//", "")
+    BLOBSTORAGE_PUBLIC_URL   = local.cdn_storage_url
+    CDN_PUBLIC_URL           = local.cdn_fqdn_url
   }
 
   type = "Opaque"
@@ -222,19 +198,6 @@ resource "kubernetes_secret" "social-login" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = var.domain
-  }
-
-  data = {
-    # POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
-    # POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
-  }
-
-  type = "Opaque"
-}
 
 resource "kubernetes_secret" "common-secrets" {
   metadata {
@@ -244,42 +207,6 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "event-secrets" {
-  metadata {
-    name      = "event-secrets"
-    namespace = var.domain
-  }
-
-  data = {
-    # KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
-    # KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
-    # KAFKA_SASL_MECHANISM    = "PLAIN"
-
-    # KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
-    # KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
-  metadata {
-    name      = "onboarding-interceptor-event-secrets"
-    namespace = var.domain
-  }
-
-  data = {
-    # KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
-    # KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
-    # KAFKA_SASL_MECHANISM    = "PLAIN"
-
-    # KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
-    # KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
   }
 
   type = "Opaque"
@@ -297,7 +224,6 @@ resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
 
   type = "Opaque"
 }
-
 
 resource "kubernetes_secret" "aruba-sign-service-secrets" {
   metadata {
@@ -325,6 +251,80 @@ resource "kubernetes_secret" "infocamere-service-secrets" {
     INFO_CAMERE_SECRET_PUBLIC_KEY  = module.key_vault_secrets_query.values["infocamere-secret-public-key"].value
     INFO_CAMERE_SECRET_PRIVATE_KEY = module.key_vault_secrets_query.values["infocamere-secret-private-key"].value
     INFO_CAMERE_SECRET_CERTIFICATE = module.key_vault_secrets_query.values["infocamere-secret-certificate"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "postgres" {
+  metadata {
+    name      = "postgres"
+    namespace = var.domain
+  }
+
+  data = {
+    # #principal database name
+    # POSTGRES_DB = "selc"
+    # #principal database hostname or ip
+    # POSTGRES_HOST = local.postgres_hostname
+    # #principal database hostname or ip
+    # POSTGRES_PORT = "5432"
+    # #replica database name
+    # POSTGRES_REPLICA_DB = "selc"
+    # #replica database hostname or ip
+    # POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
+    # #replica database hostname or ip
+    # POSTGRES_REPLICA_PORT = "5432"
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
+  metadata {
+    name      = "onboarding-interceptor-event-secrets"
+    namespace = var.domain
+  }
+
+  data = {
+    # KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    # KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    # KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    # KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    # KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "event-secrets" {
+  metadata {
+    name      = "event-secrets"
+    namespace = var.domain
+  }
+
+  data = {
+    # KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    # KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    # KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    # KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    # KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "uservice-party-management" {
+  metadata {
+    name      = "uservice-party-management"
+    namespace = var.domain
+  }
+
+  data = {
+    # POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
+    # POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
   }
 
   type = "Opaque"

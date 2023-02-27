@@ -10,3 +10,4 @@ resource "azurerm_private_dns_a_record" "ingress" {
   ttl                 = 3600
   records             = [var.ingress_load_balancer_ip]
 }
+
