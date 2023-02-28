@@ -524,6 +524,11 @@ variable "cidr_subnet_logs_storage" {
   description = "Logs storage address space."
 }
 
+variable "cidr_subnet_private_endpoints" {
+  type        = list(string)
+  description = "private endpoints address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number

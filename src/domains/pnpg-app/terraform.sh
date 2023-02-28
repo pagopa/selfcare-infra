@@ -38,7 +38,7 @@ if echo "init plan apply refresh import output state taint destroy" | grep -w "$
     echo "🧭 terraform launched with action: ${action} in env: ${env}"
 
     terraform init -reconfigure -backend-config="./env/$env/backend.tfvars"
-    terraform "$action" -var-file="./env/$env/terraform.tfvars" $other
+    terraform "$action" -var-file="./env/$env/terraform.tfvars" -compact-warnings $other
   fi
 else
     echo "Action not allowed."

@@ -73,6 +73,7 @@ aks_upgrade_settings_max_surge    = "33%"
 aks_sku_tier                      = "Paid"
 
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
+aks_system_node_pool_node_count_min               = 2
 aks_system_node_pool_node_count_max               = 3
 aks_system_node_pool_only_critical_addons_enabled = false
 
