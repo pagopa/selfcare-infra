@@ -43,6 +43,7 @@ module "key_vault_secrets_query" {
     "infocamere-secret-public-key",
     "infocamere-secret-private-key",
     "infocamere-secret-certificate",
-    "onboarding-interceptor-apim-internal"
+    "onboarding-interceptor-apim-internal",
+    "national-registry-api-key"
   ]
 }
