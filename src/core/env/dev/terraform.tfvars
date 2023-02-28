@@ -166,6 +166,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "io-sign"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]

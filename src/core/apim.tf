@@ -489,7 +489,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_pn_hotfix.product_id,
     module.apim_product_pn_prod.product_id,
     module.apim_product_pagopa.product_id,
-    module.apim_product_idpay.product_id
+    module.apim_product_idpay.product_id,
+    module.apim_product_io_sign.product_id
   ]
 
   api_operation_policies = [
@@ -796,6 +797,23 @@ module "apim_product_idpay" {
   approval_required     = false
 
   policy_xml = file("./api_product/idpay/policy.xml")
+}
+
+module "apim_product_io_sign" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "io-sign"
+  display_name = "io-sign"
+  description  = "Firma con IO"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io-sign/policy.xml")
 }
 
 
