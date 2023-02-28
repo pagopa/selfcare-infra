@@ -1,4 +1,56 @@
-# general
+locals {
+  product = "${var.prefix}-${var.env_short}"
+  project = "${var.prefix}-${var.env_short}-${var.location_short}-${var.domain}"
+
+  key_vault_name           = "${local.product}-${var.domain}-kv"
+  key_vault_resource_group = "${local.product}-${var.domain}-sec-rg"
+
+  # redis_url                       = "${format("%s-redis", local.project)}.redis.cache.windows.net"
+  # postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
+  # postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
+  mongodb_name_selc_product       = "selcProduct"
+  mongodb_name_selc_user_group    = "selcUserGroup"
+  contracts_storage_account_name  = replace("${local.project}-contracts-storage", "-", "")
+  contracts_storage_container     = "${local.project}-contracts-blob"
+  appinsights_instrumentation_key = data.azurerm_application_insights.application_insights.instrumentation_key
+
+  aks_cluster_name = var.aks_name
+
+  monitor_appinsights_name        = "${local.product}-appinsights"
+  monitor_action_group_slack_name = "SlackPagoPA"
+  monitor_action_group_email_name = "PagoPA"
+  alert_action_group_domain_name  = "${var.prefix}${var.env_short}${var.domain}"
+
+  ingress_hostname_prefix               = "${var.instance}.${var.domain}"
+  internal_dns_zone_name                = "${var.dns_zone_internal_prefix}.${var.external_domain}"
+  internal_dns_zone_resource_group_name = "${local.product}-vnet-rg"
+
+  acr_name                = replace("${local.product}commonacr", "-", "")
+  acr_resource_group_name = "${local.product}-container-registry-rg"
+
+  aks_name                = var.aks_name
+  aks_resource_group_name = var.aks_resource_group_name
+
+  vnet_core_name                = "${local.product}-vnet"
+  vnet_core_resource_group_name = "${local.product}-vnet-rg"
+  # DOMAINS
+  system_domain_namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
+  domain_namespace        = kubernetes_namespace.domain_namespace.metadata[0].name
+
+  domain_aks_hostname = var.env == "prod" ? "${var.instance}.${var.domain}.internal.selfcare.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.selfcare.pagopa.it"
+
+  # Service account
+  azure_devops_app_service_account_name        = "azure-devops"
+  azure_devops_app_service_account_secret_name = "${local.azure_devops_app_service_account_name}-token"
+
+  apim_service_account_name        = "apim"
+  apim_service_account_secret_name = "${local.apim_service_account_name}-token"
+
+  cdn_name        = "${local.project}-checkout-cdn-endpoint"
+  cdn_rg_name     = "${local.project}-checkout-fe-rg"
+  cdn_fqdn_url    = "https://${module.key_vault_secrets_query.values["cdn-fqdn"].value}"
+  cdn_storage_url = "https://${module.key_vault_secrets_query.values["cdn-storage-blob-primary-web-host"].value}"
+}
 
 variable "prefix" {
   type = string
@@ -158,3 +210,61 @@ variable "reverse_proxy_rtd" {
   default     = "127.0.0.1"
   description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
 }
+
+#
+# ConfigMaps & Secrets
+#
+variable "configmaps_ms_core" {
+  type = map(string)
+}
+
+variable "configmaps_common" {
+  type = map(string)
+}
+
+variable "aruba_sign_service" {
+  type = map(string)
+}
+
+variable "geo-taxonomies" {
+  type = map(string)
+}
+
+variable "api_gateway_url" {
+  type = string
+}
+
+variable "default_service_port" {
+  type    = number
+  default = 8080
+}
+
+variable "spid_testenv_url" {
+  type    = string
+  default = null
+}
+
+variable "configmaps_hub-spid-login-ms" {
+  type = map(string)
+}
+
+variable "jwt_token_exchange_duration" {
+  type    = string
+  default = "PT15S"
+}
+
+# configs/secrets
+variable "jwt_audience" {
+  type = string
+}
+
+variable "jwt_social_expire" {
+  type = string
+}
+
+variable "token_expiration_minutes" {
+  type    = number
+  default = 540 # 9 hours
+}
+
+

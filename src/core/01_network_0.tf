@@ -15,3 +15,16 @@ module "vnet" {
 
   tags = var.tags
 }
+
+module "private_endpoints_subnet" {
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v4.8.0"
+  name                                           = "${local.project}-private-endpoints-snet"
+  address_prefixes                               = var.cidr_subnet_private_endpoints
+  resource_group_name                            = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                           = module.vnet.name
+  enforce_private_link_endpoint_network_policies = true
+
+  service_endpoints = [
+    "Microsoft.Storage",
+  ]
+}

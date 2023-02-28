@@ -14,7 +14,7 @@ locals {
 
 # cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
-  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v4.1.18"
+  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
   name                 = "${local.project}-cosmosb-mongodb-snet"
   resource_group_name  = local.vnet_core_resource_group_name
   virtual_network_name = local.vnet_core_name
@@ -25,7 +25,7 @@ module "cosmosdb_mongodb_snet" {
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v4.1.18"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v5.3.0"
 
   name                 = "${local.project}-cosmosdb-mongodb-account"
   location             = azurerm_resource_group.mongodb_rg.location
@@ -100,7 +100,7 @@ resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
 
 # Collections
 module "mongdb_collection_products" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v4.1.18"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v5.3.0"
 
   name                = "products"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
@@ -121,7 +121,7 @@ module "mongdb_collection_products" {
 }
 
 module "mongdb_collection_user-groups" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v4.1.18"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v5.3.0"
 
   name                = "userGroups"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
