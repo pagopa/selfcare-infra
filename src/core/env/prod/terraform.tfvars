@@ -147,6 +147,14 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "18.192.147.151",
     action  = "Allow"
+  },
+  { // IO-Sign
+    ip_mask = "20.67.51.184",
+    action  = "Allow"
+  },
+  { // IO-Sign
+    ip_mask = "20.67.51.210",
+    action  = "Allow"
   }
 ]
 
