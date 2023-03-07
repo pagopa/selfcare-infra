@@ -58,6 +58,7 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
 
 # redis
 redis_sku_name                 = "Basic"
