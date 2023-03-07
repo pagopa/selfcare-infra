@@ -1,5 +1,12 @@
+# certificate api.selfcare.pagopa.it
 data "azurerm_key_vault_certificate" "app_gw_platform" {
   name         = var.app_gateway_api_certificate_name
+  key_vault_id = module.key_vault.id
+}
+
+# certificate api-pnpg.selfcare.pagopa.it
+data "azurerm_key_vault_certificate" "api_pnpg_selfcare_certificate" {
+  name         = var.app_gateway_api_pnpg_certificate_name
   key_vault_id = module.key_vault.id
 }
 
