@@ -28,63 +28,41 @@ locals {
     "/party-registry-proxy/*",
   ]
 
-  # listeners = {
-  #   api = {
-  #     protocol           = "Https"
-  #     host               = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
-  #     port               = 443
-  #     ssl_profile_name   = format("%s-ssl-profile", local.project)
-  #     firewall_policy_id = null
+  listeners = {
+    api = {
+      protocol           = "Https"
+      host               = "api.${var.dns_zone_prefix}.${var.external_domain}"
+      port               = 443
+      ssl_profile_name   = null
+      firewall_policy_id = null
 
-  #     certificate = {
-  #       name = var.app_gateway_api_certificate_name
-  #       id = replace(
-  #         data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-  #         "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
-  #         ""
-  #       )
-  #     }
-  #   }
+      certificate = {
+        name = var.app_gateway_api_certificate_name
+        id = replace(
+          data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
+          "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
+          ""
+        )
+      }
+    }
+    api_pnpg = {
+      protocol           = "Https"
+      host               = "api-pnpg.${var.dns_zone_prefix}.${var.external_domain}"
+      port               = 443
+      ssl_profile_name   = null
+      firewall_policy_id = null
 
-  #   kibana = {
-  #     protocol           = "Https"
-  #     host               = format("kibana.%s.%s", var.dns_zone_prefix, var.external_domain)
-  #     port               = 443
-  #     ssl_profile_name   = format("%s-ssl-profile", local.project)
-  #     firewall_policy_id = null
+      certificate = {
+        name = var.app_gateway_api_pnpg_certificate_name
+        id = replace(
+          data.azurerm_key_vault_certificate.api_pnpg_selfcare_certificate.secret_id,
+          "/${data.azurerm_key_vault_certificate.api_pnpg_selfcare_certificate.version}",
+          ""
+        )
+      }
+    }
+  }
 
-  #     certificate = {
-  #       name = var.app_gateway_kibana_certificate_name
-  #       id = replace(
-  #         data.azurerm_key_vault_certificate.kibana.secret_id,
-  #         "/${data.azurerm_key_vault_certificate.kibana.version}",
-  #         ""
-  #       )
-  #     }
-  #   }
-  # }
-}
-
-# Application gateway: Multilistener configuraiton
-module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v4.10.1"
-
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-  location            = azurerm_resource_group.rg_vnet.location
-  name                = format("%s-app-gw", local.project)
-
-  # SKU
-  sku_name = var.app_gateway_sku_name
-  sku_tier = var.app_gateway_sku_tier
-
-  # WAF
-  waf_enabled = var.app_gateway_waf_enabled
-
-  # Networking
-  subnet_id    = module.appgateway_snet.id
-  public_ip_id = azurerm_public_ip.appgateway_public_ip.id
-
-  # Configure backends
   backends = {
     aks = {
       protocol                    = "Http"
@@ -109,6 +87,42 @@ module "app_gw" {
       pick_host_name_from_backend = false
     }
   }
+}
+
+# Application gateway: Multilistener configuraiton
+module "app_gw" {
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v4.10.1"
+
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  location            = azurerm_resource_group.rg_vnet.location
+  name                = format("%s-app-gw", local.project)
+
+  # SKU
+  sku_name = var.app_gateway_sku_name
+  sku_tier = var.app_gateway_sku_tier
+
+  # WAF
+  waf_enabled = var.app_gateway_waf_enabled
+
+  # Networking
+  subnet_id    = module.appgateway_snet.id
+  public_ip_id = azurerm_public_ip.appgateway_public_ip.id
+
+  # Configure backends
+  backends = local.backends
+
+  # Configure listeners
+  listeners = local.listeners
+
+  # maps listener to backend
+  routes = {}
+  routes_path_based = {
+    api = {
+      listener     = "api"
+      priority     = null
+      url_map_name = "api"
+    }
+  }
 
   ssl_profiles = [{
     name                             = format("%s-ssl-profile", local.project)
@@ -129,37 +143,6 @@ module "app_gw" {
   }]
 
   trusted_client_certificates = []
-
-  # Configure listeners
-  listeners = {
-    api = {
-      protocol           = "Https"
-      host               = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
-      port               = 443
-      ssl_profile_name   = null
-      firewall_policy_id = null
-
-      certificate = {
-        name = var.app_gateway_api_certificate_name
-        id = replace(
-          data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
-          "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
-          ""
-        )
-      }
-    }
-  }
-
-
-  # maps listener to backend
-  routes = {}
-  routes_path_based = {
-    api = {
-      listener     = "api"
-      priority     = null
-      url_map_name = "api"
-    }
-  }
 
   url_path_map = {
     api = {
