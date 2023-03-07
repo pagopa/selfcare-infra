@@ -31,6 +31,9 @@ cidr_subnet_apim             = ["10.1.136.0/24"]
 cidr_subnet_contract_storage = ["10.1.137.0/24"]
 cidr_subnet_eventhub         = ["10.1.138.0/24"]
 cidr_subnet_logs_storage     = ["10.1.139.0/24"]
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
+
 #
 # AKS
 #
