@@ -1,6 +1,6 @@
 ## Application gateway public ip ##
 resource "azurerm_public_ip" "appgateway_public_ip" {
-  name                = format("%s-appgateway-pip", local.project)
+  name                = "${local.project}-appgateway-pip"
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
@@ -11,8 +11,8 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
 
 # Subnet to host the application gateway
 module "appgateway_snet" {
-  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
-  name                 = format("%s-appgateway-snet", local.project)
+  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v4.10.1"
+  name                 = "${local.project}-appgateway-snet"
   address_prefixes     = var.cidr_subnet_appgateway
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
@@ -27,11 +27,47 @@ locals {
     "/party-process/*",
     "/party-registry-proxy/*",
   ]
+
+  # listeners = {
+  #   api = {
+  #     protocol           = "Https"
+  #     host               = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+  #     port               = 443
+  #     ssl_profile_name   = format("%s-ssl-profile", local.project)
+  #     firewall_policy_id = null
+
+  #     certificate = {
+  #       name = var.app_gateway_api_certificate_name
+  #       id = replace(
+  #         data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
+  #         "/${data.azurerm_key_vault_certificate.app_gw_platform.version}",
+  #         ""
+  #       )
+  #     }
+  #   }
+
+  #   kibana = {
+  #     protocol           = "Https"
+  #     host               = format("kibana.%s.%s", var.dns_zone_prefix, var.external_domain)
+  #     port               = 443
+  #     ssl_profile_name   = format("%s-ssl-profile", local.project)
+  #     firewall_policy_id = null
+
+  #     certificate = {
+  #       name = var.app_gateway_kibana_certificate_name
+  #       id = replace(
+  #         data.azurerm_key_vault_certificate.kibana.secret_id,
+  #         "/${data.azurerm_key_vault_certificate.kibana.version}",
+  #         ""
+  #       )
+  #     }
+  #   }
+  # }
 }
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.9.0"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v4.10.1"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -146,12 +182,12 @@ module "app_gw" {
         {
           name          = "ingres-private-urls"
           rule_sequence = 1
-          condition = {
+          conditions = [{
             variable    = "var_uri_path"
             pattern     = join("|", local.allowedIngressPathRegexps)
             ignore_case = true
             negate      = true
-          }
+          }]
           request_header_configurations  = []
           response_header_configurations = []
           url = {
@@ -162,7 +198,7 @@ module "app_gw" {
         {
           name          = "http-headers-api"
           rule_sequence = 100
-          condition     = null
+          conditions     = []
           request_header_configurations = [
             {
               header_name  = "X-Forwarded-For"
