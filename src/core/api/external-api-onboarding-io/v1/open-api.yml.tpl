@@ -20,9 +20,9 @@ paths:
     post:
       tags:
         - onboarding
-      summary: oldContractOnboarding
+      summary: contractOnboarding
       description: The service allows the import of old institutions' contracts
-      operationId: oldContractOnboardingUsingPOST
+      operationId: contractOnboardingUsingPOST
       parameters:
         - name: externalInstitutionId
           in: path
