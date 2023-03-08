@@ -48,14 +48,14 @@
     <li class="c19 c39 li-bullet-0"><span class="c1 c10">codice fiscale <span
       class="c3">${institutionTaxCode}</span>;</span></li>
     <li class="c19 c39 li-bullet-0"><span class="c1 c10">partita IVA <span
-      class="c3">${institutionVatNumber} da valorizzare solo se esistente e diversa dal codice fiscale altrimenti eliminare/non compilare il campo)</span>;</span>
+      class="c3">${institutionVatNumber}</span>;</span>
     </li>
     ${originIdLabelValue}
     ${institutionRegisterLabelValue}
     <li class="c19 c39 li-bullet-0"><span class="c1 c10">n. Iscrizione registro delle imprese di <span
       class="c3">${institutionBusinessRegisterPlace}</span>
         REA <span class="c3">${institutionREA}</span> capitale sociale
-        <span class="c3">${institutionShareCapital}</span></span>;
+        <span class="c3">${institutionShareCapital};</span></span>
     </li>
     <li class="c19 c39 li-bullet-0"><span class="c1">Indirizzo PEC presente in I.P.A. o nel Registro Imprese o del Delegato <span
       class="c3">${institutionMail};</span></span>
@@ -551,9 +551,9 @@
       <ul class="c34 lst-kix_list_6-0 start">
         <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente: <br>
 </span>
-
+          ${delegates}
         </li>
-        ${delegates}
+
         <li class="c2 c12 li-bullet-1"><span class="c1">per PagoPA: <br>
           nome e cognome: Giuseppe De Giorgi; <br>
           codice fiscale: DGRGPP85H23E506X; <br>
