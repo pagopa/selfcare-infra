@@ -14,6 +14,9 @@
 
 
 
+
+
+
   </style>
 
 </head>
@@ -34,14 +37,35 @@
     e iscrizione al Registro delle Imprese di Roma n. 15376371009, in persona del suo legale rappresentante pro
     tempore, dott. Maurizio Fatarella (di seguito, “<span
       class="c4">PagoPA</span>” o “<span class="c4">Società</span>”)</span></p>
-
-
   <p class="c44 c42 c113"><span class="c4 c10">e</span></p>
   <p class="c2 c23 c72"><span class="c4 c10"></span></p>
-  <p class="c2"><span class="c1">${institutionName}, con sede legale in ${address}, ${zipCode},
-    C.F. ${institutionTaxCode}, P.IVA ${institutionVatNumber} in persona del suo legale rappresentante pro tempore, ${managerName} ${managerSurname} (di seguito “Ente”) </span>
+  <p class="c2"><span class="c1">l’ente scrivente ${institutionName}, con sede legale in ${address}, ${zipCode}, nella persona del legale rappresentante <span
+    class="c9o">pro tempore</span> o di altro soggetto avente poteri di firma ${managerName} ${managerSurname} email ${managerEmail} (di seguito “l’<span
+    class="c4">Ente</span>”), con i seguenti dati identificativi:</span>
   </p>
   <p class="c2 c23 c72"><span class="c4 c10"></span></p>
+  <ul class="c34 lst-kix_list_6-0 start">
+    <li class="c19 c39 li-bullet-0"><span class="c1 c10">codice fiscale <span
+      class="c3">${institutionTaxCode}</span>;</span></li>
+    <li class="c19 c39 li-bullet-0"><span class="c1 c10">partita IVA <span
+      class="c3">${institutionVatNumber} da valorizzare solo se esistente e diversa dal codice fiscale altrimenti eliminare/non compilare il campo);</span>;</span>
+    </li>
+    ${originIdLabelValue}
+    ${institutionRegisterLabelValue}
+    <li class="c19 c39 li-bullet-0"><span class="c1 c10">n. Iscrizione registro delle imprese di <span
+      class="c3">${institutionBusinessRegisterPlace}</span>
+        REA <span class="c3">${institutionREA}</span> capitale sociale
+        <span class="c3">${institutionShareCapital}</span></span>;
+    </li>
+    <li class="c19 c39 li-bullet-0"><span class="c1">Indirizzo PEC presente in I.P.A. o nel Registro Imprese o del Delegato <span
+      class="c3">${institutionMail};</span></span>
+    </li>
+
+  </ul>
+
+
+  <p class="c2 c23 c72"><span class="c4 c10"></span></p>
+
 
   <p class="c2"><span class="c1">Ente e PagoPA, di seguito singolarmente “<span
     class="c4">Parte</span>” e congiuntamente “<span
@@ -267,18 +291,7 @@
       </ul>
       <span class="c1"> pena l’impossibilità di fruire del Servizio.</span>
     </li>
-    <li class="c2 c18 li-bullet-1"><span class="c1">Affinchè l’Ente possa usufruire del Servizio è previsto l’invio da parte di PagoPA di talune informazioni confidenziali ai seguenti soggetti individuati al successivo art. 11:
- </span>
-      <ul class="c34 lst-kix_list_1-0 start">
-
-        <li class="c2 c12 li-bullet-2"><span class="c1"> il Referente Tecnico riceverà un “API key” cifrata generata da PagoPA al fine di consentire all’Ente di autenticarsi al Servizio e la prima parte della “chiave di cifratura”, necessaria a decifrare l’API key trasmessa;
-</span></li>
-
-        <li class="c2 c12 li-bullet-2"><span class="c1"> il Referente Amministrativo riceverà la restante parte della “chiave di cifratura”. </span>
-
-        </li>
-
-      </ul>
+    <li class="c2 c18 li-bullet-1"><span class="c1">Affinchè l’Ente possa usufruire del Servizio è previsto l’invio da parte di PagoPA di talune informazioni confidenziali ai recapiti indicati al successivo art. 11.</span>
     </li>
     <li class="c2 c18 li-bullet-1"><span class="c1">Ciascuna Parte si impegna a informare tempestivamente l’altra sulle principali criticità/anomalie operative riscontrate durante l’esecuzione del presente Accordo.  </span>
     </li>
@@ -532,89 +545,26 @@
   </p>
   <p class="c40b c49"><span class="c1">&nbsp;</span></p>
   <ol class="c34" type="1">
-    <li class="c2 c18 li-bullet-1"><span class="c1"> Le Parti indicano quali referenti amministrativi del presente Accordo (di seguito “<span
-      class="c4">Referente/i Amministrativo/i</span>”) per comunicazioni di tipo amministrativo:
+    <li class="c2 c18 li-bullet-1"><span class="c1"> Le Parti indicano quali referenti amministrativi ai fini dell’esecuzione del presente Accordo (di seguito “<span
+      class="c4">Amministratore/i</span>”) i seguenti soggetti:
  </span>
       <ul class="c34 lst-kix_list_6-0 start">
-        <li class="c2 c12 li-bullet-1"><span class="c1">__________________, per l’Ente;
+        <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente: <br>
+          ${delegates}
 </span>
         </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">Giuseppe De Giorgi, per PagoPA.
+        <li class="c2 c12 li-bullet-1"><span class="c1">per PagoPA: <br>
+          nome e cognome: Giuseppe De Giorgi; <br>
+          codice fiscale: DGRGPP85H23E506X; <br>
+          qualifica/posizione: Product Management Lead; <br>
+          PEC: pagopa@pec.governo.it; <br>
+          e-mail:  giuseppe.degiorgi@pagopa.it
+
 </span>
         </li>
-
-      </ul>
-      <span class="c1"> Le comunicazioni ai Referenti Amministrativi, così come sopra individuati, dovranno essere fatte tramite PEC o tramite email ordinaria ai seguenti recapiti:</span>
-      <ol class="c34 lst-kix_list_2-0 start" start="1">
-        <li class="c2 c12 li-bullet-1"><span class="c1">per PagoPA:
-</span>
-          <ul class="c34 lst-kix_list_6-0 start">
-            <li class="c2 c12 li-bullet-1"><span class="c1">PEC: pagopa@pec.governo.it;
-</span>
-            </li>
-            <li class="c2 c12 li-bullet-1"><span class="c1">e-mail: giuseppe.degiorgi@pagopa.it;
-</span>
-            </li>
-
-          </ul>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente:
-</span>
-          <ul class="c34 lst-kix_list_6-0 start">
-            <li class="c2 c12 li-bullet-1"><span class="c1">PEC: ${institutionMail}
-</span>
-            </li>
-            <li class="c2 c12 li-bullet-1"><span class="c1">e-mail:  __________________
-</span>
-            </li>
-
-          </ul>
-        </li>
-
-      </ol>
-    </li>
-    <li class="c2 c18 li-bullet-1"><span class="c1"> PagoPA indica quale referente tecnico del presente Accordo (di seguito, “<span
-      class="c4">Referente Tecnico</span>”) per comunicazioni di tipo tecnico ed inerenti all’esecuzione dell’Accordo il sig.:
- </span>
-      <ul class="c34 lst-kix_list_6-0 start">
-        <li class="c2 c12 li-bullet-1"><span class="c1">Nome e Cognome del Referente: Danilo Spinelli</span>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">C.F. del Referente:  SPNDNL80R13C523K</span>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">Email del Referente:  danilo.spinelli@pagopa.it
-</span></li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">Telefono/Mobile Referente:  3288222762
-</span></li>
-
-      </ul>
-
-    </li>
-    <li class="c2 c18 li-bullet-1"><span class="c1"> L’Ente indica quale proprio Referente Tecnico del presente Accordo:
- </span>
-      <ul class="c34 lst-kix_list_6-0 start">
-
-        <li class="c2 c12 li-bullet-1"><span class="c1">Nome e Cognome del Referente:  __________________</span>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">C.F. del Referente:  __________________</span>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">Email del Referente:  __________________
-</span></li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">Telefono/Mobile Referente:  __________________
-</span></li>
-
-
-      </ul>
-      <span class="c1"> Le comunicazioni tra i Referenti Tecnici, così come sopra individuati, saranno eseguite tramite gli strumenti messi a disposizione a tale fine della PagoPA mentre per ogni comunicazione non tecnica dovranno essere utilizzate i seguenti recapiti PEC: </span>
-      <ul class="c34 lst-kix_list_6-0 start">
-        <li class="c2 c12 li-bullet-1"><span class="c1">per PagoPA: pagopa@pec.governo.it; </span>
-        </li>
-        <li class="c2 c12 li-bullet-1"><span class="c1">per l’Ente:  ${institutionMail}
-</span></li>
-
 
       </ul>
     </li>
-
   </ol>
   <p class="c0 c23"><span class="c1"></span></p>
 
@@ -741,13 +691,13 @@
   <table class="c94">
     <tr class="c104">
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
-        class="c3">L’Ente <br> ${institutionName}<br> f.to digitalmente
+        class="c3">L’Ente <br> ${institutionName}<br>
 </span>
       </p></td>
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
         class="c3">PagoPA S.p.A. <br>
 Il legale rappresentante pro tempore<br>
-f.to digitalmente
+
 </span></p></td>
 
     </tr>
@@ -775,7 +725,7 @@ f.to digitalmente
   <table class="c94">
     <tr class="c104">
       <td class="c79" colspan="1" rowspan="1"><p class="c44 c42 c113"><span
-        class="c3">L’Ente <br> ${institutionName}<br> f.to digitalmente
+        class="c3">L’Ente <br> ${institutionName}<br>
 </span>
       </p></td>
 
