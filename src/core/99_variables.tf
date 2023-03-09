@@ -98,7 +98,7 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
-variable "cidr_aks_vnet" {
+variable "cidr_aks_platform_vnet" {
   type        = list(string)
   description = "vnet for aks platform."
 }
@@ -1075,4 +1075,9 @@ variable "docker_registry" {
       zone_redundancy_enabled   = bool
     })
   })
+}
+
+variable "aks_platform_env" {
+  type        = string
+  description = "The env name used into aks platform folder. E.g: dev01"
 }

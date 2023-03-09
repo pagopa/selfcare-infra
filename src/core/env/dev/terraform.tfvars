@@ -37,15 +37,16 @@ cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 
 
 #
-# AKS
+# AKS Platform
 #
-cidr_aks_vnet                 = ["10.11.0.0/16"]
+aks_platform_env              = "dev01"
 vnet_aks_ddos_protection_plan = false
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 
 # dns
-external_domain = "pagopa.it"
 dns_zone_prefix = "dev.selfcare"
+external_domain = "pagopa.it"
 
 # azure devops
 azdo_sp_tls_cert_enabled = true
@@ -57,7 +58,7 @@ apim_publisher_name = "pagoPA SelfCare DEV"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-dev-selfcare-pagopa-it"
 app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
 
 # redis

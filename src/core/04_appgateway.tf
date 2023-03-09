@@ -53,13 +53,13 @@ locals {
     }
     platform-aks = {
       protocol                    = "Https"
-      host                        = "dev01.pnpg.internal.dev.selfcare.pagopa.it"
+      host                        = "${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"
       port                        = 443
       ip_addresses                = null
       probe                       = "/pnpg/status"
       probe_name                  = "probe-platform-aks"
       request_timeout             = 60
-      fqdns                       = ["dev01.pnpg.internal.dev.selfcare.pagopa.it"]
+      fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
       pick_host_name_from_backend = false
     }
   }
@@ -196,7 +196,7 @@ module "app_gw" {
         {
           name          = "http-headers-api"
           rule_sequence = 100
-          conditions     = []
+          conditions    = []
           request_header_configurations = [
             {
               header_name  = "X-Forwarded-For"
