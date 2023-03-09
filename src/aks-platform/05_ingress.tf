@@ -11,7 +11,7 @@ resource "kubernetes_namespace" "ingress" {
 # from Microsoft docs https://docs.microsoft.com/it-it/azure/aks/ingress-internal-ip
 module "nginx_ingress" {
   source  = "terraform-module/release/helm"
-  version = "2.7.0"
+  version = "2.8.0"
 
   namespace  = kubernetes_namespace.ingress.metadata[0].name
   repository = "https://kubernetes.github.io/ingress-nginx"
@@ -48,7 +48,16 @@ module "nginx_ingress" {
     {
       name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/azure-load-balancer-health-probe-request-path"
       value = "/healthz"
-    }
+
+    },
+    {
+      name  = "controller.service.externalTrafficPolicy"
+      value = "Local"
+    },
+    {
+      name  = "controller.ingressClassResource.default"
+      value = "true"
+    },
   ]
 
   depends_on = [
