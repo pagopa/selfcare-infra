@@ -101,7 +101,7 @@ locals {
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.9.0"
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v4.10.1"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -180,12 +180,12 @@ module "app_gw" {
         {
           name          = "ingres-private-urls"
           rule_sequence = 1
-          condition = {
+          conditions = [{
             variable    = "var_uri_path"
             pattern     = join("|", local.allowedIngressPathRegexps)
             ignore_case = true
             negate      = true
-          }
+          }]
           request_header_configurations  = []
           response_header_configurations = []
           url = {
@@ -196,7 +196,7 @@ module "app_gw" {
         {
           name          = "http-headers-api"
           rule_sequence = 100
-          condition     = null
+          conditions     = []
           request_header_configurations = [
             {
               header_name  = "X-Forwarded-For"
