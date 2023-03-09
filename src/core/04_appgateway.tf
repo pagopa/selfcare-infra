@@ -73,14 +73,14 @@ module "app_gw" {
       pick_host_name_from_backend = false
     }
     platform-aks = {
-      protocol                    = "Http"
-      host                        = trim(azurerm_dns_a_record.public_api_pnpg.fqdn, ".")
-      port                        = 80
-      ip_addresses                = ["10.11.100.250"]
-      probe                       = "/status"
+      protocol                    = "Https"
+      host                        = "dev01.pnpg.internal.dev.selfcare.pagopa.it"
+      port                        = 443
+      ip_addresses                = null
+      probe                       = "/pnpg/status"
       probe_name                  = "probe-platform-aks"
       request_timeout             = 60
-      fqdns                       = null
+      fqdns                       = ["dev01.pnpg.internal.dev.selfcare.pagopa.it"]
       pick_host_name_from_backend = false
     }
   }
@@ -96,8 +96,6 @@ module "app_gw" {
       cipher_suites = [
         "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
         "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
-        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
       ]
       min_protocol_version = "TLSv1_2"
     }
@@ -208,7 +206,8 @@ module "app_gw" {
           ]
           response_header_configurations = []
           url                            = null
-      }]
+        },
+      ]
     },
   ]
 
