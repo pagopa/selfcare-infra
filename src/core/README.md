@@ -26,6 +26,7 @@
 | <a name="module_apim_internal_api_ms_v1"></a> [apim\_internal\_api\_ms\_v1](#module\_apim\_internal\_api\_ms\_v1) | git::https://github.com/pagopa/azurerm.git//api_management_api | v2.12.5 |
 | <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_interop"></a> [apim\_product\_interop](#module\_apim\_product\_interop) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_io_sign"></a> [apim\_product\_io\_sign](#module\_apim\_product\_io\_sign) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pagopa"></a> [apim\_product\_pagopa](#module\_apim\_product\_pagopa) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pn"></a> [apim\_product\_pn](#module\_apim\_product\_pn) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pn_cert"></a> [apim\_product\_pn\_cert](#module\_apim\_product\_pn\_cert) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
