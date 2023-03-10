@@ -664,12 +664,21 @@ components:
         address:
           type: string
           description: Institution's physical address
+        assistanceContacts:
+          description: Institution's assistance contacts
+          $ref: '#/components/schemas/AssistanceContactsResource'
+        companyInformations:
+          description: GPS, SCP, PT optional data
+          $ref: '#/components/schemas/CompanyInformationsResource'
         description:
           type: string
           description: Institution's legal name
         digitalAddress:
           type: string
           description: Institution's digitalAddress
+        dpoData:
+          description: Data Protection Officer (DPO) specific data
+          $ref: '#/components/schemas/DpoDataResource'
         externalId:
           type: string
           description: Institution's unique external identifier
@@ -692,6 +701,12 @@ components:
         originId:
           type: string
           description: Institution's details origin Id
+        pspData:
+          description: Payment Service Provider (PSP) specific data
+          $ref: '#/components/schemas/PspDataResource'
+        recipientCode:
+          type: string
+          description: Billing recipient code
         status:
           type: string
           description: Institution onboarding status
@@ -815,6 +830,78 @@ components:
         urlPublic:
           type: string
           description: URL that redirects to the public information webpage of the product
+    PspDataResource:
+      title: PspDataResource
+      required:
+        - abiCode
+        - businessRegisterNumber
+        - legalRegisterName
+        - legalRegisterNumber
+        - vatNumberGroup
+      type: object
+      properties:
+        abiCode:
+          type: string
+          description: PSP's ABI code
+        businessRegisterNumber:
+          type: string
+          description: PSP's Business Register number
+        legalRegisterName:
+          type: string
+          description: PSP's legal register name
+        legalRegisterNumber:
+          type: string
+          description: PSP's legal register number
+        vatNumberGroup:
+          type: boolean
+          description: PSP's Vat Number group
+          example: false
+    DpoDataResource:
+      title: DpoDataResource
+      required:
+        - address
+        - email
+        - pec
+      type: object
+      properties:
+        address:
+          type: string
+          description: DPO's address
+        email:
+          type: string
+          description: DPO's email
+          format: email
+          example: email@example.com
+        pec:
+          type: string
+          description: DPO's PEC
+          format: email
+          example: email@example.com
+    CompanyInformationsResource:
+      title: CompanyInformationsResource
+      type: object
+      properties:
+        businessRegisterPlace:
+          type: string
+          description: Institution's business register place
+        rea:
+          type: string
+          description: Institution's REA
+        shareCapital:
+          type: string
+          description: Institution's share capital value
+    AssistanceContactsResource:
+      title: AssistanceContactsResource
+      type: object
+      properties:
+        supportEmail:
+          type: string
+          description: Institution's support email contact
+          format: email
+          example: email@example.com
+        supportPhone:
+          type: string
+          description: Institution's support phone contact
     ProductRoleInfoRes:
       title: ProductRoleInfoRes
       required:
@@ -982,6 +1069,34 @@ components:
           example: PA
         attributes:
           $ref: '#/components/schemas/Attributes'
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficer'
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomy'
+        rea:
+          description: The institution REA
+          type: string
+        shareCapital:
+          type: string
+          description: The institution share capital value
+          example: 10000
+        businessRegisterPlace:
+          type: string
+          description: The business register place
+          example: Rome
+        supportEmail:
+          type: string
+          description: The support email contact
+        supportPhone:
+          type: string
+          description: The support phone contact
+        imported:
+          type: boolean
+          description: True if institution is stored from batch api
         logo:
           description: URL to institution logo
           format: url
@@ -997,6 +1112,7 @@ components:
         - taxCode
         - attributes
         - origin
+        - geographicTaxonomies
       additionalProperties: false
     Attribute:
       type: object
@@ -1015,6 +1131,51 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Attribute'
+    PaymentServiceProvider:
+      type: object
+      additionalProperties: false
+      properties:
+        abiCode:
+          type: string
+          description: 'ABI Code'
+        businessRegisterNumber:
+          type: string
+          description: 'ID Registration Number on Business Register'
+        legalRegisterName:
+          type: string
+          description: 'Chairman name on Business Register'
+        legalRegisterNumber:
+          type: string
+          description: 'Chairman ID on Business Register'
+        vatNumberGroup:
+          type: boolean
+          description: 'true when vat number identify a group'
+    DataProtectionOfficer:
+      type: object
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: 'Data protection officer address'
+        email:
+          type: string
+          description: 'Data protection officer email'
+        pec:
+          type: string
+          description: 'Data protection officer digital address'
+    GeographicTaxonomy:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - desc
+      properties:
+        code:
+          type: string
+          description: 'Code of the geographic taxonomy'
+        desc:
+          type: string
+          description: 'Description of the geographic taxonomy code'
   securitySchemes:
     bearerAuth:
       type: http
