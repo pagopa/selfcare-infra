@@ -37,11 +37,8 @@
 | [kubernetes_config_map.jwt-exchange](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
 | [kubernetes_config_map.jwt-social](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
 | [kubernetes_config_map.selfcare-core](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_deployment.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/deployment) | resource |
-| [kubernetes_ingress_v1.health_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
 | [kubernetes_ingress_v1.selc_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
 | [kubernetes_namespace.domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
-| [kubernetes_namespace.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
 | [kubernetes_namespace.system_domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
 | [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
@@ -67,7 +64,6 @@
 | [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
 | [kubernetes_secret_v1.apim_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
 | [kubernetes_secret_v1.azure_devops_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
-| [kubernetes_service.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service) | resource |
 | [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
 | [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
 | [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |

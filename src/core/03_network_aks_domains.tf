@@ -13,7 +13,7 @@ module "vnet_aks_platform" {
   name                = "${local.project}-${var.location_short}-aks-dev01-vnet"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg_vnet_aks.name
-  address_space       = var.cidr_aks_vnet
+  address_space       = var.cidr_aks_platform_vnet
 
   tags = var.tags
 }
