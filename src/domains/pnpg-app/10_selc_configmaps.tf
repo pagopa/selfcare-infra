@@ -13,6 +13,8 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_PRODUCT_URL              = "http://ms-product:8080"
     MS_NOTIFICATION_MANAGER_URL = "http://ms-notification-manager:8080"
     MS_USER_GROUP_URL           = "http://ms-user-group:8080"
+    MS_CORE_URL                 = "http://ms-core:8080"
+    MOCK_SERVER                 = "http://mock-server:1080"
   }
 }
 
