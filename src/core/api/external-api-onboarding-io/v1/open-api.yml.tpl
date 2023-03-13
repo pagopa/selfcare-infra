@@ -143,6 +143,11 @@ components:
           description: Institution's geographic taxonomy extended name
     ImportContractDto:
       title: ImportContractDto
+      required:
+        - contractType
+        - fileName
+        - filePath
+        - onboardingDate
       type: object
       properties:
         contractType:
@@ -154,6 +159,10 @@ components:
         filePath:
           type: string
           description: Institution's contract file path
+        onboardingDate:
+          type: string
+          description: Institution's old onboarding date in the format 2007-12-03T10:15:30+01:00 (YYYY-MM-DD-T-HH:mm:ss+UTC)
+          format: date-time
     InvalidParam:
       title: InvalidParam
       required:
@@ -216,6 +225,7 @@ components:
     OnboardingImportDto:
       title: OnboardingImportDto
       required:
+        - importContract
         - users
       type: object
       properties:
