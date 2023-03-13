@@ -241,7 +241,7 @@ module "apim_external_api_onboarding_io_v1" {
     basePath = "/onboarding-api/v1"
   })
 
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+  xml_content = templatefile("./api/base_policy.xml", {
     API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
