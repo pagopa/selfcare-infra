@@ -7,17 +7,17 @@ resource "azurerm_private_dns_zone" "internal_private_dns_zone" {
 }
 
 #
-# DNS private integration
+# DNS private Link
 #
 resource "azurerm_private_dns_zone_virtual_network_link" "internal_env_selfcare_pagopa_it_2_vnet_core" {
 
-  name                  = "${local.project}-integration-vnet-core"
+  name                  = "${local.project}-link-vnet-core"
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.internal_private_dns_zone.name
   virtual_network_id    = module.vnet.id
 }
 
-# 
+#
 # COSMOS
 #
 resource "azurerm_private_dns_zone" "privatelink_documents_azure_com" {

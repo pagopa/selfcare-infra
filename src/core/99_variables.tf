@@ -98,7 +98,7 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
-variable "cidr_aks_vnet" {
+variable "cidr_aks_platform_vnet" {
   type        = list(string)
   description = "vnet for aks platform."
 }
@@ -600,7 +600,12 @@ variable "cidr_subnet_redis" {
 
 variable "app_gateway_api_certificate_name" {
   type        = string
-  description = "Application gateway api certificate name on Key Vault"
+  description = "Application gateway: api certificate name on Key Vault"
+}
+
+variable "app_gateway_api_pnpg_certificate_name" {
+  type        = string
+  description = "Application gateway: api-pnpg certificate name on Key Vault"
 }
 
 variable "app_gateway_sku_name" {
@@ -1070,4 +1075,9 @@ variable "docker_registry" {
       zone_redundancy_enabled   = bool
     })
   })
+}
+
+variable "aks_platform_env" {
+  type        = string
+  description = "The env name used into aks platform folder. E.g: dev01"
 }

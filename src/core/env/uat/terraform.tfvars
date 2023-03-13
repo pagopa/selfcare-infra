@@ -35,9 +35,10 @@ cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder fo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 
 #
-# AKS
+# AKS Platform
 #
-cidr_aks_vnet                 = ["10.11.0.0/16"]
+aks_platform_env              = "uat01"
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 vnet_aks_ddos_protection_plan = false
 
 # dns
@@ -54,7 +55,8 @@ apim_publisher_name = "pagoPA SelfCare UAT"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-uat-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-uat-selfcare-pagopa-it"
 
 # redis
 redis_sku_name = "Standard"
