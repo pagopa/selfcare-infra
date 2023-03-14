@@ -252,7 +252,7 @@ module "apim_external_api_onboarding_io_v1" {
   api_operation_policies = [
     {
       operation_id = "contractOnboardingUsingPOST"
-      xml_content  = file("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
