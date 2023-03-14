@@ -14,8 +14,6 @@ locals {
   contracts_storage_container     = "${local.project}-contracts-blob"
   appinsights_instrumentation_key = data.azurerm_application_insights.application_insights.instrumentation_key
 
-  aks_cluster_name = var.aks_name
-
   monitor_appinsights_name        = "${local.product}-appinsights"
   monitor_action_group_slack_name = "SlackPagoPA"
   monitor_action_group_email_name = "PagoPA"
@@ -28,16 +26,16 @@ locals {
   acr_name                = replace("${local.product}commonacr", "-", "")
   acr_resource_group_name = "${local.product}-container-registry-rg"
 
+  aks_cluster_name        = var.aks_name
   aks_name                = var.aks_name
   aks_resource_group_name = var.aks_resource_group_name
+  domain_aks_hostname     = var.env == "prod" ? "${var.instance}.${var.domain}.internal.selfcare.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.selfcare.pagopa.it"
 
   vnet_core_name                = "${local.product}-vnet"
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
   # DOMAINS
   system_domain_namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
   domain_namespace        = kubernetes_namespace.domain_namespace.metadata[0].name
-
-  domain_aks_hostname = var.env == "prod" ? "${var.instance}.${var.domain}.internal.selfcare.pagopa.it" : "${var.instance}.${var.domain}.internal.${var.env}.selfcare.pagopa.it"
 
   # Service account
   azure_devops_app_service_account_name        = "azure-devops"
