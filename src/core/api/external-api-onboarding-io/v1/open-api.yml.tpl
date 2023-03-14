@@ -4,19 +4,12 @@ info:
   description: Self Care External Api Documentation
   version: 0.0.1-SNAPSHOT
 servers:
-  - url: '{url}:{port}{basePath}'
-    variables:
-      url:
-        default: http://localhost
-      port:
-        default: '80'
-      basePath:
-        default: ''
+  - url: 'https://${host}/${basePath}'
 tags:
   - name: onboarding
     description: Onboarding operations
 paths:
-  /onboarding/{externalInstitutionId}:
+  "/onboarding/{externalInstitutionId}":
     post:
       tags:
         - onboarding
@@ -80,6 +73,7 @@ components:
         - contractType
         - fileName
         - filePath
+        - onboardingDate
       type: object
       properties:
         contractType:
@@ -91,6 +85,11 @@ components:
         filePath:
           type: string
           description: Institution's old contract file path
+          description: Institution's contract file path
+        onboardingDate:
+          type: string
+          description: Institution's old onboarding date in the format 2007-12-03T10:15:30+01:00 (YYYY-MM-DD-T-HH:mm:ss+UTC)
+          format: date-time
     InvalidParam:
       title: InvalidParam
       required:
