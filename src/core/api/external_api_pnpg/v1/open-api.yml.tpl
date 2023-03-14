@@ -6,13 +6,13 @@ info:
 servers:
   - url: 'https://${host}/${basePath}'
 tags:
-  - name: pnpg
+  - name: institutions-pnpg
     description: PNPG Controller
 paths:
- '/institutions/add':
+ '/pn-pg/institutions/add':
      post:
        tags:
-         - pnpg
+         - institutions-pnpg
        summary: addInstitution
        description: Checks if there is an institution with given externalId and returns its internalId if doesn't exists it creates it
        operationId: addInstitutionUsingPOST
@@ -27,7 +27,7 @@ paths:
          content:
            application/json:
              schema:
-               $ref: '#/components/schemas/SearchInstitutionDto'
+               $ref: '#/components/schemas/CreatePnPgInstitutionDto'
        responses:
          '201':
            description: Created
@@ -58,12 +58,15 @@ paths:
              - global
 components:
   schemas:
-    SearchInstitutionDto:
-          title: SearchInstitutionDto
+    CreatePnPgInstitutionDto:
+          title: CreatePnPgInstitutionDto
           required:
             - externalId
           type: object
           properties:
+            description:
+              type: string
+              description: Institution's legal name
             externalId:
               type: string
               description: Institution's unique external identifier
