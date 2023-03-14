@@ -214,7 +214,7 @@ module "apim_external_api_onboarding_auto_v1" {
     {
       operation_id = "autoApprovalOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
+    }
   ]
 }
 

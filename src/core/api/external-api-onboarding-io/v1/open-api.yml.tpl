@@ -85,7 +85,6 @@ components:
         filePath:
           type: string
           description: Institution's old contract file path
-          description: Institution's contract file path
         onboardingDate:
           type: string
           description: Institution's old onboarding date in the format 2007-12-03T10:15:30+01:00 (YYYY-MM-DD-T-HH:mm:ss+UTC)
