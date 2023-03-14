@@ -26,6 +26,7 @@ locals {
     "/ms-notification-manager/*",
     "/party-process/*",
     "/party-registry-proxy/*",
+    "/ms-core/*",
   ]
 
   backends = {
