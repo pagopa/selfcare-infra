@@ -288,7 +288,7 @@ module "apim_external_api_pnpg_v1" {
     basePath = "v1"
   })
 
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+  xml_content = templatefile("./api/external_api_pnpg/v1/jwt_base_policy.xml.tpl", {
     API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint

@@ -16,21 +16,14 @@ paths:
        summary: addInstitution
        description: Checks if there is an institution with given externalId and returns its internalId if doesn't exists it creates it
        operationId: addInstitutionUsingPOST
-       parameters:
-           - name: x-selfcare-uid
-             in: header
-             description: Logged user's unique identifier
-             required: true
-             schema:
-               type: string
        requestBody:
          content:
            application/json:
              schema:
                $ref: '#/components/schemas/CreatePnPgInstitutionDto'
        responses:
-         '201':
-           description: Created
+         '200':
+           description: Ok
            content:
              application/json:
                schema:
