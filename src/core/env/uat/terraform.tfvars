@@ -37,8 +37,10 @@ cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 #
 # AKS
 #
-cidr_aks_vnet                 = ["10.11.0.0/16"]
+aks_platform_env              = "uat01"
 vnet_aks_ddos_protection_plan = false
+cidr_aks_platform_vnet                 = ["10.11.0.0/16"]
+
 
 # dns
 external_domain = "pagopa.it"
@@ -55,6 +57,7 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
 
 # redis
 redis_sku_name = "Standard"
