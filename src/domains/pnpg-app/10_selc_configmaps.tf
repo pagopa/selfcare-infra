@@ -120,7 +120,50 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
+resource "kubernetes_config_map" "interop-be-party-process" {
+  metadata {
+    name      = "interop-be-party-process"
+    namespace = var.domain
+  }
 
+  data = merge({
+    APPLICATIONINSIGHTS_ROLE_NAME : "interop-be-party-process"
+    MAIL_TEMPLATE_PATH : "contracts/template/mail/1.0.0.json"
+    MAIL_TEMPLATE_COMPLETE_PATH : "contracts/template/mail/onboarding-complete/1.0.0.json"
+    MAIL_TEMPLATE_NOTIFICATION_PATH : "contracts/template/mail/onboarding-notification/1.0.0.json"
+    MAIL_TEMPLATE_REJECT_PATH : "contracts/template/mail/onboarding-refused/1.0.0.json"
+    # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
+    EU_LIST_OF_TRUSTED_LISTS_URL : "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
+    # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
+    EU_OFFICIAL_JOURNAL_URL : "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
+    SELFCARE_URL : "https://selfcare.pagopa.it"
+    PAGOPA_LOGO_URL : "resources/logo.png"
+
+    JAVA_OPTS : "-javaagent:/applicationinsights-agent.jar"
+    APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL : "OFF"
+    REQUIRED_CONTACT_POINT_NR : "1"
+    SIGNATURE_VALIDATION_ENABLED : "false"
+    CONFIRM_TOKEN_TIMEOUT : "90 seconds"
+    ONBOARDING_SEND_EMAIL_TO_INSTITUTION : "false"
+
+
+    # PagoPa signature feature
+    PAGOPA_SIGNATURE_ENABLED : "true"
+    # Used only if the certifate doesn't contain it
+    PAGOPA_SIGNATURE_SIGNER : "PagoPA S.p.A."
+    ARUBA_SIGN_SERVICE_BASE_URL : "https://arss.demo.firma-automatica.it:443/ArubaSignService/ArubaSignService"
+    ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH : "demoprod"
+    ARUBA_SIGN_SERVICE_IDENTITY_OTP_PWD : "dsign"
+    ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN : "demoprod"
+    PAGOPA_SIGNATURE_LOCATION : "Roma"
+    PAGOPA_SIGNATURE_ONBOARDING_REASON_TEMPLATE : "Firma contratto adesione prodotto"
+
+    # module.key_vault_secrets_query.values["jwt-exchange-kid"].value
+    },
+    var.configmaps_interop-be-party-process
+  )
+
+}
 resource "kubernetes_config_map" "selfcare-core" {
   metadata {
     name      = "selfcare-core"

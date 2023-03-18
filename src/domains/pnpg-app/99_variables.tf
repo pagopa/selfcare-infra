@@ -212,6 +212,10 @@ variable "reverse_proxy_rtd" {
 #
 # ConfigMaps & Secrets
 #
+variable "configmaps_interop-be-party-process" {
+  type = map(string)
+}
+
 variable "configmaps_ms_core" {
   type = map(string)
 }
