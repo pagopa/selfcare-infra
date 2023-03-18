@@ -40,7 +40,7 @@ cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 #
 aks_platform_env              = "prod01"
 vnet_aks_ddos_protection_plan = false
-cidr_aks_platform_vnet                 = ["10.11.0.0/16"]
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
 external_domain = "pagopa.it"
@@ -56,15 +56,15 @@ apim_publisher_name = "pagoPA SelfCare PROD"
 apim_sku            = "Premium_1" # TODO
 
 # app_gateway
-app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-selfcare-pagopa-it"
 app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
 
-app_gateway_min_capacity         = 0 # todo change to at least 1
-app_gateway_max_capacity         = 2
-app_gateway_sku_name             = "WAF_v2"
-app_gateway_sku_tier             = "WAF_v2"
-app_gateway_alerts_enabled       = true
-app_gateway_waf_enabled          = true
+app_gateway_min_capacity   = 0 # todo change to at least 1
+app_gateway_max_capacity   = 2
+app_gateway_sku_name       = "WAF_v2"
+app_gateway_sku_tier       = "WAF_v2"
+app_gateway_alerts_enabled = true
+app_gateway_waf_enabled    = true
 
 # redis
 redis_sku_name = "Standard"
