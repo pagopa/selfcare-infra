@@ -155,6 +155,8 @@ resource "kubernetes_config_map" "interop-be-party-process" {
     ARUBA_SIGN_SERVICE_IDENTITY_TYPE_OTP_AUTH: "demoprod"
     ARUBA_SIGN_SERVICE_IDENTITY_OTP_PWD: "dsign"
     ARUBA_SIGN_SERVICE_IDENTITY_DELEGATED_DOMAIN: "demoprod"
+    PAGOPA_SIGNATURE_LOCATION: "Roma"
+    PAGOPA_SIGNATURE_ONBOARDING_REASON_TEMPLATE: "Firma contratto adesione prodotto"
 
     # module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     },
