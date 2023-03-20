@@ -25,7 +25,7 @@ log_analytics_workspace_name                = "selc-u-law"
 log_analytics_workspace_resource_group_name = "selc-u-monitor-rg"
 
 # Vnet
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 
 #
 # Mongo
