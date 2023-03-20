@@ -10,8 +10,8 @@ location_short  = "weu"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "PROD"
-  Owner       = "selc"
-  Source      = "https://github.com/pagopa/selc-infrastructure"
+  Owner       = "SelfCare"
+  Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
@@ -40,7 +40,7 @@ aks_alerts_enabled          = false
 aks_kubernetes_version      = "1.24.6"
 aks_sku_tier                = "Paid"
 aks_system_node_pool = {
-  name            = "cstprod01sys",
+  name            = "selcp01sys",
   vm_size         = "Standard_D2ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 75,
@@ -52,7 +52,7 @@ aks_system_node_pool = {
 }
 aks_user_node_pool = {
   enabled         = true,
-  name            = "cstprod01usr",
+  name            = "selcp01usr",
   vm_size         = "Standard_D8ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 300,
@@ -74,10 +74,7 @@ ingress_replica_count = "2"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 ingress_load_balancer_ip = "10.11.100.250"
 nginx_helm_version       = "4.1.0"
-keda_helm_version        = "2.6.2"
-prometheus_helm_version  = "15.10.4"
-grafana_helm_version     = "6.32.3"
-
+keda_helm_version        = "2.10.0"
 
 # chart releases: https://github.com/stakater/Reloader/releases
 # image tags: https://hub.docker.com/r/stakater/reloader/tags
