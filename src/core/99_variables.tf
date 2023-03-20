@@ -1086,3 +1086,8 @@ variable "enable_load_tests_db" {
   type        = bool
   description = "To provision load tests db"
 }
+
+variable "cidr_subnet_load_tests" {
+  type        = list(string)
+  description = "private endpoints address space."
+}

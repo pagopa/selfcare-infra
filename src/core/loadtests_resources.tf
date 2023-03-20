@@ -6,14 +6,56 @@ resource "azurerm_resource_group" "rg_load_tests_db" {
   tags = var.tags
 }
 
+module "load_tests_snet" {
+  count = var.enable_load_tests_db ? 1 : 0
+
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.0.3"
+  name                                           = "${local.project}-load-tests-db-snet"
+  address_prefixes                               = var.cidr_subnet_load_tests
+  resource_group_name                            = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                           = module.vnet.name
+  enforce_private_link_endpoint_network_policies = true
+
+  delegation = {
+    name = "delegation"
+    service_delegation = {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
+}
+
+resource "azurerm_network_profile" "network_profile_load_tests_db" {
+  count = var.enable_load_tests_db ? 1 : 0
+
+  name                = "${local.project}-load-tests-db-network-profile"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg_load_tests_db[0].name
+
+  container_network_interface {
+    name = "container-nic"
+
+    ip_configuration {
+      name      = "ip-config"
+      subnet_id = module.load_tests_snet[0].id
+    }
+  }
+}
+
 resource "azurerm_container_group" "load_tests_db" {
-  count               = var.enable_load_tests_db ? 1 : 0
+  count = var.enable_load_tests_db ? 1 : 0
+
   name                = "${local.project}-load-tests-db"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg_load_tests_db[0].name
   ip_address_type     = "Private"
-  dns_name_label      = "${local.project}-load-tests-db"
+  network_profile_id  = azurerm_network_profile.network_profile_load_tests_db[0].id
   os_type             = "Linux"
+
+  dns_config {
+    nameservers = []
+    search_domains = "privatelink.loadtestsdb.com"
+  }
 
   container {
     name     = "docker-influxdb-grafana"
@@ -27,7 +69,7 @@ resource "azurerm_container_group" "load_tests_db" {
     }
 
     ports {
-      port     = "3004:8083"
+      port     = 8083
       protocol = "TCP"
     }
 
