@@ -57,7 +57,7 @@ apim_sku            = "Premium_1" # TODO
 
 # app_gateway
 app_gateway_api_certificate_name      = "api-selfcare-pagopa-it"
-app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-selfcare-pagopa-it"
 
 app_gateway_min_capacity   = 0 # todo change to at least 1
 app_gateway_max_capacity   = 2

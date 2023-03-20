@@ -58,7 +58,7 @@ apim_sku            = "Developer_1"
 
 # app_gateway
 app_gateway_api_certificate_name      = "api-uat-selfcare-pagopa-it"
-app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-uat-selfcare-pagopa-it"
 
 # redis
 redis_sku_name = "Standard"
@@ -74,6 +74,8 @@ aks_kubernetes_version = "1.23.12"
 aks_system_node_pool_os_disk_type                 = "Managed"
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
+aks_user_node_pool_node_count_min = 2
+aks_user_node_pool_node_count_max = 3
 
 #
 # Docker
