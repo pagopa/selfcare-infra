@@ -74,8 +74,8 @@ aks_kubernetes_version = "1.23.12"
 aks_system_node_pool_os_disk_type                 = "Managed"
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
-aks_user_node_pool_node_count_min = 2
-aks_user_node_pool_node_count_max = 3
+aks_system_node_pool_node_count_min = 2
+aks_system_node_pool_node_count_max = 3
 
 #
 # Docker
