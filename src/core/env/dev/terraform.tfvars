@@ -178,3 +178,5 @@ eventhubs = [{
   ]
 }]
 ##
+
+enable_load_tests_db = true

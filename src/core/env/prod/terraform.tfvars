@@ -202,3 +202,5 @@ logs_account_replication_type   = "RAGZRS"
 logs_delete_retention_days      = 14
 logs_enable_versioning          = false
 logs_advanced_threat_protection = true
+
+enable_load_tests_db = false
