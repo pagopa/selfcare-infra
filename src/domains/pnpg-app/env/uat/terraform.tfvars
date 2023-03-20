@@ -63,7 +63,7 @@ pdv_timeout_sec   = 5
 # PM
 #
 pm_service_base_url = "https://api-io.uat.selfcare.pagopa.it"
-pm_backend_url      = "https://api.uat.platform.pagopa.it"
+pm_backend_url      = "https://api-pnpg.uat.platform.pagopa.it"
 
 #
 # Check IBAN
@@ -73,7 +73,7 @@ checkiban_base_url = "https://bankingservices-sandbox.pagopa.it"
 #
 # SelfCare API
 #
-selc_base_url = "https://api.uat.selfcare.pagopa.it"
+selc_base_url = "https://api-pnpg.uat.selfcare.pagopa.it"
 
 #
 # BE IO API

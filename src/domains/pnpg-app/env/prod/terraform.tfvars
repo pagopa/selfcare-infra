@@ -74,7 +74,7 @@ checkiban_base_url = "https://bankingservices.pagopa.it"
 #
 # SelfCare API
 #
-selc_base_url = "https://api.selfcare.pagopa.it"
+selc_base_url = "https://api-pnpg.selfcare.pagopa.it"
 
 #
 # BE IO API
