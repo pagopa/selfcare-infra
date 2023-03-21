@@ -10,7 +10,7 @@ instance        = "dev01"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Dev"
-  Owner       = "CSTAR"
+  Owner       = "Selfcare"
   Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
@@ -51,7 +51,7 @@ tls_cert_check_helm = {
 }
 
 # Gateway
-api_gateway_url = "https://api.dev.selfcare.pagopa.it"
+api_gateway_url = "https://api-pnpg.dev.selfcare.pagopa.it"
 # cdn_frontend_url = "https://dev.selfcare.pagopa.it"
 # cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
@@ -68,6 +68,16 @@ jwt_token_exchange_duration = "PT15M"
 jwt_audience = "api.dev.selfcare.pagopa.it"
 
 jwt_social_expire = "10000000"
+
+configmaps_interop-be-party-process = {
+  USER_REGISTRY_MANAGEMENT_URL : "https://api.uat.pdv.pagopa.it/user-registry/v1"
+  MAIL_ONBOARDING_CONFIRMATION_LINK : "https://dev.selfcare.pagopa.it/onboarding/confirm?jwt="
+  MAIL_ONBOARDING_REJECTION_LINK : "https://dev.selfcare.pagopa.it/onboarding/cancel?jwt="
+  PRODUCT_MANAGEMENT_URL : "https://api.dev.selfcare.pagopa.it/external/v1"
+  SELFCARE_ADMIN_NOTIFICATION_URL : "https://dev.selfcare.pagopa.it/dashboard/admin/onboarding/"
+  GEO_TAXONOMY_URL : "https://api.dev.selfcare.pagopa.it/external/geo-tax"
+  MAIL_ONBOARDING_URL : "https://dev.selfcare.pagopa.it/onboarding/"
+}
 
 configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"

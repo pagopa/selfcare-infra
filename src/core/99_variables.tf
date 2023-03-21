@@ -128,13 +128,11 @@ variable "aks_system_node_pool_os_disk_size_gb" {
 variable "aks_system_node_pool_node_count_min" {
   type        = number
   description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
-  default     = 1
 }
 
 variable "aks_system_node_pool_node_count_max" {
   type        = number
   description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
-  default     = 1
 }
 
 variable "aks_system_node_pool_only_critical_addons_enabled" {
