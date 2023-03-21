@@ -36,7 +36,6 @@ cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder fo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
-
 #
 # AKS Platform
 #
@@ -69,9 +68,11 @@ redis_capacity                 = 0
 redis_private_endpoint_enabled = false
 
 # aks
-aks_alerts_enabled                = false
-aks_kubernetes_version            = "1.23.12"
-aks_system_node_pool_os_disk_type = "Managed"
+aks_alerts_enabled                  = false
+aks_kubernetes_version              = "1.23.12"
+aks_system_node_pool_os_disk_type   = "Managed"
+aks_system_node_pool_node_count_min = 2
+aks_system_node_pool_node_count_max = 3
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
 
