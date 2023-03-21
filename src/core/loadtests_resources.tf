@@ -52,16 +52,11 @@ resource "azurerm_container_group" "load_tests_db" {
   network_profile_id  = azurerm_network_profile.network_profile_load_tests_db[0].id
   os_type             = "Linux"
 
-  dns_config {
-    nameservers = []
-    search_domains = "privatelink.loadtestsdb.com"
-  }
-
   container {
-    name     = "docker-influxdb-grafana"
-    image    = "philhawthorne/docker-influxdb-grafana:latest"
-    cpu      = "0.5"
-    memory   = "0.5"
+    name   = "docker-influxdb-grafana"
+    image  = "philhawthorne/docker-influxdb-grafana:latest"
+    cpu    = "0.5"
+    memory = "0.5"
 
     ports {
       port     = 3003

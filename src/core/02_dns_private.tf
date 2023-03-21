@@ -109,21 +109,3 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus
 
   tags = var.tags
 }
-
-# LOAD TESTS DB
-resource "azurerm_private_dns_zone" "privatelink_loadtestsdb_net" {
-  name                = "privatelink.loadtestsdb.com"
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-
-  tags = var.tags
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_loadtestsdb_net_vnet" {
-  name                  = module.vnet.name
-  resource_group_name   = azurerm_resource_group.rg_vnet.name
-  private_dns_zone_name = azurerm_private_dns_zone.privatelink_loadtestsdb_net.name
-  virtual_network_id    = module.vnet.id
-  registration_enabled  = false
-
-  tags = var.tags
-}
