@@ -659,6 +659,12 @@ variable "enable_iac_pipeline" {
   default     = false
 }
 
+variable "enable_app_projects_pipeline" {
+  type        = bool
+  description = "If true create the key vault policy to allow used by azure devops app projects pipelines."
+  default     = false
+}
+
 # CosmosDb Mongo
 variable "cosmosdb_mongodb_offer_type" {
   type        = string
