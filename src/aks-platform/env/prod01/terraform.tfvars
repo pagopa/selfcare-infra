@@ -30,17 +30,17 @@ log_analytics_workspace_resource_group_name = "selc-p-monitor-rg"
 #
 # ⛴ AKS
 #
-rg_vnet_aks_name           = "selc-p-weu-prod01-vnet-rg"
-vnet_aks_name              = "selc-p-weu-prod01-vnet"
-public_ip_aksoutbound_name = "selc-p-weu-prod01-aksoutbound-pip-1"
+rg_vnet_aks_name           = "selc-p-weu-vnet-rg"
+vnet_aks_name              = "selc-p-weu-aks-prod01-vnet"
+public_ip_aksoutbound_name = "selc-p-weu-aks-platform-outbound-pip"
 
 aks_enabled                 = true
 aks_private_cluster_enabled = true
 aks_alerts_enabled          = false
-aks_kubernetes_version      = "1.24.6"
+aks_kubernetes_version      = "1.24.9"
 aks_sku_tier                = "Paid"
 aks_system_node_pool = {
-  name            = "selcp01sys",
+  name            = "selcpro01sys",
   vm_size         = "Standard_D2ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 75,
@@ -52,7 +52,7 @@ aks_system_node_pool = {
 }
 aks_user_node_pool = {
   enabled         = true,
-  name            = "selcp01usr",
+  name            = "selcpro01usr",
   vm_size         = "Standard_D8ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 300,
