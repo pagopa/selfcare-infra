@@ -34,14 +34,14 @@ log_analytics_workspace_resource_group_name = "selc-u-monitor-rg"
 #
 # ⛴ AKS
 #
-rg_vnet_aks_name           = "selc-u-weu-uat01-vnet-rg"
-vnet_aks_name              = "selc-u-weu-uat01-vnet"
-public_ip_aksoutbound_name = "selc-u-weu-uat01-aksoutbound-pip-1"
+rg_vnet_aks_name           = "selc-u-weu-vnet-rg"
+vnet_aks_name              = "selc-u-weu-aks-uat01-vnet"
+public_ip_aksoutbound_name = "selc-u-weu-aks-platform-outbound-pip"
 
 aks_enabled                 = true
 aks_private_cluster_enabled = true
 aks_alerts_enabled          = false
-aks_kubernetes_version      = "1.24.6"
+aks_kubernetes_version      = "1.24.9"
 aks_system_node_pool = {
   name            = "selcu01sys",
   vm_size         = "Standard_D2ds_v5",
