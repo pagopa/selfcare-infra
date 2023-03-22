@@ -329,3 +329,16 @@ resource "kubernetes_secret" "uservice-party-management" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "national-registry-secrets" {
+  metadata {
+    name      = "national-registry-secrets"
+    namespace = var.domain
+  }
+
+  data = {
+    NATIONAL_REGISTRY_API_KEY = module.key_vault_secrets_query.values["national-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}

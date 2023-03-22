@@ -92,6 +92,12 @@ configmaps_ms_core = {
 
 # configs/secrets
 
+
+#
+# SelfCare API
+#
+selc_base_url = "https://api-pnpg.selfcare.pagopa.it"
+
 configmaps_hub-spid-login-ms = {
   APPLICATIONINSIGHTS_ROLE_NAME                     = "hub-spid-login-ms"
   APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "OFF"
