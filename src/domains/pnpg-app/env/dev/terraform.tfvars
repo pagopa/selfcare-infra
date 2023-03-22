@@ -10,7 +10,7 @@ instance        = "dev01"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "Dev"
-  Owner       = "CSTAR"
+  Owner       = "Selfcare"
   Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
