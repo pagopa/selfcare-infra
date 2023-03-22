@@ -24,7 +24,7 @@ module "snet_aks_platform" {
 
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v4.1.15"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=kuernetes-improve-outputs"
 
   count = var.aks_enabled ? 1 : 0
 
@@ -120,4 +120,10 @@ resource "azurerm_role_assignment" "aks_to_acr" {
   scope                = data.azurerm_container_registry.acr.id
   role_definition_name = "AcrPull"
   principal_id         = module.aks[0].kubelet_identity_id
+}
+
+resource "azurerm_role_assignment" "aks_sys_mgmt_id_for_managed_identity_operator" {
+  scope                = azurerm_resource_group.rg_aks.id
+  role_definition_name = "Managed Identity Operator"
+  principal_id         = module.aks[0].identity_principal_id
 }
