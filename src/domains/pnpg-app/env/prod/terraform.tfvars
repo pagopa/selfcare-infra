@@ -17,14 +17,14 @@ tags = {
 
 ### External resources
 
-monitor_resource_group_name                 = "selfcare-p-monitor-rg"
-log_analytics_workspace_name                = "selfcare-p-law"
-log_analytics_workspace_resource_group_name = "selfcare-p-monitor-rg"
+monitor_resource_group_name                 = "selc-p-monitor-rg"
+log_analytics_workspace_name                = "selc-p-law"
+log_analytics_workspace_resource_group_name = "selc-p-monitor-rg"
 
 ### Aks
 
-aks_name                = "selfcare-p-weu-prod01-aks"
-aks_resource_group_name = "selfcare-p-weu-prod01-aks-rg"
+aks_name                = "selc-p-weu-prod01-aks"
+aks_resource_group_name = "selc-p-weu-prod01-aks-rg"
 
 ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "prod01.pnpg.internal.selfcare.pagopa.it"
