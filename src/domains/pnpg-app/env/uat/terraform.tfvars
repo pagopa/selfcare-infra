@@ -50,6 +50,17 @@ tls_cert_check_helm = {
   image_tag     = "v1.3.4@sha256:c3d45736706c981493b6216451fc65e99a69d5d64409ccb1c4ca93fef57c921d"
 }
 
+#
+# PDV
+#
+pdv_tokenizer_url = "https://api.uat.tokenizer.pdv.pagopa.it/tokenizer/v1"
+pdv_timeout_sec   = 5
+#
+# PM
+#
+pm_service_base_url = "https://api-io.uat.selfcare.pagopa.it"
+pm_backend_url      = "https://api-pnpg.uat.platform.pagopa.it"
+
 # Gateway
 api_gateway_url = "https://api-pnpg.dev.selfcare.pagopa.it"
 # cdn_frontend_url = "https://dev.selfcare.pagopa.it"
@@ -89,6 +100,11 @@ configmaps_ms_core = {
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://dev.selfcare.pagopa.it/dashboard/admin/onboarding/"
 }
+
+#
+# SelfCare API
+#
+selc_base_url = "https://api-pnpg.uat.selfcare.pagopa.it"
 
 # configs/secrets
 
