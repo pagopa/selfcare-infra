@@ -8,7 +8,7 @@ resource "azurerm_key_vault_secret" "appinsights-instrumentation-key" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "azure_devops_aks_apiserver_url" {
   depends_on   = [kubernetes_service_account.azure_devops]
-  name         = "${var.aks_name}-aks-apiserver-url"
+  name         = "${var.aks_name}-apiserver-url"
   value        = "https://${data.azurerm_kubernetes_cluster.aks.private_fqdn}:443"
   content_type = "text/plain"
 
