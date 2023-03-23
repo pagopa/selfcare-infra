@@ -298,6 +298,13 @@ module "apim_external_api_pnpg_v1" {
     {
       operation_id = "addInstitutionUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content  = templatefile("./api/external_api_pnpg/v1/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+      })
     }
   ]
 }
