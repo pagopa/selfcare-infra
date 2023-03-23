@@ -302,9 +302,11 @@ module "apim_external_api_pnpg_v1" {
     {
       operation_id = "getInstitution"
       xml_content  = templatefile("./api/external_api_pnpg/v1/getInstitution_op_policy.xml.tpl", {
-        KID                            = module.jwt.jwt_kid
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     }
   ]
