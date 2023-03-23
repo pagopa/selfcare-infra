@@ -31,6 +31,7 @@ resource "kubernetes_config_map" "jwt" {
     JWT_TOKEN_KID        = module.key_vault_secrets_query.values["jwt-kid"].value
     JWT_TOKEN_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-public-key"].value
     JWT_TOKEN_AUDIENCE   = var.jwt_audience
+    JWT_ISSUER           = var.jwt_issuer
     WELL_KNOWN_URL       = "${local.cdn_storage_url}/.well-known/jwks.json"
   }
 }
