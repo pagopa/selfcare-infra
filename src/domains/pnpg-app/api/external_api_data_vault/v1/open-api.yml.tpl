@@ -87,17 +87,17 @@ paths:
 components:
   schemas:
     CreatePnPgInstitutionDto:
-          title: CreatePnPgInstitutionDto
-          required:
-            - externalId
-          type: object
-          properties:
-            description:
-              type: string
-              description: Institution's legal name
-            externalId:
-              type: string
-              description: Institution's unique external identifier
+      title: CreatePnPgInstitutionDto
+      required:
+        - externalId
+      type: object
+      properties:
+        description:
+          type: string
+          description: Institution's legal name
+        externalId:
+          type: string
+          description: Institution's unique external identifier
     Problem:
       title: Problem
       required:
@@ -128,146 +128,6 @@ components:
           type: string
           description: A URL to a page with more details regarding the problem.
       description: A "problem detail" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)
-    InstitutionDetailResource:
-      title: InstitutionDetailResource
-      required:
-        - address
-        - description
-        - digitalAddress
-        - externalId
-        - geographicTaxonomies
-        - id
-        - institutionType
-        - origin
-        - originId
-        - taxCode
-        - zipCode
-      type: object
-      properties:
-        address:
-          type: string
-          description: Institution's physical address
-        businessRegisterPlace:
-          type: string
-          description: Institution's business register place
-        description:
-          type: string
-          description: Institution's legal name
-        digitalAddress:
-          type: string
-          description: Institution's digitalAddress
-        externalId:
-          type: string
-          description: Institution's unique external identifier
-        geographicTaxonomies:
-          type: array
-          description: Institution's geographic taxonomy list
-          items:
-            $ref: '#/components/schemas/GeographicTaxonomyResource'
-        id:
-          type: string
-          description: Institution's unique internal Id
-          format: uuid
-        imported:
-          type: boolean
-          description: True if institution is stored from batch api
-          example: false
-        institutionType:
-          type: string
-          description: Institution's type
-          enum:
-            - GSP
-            - PA
-            - PSP
-            - PT
-            - SCP
-        origin:
-          type: string
-          description: Institution data origin
-        originId:
-          type: string
-          description: Institution's details origin Id
-        rea:
-          type: string
-          description: Institution's REA
-        shareCapital:
-          type: string
-          description: Institution's share capital value
-        supportEmail:
-          type: string
-          description: Institution's support email contact
-          format: email
-          example: email@example.com
-        supportPhone:
-          type: string
-          description: Institution's support phone contact
-        taxCode:
-          type: string
-          description: Institution's taxCode
-        zipCode:
-          type: string
-          description: Institution's zipCode
-    InstitutionResource:
-      title: InstitutionResource
-      required:
-        - address
-        - description
-        - digitalAddress
-        - externalId
-        - id
-        - institutionType
-        - origin
-        - originId
-        - status
-        - taxCode
-        - userProductRoles
-        - zipCode
-      type: object
-      properties:
-        address:
-          type: string
-          description: Institution's physical address
-        description:
-          type: string
-          description: Institution's legal name
-        digitalAddress:
-          type: string
-          description: Institution's digitalAddress
-        externalId:
-          type: string
-          description: Institution's unique external identifier
-        id:
-          type: string
-          description: Institution's unique internal Id
-          format: uuid
-        institutionType:
-          type: string
-          description: Institution's type
-          enum:
-            - GSP
-            - PA
-            - PT
-            - SCP
-        origin:
-          type: string
-          description: Institution data origin
-        originId:
-          type: string
-          description: Institution's details origin Id
-        status:
-          type: string
-          description: Institution onboarding status
-        taxCode:
-          type: string
-          description: Institution's taxCode
-        userProductRoles:
-          type: array
-          description: User's roles on product
-          items:
-            type: string
-        zipCode:
-          type: string
-          description: Institution's zipCode
     InvalidParam:
       title: InvalidParam
       required:
@@ -281,166 +141,23 @@ components:
         reason:
           type: string
           description: Invalid parameter reason.
-    ProductResource:
-      title: ProductResource
-      required:
-        - contractTemplatePath
-        - contractTemplateUpdatedAt
-        - contractTemplateVersion
-        - createdAt
-        - id
-        - title
+    Attribute:
       type: object
       properties:
-        contractTemplatePath:
+        origin:
           type: string
-          description: The path of contract
-        contractTemplateUpdatedAt:
-          type: string
-          description: Date the contract was postponed
-          format: date-time
-        contractTemplateVersion:
-          type: string
-          description: Version of the contract
-        createdAt:
-          type: string
-          description: Date the products was activated/created
-          format: date-time
-        depictImageUrl:
-          type: string
-          description: Product's depiction image url
-        description:
-          type: string
-          description: Product's description
-        id:
-          type: string
-          description: Product's unique identifier
-        identityTokenAudience:
-          type: string
-          description: Product's identity token audience
-        logo:
-          type: string
-          description: Product's logo url
-        logoBgColor:
-          pattern: ^#0-9A-F6$
-          type: string
-          description: Product logo's background color
-        parentId:
-          type: string
-          description: Root parent of the sub product
-        roleManagementURL:
-          type: string
-          description: Url of the utilities management
-        roleMappings:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ProductRoleInfoRes'
-          description: Mappings between Party's and Product's role
-        title:
-          type: string
-          description: Product's title
-        urlBO:
-          type: string
-          description: URL that redirects to the back-office section where is possible to manage the product
-        urlPublic:
-          type: string
-          description: URL that redirects to the public information webpage of the product
-    ProductRoleInfoRes:
-      title: ProductRoleInfoRes
-      required:
-        - multiroleAllowed
-        - roles
-      type: object
-      properties:
-        multiroleAllowed:
-          type: boolean
-          description: Flag indicating if a User can have more than one product role
-          example: false
-        roles:
-          type: array
-          description: Available product roles
-          items:
-            $ref: '#/components/schemas/ProductRole'
-    ProductRole:
-      title: ProductRole
-      required:
-        - code
-        - description
-        - label
-      type: object
-      properties:
         code:
           type: string
-          description: Product role internal code
         description:
           type: string
-          description: Product role description
-        label:
-          type: string
-          description: Product role label
-    PageOfUserGroupResource:
-      title: PageOfUserGroupResource
       required:
-        - content
-        - number
-        - size
-        - totalElements
-        - totalPages
-      type: object
-      properties:
-        content:
-          type: array
-          description: The page content
-          items:
-            "$ref": "#/components/schemas/UserGroupResource"
-        number:
-          type: integer
-          description: The number of the current page
-          format: int32
-        size:
-          type: integer
-          description: The size of the page
-          format: int32
-        totalElements:
-          type: integer
-          description: The total amount of elements
-          format: int64
-        totalPages:
-          type: integer
-          description: The number of total pages
-          format: int32
-    UserGroupResource:
-      title: UserGroupResource
-      required:
-      - description
-      - id
-      - institutionId
-      - name
-      - productId
-      - status
-      type: object
-      properties:
-        description:
-          type: string
-          description: Users group's description
-        id:
-          type: string
-          description: Users group's unique identifier
-        institutionId:
-          type: string
-          description: Users group's institutionId
-        name:
-          type: string
-          description: Users group's name
-        productId:
-          type: string
-          description: Users group's productId
-        status:
-          type: string
-          description: Users group's status
-          enum:
-          - ACTIVE
-          - SUSPENDED
+        - origin
+        - code
+        - description
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
     Institution:
       type: object
       properties:
@@ -498,23 +215,6 @@ components:
         - attributes
         - origin
       additionalProperties: false
-    Attribute:
-      type: object
-      properties:
-        origin:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-      required:
-        - origin
-        - code
-        - description
-    Attributes:
-      type: array
-      items:
-        $ref: '#/components/schemas/Attribute'
   securitySchemes:
     bearerAuth:
       type: http
