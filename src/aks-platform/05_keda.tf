@@ -1,17 +1,3 @@
-resource "kubernetes_namespace" "keda" {
-  metadata {
-    name = "keda"
-  }
-
-  depends_on = [
-    module.aks
-  ]
-}
-
-locals {
-  keda_namespace_name = kubernetes_namespace.keda.metadata[0].name
-}
-
 module "keda_pod_identity" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_pod_identity?ref=v4.1.9"
 
@@ -27,6 +13,20 @@ module "keda_pod_identity" {
   depends_on = [
     module.aks
   ]
+}
+
+resource "kubernetes_namespace" "keda" {
+  metadata {
+    name = "keda"
+  }
+
+  depends_on = [
+    module.aks
+  ]
+}
+
+locals {
+  keda_namespace_name = kubernetes_namespace.keda.metadata[0].name
 }
 
 resource "azurerm_role_assignment" "keda_monitoring_reader" {

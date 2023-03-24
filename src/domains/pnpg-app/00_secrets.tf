@@ -36,6 +36,7 @@ module "key_vault_secrets_query" {
     "jwt-secret",
     "logs-storage-connection-string",
     "mongodb-connection-string",
+    "national-registry-api-key",
     "onboarding-interceptor-apim-internal",
     "party-test-institution-email",
     "portal-admin-operator-email",
