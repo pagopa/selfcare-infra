@@ -160,6 +160,12 @@ variable "ingress_load_balancer_hostname" {
   type = string
 }
 
+variable "reverse_proxy_ip" {
+  type        = string
+  default     = "127.0.0.1"
+  description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
+}
+
 # DNS
 variable "external_domain" {
   type        = string
@@ -269,4 +275,29 @@ variable "token_expiration_minutes" {
   default = 540 # 9 hours
 }
 
+# Network
+variable "cidr_vnet" {
+  type        = list(string)
+  description = "Virtual network address space."
+}
 
+variable "cidr_subnet_apim" {
+  type        = list(string)
+  description = "Address prefixes subnet api management."
+  default     = null
+}
+
+variable "cidr_subnet_private_endpoints" {
+  type        = list(string)
+  description = "private endpoints address space."
+}
+
+variable "app_gateway_api_pnpg_certificate_name" {
+  type        = string
+  description = "Application gateway: api-pnpg certificate name on Key Vault"
+}
+
+variable "app_gateway_api_certificate_name" {
+  type        = string
+  description = "Application gateway: api certificate name on Key Vault"
+}
