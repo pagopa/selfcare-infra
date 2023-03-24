@@ -113,6 +113,7 @@
 | <a name="input_ingress_load_balancer_ip"></a> [ingress\_load\_balancer\_ip](#input\_ingress\_load\_balancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_instance"></a> [instance](#input\_instance) | One of beta, prod01, prod02 | `string` | n/a | yes |
 | <a name="input_jwt_audience"></a> [jwt\_audience](#input\_jwt\_audience) | configs/secrets | `string` | n/a | yes |
+| <a name="input_jwt_issuer"></a> [jwt\_issuer](#input\_jwt\_issuer) | SPID | `string` | `"SPID"` | no |
 | <a name="input_jwt_social_expire"></a> [jwt\_social\_expire](#input\_jwt\_social\_expire) | n/a | `string` | n/a | yes |
 | <a name="input_jwt_token_exchange_duration"></a> [jwt\_token\_exchange\_duration](#input\_jwt\_token\_exchange\_duration) | n/a | `string` | `"PT15S"` | no |
 | <a name="input_k8s_kube_config_path_prefix"></a> [k8s\_kube\_config\_path\_prefix](#input\_k8s\_kube\_config\_path\_prefix) | n/a | `string` | `"~/.kube"` | no |
