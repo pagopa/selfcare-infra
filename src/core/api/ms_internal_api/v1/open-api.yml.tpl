@@ -179,6 +179,18 @@ paths:
               application/problem+json:
                 schema:
                   $ref: '#/components/schemas/Problem'
+          '403':
+                    description: Forbidden
+                    content:
+                      application/problem+json:
+                        schema:
+                          $ref: '#/components/schemas/Problem'
+          '409':
+                  description: Conflict
+                  content:
+                      application/problem+json:
+                        schema:
+                          $ref: '#/components/schemas/Problem'
           '500':
             description: Internal Server Error
             content:

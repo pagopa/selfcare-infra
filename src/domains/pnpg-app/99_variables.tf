@@ -301,3 +301,12 @@ variable "app_gateway_api_certificate_name" {
   type        = string
   description = "Application gateway: api certificate name on Key Vault"
 }
+
+variable "jwt_issuer" {
+  type        = string
+  description = "SPID"
+  default     = "SPID"
+}
+
+
+
