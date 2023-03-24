@@ -3,7 +3,7 @@
 ##############
 
 module "apim_pnpg" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v2.18.3"
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.92"
 
   product_id   = "pnpg-be"
   display_name = local.apim_pnpg_api.display_name
@@ -17,7 +17,7 @@ module "apim_pnpg" {
   approval_required     = false
   # subscriptions_limit   = 1000
 
-  policy_xml = file("./api_product/_base_policy.xml")
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
 }
 
 locals {
@@ -28,6 +28,12 @@ locals {
     subscription_required = false
     service_url           = null
   }
+  apim_name        = "${local.product}-apim"
+  apim_rg          = "${local.product}-api-rg"
+  pnpg_hostname    = var.env == "prod" ? "api-pnpg.selfcare.pagopa.it" : "api-pnpg.${var.env}.selfcare.pagopa.it"
+  pnpg_fe_hostname = var.env == "prod" ? "selfcare.platform.pagopa.it" : "selfcare.${var.env}.platform.pagopa.it"
+
+  cdn_storage_hostname = "${var.prefix}${var.env_short}${var.location_short}${var.domain}checkoutsa"
 }
 #########
 ## API ##
@@ -42,7 +48,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_data_vault"
 }
 
 module "apim_external_api_data_vault_v1" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.92"
   name                = format("%s-external-api-pnpg", local.project)
   api_management_name = local.apim_name
   resource_group_name = local.apim_rg
@@ -59,7 +65,7 @@ module "apim_external_api_data_vault_v1" {
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/external_api_pnpg/v1/open-api.yml.tpl", {
+  content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
@@ -70,7 +76,7 @@ module "apim_external_api_data_vault_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitution"
-      xml_content  = templatefile("./api/external_api_pnpg/v1/getInstitution_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })

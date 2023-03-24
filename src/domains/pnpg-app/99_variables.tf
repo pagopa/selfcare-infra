@@ -276,31 +276,31 @@ variable "token_expiration_minutes" {
 }
 
 # Network
-variable "cidr_vnet" {
-  type        = list(string)
-  description = "Virtual network address space."
-}
+# variable "cidr_vnet" {
+#   type        = list(string)
+#   description = "Virtual network address space."
+# }
 
-variable "cidr_subnet_apim" {
-  type        = list(string)
-  description = "Address prefixes subnet api management."
-  default     = null
-}
+# variable "cidr_subnet_apim" {
+#   type        = list(string)
+#   description = "Address prefixes subnet api management."
+#   default     = null
+# }
 
-variable "cidr_subnet_private_endpoints" {
-  type        = list(string)
-  description = "private endpoints address space."
-}
+# variable "cidr_subnet_private_endpoints" {
+#   type        = list(string)
+#   description = "private endpoints address space."
+# }
 
-variable "app_gateway_api_pnpg_certificate_name" {
-  type        = string
-  description = "Application gateway: api-pnpg certificate name on Key Vault"
-}
+# variable "app_gateway_api_pnpg_certificate_name" {
+#   type        = string
+#   description = "Application gateway: api-pnpg certificate name on Key Vault"
+# }
 
-variable "app_gateway_api_certificate_name" {
-  type        = string
-  description = "Application gateway: api certificate name on Key Vault"
-}
+# variable "app_gateway_api_certificate_name" {
+#   type        = string
+#   description = "Application gateway: api certificate name on Key Vault"
+# }
 
 variable "jwt_issuer" {
   type        = string
