@@ -66,7 +66,7 @@ jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
 jwt_audience = "portale.dev.pn.pagopa.it"
-
+jwt_issuer   = "https://hub-login.spid.dev.pn.pagopa.it"
 jwt_social_expire = "10000000"
 
 configmaps_interop-be-party-process = {
