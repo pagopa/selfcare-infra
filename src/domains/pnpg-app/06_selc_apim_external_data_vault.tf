@@ -87,11 +87,11 @@ module "apim_external_api_data_vault_v1" {
 
 resource "azurerm_api_management_named_value" "apim_named_value_backend_access_token" {
 
-  name                = "backend-access-token"
+  name                = "backend-access-token-pnpg"
   api_management_name = local.apim_name
   resource_group_name = local.apim_rg
 
-  display_name = "backend-access-token"
+  display_name = "backend-access-token-pnpg"
   secret       = true
   value_from_key_vault {
     secret_id = data.azurerm_key_vault_secret.apim_backend_access_token.id
