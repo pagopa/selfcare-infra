@@ -7,7 +7,7 @@
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | = 2.33.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.45.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | = 2.8.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | = 2.17.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | = 2.18.1 |
 
 ## Modules
 
@@ -22,55 +22,55 @@
 |------|------|
 | [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.appinsights-instrumentation-key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.azure_devops_aks_apiserver_url](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_cacrt](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_private_dns_a_record.ingress](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [helm_release.reloader](https://registry.terraform.io/providers/hashicorp/helm/2.8.0/docs/resources/release) | resource |
-| [kubernetes_cluster_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/cluster_role_binding) | resource |
-| [kubernetes_config_map.aruba-sign-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.common](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.geo-taxonomies](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.infocamere-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.inner-service-url](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.jwt](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.jwt-exchange](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.jwt-social](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_config_map.selfcare-core](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/config_map) | resource |
-| [kubernetes_deployment.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/deployment) | resource |
-| [kubernetes_ingress_v1.health_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
-| [kubernetes_ingress_v1.selc_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/ingress_v1) | resource |
-| [kubernetes_namespace.domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
-| [kubernetes_namespace.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
-| [kubernetes_namespace.system_domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/namespace) | resource |
-| [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
-| [kubernetes_role_binding.system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/role_binding) | resource |
-| [kubernetes_secret.aruba-sign-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.b4f-dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.cdn-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.common-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.contracts-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.infocamere-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.mail](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.mail-not-pec](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.mongo-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.onboarding-interceptor-apim-internal](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.onboarding-interceptor-event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.social-login](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.uservice-party-management](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret) | resource |
-| [kubernetes_secret_v1.apim_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
-| [kubernetes_secret_v1.azure_devops_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/secret_v1) | resource |
-| [kubernetes_service.health](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service) | resource |
-| [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
-| [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
-| [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/resources/service_account) | resource |
+| [kubernetes_cluster_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/cluster_role_binding) | resource |
+| [kubernetes_config_map.aruba-sign-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.common](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.geo-taxonomies](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.infocamere-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.inner-service-url](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.interop-be-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt-exchange](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.jwt-social](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.national-registries-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_config_map.selfcare-core](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
+| [kubernetes_ingress_v1.selc_ingress](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/ingress_v1) | resource |
+| [kubernetes_namespace.domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/namespace) | resource |
+| [kubernetes_namespace.system_domain_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/namespace) | resource |
+| [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/role_binding) | resource |
+| [kubernetes_role_binding.system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/role_binding) | resource |
+| [kubernetes_secret.aruba-sign-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.b4f-dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.cdn-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.common-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.contracts-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.infocamere-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.mail](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.mail-not-pec](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.mongo-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.national-registry-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.onboarding-interceptor-apim-internal](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.onboarding-interceptor-event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.social-login](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.uservice-party-management](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.uservice-party-process](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret_v1.apim_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret_v1) | resource |
+| [kubernetes_secret_v1.azure_devops_service_account_default_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret_v1) | resource |
+| [kubernetes_service_account.apim_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/service_account) | resource |
+| [kubernetes_service_account.azure_devops](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/service_account) | resource |
+| [kubernetes_service_account.in_cluster_app_service_account](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/service_account) | resource |
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_one_trust](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [azuread_group.adgroup_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
@@ -86,8 +86,8 @@
 | [azurerm_private_dns_zone.internal](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
 | [azurerm_resource_group.monitor_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
-| [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/data-sources/secret) | data source |
-| [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.17.0/docs/data-sources/secret) | data source |
+| [kubernetes_secret.apim_service_account_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/data-sources/secret) | data source |
+| [kubernetes_secret.azure_devops_secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/data-sources/secret) | data source |
 
 ## Inputs
 
@@ -99,7 +99,8 @@
 | <a name="input_aruba_sign_service"></a> [aruba\_sign\_service](#input\_aruba\_sign\_service) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_common"></a> [configmaps\_common](#input\_configmaps\_common) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_hub-spid-login-ms"></a> [configmaps\_hub-spid-login-ms](#input\_configmaps\_hub-spid-login-ms) | n/a | `map(string)` | n/a | yes |
-| <a name="input_configmaps_ms_core"></a> [configmaps\_ms\_core](#input\_configmaps\_ms\_core) | ConfigMaps & Secrets | `map(string)` | n/a | yes |
+| <a name="input_configmaps_interop-be-party-process"></a> [configmaps\_interop-be-party-process](#input\_configmaps\_interop-be-party-process) | ConfigMaps & Secrets | `map(string)` | n/a | yes |
+| <a name="input_configmaps_ms_core"></a> [configmaps\_ms\_core](#input\_configmaps\_ms\_core) | n/a | `map(string)` | n/a | yes |
 | <a name="input_default_service_port"></a> [default\_service\_port](#input\_default\_service\_port) | n/a | `number` | `8080` | no |
 | <a name="input_dns_zone_internal_prefix"></a> [dns\_zone\_internal\_prefix](#input\_dns\_zone\_internal\_prefix) | The dns subdomain. | `string` | `null` | no |
 | <a name="input_dns_zone_prefix"></a> [dns\_zone\_prefix](#input\_dns\_zone\_prefix) | The dns subdomain. | `string` | `"selfcare"` | no |

@@ -1,6 +1,6 @@
 ## Application gateway public ip ##
 resource "azurerm_public_ip" "appgateway_public_ip" {
-  name                = format("%s-appgateway-pip", local.project)
+  name                = "${local.project}-appgateway-pip"
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
@@ -11,8 +11,8 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
 
 # Subnet to host the application gateway
 module "appgateway_snet" {
-  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
-  name                 = format("%s-appgateway-snet", local.project)
+  source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v4.10.1"
+  name                 = "${local.project}-appgateway-snet"
   address_prefixes     = var.cidr_subnet_appgateway
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
@@ -26,29 +26,9 @@ locals {
     "/ms-notification-manager/*",
     "/party-process/*",
     "/party-registry-proxy/*",
+    "/ms-core/*",
   ]
-}
 
-# Application gateway: Multilistener configuraiton
-module "app_gw" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v2.9.0"
-
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-  location            = azurerm_resource_group.rg_vnet.location
-  name                = format("%s-app-gw", local.project)
-
-  # SKU
-  sku_name = var.app_gateway_sku_name
-  sku_tier = var.app_gateway_sku_tier
-
-  # WAF
-  waf_enabled = var.app_gateway_waf_enabled
-
-  # Networking
-  subnet_id    = module.appgateway_snet.id
-  public_ip_id = azurerm_public_ip.appgateway_public_ip.id
-
-  # Configure backends
   backends = {
     aks = {
       protocol                    = "Http"
@@ -72,33 +52,23 @@ module "app_gw" {
       fqdns                       = null
       pick_host_name_from_backend = false
     }
+    platform-aks = {
+      protocol                    = "Https"
+      host                        = "${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"
+      port                        = 443
+      ip_addresses                = null
+      probe                       = "/pnpg/status"
+      probe_name                  = "probe-platform-aks"
+      request_timeout             = 60
+      fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
+      pick_host_name_from_backend = false
+    }
   }
 
-  ssl_profiles = [{
-    name                             = format("%s-ssl-profile", local.project)
-    trusted_client_certificate_names = null
-    verify_client_cert_issuer_dn     = false
-    ssl_policy = {
-      disabled_protocols = []
-      policy_type        = "Custom"
-      policy_name        = "" # with Custom type set empty policy_name (not required by the provider)
-      cipher_suites = [
-        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
-        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
-      ]
-      min_protocol_version = "TLSv1_2"
-    }
-  }]
-
-  trusted_client_certificates = []
-
-  # Configure listeners
   listeners = {
     api = {
       protocol           = "Https"
-      host               = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+      host               = "api.${var.dns_zone_prefix}.${var.external_domain}"
       port               = 443
       ssl_profile_name   = null
       firewall_policy_id = null
@@ -112,11 +82,58 @@ module "app_gw" {
         )
       }
     }
+    api-pnpg = {
+      protocol           = "Https"
+      host               = "api-pnpg.${var.dns_zone_prefix}.${var.external_domain}"
+      port               = 443
+      ssl_profile_name   = null
+      firewall_policy_id = null
+      certificate = {
+        name = var.app_gateway_api_pnpg_certificate_name
+        id = replace(
+          data.azurerm_key_vault_certificate.api_pnpg_selfcare_certificate.secret_id,
+          "/${data.azurerm_key_vault_certificate.api_pnpg_selfcare_certificate.version}",
+          ""
+        )
+      }
+    }
   }
+}
 
+# Application gateway: Multilistener configuraiton
+module "app_gw" {
+  source = "git::https://github.com/pagopa/azurerm.git//app_gateway?ref=v4.10.1"
+
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  location            = azurerm_resource_group.rg_vnet.location
+  name                = "${local.project}-app-gw"
+
+  # SKU
+  sku_name = var.app_gateway_sku_name
+  sku_tier = var.app_gateway_sku_tier
+
+  # WAF
+  waf_enabled = var.app_gateway_waf_enabled
+
+  # Networking
+  subnet_id    = module.appgateway_snet.id
+  public_ip_id = azurerm_public_ip.appgateway_public_ip.id
+
+  # Configure backends
+  backends = local.backends
+
+  # Configure listeners
+  listeners = local.listeners
 
   # maps listener to backend
-  routes = {}
+  routes = {
+    api-pnpg-to-platform-aks = {
+      listener              = "api-pnpg"
+      backend               = "platform-aks"
+      rewrite_rule_set_name = null
+    }
+  }
+
   routes_path_based = {
     api = {
       listener     = "api"
@@ -139,6 +156,24 @@ module "app_gw" {
     }
   }
 
+  ssl_profiles = [{
+    name                             = "${local.project}-ssl-profile"
+    trusted_client_certificate_names = null
+    verify_client_cert_issuer_dn     = false
+    ssl_policy = {
+      disabled_protocols = []
+      policy_type        = "Custom"
+      policy_name        = "" # with Custom type set empty policy_name (not required by the provider)
+      cipher_suites = [
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+      ]
+      min_protocol_version = "TLSv1_2"
+    }
+  }]
+
+  trusted_client_certificates = []
+
   rewrite_rule_sets = [
     {
       name = "rewrite-rule-set-api"
@@ -146,12 +181,12 @@ module "app_gw" {
         {
           name          = "ingres-private-urls"
           rule_sequence = 1
-          condition = {
+          conditions = [{
             variable    = "var_uri_path"
             pattern     = join("|", local.allowedIngressPathRegexps)
             ignore_case = true
             negate      = true
-          }
+          }]
           request_header_configurations  = []
           response_header_configurations = []
           url = {
@@ -162,7 +197,7 @@ module "app_gw" {
         {
           name          = "http-headers-api"
           rule_sequence = 100
-          condition     = null
+          conditions    = []
           request_header_configurations = [
             {
               header_name  = "X-Forwarded-For"
@@ -175,7 +210,8 @@ module "app_gw" {
           ]
           response_header_configurations = []
           url                            = null
-      }]
+        },
+      ]
     },
   ]
 

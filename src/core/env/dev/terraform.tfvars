@@ -35,17 +35,17 @@ cidr_subnet_aks_platform          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 
-
 #
-# AKS
+# AKS Platform
 #
-cidr_aks_vnet                 = ["10.11.0.0/16"]
+aks_platform_env              = "dev01"
 vnet_aks_ddos_protection_plan = false
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 
 # dns
-external_domain = "pagopa.it"
 dns_zone_prefix = "dev.selfcare"
+external_domain = "pagopa.it"
 
 # azure devops
 azdo_sp_tls_cert_enabled = true
@@ -57,7 +57,8 @@ apim_publisher_name = "pagoPA SelfCare DEV"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name = "api-dev-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-dev-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
 
 # redis
 redis_sku_name                 = "Basic"
@@ -66,9 +67,11 @@ redis_capacity                 = 0
 redis_private_endpoint_enabled = false
 
 # aks
-aks_alerts_enabled                = false
-aks_kubernetes_version            = "1.23.12"
-aks_system_node_pool_os_disk_type = "Managed"
+aks_alerts_enabled                  = false
+aks_kubernetes_version              = "1.23.12"
+aks_system_node_pool_os_disk_type   = "Managed"
+aks_system_node_pool_node_count_min = 2
+aks_system_node_pool_node_count_max = 3
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
 

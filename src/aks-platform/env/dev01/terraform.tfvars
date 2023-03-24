@@ -45,7 +45,7 @@ aks_system_node_pool = {
   vm_size         = "Standard_B4ms",
   os_disk_type    = "Managed",
   os_disk_size_gb = 75,
-  node_count_min  = 1,
+  node_count_min  = 2,
   node_count_max  = 3,
   node_labels     = { node_name : "aks-dev-sys", node_type : "system" },
   node_tags       = { node_tag_1 : "1" },
@@ -56,7 +56,7 @@ aks_user_node_pool = {
   vm_size         = "Standard_B4ms",
   os_disk_type    = "Managed",
   os_disk_size_gb = 128,
-  node_count_min  = 1,
+  node_count_min  = 2,
   node_count_max  = 3,
   node_labels     = { node_name : "aks-dev-user", node_type : "user" },
   node_taints     = [],
@@ -95,7 +95,7 @@ ingress_replica_count = "1"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 ingress_load_balancer_ip = "10.11.100.250"
 nginx_helm_version       = "4.1.0"
-keda_helm_version        = "2.9.1"
+keda_helm_version        = "2.10.0"
 
 # chart releases: https://github.com/stakater/Reloader/releases
 # image tags: https://hub.docker.com/r/stakater/reloader/tags

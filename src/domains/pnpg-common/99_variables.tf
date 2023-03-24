@@ -187,6 +187,8 @@ variable "spa" {
   description = "spa root dirs"
   default = [
     "auth",
+    "onboarding-pnpg",
+    "dashboard-pnpg",
     "onboarding",
     "dashboard"
   ]

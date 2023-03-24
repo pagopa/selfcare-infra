@@ -98,7 +98,7 @@ variable "cidr_subnet_k8s" {
   description = "Subnet cluster kubernetes."
 }
 
-variable "cidr_aks_vnet" {
+variable "cidr_aks_platform_vnet" {
   type        = list(string)
   description = "vnet for aks platform."
 }
@@ -128,13 +128,11 @@ variable "aks_system_node_pool_os_disk_size_gb" {
 variable "aks_system_node_pool_node_count_min" {
   type        = number
   description = "The minimum number of nodes which should exist in this Node Pool. Between 1 and 1000"
-  default     = 1
 }
 
 variable "aks_system_node_pool_node_count_max" {
   type        = number
   description = "The maximum number of nodes which should exist in this Node Pool. Between 1 and 1000"
-  default     = 1
 }
 
 variable "aks_system_node_pool_only_critical_addons_enabled" {
@@ -600,7 +598,12 @@ variable "cidr_subnet_redis" {
 
 variable "app_gateway_api_certificate_name" {
   type        = string
-  description = "Application gateway api certificate name on Key Vault"
+  description = "Application gateway: api certificate name on Key Vault"
+}
+
+variable "app_gateway_api_pnpg_certificate_name" {
+  type        = string
+  description = "Application gateway: api-pnpg certificate name on Key Vault"
 }
 
 variable "app_gateway_sku_name" {
@@ -1070,4 +1073,9 @@ variable "docker_registry" {
       zone_redundancy_enabled   = bool
     })
   })
+}
+
+variable "aks_platform_env" {
+  type        = string
+  description = "The env name used into aks platform folder. E.g: dev01"
 }
