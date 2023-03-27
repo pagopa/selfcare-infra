@@ -74,7 +74,6 @@ module "apim_external_api_data_vault_v1" {
   subscription_required = true
 
   product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
   ]
 
   api_operation_policies = [
