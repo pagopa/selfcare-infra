@@ -97,7 +97,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_v2_for_pnpg
 }
 
 module "apim_external_api_ms_v2" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v2.12.5"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v4.1.17"
   name                = format("%s-ms-external-api-pnpg", local.project)
   api_management_name = local.apim_name
   resource_group_name = local.apim_rg
