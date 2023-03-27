@@ -89,10 +89,10 @@ module "apim_external_api_data_vault_v1" {
 }
 
 resource "azurerm_api_management_api_version_set" "apim_external_api_v2_for_pnpg"{
-  name                = format("%s-ms-external-api", var.env_short)
+  name                = format("%s-ms-external-api-pnpg", var.env_short)
   resource_group_name = local.apim_rg
   api_management_name = local.apim_name
-  display_name        = "External API Service"
+  display_name        = "External API Service for PNPG"
   versioning_scheme   = "Segment"
 }
 
