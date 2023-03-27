@@ -114,12 +114,12 @@ module "apim_external_api_ms_v2" {
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/ms_external_api_for_pnpg/v2/open-api.yml.tpl", {
+  content_value  = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
 
-  xml_content = file("./api/ms_external_api_for_pnpg/v2/base_policy.xml")
+  xml_content = file("./api/external_api_for_pnpg/v2/base_policy.xml")
 
   subscription_required = true
   product_ids           = [
@@ -129,26 +129,26 @@ module "apim_external_api_ms_v2" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content  = templatefile("./api/ms_external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
       })
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content  = templatefile("./api/ms_external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
-      xml_content  = templatefile("./api/ms_external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content  = templatefile("./api/ms_external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
       })
     }
