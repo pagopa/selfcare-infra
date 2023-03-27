@@ -65,7 +65,7 @@ module "apim_external_api_data_vault_v1" {
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", { 
+  content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
@@ -97,7 +97,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_v2_for_pnpg
 }
 
 module "apim_external_api_ms_v2" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v2.12.5"
   name                = format("%s-ms-external-api-pnpg", local.project)
   api_management_name = local.apim_name
   resource_group_name = local.apim_rg
