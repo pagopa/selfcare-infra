@@ -122,5 +122,5 @@ module "apim_data_vault_product_pn_pg" {
   subscription_required = true
   approval_required     = false
 
-  policy_xml = file("./api_product/io-sign/policy.xml")
+  policy_xml = file("./api_product/pnpg/policy.xml")
 }
