@@ -70,8 +70,12 @@ module "apim_external_api_data_vault_v1" {
     basePath = "v1"
   })
 
-  xml_content = file("./api/external_api_data_vault/v1/base_policy.xml")
+  xml_content           = file("./api/external_api_data_vault/v1/base_policy.xml")
+  subscription_required = true
 
+  product_ids = [
+    module.apim_data_vault_product_pn_pg
+  ]
 
   api_operation_policies = [
     {
@@ -102,4 +106,21 @@ resource "azurerm_api_management_named_value" "apim_named_value_backend_access_t
 data "azurerm_key_vault_secret" "apim_backend_access_token" {
   name         = "apim-backend-access-token"
   key_vault_id = data.azurerm_key_vault.kv_domain.id
+}
+
+module "apim_data_vault_product_pn_pg" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "prod-pnpg"
+  display_name = "PNPG"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io-sign/policy.xml")
 }
