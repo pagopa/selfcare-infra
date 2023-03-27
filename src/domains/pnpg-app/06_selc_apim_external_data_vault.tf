@@ -71,9 +71,11 @@ module "apim_external_api_data_vault_v1" {
   })
 
   xml_content           = file("./api/external_api_data_vault/v1/base_policy.xml")
-  subscription_required = true
 
-  product_ids = [module.apim_data_vault_product_pn_pg.product_id]
+  subscription_required = true
+  product_ids = [
+    module.apim_data_vault_product_pn_pg.product_id
+  ]
 
   api_operation_policies = [
     {
