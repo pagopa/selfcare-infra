@@ -188,6 +188,8 @@ variable "spa" {
   default = [
     "auth",
     "onboarding-pnpg",
+    "dashboard-pnpg",
+    "onboarding",
     "dashboard"
   ]
 }

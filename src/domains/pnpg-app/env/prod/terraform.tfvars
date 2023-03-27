@@ -17,14 +17,14 @@ tags = {
 
 ### External resources
 
-monitor_resource_group_name                 = "selfcare-p-monitor-rg"
-log_analytics_workspace_name                = "selfcare-p-law"
-log_analytics_workspace_resource_group_name = "selfcare-p-monitor-rg"
+monitor_resource_group_name                 = "selc-p-monitor-rg"
+log_analytics_workspace_name                = "selc-p-law"
+log_analytics_workspace_resource_group_name = "selc-p-monitor-rg"
 
 ### Aks
 
-aks_name                = "selfcare-p-weu-prod01-aks"
-aks_resource_group_name = "selfcare-p-weu-prod01-aks-rg"
+aks_name                = "selc-p-weu-prod01-aks"
+aks_resource_group_name = "selc-p-weu-prod01-aks-rg"
 
 ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "prod01.pnpg.internal.selfcare.pagopa.it"
@@ -65,17 +65,17 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience = "api.selfcare.pagopa.it"
-
+jwt_audience      = "portale.prod.pn.pagopa.it"
+jwt_issuer        = "https://hub-login.ecs.pn.pagopa.it"
 jwt_social_expire = "10000000"
 
 configmaps_interop-be-party-process = {
-  USER_REGISTRY_MANAGEMENT_URL : "https://api.pdv.pagopa.it/user-registry/v1"
+  USER_REGISTRY_MANAGEMENT_URL : "https://api-pnpg.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK : "https://selfcare.pagopa.it/onboarding/confirm?jwt="
   MAIL_ONBOARDING_REJECTION_LINK : "https://selfcare.pagopa.it/onboarding/cancel?jwt="
-  PRODUCT_MANAGEMENT_URL : "https://api.selfcare.pagopa.it/external/v1"
+  PRODUCT_MANAGEMENT_URL : "https://api-pnpg.selfcare.pagopa.it/external/v1"
   SELFCARE_ADMIN_NOTIFICATION_URL : "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
-  GEO_TAXONOMY_URL : "https://api.selfcare.pagopa.it/external/geo-tax"
+  GEO_TAXONOMY_URL : "https://api-pnpg.selfcare.pagopa.it/external/geo-tax"
   MAIL_ONBOARDING_URL : "https://selfcare.pagopa.it/onboarding/"
 }
 
@@ -83,7 +83,7 @@ configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://selfcare.pagopa.it/onboarding/confirm?jwt="
   MAIL_ONBOARDING_REJECTION_LINK       = "https://selfcare.pagopa.it/onboarding/cancel?jwt="
-  PRODUCT_MANAGEMENT_URL               = "https://api.selfcare.pagopa.it/external/v1"
+  PRODUCT_MANAGEMENT_URL               = "https://api-pnpg.selfcare.pagopa.it/external/v1"
   SIGNATURE_VALIDATION_ENABLED         = "false"
   CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
@@ -119,5 +119,5 @@ aruba_sign_service = {
 }
 
 geo-taxonomies = {
-  GEO_TAXONOMIES_URL = "https://api.selfcare.pagopa.it/external"
+  GEO_TAXONOMIES_URL = "https://api-pnpg.selfcare.pagopa.it/external"
 }

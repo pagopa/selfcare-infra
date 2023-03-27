@@ -10,8 +10,8 @@ location_short  = "weu"
 tags = {
   CreatedBy   = "Terraform"
   Environment = "PROD"
-  Owner       = "selc"
-  Source      = "https://github.com/pagopa/selc-infrastructure"
+  Owner       = "SelfCare"
+  Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
@@ -30,17 +30,17 @@ log_analytics_workspace_resource_group_name = "selc-p-monitor-rg"
 #
 # ⛴ AKS
 #
-rg_vnet_aks_name           = "selc-p-weu-prod01-vnet-rg"
-vnet_aks_name              = "selc-p-weu-prod01-vnet"
-public_ip_aksoutbound_name = "selc-p-weu-prod01-aksoutbound-pip-1"
+rg_vnet_aks_name           = "selc-p-weu-vnet-rg"
+vnet_aks_name              = "selc-p-weu-aks-prod01-vnet"
+public_ip_aksoutbound_name = "selc-p-weu-aks-platform-outbound-pip"
 
 aks_enabled                 = true
 aks_private_cluster_enabled = true
 aks_alerts_enabled          = false
-aks_kubernetes_version      = "1.24.6"
+aks_kubernetes_version      = "1.24.9"
 aks_sku_tier                = "Paid"
 aks_system_node_pool = {
-  name            = "cstprod01sys",
+  name            = "selcpro01sys",
   vm_size         = "Standard_D2ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 75,
@@ -52,7 +52,7 @@ aks_system_node_pool = {
 }
 aks_user_node_pool = {
   enabled         = true,
-  name            = "cstprod01usr",
+  name            = "selcpro01usr",
   vm_size         = "Standard_D8ds_v5",
   os_disk_type    = "Ephemeral",
   os_disk_size_gb = 300,
@@ -74,10 +74,7 @@ ingress_replica_count = "2"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 ingress_load_balancer_ip = "10.11.100.250"
 nginx_helm_version       = "4.1.0"
-keda_helm_version        = "2.6.2"
-prometheus_helm_version  = "15.10.4"
-grafana_helm_version     = "6.32.3"
-
+keda_helm_version        = "2.10.0"
 
 # chart releases: https://github.com/stakater/Reloader/releases
 # image tags: https://hub.docker.com/r/stakater/reloader/tags

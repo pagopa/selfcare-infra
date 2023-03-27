@@ -82,7 +82,7 @@ module "pnpg_checkout_cdn" {
       {
         action = "Overwrite"
         name   = "Content-Security-Policy-Report-Only"
-        value = format("default-src 'self'; object-src 'none'; connect-src 'self' https://api.%s.%s/ https://api-eu.mixpanel.com/track/; "
+        value = format("default-src 'self'; object-src 'none'; connect-src 'self' https://api-pnpg.%s.%s/ https://api-eu.mixpanel.com/track/; "
         , var.dns_zone_prefix, var.external_domain)
       },
       {

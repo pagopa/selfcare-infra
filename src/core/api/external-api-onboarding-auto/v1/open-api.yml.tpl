@@ -1,13 +1,20 @@
 openapi: 3.0.3
 info:
-  title: selc-external-api-onboarding-auto
+  title: selc-external-api
   description: Self Care External Api Documentation
   version: 0.0.1-SNAPSHOT
 servers:
-  - url: 'https://${host}/${basePath}'
+  - url: '{url}:{port}{basePath}'
+    variables:
+      url:
+        default: http://localhost
+      port:
+        default: '80'
+      basePath:
+        default: ''
 tags:
   - name: onboarding
-    description: Onboarding Controller
+    description: Onboarding operations
 paths:
   /onboarding/{externalInstitutionId}/products/{productId}:
     post:
@@ -47,6 +54,18 @@ paths:
                 $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
           content:
             application/problem+json:
               schema:
@@ -114,6 +133,16 @@ components:
     CompanyInformationsDto:
       title: CompanyInformationsDto
       type: object
+      properties:
+        businessRegisterPlace:
+          type: string
+          description: Institution's business register place
+        rea:
+          type: string
+          description: Institution's REA
+        shareCapital:
+          type: string
+          description: Institution's share capital value
     DpoDataDto:
       title: DpoDataDto
       required:
@@ -148,19 +177,6 @@ components:
         desc:
           type: string
           description: Institution's geographic taxonomy extended name
-    ImportContractDto:
-      title: ImportContractDto
-      type: object
-      properties:
-        contractType:
-          type: string
-          description: Institution's contract version
-        fileName:
-          type: string
-          description: Institution's contract file name
-        filePath:
-          type: string
-          description: Institution's contract file path
     InvalidParam:
       title: InvalidParam
       required:
@@ -194,7 +210,7 @@ components:
           $ref: '#/components/schemas/CompanyInformationsDto'
         geographicTaxonomies:
           type: array
-          description: Institution's geographic taxonomy
+          description: Institution's geographic taxonomy list
           items:
             $ref: '#/components/schemas/GeographicTaxonomyDto'
         institutionType:
@@ -215,20 +231,6 @@ components:
         pspData:
           description: Payment Service Provider (PSP) specific data
           $ref: '#/components/schemas/PspDataDto'
-        users:
-          type: array
-          description: List of onboarding users
-          items:
-            $ref: '#/components/schemas/UserDto'
-    OnboardingImportDto:
-      title: OnboardingImportDto
-      required:
-        - users
-      type: object
-      properties:
-        importContract:
-          description: Institution's contract information
-          $ref: '#/components/schemas/ImportContractDto'
         users:
           type: array
           description: List of onboarding users

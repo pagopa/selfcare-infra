@@ -269,4 +269,8 @@ variable "token_expiration_minutes" {
   default = 540 # 9 hours
 }
 
-
+variable "jwt_issuer" {
+  type        = string
+  description = "SPID"
+  default     = "SPID"
+}
