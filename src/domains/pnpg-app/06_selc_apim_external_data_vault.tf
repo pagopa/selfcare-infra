@@ -3,7 +3,7 @@
 ##############
 
 module "apim_pnpg" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.92"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
 
   product_id   = "pnpg-be"
   display_name = local.apim_pnpg_api.display_name
@@ -48,7 +48,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_data_vault"
 }
 
 module "apim_external_api_data_vault_v1" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v1.0.92"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v4.1.17"
   name                = format("%s-external-api-pnpg", local.project)
   api_management_name = local.apim_name
   resource_group_name = local.apim_rg
@@ -73,9 +73,7 @@ module "apim_external_api_data_vault_v1" {
   xml_content           = file("./api/external_api_data_vault/v1/base_policy.xml")
   subscription_required = true
 
-  product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
-  ]
+  product_ids = [module.apim_data_vault_product_pn_pg.product_id]
 
   api_operation_policies = [
     {
@@ -109,8 +107,7 @@ data "azurerm_key_vault_secret" "apim_backend_access_token" {
 }
 
 module "apim_data_vault_product_pn_pg" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
   product_id   = "prod-pnpg"
   display_name = "PNPG"
   description  = "Piattaforma Notifiche Persone Giuridiche"
