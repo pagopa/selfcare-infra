@@ -39,8 +39,8 @@ cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 # AKS Platform
 #
 aks_platform_env              = "prod01"
-cidr_aks_platform_vnet         = false
-vnet_aks_ddos_protection_plan = ["10.11.0.0/16"]
+vnet_aks_ddos_protection_plan = false
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
 dns_zone_prefix = "selfcare"
