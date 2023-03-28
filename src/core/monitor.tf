@@ -159,6 +159,11 @@ locals {
       path                 = "/health",
       expected_http_status = 404
     },
+    {
+      host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
+      path                 = "/health",
+      expected_http_status = 404
+    },
     # https://selfcare.pagopa.it/auth/login
     ## CDN custom domains ##
     {
@@ -172,7 +177,7 @@ locals {
 
 module "web_test_api" {
   for_each = { for v in local.test_urls : v.host => v if v != null }
-  source   = "git::https://github.com/pagopa/azurerm.git//application_insights_web_test_preview?ref=v2.0.18"
+  source   = "git::https://github.com/pagopa/azurerm.git//application_insights_web_test_preview?ref=v4.13.2"
 
   subscription_id                   = data.azurerm_subscription.current.subscription_id
   name                              = "${each.value.host}-test"
