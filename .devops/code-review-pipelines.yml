@@ -6,10 +6,11 @@ pr:
       - main
   paths:
     include:
-      - 'src/*'
-      - '.devops/*'
+      - 'src/core/*'
+      - '.devops/code-review-pipelines.yml'
     exclude:
       - 'src/k8s/*'
+      - '**/*.lock.hcl'
 
 parameters:
   - name: 'DEV'
@@ -35,7 +36,7 @@ parameters:
       - True
 
 variables:
-  TIME_OUT: 5
+  TIME_OUT: 10
 
 pool:
   vmImage: 'ubuntu-20.04'
@@ -45,7 +46,7 @@ resources:
     - repository: terraform
       type: github
       name: pagopa/azure-pipeline-templates
-      ref: refs/tags/v17
+      ref: refs/tags/v3.0.0
       endpoint: 'io-azure-devops-github-ro'
 
 stages:
@@ -55,43 +56,36 @@ stages:
     pool:
       name: selfcare-dev-linux
     jobs:
-      - job: terraform_install
-        steps:
-          # 1. Install terraform and terragrunt
-          - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan
-        dependsOn: terraform_install
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
           - checkout: self
-          # 2. Run terragrunt plan
+          # 1. Install terraform and terragrunt
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: DEV-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: dev
               WORKINGDIR: 'src/core'
-
+              TF_ENVIRONMENT_FOLDER: "dev"
+              AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
   - stage: UAT
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
       name: selfcare-uat-linux
     jobs:
-      - job: terraform_install
-        steps:
-          # 1. Install terraform and terragrunt
-          - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan
-        dependsOn: terraform_install
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
           - checkout: self
-          # 2. Run terragrunt plan
+          # 1. Install terraform and terragrunt
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: uat
               WORKINGDIR: 'src/core'
+              TF_ENVIRONMENT_FOLDER: "uat"
+              AZURE_SERVICE_CONNECTION_NAME: UAT-SELFCARE-SERVICE-CONN
 
   - stage: PROD
     dependsOn: []
@@ -99,18 +93,15 @@ stages:
     pool:
       name: selfcare-prod-linux
     jobs:
-      - job: terraform_install
-        steps:
-          # 1. Install terraform and terragrunt
-          - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan
-        dependsOn: terraform_install
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
           - checkout: self
-          # 2. Run terragrunt plan
+          # 1. Install terraform and terragrunt
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: PROD-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: prod
               WORKINGDIR: 'src/core'
+              TF_ENVIRONMENT_FOLDER: "prod"
+              AZURE_SERVICE_CONNECTION_NAME: PROD-SELFCARE-SERVICE-CONN
