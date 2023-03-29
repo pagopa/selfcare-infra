@@ -179,6 +179,12 @@ variable "cosmosdb_mongodb_private_endpoint_enabled" {
   default     = true
 }
 
+variable "enable_spid_test" {
+  type        = bool
+  description = "to provision italia/spid-testenv2:1.1.0"
+  default     = false
+}
+
 #
 # CDN
 #
@@ -187,8 +193,6 @@ variable "spa" {
   description = "spa root dirs"
   default = [
     "auth",
-    "onboarding-pnpg",
-    "dashboard-pnpg",
     "onboarding",
     "dashboard"
   ]
@@ -222,3 +226,36 @@ variable "logs_advanced_threat_protection" {
   description = "Enable logs threat advanced protection"
   default     = false
 }
+
+## Redis cache
+variable "redis_capacity" {
+  type    = number
+  default = 1
+}
+
+variable "redis_sku_name" {
+  type    = string
+  default = "Standard"
+}
+
+variable "redis_family" {
+  type    = string
+  default = "C"
+}
+
+variable "redis_private_endpoint_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "cidr_subnet_redis" {
+  type        = list(string)
+  description = "Redis network address space."
+  default     = []
+}
+
+variable "cidr_subnet_logs_storage" {
+  type        = list(string)
+  description = "Logs storage address space."
+}
+
