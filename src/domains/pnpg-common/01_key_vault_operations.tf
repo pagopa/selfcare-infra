@@ -14,7 +14,7 @@ module "jwt_exchange" {
 
   jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault_pnpg.id
-  cert_common_name = "selfcare.pagopa.it"
+  cert_common_name = "pnpg.selfcare.pagopa.it"
   cert_password    = ""
   tags             = var.tags
 }
@@ -24,7 +24,7 @@ module "agid_spid" {
 
   jwt_name         = "agid-spid"
   key_vault_id     = module.key_vault_pnpg.id
-  cert_common_name = "selfcare.pagopa.it"
+  cert_common_name = "pnpg.selfcare.pagopa.it"
   cert_password    = ""
   tags             = var.tags
 }
@@ -78,7 +78,7 @@ data "azurerm_api_management" "api_management_core" {
 }
 
 resource "azurerm_api_management_certificate" "jwt_certificate" {
-  name                = "jwt-spid-crt"
+  name                = "jwt-pnpg-spid-crt"
   api_management_name = data.azurerm_api_management.api_management_core.name
   resource_group_name = data.azurerm_api_management.api_management_core.resource_group_name
   data                = pkcs12_from_pem.jwt_pkcs12.result
