@@ -7,6 +7,7 @@ location_short = "weu"
 instance       = "prod"
 
 dns_zone_prefix = "selfcare"
+external_domain = "pagopa.it"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -24,7 +25,7 @@ log_analytics_workspace_name                = "selc-p-law"
 log_analytics_workspace_resource_group_name = "selc-p-monitor-rg"
 
 # Vnet
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 
 #
 # Mongo
@@ -44,3 +45,13 @@ cosmosdb_mongodb_throughput                       = 1000
 cosmosdb_mongodb_max_throughput                   = 1000
 cosmosdb_mongodb_enable_autoscaling               = true
 cosmosdb_mongodb_private_endpoint_enabled         = true
+
+# CDN
+robots_indexed_paths = []
+
+# Storage Logs
+# logs storage
+logs_account_replication_type   = "LRS"
+logs_delete_retention_days      = 14
+logs_enable_versioning          = false
+logs_advanced_threat_protection = true

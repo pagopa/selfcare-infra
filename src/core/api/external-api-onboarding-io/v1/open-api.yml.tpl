@@ -7,14 +7,14 @@ servers:
   - url: 'https://${host}/${basePath}'
 tags:
   - name: onboarding
-    description: Onboarding Controller
+    description: Onboarding operations
 paths:
   "/onboarding/{externalInstitutionId}":
     post:
       tags:
         - onboarding
       summary: contractOnboarding
-      description: The service allows the import of institutions' contracts
+      description: The service allows the import of old institutions' contracts
       operationId: contractOnboardingUsingPOST
       parameters:
         - name: externalInstitutionId
@@ -44,6 +44,18 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
@@ -55,105 +67,28 @@ paths:
             - global
 components:
   schemas:
-    AssistanceContactsDto:
-      title: AssistanceContactsDto
-      type: object
-      properties:
-        supportEmail:
-          type: string
-          description: Institution's support email contact
-          format: email
-          example: email@example.com
-        supportPhone:
-          type: string
-          description: Institution's support phone contact
-    BillingDataDto:
-      title: BillingDataDto
-      required:
-        - businessName
-        - digitalAddress
-        - recipientCode
-        - registeredOffice
-        - taxCode
-        - vatNumber
-        - zipCode
-      type: object
-      properties:
-        businessName:
-          type: string
-          description: Institution's legal name
-        digitalAddress:
-          type: string
-          description: Institution's digitalAddress
-        publicServices:
-          type: boolean
-          description: Institution's service type
-          example: false
-        recipientCode:
-          type: string
-          description: Billing recipient code
-        registeredOffice:
-          type: string
-          description: Institution's physical address
-        taxCode:
-          type: string
-          description: Institution's taxCode
-        vatNumber:
-          type: string
-          description: Institution's VAT number
-        zipCode:
-          type: string
-          description: Institution's zipCode
-    CompanyInformationsDto:
-      title: CompanyInformationsDto
-      type: object
-    DpoDataDto:
-      title: DpoDataDto
-      required:
-        - address
-        - email
-        - pec
-      type: object
-      properties:
-        address:
-          type: string
-          description: DPO's address
-        email:
-          type: string
-          description: DPO's email
-          format: email
-          example: email@example.com
-        pec:
-          type: string
-          description: DPO's PEC
-          format: email
-          example: email@example.com
-    GeographicTaxonomyDto:
-      title: GeographicTaxonomyDto
-      required:
-        - code
-        - desc
-      type: object
-      properties:
-        code:
-          type: string
-          description: Institution's geographic taxonomy ISTAT code
-        desc:
-          type: string
-          description: Institution's geographic taxonomy extended name
     ImportContractDto:
       title: ImportContractDto
+      required:
+        - contractType
+        - fileName
+        - filePath
+        - onboardingDate
       type: object
       properties:
         contractType:
           type: string
-          description: Institution's contract version
+          description: Institution's old contract version
         fileName:
           type: string
-          description: Institution's contract file name
+          description: Institution's old contract file name
         filePath:
           type: string
-          description: Institution's contract file path
+          description: Institution's old contract file path
+        onboardingDate:
+          type: string
+          description: Institution's old onboarding date in the format 2007-12-03T10:15:30+01:00 (YYYY-MM-DD-T-HH:mm:ss+UTC)
+          format: date-time
     InvalidParam:
       title: InvalidParam
       required:
@@ -167,60 +102,15 @@ components:
         reason:
           type: string
           description: Invalid parameter reason.
-    OnboardingDto:
-      title: OnboardingDto
-      required:
-        - billingData
-        - geographicTaxonomies
-        - institutionType
-        - users
-      type: object
-      properties:
-        assistanceContacts:
-          description: Institution's assistance contacts
-          $ref: '#/components/schemas/AssistanceContactsDto'
-        billingData:
-          description: Institution's billing information
-          $ref: '#/components/schemas/BillingDataDto'
-        companyInformations:
-          description: GPS, SCP, PT optional data
-          $ref: '#/components/schemas/CompanyInformationsDto'
-        geographicTaxonomies:
-          type: array
-          description: Institution's geographic taxonomy
-          items:
-            $ref: '#/components/schemas/GeographicTaxonomyDto'
-        institutionType:
-          type: string
-          description: Institution's type
-          enum:
-            - GSP
-            - PA
-            - PSP
-            - PT
-            - SCP
-        origin:
-          type: string
-          description: Institution data origin
-        pricingPlan:
-          type: string
-          description: Product's pricing plan
-        pspData:
-          description: Payment Service Provider (PSP) specific data
-          $ref: '#/components/schemas/PspDataDto'
-        users:
-          type: array
-          description: List of onboarding users
-          items:
-            $ref: '#/components/schemas/UserDto'
     OnboardingImportDto:
       title: OnboardingImportDto
       required:
+        - importContract
         - users
       type: object
       properties:
         importContract:
-          description: Institution's contract information
+          description: Institution's old contract information
           $ref: '#/components/schemas/ImportContractDto'
         users:
           type: array
@@ -257,36 +147,6 @@ components:
           type: string
           description: A URL to a page with more details regarding the problem.
       description: A "problem detail" as a way to carry machine-readable details of errors (https://datatracker.ietf.org/doc/html/rfc7807)
-    PspDataDto:
-      title: PspDataDto
-      required:
-        - abiCode
-        - businessRegisterNumber
-        - dpoData
-        - legalRegisterName
-        - legalRegisterNumber
-        - vatNumberGroup
-      type: object
-      properties:
-        abiCode:
-          type: string
-          description: PSP's ABI code
-        businessRegisterNumber:
-          type: string
-          description: PSP's Business Register number
-        dpoData:
-          description: Data Protection Officer (DPO) specific data
-          $ref: '#/components/schemas/DpoDataDto'
-        legalRegisterName:
-          type: string
-          description: PSP's legal register name
-        legalRegisterNumber:
-          type: string
-          description: PSP's legal register number
-        vatNumberGroup:
-          type: boolean
-          description: PSP's Vat Number group
-          example: false
     UserDto:
       title: UserDto
       required:

@@ -32,19 +32,19 @@ cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_aks_platform          = ["10.1.139.0/24"]
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
-cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
+cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 
 #
-# AKS
+# AKS Platform
 #
 aks_platform_env              = "prod01"
 vnet_aks_ddos_protection_plan = false
-cidr_aks_platform_vnet                 = ["10.11.0.0/16"]
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
-external_domain = "pagopa.it"
 dns_zone_prefix = "selfcare"
+external_domain = "pagopa.it"
 
 # azure devops
 azdo_sp_tls_cert_enabled = true
@@ -56,15 +56,15 @@ apim_publisher_name = "pagoPA SelfCare PROD"
 apim_sku            = "Premium_1" # TODO
 
 # app_gateway
-app_gateway_api_certificate_name = "api-selfcare-pagopa-it"
-app_gateway_api_pnpg_certificate_name = "api-pnpg-dev-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-selfcare-pagopa-it"
 
-app_gateway_min_capacity         = 0 # todo change to at least 1
-app_gateway_max_capacity         = 2
-app_gateway_sku_name             = "WAF_v2"
-app_gateway_sku_tier             = "WAF_v2"
-app_gateway_alerts_enabled       = true
-app_gateway_waf_enabled          = true
+app_gateway_min_capacity   = 0 # todo change to at least 1
+app_gateway_max_capacity   = 2
+app_gateway_sku_name       = "WAF_v2"
+app_gateway_sku_tier       = "WAF_v2"
+app_gateway_alerts_enabled = true
+app_gateway_waf_enabled    = true
 
 # redis
 redis_sku_name = "Standard"

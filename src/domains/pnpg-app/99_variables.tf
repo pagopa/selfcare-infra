@@ -212,6 +212,10 @@ variable "reverse_proxy_rtd" {
 #
 # ConfigMaps & Secrets
 #
+variable "configmaps_interop-be-party-process" {
+  type = map(string)
+}
+
 variable "configmaps_ms_core" {
   type = map(string)
 }
@@ -265,4 +269,8 @@ variable "token_expiration_minutes" {
   default = 540 # 9 hours
 }
 
-
+variable "jwt_issuer" {
+  type        = string
+  description = "SPID"
+  default     = "SPID"
+}

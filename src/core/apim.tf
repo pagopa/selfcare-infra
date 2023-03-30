@@ -214,7 +214,7 @@ module "apim_external_api_onboarding_auto_v1" {
     {
       operation_id = "autoApprovalOnboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
+    }
   ]
 }
 
@@ -241,18 +241,18 @@ module "apim_external_api_onboarding_io_v1" {
     basePath = "/onboarding-api/v1"
   })
 
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
-    API_DOMAIN                 = local.api_domain
-    KID                        = module.jwt.jwt_kid
-    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-  })
+  xml_content = file("./api/base_policy.xml")
 
   subscription_required = true
 
   api_operation_policies = [
     {
       operation_id = "contractOnboardingUsingPOST"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      xml_content = templatefile("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
