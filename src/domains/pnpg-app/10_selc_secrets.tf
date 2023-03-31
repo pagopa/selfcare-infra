@@ -30,6 +30,7 @@ resource "kubernetes_secret" "selc-redis-credentials" {
     # REDIS_URL      = local.redis_url
     REDIS_PASSWORD = module.key_vault_secrets_query.values["redis-primary-access-key"].value
     REDIS_PORT     = "6380"
+    REDIS_URL      = local.redis_url
   }
 
   type = "Opaque"
@@ -43,6 +44,7 @@ resource "kubernetes_secret" "selc-application-insights" {
 
   data = {
     APPLICATIONINSIGHTS_CONNECTION_STRING = data.azurerm_application_insights.application_insights.connection_string
+    APPINSIGHTS_INSTRUMENTATIONKEY        = data.azurerm_application_insights.application_insights.instrumentation_key
   }
 
   type = "Opaque"
