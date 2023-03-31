@@ -65,8 +65,8 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience      = "portale.uat.pn.pagopa.it"
-jwt_issuer        = "https://hub-login.ecs.uat.pn.pagopa.it"
+jwt_audience      = "api-pnpg.uat.selfcare.pagopa.it"
+jwt_issuer        = "SPID"
 jwt_social_expire = "10000000"
 
 configmaps_interop-be-party-process = {
