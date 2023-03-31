@@ -1,15 +1,15 @@
 ## Database subnet
 module "redis_snet" {
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
-  name                                           = format("%s-redis-snet", local.project)
-  address_prefixes                               = var.cidr_subnet_redis
-  resource_group_name                            = local.vnet_core_resource_group_name
-  virtual_network_name                           = local.vnet_core_name
+  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
+  name                 = format("%s-redis-snet", local.project)
+  address_prefixes     = var.cidr_subnet_redis
+  resource_group_name  = local.vnet_core_resource_group_name
+  virtual_network_name = local.vnet_core_name
   # enforce_private_link_endpoint_network_policies = true
 }
 
 module "redis" {
-  source                        = "git::https://github.com/pagopa/terraform-azurerm-v3.git//redis_cache?ref=v5.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//redis_cache?ref=v5.3.0"
 
   name                          = format("%s-redis", local.project)
   resource_group_name           = local.vnet_core_resource_group_name

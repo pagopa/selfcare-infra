@@ -8,7 +8,6 @@ terraform {
       source  = "hashicorp/azuread"
       version = "= 2.33.0"
     }
-
     pkcs12 = {
       source  = "chilicat/pkcs12"
       version = "0.0.7"
