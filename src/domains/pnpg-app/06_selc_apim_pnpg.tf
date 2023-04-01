@@ -59,19 +59,19 @@ module "apim_external_api_data_vault_v1" {
   display_name = "External API Data Vault"
   path         = "external/data-vault"
   api_version  = "v1"
-  protocols    = [
+  protocols = [
     "https"
   ]
 
   service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
+  content_value = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
 
-  xml_content           = file("./api/external_api_data_vault/v1/base_policy.xml")
+  xml_content = file("./api/external_api_data_vault/v1/base_policy.xml")
 
   subscription_required = true
   product_ids = [
@@ -81,7 +81,7 @@ module "apim_external_api_data_vault_v1" {
   api_operation_policies = [
     {
       operation_id = "getInstitution"
-      xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
       })
@@ -89,7 +89,7 @@ module "apim_external_api_data_vault_v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "apim_external_api_v2_for_pnpg"{
+resource "azurerm_api_management_api_version_set" "apim_external_api_v2_for_pnpg" {
   name                = format("%s-ms-external-api-pnpg", var.env_short)
   resource_group_name = local.apim_rg
   api_management_name = local.apim_name
@@ -108,14 +108,14 @@ module "apim_external_api_ms_v2" {
   display_name = "External API service for PNPG"
   path         = "external/pn-pg"
   api_version  = "v2"
-  protocols    = [
+  protocols = [
     "https"
   ]
 
   service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
 
   content_format = "openapi"
-  content_value  = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
+  content_value = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
@@ -123,33 +123,33 @@ module "apim_external_api_ms_v2" {
   xml_content = file("./api/external_api_for_pnpg/v2/base_policy.xml")
 
   subscription_required = true
-  product_ids           = [
+  product_ids = [
     module.apim_data_vault_product_pn_pg.product_id
   ]
 
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
-        CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
+      xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
+        CDN_STORAGE_URL = "https://${local.cdn_storage_hostname}"
       })
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content  = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
+      xml_content = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
-      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-product/v1/"
       })
     }

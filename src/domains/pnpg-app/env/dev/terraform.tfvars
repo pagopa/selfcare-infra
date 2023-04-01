@@ -30,12 +30,12 @@ ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "dev01.pnpg.internal.dev.selfcare.pagopa.it"
 reverse_proxy_be_io            = "10.1.0.250"
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip               = "10.11.100.250"
+reverse_proxy_ip = "10.11.100.250"
 #
 # Dns
 #
-dns_zone_internal_prefix       = "internal.dev.selfcare"
-external_domain                = "pagopa.it"
+dns_zone_internal_prefix = "internal.dev.selfcare"
+external_domain          = "pagopa.it"
 
 reloader_helm = {
   chart_version = "v0.0.118"
