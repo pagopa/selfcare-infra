@@ -257,6 +257,7 @@ module "apim_external_api_onboarding_io_v1" {
   ]
 }
 
+
 resource "azurerm_api_management_api_version_set" "apim_uservice_party_management" {
   name                = format("%s-party-mgmt-api", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -344,7 +345,8 @@ module "apim_user_group_ms_v1" {
   path         = "external/user-groups"
   api_version  = "v1"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/ms-user-group/user-groups/v1/", var.reverse_proxy_ip)
 
@@ -391,7 +393,8 @@ module "apim_external_api_ms_v1" {
   path         = "external"
   api_version  = "v1"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
@@ -466,7 +469,8 @@ module "apim_external_api_ms_v2" {
   path         = "external"
   api_version  = "v2"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 

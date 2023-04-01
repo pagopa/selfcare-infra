@@ -5,7 +5,7 @@ locals {
   key_vault_name           = "${local.product}-${var.domain}-kv"
   key_vault_resource_group = "${local.product}-${var.domain}-sec-rg"
 
-  # redis_url                       = "${format("%s-redis", local.project)}.redis.cache.windows.net"
+  redis_url = "selc-${var.env_short}-${var.location_short}-pnpg-redis.redis.cache.windows.net"
   # postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
   # postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
   mongodb_name_selc_product       = "selcProduct"
@@ -160,6 +160,12 @@ variable "ingress_load_balancer_hostname" {
   type = string
 }
 
+variable "reverse_proxy_ip" {
+  type        = string
+  default     = "127.0.0.1"
+  description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
+}
+
 # DNS
 variable "external_domain" {
   type        = string
@@ -269,8 +275,36 @@ variable "token_expiration_minutes" {
   default = 540 # 9 hours
 }
 
+# Network
+# variable "cidr_vnet" {
+#   type        = list(string)
+#   description = "Virtual network address space."
+# }
+
+# variable "cidr_subnet_apim" {
+#   type        = list(string)
+#   description = "Address prefixes subnet api management."
+#   default     = null
+# }
+
+# variable "cidr_subnet_private_endpoints" {
+#   type        = list(string)
+#   description = "private endpoints address space."
+# }
+
+# variable "app_gateway_api_pnpg_certificate_name" {
+#   type        = string
+#   description = "Application gateway: api-pnpg certificate name on Key Vault"
+# }
+
+# variable "app_gateway_api_certificate_name" {
+#   type        = string
+#   description = "Application gateway: api certificate name on Key Vault"
+# }
+
 variable "jwt_issuer" {
   type        = string
   description = "SPID"
   default     = "SPID"
 }
+

@@ -25,7 +25,17 @@ log_analytics_workspace_name                = "selc-u-law"
 log_analytics_workspace_resource_group_name = "selc-u-monitor-rg"
 
 # Vnet
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_redis                 = ["10.1.143.0/29"]
+cidr_subnet_logs_storage          = ["10.1.143.8/29"]
+
+# spid-testenv
+enable_spid_test = true
+
+# redis
+redis_sku_name = "Basic"
+redis_family   = "C"
+redis_capacity = 0
 
 #
 # Mongo

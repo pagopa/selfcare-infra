@@ -8,8 +8,7 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v5.3.0"
-
+  source                          = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v5.3.0"
   name                            = replace("${local.project}-st-logs", "-", "")
   account_kind                    = "StorageV2"
   account_tier                    = "Standard"
@@ -83,4 +82,17 @@ resource "azurerm_private_endpoint" "logs_storage" {
     name                 = "private-dns-zone-group"
     private_dns_zone_ids = [data.azurerm_private_dns_zone.privatelink_blob_core_windows_net.id]
   }
+}
+
+module "logs_storage_snet" {
+  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
+  name                 = "${local.project}-logs-storage-snet"
+  address_prefixes     = var.cidr_subnet_logs_storage
+  resource_group_name  = data.azurerm_virtual_network.vnet_core.resource_group_name
+  virtual_network_name = data.azurerm_virtual_network.vnet_core.name
+  # enforce_private_link_endpoint_network_policies = true
+
+  service_endpoints = [
+    "Microsoft.Storage",
+  ]
 }
