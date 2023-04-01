@@ -1,7 +1,7 @@
 <policies>
     <inbound>
         <base/>
-        <set-variable name="productId" value="prod-pnpg"/>
+        <set-variable name="productId" value="prod-pn-pg"/>
     </inbound>
     <backend>
         <base/>

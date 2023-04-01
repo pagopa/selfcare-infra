@@ -30,6 +30,7 @@ locals {
   }
   apim_name        = "${local.product}-apim"
   apim_rg          = "${local.product}-api-rg"
+  api_domain       = format("api-pnpg.%s.%s", var.dns_zone_prefix, var.external_domain)
   pnpg_hostname    = var.env == "prod" ? "api-pnpg.selfcare.pagopa.it" : "api-pnpg.${var.env}.selfcare.pagopa.it"
   pnpg_fe_hostname = var.env == "prod" ? "selfcare.platform.pagopa.it" : "selfcare.${var.env}.platform.pagopa.it"
 
@@ -62,7 +63,7 @@ module "apim_external_api_data_vault_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
 
   content_format = "openapi"
   content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
@@ -82,7 +83,9 @@ module "apim_external_api_data_vault_v1" {
       operation_id = "getInstitution"
       xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.module.jwt.jwt_kid
       })
     }
   ]
@@ -111,7 +114,7 @@ module "apim_external_api_ms_v2" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
 
   content_format = "openapi"
   content_value  = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
@@ -136,20 +139,20 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content  = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
       xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
       xml_content  = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-product/v1/"
       })
     }
   ]
@@ -175,7 +178,7 @@ data "azurerm_key_vault_secret" "apim_backend_access_token" {
 
 module "apim_data_vault_product_pn_pg" {
   source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
-  product_id   = "prod-pnpg"
+  product_id   = "prod-pn-pg"
   display_name = "PNPG"
   description  = "Piattaforma Notifiche Persone Giuridiche"
 

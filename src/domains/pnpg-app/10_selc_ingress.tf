@@ -60,7 +60,7 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
               }
             }
           }
-          path = "/spid/v1/(.*)"
+          path = "/pnpg/spid/v1/(.*)"
           path_type = "ImplementationSpecific"
         }
 
