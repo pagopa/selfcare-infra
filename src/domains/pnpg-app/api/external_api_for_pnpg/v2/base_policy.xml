@@ -12,7 +12,7 @@
             <value>@(context.Request.IpAddress)</value>
         </set-header>
         <set-header exists-action="override" name="Authorization">
-            <value>Bearer {{backend-access-token}}</value>
+            <value>Bearer {{backend-access-token-pnpg}}</value>
         </set-header>
     </inbound>
     <backend>
