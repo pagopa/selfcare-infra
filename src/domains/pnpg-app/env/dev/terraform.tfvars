@@ -55,7 +55,7 @@ tls_cert_check_helm = {
 api_gateway_url = "https://api-pnpg.dev.selfcare.pagopa.it"
 # cdn_frontend_url = "https://dev.selfcare.pagopa.it"
 # cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
-spid_testenv_url = "https://selc-d-spid-testenv.westeurope.azurecontainer.io"
+spid_testenv_url = "https://selc-d-pnpg-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
 api-version_uservice-party-management     = "0.1"
@@ -66,8 +66,8 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience      = "portale.dev.pn.pagopa.it"
-jwt_issuer        = "https://hub-login.spid.dev.pn.pagopa.it"
+jwt_audience      = "api-pnpg.dev.selfcare.pagopa.it"
+jwt_issuer        = "SPID"
 jwt_social_expire = "10000000"
 
 configmaps_interop-be-party-process = {

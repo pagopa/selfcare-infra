@@ -48,6 +48,7 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
 
   spec {
     rule {
+      host = var.ingress_load_balancer_hostname
       http {
 
         path {
@@ -60,6 +61,7 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
             }
           }
           path = "/spid/v1/(.*)"
+          path_type = "ImplementationSpecific"
         }
 
       }
