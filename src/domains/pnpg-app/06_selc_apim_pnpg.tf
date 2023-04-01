@@ -84,8 +84,6 @@ module "apim_external_api_data_vault_v1" {
       xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = data.module.jwt.jwt_kid
       })
     }
   ]
