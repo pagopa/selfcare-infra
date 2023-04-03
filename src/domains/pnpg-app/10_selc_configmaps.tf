@@ -73,7 +73,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
 
     # SPID
     ORG_URL          = "https://pagopa.gov.it"
-    ACS_BASE_URL     = "${var.api_gateway_url}/pnpg/spid/v1"
+    ACS_BASE_URL     = "${var.api_gateway_url}/spid/v1"
     ORG_DISPLAY_NAME = "PagoPA S.p.A"
     ORG_NAME         = "PagoPA"
 
