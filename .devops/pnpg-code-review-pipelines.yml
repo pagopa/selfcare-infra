@@ -8,6 +8,7 @@ pr:
     include:
       - 'src/domains/pnpg-app'
       - 'src/domains/pnpg-common'
+      - '.devops/pnpg-code-review-pipelines.yml'
     exclude:
       - 'src/k8s/*'
       - '**/*.lock.hcl'
