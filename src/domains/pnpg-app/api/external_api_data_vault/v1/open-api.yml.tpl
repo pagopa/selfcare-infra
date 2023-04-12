@@ -23,11 +23,11 @@ paths:
                $ref: '#/components/schemas/CreatePnPgInstitutionDto'
        responses:
          '200':
-           description: Ok
+           description: OK
            content:
              application/json:
                schema:
-                 type: string
+                 $ref: '#/components/schemas/PnPgInstitutionIdResource'
          '400':
            description: Bad Request
            content:
@@ -98,6 +98,16 @@ components:
         externalId:
           type: string
           description: Institution's unique external identifier
+    PnPgInstitutionIdResource:
+          title: PnPgInstitutionIdResource
+          required:
+            - id
+          type: object
+          properties:
+            id:
+              type: string
+              description: Institution's unique internal Id
+              format: uuid
     Problem:
       title: Problem
       required:
