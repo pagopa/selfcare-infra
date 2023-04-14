@@ -31,6 +31,7 @@ configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://dev.selfcare.pagopa.it/onboarding/confirm?jwt="
   MAIL_ONBOARDING_REJECTION_LINK       = "https://dev.selfcare.pagopa.it/onboarding/cancel?jwt="
+  MAIL_ONBOARDING_URL                  = "https://dev.selfcare.pagopa.it/onboarding/"
   PRODUCT_MANAGEMENT_URL               = "https://api.dev.selfcare.pagopa.it/external/v1"
   SIGNATURE_VALIDATION_ENABLED         = "false"
   CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
