@@ -75,7 +75,7 @@ configmaps_interop-be-party-process = {
   MAIL_ONBOARDING_REJECTION_LINK : "https://uat.selfcare.pagopa.it/onboarding/cancel?jwt="
   PRODUCT_MANAGEMENT_URL : "https://api-pnpg.uat.selfcare.pagopa.it/external/v1"
   SELFCARE_ADMIN_NOTIFICATION_URL : "https://uat.selfcare.pagopa.it/dashboard/admin/onboarding/"
-  GEO_TAXONOMY_URL : "https://api.pdnd.pagopa.it/geo-tax/"
+  GEO_TAXONOMY_URL : "https://api.pdnd.pagopa.it/geo-tax"
   MAIL_ONBOARDING_URL : "https://uat.selfcare.pagopa.it/onboarding/"
 }
 
@@ -88,6 +88,7 @@ configmaps_ms_core = {
   CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://uat.selfcare.pagopa.it/dashboard/admin/onboarding/"
+  GEO_TAXONOMY_URL                     = "https://api.pdnd.pagopa.it/geo-tax"
 }
 
 # configs/secrets

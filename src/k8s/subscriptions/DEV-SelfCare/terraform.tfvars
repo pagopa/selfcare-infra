@@ -36,6 +36,7 @@ configmaps_ms_core = {
   CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://dev.selfcare.pagopa.it/dashboard/admin/onboarding/"
+  GEO_TAXONOMY_URL                     = "https://api.pdnd.pagopa.it/geo-tax"
 }
 
 # configs/secrets
