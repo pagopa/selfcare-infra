@@ -75,7 +75,7 @@ configmaps_interop-be-party-process = {
   MAIL_ONBOARDING_REJECTION_LINK : "https://selfcare.pagopa.it/onboarding/cancel?jwt="
   PRODUCT_MANAGEMENT_URL : "https://api-pnpg.selfcare.pagopa.it/external/v1"
   SELFCARE_ADMIN_NOTIFICATION_URL : "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
-  GEO_TAXONOMY_URL : "https://api-pnpg.selfcare.pagopa.it/external/geo-tax"
+  GEO_TAXONOMY_URL : "https://api.pdnd.pagopa.it/geo-tax/"
   MAIL_ONBOARDING_URL : "https://selfcare.pagopa.it/onboarding/"
 }
 
