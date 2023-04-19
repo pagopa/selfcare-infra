@@ -485,6 +485,7 @@ module "apim_external_api_ms_v2" {
   subscription_required = true
   product_ids = [
     module.apim_product_interop.product_id,
+    module.apim_product_interop_coll.product_id,
     module.apim_product_pn.product_id,
     module.apim_product_pn_svil.product_id,
     module.apim_product_pn_dev.product_id,
@@ -648,6 +649,23 @@ module "apim_product_interop" {
   approval_required     = false
 
   policy_xml = file("./api_product/interop/policy.xml")
+}
+
+module "apim_product_interop_coll" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "interop-coll"
+  display_name = "INTEROP COLLAUDO"
+  description  = "Interoperabilità Collaudo"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop-coll/policy.xml")
 }
 
 module "apim_product_pn" {
