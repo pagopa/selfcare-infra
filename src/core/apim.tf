@@ -820,6 +820,23 @@ module "apim_product_io_sign" {
   policy_xml = file("./api_product/io-sign/policy.xml")
 }
 
+module "apim_product_io" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "io"
+  display_name = "IO"
+  description  = "App IO"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io/policy.xml")
+}
+
 
 ##################
 ## Named values ##
