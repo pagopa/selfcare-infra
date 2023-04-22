@@ -29,7 +29,8 @@ aks_resource_group_name = "selc-u-weu-uat01-aks-rg"
 ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "uat01.pnpg.internal.uat.selfcare.pagopa.it"
 reverse_proxy_be_io            = "10.1.0.250"
-
+# This is the k8s ingress controller ip. It must be in the aks subnet range.
+reverse_proxy_ip = "10.11.100.250"
 #
 # Dns
 #
