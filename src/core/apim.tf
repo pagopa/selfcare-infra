@@ -855,6 +855,108 @@ module "apim_product_io" {
   policy_xml = file("./api_product/io/policy.xml")
 }
 
+module "apim_product_pnpg" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg"
+  display_name = "PNPG"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg/policy.xml")
+}
+
+module "apim_product_pnpg_uat_cert" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-cert"
+  display_name = "PNPG UAT CERT"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_cert/policy.xml")
+}
+
+module "apim_product_pnpg_uat_coll" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-coll"
+  display_name = "PNPG UAT COLL"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_coll/policy.xml")
+}
+
+module "apim_product_pnpg_uat_svil" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-svil"
+  display_name = "PNPG UAT SVIL"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_svil/policy.xml")
+}
+
+module "apim_product_pnpg_uat" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat"
+  display_name = "PNPG UAT"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat/policy.xml")
+}
+
+module "apim_product_pnpg_dev" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-dev"
+  display_name = "PNPG DEV"
+  description  = "Piattaforma Notifiche - Persone Giuridiche"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_dev/policy.xml")
+}
+
 
 ##################
 ## Named values ##
