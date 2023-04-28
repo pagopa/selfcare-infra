@@ -20,6 +20,91 @@ module "apim_pnpg" {
   policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
 }
 
+module "apim_product_pnpg_uat_cert" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-cert"
+  display_name = local.apim_pnpg_api.display_name
+  description  = local.apim_pnpg_api.display_name
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = false
+  subscription_required = false
+  approval_required     = false
+
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
+}
+
+module "apim_product_pnpg_uat_coll" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-coll"
+  display_name = local.apim_pnpg_api.display_name
+  description  = local.apim_pnpg_api.display_name
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = false
+  subscription_required = false
+  approval_required     = false
+
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
+}
+
+module "apim_product_pnpg_uat_svil" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat-svil"
+  display_name = local.apim_pnpg_api.display_name
+  description  = local.apim_pnpg_api.display_name
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = false
+  subscription_required = false
+  approval_required     = false
+
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
+}
+
+module "apim_product_pnpg_uat" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-uat"
+  display_name = local.apim_pnpg_api.display_name
+  description  = local.apim_pnpg_api.display_name
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = false
+  subscription_required = false
+  approval_required     = false
+
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
+}
+
+module "apim_product_pnpg_dev" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "pn-pg-dev"
+  display_name = local.apim_pnpg_api.display_name
+  description  = local.apim_pnpg_api.display_name
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = false
+  subscription_required = false
+  approval_required     = false
+
+  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
+}
+
 locals {
   apim_pnpg_api = {
     display_name          = "PnPg Product"
