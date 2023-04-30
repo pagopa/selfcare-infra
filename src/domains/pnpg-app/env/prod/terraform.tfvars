@@ -122,3 +122,11 @@ aruba_sign_service = {
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api-pnpg.selfcare.pagopa.it/external"
 }
+
+
+terraform_remote_state_core = {
+  resource_group_name  = "terraform-state-rg"
+  storage_account_name = "tfinfuatselfcare"
+  container_name       = "terraform-state"
+  key                  = "domain-pnpg-common.terraform.tfstate"
+}
