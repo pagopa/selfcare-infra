@@ -855,23 +855,6 @@ module "apim_product_io" {
   policy_xml = file("./api_product/io/policy.xml")
 }
 
-module "apim_product_pnpg" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg"
-  display_name = "PNPG"
-  description  = "Piattaforma Notifiche - Persone Giuridiche"
-
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-
-  published             = true
-  subscription_required = true
-  approval_required     = false
-
-  policy_xml = file("./api_product/pnpg/policy.xml")
-}
-
 ##################
 ## Named values ##
 ##################

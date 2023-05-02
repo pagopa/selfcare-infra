@@ -1,6 +1,3 @@
-##############
-## Products ##
-##############
 
 module "apim_pnpg" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
@@ -16,91 +13,6 @@ module "apim_pnpg" {
   subscription_required = false
   approval_required     = false
   # subscriptions_limit   = 1000
-
-  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
-}
-
-module "apim_product_pnpg_uat_cert" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg-uat-cert"
-  display_name = local.apim_pnpg_api.display_name
-  description  = local.apim_pnpg_api.display_name
-
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  published             = false
-  subscription_required = false
-  approval_required     = false
-
-  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
-}
-
-module "apim_product_pnpg_uat_coll" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg-uat-coll"
-  display_name = local.apim_pnpg_api.display_name
-  description  = local.apim_pnpg_api.display_name
-
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  published             = false
-  subscription_required = false
-  approval_required     = false
-
-  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
-}
-
-module "apim_product_pnpg_uat_svil" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg-uat-svil"
-  display_name = local.apim_pnpg_api.display_name
-  description  = local.apim_pnpg_api.display_name
-
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  published             = false
-  subscription_required = false
-  approval_required     = false
-
-  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
-}
-
-module "apim_product_pnpg_uat" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg-uat"
-  display_name = local.apim_pnpg_api.display_name
-  description  = local.apim_pnpg_api.display_name
-
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  published             = false
-  subscription_required = false
-  approval_required     = false
-
-  policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
-}
-
-module "apim_product_pnpg_dev" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
-
-  product_id   = "pn-pg-dev"
-  display_name = local.apim_pnpg_api.display_name
-  description  = local.apim_pnpg_api.display_name
-
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  published             = false
-  subscription_required = false
-  approval_required     = false
 
   policy_xml = file("./api/external_api_data_vault/v1/base_policy.xml")
 }
@@ -160,7 +72,12 @@ module "apim_external_api_data_vault_v1" {
 
   subscription_required = true
   product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
+    module.apim_pnpg_product_pn_pg.product_id,
+    module.apim_product_pnpg_uat_coll.product_id,
+    module.apim_product_pnpg_uat_svil.product_id,
+    module.apim_product_pnpg_uat.product_id,
+    module.apim_product_pnpg_dev.product_id,
+    module.apim_product_pnpg_uat_cert.product_id
   ]
 
   api_operation_policies = [
@@ -222,7 +139,12 @@ module "apim_external_api_ms_v2" {
 
   subscription_required = true
   product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
+    module.apim_pnpg_product_pn_pg.product_id,
+    module.apim_product_pnpg_uat_coll.product_id,
+    module.apim_product_pnpg_uat_svil.product_id,
+    module.apim_product_pnpg_uat.product_id,
+    module.apim_product_pnpg_dev.product_id,
+    module.apim_product_pnpg_uat_cert.product_id
   ]
 
   api_operation_policies = [
@@ -272,7 +194,9 @@ data "azurerm_key_vault_secret" "apim_backend_access_token" {
   key_vault_id = data.azurerm_key_vault.kv_domain.id
 }
 
-module "apim_data_vault_product_pn_pg" {
+# PRODUCTS
+
+module "apim_pnpg_product_pn_pg" {
   source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
   product_id   = "prod-pn-pg"
   display_name = "PNPG"
@@ -287,3 +211,84 @@ module "apim_data_vault_product_pn_pg" {
 
   policy_xml = file("./api_product/pnpg/policy.xml")
 }
+
+module "apim_product_pnpg_uat_cert" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-cert"
+  display_name = "PNPG UAT CERT"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_cert/policy.xml")
+}
+
+module "apim_product_pnpg_uat_coll" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-coll"
+  display_name = "PNPG UAT COLL"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_coll/policy.xml")
+}
+
+module "apim_product_pnpg_uat_svil" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-svil"
+  display_name = "PNPG UAT SVIL"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_svil/policy.xml")
+}
+
+module "apim_product_pnpg_uat" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat"
+  display_name = "PNPG UAT"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat/policy.xml")
+}
+
+module "apim_product_pnpg_dev" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-dev"
+  display_name = "PNPG DEV"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_dev/policy.xml")
+}
+
