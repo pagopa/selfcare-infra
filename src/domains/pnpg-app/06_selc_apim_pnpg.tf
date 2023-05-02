@@ -1,6 +1,3 @@
-##############
-## Products ##
-##############
 
 module "apim_pnpg" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
@@ -75,7 +72,12 @@ module "apim_external_api_data_vault_v1" {
 
   subscription_required = true
   product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
+    module.apim_pnpg_product_pn_pg.product_id,
+    module.apim_product_pnpg_uat_coll.product_id,
+    module.apim_product_pnpg_uat_svil.product_id,
+    module.apim_product_pnpg_uat.product_id,
+    module.apim_product_pnpg_dev.product_id,
+    module.apim_product_pnpg_uat_cert.product_id
   ]
 
   api_operation_policies = [
@@ -84,9 +86,9 @@ module "apim_external_api_data_vault_v1" {
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = data.terraform_remote_state.core.outputs.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+        API_DOMAIN                     = local.api_domain
+        KID                            = data.terraform_remote_state.core.outputs.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     },
     {
@@ -94,9 +96,9 @@ module "apim_external_api_data_vault_v1" {
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = data.terraform_remote_state.core.outputs.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+        API_DOMAIN                     = local.api_domain
+        KID                            = data.terraform_remote_state.core.outputs.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     }
   ]
@@ -137,7 +139,12 @@ module "apim_external_api_ms_v2" {
 
   subscription_required = true
   product_ids = [
-    module.apim_data_vault_product_pn_pg.product_id
+    module.apim_pnpg_product_pn_pg.product_id,
+    module.apim_product_pnpg_uat_coll.product_id,
+    module.apim_product_pnpg_uat_svil.product_id,
+    module.apim_product_pnpg_uat.product_id,
+    module.apim_product_pnpg_dev.product_id,
+    module.apim_product_pnpg_uat_cert.product_id
   ]
 
   api_operation_policies = [
@@ -193,7 +200,9 @@ data "azurerm_key_vault_secret" "apim_backend_access_token" {
   key_vault_id = data.azurerm_key_vault.kv_domain.id
 }
 
-module "apim_data_vault_product_pn_pg" {
+# PRODUCTS
+
+module "apim_pnpg_product_pn_pg" {
   source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
   product_id   = "prod-pn-pg"
   display_name = "PNPG"
@@ -208,3 +217,84 @@ module "apim_data_vault_product_pn_pg" {
 
   policy_xml = file("./api_product/pnpg/policy.xml")
 }
+
+module "apim_product_pnpg_uat_cert" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-cert"
+  display_name = "PNPG UAT CERT"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_cert/policy.xml")
+}
+
+module "apim_product_pnpg_uat_coll" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-coll"
+  display_name = "PNPG UAT COLL"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_coll/policy.xml")
+}
+
+module "apim_product_pnpg_uat_svil" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat-svil"
+  display_name = "PNPG UAT SVIL"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat_svil/policy.xml")
+}
+
+module "apim_product_pnpg_uat" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-uat"
+  display_name = "PNPG UAT"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_uat/policy.xml")
+}
+
+module "apim_product_pnpg_dev" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-dev"
+  display_name = "PNPG DEV"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_dev/policy.xml")
+}
+

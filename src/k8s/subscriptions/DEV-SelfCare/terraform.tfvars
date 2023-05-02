@@ -69,5 +69,5 @@ aruba_sign_service = {
 }
 
 geo-taxonomies = {
-  GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
+  GEO_TAXONOMIES_URL = "https://api.pdnd.pagopa.it/geo-tax"
 }

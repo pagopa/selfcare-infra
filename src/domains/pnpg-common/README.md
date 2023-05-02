@@ -120,5 +120,8 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_azurerm_api_management_certificate_jwt_certificate"></a> [azurerm\_api\_management\_certificate\_jwt\_certificate](#output\_azurerm\_api\_management\_certificate\_jwt\_certificate) | n/a |
+| <a name="output_jwt"></a> [jwt](#output\_jwt) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

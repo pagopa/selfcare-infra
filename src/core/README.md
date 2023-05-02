@@ -27,6 +27,7 @@
 | <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_interop"></a> [apim\_product\_interop](#module\_apim\_product\_interop) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_interop_coll"></a> [apim\_product\_interop\_coll](#module\_apim\_product\_interop\_coll) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
+| <a name="module_apim_product_io"></a> [apim\_product\_io](#module\_apim\_product\_io) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_io_sign"></a> [apim\_product\_io\_sign](#module\_apim\_product\_io\_sign) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pagopa"></a> [apim\_product\_pagopa](#module\_apim\_product\_pagopa) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
 | <a name="module_apim_product_pn"></a> [apim\_product\_pn](#module\_apim\_product\_pn) | git::https://github.com/pagopa/azurerm.git//api_management_product | v1.0.16 |
