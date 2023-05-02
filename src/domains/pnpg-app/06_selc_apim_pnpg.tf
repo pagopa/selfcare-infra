@@ -145,6 +145,9 @@ module "apim_external_api_ms_v2" {
       operation_id = "getInstitutionsUsingGET"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL = "https://${local.cdn_storage_hostname}"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     },
     {
@@ -158,6 +161,9 @@ module "apim_external_api_ms_v2" {
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     },
     {
