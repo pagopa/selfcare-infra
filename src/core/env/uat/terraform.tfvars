@@ -137,6 +137,14 @@ eventhub_ip_rules = [
     ip_mask = "18.192.147.151",
     action  = "Allow"
   },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
   { // PN - DEV
     ip_mask = "15.160.101.29",
     action  = "Allow"
@@ -184,7 +192,20 @@ eventhub_ip_rules = [
   { // PN - HOTFIX
     ip_mask = "18.102.83.181",
     action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.80.237",
+    action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.87.95",
+    action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.92.88",
+    action  = "Allow"
   }
+
 ]
 
 eventhubs = [{
