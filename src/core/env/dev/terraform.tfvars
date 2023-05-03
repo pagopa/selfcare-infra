@@ -136,6 +136,14 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "18.192.147.151",
     action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
   }
 ]
 
