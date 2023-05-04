@@ -57,10 +57,37 @@ resource "azurerm_key_vault_access_policy" "adgroup_externals_policy" {
   key_vault_id = module.key_vault_pnpg.id
 
   tenant_id = data.azurerm_client_config.current.tenant_id
-  object_id = data.azuread_group.adgroup_developers.object_id
+  object_id = data.azuread_group.adgroup_externals.object_id
 
   key_permissions         = var.env_short == "d" ? ["Get", "List", "Update", "Create", "Import", "Delete", ] : ["Get", "List", "Update", "Create", "Import", ]
   secret_permissions      = var.env_short == "d" ? ["Get", "List", "Delete", "Restore", "Purge", "Recover", "Set", "Backup"] : ["Get", "List", "Set", ]
   storage_permissions     = []
   certificate_permissions = var.env_short == "d" ? ["Get", "List", "Update", "Create", "Import", "Delete", "Restore", "Purge", "Recover", "ManageContacts", ] : ["Get", "List", "Update", "Create", "Import", "Restore", "Recover", ]
+}
+
+# ## api management policy ##
+resource "azurerm_key_vault_access_policy" "api_management_policy" {
+  key_vault_id = module.key_vault_pnpg.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_api_management.api_management_core.identity[0].principal_id
+
+  key_permissions         = []
+  secret_permissions      = ["Get", "List"]
+  certificate_permissions = ["Get", "List"]
+  storage_permissions     = []
+}
+
+# azure devops policy
+data "azuread_service_principal" "iac_principal" {
+  display_name = format("pagopaspa-selfcare-iac-projects-%s", data.azurerm_subscription.current.subscription_id)
+}
+
+resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
+  key_vault_id = module.key_vault_pnpg.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azuread_service_principal.iac_principal.object_id
+
+  secret_permissions      = ["Get", "List", "Set", ]
+  certificate_permissions = ["SetIssuers", "DeleteIssuers", "Purge", "List", "Get"]
+  storage_permissions     = []
 }

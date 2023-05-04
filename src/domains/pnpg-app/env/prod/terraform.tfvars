@@ -54,7 +54,7 @@ tls_cert_check_helm = {
 api_gateway_url = "https://api-pnpg.selfcare.pagopa.it"
 # cdn_frontend_url = "https://selfcare.pagopa.it"
 # cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
-spid_testenv_url = "https://selc-p-spid-testenv.westeurope.azurecontainer.io"
+# spid_testenv_url = "https://selc-p-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
 api-version_uservice-party-management     = "0.1"
@@ -65,8 +65,8 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience      = "portale.prod.pn.pagopa.it"
-jwt_issuer        = "https://hub-login.ecs.pn.pagopa.it"
+jwt_audience      = "api-pnpg.selfcare.pagopa.it"
+jwt_issuer        = "SPID"
 jwt_social_expire = "10000000"
 
 configmaps_interop-be-party-process = {
@@ -75,7 +75,7 @@ configmaps_interop-be-party-process = {
   MAIL_ONBOARDING_REJECTION_LINK : "https://selfcare.pagopa.it/onboarding/cancel?jwt="
   PRODUCT_MANAGEMENT_URL : "https://api-pnpg.selfcare.pagopa.it/external/v1"
   SELFCARE_ADMIN_NOTIFICATION_URL : "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
-  GEO_TAXONOMY_URL : "https://api-pnpg.selfcare.pagopa.it/external/geo-tax"
+  GEO_TAXONOMY_URL : "https://api.pdnd.pagopa.it/geo-tax"
   MAIL_ONBOARDING_URL : "https://selfcare.pagopa.it/onboarding/"
 }
 
@@ -88,6 +88,7 @@ configmaps_ms_core = {
   CONFIRM_TOKEN_TIMEOUT                = "90 seconds"
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "false"
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
+  GEO_TAXONOMY_URL                     = "https://api.pdnd.pagopa.it/geo-tax"
 }
 
 # configs/secrets
@@ -120,4 +121,12 @@ aruba_sign_service = {
 
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api-pnpg.selfcare.pagopa.it/external"
+}
+
+
+terraform_remote_state_core = {
+  resource_group_name  = "terraform-state-rg"
+  storage_account_name = "tfinfuatselfcare"
+  container_name       = "terraform-state"
+  key                  = "domain-pnpg-common.terraform.tfstate"
 }

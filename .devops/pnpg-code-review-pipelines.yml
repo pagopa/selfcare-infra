@@ -1,0 +1,128 @@
+trigger: none
+pr:
+  autoCancel: false # prevent terraform state lock on new commits
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - 'src/domains/pnpg-app'
+      - 'src/domains/pnpg-common'
+      - '.devops/pnpg-code-review-pipelines.yml'
+    exclude:
+      - 'src/k8s/*'
+      - '**/*.lock.hcl'
+
+parameters:
+  - name: 'DEV'
+    displayName: 'Run on DEV environment'
+    type: boolean
+    default: True
+    values:
+      - False
+      - True
+  - name: 'UAT'
+    displayName: 'Run on UAT environment'
+    type: boolean
+    default: True
+    values:
+      - False
+      - True
+  - name: 'PROD'
+    displayName: 'Run on PROD environment'
+    type: boolean
+    default: True
+    values:
+      - False
+      - True
+
+variables:
+  TIME_OUT: 10
+  DEV_AKS_APISERVER_URL: '$(TF_DEV_AKS_APISERVER_URL)'
+  DEV_AKS_AZURE_DEVOPS_SA_CACRT: '$(TF_DEV_AKS_AZURE_DEVOPS_SA_CACRT)'
+  DEV_AKS_AZURE_DEVOPS_SA_TOKEN: '$(TF_DEV_AKS_AZURE_DEVOPS_SA_TOKEN)'
+  AKS_DEV_NAME: '$(TF_AKS_DEV_NAME)'
+  DEV_AZURE_SERVICE_CONNECTION: '$(TF_DEV_AZURE_SERVICE_CONNECTION)'
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+resources:
+  repositories:
+    - repository: terraform
+      type: github
+      name: pagopa/azure-pipeline-templates
+      ref: refs/tags/v3.0.0
+      endpoint: 'io-azure-devops-github-ro'
+
+lockBehavior: sequential
+stages:
+  - stage: DEV
+    dependsOn: []
+    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+    pool:
+      name: selfcare-dev-linux
+    jobs:
+      - job: plan_selfcare_pnpg
+        displayName: 🔦 plan_selfcare_pnpg
+        timeoutInMinutes: $[variables.TIME_OUT]
+        strategy:
+          parallel: 1
+        steps:
+          - checkout: self
+          # 1. Install terraform and terragrunt
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan selfcare-common
+          - template: templates/terraform-plan/template.yaml@terraform
+            parameters:
+              WORKINGDIR: 'src/domains/pnpg-common'
+              TF_ENVIRONMENT_FOLDER: "dev"
+              AZURE_SERVICE_CONNECTION_NAME: ${{ variables.DEV_AZURE_SERVICE_CONNECTION }}
+          # 3. Run terraform plan selfcare-app
+          - template: templates/terraform-plan/template.yaml@terraform
+            parameters:
+              TF_ENVIRONMENT_FOLDER: "dev"
+              WORKINGDIR: 'src/domains/pnpg-app'
+              AZURE_SERVICE_CONNECTION_NAME: ${{ variables.DEV_AZURE_SERVICE_CONNECTION }}
+              AKS_NAME: ${{ variables.AKS_DEV_NAME }}
+              AKS_API_SERVER_URL: ${{ variables.DEV_AKS_APISERVER_URL }}
+              AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_CACRT }}
+              AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_TOKEN }}
+
+#  - stage: UAT
+#    dependsOn: []
+#    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+#    pool:
+#      name: selfcare-uat-linux
+#    jobs:
+#      - job: tf_plan_core
+#        timeoutInMinutes: $[variables.TIME_OUT]
+#        steps:
+#          - checkout: self
+#          # 1. Install terraform and terragrunt
+#          - template: templates/terraform-setup/template.yaml@terraform
+#          # 2. Run terraform plan selfcare-common
+#          - template: templates/terraform-plan/template.yaml@terraform
+#            parameters:
+#              WORKINGDIR: 'src/core'
+#              TF_ENVIRONMENT_FOLDER: "uat"
+#              AZURE_SERVICE_CONNECTION_NAME: UAT-SELFCARE-SERVICE-CONN
+#
+#  - stage: PROD
+#    dependsOn: []
+#    condition: and(succeeded(), eq(${{parameters.PROD}}, true))
+#    pool:
+#      name: selfcare-prod-linux
+#    jobs:
+#      - job: tf_plan_core
+#        timeoutInMinutes: $[variables.TIME_OUT]
+#        steps:
+#          - checkout: self
+#          # 1. Install terraform and terragrunt
+#          - template: templates/terraform-setup/template.yaml@terraform
+#          # 2. Run terraform plan selfcare-common
+#          - template: templates/terraform-plan/template.yaml@terraform
+#            parameters:
+#              WORKINGDIR: 'src/core'
+#              TF_ENVIRONMENT_FOLDER: "prod"
+#              AZURE_SERVICE_CONNECTION_NAME: PROD-SELFCARE-SERVICE-CONN

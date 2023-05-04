@@ -43,7 +43,6 @@ aks_platform_env              = "dev01"
 vnet_aks_ddos_protection_plan = false
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
-
 # dns
 dns_zone_prefix = "dev.selfcare"
 external_domain = "pagopa.it"
@@ -137,6 +136,14 @@ eventhub_alerts_enabled           = false
 eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "18.192.147.151",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
     action  = "Allow"
   }
 ]

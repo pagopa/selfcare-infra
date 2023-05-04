@@ -6,6 +6,7 @@ locals {
   redis_url                       = "${format("%s-redis", local.project)}.redis.cache.windows.net"
   postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
   postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
+  mongodb_name_selc_core          = "selcMsCore"
   mongodb_name_selc_product       = "selcProduct"
   mongodb_name_selc_user_group    = "selcUserGroup"
   contracts_storage_account_name  = replace(format("%s-contracts-storage", local.project), "-", "")

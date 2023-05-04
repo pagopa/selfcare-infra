@@ -8,6 +8,12 @@ data "azurerm_private_dns_zone" "privatelink_mongo_cosmos_azure_com" {
   resource_group_name = local.vnet_core_resource_group_name
 }
 
+data "azurerm_private_dns_zone" "privatelink_redis_cache_windows_net_vnet" {
+  count               = var.redis_private_endpoint_enabled ? 1 : 0
+  name                = "privatelink.redis.cache.windows.net"
+  resource_group_name = local.vnet_core_resource_group_name
+}
+
 #
 # Private Endpoints
 #

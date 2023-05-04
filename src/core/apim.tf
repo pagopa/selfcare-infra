@@ -248,7 +248,7 @@ module "apim_external_api_onboarding_io_v1" {
   api_operation_policies = [
     {
       operation_id = "contractOnboardingUsingPOST"
-      xml_content  = templatefile("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -256,6 +256,7 @@ module "apim_external_api_onboarding_io_v1" {
     }
   ]
 }
+
 
 resource "azurerm_api_management_api_version_set" "apim_uservice_party_management" {
   name                = format("%s-party-mgmt-api", var.env_short)
@@ -344,7 +345,8 @@ module "apim_user_group_ms_v1" {
   path         = "external/user-groups"
   api_version  = "v1"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/ms-user-group/user-groups/v1/", var.reverse_proxy_ip)
 
@@ -391,7 +393,8 @@ module "apim_external_api_ms_v1" {
   path         = "external"
   api_version  = "v1"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
@@ -466,7 +469,8 @@ module "apim_external_api_ms_v2" {
   path         = "external"
   api_version  = "v2"
   protocols = [
-  "https"]
+    "https"
+  ]
 
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
@@ -481,6 +485,7 @@ module "apim_external_api_ms_v2" {
   subscription_required = true
   product_ids = [
     module.apim_product_interop.product_id,
+    module.apim_product_interop_coll.product_id,
     module.apim_product_pn.product_id,
     module.apim_product_pn_svil.product_id,
     module.apim_product_pn_dev.product_id,
@@ -644,6 +649,23 @@ module "apim_product_interop" {
   approval_required     = false
 
   policy_xml = file("./api_product/interop/policy.xml")
+}
+
+module "apim_product_interop_coll" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "interop-coll"
+  display_name = "INTEROP COLLAUDO"
+  description  = "Interoperabilità Collaudo"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop-coll/policy.xml")
 }
 
 module "apim_product_pn" {
@@ -816,6 +838,22 @@ module "apim_product_io_sign" {
   policy_xml = file("./api_product/io-sign/policy.xml")
 }
 
+module "apim_product_io" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "io"
+  display_name = "IO"
+  description  = "App IO"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io/policy.xml")
+}
 
 ##################
 ## Named values ##

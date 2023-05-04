@@ -31,19 +31,21 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
+cidr_subnet_aks_platform          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
 #
-# AKS
+# AKS Platform
 #
-cidr_aks_vnet                 = ["10.11.0.0/16"]
+aks_platform_env              = "uat01"
 vnet_aks_ddos_protection_plan = false
+cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
-external_domain = "pagopa.it"
 dns_zone_prefix = "uat.selfcare"
+external_domain = "pagopa.it"
 
 # azure devops
 azdo_sp_tls_cert_enabled = true
@@ -55,7 +57,8 @@ apim_publisher_name = "pagoPA SelfCare UAT"
 apim_sku            = "Developer_1"
 
 # app_gateway
-app_gateway_api_certificate_name = "api-uat-selfcare-pagopa-it"
+app_gateway_api_certificate_name      = "api-uat-selfcare-pagopa-it"
+app_gateway_api_pnpg_certificate_name = "api-pnpg-uat-selfcare-pagopa-it"
 
 # redis
 redis_sku_name = "Standard"
@@ -63,12 +66,14 @@ redis_family   = "C"
 redis_capacity = 0
 
 # aks
-aks_alerts_enabled = false
+aks_alerts_enabled                  = false
+aks_kubernetes_version              = "1.23.12"
+aks_system_node_pool_os_disk_type   = "Managed"
+aks_system_node_pool_node_count_min = 2
+aks_system_node_pool_node_count_max = 3
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip       = "10.1.1.250"
-aks_kubernetes_version = "1.23.12"
+reverse_proxy_ip = "10.1.1.250"
 
-aks_system_node_pool_os_disk_type                 = "Managed"
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
 
@@ -133,6 +138,14 @@ eventhub_ip_rules = [
     ip_mask = "18.192.147.151",
     action  = "Allow"
   },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
   { // PN - DEV
     ip_mask = "15.160.101.29",
     action  = "Allow"
@@ -180,7 +193,20 @@ eventhub_ip_rules = [
   { // PN - HOTFIX
     ip_mask = "18.102.83.181",
     action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.80.237",
+    action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.87.95",
+    action  = "Allow"
+  },
+  { // PN 
+    ip_mask = "18.102.92.88",
+    action  = "Allow"
   }
+
 ]
 
 eventhubs = [{

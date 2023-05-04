@@ -26,7 +26,7 @@ parameters:
       - True
 
 variables:
-  TIME_OUT: 5
+  TIME_OUT: 10
 
 pool:
   vmImage: 'ubuntu-20.04'
@@ -36,54 +36,45 @@ resources:
     - repository: terraform
       type: github
       name: pagopa/azure-pipeline-templates
-      ref: refs/tags/v17
+      ref: refs/tags/v3.0.0
       endpoint: 'io-azure-devops-github-ro'
 
 stages:
   # DEV
   - stage: plan_DEV
-    dependsOn: []
     condition: and(succeeded(), eq(${{parameters.DEV}}, true))
     pool:
       name: selfcare-dev-linux
     jobs:
-      - job: plan
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
-          # 1. Install terraform
+          - checkout: self
+          # 1. Install terraform and terragrunt
           - template: templates/terraform-setup/template.yaml@terraform
-          # 2. Run terraform plan
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: DEV-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: dev
               WORKINGDIR: 'src/core'
+              TF_ENVIRONMENT_FOLDER: "dev"
+              AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
 
   - stage: apply_DEV
     dependsOn: [plan_DEV]
     condition: and(succeeded(), eq(${{parameters.DEV}}, true))
-    pool:
-      name: selfcare-dev-linux
     jobs:
       # - job: init
       #   steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-      - deployment: apply
-        continueOnError: false
-        # dependsOn: init
-        environment: 'DEV'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - checkout: self
-                # 3. Run terraform apply
-                - template: templates/terraform-apply/template.yaml@terraform
-                  parameters:
-                    SUBSCRIPTION: DEV-SELFCARE-SERVICE-CONN
-                    ENVIRONMENT: dev
-                    WORKINGDIR: 'src/core'
+      - template: templates/terraform-plan-apply/template.yaml@terraform
+        parameters:
+          DOMAIN_NAME: 'core'
+          AZURE_DEVOPS_POOL_AGENT_NAME: "pagopa-dev-linux"
+          ENVIRONMENT: "dev"
+          TF_ENVIRONMENT_FOLDER: "dev"
+          WORKINGDIR: 'src/core'
+          AZURE_SERVICE_CONNECTION_NAME: DEV-PAGOPA-SERVICE-CONN
 
   # UAT
   - stage: plan_UAT
@@ -92,43 +83,32 @@ stages:
     pool:
       name: selfcare-uat-linux
     jobs:
-      - job: plan
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
-          # 1. Install terraform
+          - checkout: self
+          # 1. Install terraform and terragrunt
           - template: templates/terraform-setup/template.yaml@terraform
-          # 2. Run terraform plan
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: uat
               WORKINGDIR: 'src/core'
+              TF_ENVIRONMENT_FOLDER: "uat"
+              AZURE_SERVICE_CONNECTION_NAME: UAT-SELFCARE-SERVICE-CONN
+
 
   - stage: apply_UAT
     dependsOn: [plan_UAT]
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-    pool:
-      name: selfcare-uat-linux
     jobs:
-      # - job: init
-      #   steps:
-      #     # 1. Install terraform
-      #     - template: templates/terraform-setup/template.yaml@terraform
-      - deployment: apply
-        continueOnError: false
-        # dependsOn: init
-        environment: 'UAT'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - checkout: self
-                # 3. Run terraform apply
-                - template: templates/terraform-apply/template.yaml@terraform
-                  parameters:
-                    SUBSCRIPTION: UAT-SELFCARE-SERVICE-CONN
-                    ENVIRONMENT: uat
-                    WORKINGDIR: 'src/core'
+      - template: templates/terraform-plan-apply/template.yaml@terraform
+        parameters:
+          DOMAIN_NAME: 'core'
+          AZURE_DEVOPS_POOL_AGENT_NAME: "pagopa-uat-linux"
+          ENVIRONMENT: "uat"
+          TF_ENVIRONMENT_FOLDER: "uat"
+          WORKINGDIR: 'src/core'
+          AZURE_SERVICE_CONNECTION_NAME: UAT-PAGOPA-SERVICE-CONN
 
   # PROD
   - stage: plan_PROD
@@ -137,40 +117,32 @@ stages:
     pool:
       name: selfcare-prod-linux
     jobs:
-      - job: plan
+      - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
         steps:
-          # 1. Install terraform
+          - checkout: self
+          # 1. Install terraform and terragrunt
           - template: templates/terraform-setup/template.yaml@terraform
-          # 2. Run terraform plan
+          # 2. Run terraform plan selfcare-common
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: PROD-SELFCARE-SERVICE-CONN
-              ENVIRONMENT: prod
               WORKINGDIR: 'src/core'
+              TF_ENVIRONMENT_FOLDER: "prod"
+              AZURE_SERVICE_CONNECTION_NAME: PROD-SELFCARE-SERVICE-CONN
 
   - stage: apply_PROD
     dependsOn: [plan_PROD]
     condition: and(succeeded(), eq(${{parameters.PROD}}, true))
-    pool:
-      name: selfcare-prod-linux
     jobs:
       # - job: init
       #   steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-      - deployment: apply
-        continueOnError: false
-        # dependsOn: init
-        environment: 'PROD'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - checkout: self
-                # 3. Run terraform apply
-                - template: templates/terraform-apply/template.yaml@terraform
-                  parameters:
-                    SUBSCRIPTION: PROD-SELFCARE-SERVICE-CONN
-                    ENVIRONMENT: prod
-                    WORKINGDIR: 'src/core'
+      - template: templates/terraform-plan-apply/template.yaml@terraform
+        parameters:
+          DOMAIN_NAME: 'core'
+          AZURE_DEVOPS_POOL_AGENT_NAME: "pagopa-prod-linux"
+          ENVIRONMENT: "prod"
+          TF_ENVIRONMENT_FOLDER: "prod"
+          WORKINGDIR: 'src/core'
+          AZURE_SERVICE_CONNECTION_NAME: PROD-PAGOPA-SERVICE-CONN

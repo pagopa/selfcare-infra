@@ -46,3 +46,14 @@ provider "helm" {
     config_path = "${var.k8s_kube_config_path_prefix}/config-${local.aks_name}"
   }
 }
+
+data "terraform_remote_state" "core" {
+  backend = "azurerm"
+
+  config = {
+    resource_group_name  = var.terraform_remote_state_core.resource_group_name
+    storage_account_name = var.terraform_remote_state_core.storage_account_name
+    container_name       = var.terraform_remote_state_core.container_name
+    key                  = var.terraform_remote_state_core.key
+  }
+}
