@@ -47,9 +47,10 @@ dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = false
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"

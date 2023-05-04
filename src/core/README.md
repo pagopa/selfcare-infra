@@ -114,6 +114,7 @@
 | [azurerm_key_vault_access_policy.adgroup_security_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.api_management_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.app_gateway_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.azdevops_app_projects_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.azdevops_iac_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.azdo_sp_tls_cert](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.azure_cdn_frontdoor_policy](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/resources/key_vault_access_policy) | resource |
@@ -207,6 +208,7 @@
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_externals](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_security](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
+| [azuread_service_principal.app_projects_principal](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.azdo_sp_tls_cert](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.iac_principal](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/service_principal) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.99.0/docs/data-sources/client_config) | data source |
@@ -298,6 +300,7 @@
 | <a name="input_dns_ns_interop_selfcare"></a> [dns\_ns\_interop\_selfcare](#input\_dns\_ns\_interop\_selfcare) | value | `list(string)` | `null` | no |
 | <a name="input_dns_zone_prefix"></a> [dns\_zone\_prefix](#input\_dns\_zone\_prefix) | The dns subdomain. | `string` | `"selfcare"` | no |
 | <a name="input_docker_registry"></a> [docker\_registry](#input\_docker\_registry) | ACR docker registry configuration | <pre>object({<br>    sku                     = string<br>    zone_redundancy_enabled = bool<br>    geo_replication = object({<br>      enabled                   = bool<br>      regional_endpoint_enabled = bool<br>      zone_redundancy_enabled   = bool<br>    })<br>  })</pre> | n/a | yes |
+| <a name="input_enable_app_projects_pipeline"></a> [enable\_app\_projects\_pipeline](#input\_enable\_app\_projects\_pipeline) | If true create the key vault policy to allow used by azure devops app projects pipelines. | `bool` | `false` | no |
 | <a name="input_enable_azdoa"></a> [enable\_azdoa](#input\_enable\_azdoa) | Enable Azure DevOps agent. | `bool` | n/a | yes |
 | <a name="input_enable_iac_pipeline"></a> [enable\_iac\_pipeline](#input\_enable\_iac\_pipeline) | If true create the key vault policy to allow used by azure devops iac pipelines. | `bool` | `false` | no |
 | <a name="input_enable_load_tests_db"></a> [enable\_load\_tests\_db](#input\_enable\_load\_tests\_db) | To provision load tests db | `bool` | n/a | yes |
