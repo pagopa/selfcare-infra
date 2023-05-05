@@ -75,7 +75,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     ORG_URL          = "https://pagopa.gov.it"
     ACS_BASE_URL     = "${var.api_gateway_url}/spid/v1"
     ORG_DISPLAY_NAME = "PagoPA S.p.A"
-    ORG_NAME         = "PagoPA"
+    ORG_NAME         = "PagoPA3"
 
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
@@ -86,11 +86,11 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"
 
-    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber,email"
+    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
     REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
-    ENABLE_FULL_OPERATOR_METADATA    = true
+    ENABLE_FULL_OPERATOR_METADATA    = false
     COMPANY_EMAIL                    = "pagopa@pec.governo.it"
     COMPANY_FISCAL_CODE              = 15376371009
     COMPANY_IPA_CODE                 = "PagoPA"

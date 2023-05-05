@@ -65,7 +65,7 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience      = "api-pnpg.selfcare.pagopa.it"
+jwt_audience      = "imprese.notifichedigitali.it"
 jwt_issuer        = "SPID"
 jwt_social_expire = "10000000"
 
@@ -100,7 +100,7 @@ configmaps_hub-spid-login-ms = {
   USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
 
   # SPID
-  ORG_ISSUER = "https://selfcare.pagopa.it"
+  ORG_ISSUER = "https://imprese.notifichedigitali.it"
 
   CIE_URL          = "https://preproduzione.idserver.servizicie.interno.gov.it/idp/shibboleth?Metadata"
   SERVER_PORT      = "8080"
