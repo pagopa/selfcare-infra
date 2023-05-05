@@ -96,6 +96,11 @@ docker_registry = {
     regional_endpoint_enabled = true
     zone_redundancy_enabled   = true
   }
+  network_rule_set = {
+    default_action  = "Allow"
+    ip_rule         = []
+    virtual_network = []
+  }
 }
 
 # CosmosDb MongoDb

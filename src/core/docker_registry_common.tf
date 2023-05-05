@@ -16,6 +16,12 @@ module "acr_common" {
   zone_redundancy_enabled       = var.docker_registry.zone_redundancy_enabled
   public_network_access_enabled = true
 
+  network_rule_set = [{
+    default_action  = var.docker_registry.network_rule_set.default_action
+    ip_rule         = var.docker_registry.network_rule_set.ip_rule
+    virtual_network = var.docker_registry.network_rule_set.virtual_network
+  }]
+
   private_endpoint = {
     enabled              = false
     private_dns_zone_ids = [""]
