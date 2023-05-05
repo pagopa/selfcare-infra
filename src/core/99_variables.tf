@@ -1078,6 +1078,11 @@ variable "docker_registry" {
       regional_endpoint_enabled = bool
       zone_redundancy_enabled   = bool
     })
+    network_rule_set = object({
+      default_action  = string
+      ip_rule         = list(any)
+      virtual_network = list(any)
+    })
   })
 }
 
