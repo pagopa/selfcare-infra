@@ -90,7 +90,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
     REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
-    ENABLE_FULL_OPERATOR_METADATA    = false
+    ENABLE_FULL_OPERATOR_METADATA    = true
     COMPANY_EMAIL                    = "pagopa@pec.governo.it"
     COMPANY_FISCAL_CODE              = 15376371009
     COMPANY_IPA_CODE                 = "PagoPA"
