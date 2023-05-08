@@ -3,7 +3,7 @@ output "azurerm_api_management_certificate_jwt_certificate" {
   sensitive = true
 }
 
-output "jwt" {
-  value     = module.jwt.id
+output "jwt_auth" {
+  value     = module.jwt_auth
   sensitive = true
 }
