@@ -659,6 +659,12 @@ variable "enable_iac_pipeline" {
   default     = false
 }
 
+variable "enable_app_projects_pipeline" {
+  type        = bool
+  description = "If true create the key vault policy to allow used by azure devops app projects pipelines."
+  default     = false
+}
+
 # CosmosDb Mongo
 variable "cosmosdb_mongodb_offer_type" {
   type        = string
@@ -1072,10 +1078,25 @@ variable "docker_registry" {
       regional_endpoint_enabled = bool
       zone_redundancy_enabled   = bool
     })
+    network_rule_set = object({
+      default_action  = string
+      ip_rule         = list(any)
+      virtual_network = list(any)
+    })
   })
 }
 
 variable "aks_platform_env" {
   type        = string
   description = "The env name used into aks platform folder. E.g: dev01"
+}
+
+variable "enable_load_tests_db" {
+  type        = bool
+  description = "To provision load tests db"
+}
+
+variable "cidr_subnet_load_tests" {
+  type        = list(string)
+  description = "private endpoints address space."
 }

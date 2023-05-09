@@ -31,9 +31,9 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
-cidr_subnet_aks_platform          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
 #
 # AKS Platform
@@ -47,9 +47,10 @@ dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = false
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"
@@ -94,6 +95,11 @@ docker_registry = {
     enabled                   = true
     regional_endpoint_enabled = true
     zone_redundancy_enabled   = true
+  }
+  network_rule_set = {
+    default_action  = "Allow"
+    ip_rule         = []
+    virtual_network = []
   }
 }
 
@@ -210,3 +216,5 @@ logs_account_replication_type   = "RAGZRS"
 logs_delete_retention_days      = 14
 logs_enable_versioning          = false
 logs_advanced_threat_protection = true
+
+enable_load_tests_db = false

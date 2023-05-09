@@ -31,9 +31,9 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
-cidr_subnet_aks_platform          = ["10.1.139.0/24"]
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
-cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
+cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_load_tests            = ["10.1.142.0/24"]
 
 #
 # AKS Platform
@@ -47,9 +47,10 @@ dns_zone_prefix = "uat.selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare UAT"
@@ -68,8 +69,8 @@ redis_capacity = 0
 aks_alerts_enabled                  = false
 aks_kubernetes_version              = "1.23.12"
 aks_system_node_pool_os_disk_type   = "Managed"
-aks_system_node_pool_node_count_min = 2
-aks_system_node_pool_node_count_max = 3
+aks_system_node_pool_node_count_min = 1
+aks_system_node_pool_node_count_max = 1
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
 
@@ -86,6 +87,11 @@ docker_registry = {
     enabled                   = false
     regional_endpoint_enabled = false
     zone_redundancy_enabled   = false
+  }
+  network_rule_set = {
+    default_action  = "Deny"
+    ip_rule         = []
+    virtual_network = []
   }
 }
 
@@ -247,3 +253,5 @@ eventhubs = [{
   ]
 }]
 ##
+
+enable_load_tests_db = true
