@@ -126,7 +126,7 @@ geo-taxonomies = {
 
 terraform_remote_state_core = {
   resource_group_name  = "terraform-state-rg"
-  storage_account_name = "tfinfuatselfcare"
+  storage_account_name = "tfinfprodselfcare"
   container_name       = "terraform-state"
   key                  = "domain-pnpg-common.terraform.tfstate"
 }
