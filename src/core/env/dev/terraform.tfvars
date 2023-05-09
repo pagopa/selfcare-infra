@@ -96,6 +96,11 @@ docker_registry = {
   }
 }
 
+# monitoring
+law_sku               = "PerGB2018"
+law_retention_in_days = 30
+law_daily_quota_gb    = 2
+
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
