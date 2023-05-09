@@ -301,3 +301,19 @@ module "apim_product_pnpg_dev" {
   policy_xml = file("./api_product/pnpg_dev/policy.xml")
 }
 
+module "apim_product_pnpg_test" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-test"
+  display_name = "PNPG TEST"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_test/policy.xml")
+}
+
