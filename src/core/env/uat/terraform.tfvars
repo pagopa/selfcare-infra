@@ -210,8 +210,31 @@ eventhub_ip_rules = [
   { // PN 
     ip_mask = "18.102.92.88",
     action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "18.102.119.227",
+    action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "18.102.59.108",
+    action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "35.152.45.88",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "15.160.251.231",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "15.161.176.211",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "18.102.31.101",
+    action  = "Allow"
   }
-
 ]
 
 eventhubs = [{
