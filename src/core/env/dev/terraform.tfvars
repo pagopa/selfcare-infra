@@ -193,6 +193,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sap"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
