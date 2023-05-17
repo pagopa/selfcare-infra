@@ -493,6 +493,7 @@ module "apim_external_api_ms_v2" {
     module.apim_product_pn_cert.product_id,
     module.apim_product_pn_hotfix.product_id,
     module.apim_product_pn_prod.product_id,
+    module.apim_product_pn_test.product_id,
     module.apim_product_pagopa.product_id,
     module.apim_product_idpay.product_id,
     module.apim_product_io_sign.product_id
@@ -740,7 +741,7 @@ module "apim_product_pn_test" {
   source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
 
   product_id   = "pn-test"
-  display_name = "PN test"
+  display_name = "PN TEST"
   description  = "Piattaforma Notifiche"
 
   api_management_name = module.apim.name
