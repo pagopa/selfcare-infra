@@ -71,6 +71,7 @@ app_gateway_waf_enabled    = true
 redis_sku_name = "Standard"
 redis_family   = "C"
 redis_capacity = 0
+redis_version  = 6
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
