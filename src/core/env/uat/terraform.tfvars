@@ -199,15 +199,15 @@ eventhub_ip_rules = [
     ip_mask = "18.102.83.181",
     action  = "Allow"
   },
-  { // PN 
+  { // PN
     ip_mask = "18.102.80.237",
     action  = "Allow"
   },
-  { // PN 
+  { // PN
     ip_mask = "18.102.87.95",
     action  = "Allow"
   },
-  { // PN 
+  { // PN
     ip_mask = "18.102.92.88",
     action  = "Allow"
   },
@@ -269,6 +269,12 @@ eventhubs = [{
     },
     {
       name   = "io-sign"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "sap"
       listen = true
       send   = false
       manage = false
