@@ -65,6 +65,7 @@ redis_sku_name                 = "Basic"
 redis_family                   = "C"
 redis_capacity                 = 0
 redis_private_endpoint_enabled = false
+redis_version                  = 6
 
 # aks
 aks_alerts_enabled                  = false

@@ -575,6 +575,11 @@ variable "redis_capacity" {
   default = 1
 }
 
+variable "redis_version" {
+  type    = number
+  default = 6
+}
+
 variable "redis_sku_name" {
   type    = string
   default = "Standard"

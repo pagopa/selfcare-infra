@@ -64,6 +64,7 @@ app_gateway_api_pnpg_certificate_name = "api-pnpg-uat-selfcare-pagopa-it"
 redis_sku_name = "Standard"
 redis_family   = "C"
 redis_capacity = 0
+redis_version  = 6
 
 # aks
 aks_alerts_enabled                  = false
