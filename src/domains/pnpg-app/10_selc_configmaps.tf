@@ -16,7 +16,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_CORE_URL                       = "http://ms-core:8080"
     USERVICE_PARTY_PROCESS_URL        = "http://ms-core:8080"
     USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
-    USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080/v1"
+    USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
     MOCK_SERVER                       = "http://mock-server:1080/selfcaremock"
   }
 }
