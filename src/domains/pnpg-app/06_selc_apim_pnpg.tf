@@ -145,7 +145,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_pnpg_uat_svil.product_id,
     module.apim_product_pnpg_uat.product_id,
     module.apim_product_pnpg_dev.product_id,
-    module.apim_product_pnpg_uat_cert.product_id
+    module.apim_product_pnpg_uat_cert.product_id,
+    module.apim_product_pnpg_test.product_id
   ]
 
   api_operation_policies = [
