@@ -103,6 +103,16 @@ variable "cidr_aks_platform_vnet" {
   description = "vnet for aks platform."
 }
 
+# Azure Distributed denial of service (DDoS) Protection plan
+variable "ddos_protection_plan" {
+  type = object({
+    id     = string
+    enable = bool
+  })
+
+  default = null
+}
+
 variable "vnet_aks_ddos_protection_plan" {
   type        = bool
   description = "vnet enable ddos protection plan"
