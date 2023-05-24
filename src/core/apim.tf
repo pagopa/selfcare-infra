@@ -565,7 +565,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getContractUsingGET"
-      xml_content = templatefile("./api/ms_external_api/v2/getContractUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getContractUsingGet_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
