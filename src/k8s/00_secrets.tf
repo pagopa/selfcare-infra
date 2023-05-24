@@ -23,6 +23,7 @@ module "key_vault_secrets_query" {
     "smtp-not-pec-psw",
     "contracts-storage-access-key",
     "web-storage-connection-string",
+    "contracts-storage-connection-string",
     "user-registry-api-key",
     "party-test-institution-email",
     "portal-admin-operator-email",
