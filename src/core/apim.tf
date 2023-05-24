@@ -562,6 +562,10 @@ module "apim_external_api_ms_v2" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "getContractUsingGET"
+      xml_content = templatefile(, )
     }
   ]
 }

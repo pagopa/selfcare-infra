@@ -81,6 +81,56 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/{institutionId}/contract':
+    get:
+      tags:
+        - institutions
+      summary: getContract
+      description: Service to retrieve a contract given institutionId and productId
+      operationId: getContractUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: Institution's unique internal Id
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: byte
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/{institutionId}/geographicTaxonomy':
     get:
       tags:
