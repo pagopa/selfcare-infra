@@ -17,6 +17,14 @@ resource "azurerm_private_dns_zone_virtual_network_link" "internal_env_selfcare_
   virtual_network_id    = module.vnet.id
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "internal_env_selfcare_pagopa_it_2_vnet_core_pair" {
+
+  name                  = "${local.project}-pair-link-vnet-core"
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.internal_private_dns_zone.name
+  virtual_network_id    = module.vnet_pair.id
+}
+
 #
 # COSMOS
 #
@@ -32,6 +40,16 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_documents_
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.privatelink_documents_azure_com.name
   virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_documents_azure_com_vnet_pair" {
+  name                  = module.vnet_pair.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_documents_azure_com.name
+  virtual_network_id    = module.vnet_pair.id
   registration_enabled  = false
 
   tags = var.tags
@@ -54,6 +72,16 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_mongo_cosm
   tags = var.tags
 }
 
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_mongo_cosmos_azure_com_vnet_pair" {
+  name                  = module.vnet_pair.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.name
+  virtual_network_id    = module.vnet_pair.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
 # STORAGE ACCOUNT/CONTRACTS STORAGE
 resource "azurerm_private_dns_zone" "privatelink_blob_core_windows_net" {
   name                = "privatelink.blob.core.windows.net"
@@ -61,12 +89,21 @@ resource "azurerm_private_dns_zone" "privatelink_blob_core_windows_net" {
 
   tags = var.tags
 }
-
 resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_blob_core_windows_net_vnet" {
   name                  = module.vnet.name
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.privatelink_blob_core_windows_net.name
   virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_blob_core_windows_net_vnet_pair" {
+  name                  = module.vnet_pair.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_blob_core_windows_net.name
+  virtual_network_id    = module.vnet_pair.id
   registration_enabled  = false
 
   tags = var.tags
@@ -80,13 +117,23 @@ resource "azurerm_private_dns_zone" "privatelink_redis_cache_windows_net" {
 
   tags = var.tags
 }
-
 resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_redis_cache_windows_net_vnet" {
   count                 = var.redis_private_endpoint_enabled ? 1 : 0
   name                  = module.vnet.name
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.privatelink_redis_cache_windows_net[0].name
   virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_redis_cache_windows_net_vnet_pair" {
+  count                 = var.redis_private_endpoint_enabled ? 1 : 0
+  name                  = module.vnet_pair.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_redis_cache_windows_net[0].name
+  virtual_network_id    = module.vnet_pair.id
   registration_enabled  = false
 
   tags = var.tags
@@ -105,6 +152,16 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus
   resource_group_name   = azurerm_resource_group.rg_vnet.name
   private_dns_zone_name = azurerm_private_dns_zone.privatelink_servicebus_windows_net.name
   virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus_windows_net_vnet_pair" {
+  name                  = module.vnet_pair.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.privatelink_servicebus_windows_net.name
+  virtual_network_id    = module.vnet_pair.id
   registration_enabled  = false
 
   tags = var.tags

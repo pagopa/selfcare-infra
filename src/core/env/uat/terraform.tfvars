@@ -36,6 +36,12 @@ cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder fo
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
 
 #
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.2.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.2.134.0/29"]
+
+#
 # AKS Platform
 #
 aks_platform_env              = "uat01"
