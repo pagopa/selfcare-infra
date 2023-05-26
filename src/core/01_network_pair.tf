@@ -6,18 +6,19 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source              = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.3.2"
-  name                = "${local.project_pair}-vnet"
-  location            = azurerm_resource_group.rg_pair_vnet.location
-  resource_group_name = azurerm_resource_group.rg_pair_vnet.name
-  address_space       = var.cidr_pair_vnet
+  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v6.2.1"
+  name                 = "${local.project_pair}-vnet"
+  location             = azurerm_resource_group.rg_pair_vnet.location
+  resource_group_name  = azurerm_resource_group.rg_pair_vnet.name
+  address_space        = var.cidr_pair_vnet
+  ddos_protection_plan = var.ddos_protection_plan
 
   tags = var.tags
 }
 
-## Peering between the vnet(pair) and core
+## Peering between the vnet(main) and integration vnet
 module "vnet_peering_pair_vs_core" {
-  source = "git::https://github.com/pagopa/azurerm.git//virtual_network_peering?ref=v2.16.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v6.3.1"
 
   location = azurerm_resource_group.rg_vnet.location
 
@@ -34,6 +35,7 @@ module "vnet_peering_pair_vs_core" {
   target_remote_virtual_network_id = module.vnet.id
   target_allow_gateway_transit     = true
   target_use_remote_gateways       = false
+
   target_allow_forwarded_traffic   = true
 }
 

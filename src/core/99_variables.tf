@@ -1,8 +1,8 @@
 # general
 
 locals {
-  project      = "${var.prefix}-${var.env_short}"
-  project_pair = "${var.prefix}-${var.env_short}-${var.location_pair_short}"
+  project                        = "${var.prefix}-${var.env_short}"
+  project_pair                   = "${var.prefix}-${var.env_short}-${var.location_pair_short}"
 
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
