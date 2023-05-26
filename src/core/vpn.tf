@@ -110,6 +110,6 @@ module "vpn_pair_dns_forwarder" {
   location            = var.location_pair
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
   subnet_id           = module.dns_forwarder_pair_subnet.id
-  
-  tags                = var.tags
+
+  tags = var.tags
 }
