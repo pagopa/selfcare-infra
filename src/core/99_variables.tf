@@ -1,8 +1,8 @@
 # general
 
 locals {
-  project                        = "${var.prefix}-${var.env_short}"
-  project_pair                   = "${var.prefix}-${var.env_short}-${var.location_pair_short}"
+  project      = "${var.prefix}-${var.env_short}"
+  project_pair = "${var.prefix}-${var.env_short}-${var.location_pair_short}"
 
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
@@ -107,6 +107,11 @@ variable "cidr_subnet_k8s" {
 variable "cidr_aks_platform_vnet" {
   type        = list(string)
   description = "vnet for aks platform."
+}
+
+variable "cidr_subnet_pair_dnsforwarder" {
+  type        = list(string)
+  description = "DNS Forwarder network address space."
 }
 
 # Azure Distributed denial of service (DDoS) Protection plan

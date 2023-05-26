@@ -10,6 +10,9 @@ locals {
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
   vnet_core_name                = "${local.product}-vnet"
 
+  vnet_pair_resource_group_name = "${local.product}-${var.location_pair_short}-vnet-rg"
+  vnet_pair_name                = "${local.product}-${var.location_pair_short}-vnet"
+
   vnet_aks_resource_group_name = "${local.product}-${var.location_short}-vnet-rg"
   vnet_aks_name                = "${local.product}-${var.location_short}-aks-${var.domain}-vnet"
 
@@ -65,9 +68,19 @@ variable "location" {
   default = "westeurope"
 }
 
+variable "location_pair" {
+  type        = string
+  description = "Location pair name complete"
+}
+
 variable "location_short" {
   type        = string
   description = "Location short like eg: weu, weu.."
+}
+
+variable "location_pair_short" {
+  type        = string
+  description = "Location short like eg: weu, neu.."
 }
 
 variable "location_string" {

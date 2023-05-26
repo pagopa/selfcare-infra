@@ -71,3 +71,45 @@ module "dns_forwarder" {
 
   tags = var.tags
 }
+
+# DNS FORWARDER FOR DISASTER RECOVERY
+
+#
+# DNS Forwarder
+#
+module "dns_forwarder_pair_subnet" {
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.0.3"
+  name                                           = "${local.project_pair}-dnsforwarder-snet"
+  address_prefixes                               = var.cidr_subnet_pair_dnsforwarder
+  resource_group_name                            = azurerm_resource_group.rg_pair_vnet.name
+  virtual_network_name                           = module.vnet_pair.name
+  enforce_private_link_endpoint_network_policies = true
+
+  delegation = {
+    name = "delegation"
+    service_delegation = {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
+}
+
+output "subnet_pair_id" {
+  value = module.dns_forwarder_pair_subnet.id
+}
+
+resource "random_id" "pair_dns_forwarder_hash" {
+  byte_length = 3
+}
+
+module "vpn_pair_dns_forwarder" {
+
+  source = "git::https://github.com/pagopa/azurerm.git//dns_forwarder?ref=v2.0.8"
+
+  name                = "${local.project_pair}-${random_id.pair_dns_forwarder_hash.hex}-vpn-dnsfrw"
+  location            = var.location_pair
+  resource_group_name = azurerm_resource_group.rg_pair_vnet.name
+  subnet_id           = module.dns_forwarder_pair_subnet.id
+  
+  tags                = var.tags
+}
