@@ -73,6 +73,11 @@ variable "location_pair" {
   description = "Location pair name complete"
 }
 
+variable "location_pair" {
+  type        = string
+  description = "Location pair name complete"
+}
+
 variable "location_short" {
   type        = string
   description = "Location short like eg: weu, weu.."
