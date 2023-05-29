@@ -64,8 +64,8 @@ variable "env_short" {
 }
 
 variable "location" {
-  type    = string
-  default = "westeurope"
+  type        = string
+  description = "Location name complete"
 }
 
 variable "location_pair" {

@@ -46,7 +46,7 @@ module "vpn" {
 
 ## DNS Forwarder
 module "dns_forwarder_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.0.3"
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v4.15.0"
   name                                           = format("%s-dns-forwarder-snet", local.project)
   address_prefixes                               = var.cidr_subnet_dns_forwarder
   resource_group_name                            = azurerm_resource_group.rg_vnet.name
@@ -63,7 +63,7 @@ module "dns_forwarder_snet" {
 }
 
 module "dns_forwarder" {
-  source              = "git::https://github.com/pagopa/azurerm.git//dns_forwarder?ref=v2.0.8"
+  source              = "git::https://github.com/pagopa/azurerm.git//dns_forwarder?ref=v4.15.0"
   name                = format("%s-dns-forwarder", local.project)
   location            = azurerm_resource_group.rg_vnet.location
   resource_group_name = azurerm_resource_group.rg_vnet.name
@@ -78,7 +78,7 @@ module "dns_forwarder" {
 # DNS Forwarder
 #
 module "dns_forwarder_pair_subnet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.0.3"
+  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v4.15.0"
   name                                           = "${local.project_pair}-dnsforwarder-snet"
   address_prefixes                               = var.cidr_subnet_pair_dnsforwarder
   resource_group_name                            = azurerm_resource_group.rg_pair_vnet.name
@@ -104,7 +104,7 @@ resource "random_id" "pair_dns_forwarder_hash" {
 
 module "vpn_pair_dns_forwarder" {
 
-  source = "git::https://github.com/pagopa/azurerm.git//dns_forwarder?ref=v2.0.8"
+  source = "git::https://github.com/pagopa/azurerm.git//dns_forwarder?ref=v4.15.0"
 
   name                = "${local.project_pair}-${random_id.pair_dns_forwarder_hash.hex}-vpn-dnsfrw"
   location            = var.location_pair
