@@ -11,7 +11,6 @@ module "vnet_pair" {
   location             = azurerm_resource_group.rg_pair_vnet.location
   resource_group_name  = azurerm_resource_group.rg_pair_vnet.name
   address_space        = var.cidr_pair_vnet
-  ddos_protection_plan = var.ddos_protection_plan
 
   tags = var.tags
 }
