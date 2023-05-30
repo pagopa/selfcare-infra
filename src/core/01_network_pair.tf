@@ -6,11 +6,11 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source               = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
-  name                 = "${local.project_pair}-vnet"
-  location             = azurerm_resource_group.rg_pair_vnet.location
-  resource_group_name  = azurerm_resource_group.rg_pair_vnet.name
-  address_space        = var.cidr_pair_vnet
+  source              = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
+  name                = "${local.project_pair}-vnet"
+  location            = azurerm_resource_group.rg_pair_vnet.location
+  resource_group_name = azurerm_resource_group.rg_pair_vnet.name
+  address_space       = var.cidr_pair_vnet
 
   tags = var.tags
 }
@@ -34,5 +34,5 @@ module "vnet_peering_pair_vs_core" {
   target_remote_virtual_network_id = module.vnet.id
   target_allow_gateway_transit     = true
   target_use_remote_gateways       = false
-  target_allow_forwarded_traffic = true
+  target_allow_forwarded_traffic   = true
 }
