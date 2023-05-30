@@ -861,3 +861,77 @@ data "azurerm_key_vault_secret" "apim_backend_access_token" {
   name         = "apim-backend-access-token"
   key_vault_id = module.key_vault.id
 }
+
+
+resource "azurerm_api_management_api_version_set" "apim_external_api_data_vault" {
+  name                = format("%s-external-api-data-vault", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Data Vault for Selfcare"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_external_api_data_vault_v1" {
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  name                = "${local.project}-external-api-selc"
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_data_vault.id
+
+  description  = "Selfcare External API Data Vault"
+  display_name = "Selfcare External API Data Vault"
+  path         = "selfcare/external/data-vault"
+  api_version  = "v1"
+  protocols = [
+    "https"
+  ]
+
+  service_url = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
+
+  content_format = "openapi"
+  content_value = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
+    host     = local.apim_base_url
+    basePath = "v1"
+  })
+
+  xml_content = file("./api/external_api_data_vault/v1/base_policy.xml")
+
+  subscription_required = true
+  product_ids = [
+    module.apim_product_interop.product_id,
+    module.apim_product_interop_coll.product_id,
+    module.apim_product_pn.product_id,
+    module.apim_product_pn_svil.product_id,
+    module.apim_product_pn_dev.product_id,
+    module.apim_product_pn_coll.product_id,
+    module.apim_product_pn_cert.product_id,
+    module.apim_product_pn_hotfix.product_id,
+    module.apim_product_pn_prod.product_id,
+    module.apim_product_pagopa.product_id,
+    module.apim_product_idpay.product_id,
+    module.apim_product_io_sign.product_id
+  ]
+
+  api_operation_policies = [
+    {
+      operation_id = "addInstitutionUsingPOST"
+      xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getInstitution"
+      xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
+        CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    }
+  ]
+}
