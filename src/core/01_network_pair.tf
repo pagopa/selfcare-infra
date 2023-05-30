@@ -6,11 +6,11 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source               = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
-  name                 = "${local.project_pair}-vnet"
-  location             = azurerm_resource_group.rg_pair_vnet.location
-  resource_group_name  = azurerm_resource_group.rg_pair_vnet.name
-  address_space        = var.cidr_pair_vnet
+  source              = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
+  name                = "${local.project_pair}-vnet"
+  location            = azurerm_resource_group.rg_pair_vnet.location
+  resource_group_name = azurerm_resource_group.rg_pair_vnet.name
+  address_space       = var.cidr_pair_vnet
 
   tags = var.tags
 }
