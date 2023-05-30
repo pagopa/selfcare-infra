@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v2.18.10"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v6.14.0"
 
   name                       = replace("${local.project}-st-logs", "-", "")
   account_kind               = "StorageV2"
@@ -65,7 +65,7 @@ resource "azurerm_storage_container" "selc_logs_container" {
 }
 
 module "logs_storage_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.18.10"
+  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
   name                                           = "${local.project}-logs-storage-snet"
   address_prefixes                               = var.cidr_subnet_logs_storage
   resource_group_name                            = azurerm_resource_group.rg_vnet.name
@@ -97,7 +97,7 @@ resource "azurerm_private_endpoint" "logs_storage" {
 }
 
 module "spid_logs_encryption_keys" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v6.14.0"
 
   jwt_name         = "spid-logs-encryption"
   key_vault_id     = module.key_vault.id

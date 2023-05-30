@@ -1,6 +1,6 @@
 # JWT
 module "jwt" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v6.14.0"
 
   jwt_name         = "jwt"
   key_vault_id     = module.key_vault.id
@@ -10,7 +10,7 @@ module "jwt" {
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v6.14.0"
 
   jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault.id
@@ -20,7 +20,7 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v3.8.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v6.14.0"
 
   jwt_name         = "agid-spid"
   key_vault_id     = module.key_vault.id
