@@ -872,7 +872,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_data_vault"
 }
 
 module "apim_external_api_data_vault_v1" {
-  source              = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = "${local.project}-external-api-selc"
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -911,6 +911,7 @@ module "apim_external_api_data_vault_v1" {
     module.apim_product_idpay.product_id,
     module.apim_product_io_sign.product_id
   ]
+  
 
   api_operation_policies = [
     {
@@ -934,15 +935,19 @@ module "apim_external_api_data_vault_v1" {
       })
     }
   ]
+
+  oauth2_authorization = {
+    authorization_server_name = azurerm_api_management_oauth2_authorization_server.selfcare_fd
+  }
 }
 
-resource "azurerm_api_management_oauth2_authorization_server" "example" {
+resource "azurerm_api_management_oauth2_authorization_server" "selfcare_fd" {
   name                = "${local.project}-selfcare-authorization-server"
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
 
-  authorization_endpoint = "https://example.com/oauth2/authorize"
-  token_endpoint         = "https://example.com/oauth2/token"
+  authorization_endpoint = "https://${local.cdn_storage_hostname}/oauth2/authorize"
+  token_endpoint         = "https://${local.cdn_storage_hostname}/oauth2/token"
   client_id              = "your-client-id"
   client_secret          = "your-client-secret"
 }
