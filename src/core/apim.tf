@@ -496,7 +496,10 @@ module "apim_external_api_ms_v2" {
     module.apim_product_pn_test.product_id,
     module.apim_product_pagopa.product_id,
     module.apim_product_idpay.product_id,
-    module.apim_product_io_sign.product_id
+    module.apim_product_io_sign.product_id,
+    module.apim_product_io.product_id,
+    module.apim_product_test_io.product_id,
+    module.apim_product_test_io_premium.product_id
   ]
 
   api_operation_policies = [
@@ -888,6 +891,40 @@ module "apim_product_io" {
   approval_required     = false
 
   policy_xml = file("./api_product/io/policy.xml")
+}
+
+module "apim_product_test_io" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "test-io"
+  display_name = "Test IO"
+  description  = "Test App IO"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/test-io/policy.xml")
+}
+
+module "apim_product_test_io_premium" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "test-io-premium"
+  display_name = "Test IO Premium"
+  description  = "Test App IO Premium"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/test-io-premium/policy.xml")
 }
 
 ##################
