@@ -935,3 +935,14 @@ module "apim_external_api_data_vault_v1" {
     }
   ]
 }
+
+resource "azurerm_api_management_oauth2_authorization_server" "example" {
+  name                = "${local.project}-selfcare-authorization-server"
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  authorization_endpoint = "https://example.com/oauth2/authorize"
+  token_endpoint         = "https://example.com/oauth2/token"
+  client_id              = "your-client-id"
+  client_secret          = "your-client-secret"
+}
