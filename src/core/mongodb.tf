@@ -20,15 +20,17 @@ module "cosmosdb_mongodb_snet" {
   virtual_network_name = module.vnet.name
   address_prefixes     = var.cidr_subnet_cosmosdb_mongodb
 
-  enforce_private_link_endpoint_network_policies = true
-  service_endpoints                              = ["Microsoft.Web"]
+  private_endpoint_network_policies_enabled = true
+  service_endpoints                         = ["Microsoft.Web"]
 }
 
+###???
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb?ref=v6.14.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v6.14.0"
 
   name                 = format("%s-cosmosdb-mongodb-account", local.project)
   location             = azurerm_resource_group.mongodb_rg.location
+  domain               = var.external_domain
   resource_group_name  = azurerm_resource_group.mongodb_rg.name
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"

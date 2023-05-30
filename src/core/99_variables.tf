@@ -775,6 +775,12 @@ variable "postgres_sku_name" {
   description = "Specifies the SKU Name for this PostgreSQL Server."
 }
 
+variable "postgres_private_endpoint_enabled" {
+  type        = bool
+  default     = false
+  description = "Private endpoint database enable?"
+}
+
 variable "postgres_geo_redundant_backup_enabled" {
   type        = bool
   default     = false
@@ -951,6 +957,11 @@ variable "contracts_account_replication_type" {
   type        = string
   description = "Contracts replication type"
   default     = "LRS"
+}
+
+variable "public_network_access_enabled" {
+  description = "Enable or Disable public access. It should always set to false unless there are special needs"
+  type        = bool
 }
 
 variable "contracts_delete_retention_days" {

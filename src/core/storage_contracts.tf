@@ -10,19 +10,19 @@ resource "azurerm_resource_group" "rg_contracts_storage" {
 module "selc-contracts-storage" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v6.14.0"
 
-  name                       = replace(format("%s-contracts-storage", local.project), "-", "")
-  account_kind               = "StorageV2"
-  account_tier               = "Standard"
-  account_replication_type   = var.contracts_account_replication_type
-  access_tier                = "Hot"
-  versioning_name            = "versioning"
-  enable_versioning          = var.contracts_enable_versioning
-  resource_group_name        = azurerm_resource_group.rg_contracts_storage.name
-  location                   = var.location
-  advanced_threat_protection = var.contracts_advanced_threat_protection
-  allow_blob_public_access   = false
+  name                            = replace(format("%s-contracts-storage", local.project), "-", "")
+  account_kind                    = "StorageV2"
+  account_tier                    = "Standard"
+  account_replication_type        = var.contracts_account_replication_type
+  access_tier                     = "Hot"
+  blob_versioning_enabled         = var.contracts_enable_versioning
+  resource_group_name             = azurerm_resource_group.rg_contracts_storage.name
+  location                        = var.location
+  advanced_threat_protection      = var.contracts_advanced_threat_protection
+  allow_nested_items_to_be_public = false
+  public_network_access_enabled   = false
 
-  blob_properties_delete_retention_policy_days = var.contracts_delete_retention_days
+  blob_delete_retention_days = var.contracts_delete_retention_days
 
   tags = var.tags
 }
@@ -61,12 +61,12 @@ resource "azurerm_storage_container" "selc-contracts-container" {
 }
 
 module "contracts_storage_snet" {
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
-  name                                           = format("%s-contracts-storage-snet", local.project)
-  address_prefixes                               = var.cidr_subnet_contract_storage
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  name                                      = format("%s-contracts-storage-snet", local.project)
+  address_prefixes                          = var.cidr_subnet_contract_storage
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   service_endpoints = [
     "Microsoft.Storage",

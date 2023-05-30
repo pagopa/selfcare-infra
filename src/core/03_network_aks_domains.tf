@@ -31,8 +31,6 @@ resource "azurerm_public_ip" "outbound_ip_aks_platform" {
   sku                 = "Standard"
   allocation_method   = "Static"
 
-  availability_zone = "Zone-Redundant"
-
   tags = var.tags
 }
 

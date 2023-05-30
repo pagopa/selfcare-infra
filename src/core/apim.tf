@@ -6,8 +6,8 @@ module "apim_snet" {
   virtual_network_name = module.vnet.name
   address_prefixes     = var.cidr_subnet_apim
 
-  enforce_private_link_endpoint_network_policies = true
-  service_endpoints                              = ["Microsoft.Web"]
+  private_endpoint_network_policies_enabled = true
+  service_endpoints                         = ["Microsoft.Web"]
 }
 
 resource "azurerm_resource_group" "rg_api" {
@@ -22,13 +22,13 @@ locals {
 
   api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
 
-  apim_base_url = format("%s/external", azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name)
+  apim_base_url = format("%s/external", azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name)
 }
 
 resource "azurerm_api_management_custom_domain" "api_custom_domain" {
   api_management_id = module.apim.id
 
-  proxy {
+  gateway {
     host_name = local.api_domain
     key_vault_id = replace(
       data.azurerm_key_vault_certificate.app_gw_platform.secret_id,
@@ -60,7 +60,10 @@ module "apim" {
   sign_up_enabled = false
   lock_enable     = false
 
-  application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
+  application_insights = {
+    enabled             = true
+    instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
+  }
 
   xml_content = file("./api/root_policy.xml")
 
@@ -211,7 +214,7 @@ module "apim_external_api_onboarding_auto_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-auto/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "/onboarding-api/v1"
   })
 
@@ -250,7 +253,7 @@ module "apim_external_api_onboarding_io_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "/onboarding-api/v1"
   })
 
@@ -396,7 +399,7 @@ module "apim_user_group_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "user-groups/v1/"
   })
 
@@ -444,7 +447,7 @@ module "apim_external_api_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "v1"
   })
 
@@ -520,7 +523,7 @@ module "apim_external_api_ms_v2" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "v2"
   })
 
@@ -717,7 +720,7 @@ module "apim_internal_api_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "v1"
   })
 

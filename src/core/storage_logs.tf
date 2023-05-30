@@ -10,23 +10,19 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 module "selc_logs_storage" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v6.14.0"
 
-  name                       = replace("${local.project}-st-logs", "-", "")
-  account_kind               = "StorageV2"
-  account_tier               = "Standard"
-  account_replication_type   = var.logs_account_replication_type
-  access_tier                = "Hot"
-  versioning_name            = "versioning"
-  enable_versioning          = var.logs_enable_versioning
-  resource_group_name        = azurerm_resource_group.rg_logs_storage.name
-  location                   = var.location
-  advanced_threat_protection = var.logs_advanced_threat_protection
-  allow_blob_public_access   = false
+  name                            = replace("${local.project}-st-logs", "-", "")
+  account_kind                    = "StorageV2"
+  account_tier                    = "Standard"
+  account_replication_type        = var.logs_account_replication_type
+  access_tier                     = "Hot"
+  blob_versioning_enabled         = var.logs_enable_versioning
+  resource_group_name             = azurerm_resource_group.rg_logs_storage.name
+  location                        = var.location
+  advanced_threat_protection      = var.logs_advanced_threat_protection
+  allow_nested_items_to_be_public = false
+  public_network_access_enabled   = var.public_network_access_enabled
 
-  blob_properties_delete_retention_policy_days = var.logs_delete_retention_days
-
-  lock_enabled = true
-  lock_name    = "logs-storage-blob-container-lock"
-  lock_level   = "CanNotDelete"
+  blob_delete_retention_days = var.logs_delete_retention_days
 
   tags = var.tags
 }
@@ -65,12 +61,12 @@ resource "azurerm_storage_container" "selc_logs_container" {
 }
 
 module "logs_storage_snet" {
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
-  name                                           = "${local.project}-logs-storage-snet"
-  address_prefixes                               = var.cidr_subnet_logs_storage
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  name                                      = "${local.project}-logs-storage-snet"
+  address_prefixes                          = var.cidr_subnet_logs_storage
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   service_endpoints = [
     "Microsoft.Storage",

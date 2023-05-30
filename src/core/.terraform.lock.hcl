@@ -46,8 +46,8 @@ provider "registry.terraform.io/hashicorp/azuread" {
 }
 
 provider "registry.terraform.io/hashicorp/azurerm" {
-  version     = "2.99.0"
-  constraints = ">= 2.80.0, >= 2.99.0, 2.99.0, <= 2.99.0"
+  version     = "3.40.0"
+  constraints = ">= 3.30.0, >= 3.39.0, <= 3.40.0, <= 3.45.0, <= 3.53.0"
   hashes = [
     "h1:/M8yLHqv0uOm9IbHRa4yZvQORr9ir1QyJyIyjGs4ryQ=",
     "h1:/ZY1j8YgB5GeqPnjT8avyRFjUcGH3rCk1xGLKcUCtWc=",
@@ -148,8 +148,8 @@ provider "registry.terraform.io/hashicorp/time" {
 }
 
 provider "registry.terraform.io/hashicorp/tls" {
-  version     = "3.4.0"
-  constraints = ">= 3.1.0, <= 3.4.0"
+  version     = "4.0.4"
+  constraints = "<= 4.0.4"
   hashes = [
     "h1:QpJxHEQt5369EnAZ10+8MnvJ0TktFA0oWbRe6lzvb+s=",
     "h1:fSRc/OyRitbAST9vE+mEcmgJiDp+Jx8pGPbUUeYEQRc=",

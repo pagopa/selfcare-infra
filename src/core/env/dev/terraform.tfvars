@@ -52,6 +52,9 @@ cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 dns_zone_prefix = "dev.selfcare"
 external_domain = "pagopa.it"
 
+# storage account
+public_network_access_enabled = false
+
 # azure devops
 azdo_sp_tls_cert_enabled     = true
 enable_azdoa                 = true
@@ -128,7 +131,8 @@ postgres_configuration = {
   log_checkpoints             = "on"
   connection_throttling       = "on"
 }
-postgres_alerts_enabled = false
+postgres_private_endpoint_enabled = false
+postgres_alerts_enabled           = false
 
 # spid-testenv
 enable_spid_test = true

@@ -9,12 +9,12 @@ resource "azurerm_resource_group" "rg_load_tests_db" {
 module "load_tests_snet" {
   count = var.enable_load_tests_db ? 1 : 0
 
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
-  name                                           = "${local.project}-load-tests-db-snet"
-  address_prefixes                               = var.cidr_subnet_load_tests
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  name                                      = "${local.project}-load-tests-db-snet"
+  address_prefixes                          = var.cidr_subnet_load_tests
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   delegation = {
     name = "delegation"

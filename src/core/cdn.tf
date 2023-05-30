@@ -46,7 +46,7 @@ locals {
  * CDN
  */
 // public storage used to serve FE
-#tfsec:ignore:azure-storage-default-action-deny
+#tfsec:ignore:azure-storage-queue-services-logging-enabled:exp:2022-05-01 # already ignored, maybe a bug in tfsec
 module "checkout_cdn" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v6.14.0"
 
@@ -56,7 +56,6 @@ module "checkout_cdn" {
   location              = var.location
   hostname              = format("%s.%s", var.dns_zone_prefix, var.external_domain)
   https_rewrite_enabled = true
-  lock_enabled          = var.lock_enable
 
   index_document     = "index.html"
   error_404_document = "error.html"

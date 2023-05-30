@@ -6,13 +6,13 @@ resource "azurerm_resource_group" "event_rg" {
 }
 
 module "eventhub_snet" {
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
-  name                                           = "${local.project}-eventhub-snet"
-  address_prefixes                               = var.cidr_subnet_eventhub
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  service_endpoints                              = ["Microsoft.EventHub"]
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  name                                      = "${local.project}-eventhub-snet"
+  address_prefixes                          = var.cidr_subnet_eventhub
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  service_endpoints                         = ["Microsoft.EventHub"]
+  private_endpoint_network_policies_enabled = true
 }
 
 module "event_hub" {
@@ -35,9 +35,10 @@ module "event_hub" {
 
   network_rulesets = [
     {
-      default_action       = "Deny",
-      virtual_network_rule = [],
-      ip_rule              = var.eventhub_ip_rules
+      default_action                 = "Deny",
+      virtual_network_rule           = [],
+      ip_rule                        = var.eventhub_ip_rules
+      trusted_service_access_enabled = true
     }
   ]
 

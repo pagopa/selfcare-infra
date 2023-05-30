@@ -9,13 +9,12 @@ resource "azurerm_resource_group" "rg_spid_testenv" {
 # tfsec:ignore:azure-storage-default-action-deny
 # tfsec:ignore:azure-storage-queue-services-logging-enabled
 resource "azurerm_storage_account" "spid_testenv_storage_account" {
-  count                     = var.enable_spid_test ? 1 : 0
-  name                      = replace(format("%s-sa-st", var.name), "-", "")
-  resource_group_name       = azurerm_resource_group.rg_spid_testenv[0].name
-  location                  = var.location
-  enable_https_traffic_only = true
-  min_tls_version           = "TLS1_2"
-  account_tier              = "Standard"
+  count               = var.enable_spid_test ? 1 : 0
+  name                = replace(format("%s-sa-st", var.name), "-", "")
+  resource_group_name = azurerm_resource_group.rg_spid_testenv[0].name
+  location            = var.location
+  min_tls_version     = "TLS1_2"
+  account_tier        = "Standard"
 
   account_replication_type = "LRS"
 

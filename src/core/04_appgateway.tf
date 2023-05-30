@@ -131,6 +131,7 @@ module "app_gw" {
       listener              = "api-pnpg"
       backend               = "platform-aks"
       rewrite_rule_set_name = null
+      priority              = 1
     }
   }
 
@@ -139,6 +140,7 @@ module "app_gw" {
       listener     = "api"
       priority     = null
       url_map_name = "api"
+      priority     = 1
     }
   }
 

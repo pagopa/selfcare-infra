@@ -7,13 +7,13 @@ resource "azurerm_resource_group" "azdo_rg" {
 }
 
 module "azdoa_snet" {
-  source                                         = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
-  count                                          = var.enable_azdoa ? 1 : 0
-  name                                           = "${local.project}-azdoa-snet"
-  address_prefixes                               = var.cidr_subnet_azdoa
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  count                                     = var.enable_azdoa ? 1 : 0
+  name                                      = format("%s-azdoa-snet", local.project)
+  address_prefixes                          = var.cidr_subnet_azdoa
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   service_endpoints = [
     "Microsoft.Storage",
@@ -21,7 +21,7 @@ module "azdoa_snet" {
 }
 
 module "azdoa_li" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v6.14.0"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v6.2.1"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-app"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -72,7 +72,9 @@ resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
 # azure devops policy
 data "azuread_service_principal" "app_projects_principal" {
   count        = var.enable_app_projects_pipeline ? 1 : 0
-  display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+  ###???
+  # display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+  application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
 }
 
 resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {

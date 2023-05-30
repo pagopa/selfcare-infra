@@ -177,8 +177,11 @@ locals {
 }
 
 module "web_test_api" {
-  for_each = { for v in local.test_urls : v.host => v if v != null }
-  source   = "git::https://github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v6.14.0"
+  ###???
+  # for_each = { for v in local.test_urls : v.host => v if v != null }
+  for_each = { for i in range(length(local.test_urls)) : i => local.test_urls[i] if local.test_urls[i] != null }
+
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v6.14.0"
 
   subscription_id                   = data.azurerm_subscription.current.subscription_id
   name                              = "${each.value.host}-test"
