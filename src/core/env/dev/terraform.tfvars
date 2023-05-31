@@ -156,6 +156,42 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "3.126.198.129",
     action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
+    action  = "Allow"
   }
 ]
 
