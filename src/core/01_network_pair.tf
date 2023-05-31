@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source              = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
+  source              = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.3.2"
   name                = "${local.project_pair}-vnet"
   location            = azurerm_resource_group.rg_pair_vnet.location
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
@@ -17,7 +17,7 @@ module "vnet_pair" {
 
 ## Peering between the vnet(main) and integration vnet
 module "vnet_peering_pair_vs_core" {
-  source = "git::https://github.com/pagopa/azurerm.git//virtual_network_peering?ref=v4.15.0"
+  source = "git::https://github.com/pagopa/azurerm.git//virtual_network_peering?ref=v2.16.0"
 
   location = azurerm_resource_group.rg_vnet.location
 
