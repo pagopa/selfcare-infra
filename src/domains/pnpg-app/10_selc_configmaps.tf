@@ -72,10 +72,10 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     JAVA_TOOL_OPTIONS = ""
 
     # SPID
-    ORG_URL          = "https://pagopa.gov.it"
+    ORG_URL          = "https://www.pagopa.it"
     ACS_BASE_URL     = "${var.api_gateway_url}/spid/v1"
     ORG_DISPLAY_NAME = "PagoPA S.p.A"
-    ORG_NAME         = "PagoPA3"
+    ORG_NAME         = "PagoPA"
 
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
@@ -89,12 +89,12 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
-    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
+    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Portale Notifiche Digitali Imprese"
     ENABLE_FULL_OPERATOR_METADATA    = true
     COMPANY_EMAIL                    = "pagopa@pec.governo.it"
     COMPANY_FISCAL_CODE              = 15376371009
-    COMPANY_IPA_CODE                 = "PagoPA"
-    COMPANY_NAME                     = "PagoPA S.p.A"
+    COMPANY_IPA_CODE                 = "PagoPA3"
+    COMPANY_NAME                     = "PagoPA"
     COMPANY_VAT_NUMBER               = "IT15376371009"
 
     ENABLE_JWT                         = "true"

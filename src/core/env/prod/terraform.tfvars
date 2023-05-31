@@ -223,6 +223,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "test-io"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
