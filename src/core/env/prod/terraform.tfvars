@@ -173,7 +173,19 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "3.126.198.129",
     action  = "Allow"
-  }
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "2.38.65.171",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "213.61.203.142",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "151.15.26.132",
+    action  = "Allow"
+  },
 ]
 
 eventhubs = [{
