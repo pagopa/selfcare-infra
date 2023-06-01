@@ -85,23 +85,11 @@ resource "null_resource" "aks_dns_private_link_to_vnet_core" {
 #   ]
 # }
 
-module "aks_dns_private_link_to_vnet_pair" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v6.14.1"
-
-  location = var.location
-
-  source_resource_group_name       = data.azurerm_resource_group.vnet_pair_rg.name
-  source_virtual_network_name      = data.azurerm_virtual_network.vnet_pair.name
-  source_remote_virtual_network_id = data.azurerm_virtual_network.vnet_pair.id
-  source_allow_gateway_transit     = false
-  source_use_remote_gateways       = false
-  # needed by vpn gateway for enabling routing from vnet to vnet_integration
-  source_allow_forwarded_traffic = true
-
-  target_resource_group_name       = data.azurerm_resource_group.vnet_aks_rg.name
-  target_virtual_network_name      = data.azurerm_virtual_network.vnet_aks.name
-  target_remote_virtual_network_id = data.azurerm_virtual_network.vnet_aks.id
-  target_allow_gateway_transit     = true
-  target_use_remote_gateways       = false
-  target_allow_forwarded_traffic   = true
+resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_private_link_to_vnet_core" {
+  name                  = data.azurerm_virtual_network.vnet_pair.name
+  resource_group_name   = "mc_${local.aks_rg_name}_${local.aks_cluster_name}_${var.location}"
+  private_dns_zone_name = data.azurerm_private_dns_zone.dns_zone_aks.name
+  virtual_network_id    = data.azurerm_virtual_network.vnet_pair.id
 }
+
+
