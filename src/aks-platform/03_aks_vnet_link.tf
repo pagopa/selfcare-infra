@@ -45,51 +45,22 @@ resource "null_resource" "aks_dns_private_link_to_vnet_core" {
 }
 
 # linking vnet AKS to vnet pair
-# resource "null_resource" "aks_dns_private_link_to_vnet_pair" {
+data "external" "get_dns_zone" {
+  program = ["bash", "-c", <<-EOH
+    dns_zone_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${module.aks[0].name}')].{name:name}")
+    dns_zone_resource_group_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${module.aks[0].name}')].{resourceGroup:resourceGroup}")
+    echo "{\"dns_zone_name\": \"$dns_zone_name\", \"dns_zone_resource_group_name\": \"$dns_zone_resource_group_name\"}"
+  EOH
+  ]
+}
 
-#   count = var.aks_enabled && var.aks_private_cluster_enabled ? 1 : 0
-#   triggers = {
-#     cluster_name = module.aks[0].name
-#     vnet_id      = data.azurerm_virtual_network.vnet_pair.id
-#     vnet_name    = data.azurerm_virtual_network.vnet_pair.name
-#   }
-
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       dns_zone_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${self.triggers.cluster_name}')].{name:name}")
-#       dns_zone_resource_group_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${self.triggers.cluster_name}')].{resourceGroup:resourceGroup}")
-#       az network private-dns link vnet create \
-#         --name ${self.triggers.vnet_name} \
-#         --registration-enabled false \
-#         --resource-group $dns_zone_resource_group_name \
-#         --virtual-network ${self.triggers.vnet_id} \
-#         --zone-name $dns_zone_name
-#     EOT
-#   }
-
-#   provisioner "local-exec" {
-#     when    = destroy
-#     command = <<EOT
-#       dns_zone_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${self.triggers.cluster_name}')].{name:name}")
-#       dns_zone_resource_group_name=$(az network private-dns zone list --output tsv --query "[?contains(id,'${self.triggers.cluster_name}')].{resourceGroup:resourceGroup}")
-#       az network private-dns link vnet delete \
-#         --name ${self.triggers.vnet_name} \
-#         --resource-group $dns_zone_resource_group_name \
-#         --zone-name $dns_zone_name \
-#         --yes
-#     EOT
-#   }
-
-#   depends_on = [
-#     module.aks
-#   ]
-# }
-
-resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_private_link_to_vnet_core" {
+resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_private_link_to_vnet_pair" {
   name                  = data.azurerm_virtual_network.vnet_pair.name
-  resource_group_name   = "mc_${local.aks_rg_name}_${local.aks_cluster_name}_${var.location}"
-  private_dns_zone_name = data.azurerm_private_dns_zone.dns_zone_aks.name
+  resource_group_name   = data.external.get_dns_zone.result["dns_zone_resource_group_name"]
+  private_dns_zone_name = data.external.get_dns_zone.result["dns_zone_name"]
   virtual_network_id    = data.azurerm_virtual_network.vnet_pair.id
+
+  depends_on = [module.aks]
 }
 
 
