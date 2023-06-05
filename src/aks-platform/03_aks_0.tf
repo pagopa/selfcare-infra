@@ -24,7 +24,7 @@ module "snet_aks_platform" {
 
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=kubernetes_cluster_module_test"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=kuernetes-improve-outputs"
 
   count = var.aks_enabled ? 1 : 0
 
@@ -108,7 +108,8 @@ module "aks" {
       webhook_properties = null
     }
   ]
-  tags = var.tags
+  microsoft_defender_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_log_analytics_workspace.log_analytics_workspace.id : null
+  tags                                          = var.tags
 
 }
 
