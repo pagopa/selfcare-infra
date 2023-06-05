@@ -24,7 +24,7 @@ module "snet_aks_platform" {
 
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=kuernetes-improve-outputs"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v6.15.0"
 
   count = var.aks_enabled ? 1 : 0
 
