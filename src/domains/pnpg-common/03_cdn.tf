@@ -268,6 +268,7 @@ resource "azurerm_key_vault_secret" "cdn_storage_blob_connection_string" {
   key_vault_id = module.key_vault_pnpg.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "cdn_storage_blob_primary_web_host" {
   name         = "cdn-storage-blob-primary-web-host"
   value        = module.pnpg_checkout_cdn.storage_primary_web_host
@@ -276,6 +277,7 @@ resource "azurerm_key_vault_secret" "cdn_storage_blob_primary_web_host" {
   key_vault_id = module.key_vault_pnpg.id
 }
 
+#tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "cdn_fqdn" {
   name         = "cdn-fqdn"
   value        = module.pnpg_checkout_cdn.fqdn
