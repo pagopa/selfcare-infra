@@ -13,8 +13,8 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_PRODUCT_URL                    = "http://ms-product:8080"
     MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
-    USERVICE_PARTY_PROCESS_URL        = (var.env == "dev" || var.env == "uat") ? "http://ms-core:8080" : format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
-    USERVICE_PARTY_MANAGEMENT_URL     = (var.env == "dev" || var.env == "uat") ? "http://ms-core:8080" : format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_PROCESS_URL        = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
+    USERVICE_PARTY_MANAGEMENT_URL     = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
     MOCK_SERVER                       = "http://mock-server:1080"
   }
