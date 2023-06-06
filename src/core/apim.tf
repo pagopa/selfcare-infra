@@ -675,7 +675,7 @@ module "apim_selfcare_support_service_v1"{
   api_operation_policies = [
     {
       operation_id = "getContractUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v2/getContract_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/getContract_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
