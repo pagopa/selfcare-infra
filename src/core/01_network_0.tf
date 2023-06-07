@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "rg_vnet" {
 
 # vnet
 module "vnet" {
-  source               = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.15.0"
+  source               = "git::https://github.com/pagopa/azurerm.git//virtual_network?ref=v4.3.2"
   name                 = format("%s-vnet", local.project)
   location             = azurerm_resource_group.rg_vnet.location
   resource_group_name  = azurerm_resource_group.rg_vnet.name

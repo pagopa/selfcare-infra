@@ -35,6 +35,12 @@ cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
+#
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.101.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.101.134.0/29"]
+
 ddos_protection_plan = {
   id     = "/subscriptions/0da48c97-355f-4050-a520-f11a18b8be90/resourceGroups/sec-p-ddos/providers/Microsoft.Network/ddosProtectionPlans/sec-p-ddos-protection"
   enable = true
@@ -173,6 +179,54 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "3.126.198.129",
     action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "2.38.65.171",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "213.61.203.142",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "151.15.26.132",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
+    action  = "Allow"
   }
 ]
 
@@ -214,6 +268,12 @@ eventhubs = [{
     },
     {
       name   = "sap"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "test-io"
       listen = true
       send   = false
       manage = false
