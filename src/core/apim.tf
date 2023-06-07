@@ -484,6 +484,7 @@ module "apim_external_api_ms_v2" {
 
   subscription_required = true
   product_ids = [
+    module.apim_product_support_io.product_id,
     module.apim_product_interop.product_id,
     module.apim_product_interop_coll.product_id,
     module.apim_product_pn.product_id,
@@ -898,6 +899,22 @@ module "apim_product_io" {
   policy_xml = file("./api_product/io/policy.xml")
 }
 
+module "apim_product_support_io"{
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "prod-io"
+  display_name = "Support IO"
+  description  = "Support for APP IO"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/support-io/policy.xml")
+}
 ##################
 ## Named values ##
 ##################
