@@ -17,7 +17,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     USERVICE_PARTY_PROCESS_URL        = "http://ms-core:8080"
     USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
-    MOCK_SERVER                       = "http://mock-server:1080/selfcaremock"
+    MOCK_SERVER                       = "http://mock-server:1080/selfcaremock/ic/ce/wspa/wspa/rest/"
   }
 }
 
@@ -72,10 +72,10 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     JAVA_TOOL_OPTIONS = ""
 
     # SPID
-    ORG_URL          = "https://pagopa.gov.it"
+    ORG_URL          = "https://www.pagopa.it"
     ACS_BASE_URL     = "${var.api_gateway_url}/spid/v1"
     ORG_DISPLAY_NAME = "PagoPA S.p.A"
-    ORG_NAME         = "PagoPA3"
+    ORG_NAME         = "PagoPA"
 
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
@@ -89,12 +89,12 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
     SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
 
-    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
+    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Portale Notifiche Digitali Imprese"
     ENABLE_FULL_OPERATOR_METADATA    = true
     COMPANY_EMAIL                    = "pagopa@pec.governo.it"
     COMPANY_FISCAL_CODE              = 15376371009
-    COMPANY_IPA_CODE                 = "PagoPA"
-    COMPANY_NAME                     = "PagoPA S.p.A"
+    COMPANY_IPA_CODE                 = "PagoPA3"
+    COMPANY_NAME                     = "PagoPA"
     COMPANY_VAT_NUMBER               = "IT15376371009"
 
     ENABLE_JWT                         = "true"
@@ -178,6 +178,7 @@ resource "kubernetes_config_map" "selfcare-core" {
     MAIL_TEMPLATE_PATH              = "contracts/template/mail/1.0.0.json"
     MAIL_TEMPLATE_COMPLETE_PATH     = "contracts/template/mail/onboarding-complete/1.0.0.json"
     MAIL_TEMPLATE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-notification/1.0.0.json"
+    MAIL_TEMPLATE_AUTOCOMPLETE_PATH = "contracts/template/mail/import-massivo-io/1.0.0.json"
     MAIL_TEMPLATE_REJECT_PATH       = "contracts/template/mail/onboarding-refused/1.0.0.json"
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
     EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"

@@ -36,6 +36,12 @@ cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
 
 #
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.101.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.101.134.0/29"]
+
+#
 # AKS Platform
 #
 aks_platform_env              = "dev01"
@@ -155,6 +161,42 @@ eventhub_ip_rules = [
   },
   { // DATALAKE
     ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
     action  = "Allow"
   }
 ]
