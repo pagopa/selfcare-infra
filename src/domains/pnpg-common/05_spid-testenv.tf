@@ -3,13 +3,13 @@ module "spid-test-env" {
 
   enable_spid_test = var.enable_spid_test
 
-  name              = format("%s-%s-spid-testenv", local.product, var.domain)
+  name              = "${local.product}-${var.domain}-spid-testenv"
   location          = var.location
   subscription_name = data.azurerm_subscription.current.display_name
 
-  hub_spid_login_metadata_url = format("https://api-pnpg.%s.%s/spid/v1/metadata", var.dns_zone_prefix, var.external_domain)
+  hub_spid_login_metadata_url = "https://api-pnpg.${var.dns_zone_prefix}.${var.external_domain}/spid/v1/metadata"
 
-  spid_testenv_local_config_dir = format("./env/%s/spid_testenv_conf", var.env)
+  spid_testenv_local_config_dir = "./env/${var.env}/spid_testenv_conf"
 
   tags = var.tags
 }

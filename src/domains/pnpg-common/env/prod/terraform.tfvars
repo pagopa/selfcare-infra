@@ -30,7 +30,7 @@ cidr_subnet_redis                 = ["10.1.143.0/29"]
 cidr_subnet_logs_storage          = ["10.1.143.8/29"]
 
 # spid-testenv
-enable_spid_test = false
+enable_spid_test = true
 
 # redis
 redis_sku_name = "Standard"
