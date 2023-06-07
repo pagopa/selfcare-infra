@@ -129,12 +129,12 @@ module "apim_uservice_party_process_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/party-process/v1", var.reverse_proxy_ip)
+  service_url = "http://${var.reverse_proxy_ip}/ms-core/v1"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "party-process/v1"
+    basePath = "ms-core/v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
@@ -280,12 +280,12 @@ module "apim_uservice_party_management_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = format("http://%s/party-management/v1", var.reverse_proxy_ip)
+  service_url = "http://${var.reverse_proxy_ip}/ms-core/v1"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
-    basePath = "party-management/v1"
+    basePath = "ms-core/v1"
   })
 
   xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
@@ -441,7 +441,7 @@ module "apim_external_api_ms_v1" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })
     },
     {
@@ -547,7 +547,7 @@ module "apim_external_api_ms_v2" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/party-process/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
