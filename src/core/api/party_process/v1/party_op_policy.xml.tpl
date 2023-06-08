@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-        <base/>
+        <base />
         <set-variable name="jwt" value="@{
                 // 1) Construct the Base64Url-encoded header
                 var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
@@ -34,25 +34,19 @@
 
                 }"/>
         <set-header exists-action="override" name="Authorization">
-            <value>@((string)context.Variables["jwt"])</value>
+                  <value>@((string)context.Variables["jwt"])</value>
+        </set-header>
+        <set-header name="X-Client-Ip" exists-action="override">
+            <value>@(context.Request.IpAddress)</value>
         </set-header>
     </inbound>
     <backend>
-        <base/>
+        <base />
     </backend>
     <outbound>
-        <base/>
-        <choose>
-            <when condition="@(context.Response.StatusCode == 200)">
-                <set-body>@{
-                    JObject response = context.Response.Body.As<JObject>();
-                    response.Add("logo", new JValue(new Uri("${CDN_STORAGE_URL}/institutions/" + response.GetValue("id") + "/logo.png")));
-                    return response.ToString();
-                    }</set-body>
-            </when>
-        </choose>
+        <base />
     </outbound>
     <on-error>
-        <base/>
+        <base />
     </on-error>
 </policies>
