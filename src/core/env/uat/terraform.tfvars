@@ -345,6 +345,19 @@ eventhubs = [{
     {
       name   = "external-interceptor"
       listen = true
+      send   = false
+      manage = false
+    }
+  ]
+},{
+  name              = "Selfcare-FD"
+  partitions        = 30
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "external-interceptor-wo"
+      listen = false
       send   = true
       manage = false
     },
