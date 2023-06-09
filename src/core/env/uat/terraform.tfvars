@@ -351,7 +351,7 @@ eventhubs = [{
   ]
 },{
   name              = "Selfcare-FD"
-  partitions        = 30
+  partitions        = 5
   message_retention = 7
   consumers         = []
   keys = [
