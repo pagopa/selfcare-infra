@@ -301,7 +301,7 @@ eventhubs = [{
     {
       name   = "external-interceptor"
       listen = true
-      send   = true
+      send   = false
       manage = false
     }
   ]
