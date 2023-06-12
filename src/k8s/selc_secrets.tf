@@ -184,10 +184,10 @@ resource "kubernetes_secret" "product-external-api" {
   }
 
   data = {
-    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_CONTAINER        = local.contracts_storage_container
     BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["contracts-storage-connection-string"].value
-    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
-    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+    EXTERNAL_API_KEY         = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER        = module.key_vault_secrets_query.values["external-user-api"].value
   }
 
   type = "Opaque"
