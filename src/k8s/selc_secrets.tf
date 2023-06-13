@@ -287,6 +287,25 @@ resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "external-interceptor-event-secrets" {
+  metadata {
+    name      = "external-interceptor-event-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    KAFKA_BROKER            = "${local.project}-eventhub-ns.servicebus.windows.net:9093"
+    KAFKA_SECURITY_PROTOCOL = "SASL_SSL"
+    KAFKA_SASL_MECHANISM    = "PLAIN"
+
+    KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
+    KAFKA_FD_TOPIC                               = "Selfcare-FD"
+    KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
+    KAFKA_SELFCARE_FD_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-Selfcare-FD-external-interceptor-wo-connection-string"].value}\";"
+  }
+
+}
+
 resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
   metadata {
     name      = "onboarding-interceptor-apim-internal"
@@ -295,6 +314,19 @@ resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
 
   data = {
     SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["onboarding-interceptor-apim-internal"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "external-interceptor-apim-internal" {
+  metadata {
+    name      = "external-interceptor-apim-internal"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["external-interceptor-apim-internal"].value
   }
 
   type = "Opaque"
