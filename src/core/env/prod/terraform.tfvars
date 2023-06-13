@@ -227,6 +227,18 @@ eventhub_ip_rules = [
   { // SAP
     ip_mask = "3.65.9.91",
     action  = "Allow"
+  },
+  { // PN
+    ip_mask = "15.161.124.181",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.100.136",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.5.128",
+    action  = "Allow"
   }
 ]
 
