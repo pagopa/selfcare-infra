@@ -199,27 +199,50 @@ eventhub_ip_rules = [
     ip_mask = "3.65.9.91",
     action  = "Allow"
   },
-  {//PROD-FD
-    ip_mask = "91.218.226.5/32",
-    action = "Allow"
+  { // FD
+    ip_mask = "91.218.226.5",
+    action  = "Allow"
   },
-  {//PROD-FD
-    ip_mask = "91.218.226.15/32",
-    action = "Allow"
+  { // FD
+    ip_mask = "91.218.226.15",
+    action  = "Allow"
   },
-  {//PROD-FD
-    ip_mask = "91.218.224.5/32",
-    action = "Allow"
+  { // FD
+    ip_mask = "91.218.224.5",
+    action  = "Allow"
   },
-  {//PROD-FD
-    ip_mask = "91.218.224.15/32",
-    action = "Allow"
+  { // FD
+    ip_mask = "91.218.224.15",
+    action  = "Allow"
   },
-  {//PROD-FD
-    ip_mask = "2.228.86.218/32",
-    action = "Allow"
+  { // FD
+    ip_mask = "2.228.86.218",
+    action  = "Allow"
+  },
+  { // APZ
+    ip_mask = "5.90.92.87",
+    action  = "Allow"
   }
-
+  # {//PROD-FD
+  #   ip_mask = "91.218.226.5/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.226.15/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.224.5/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.224.15/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "2.228.86.218/32",
+  #   action = "Allow"
+  # }
 ]
 
 eventhubs = [{
