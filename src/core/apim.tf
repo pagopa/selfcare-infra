@@ -670,7 +670,7 @@ module "apim_internal_api_ms_v1" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL    = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })
     },
     {
