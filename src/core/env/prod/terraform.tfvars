@@ -247,6 +247,7 @@ eventhub_ip_rules = [
   {//PROD-FD
     ip_mask = "2.228.86.218/32",
     action = "Allow"
+  },
   { // PN
     ip_mask = "15.161.124.181",
     action  = "Allow"
