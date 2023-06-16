@@ -1,5 +1,5 @@
 # JWT
-module "jwt" {
+module "jwt_auth" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v5.3.0"
 
   jwt_name         = "jwt"
@@ -20,18 +20,26 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v5.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=refs/remotes/origin/jwt_cert_allowed_uses_as_variable"
 
-  jwt_name         = "agid-spid"
-  key_vault_id     = module.key_vault_pnpg.id
-  cert_common_name = "pnpg.selfcare.pagopa.it"
-  cert_password    = ""
-  tags             = var.tags
+  jwt_name                 = "agid-spid"
+  key_vault_id             = module.key_vault_pnpg.id
+  cert_common_name         = "imprese.notifichedigitali.it"
+  cert_password            = ""
+  cert_country             = "IT"
+  cert_locality            = "Roma"
+  cert_organization        = "PagoPA"
+  cert_organizational_unit = "PagoPA"
+  cert_province            = "RM"
+  cert_postal_code         = "00187"
+  cert_validity_hours      = 87600
+  tags                     = var.tags
+  cert_allowed_uses        = []
 }
 
 resource "null_resource" "upload_jwks" {
   triggers = {
-    "changes-in-jwt" : module.jwt.certificate_data_pem
+    "changes-in-jwt" : module.jwt_auth.certificate_data_pem
     "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
   }
   provisioner "local-exec" {
@@ -44,7 +52,7 @@ resource "null_resource" "upload_jwks" {
                 --account-key ${module.pnpg_checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
-              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt_auth.jwt_kid}" "${module.jwt_auth.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
               if [ $? -eq 1 ]
               then
                 exit 1
@@ -68,8 +76,8 @@ resource "null_resource" "upload_jwks" {
 
 resource "pkcs12_from_pem" "jwt_pkcs12" {
   password        = ""
-  cert_pem        = module.jwt.certificate_data_pem
-  private_key_pem = module.jwt.jwt_private_key_pem
+  cert_pem        = module.jwt_auth.certificate_data_pem
+  private_key_pem = module.jwt_auth.jwt_private_key_pem
 }
 
 resource "azurerm_api_management_certificate" "jwt_certificate" {

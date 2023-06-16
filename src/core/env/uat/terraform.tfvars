@@ -31,9 +31,15 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
-cidr_subnet_aks_platform          = ["10.1.139.0/24"]
-cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
-cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
+cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
+cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_load_tests            = ["10.1.142.0/24"]
+
+#
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.101.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.101.134.0/29"]
 
 #
 # AKS Platform
@@ -47,9 +53,10 @@ dns_zone_prefix = "uat.selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare UAT"
@@ -63,13 +70,14 @@ app_gateway_api_pnpg_certificate_name = "api-pnpg-uat-selfcare-pagopa-it"
 redis_sku_name = "Standard"
 redis_family   = "C"
 redis_capacity = 0
+redis_version  = 6
 
 # aks
 aks_alerts_enabled                  = false
 aks_kubernetes_version              = "1.23.12"
 aks_system_node_pool_os_disk_type   = "Managed"
 aks_system_node_pool_node_count_min = 2
-aks_system_node_pool_node_count_max = 3
+aks_system_node_pool_node_count_max = 2
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
 
@@ -86,6 +94,11 @@ docker_registry = {
     enabled                   = false
     regional_endpoint_enabled = false
     zone_redundancy_enabled   = false
+  }
+  network_rule_set = {
+    default_action  = "Deny"
+    ip_rule         = []
+    virtual_network = []
   }
 }
 
@@ -137,6 +150,14 @@ eventhub_ip_rules = [
     ip_mask = "18.192.147.151",
     action  = "Allow"
   },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
   { // PN - DEV
     ip_mask = "15.160.101.29",
     action  = "Allow"
@@ -184,6 +205,98 @@ eventhub_ip_rules = [
   { // PN - HOTFIX
     ip_mask = "18.102.83.181",
     action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.80.237",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.87.95",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.92.88",
+    action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "18.102.119.227",
+    action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "18.102.59.108",
+    action  = "Allow"
+  },
+  { // PN UAT
+    ip_mask = "35.152.45.88",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "15.160.251.231",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "15.161.176.211",
+    action  = "Allow"
+  },
+  { // PN TEST
+    ip_mask = "18.102.31.101",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
+    action  = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.226.5/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.226.15/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.224.5/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.224.15/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "2.228.86.218/32",
+    action = "Allow"
   }
 ]
 
@@ -222,7 +335,41 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sap"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+},{
+  name              = "Selfcare-FD"
+  partitions        = 5
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "external-interceptor-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "fd"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
 ##
+
+enable_load_tests_db = true
+

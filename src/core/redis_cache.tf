@@ -9,11 +9,12 @@ module "redis_snet" {
 }
 
 module "redis" {
-  source                        = "git::https://github.com/pagopa/azurerm.git//redis_cache?ref=v2.0.11"
+  source                        = "git::https://github.com/pagopa/azurerm.git//redis_cache?ref=v4.15.0"
   name                          = format("%s-redis", local.project)
   resource_group_name           = azurerm_resource_group.data.name
   location                      = azurerm_resource_group.data.location
   capacity                      = var.redis_capacity
+  redis_version                 = var.redis_version
   family                        = var.redis_family
   sku_name                      = var.redis_sku_name
   public_network_access_enabled = !var.redis_private_endpoint_enabled

@@ -31,9 +31,15 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
-cidr_subnet_aks_platform          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
+cidr_subnet_load_tests            = ["10.1.142.0/24"]
+
+#
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.101.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.101.134.0/29"]
 
 #
 # AKS Platform
@@ -47,9 +53,10 @@ dns_zone_prefix = "dev.selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = true
 
 # apim
 apim_publisher_name = "pagoPA SelfCare DEV"
@@ -64,6 +71,7 @@ redis_sku_name                 = "Basic"
 redis_family                   = "C"
 redis_capacity                 = 0
 redis_private_endpoint_enabled = false
+redis_version                  = 6
 
 # aks
 aks_alerts_enabled                  = false
@@ -88,7 +96,17 @@ docker_registry = {
     regional_endpoint_enabled = false
     zone_redundancy_enabled   = false
   }
+  network_rule_set = {
+    default_action  = "Deny"
+    ip_rule         = []
+    virtual_network = []
+  }
 }
+
+# monitoring
+law_sku               = "PerGB2018"
+law_retention_in_days = 30
+law_daily_quota_gb    = 2
 
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
@@ -136,7 +154,95 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "18.192.147.151",
     action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
+    action  = "Allow"
+  },
+  { // FD
+    ip_mask = "91.218.226.5",
+    action  = "Allow"
+  },
+  { // FD
+    ip_mask = "91.218.226.15",
+    action  = "Allow"
+  },
+  { // FD
+    ip_mask = "91.218.224.5",
+    action  = "Allow"
+  },
+  { // FD
+    ip_mask = "91.218.224.15",
+    action  = "Allow"
+  },
+  { // FD
+    ip_mask = "2.228.86.218",
+    action  = "Allow"
+  },
+  { // APZ
+    ip_mask = "5.90.92.87",
+    action  = "Allow"
   }
+  # {//PROD-FD
+  #   ip_mask = "91.218.226.5/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.226.15/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.224.5/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "91.218.224.15/32",
+  #   action = "Allow"
+  # },
+  # {//PROD-FD
+  #   ip_mask = "2.228.86.218/32",
+  #   action = "Allow"
+  # }
 ]
 
 eventhubs = [{
@@ -174,7 +280,40 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sap"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+},{
+  name              = "Selfcare-FD"
+  partitions        = 5
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "external-interceptor-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "fd"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
 ##
+
+enable_load_tests_db = true

@@ -31,10 +31,20 @@ cidr_subnet_apim                  = ["10.1.136.0/24"]
 cidr_subnet_contract_storage      = ["10.1.137.0/24"]
 cidr_subnet_eventhub              = ["10.1.138.0/24"]
 cidr_subnet_logs_storage          = ["10.1.139.0/24"]
-cidr_subnet_aks_platform          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
+cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
+#
+# Pair VNET
+#
+cidr_pair_vnet                = ["10.101.0.0/16"]
+cidr_subnet_pair_dnsforwarder = ["10.101.134.0/29"]
+
+ddos_protection_plan = {
+  id     = "/subscriptions/0da48c97-355f-4050-a520-f11a18b8be90/resourceGroups/sec-p-ddos/providers/Microsoft.Network/ddosProtectionPlans/sec-p-ddos-protection"
+  enable = true
+}
 #
 # AKS Platform
 #
@@ -47,9 +57,10 @@ dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"
 
 # azure devops
-azdo_sp_tls_cert_enabled = true
-enable_azdoa             = true
-enable_iac_pipeline      = true
+azdo_sp_tls_cert_enabled     = true
+enable_azdoa                 = true
+enable_iac_pipeline          = true
+enable_app_projects_pipeline = false
 
 # apim
 apim_publisher_name = "pagoPA SelfCare PROD"
@@ -70,6 +81,7 @@ app_gateway_waf_enabled    = true
 redis_sku_name = "Standard"
 redis_family   = "C"
 redis_capacity = 0
+redis_version  = 6
 
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
@@ -94,6 +106,11 @@ docker_registry = {
     enabled                   = true
     regional_endpoint_enabled = true
     zone_redundancy_enabled   = true
+  }
+  network_rule_set = {
+    default_action  = "Allow"
+    ip_rule         = []
+    virtual_network = []
   }
 }
 
@@ -154,6 +171,94 @@ eventhub_ip_rules = [
   { // DATALAKE
     ip_mask = "18.192.147.151",
     action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "18.159.227.69",
+    action  = "Allow"
+  },
+  { // DATALAKE
+    ip_mask = "3.126.198.129",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "2.38.65.171",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "213.61.203.142",
+    action  = "Allow"
+  },
+  { // PROD-IO Vulnerability & Penetration Test
+    ip_mask = "151.15.26.132",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.197.134.65",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "52.29.190.137",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.255.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.67.182.154",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.68.44.236",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.66.249.150",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.198.196.89",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "18.193.21.232",
+    action  = "Allow"
+  },
+  { // SAP
+    ip_mask = "3.65.9.91",
+    action  = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.226.5/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.226.15/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.224.5/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "91.218.224.15/32",
+    action = "Allow"
+  },
+  {//PROD-FD
+    ip_mask = "2.228.86.218/32",
+    action = "Allow"
+  },
+  { // PN
+    ip_mask = "15.161.124.181",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.100.136",
+    action  = "Allow"
+  },
+  { // PN
+    ip_mask = "18.102.5.128",
+    action  = "Allow"
   }
 ]
 
@@ -192,6 +297,43 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sap"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "test-io"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+},{
+  name              = "Selfcare-FD"
+  partitions        = 6
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "external-interceptor-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "fd"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
 }]
@@ -202,3 +344,5 @@ logs_account_replication_type   = "RAGZRS"
 logs_delete_retention_days      = 14
 logs_enable_versioning          = false
 logs_advanced_threat_protection = true
+
+enable_load_tests_db = false

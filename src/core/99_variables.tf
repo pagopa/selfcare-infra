@@ -1,7 +1,9 @@
 # general
 
 locals {
-  project                        = "${var.prefix}-${var.env_short}"
+  project      = "${var.prefix}-${var.env_short}"
+  project_pair = "${var.prefix}-${var.env_short}-${var.location_pair_short}"
+
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
 
@@ -12,6 +14,10 @@ locals {
   action_group_selfcare_uat_name = "selcuat"
 }
 
+variable "cidr_pair_vnet" {
+  type        = list(string)
+  description = "Virtual network address space."
+}
 
 variable "prefix" {
   type    = string
@@ -101,6 +107,21 @@ variable "cidr_subnet_k8s" {
 variable "cidr_aks_platform_vnet" {
   type        = list(string)
   description = "vnet for aks platform."
+}
+
+variable "cidr_subnet_pair_dnsforwarder" {
+  type        = list(string)
+  description = "DNS Forwarder network address space."
+}
+
+# Azure Distributed denial of service (DDoS) Protection plan
+variable "ddos_protection_plan" {
+  type = object({
+    id     = string
+    enable = bool
+  })
+
+  default = null
 }
 
 variable "vnet_aks_ddos_protection_plan" {
@@ -575,6 +596,11 @@ variable "redis_capacity" {
   default = 1
 }
 
+variable "redis_version" {
+  type    = number
+  default = 6
+}
+
 variable "redis_sku_name" {
   type    = string
   default = "Standard"
@@ -656,6 +682,12 @@ variable "cidr_subnet_azdoa" {
 variable "enable_iac_pipeline" {
   type        = bool
   description = "If true create the key vault policy to allow used by azure devops iac pipelines."
+  default     = false
+}
+
+variable "enable_app_projects_pipeline" {
+  type        = bool
+  description = "If true create the key vault policy to allow used by azure devops app projects pipelines."
   default     = false
 }
 
@@ -1072,10 +1104,25 @@ variable "docker_registry" {
       regional_endpoint_enabled = bool
       zone_redundancy_enabled   = bool
     })
+    network_rule_set = object({
+      default_action  = string
+      ip_rule         = list(any)
+      virtual_network = list(any)
+    })
   })
 }
 
 variable "aks_platform_env" {
   type        = string
   description = "The env name used into aks platform folder. E.g: dev01"
+}
+
+variable "enable_load_tests_db" {
+  type        = bool
+  description = "To provision load tests db"
+}
+
+variable "cidr_subnet_load_tests" {
+  type        = list(string)
+  description = "private endpoints address space."
 }

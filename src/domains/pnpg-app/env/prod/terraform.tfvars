@@ -54,7 +54,7 @@ tls_cert_check_helm = {
 api_gateway_url = "https://api-pnpg.selfcare.pagopa.it"
 # cdn_frontend_url = "https://selfcare.pagopa.it"
 # cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
-# spid_testenv_url = "https://selc-p-spid-testenv.westeurope.azurecontainer.io"
+spid_testenv_url = "https://selc-p-spid-testenv.westeurope.azurecontainer.io"
 
 # uservice versions
 api-version_uservice-party-management     = "0.1"
@@ -65,7 +65,7 @@ api-version_uservice-party-registry-proxy = "v1"
 jwt_token_exchange_duration = "PT15M"
 
 # session jwt audience
-jwt_audience      = "api-pnpg.selfcare.pagopa.it"
+jwt_audience      = "imprese.notifichedigitali.it"
 jwt_issuer        = "SPID"
 jwt_social_expire = "10000000"
 
@@ -100,7 +100,7 @@ configmaps_hub-spid-login-ms = {
   USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
 
   # SPID
-  ORG_ISSUER = "https://selfcare.pagopa.it"
+  ORG_ISSUER = "https://imprese.notifichedigitali.it"
 
   CIE_URL          = "https://preproduzione.idserver.servizicie.interno.gov.it/idp/shibboleth?Metadata"
   SERVER_PORT      = "8080"
@@ -126,7 +126,7 @@ geo-taxonomies = {
 
 terraform_remote_state_core = {
   resource_group_name  = "terraform-state-rg"
-  storage_account_name = "tfinfuatselfcare"
+  storage_account_name = "tfinfprodselfcare"
   container_name       = "terraform-state"
   key                  = "domain-pnpg-common.terraform.tfstate"
 }

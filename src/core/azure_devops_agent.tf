@@ -47,3 +47,20 @@ resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
   certificate_permissions = ["SetIssuers", "DeleteIssuers", "Purge", "List", "Get"]
   storage_permissions     = []
 }
+
+# azure devops policy
+data "azuread_service_principal" "app_projects_principal" {
+  count        = var.enable_app_projects_pipeline ? 1 : 0
+  display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+}
+
+resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
+  count        = var.enable_app_projects_pipeline ? 1 : 0
+  key_vault_id = module.key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azuread_service_principal.app_projects_principal[0].object_id
+
+  secret_permissions      = ["Get", "List"]
+  certificate_permissions = []
+  storage_permissions     = []
+}

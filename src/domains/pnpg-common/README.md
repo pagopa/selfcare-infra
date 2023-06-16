@@ -12,10 +12,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
+| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | refs/remotes/origin/jwt_cert_allowed_uses_as_variable |
 | <a name="module_cosmosdb_account_mongodb"></a> [cosmosdb\_account\_mongodb](#module\_cosmosdb\_account\_mongodb) | git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account | v5.3.0 |
 | <a name="module_cosmosdb_mongodb_snet"></a> [cosmosdb\_mongodb\_snet](#module\_cosmosdb\_mongodb\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v5.3.0 |
-| <a name="module_jwt"></a> [jwt](#module\_jwt) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
+| <a name="module_jwt_auth"></a> [jwt\_auth](#module\_jwt\_auth) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
 | <a name="module_key_vault_pnpg"></a> [key\_vault\_pnpg](#module\_key\_vault\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault | v5.3.0 |
 | <a name="module_logs_storage_snet"></a> [logs\_storage\_snet](#module\_logs\_storage\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v5.3.0 |
@@ -120,5 +120,8 @@
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_azurerm_api_management_certificate_jwt_certificate_thumbprint"></a> [azurerm\_api\_management\_certificate\_jwt\_certificate\_thumbprint](#output\_azurerm\_api\_management\_certificate\_jwt\_certificate\_thumbprint) | n/a |
+| <a name="output_jwt_auth_jwt_kid"></a> [jwt\_auth\_jwt\_kid](#output\_jwt\_auth\_jwt\_kid) | n/a |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
