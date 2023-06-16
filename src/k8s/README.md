@@ -187,6 +187,8 @@ pre-commit run -a
 | [kubernetes_secret.common-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.contracts-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.external-interceptor-apim-internal](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.external-interceptor-event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.geotaxonomy-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.hub-spid-login-ms](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.infocamere-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |

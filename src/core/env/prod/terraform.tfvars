@@ -228,25 +228,25 @@ eventhub_ip_rules = [
     ip_mask = "3.65.9.91",
     action  = "Allow"
   },
-  {//PROD-FD
+  { //PROD-FD
     ip_mask = "91.218.226.5/32",
-    action = "Allow"
+    action  = "Allow"
   },
-  {//PROD-FD
+  { //PROD-FD
     ip_mask = "91.218.226.15/32",
-    action = "Allow"
+    action  = "Allow"
   },
-  {//PROD-FD
+  { //PROD-FD
     ip_mask = "91.218.224.5/32",
-    action = "Allow"
+    action  = "Allow"
   },
-  {//PROD-FD
+  { //PROD-FD
     ip_mask = "91.218.224.15/32",
-    action = "Allow"
+    action  = "Allow"
   },
-  {//PROD-FD
+  { //PROD-FD
     ip_mask = "2.228.86.218/32",
-    action = "Allow"
+    action  = "Allow"
   },
   { // PN
     ip_mask = "15.161.124.181",
@@ -317,7 +317,7 @@ eventhubs = [{
       manage = false
     }
   ]
-},{
+  }, {
   name              = "Selfcare-FD"
   partitions        = 6
   message_retention = 7
