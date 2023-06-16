@@ -184,10 +184,10 @@ resource "kubernetes_secret" "product-external-api" {
   }
 
   data = {
-    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_CONTAINER        = local.contracts_storage_container
     BLOB_STORAGE_CONN_STRING = module.key_vault_secrets_query.values["contracts-storage-connection-string"].value
-    EXTERNAL_API_KEY  = module.key_vault_secrets_query.values["external-api-key"].value
-    EXTERNAL_API_USER = module.key_vault_secrets_query.values["external-user-api"].value
+    EXTERNAL_API_KEY         = module.key_vault_secrets_query.values["external-api-key"].value
+    EXTERNAL_API_USER        = module.key_vault_secrets_query.values["external-user-api"].value
   }
 
   type = "Opaque"
@@ -301,7 +301,7 @@ resource "kubernetes_secret" "external-interceptor-event-secrets" {
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     KAFKA_FD_TOPIC                               = "Selfcare-FD"
     KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
-    KAFKA_SELFCARE_FD_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-Selfcare-FD-external-interceptor-wo-connection-string"].value}\";"
+    KAFKA_SELFCARE_FD_WO_SASL_JAAS_CONFIG        = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-Selfcare-FD-external-interceptor-wo-connection-string"].value}\";"
   }
 
 }

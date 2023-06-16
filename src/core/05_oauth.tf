@@ -1,18 +1,18 @@
-resource "random_uuid" "prova_scope_id" {}
+resource "random_uuid" "scope_id" {}
 
 resource "azuread_application" "selfcare_fd" {
   display_name = "${local.project}-selfcare-fd"
 
   api {
     oauth2_permission_scope {
-      admin_consent_description  = "prova"
-      admin_consent_display_name = "provaAdmin"
+      admin_consent_description  = "adminApi"
+      admin_consent_display_name = "adminApi"
       enabled                    = true
-      id                         = random_uuid.prova_scope_id.result
+      id                         = random_uuid.scope_id.result
       type                       = "User"
-      user_consent_description   = ""
-      user_consent_display_name  = "provaUser"
-      value                      = "prova"
+      user_consent_description   = "userConsent"
+      user_consent_display_name  = "userConsent"
+      value                      = "userConsent"
     }
   }
 }
