@@ -6,7 +6,7 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "= 2.5.0"
+      version = "<= 2.21.0"
     }
 
     pkcs12 = {
@@ -16,7 +16,7 @@ terraform {
 
     random = {
       source = "hashicorp/random"
-      version = "3.5.1"
+      version = "<= 3.5.1"
     }
 
   }
