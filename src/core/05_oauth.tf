@@ -43,6 +43,7 @@ resource "azurerm_role_assignment" "external_oauth2_issuer_apim_contributor" {
   principal_id         = azuread_service_principal.external_oauth2_issuer.object_id
 }
 
+
 #
 # Client
 #
@@ -73,4 +74,21 @@ resource "azuread_application_password" "external_oauth2_client_fd_password" {
 
 resource "azuread_service_principal" "external_oauth2_client_fd_sp" {
   application_id = azuread_application.external_oauth2_client_fd.application_id
+}
+
+
+resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
+  name         = "${local.project}-external-oauth2-fd-sp-client-id"
+  value        = azuread_service_principal.selfcare_fd_client.application_id
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_secret" {
+  name         = "${local.project}-external-oauth2-fd-sp-client-secret"
+  value        = azuread_application_password.selfcare_fd_client.value
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
 }
