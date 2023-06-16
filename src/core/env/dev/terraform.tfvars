@@ -294,7 +294,7 @@ eventhubs = [{
       manage = false
     }
   ]
-},{
+  }, {
   name              = "Selfcare-FD"
   partitions        = 5
   message_retention = 7

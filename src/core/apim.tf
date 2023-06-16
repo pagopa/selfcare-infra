@@ -167,7 +167,7 @@ module "apim_uservice_party_process_v1" {
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -669,8 +669,8 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        MS_PRODUCT_BACKEND_BASE_URL    = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        CDN_STORAGE_URL             = "https://${module.checkout_cdn.storage_primary_web_host}"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })
     },
     {
@@ -686,7 +686,7 @@ module "apim_internal_api_ms_v1" {
   ]
 }
 
-resource "azurerm_api_management_api_version_set" "apim_selfcare_support_service"{
+resource "azurerm_api_management_api_version_set" "apim_selfcare_support_service" {
   name                = format("%s-support-service", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
@@ -694,7 +694,7 @@ resource "azurerm_api_management_api_version_set" "apim_selfcare_support_service
   versioning_scheme   = "Segment"
 }
 
-module "apim_selfcare_support_service_v1"{
+module "apim_selfcare_support_service_v1" {
   source              = "git::https://github.com/pagopa/azurerm.git//api_management_api?ref=v2.12.5"
   name                = format("%s-selfcare-support-api-service", local.project)
   api_management_name = module.apim.name
@@ -1030,7 +1030,7 @@ module "apim_product_test_io_premium" {
   policy_xml = file("./api_product/test-io-premium/policy.xml")
 }
 
-module "apim_product_support_io"{
+module "apim_product_support_io" {
   source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
 
   product_id   = "prod-io"
