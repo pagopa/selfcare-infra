@@ -167,7 +167,7 @@ module "apim_uservice_party_process_v1" {
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL = "https://${module.checkout_cdn.storage_primary_web_host}"
+        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -1093,7 +1093,7 @@ module "apim_external_api_data_vault_v1" {
     "https"
   ]
 
-  service_url = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
+  service_url = "http://${var.reverse_proxy_ip}/external-api/v1"
 
   content_format = "openapi"
   content_value = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
@@ -1124,37 +1124,37 @@ module "apim_external_api_data_vault_v1" {
     {
       operation_id = "addInstitutionUsingPOST"
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     },
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     }
   ]
 
-  oauth2_authorization = {
-    authorization_server_name = azurerm_api_management_oauth2_authorization_server.selfcare_fd
-  }
+  # oauth2_authorization = {
+  #   authorization_server_name = azurerm_api_management_oauth2_authorization_server.selfcare_fd
+  # }
 }
 
-resource "azurerm_api_management_oauth2_authorization_server" "selfcare_fd" {
-  name                = "${local.project}-selfcare-authorization-server"
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
+# resource "azurerm_api_management_oauth2_authorization_server" "selfcare_fd" {
+#   name                = "${local.project}-selfcare-authorization-server"
+#   api_management_name = module.apim.name
+#   resource_group_name = azurerm_resource_group.rg_api.name
 
-  authorization_endpoint = "https://${local.cdn_storage_hostname}/oauth2/authorize"
-  token_endpoint         = "https://${local.cdn_storage_hostname}/oauth2/token"
-  client_id              = "your-client-id"
-  client_secret          = "your-client-secret"
-}
+#   authorization_endpoint = "https://${local.cdn_storage_hostname}/oauth2/authorize"
+#   token_endpoint         = "https://${local.cdn_storage_hostname}/oauth2/token"
+#   client_id              = "your-client-id"
+#   client_secret          = "your-client-secret"
+# }
