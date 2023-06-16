@@ -78,7 +78,7 @@ resource "azuread_service_principal" "external_oauth2_client_fd_sp" {
 
 
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
-  name         = "${local.project}-external-oauth2-fd-sp-client-id"
+  name         = "external-oauth2-fd-sp-client-id"
   value        = azuread_service_principal.selfcare_fd_client.application_id
   content_type = "text/plain"
 
@@ -86,7 +86,7 @@ resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
 }
 
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_secret" {
-  name         = "${local.project}-external-oauth2-fd-sp-client-secret"
+  name         = "external-oauth2-fd-sp-client-secret"
   value        = azuread_application_password.selfcare_fd_client.value
   content_type = "text/plain"
 
