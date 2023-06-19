@@ -81,7 +81,7 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
 
     ENDPOINT_ACS      = "/acs"
     ENDPOINT_ERROR    = "https://${var.pnpg_domain}/auth/login/error"
-    ENDPOINT_SUCCESS  = "https://${var.pnpg_domain}/auth/login/error"
+    ENDPOINT_SUCCESS  = "https://${var.pnpg_domain}/auth/login/success"
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"
