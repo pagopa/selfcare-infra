@@ -86,14 +86,9 @@ variable "domain" {
   }
 }
 
-variable "external_domain" {
+variable "pnpg_domain" {
   type = string
-  validation {
-    condition = (
-      length(var.domain) <= 20 
-    )
-    error_message = "Max length is 20 chars."
-  }
+  description = "PNPG real domain"
 }
 
 variable "location" {
