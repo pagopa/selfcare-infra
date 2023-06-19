@@ -86,6 +86,11 @@ variable "domain" {
   }
 }
 
+variable "pnpg_domain" {
+  type = string
+  description = "PNPG real domain"
+}
+
 variable "location" {
   type        = string
   description = "One of westeurope, northeurope"

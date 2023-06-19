@@ -4,14 +4,16 @@ locals {
       [
         "https://${var.api_gateway_url}",
         "https://${local.cdn_fqdn_url}",
-        "https://${var.spid_testenv_url}"
+        "https://${var.spid_testenv_url}", # REMOVE AFTER AGID APPLICATION DONE
+        "https://${var.external_domain}"
       ],
       var.env_short != "p" ? [
         "https://localhost:3000",
         "http://localhost:3000",
         "https://localhost:3001",
         "http://localhost:3001",
-        "https://${var.spid_testenv_url}"
+        "https://${var.spid_testenv_url}",
+        "https://${var.external_domain}"
       ] : []
     )),
     headers = join(",", [
