@@ -80,8 +80,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "https://${var.external_domain}/auth/login/error"
-    ENDPOINT_SUCCESS  = "https://${var.external_domain}/auth/login/error"
+    ENDPOINT_ERROR    = "https://${var.pnpg_domain}/auth/login/error"
+    ENDPOINT_SUCCESS  = "https://${var.pnpg_domain}/auth/login/error"
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"

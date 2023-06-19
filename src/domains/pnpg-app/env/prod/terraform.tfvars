@@ -6,7 +6,7 @@ location        = "westeurope"
 location_string = "West Europe"
 location_short  = "weu"
 instance        = "prod01"
-external_domain = "imprese.notifichedigitali.it"
+pnpg_domain     = "imprese.notifichedigitali.it"
 
 tags = {
   CreatedBy   = "Terraform"
