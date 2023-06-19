@@ -86,6 +86,16 @@ variable "domain" {
   }
 }
 
+variable "external_domain" {
+  type = string
+  validation {
+    condition = (
+      length(var.domain) <= 20 
+    )
+    error_message = "Max length is 20 chars."
+  }
+}
+
 variable "location" {
   type        = string
   description = "One of westeurope, northeurope"
