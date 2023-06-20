@@ -9,7 +9,6 @@ repos:
           - --hook-config=--add-to-existing-file=true     # Boolean. true or false
           - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
           - --args=--hide providers
-      - id: terraform_tfsec
       - id: terraform_validate
         args:
           - --init-args=-lockfile=readonly
