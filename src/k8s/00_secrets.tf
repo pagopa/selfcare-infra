@@ -6,6 +6,8 @@ module "key_vault_secrets_query" {
 
   secrets = [
     "appinsights-instrumentation-key",
+    "aws-ses-access-key-id",
+    "aws-ses-secret-access-key",
     "redis-primary-access-key",
     "jwt-private-key",
     "jwt-public-key",

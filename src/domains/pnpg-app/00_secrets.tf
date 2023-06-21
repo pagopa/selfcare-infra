@@ -12,6 +12,8 @@ module "key_vault_secrets_query" {
     "aruba-sign-service-delegated-psw",
     "aruba-sign-service-delegated-user",
     "aruba-sign-service-user",
+    "aws-ses-access-key-id",
+    "aws-ses-secret-access-key",
     "cdn-fqdn",
     "cdn-storage-access-key",
     "cdn-storage-blob-connection-string",
