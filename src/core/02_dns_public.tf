@@ -189,15 +189,15 @@ resource "azurerm_dns_txt_record" "dns-txt-selfcare-pagopa-it-aws-ses" {
 locals {
   dkim_aws_ses_selfcare_pagopa_it = [
     {
-      "name" = "6h45kkrdd3vjdinlyiiidtxxsphoaubs._domainkey"
+      "name"  = "6h45kkrdd3vjdinlyiiidtxxsphoaubs._domainkey"
       "value" = "6h45kkrdd3vjdinlyiiidtxxsphoaubs.dkim.eu-south-1.amazonses.com"
     },
     {
-      "name" = "xzxgkpr57rtojhujy5pa7allv7mpoxs4._domainkey"
+      "name"  = "xzxgkpr57rtojhujy5pa7allv7mpoxs4._domainkey"
       "value" = "xzxgkpr57rtojhujy5pa7allv7mpoxs4.dkim.eu-south-1.amazonses.com"
     },
     {
-      "name" = "6ozapd6v5bdmceyr2ap246as3mvafyd2._domainkey"
+      "name"  = "6ozapd6v5bdmceyr2ap246as3mvafyd2._domainkey"
       "value" = "6ozapd6v5bdmceyr2ap246as3mvafyd2.dkim.eu-south-1.amazonses.com"
     }
   ]
