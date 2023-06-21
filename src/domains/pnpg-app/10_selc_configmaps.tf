@@ -250,6 +250,6 @@ resource "kubernetes_config_map" "national-registries-service" {
   }
 
   data = {
-    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/national-registries-private/"
+    NATIONAL_REGISTRIES_URL = var.env_short == "d" ? "https://api-selcpg.test.notifichedigitali.it/national-registries-private" :  "https://api-selcpg.uat.notifichedigitali.it/national-registries-private"
   }
 }
