@@ -88,7 +88,7 @@ module "k8s_snet" {
   address_prefixes                          = var.cidr_subnet_k8s
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
   virtual_network_name                      = module.vnet.name
-  private_endpoint_network_policies_enabled = true
+  private_endpoint_network_policies_enabled = false
 
   service_endpoints = [
     "Microsoft.Web",
@@ -105,6 +105,12 @@ resource "azurerm_public_ip" "aks_outbound" {
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
+
+  zones = [
+    "1",
+    "2",
+    "3",
+  ]
 
   tags = var.tags
 }

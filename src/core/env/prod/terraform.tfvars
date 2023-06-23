@@ -56,6 +56,9 @@ cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"
 
+# storage account
+public_network_access_enabled = false
+
 # azure devops
 azdo_sp_tls_cert_enabled     = true
 enable_azdoa                 = true

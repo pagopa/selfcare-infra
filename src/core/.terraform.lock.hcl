@@ -147,6 +147,13 @@ provider "registry.terraform.io/hashicorp/time" {
   ]
 }
 
+provider "registry.terraform.io/hashicorp/time" {
+  version = "0.9.1"
+  hashes = [
+    "h1:VxyoYYOCaJGDmLz4TruZQTSfQhvwEcMxvcKclWdnpbs=",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/tls" {
   version     = "4.0.4"
   constraints = "<= 4.0.4"

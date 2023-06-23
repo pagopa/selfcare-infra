@@ -23,7 +23,7 @@ module "postgres_snet" {
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
   virtual_network_name                      = module.vnet.name
   service_endpoints                         = ["Microsoft.Sql"]
-  private_endpoint_network_policies_enabled = true
+  private_endpoint_network_policies_enabled = false
 }
 
 // azure-database-postgres-configuration ignored because these rules are not correctly evaluated! this configuration is enabled using postgres_configurations var
@@ -33,7 +33,7 @@ module "postgres_snet" {
 module "postgresql" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//postgresql_server?ref=v6.14.0"
 
-  name                             = format("%s-postgresql", local.project)
+  name                             = "${local.project}-postgresql"
   location                         = azurerm_resource_group.postgres_rg.location
   resource_group_name              = azurerm_resource_group.postgres_rg.name
   administrator_login              = data.azurerm_key_vault_secret.postgres_administrator_login.value

@@ -78,7 +78,7 @@ module "dns_forwarder" {
 # DNS Forwarder
 #
 module "dns_forwarder_pair_subnet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.14.0"
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v6.20.0"
   name                                      = "${local.project_pair}-dnsforwarder-snet"
   address_prefixes                          = var.cidr_subnet_pair_dnsforwarder
   resource_group_name                       = azurerm_resource_group.rg_pair_vnet.name

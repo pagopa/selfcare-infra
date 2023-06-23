@@ -71,7 +71,7 @@ resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
 
 # azure devops policy
 data "azuread_service_principal" "app_projects_principal" {
-  count        = var.enable_app_projects_pipeline ? 1 : 0
+  count = var.enable_app_projects_pipeline ? 1 : 0
   ###???
   # display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
   application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
