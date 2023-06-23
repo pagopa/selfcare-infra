@@ -73,13 +73,13 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = merge({
-    SMTP_HOST           = "smtps.pec.aruba.it"
-    SMTP_PORT           = 465
-    SMTP_SSL            = true
-    SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
-    SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
-    MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
-    AWS_SES_ACCESS_KEY_ID = module.key_vault_secrets_query.values["aws-ses-access-key-id"].value
+    SMTP_HOST                 = "smtps.pec.aruba.it"
+    SMTP_PORT                 = 465
+    SMTP_SSL                  = true
+    SMTP_USR                  = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW                  = module.key_vault_secrets_query.values["smtp-psw"].value
+    MAIL_SENDER_ADDRESS       = module.key_vault_secrets_query.values["smtp-usr"].value
+    AWS_SES_ACCESS_KEY_ID     = module.key_vault_secrets_query.values["aws-ses-access-key-id"].value
     AWS_SES_SECRET_ACCESS_KEY = module.key_vault_secrets_query.values["aws-ses-secret-access-key"].value
     },
     var.env_short != "p"
