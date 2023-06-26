@@ -102,7 +102,7 @@ configmaps_hub-spid-login-ms = {
   # SPID
   ORG_ISSUER = "https://imprese.notifichedigitali.it"
 
-  CIE_URL          = "https://preproduzione.idserver.servizicie.interno.gov.it/idp/shibboleth?Metadata"
+  CIE_URL          = "https://api.is.eng.pagopa.it/idp-keys/cie/latest"
   SERVER_PORT      = "8080"
   IDP_METADATA_URL = "https://api.is.eng.pagopa.it/idp-keys/spid/latest"
 }
