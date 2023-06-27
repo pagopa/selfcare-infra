@@ -36,6 +36,7 @@ configmaps_ms_core = {
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://uat.selfcare.pagopa.it/dashboard/admin/onboarding/"
   GEO_TAXONOMY_URL                     = "https://api.pdnd.pagopa.it/geo-tax"
   PAGOPA_SIGNATURE_ONBOARDING_ENABLED  = "true"
+  SCHEDULER_REGENERATE_KAFKA_QUEUE_ENABLED = "true"
 }
 
 # configs/secrets
