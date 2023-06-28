@@ -224,6 +224,10 @@ variable "configmaps_interop-be-party-process" {
   type = map(string)
 }
 
+variable "configmaps_national_registries" {
+  type = map(string)
+}
+
 variable "configmaps_ms_core" {
   type = map(string)
 }
