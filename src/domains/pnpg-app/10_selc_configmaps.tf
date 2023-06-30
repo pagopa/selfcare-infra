@@ -18,7 +18,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
     MOCK_SERVER                       = "http://mock-server:1080/selfcaremock/ic/ce/wspa/wspa/rest/"
-    NATIONAL_REGISTRIES_CLIENT_READ_TIMEOUT: 50000
+    NATIONAL_REGISTRIES_CLIENT_READ_TIMEOUT : 50000
   }
 }
 
@@ -252,5 +252,5 @@ resource "kubernetes_config_map" "national-registries-service" {
   }
 
   data = var.configmaps_national_registries
-  
+
 }
