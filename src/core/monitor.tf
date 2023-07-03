@@ -152,34 +152,45 @@ resource "azurerm_monitor_action_group" "slack" {
 ## web availability test
 locals {
 
-  test_urls = [
-    # https://api.selfcare.pagopa.it/health
-    {
-      host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
+  # test_urls = [
+  #   # https://api.selfcare.pagopa.it/health
+  #   {
+  #     host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
+  #     path                 = "/health",
+  #     expected_http_status = 404
+  #   },
+  #   # https://selfcare.pagopa.it/auth/login
+  #   ## CDN custom domains ##
+  #   {
+  #     host                 = trimsuffix(module.checkout_cdn.fqdn, "."),
+  #     path                 = "/auth/login",
+  #     expected_http_status = 200
+  #   },
+  # ]
+    test_urls_map = {
+    "api.dev.selfcare.pagopa.it" = {
+      host                 = "api.dev.selfcare.pagopa.it",
       path                 = "/health",
       expected_http_status = 404
     },
-    # https://selfcare.pagopa.it/auth/login
-    ## CDN custom domains ##
-    {
-      host                 = trimsuffix(module.checkout_cdn.fqdn, "."),
+    "dev.selfcare.pagopa.it" = {
+      host                 = "dev.selfcare.pagopa.it",
       path                 = "/auth/login",
       expected_http_status = 200
     },
-    # https://api-pnpg.selfcare.pagopa.it/health
-    {
+    "api-pnpg.selfcare.pagopa.it" = {
       host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                 = "/health",
       expected_http_status = 404
     },
-  ]
-
+    // Aggiungi qui altre stringhe se necessario.
+  }
 }
 
 module "web_test_api" {
-  ###???
+  ###??? TBFIX
+  for_each = local.test_urls_map
   # for_each = { for v in local.test_urls : v.host => v if v != null }
-  for_each = { for i in range(length(local.test_urls)) : i => local.test_urls[i] if local.test_urls[i] != null }
 
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v6.14.0"
 
