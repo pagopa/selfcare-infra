@@ -80,6 +80,10 @@ configmaps_interop-be-party-process = {
   MAIL_ONBOARDING_URL : "https://uat.selfcare.pagopa.it/onboarding/"
 }
 
+configmaps_national_registries = {
+  NATIONAL_REGISTRIES_URL = "https://api-selcpg.uat.notifichedigitali.it/national-registries-private"
+}
+
 configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://uat.selfcare.pagopa.it/onboarding/confirm?jwt="

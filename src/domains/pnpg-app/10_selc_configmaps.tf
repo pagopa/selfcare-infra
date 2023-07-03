@@ -243,13 +243,13 @@ resource "kubernetes_config_map" "geo-taxonomies" {
 }
 
 
+
 resource "kubernetes_config_map" "national-registries-service" {
   metadata {
     name      = "national-registries-service"
     namespace = var.domain
   }
 
-  data = {
-    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/national-registries-private/"
-  }
+  data = var.configmaps_national_registries
+  
 }
