@@ -251,5 +251,5 @@ resource "kubernetes_config_map" "national-registries-service" {
   }
 
   data = var.configmaps_national_registries
-  
+
 }
