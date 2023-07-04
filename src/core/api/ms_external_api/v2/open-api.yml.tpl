@@ -563,9 +563,6 @@ components:
   schemas:
     GeographicTaxonomyResource:
       title: GeographicTaxonomyResource
-      required:
-        - code
-        - desc
       type: object
       properties:
         code:
@@ -576,23 +573,14 @@ components:
           description: Institution's geographic taxonomy extended name
     InstitutionDetailResource:
       title: InstitutionDetailResource
-      required:
-        - address
-        - description
-        - digitalAddress
-        - externalId
-        - geographicTaxonomies
-        - id
-        - institutionType
-        - origin
-        - originId
-        - taxCode
-        - zipCode
       type: object
       properties:
         address:
           type: string
           description: Institution's physical address
+        aooParentCode:
+          type: string
+          description: AOO unit parent institution Code
         businessRegisterPlace:
           type: string
           description: Institution's business register place
@@ -624,6 +612,7 @@ components:
           enum:
             - GSP
             - PA
+            - PG
             - PSP
             - PT
             - SCP
@@ -633,17 +622,24 @@ components:
         originId:
           type: string
           description: Institution's details origin Id
+        parentDescription:
+          type: string
+          description: Institutions AOO/UO unit parent's description
         rea:
           type: string
           description: Institution's REA
         shareCapital:
           type: string
           description: Institution's share capital value
+        subunitCode:
+          type: string
+          description: Institutions AOO/UO unit Code
+        subunitType:
+          type: string
+          description: Institutions AOO/UO unit type
         supportEmail:
           type: string
           description: Institution's support email contact
-          format: email
-          example: email@example.com
         supportPhone:
           type: string
           description: Institution's support phone contact
@@ -655,24 +651,14 @@ components:
           description: Institution's zipCode
     InstitutionResource:
       title: InstitutionResource
-      required:
-        - address
-        - description
-        - digitalAddress
-        - externalId
-        - id
-        - institutionType
-        - origin
-        - originId
-        - status
-        - taxCode
-        - userProductRoles
-        - zipCode
       type: object
       properties:
         address:
           type: string
           description: Institution's physical address
+        aooParentCode:
+          type: string
+          description: AOO unit parent institution Code
         assistanceContacts:
           description: Institution's assistance contacts
           $ref: '#/components/schemas/AssistanceContactsResource'
@@ -701,6 +687,8 @@ components:
           enum:
             - GSP
             - PA
+            - PG
+            - PSP
             - PT
             - SCP
         origin:
@@ -709,6 +697,9 @@ components:
         originId:
           type: string
           description: Institution's details origin Id
+        parentDescription:
+          type: string
+          description: Institutions AOO/UO unit parent's description
         pspData:
           description: Payment Service Provider (PSP) specific data
           $ref: '#/components/schemas/PspDataResource'
@@ -718,12 +709,18 @@ components:
         status:
           type: string
           description: Institution onboarding status
+        subunitCode:
+          type: string
+          description: Institutions AOO/UO unit Code
+        subunitType:
+          type: string
+          description: Institutions AOO/UO unit type
         taxCode:
           type: string
           description: Institution's taxCode
         userProductRoles:
           type: array
-          description: User's roles on product
+          description: Logged user's roles on product
           items:
             type: string
         zipCode:
@@ -776,13 +773,6 @@ components:
         (https://datatracker.ietf.org/doc/html/rfc7807)
     ProductResource:
       title: ProductResource
-      required:
-        - contractTemplatePath
-        - contractTemplateUpdatedAt
-        - contractTemplateVersion
-        - createdAt
-        - id
-        - title
       type: object
       properties:
         contractTemplatePath:
@@ -840,12 +830,6 @@ components:
           description: URL that redirects to the public information webpage of the product
     PspDataResource:
       title: PspDataResource
-      required:
-        - abiCode
-        - businessRegisterNumber
-        - legalRegisterName
-        - legalRegisterNumber
-        - vatNumberGroup
       type: object
       properties:
         abiCode:
@@ -866,10 +850,6 @@ components:
           example: false
     DpoDataResource:
       title: DpoDataResource
-      required:
-        - address
-        - email
-        - pec
       type: object
       properties:
         address:
@@ -905,8 +885,6 @@ components:
         supportEmail:
           type: string
           description: Institution's support email contact
-          format: email
-          example: email@example.com
         supportPhone:
           type: string
           description: Institution's support phone contact
@@ -945,12 +923,6 @@ components:
           description: Product role label
     PageOfUserGroupResource:
       title: PageOfUserGroupResource
-      required:
-        - content
-        - number
-        - size
-        - totalElements
-        - totalPages
       type: object
       properties:
         content:
@@ -976,13 +948,6 @@ components:
           format: int32
     UserGroupResource:
       title: UserGroupResource
-      required:
-      - description
-      - id
-      - institutionId
-      - name
-      - productId
-      - status
       type: object
       properties:
         description:
@@ -1008,19 +973,11 @@ components:
           - SUSPENDED
     UserResource:
       title: UserResource
-      required:
-        - email
-        - id
-        - name
-        - roles
-        - surname
       type: object
       properties:
         email:
           type: string
           description: User's institutional email
-          format: email
-          example: email@example.com
         id:
           type: string
           description: User's unique identifier
@@ -1036,6 +993,9 @@ components:
         surname:
           type: string
           description: User's surname
+        fiscalCode:
+          type: string
+          description: User's fiscal code
     Institution:
       type: object
       properties:
@@ -1109,18 +1069,6 @@ components:
           description: URL to institution logo
           format: url
           type: string
-      required:
-        - id
-        - externalId
-        - originId
-        - description
-        - digitalAddress
-        - address
-        - zipCode
-        - taxCode
-        - attributes
-        - origin
-        - geographicTaxonomies
       additionalProperties: false
     Attribute:
       type: object
@@ -1131,10 +1079,6 @@ components:
           type: string
         description:
           type: string
-      required:
-        - origin
-        - code
-        - description
     Attributes:
       type: array
       items:
