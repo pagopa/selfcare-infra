@@ -544,7 +544,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_io_sign.product_id,
     module.apim_product_io.product_id,
     module.apim_product_test_io.product_id,
-    module.apim_product_test_io_premium.product_id
+    module.apim_product_test_io_premium.product_id,
+    module.apim_product_fd.product_id
   ]
 
   api_operation_policies = [
@@ -1046,6 +1047,24 @@ module "apim_product_support_io" {
 
   policy_xml = file("./api_product/support-io/policy.xml")
 }
+
+module "apim_product_fd" {
+  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+
+  product_id   = "prod-fd"
+  display_name = "Fideiussioni Digitali"
+  description  = "Fideiussioni Digitali"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/prod-fd/policy.xml")
+}
+
 ##################
 ## Named values ##
 ##################
