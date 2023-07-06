@@ -282,12 +282,6 @@ eventhubs = [{
       manage = false
     },
     {
-      name   = "sap"
-      listen = true
-      send   = false
-      manage = false
-    },
-    {
       name   = "external-interceptor"
       listen = true
       send   = false
