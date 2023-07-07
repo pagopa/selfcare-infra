@@ -263,7 +263,7 @@ locals {
 
 module "selc_ms_core_collections" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v5.3.0"
-  
+
   for_each = {
     for index, coll in local.mongo.selcMsCore.collections :
     coll.name => coll
