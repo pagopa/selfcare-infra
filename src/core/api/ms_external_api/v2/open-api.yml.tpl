@@ -1033,8 +1033,13 @@ components:
           example: IPA
         institutionType:
           type: string
-          description: institution type
-          example: PA
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
         attributes:
           $ref: '#/components/schemas/Attributes'
         paymentServiceProvider:
@@ -1068,6 +1073,14 @@ components:
         logo:
           description: URL to institution logo
           format: url
+          type: string
+        subunitCode:
+          type: string
+        subunitType:
+          type: string
+        aooParentCode:
+          type: string
+        parentDescription:
           type: string
       additionalProperties: false
     Attribute:
