@@ -355,6 +355,12 @@ eventhubs = [{
   consumers         = []
   keys = [
     {
+      name   = "selfcare-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
       name   = "datalake"
       listen = true
       send   = false
