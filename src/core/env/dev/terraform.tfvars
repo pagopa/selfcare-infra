@@ -290,15 +290,15 @@ eventhubs = [{
   ]
   }, {
   name              = "Selfcare-FD"
-      partitions        = 5
-      message_retention = 7
-      consumers         = []
-      keys = [
-        {
-          name   = "external-interceptor-wo"
-          listen = false
-          send   = true
-          manage = false
+  partitions        = 5
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "external-interceptor-wo"
+      listen = false
+      send   = true
+      manage = false
     },
     {
       name   = "fd"
@@ -307,7 +307,7 @@ eventhubs = [{
       manage = false
     }
   ]
-}, {
+  }, {
   name              = "SC-Contracts-sap"
   partitions        = 5
   message_retention = 7
@@ -318,7 +318,7 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
-    }, {
+      }, {
       name   = "external-interceptor-wo"
       listen = false
       send   = true

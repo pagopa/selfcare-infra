@@ -362,7 +362,7 @@ eventhubs = [{
       manage = false
     }
   ]
-},{
+  }, {
   name              = "SC-Contracts-sap"
   partitions        = 5
   message_retention = 7
@@ -373,7 +373,7 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
-    }, {
+      }, {
       name   = "external-interceptor-wo"
       listen = false
       send   = true
