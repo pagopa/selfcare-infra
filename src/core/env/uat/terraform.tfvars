@@ -337,12 +337,6 @@ eventhubs = [{
       manage = false
     },
     {
-      name   = "sap"
-      listen = true
-      send   = false
-      manage = false
-    },
-    {
       name   = "external-interceptor"
       listen = true
       send   = false
@@ -365,6 +359,24 @@ eventhubs = [{
       name   = "fd"
       listen = true
       send   = false
+      manage = false
+    }
+  ]
+},{
+  name              = "SC-Contracts-sap"
+  partitions        = 5
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "sap"
+      listen = true
+      send   = false
+      manage = false
+    }, {
+      name   = "external-interceptor-wo"
+      listen = false
+      send   = true
       manage = false
     }
   ]
