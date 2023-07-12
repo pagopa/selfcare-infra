@@ -24,9 +24,9 @@ locals {
     "/dashboard/*",
     "/onboarding/*",
     "/ms-notification-manager/*",
-    "/party-process/*",
+    # "/party-process/*",
     "/party-registry-proxy/*",
-    "/ms-core/*",
+    # "/ms-core/*",
   ]
 
   backends = {
