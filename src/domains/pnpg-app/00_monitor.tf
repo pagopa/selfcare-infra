@@ -33,7 +33,7 @@ data "azurerm_application_insights" "application_insights" {
 
 
 resource "azurerm_monitor_action_group" "http_status" {
-  count = var.env_short == "u" ? 1 : 0
+  count = var.env_short == "d" ? 0 : 1
 
   resource_group_name = data.azurerm_resource_group.monitor_rg.name
   name                = "HttpStatus-${var.env_short}"
@@ -49,6 +49,8 @@ resource "azurerm_monitor_action_group" "http_status" {
 }
 
 resource "azurerm_monitor_metric_alert" "pnpg_error_5xx" {
+  count = var.env_short == "d" ? 0 : 1
+  
   name                = local.alert_pnpg_error_5xx_name
   resource_group_name = data.azurerm_resource_group.monitor_rg.name
   scopes              = [data.azurerm_application_insights.application_insights.id]
