@@ -32,23 +32,23 @@ data "azurerm_application_insights" "application_insights" {
 
 
 
-resource "azurerm_monitor_action_group" "pnpg_status_uat" {
+resource "azurerm_monitor_action_group" "http_status" {
   count = var.env_short == "u" ? 1 : 0
 
   resource_group_name = data.azurerm_resource_group.monitor_rg.name
-  name                = local.action_group_pnpg_uat_name
-  short_name          = local.action_group_pnpg_uat_name
+  name                = "HttpStatus-${var.env_short}"
+  short_name          = "HttpStatus-${var.env_short}"
 
   email_receiver {
     name                    = "slack"
-    email_address           = module.key_vault_secrets_query.values["alert-pnpg-status-uat-slack"].value
+    email_address           = module.key_vault_secrets_query.values["alert-pnpg-http-status-slack"].value
     use_common_alert_schema = true
   }
 
   tags = var.tags
 }
 
-resource "azurerm_monitor_metric_alert" "pnpg_error_5xx_uat" {
+resource "azurerm_monitor_metric_alert" "pnpg_error_5xx" {
   name                = local.alert_pnpg_error_5xx_name
   resource_group_name = data.azurerm_resource_group.monitor_rg.name
   scopes              = [data.azurerm_application_insights.application_insights.id]
@@ -69,6 +69,6 @@ resource "azurerm_monitor_metric_alert" "pnpg_error_5xx_uat" {
   }
 
   action {
-    action_group_id = azurerm_monitor_action_group.pnpg_status_uat[0].id
+    action_group_id = azurerm_monitor_action_group.http_status[0].id
   }
 }

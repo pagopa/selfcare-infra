@@ -53,7 +53,6 @@ locals {
 
 
   # Monitor
-  action_group_pnpg_uat_name = "PnpgUAT"
   alert_pnpg_error_5xx_name = "pnpg-error-5xx"
 }
 
