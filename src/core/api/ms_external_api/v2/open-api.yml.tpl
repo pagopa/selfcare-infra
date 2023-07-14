@@ -559,6 +559,57 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/':
+    get:
+      tags:
+        - institutions
+      summary: Gets institutions filtering by taxCode and/or subunitCode
+      description: Gets institutions filtering by taxCode and/or subunitCode
+      operationId: getInstitutionsByTaxCodeUsingGET
+      parameters:
+        - name: taxCode
+          in: query
+          description: ${swagger.mscore.institutions.model.taxCode}
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: subunitCode
+          in: query
+          description: ${swagger.mscore.institutions.model.subunitCode}
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: userIdForAuth
+          in: query
+          description: User's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstitutionsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global  
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1141,6 +1192,141 @@ components:
         desc:
           type: string
           description: 'Description of the geographic taxonomy code'
+    InstitutionsResponse:
+      title: InstitutionsResponse
+      type: object
+      properties:
+        institutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionResponse'
+    InstitutionResponse:
+      title: InstitutionResponse
+      type: object
+      properties:
+        address:
+          type: string
+        aooParentCode:
+          type: string
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributesResponse'
+        businessRegisterPlace:
+          type: string
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficerResponse'
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        externalId:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoTaxonomies'
+        id:
+          type: string
+        imported:
+          type: boolean
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+        origin:
+          type: string
+        originId:
+          type: string
+        parentDescription:
+          type: string
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProviderResponse'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        subunitCode:
+          type: string
+        subunitType:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    AttributesResponse:
+      title: AttributesResponse
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        origin:
+          type: string
+    DataProtectionOfficerResponse:
+      title: DataProtectionOfficerResponse
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        pec:
+          type: string
+    GeoTaxonomies:
+      title: GeoTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
+    GeographicTaxonomies:
+      title: GeographicTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        country:
+          type: string
+        country_abbreviation:
+          type: string
+        desc:
+          type: string
+        enabled:
+          type: boolean
+        istat_code:
+          type: string
+        province_abbreviation:
+          type: string
+        province_id:
+          type: string
+        region_id:
+          type: string
+    PaymentServiceProviderResponse:
+      title: PaymentServiceProviderResponse
+      type: object
+      properties:
+        abiCode:
+          type: string
+        businessRegisterNumber:
+          type: string
+        legalRegisterName:
+          type: string
+        legalRegisterNumber:
+          type: string
+        vatNumberGroup:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http
