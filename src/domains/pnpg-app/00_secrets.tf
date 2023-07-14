@@ -52,5 +52,6 @@ module "key_vault_secrets_query" {
     "user-registry-api-key",
     "user-registry-api-key",
     "web-storage-connection-string",
+    "alert-pnpg-http-status-slack"
   ]
 }

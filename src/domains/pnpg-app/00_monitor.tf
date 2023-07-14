@@ -29,3 +29,49 @@ data "azurerm_application_insights" "application_insights" {
 #   resource_group_name = var.monitor_resource_group_name
 #   name                = local.alert_action_group_domain_name
 # }
+
+
+
+resource "azurerm_monitor_action_group" "http_status" {
+  count = var.env_short == "d" ? 0 : 1
+
+  resource_group_name = data.azurerm_resource_group.monitor_rg.name
+  name                = "HttpStatus-${var.env_short}"
+  short_name          = "HttpStatus-${var.env_short}"
+
+  email_receiver {
+    name                    = "slack"
+    email_address           = module.key_vault_secrets_query.values["alert-pnpg-http-status-slack"].value
+    use_common_alert_schema = true
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_monitor_metric_alert" "pnpg_error_5xx" {
+  count = var.env_short == "d" ? 0 : 1
+
+  name                = local.alert_pnpg_error_5xx_name
+  resource_group_name = data.azurerm_resource_group.monitor_rg.name
+  scopes              = [data.azurerm_application_insights.application_insights.id]
+  description         = "Action will be triggered when Request with http 5xx status happens."
+  auto_mitigate       = false
+
+  criteria {
+    metric_namespace = "Microsoft.Insights/Components"
+    metric_name      = "requests/failed"
+    aggregation      = "Count"
+    operator         = "GreaterThan"
+    threshold        = 0
+
+    dimension {
+      name     = "request/resultCode"
+      operator = "Include"
+      values   = ["500", "501", "502", "503"]
+    }
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.http_status[0].id
+  }
+}
