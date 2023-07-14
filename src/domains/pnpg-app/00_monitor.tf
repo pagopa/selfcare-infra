@@ -67,7 +67,7 @@ resource "azurerm_monitor_metric_alert" "pnpg_error_5xx" {
     dimension {
       name     = "request/resultCode"
       operator = "Include"
-      values   = ["500","501","502","503"]
+      values   = ["500", "501", "502", "503"]
     }
   }
 
