@@ -1174,6 +1174,25 @@ module "apim_external_api_data_vault_v1" {
 
 #   authorization_endpoint = "https://${local.cdn_storage_hostname}/oauth2/authorize"
 #   token_endpoint         = "https://${local.cdn_storage_hostname}/oauth2/token"
-#   client_id              = "your-client-id"
-#   client_secret          = "your-client-secret"
+#   client_id              = "data.azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_id.value"
+#   client_secret          = "data.azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_secret.value"
+# }
+
+# resource "azurerm_api_management_policy" "oauth2_fd" {
+#   name = "${local.project}-selfcare-oauth2_fd"
+#   api_management_id = module.apim.id
+#   policy_type = "oauth2"
+#   description = "This policy uses OAuth2 to authorize API requests."
+
+#   settings {
+#     authorization_server_id = var.authorization_server_id
+#     scope = "api://selc-d-external-oauth2-issuer/.default"
+#   }
+# }
+
+# resource "azurerm_api_management_api_policy_association" "example" {
+#   name = "example"
+#   api_management_id = module.apim.id
+#   api_id = azurerm_api_management_api.example.id
+#   policy_id = azurerm_api_management_policy.example.id
 # }

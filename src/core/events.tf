@@ -83,3 +83,51 @@ resource "azurerm_key_vault_secret" "event_hub_connection_strings" {
 
   key_vault_id = module.key_vault.id
 }
+
+
+module "eventhubs_fd" {
+  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.7"
+  name                     = "${local.project}-external-oauth2-issuer"
+  location                 = var.location
+  resource_group_name      = azurerm_resource_group.event_rg.name
+  auto_inflate_enabled     = var.eventhub_auto_inflate_enabled
+  sku                      = var.eventhub_sku_name
+  capacity                 = var.eventhub_capacity
+  maximum_throughput_units = var.eventhub_maximum_throughput_units
+  zone_redundant           = var.eventhub_zone_redundant
+
+  virtual_network_ids = [module.vnet.id]
+  subnet_id           = module.eventhub_snet.id
+
+  private_dns_zone_record_A_name = null
+
+  eventhubs = var.eventhubs_fd
+
+  network_rulesets = [
+    {
+      default_action       = "Deny",
+      virtual_network_rule = [],
+      ip_rule              = var.eventhub_fd_ip_rules
+    }
+  ]
+
+  private_dns_zones = {
+    id   = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
+    name = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+  }
+
+  alerts_enabled = var.eventhub_alerts_enabled
+  metric_alerts  = var.eventhub_metric_alerts
+  action = [
+    {
+      action_group_id    = azurerm_monitor_action_group.slack.id
+      webhook_properties = null
+    },
+    {
+      action_group_id    = azurerm_monitor_action_group.email.id
+      webhook_properties = null
+    }
+  ]
+
+  tags = var.tags
+}
