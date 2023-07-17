@@ -266,6 +266,8 @@ resource "kubernetes_secret" "event-secrets" {
 
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
+    KAFKA_USER_TOPIC                             = "SC-Users"
+    KAFKA_USERS_SELFCARE_WO_SASL_JAAS_CONFIG     = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Users-selfcare-wo-connection-string"].value}\";"
   }
 
   type = "Opaque"

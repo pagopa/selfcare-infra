@@ -50,6 +50,7 @@ module "key_vault_secrets_query" {
     "onboarding-interceptor-apim-internal",
     "external-interceptor-apim-internal",
     "national-registry-api-key",
-    "geotaxonomy-api-key"
+    "geotaxonomy-api-key",
+    "eventhub-SC-Users-selfcare-wo-connection-string"
   ]
 }
