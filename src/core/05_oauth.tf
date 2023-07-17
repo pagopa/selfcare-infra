@@ -46,7 +46,7 @@ resource "azurerm_role_assignment" "external_oauth2_issuer_apim_contributor" {
 resource "azurerm_role_assignment" "eventhub_access" {
   scope                = module.eventhubs_fd.namespace_id
   role_definition_name = "Contributor" # "Azure Event Hubs Data Owner" #
-  principal_id         = azuread_application.external_oauth2_issuer.object_id
+  principal_id         = azuread_service_principal.external_oauth2_issuer.object_id
 }
 
 
