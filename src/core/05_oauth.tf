@@ -82,6 +82,11 @@ resource "azuread_service_principal" "external_oauth2_client_fd_sp" {
   application_id = azuread_application.external_oauth2_client_fd.application_id
 }
 
+resource "azurerm_role_assignment" "client_eventhub_access" {
+  scope                = module.eventhubs_fd.namespace_id
+  role_definition_name = "Contributor" # "Azure Event Hubs Data Owner" #
+  principal_id         = azuread_application.external_oauth2_issuer.object_id
+}
 
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
   name         = "external-oauth2-fd-sp-client-id"
