@@ -5,10 +5,16 @@
 ############################################################
 # Global variables
 # Version format x.y accepted
-vers="1.7"
+vers="1.11"
 script_name=$(basename "$0")
 git_repo="https://raw.githubusercontent.com/pagopa/eng-common-scripts/main/azure/${script_name}"
 tmp_file="${script_name}.new"
+# Check if the third parameter exists and is a file
+if [ -n "$3" ] && [ -f "$3" ]; then
+  FILE_ACTION=true
+else
+  FILE_ACTION=false
+fi
 
 # Define functions
 function clean_environment() {
@@ -18,8 +24,23 @@ function clean_environment() {
 }
 
 function download_tool() {
+  #default value
+  cpu_type="intel"
+  os_type=$(uname)
+
+  # only on MacOS
+  if [ "$os_type" == "Darwin" ]; then
+    cpu_brand=$(sysctl -n machdep.cpu.brand_string)
+    if grep -q -i "intel" <<< "$cpu_brand"; then
+      cpu_type="intel"
+    else
+      cpu_type="arm"
+    fi
+  fi
+
+  echo $cpu_type
   tool=$1
-  git_repo="https://raw.githubusercontent.com/pagopa/eng-common-scripts/main/golang/${tool}"
+  git_repo="https://raw.githubusercontent.com/pagopa/eng-common-scripts/main/golang/${tool}_${cpu_type}"
   if ! command -v $tool &> /dev/null; then
     if ! curl -sL "$git_repo" -o "$tool"; then
       echo "Error downloading ${tool}"
@@ -33,6 +54,43 @@ You need to do it yourself!"
 
     fi
   fi
+}
+
+function extract_resources() {
+  TF_FILE=$1
+  ENV=$2
+  TARGETS=""
+
+  # Check if the file exists
+  if [ ! -f "$TF_FILE" ]; then
+      echo "File $TF_FILE does not exist."
+      exit 1
+  fi
+
+  # Check if the directory exists
+  if [ ! -d "./env/$ENV" ]; then
+      echo "Directory ./env/$ENV does not exist."
+      exit 1
+  fi
+
+  TMP_FILE=$(mktemp)
+  grep -E '^resource|^module' $TF_FILE > $TMP_FILE
+
+  while read -r line ; do
+      TYPE=$(echo $line | cut -d '"' -f 1 | tr -d ' ')
+      if [ "$TYPE" == "module" ]; then
+          NAME=$(echo $line | cut -d '"' -f 2)
+          TARGETS+=" -target=\"$TYPE.$NAME\""
+      else
+          NAME1=$(echo $line | cut -d '"' -f 2)
+          NAME2=$(echo $line | cut -d '"' -f 4)
+          TARGETS+=" -target=\"$NAME1.$NAME2\""
+      fi   
+  done < $TMP_FILE
+
+  rm $TMP_FILE
+
+  echo "./terraform.sh $action $ENV $TARGETS"
 }
 
 function help_usage() {
@@ -49,6 +107,7 @@ function help_usage() {
   echo "  update        Update this script if possible"
   echo "  summ          Generate summary of Terraform plan"
   echo "  tflist        Generate an improved output of terraform state list"
+  echo "  tlock         Generate or update the dependency lock file"
   echo "  *             any terraform option"
 }
 
@@ -212,6 +271,7 @@ fi
 # Parse arguments
 action=$1
 env=$2
+filetf=$3
 shift 2
 other=$@
 
@@ -247,11 +307,18 @@ case $action in
     init_terraform
     tfsummary "$other"
     ;;
+  tlock)
+    terraform providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=darwin_arm64 -platform=linux_amd64
+    ;;
   update)
     update_script
     ;;
   *)
-    init_terraform
-    other_actions "$other"
+    if [ "$FILE_ACTION" = true ]; then
+      extract_resources "$filetf" "$env"
+    else
+      init_terraform
+      other_actions "$other"
+    fi
     ;;
 esac
