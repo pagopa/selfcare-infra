@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "azdo_rg" {
 module "azdoa_snet" {
   source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
   count                                          = var.enable_azdoa ? 1 : 0
-  name                                           = format("%s-azdoa-snet", local.project)
+  name                                           = "${local.project}-azdoa-snet"
   address_prefixes                               = var.cidr_subnet_azdoa
   resource_group_name                            = azurerm_resource_group.rg_vnet.name
   virtual_network_name                           = module.vnet.name
@@ -20,13 +20,35 @@ module "azdoa_snet" {
   ]
 }
 
-module "azdoa_li" {
-  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v1.0.58"
+
+module "azdoa_li_app" {
+  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
   count               = var.enable_azdoa ? 1 : 0
-  name                = format("%s-azdoa-vmss-li", local.project)
+  name                = "${local.project}-azdoa-vmss-ubuntu-app"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
   subnet_id           = module.azdoa_snet[0].id
-  subscription        = data.azurerm_subscription.current.display_name
+  subscription_name   = data.azurerm_subscription.current.display_name
+  subscription_id     = data.azurerm_subscription.current.subscription_id
+  location            = var.location
+  image_type          = "custom" # enables usage of "source_image_name"
+  source_image_name   = "selc-${var.env_short}-azdo-agent-ubuntu2204-image-v1"
+  vm_sku              = var.azdo_agent_vm_sku
+
+  tags = var.tags
+}
+
+module "azdoa_li_infra" {
+  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+  count               = var.enable_azdoa ? 1 : 0
+  name                = "${local.project}-azdoa-vmss-ubuntu-infra"
+  resource_group_name = azurerm_resource_group.azdo_rg[0].name
+  subnet_id           = module.azdoa_snet[0].id
+  subscription_name   = data.azurerm_subscription.current.display_name
+  subscription_id     = data.azurerm_subscription.current.subscription_id
+  location            = var.location
+  image_type          = "custom" # enables usage of "source_image_name"
+  source_image_name   = "selc-${var.env_short}-azdo-agent-ubuntu2204-image-v1"
+  vm_sku              = var.azdo_agent_vm_sku
 
   tags = var.tags
 }
