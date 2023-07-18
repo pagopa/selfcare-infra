@@ -1131,5 +1131,5 @@ variable "cidr_subnet_load_tests" {
 variable "azdo_agent_vm_sku" {
   type        = string
   description = "sku of the azdo agent vm"
-  default     = "Standard_B2ls_v2"
+  default     = "Standard_B1s"
 }
