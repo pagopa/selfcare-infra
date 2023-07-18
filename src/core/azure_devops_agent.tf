@@ -32,6 +32,7 @@ module "azdoa_li_app" {
   location            = var.location
   image_type          = "custom" # enables usage of "source_image_name"
   source_image_name   = "selc-${var.env_short}-azdo-agent-ubuntu2204-image-v1"
+  vm_sku              = var.azdo_agent_vm_sku
 
   tags = var.tags
 }
@@ -47,6 +48,7 @@ module "azdoa_li_infra" {
   location            = var.location
   image_type          = "custom" # enables usage of "source_image_name"
   source_image_name   = "selc-${var.env_short}-azdo-agent-ubuntu2204-image-v1"
+  vm_sku              = var.azdo_agent_vm_sku
 
   tags = var.tags
 }
