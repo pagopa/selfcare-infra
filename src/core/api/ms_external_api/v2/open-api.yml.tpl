@@ -610,6 +610,57 @@ paths:
       security:
         - bearerAuth:
             - global  
+  '/institutions/{institutionId}/onboardings':
+    get:
+      tags:
+        - institutions
+      summary: ${swagger.mscore.institution.info}
+      description: ${swagger.mscore.institution.info}
+      operationId: getOnboardingsInstitutionUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: The internal identifier of the institution
+          required: true
+          style: simple
+          schema:
+            type: string
+		- name: userIdForAuth
+          in: query
+          description: User's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: productId
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1327,6 +1378,56 @@ components:
           type: string
         vatNumberGroup:
           type: boolean
+    OnboardingsResponse:
+      title: OnboardingsResponse
+      type: object
+      properties:
+        onboardings:
+          type: array
+          items:
+            $ref: '#/components/schemas/OnboardingResponse'
+    OnboardingResponse:
+      title: OnboardingResponse
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        closedAt:
+          type: string
+          format: date-time
+        contract:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        pricingPlan:
+          type: string
+        productId:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    BillingResponse:
+      title: BillingResponse
+      type: object
+      properties:
+        publicServices:
+          type: boolean
+        recipientCode:
+          type: string
+        vatNumber:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http
