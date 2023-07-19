@@ -559,6 +559,46 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/users':
+    post:
+      tags:
+        - users
+      summary: getUserInfo
+      description: Service to retrieve user info including institutions and products linked to him
+      operationId: getUserInfoUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchUserDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfoResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1141,6 +1181,73 @@ components:
         desc:
           type: string
           description: 'Description of the geographic taxonomy code'
+    SearchUserDto:
+      title: SearchUserDto
+      required:
+        - fiscalCode
+      type: object
+      properties:
+        fiscalCode:
+          type: string
+          description: User's fiscal code
+    UserInfoResource:
+      title: UserInfoResource
+      type: object
+      properties:
+        onboardedInstitutions:
+          type: array
+          description: Object that includes all info about onboarded institutions linked to a user
+          items:
+            $ref: '#/components/schemas/OnboardedInstitutionResource'
+        user:
+          description: Object that includes all info about a user
+          $ref: '#/components/schemas/UserResource'
+    OnboardedInstitutionResource:
+      title: OnboardedInstitutionResource
+      type: object
+      properties:
+        address:
+          type: string
+          description: Institution's address
+        description:
+          type: string
+          description: Institution's description
+        digitalAddress:
+          type: string
+          description: Institution's digital address
+        id:
+          type: string
+          description: Institution's Id
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+        productInfo:
+          description: Products' info of onboardings
+          $ref: '#/components/schemas/ProductInfo'
+        taxCode:
+          type: string
+          description: Institution's tax code
+        zipCode:
+          type: string
+          description: Institution's zip code
+    ProductInfo:
+      title: ProductInfo
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        role:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

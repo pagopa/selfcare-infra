@@ -589,6 +589,14 @@ module "apim_external_api_ms_v2" {
       })
     },
     {
+      operation_id = "getUserInfoUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
