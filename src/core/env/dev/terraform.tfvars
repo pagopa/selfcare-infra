@@ -325,7 +325,7 @@ eventhubs = [{
       manage = false
     }
   ]
-},{
+  }, {
   name              = "SC-Users"
   partitions        = 10
   message_retention = 7
@@ -342,7 +342,7 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
-    }, {
+      }, {
       name   = "external-interceptor"
       listen = true
       send   = false
