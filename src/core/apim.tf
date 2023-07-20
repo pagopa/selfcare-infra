@@ -619,6 +619,12 @@ module "apim_external_api_ms_v2" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "messageAcknowledgmentUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/messageAcknowledgment_op_policy.xml.tpl", {
+        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-external-interceptor/v1"
+      })
     }
   ]
 }
