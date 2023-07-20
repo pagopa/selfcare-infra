@@ -51,6 +51,10 @@ module "key_vault_secrets_query" {
     "external-interceptor-apim-internal",
     "national-registry-api-key",
     "geotaxonomy-api-key",
-    "eventhub-SC-Users-selfcare-wo-connection-string"
+    "eventhub-SC-Users-selfcare-wo-connection-string",
+    "eventhub-SC-Users-datalake-connection-string",
+    "eventhub-SC-Users-external-interceptor-connection-string",
+    "eventhub-SC-Contracts-sap-external-interceptor-wo-connection-string",
+    "eventhub-SC-Contracts-sap-external-sap-connection-string"
   ]
 }
