@@ -76,7 +76,7 @@ resource "azuread_service_principal" "external_oauth2_client_fd_sp" {
 }
 
 resource "azurerm_role_assignment" "client_eventhub_access" {
-  scope                = module.eventhubs.namespace_id
+  scope                = module.event_hub.namespace_id
   role_definition_name = "Azure Event Hubs Data Owner"
   principal_id         = azuread_service_principal.external_oauth2_client_fd_sp.object_id
 }
