@@ -28,7 +28,19 @@
             }
 
             }"/>
-        <set-header exists-action="override" name="Authorization">
+        <choose>
+            <when condition="@(((string)context.Variables["productId"]).Contains("prod-fd"))">
+                <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized" require-expiration-time="false" require-scheme="Bearer" require-signed-tokens="true">
+                    <openid-config url="https://login.microsoftonline.com/${TENANT_ID}/.well-known/openid-configuration" />
+                    <required-claims>
+                        <claim name="aud" match="all">
+                            <value>${EXTERNAL-OAUTH2-ISSUER}</value>
+                        </claim>
+                    </required-claims>
+                </validate-jwt>
+            </when>
+        </choose>
+        <set-header name="Authorization" exists-action="override">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
         <!-- TODO: remove previous elements after Party will accept k8s token -->
