@@ -219,14 +219,10 @@ eventhub_ip_rules = [
     ip_mask = "2.228.86.218",
     action  = "Allow"
   },
-  { // APZ
-    ip_mask = "5.90.92.87",
-    action  = "Allow"
-  }
-  # {//PROD-FD
-  #   ip_mask = "91.218.226.5/32",
-  #   action = "Allow"
-  # },
+  { // FD
+    ip_mask = "193.203.230.25",
+    action = "Allow"
+  },
   # {//PROD-FD
   #   ip_mask = "91.218.226.15/32",
   #   action = "Allow"
