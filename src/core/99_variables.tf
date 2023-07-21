@@ -1126,3 +1126,10 @@ variable "cidr_subnet_load_tests" {
   type        = list(string)
   description = "private endpoints address space."
 }
+
+
+variable "azdo_agent_vm_sku" {
+  type        = string
+  description = "sku of the azdo agent vm"
+  default     = "Standard_B1s"
+}

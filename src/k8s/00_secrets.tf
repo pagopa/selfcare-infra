@@ -55,6 +55,6 @@ module "key_vault_secrets_query" {
     "eventhub-SC-Users-datalake-connection-string",
     "eventhub-SC-Users-external-interceptor-connection-string",
     "eventhub-SC-Contracts-sap-external-interceptor-wo-connection-string",
-    "eventhub-SC-Contracts-sap-external-sap-connection-string"
+    "eventhub-SC-Contracts-sap-sap-connection-string"
   ]
 }

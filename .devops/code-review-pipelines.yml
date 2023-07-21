@@ -54,7 +54,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.DEV}}, true))
     pool:
-      name: selfcare-dev-linux
+      name: selfcare-dev-linux-infra
     jobs:
       - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
@@ -72,7 +72,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
-      name: selfcare-uat-linux
+      name: selfcare-uat-linux-infra
     jobs:
       - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
@@ -91,7 +91,7 @@ stages:
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.PROD}}, true))
     pool:
-      name: selfcare-prod-linux
+      name: selfcare-prod-linux-infra
     jobs:
       - job: tf_plan_core
         timeoutInMinutes: $[variables.TIME_OUT]
