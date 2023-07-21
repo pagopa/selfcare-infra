@@ -166,7 +166,7 @@ locals {
       path                 = "/auth/login",
       expected_http_status = 200
     },
-        # https://api-pnpg.selfcare.pagopa.it/health
+    # https://api-pnpg.selfcare.pagopa.it/health
     {
       host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                 = "/health",

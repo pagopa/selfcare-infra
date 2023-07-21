@@ -1040,33 +1040,7 @@ variable "eventhub_ip_rules" {
   default = []
 }
 
-variable "eventhub_fd_ip_rules" {
-  description = "eventhub network rules"
-  type = list(object({
-    ip_mask = string
-    action  = string
-  }))
-  default = []
-}
-
 variable "eventhubs" {
-  description = "A list of event hub topics to add to namespace."
-  type = list(object({
-    name              = string
-    partitions        = number
-    message_retention = number
-    consumers         = list(string)
-    keys = list(object({
-      name   = string
-      listen = bool
-      send   = bool
-      manage = bool
-    }))
-  }))
-  default = []
-}
-
-variable "eventhubs_fd" {
   description = "A list of event hub topics to add to namespace."
   type = list(object({
     name              = string

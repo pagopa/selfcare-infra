@@ -328,27 +328,4 @@ eventhubs = [{
 }]
 ##
 
-eventhub_fd_ip_rules = [
-]
-
-eventhubs_fd = [{
-  name              = "SC-Contracts"
-  partitions        = 10
-  message_retention = 7
-  consumers         = []
-  keys = [
-    {
-      name   = "selfcare-wo"
-      listen = false
-      send   = true
-      manage = false
-    },
-    {
-      name   = "fd"
-      listen = true
-      send   = false
-      manage = false
-    }]
-}]
-  
 enable_load_tests_db = true
