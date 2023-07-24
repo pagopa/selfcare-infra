@@ -654,8 +654,8 @@ paths:
     get:
       tags:
         - institutions
-      summary: ${swagger.mscore.institution.info}
-      description: ${swagger.mscore.institution.info}
+      summary: Gets institutions' onboardings by internal identifier
+      description: Gets institutions' onboardings by internal identifier
       operationId: getOnboardingsInstitutionUsingGET
       parameters:
         - name: institutionId
