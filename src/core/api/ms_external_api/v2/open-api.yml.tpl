@@ -609,14 +609,14 @@ paths:
       parameters:
         - name: taxCode
           in: query
-          description: ${swagger.mscore.institutions.model.taxCode}
+          description: Institution's tax code
           required: true
           style: form
           schema:
             type: string
         - name: subunitCode
           in: query
-          description: ${swagger.mscore.institutions.model.subunitCode}
+          description: Institution's subunit code
           required: false
           style: form
           schema:
