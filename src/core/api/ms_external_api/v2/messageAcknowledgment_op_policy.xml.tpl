@@ -17,7 +17,7 @@
                     </when>
                 </choose>
         <set-backend-service base-url="${MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL}" />
-        <rewrite-uri template="@("/interceptor/acknowledgment/" + (string)context.Variables["productId"] + "/message/{messageId}/status/{status}")" />
+        <rewrite-uri template="@("interceptor/acknowledgment/" + (string)context.Variables["productId"] + "/message/{messageId}/status/{status}")" />
     </inbound>
     <backend>
         <base/>
