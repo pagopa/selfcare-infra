@@ -30,8 +30,6 @@ data "azurerm_monitor_action_group" "email" {
 #   name                = local.alert_action_group_domain_name
 # }
 
-
-
 resource "azurerm_monitor_action_group" "http_status" {
   count = var.env_short == "d" ? 0 : 1
 

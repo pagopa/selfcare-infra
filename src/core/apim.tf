@@ -556,6 +556,8 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -564,6 +566,8 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -572,6 +576,8 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -580,12 +586,16 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        TENANT_ID                   = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -596,12 +606,16 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                      = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER         = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+        TENANT_ID                   = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -610,6 +624,8 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
     {
@@ -618,6 +634,8 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     }
   ]
@@ -1085,6 +1103,11 @@ resource "azurerm_api_management_named_value" "apim_named_value_backend_access_t
 
 data "azurerm_key_vault_secret" "apim_backend_access_token" {
   name         = "apim-backend-access-token"
+  key_vault_id = module.key_vault.id
+}
+
+data "azurerm_key_vault_secret" "external-oauth2-issuer" {
+  name         = "external-oauth2-issuer"
   key_vault_id = module.key_vault.id
 }
 
