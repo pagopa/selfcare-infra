@@ -403,7 +403,7 @@ resource "kubernetes_secret" "pagopa-backoffice-secrets" {
   }
 
   data = {
-    BACKOFFICE_PAGO_PA_API_KEY      = module.key_vault_secrets_query.values["pagopa-backoffice-api-key"].value
+    BACKOFFICE_PAGO_PA_API_KEY = module.key_vault_secrets_query.values["pagopa-backoffice-api-key"].value
   }
 
   type = "Opaque"
