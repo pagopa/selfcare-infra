@@ -23,7 +23,7 @@ provider "registry.terraform.io/hashicorp/azuread" {
 
 provider "registry.terraform.io/hashicorp/azurerm" {
   version     = "3.40.0"
-  constraints = ">= 3.30.0, <= 3.40.0, <= 3.44.1, <= 3.45.0"
+  constraints = ">= 3.30.0, <= 3.40.0, <= 3.44.1, <= 3.45.0, <= 3.64.0"
   hashes = [
     "h1:VpRitAMc2wjUH/2jCz9MtZZd83UFxwTCamjRvIh/Nvg=",
     "zh:00fa6dc05bf2643c6a3c741edb7d88263698086835a8a613f1d7bd76d1b918fd",
@@ -43,7 +43,7 @@ provider "registry.terraform.io/hashicorp/azurerm" {
 
 provider "registry.terraform.io/hashicorp/helm" {
   version     = "2.8.0"
-  constraints = "2.8.0"
+  constraints = "2.8.0, <= 2.8.0"
   hashes = [
     "h1:U0w0mUT0SwZCR0poGNSxGaZJKWcOiu4GerpGztYBiMM=",
     "zh:1e42d1a04c07d4006844e477ca32b5f45b04f6525dbbbe00b6be6e6ec5a11c54",
