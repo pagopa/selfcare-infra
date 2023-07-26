@@ -395,3 +395,17 @@ resource "kubernetes_secret" "geotaxonomy-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "pagopa-backoffice-secrets" {
+  metadata {
+    name      = "pagopa-backoffice-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BACKOFFICE_PAGO_PA_API_KEY = module.key_vault_secrets_query.values["pagopa-backoffice-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
