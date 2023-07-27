@@ -1,6 +1,7 @@
 module "tls_checker" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker?ref=update-azurerm-tls-version"
-  
+  # source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker?ref=update-azurerm-tls-version"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker?ref=v6.20.1"
+
   https_endpoint                                            = local.domain_aks_hostname
   alert_name                                                = local.domain_aks_hostname
   alert_enabled                                             = true
@@ -16,7 +17,6 @@ module "tls_checker" {
   keyvault_tenant_id                                        = data.azurerm_subscription.current.tenant_id
   keyvault_name                                             = data.azurerm_key_vault.kv_domain.name
   kv_secret_name_for_application_insights_connection_string = "appinsights-instrumentation-key"
-  # data.azurerm_application_insights.application_insights.connection_string
 }
 
 # resource "helm_release" "cert_mounter" {
