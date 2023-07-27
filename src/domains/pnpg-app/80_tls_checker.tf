@@ -19,23 +19,23 @@ module "tls_checker" {
   # data.azurerm_application_insights.application_insights.connection_string
 }
 
-resource "helm_release" "cert_mounter" {
-  name         = "cert-mounter-blueprint"
-  repository   = "https://pagopa.github.io/aks-helm-cert-mounter-blueprint"
-  chart        = "cert-mounter-blueprint"
-  version      = "1.0.4"
-  namespace    = var.domain
-  timeout      = 120
-  force_update = true
+# resource "helm_release" "cert_mounter" {
+#   name         = "cert-mounter-blueprint"
+#   repository   = "https://pagopa.github.io/aks-helm-cert-mounter-blueprint"
+#   chart        = "cert-mounter-blueprint"
+#   version      = "1.0.4"
+#   namespace    = var.domain
+#   timeout      = 120
+#   force_update = true
 
-  values = [
-    "${
-      templatefile("${path.root}/helm/cert-mounter.yaml.tpl", {
-        NAMESPACE        = var.domain,
-        DOMAIN           = var.domain
-        CERTIFICATE_NAME = replace(local.domain_aks_hostname, ".", "-"),
-        ENV_SHORT        = var.env_short,
-      })
-    }"
-  ]
-}
+#   values = [
+#     "${
+#       templatefile("${path.root}/helm/cert-mounter.yaml.tpl", {
+#         NAMESPACE        = var.domain,
+#         DOMAIN           = var.domain
+#         CERTIFICATE_NAME = replace(local.domain_aks_hostname, ".", "-"),
+#         ENV_SHORT        = var.env_short,
+#       })
+#     }"
+#   ]
+# }
