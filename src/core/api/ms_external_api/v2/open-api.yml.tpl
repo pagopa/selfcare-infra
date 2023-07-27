@@ -621,13 +621,6 @@ paths:
           style: form
           schema:
             type: string
-        - name: userIdForAuth
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
       responses:
         '200':
           description: OK

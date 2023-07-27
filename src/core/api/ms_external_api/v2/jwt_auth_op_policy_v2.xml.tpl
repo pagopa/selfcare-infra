@@ -36,6 +36,9 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
+        <set-query-parameter name="productId" exists-action="override">
+            <value>@((string)context.Variables["productId"])</value>
+        </set-query-parameter>
     </inbound>
     <backend>
         <base/>
