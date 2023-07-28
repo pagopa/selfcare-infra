@@ -645,6 +645,17 @@ module "apim_external_api_ms_v2" {
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
+    },
+    {
+      operation_id = "getDelegationsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getDelegationsUsingGET_op_policy.xml.tpl", {
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                      = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER         = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
     }
   ]
 }

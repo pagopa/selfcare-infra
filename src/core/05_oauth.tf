@@ -81,6 +81,14 @@ resource "azurerm_role_assignment" "client_eventhub_access" {
   principal_id         = azuread_service_principal.external_oauth2_client_fd_sp.object_id
 }
 
+resource "azurerm_key_vault_secret" "external_oauth2_issuer_identifier_uri" {
+  name         = "external-oauth2-issuer"
+  value        = "api://${local.project}-external-oauth2-issuer"
+  key_vault_id = module.key_vault.id
+
+  content_type = "text/plain"
+}
+
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
   name         = "external-oauth2-fd-sp-client-id"
   value        = azuread_application.external_oauth2_client_fd.application_id
