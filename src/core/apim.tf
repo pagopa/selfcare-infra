@@ -639,6 +639,14 @@ module "apim_external_api_ms_v2" {
       })
     },
     {
+      operation_id = "messageAcknowledgmentUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/messageAcknowledgment_op_policy.xml.tpl", {
+        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-external-interceptor/v1"
+        TENANT_ID                                = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER                   = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
+    },
+    {
       operation_id = "getDelegationsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getDelegationsUsingGET_op_policy.xml.tpl", {
         PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"

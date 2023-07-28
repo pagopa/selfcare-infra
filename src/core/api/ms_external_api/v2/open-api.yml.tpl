@@ -11,6 +11,60 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/message/{messageId}/status/{status}':
+    post:
+      tags:
+        - interceptor
+      summary: messageAcknowledgment
+      description: Service to acknowledge message consumption by a consumer
+      operationId: messageAcknowledgmentUsingPOST
+      parameters:
+        - name: messageId
+          in: path
+          description: Kafka message unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: status
+          in: path
+          description: Kafka message consumption acknowledgment status
+          required: true
+          style: simple
+          schema:
+            type: string
+            enum:
+              - ACK
+              - NACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AckPayloadRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/byGeoTaxonomies':
     get:
       tags:
@@ -378,8 +432,8 @@ paths:
       security: [ { } ]
       tags:
         - institutions
-      summary: Gets the corresponding institution using internal institution id
-      description: Gets institution using internal institution id
+      summary: getInstitutionById
+      description: getInstitutionById
       operationId: getInstitution
       parameters:
         - name: id
@@ -614,6 +668,15 @@ paths:
             - global
 components:
   schemas:
+    AckPayloadRequest:
+        title: AckPayloadRequest
+        required:
+          - message
+        type: object
+        properties:
+          message:
+            type: string
+            description: Acknowledgment request payload message
     GeographicTaxonomyResource:
       title: GeographicTaxonomyResource
       type: object
