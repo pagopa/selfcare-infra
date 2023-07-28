@@ -10,11 +10,8 @@
 
             // 2) Construct the Base64Url-encoded payload
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
-            var uid = context.Request.Url.Query.GetValueOrDefault("userIdForAuth", "");
+            var uid = "m2m";
 
-            if(uid == "") {
-              return "";
-            }
 
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
@@ -33,9 +30,22 @@
             }
 
             }"/>
+            <choose>
+              <when condition="@(((string)context.Variables["productId"]).Contains("prod-fd"))">
+                  <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized" require-expiration-time="false" require-scheme="Bearer" require-signed-tokens="true">
+                      <openid-config url="https://login.microsoftonline.com/${TENANT_ID}/.well-known/openid-configuration" />
+                      <required-claims>
+                          <claim name="aud" match="all">
+                              <value>${EXTERNAL-OAUTH2-ISSUER}</value>
+                         </claim>
+                    </required-claims>
+               </validate-jwt>
+              </when>
+            </choose>
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
+        <set-backend-service base-url="${PARTY_PROCESS_BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base/>
