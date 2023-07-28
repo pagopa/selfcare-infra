@@ -432,8 +432,8 @@ paths:
       security: [ { } ]
       tags:
         - institutions
-      summary: Gets the corresponding institution using internal institution id
-      description: Gets institution using internal institution id
+      summary: getInstitutionById
+      description: getInstitutionById
       operationId: getInstitution
       parameters:
         - name: id
