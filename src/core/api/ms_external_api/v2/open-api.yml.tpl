@@ -559,6 +559,59 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/delegations':
+    get:
+      tags:
+        - Delegation
+      summary: Retrieve institution's delegations
+      description: Retrieve institution's delegations
+      operationId: getDelegationsUsingGET
+      parameters:
+        - name: from
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: to
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelegationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1141,6 +1194,29 @@ components:
         desc:
           type: string
           description: 'Description of the geographic taxonomy code'
+    DelegationResponse:
+      title: DelegationResponse
+      type: object
+      properties:
+        from:
+          type: string
+        id:
+          type: string
+        institutionFromName:
+          type: string
+        institutionFromRootName:
+          type: string
+        institutionToName:
+          type: string
+        productId:
+          type: string
+        to:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
   securitySchemes:
     bearerAuth:
       type: http
