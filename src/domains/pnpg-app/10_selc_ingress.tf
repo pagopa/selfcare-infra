@@ -4,7 +4,6 @@ locals {
       [
         "https://${var.api_gateway_url}",
         "https://${local.cdn_fqdn_url}",
-        "https://${var.spid_testenv_url}"
       ],
       var.env_short != "p" ? [
         "https://localhost:3000",
