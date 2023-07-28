@@ -82,7 +82,7 @@ resource "azurerm_role_assignment" "client_eventhub_access" {
 }
 
 resource "azurerm_key_vault_secret" "external_oauth2_issuer_identifier_uri" {
-  name         = "external_oauth2_issuer"
+  name         = "external-oauth2-issuer"
   value        = "api://${local.project}-external-oauth2-issuer"
   key_vault_id = module.key_vault.id
 
