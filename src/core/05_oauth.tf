@@ -61,7 +61,7 @@ resource "azuread_application" "external_oauth2_client_fd" {
 }
 
 resource "time_rotating" "client" {
-  rotation_days = 7
+  rotation_days = 3650
 }
 
 resource "azuread_application_password" "external_oauth2_client_fd_password" {
