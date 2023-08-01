@@ -617,20 +617,20 @@ paths:
     get:
       tags:
         - Delegation
-      summary: Retrieve institution's delegations
-      description: Retrieve institution's delegations
+      summary: getDelegations
+      description: getDelegations
       operationId: getDelegationsUsingGET
       parameters:
-        - name: from
+        - name: institutionId
           in: query
           description: The internal identifier of the institution
           required: false
           style: form
           schema:
             type: string
-        - name: to
+        - name: brokerId
           in: query
-          description: The internal identifier of the institution
+          description: The internal identifier of the broker
           required: false
           style: form
           schema:
@@ -1389,19 +1389,19 @@ components:
       title: DelegationResponse
       type: object
       properties:
-        from:
+        brokerId:
+          type: string
+        brokerName:
           type: string
         id:
           type: string
-        institutionFromName:
+        institutionId:
           type: string
-        institutionFromRootName:
+        institutionName:
           type: string
-        institutionToName:
+        institutionRootName:
           type: string
         productId:
-          type: string
-        to:
           type: string
         type:
           type: string
