@@ -765,13 +765,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: userIdForAuth
-          in: query
-          description: User's unique identifier
-          required: true
-          style: form
-          schema:
-            type: string
         - name: productId
           in: query
           description: productId
