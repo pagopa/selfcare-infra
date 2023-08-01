@@ -309,6 +309,7 @@ resource "kubernetes_secret" "external-interceptor-event-secrets" {
     KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
     KAFKA_USERS_SELFCARE_RO_SASL_JAAS_CONFIG     = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Users-external-interceptor-connection-string"].value}\";"
     KAFKA_SELFCARE_FD_WO_SASL_JAAS_CONFIG        = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-Selfcare-FD-external-interceptor-wo-connection-string"].value}\";"
+    KAFKA_SC_CONTRACTS_SAP_WO_SASL_JAAS_CONFIG   = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-sap-external-interceptor-wo-connection-string"].value}\";"
   }
 
 }
