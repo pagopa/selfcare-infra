@@ -117,11 +117,11 @@ resource "kubernetes_secret" "contracts-storage" {
 
   data = {
     STORAGE_TYPE               = "BlobStorage"
-    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_CONTAINER          = "$web"
     STORAGE_ENDPOINT           = "core.windows.net"
     STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
     STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
-    STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
+    STORAGE_CREDENTIAL_ID      = "selc${var.env_short}weupnpgcheckoutsa"
     STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
     STORAGE_TEMPLATE_URL       = format("https://selc%sweupnpgcheckoutsa.z6.web.core.windows.net", var.env_short)
   }
