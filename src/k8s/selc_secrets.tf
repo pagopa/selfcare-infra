@@ -143,6 +143,7 @@ resource "kubernetes_secret" "contracts-storage" {
     STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
     STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
     STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_TEMPLATE_URL       = format("https://selc%scheckoutsa.z6.web.core.windows.net", var.env_short)
   }
 
   type = "Opaque"
@@ -266,6 +267,8 @@ resource "kubernetes_secret" "event-secrets" {
 
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
+    KAFKA_USER_TOPIC                             = "SC-Users"
+    KAFKA_USERS_SELFCARE_WO_SASL_JAAS_CONFIG     = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Users-selfcare-wo-connection-string"].value}\";"
   }
 
   type = "Opaque"
@@ -302,7 +305,9 @@ resource "kubernetes_secret" "external-interceptor-event-secrets" {
 
     KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     KAFKA_FD_TOPIC                               = "Selfcare-FD"
+    KAFKA_USERS_TOPIC                            = "SC-Users"
     KAFKA_CONTRACTS_SELFCARE_RO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-interceptor-connection-string"].value}\";"
+    KAFKA_USERS_SELFCARE_RO_SASL_JAAS_CONFIG     = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Users-external-interceptor-connection-string"].value}\";"
     KAFKA_SELFCARE_FD_WO_SASL_JAAS_CONFIG        = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-Selfcare-FD-external-interceptor-wo-connection-string"].value}\";"
   }
 
@@ -391,3 +396,17 @@ resource "kubernetes_secret" "geotaxonomy-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "pagopa-backoffice-secrets" {
+  metadata {
+    name      = "pagopa-backoffice-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BACKOFFICE_PAGO_PA_API_KEY = module.key_vault_secrets_query.values["pagopa-backoffice-api-key"].value
+  }
+
+  type = "Opaque"
+}
+

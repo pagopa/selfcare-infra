@@ -11,6 +11,60 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/message/{messageId}/status/{status}':
+    post:
+      tags:
+        - interceptor
+      summary: messageAcknowledgment
+      description: Service to acknowledge message consumption by a consumer
+      operationId: messageAcknowledgmentUsingPOST
+      parameters:
+        - name: messageId
+          in: path
+          description: Kafka message unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: status
+          in: path
+          description: Kafka message consumption acknowledgment status
+          required: true
+          style: simple
+          schema:
+            type: string
+            enum:
+              - ACK
+              - NACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AckPayloadRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/byGeoTaxonomies':
     get:
       tags:
@@ -378,8 +432,8 @@ paths:
       security: [ { } ]
       tags:
         - institutions
-      summary: Gets the corresponding institution using internal institution id
-      description: Gets institution using internal institution id
+      summary: getInstitutionById
+      description: getInstitutionById
       operationId: getInstitution
       parameters:
         - name: id
@@ -559,6 +613,59 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/delegations':
+    get:
+      tags:
+        - Delegation
+      summary: Retrieve institution's delegations
+      description: Retrieve institution's delegations
+      operationId: getDelegationsUsingGET
+      parameters:
+        - name: from
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: to
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelegationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/users':
     post:
       tags:
@@ -642,7 +749,7 @@ paths:
                 $ref: '#/components/schemas/Problem'
       security:
         - bearerAuth:
-            - global  
+            - global
   '/institutions/{institutionId}/onboardings':
     get:
       tags:
@@ -696,6 +803,15 @@ paths:
             - global
 components:
   schemas:
+    AckPayloadRequest:
+        title: AckPayloadRequest
+        required:
+          - message
+        type: object
+        properties:
+          message:
+            type: string
+            description: Acknowledgment request payload message
     GeographicTaxonomyResource:
       title: GeographicTaxonomyResource
       type: object
@@ -1276,6 +1392,29 @@ components:
         desc:
           type: string
           description: 'Description of the geographic taxonomy code'
+    DelegationResponse:
+      title: DelegationResponse
+      type: object
+      properties:
+        from:
+          type: string
+        id:
+          type: string
+        institutionFromName:
+          type: string
+        institutionFromRootName:
+          type: string
+        institutionToName:
+          type: string
+        productId:
+          type: string
+        to:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
     SearchUserDto:
       title: SearchUserDto
       required:

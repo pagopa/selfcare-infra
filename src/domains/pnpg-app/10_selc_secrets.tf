@@ -124,6 +124,7 @@ resource "kubernetes_secret" "contracts-storage" {
     STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
     STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
     STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_TEMPLATE_URL       = format("https://selc%sweupnpgcheckoutsa.z6.web.core.windows.net", var.env_short)
   }
 
   type = "Opaque"
