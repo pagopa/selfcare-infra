@@ -238,6 +238,18 @@ eventhub_ip_rules = [
     ip_mask = "15.161.176.211",
     action  = "Allow"
   },
+  { // PN HOTFIX
+    ip_mask = "18.102.101.93",
+    action  = "Allow"
+  },
+    { // PN HOTFIX
+    ip_mask = "18.102.131.222",
+    action  = "Allow"
+  },
+    { // PN HOTFIX
+    ip_mask = "18.102.7.213",
+    action  = "Allow"
+  },
   { // PN TEST
     ip_mask = "18.102.31.101",
     action  = "Allow"
