@@ -9,7 +9,7 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
-  '/support':
+  '/':
     post:
       tags:
         - support
