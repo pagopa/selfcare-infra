@@ -54,6 +54,22 @@ resource "azurerm_dns_ns_record" "io_selfcare" {
   tags = var.tags
 }
 
+# Prod ONLY record to Firma con IO public DNS delegation
+resource "azurerm_dns_ns_record" "firmaconio_selfcare" {
+  count               = var.env_short == "p" ? 1 : 0
+  name                = "firmaconio"
+  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  records = [
+    "ns1-02.azure-dns.com.",
+    "ns2-02.azure-dns.net.",
+    "ns3-02.azure-dns.org.",
+    "ns4-02.azure-dns.info."
+  ]
+  ttl  = var.dns_default_ttl_sec
+  tags = var.tags
+}
+
 # INTEROP public DNS delegation
 resource "azurerm_dns_ns_record" "interop_selfcare" {
   count               = var.dns_ns_interop_selfcare != null ? 1 : 0
