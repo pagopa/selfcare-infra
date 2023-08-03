@@ -242,11 +242,11 @@ eventhub_ip_rules = [
     ip_mask = "18.102.101.93",
     action  = "Allow"
   },
-    { // PN HOTFIX
+  { // PN HOTFIX
     ip_mask = "18.102.131.222",
     action  = "Allow"
   },
-    { // PN HOTFIX
+  { // PN HOTFIX
     ip_mask = "18.102.7.213",
     action  = "Allow"
   },
