@@ -268,6 +268,48 @@ paths:
         security:
           - bearerAuth:
               - global
+  '/onboarding':
+    post:
+      tags:
+        - onboarding
+      summary: onboarding
+      description: The service allows the onboarding of Users to a subunit of an Institution
+      operationId: onboardingUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingProductDto'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -940,6 +982,80 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Attribute'
+    OnboardingProductDto:
+      title: OnboardingProductDto
+      required:
+        - billingData
+        - geographicTaxonomies
+        - institutionType
+        - productId
+        - taxCode
+        - users
+      type: object
+      properties:
+        assistanceContacts:
+          description: Institution's assistance contacts
+          $ref: '#/components/schemas/AssistanceContactsDto'
+        billingData:
+          description: Institution's billing information
+          $ref: '#/components/schemas/BillingDataDto'
+        companyInformations:
+          description: GPS, SCP, PT optional data
+          $ref: '#/components/schemas/CompanyInformationsDto'
+        geographicTaxonomies:
+          type: array
+          description: List of geographic Taxonomies
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomyDto0'
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+        origin:
+          type: string
+          description: Institution data origin
+        pricingPlan:
+          type: string
+          description: Product's pricing plan
+        productId:
+          type: string
+          description: Product's unique identifier
+        pspData:
+          description: Payment Service Provider (PSP) specific data
+          $ref: '#/components/schemas/PspDataDto'
+        subunitCode:
+          type: string
+          description: Institutions AOO/UO unit Code
+        subunitType:
+          type: string
+          description: Institutions AOO/UO unit type
+        taxCode:
+          type: string
+          description: Institution's taxCode
+        users:
+          type: array
+          description: List of onboarding users
+          items:
+            $ref: '#/components/schemas/UserDto'
+    GeographicTaxonomyDto0:
+      title: GeographicTaxonomyDto0
+      required:
+        - code
+        - desc
+      type: object
+      properties:
+        code:
+          type: string
+          description: Institution's geographic taxonomy ISTAT code
+        desc:
+          type: string
+          description: Institution's geographic taxonomy extended name
   securitySchemes:
     bearerAuth:
       type: http
