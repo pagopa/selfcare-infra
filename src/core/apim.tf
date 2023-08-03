@@ -599,6 +599,14 @@ module "apim_external_api_ms_v2" {
       })
     },
     {
+      operation_id = "getUserInfoUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_v2.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
@@ -637,7 +645,48 @@ module "apim_external_api_ms_v2" {
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
-    }
+    },
+    {
+      operation_id = "messageAcknowledgmentUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/messageAcknowledgment_op_policy.xml.tpl", {
+        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-external-interceptor/v1"
+        TENANT_ID                                = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER                   = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
+    },
+    {
+      operation_id = "getDelegationsUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getDelegationsUsingGET_op_policy.xml.tpl", {
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                      = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER         = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
+    },
+    {
+      operation_id = "getOnboardingsInstitutionUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getOnboardingsInstitutionUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
+    },
+    {
+      operation_id = "getInstitutionsByTaxCodeUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
+    },
   ]
 }
 
@@ -751,6 +800,15 @@ module "apim_selfcare_support_service_v1" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "sendSupportRequestUsingPOST"
+      xml_content = templatefile("./api/selfcare_support_service/v1/sendSupportRequest_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        BACKEND_BASE_URL           = "http://${var.reverse_proxy_ip}/dashboard/v1/support"
       })
     }
   ]

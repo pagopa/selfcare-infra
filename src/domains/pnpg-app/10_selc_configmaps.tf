@@ -18,6 +18,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
     MOCK_SERVER                       = "http://mock-server:1080/selfcaremock/ic/ce/wspa/wspa/rest/"
+    NATIONAL_REGISTRIES_CLIENT_READ_TIMEOUT : 50000
   }
 }
 
@@ -80,8 +81,8 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
     AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
 
     ENDPOINT_ACS      = "/acs"
-    ENDPOINT_ERROR    = "${local.cdn_fqdn_url}/auth/login/error"
-    ENDPOINT_SUCCESS  = "${local.cdn_fqdn_url}/auth/login/success"
+    ENDPOINT_ERROR    = var.env_short == "p" ? "https://imprese.notifichedigitali.it/auth/login/error" : "https://imprese.${var.env}.notifichedigitali.it/auth/login/error"
+    ENDPOINT_SUCCESS  = var.env_short == "p" ? "https://imprese.notifichedigitali.it/auth/login/success" : "https://imprese.${var.env}.notifichedigitali.it/auth/login/success"
     ENDPOINT_LOGIN    = "/login"
     ENDPOINT_METADATA = "/metadata"
     ENDPOINT_LOGOUT   = "/logout"

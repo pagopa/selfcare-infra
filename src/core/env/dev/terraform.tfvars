@@ -221,7 +221,7 @@ eventhub_ip_rules = [
   },
   { // FD
     ip_mask = "193.203.230.25",
-    action = "Allow"
+    action  = "Allow"
   },
   # {//PROD-FD
   #   ip_mask = "91.218.226.15/32",

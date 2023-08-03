@@ -61,7 +61,7 @@ resource "azuread_application" "external_oauth2_client_fd" {
 }
 
 resource "time_rotating" "client" {
-  rotation_days = 7
+  rotation_days = 3650
 }
 
 resource "azuread_application_password" "external_oauth2_client_fd_password" {
@@ -79,6 +79,14 @@ resource "azurerm_role_assignment" "client_eventhub_access" {
   scope                = module.event_hub.namespace_id
   role_definition_name = "Azure Event Hubs Data Owner"
   principal_id         = azuread_service_principal.external_oauth2_client_fd_sp.object_id
+}
+
+resource "azurerm_key_vault_secret" "external_oauth2_issuer_identifier_uri" {
+  name         = "external-oauth2-issuer"
+  value        = "api://${local.project}-external-oauth2-issuer"
+  key_vault_id = module.key_vault.id
+
+  content_type = "text/plain"
 }
 
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {

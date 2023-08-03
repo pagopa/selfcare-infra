@@ -11,6 +11,60 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/message/{messageId}/status/{status}':
+    post:
+      tags:
+        - interceptor
+      summary: messageAcknowledgment
+      description: Service to acknowledge message consumption by a consumer
+      operationId: messageAcknowledgmentUsingPOST
+      parameters:
+        - name: messageId
+          in: path
+          description: Kafka message unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: status
+          in: path
+          description: Kafka message consumption acknowledgment status
+          required: true
+          style: simple
+          schema:
+            type: string
+            enum:
+              - ACK
+              - NACK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AckPayloadRequest'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/byGeoTaxonomies':
     get:
       tags:
@@ -378,8 +432,8 @@ paths:
       security: [ { } ]
       tags:
         - institutions
-      summary: Gets the corresponding institution using internal institution id
-      description: Gets institution using internal institution id
+      summary: getInstitutionById
+      description: getInstitutionById
       operationId: getInstitution
       parameters:
         - name: id
@@ -559,8 +613,198 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/delegations':
+    get:
+      tags:
+        - Delegation
+      summary: getDelegations
+      description: getDelegations
+      operationId: getDelegationsUsingGET
+      parameters:
+        - name: institutionId
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: brokerId
+          in: query
+          description: The internal identifier of the broker
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelegationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/users':
+    post:
+      tags:
+        - users
+      summary: getUserInfo
+      description: Service to retrieve user info including institutions and products linked to him
+      operationId: getUserInfoUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchUserDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfoResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/institutions/':
+    get:
+      tags:
+        - institutions
+      summary: Gets institutions filtering by taxCode and/or subunitCode
+      description: Gets institutions filtering by taxCode and/or subunitCode
+      operationId: getInstitutionsByTaxCodeUsingGET
+      parameters:
+        - name: taxCode
+          in: query
+          description: Institution's tax code
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: subunitCode
+          in: query
+          description: Institution's subunit code
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstitutionsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/institutions/{institutionId}/onboardings':
+    get:
+      tags:
+        - institutions
+      summary: Gets institutions' onboardings by internal identifier
+      description: Gets institutions' onboardings by internal identifier
+      operationId: getOnboardingsInstitutionUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: The internal identifier of the institution
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: productId
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OnboardingsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
+    AckPayloadRequest:
+        title: AckPayloadRequest
+        required:
+          - message
+        type: object
+        properties:
+          message:
+            type: string
+            description: Acknowledgment request payload message
     GeographicTaxonomyResource:
       title: GeographicTaxonomyResource
       type: object
@@ -1141,6 +1385,281 @@ components:
         desc:
           type: string
           description: 'Description of the geographic taxonomy code'
+    DelegationResponse:
+      title: DelegationResponse
+      type: object
+      properties:
+        brokerId:
+          type: string
+        brokerName:
+          type: string
+        id:
+          type: string
+        institutionId:
+          type: string
+        institutionName:
+          type: string
+        institutionRootName:
+          type: string
+        productId:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
+    SearchUserDto:
+      title: SearchUserDto
+      required:
+        - fiscalCode
+      type: object
+      properties:
+        fiscalCode:
+          type: string
+          description: User's fiscal code
+    UserInfoResource:
+      title: UserInfoResource
+      type: object
+      properties:
+        onboardedInstitutions:
+          type: array
+          description: Object that includes all info about onboarded institutions linked to a user
+          items:
+            $ref: '#/components/schemas/OnboardedInstitutionResource'
+        user:
+          description: Object that includes all info about a user
+          $ref: '#/components/schemas/UserResource'
+    OnboardedInstitutionResource:
+      title: OnboardedInstitutionResource
+      type: object
+      properties:
+        address:
+          type: string
+          description: Institution's address
+        description:
+          type: string
+          description: Institution's description
+        digitalAddress:
+          type: string
+          description: Institution's digital address
+        id:
+          type: string
+          description: Institution's Id
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+        productInfo:
+          description: Products' info of onboardings
+          $ref: '#/components/schemas/ProductInfo'
+        taxCode:
+          type: string
+          description: Institution's tax code
+        zipCode:
+          type: string
+          description: Institution's zip code
+    ProductInfo:
+      title: ProductInfo
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        role:
+          type: string
+    InstitutionsResponse:
+      title: InstitutionsResponse
+      type: object
+      properties:
+        institutions:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionResponse'
+    InstitutionResponse:
+      title: InstitutionResponse
+      type: object
+      properties:
+        address:
+          type: string
+        aooParentCode:
+          type: string
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributesResponse'
+        businessRegisterPlace:
+          type: string
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficerResponse'
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        externalId:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoTaxonomies'
+        id:
+          type: string
+        imported:
+          type: boolean
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+        origin:
+          type: string
+        originId:
+          type: string
+        parentDescription:
+          type: string
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProviderResponse'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        subunitCode:
+          type: string
+        subunitType:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    AttributesResponse:
+      title: AttributesResponse
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        origin:
+          type: string
+    DataProtectionOfficerResponse:
+      title: DataProtectionOfficerResponse
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        pec:
+          type: string
+    GeoTaxonomies:
+      title: GeoTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
+    GeographicTaxonomies:
+      title: GeographicTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        country:
+          type: string
+        country_abbreviation:
+          type: string
+        desc:
+          type: string
+        enabled:
+          type: boolean
+        istat_code:
+          type: string
+        province_abbreviation:
+          type: string
+        province_id:
+          type: string
+        region_id:
+          type: string
+    PaymentServiceProviderResponse:
+      title: PaymentServiceProviderResponse
+      type: object
+      properties:
+        abiCode:
+          type: string
+        businessRegisterNumber:
+          type: string
+        legalRegisterName:
+          type: string
+        legalRegisterNumber:
+          type: string
+        vatNumberGroup:
+          type: boolean
+    OnboardingsResponse:
+      title: OnboardingsResponse
+      type: object
+      properties:
+        onboardings:
+          type: array
+          items:
+            $ref: '#/components/schemas/OnboardingResponse'
+    OnboardingResponse:
+      title: OnboardingResponse
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        closedAt:
+          type: string
+          format: date-time
+        contract:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        pricingPlan:
+          type: string
+        productId:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    BillingResponse:
+      title: BillingResponse
+      type: object
+      properties:
+        publicServices:
+          type: boolean
+        recipientCode:
+          type: string
+        vatNumber:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

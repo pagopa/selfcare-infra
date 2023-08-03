@@ -1,5 +1,5 @@
 # module "tls_checker" {
-#   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker?ref=update-azurerm-tls-version"
+#   source = "git::https://github.com/pagopa/azurerm.git//tls_checker?ref=v4.17.0"
 
 #   for_each = { for chkr in var.tls_checker_https_endpoints_to_check : chkr.alert_name => chkr }
 

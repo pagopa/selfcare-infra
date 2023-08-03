@@ -73,16 +73,12 @@ resource "kubernetes_secret" "mail" {
   }
 
   data = merge({
-    SMTP_HOST                 = "smtps.pec.aruba.it"
-    SMTP_PORT                 = 465
-    SMTP_SSL                  = true
-    SMTP_USR                  = module.key_vault_secrets_query.values["smtp-usr"].value
-    SMTP_PSW                  = module.key_vault_secrets_query.values["smtp-psw"].value
-    MAIL_SENDER_ADDRESS       = module.key_vault_secrets_query.values["smtp-usr"].value
-    AWS_SES_ACCESS_KEY_ID     = module.key_vault_secrets_query.values["aws-ses-access-key-id"].value
-    AWS_SES_SECRET_ACCESS_KEY = module.key_vault_secrets_query.values["aws-ses-secret-access-key"].value
-    MAIL_SERVER_SMTP_AUTH     = false
-    MAIL_CONNECTOR_TYPE       = "aws"
+    SMTP_HOST           = "smtps.pec.aruba.it"
+    SMTP_PORT           = 465
+    SMTP_SSL            = true
+    SMTP_USR            = module.key_vault_secrets_query.values["smtp-usr"].value
+    SMTP_PSW            = module.key_vault_secrets_query.values["smtp-psw"].value
+    MAIL_SENDER_ADDRESS = module.key_vault_secrets_query.values["smtp-usr"].value
     },
     var.env_short != "p"
     ? {
@@ -101,10 +97,13 @@ resource "kubernetes_secret" "mail-not-pec" {
   }
 
   data = {
-    MAIL_SERVER_HOST     = "smtp.gmail.com"
-    MAIL_SERVER_PORT     = 587
-    MAIL_SERVER_USERNAME = module.key_vault_secrets_query.values["smtp-not-pec-usr"].value
-    MAIL_SERVER_PASSWORD = module.key_vault_secrets_query.values["smtp-not-pec-psw"].value
+    MAIL_SERVER_HOST          = "smtp.gmail.com"
+    MAIL_SERVER_PORT          = 587
+    MAIL_SERVER_USERNAME      = module.key_vault_secrets_query.values["smtp-not-pec-usr"].value
+    MAIL_SERVER_PASSWORD      = module.key_vault_secrets_query.values["smtp-not-pec-psw"].value
+    AWS_SES_ACCESS_KEY_ID     = module.key_vault_secrets_query.values["aws-ses-access-key-id"].value
+    AWS_SES_SECRET_ACCESS_KEY = module.key_vault_secrets_query.values["aws-ses-secret-access-key"].value
+    AWS_SES_REGION            = "eu-south-1"
   }
 
   type = "Opaque"
@@ -118,12 +117,13 @@ resource "kubernetes_secret" "contracts-storage" {
 
   data = {
     STORAGE_TYPE               = "BlobStorage"
-    STORAGE_CONTAINER          = local.contracts_storage_container
+    STORAGE_CONTAINER          = "$web"
     STORAGE_ENDPOINT           = "core.windows.net"
     STORAGE_APPLICATION_ID     = local.contracts_storage_account_name
     STORAGE_APPLICATION_SECRET = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
-    STORAGE_CREDENTIAL_ID      = local.contracts_storage_account_name
+    STORAGE_CREDENTIAL_ID      = "selc${var.env_short}weupnpgcheckoutsa"
     STORAGE_CREDENTIAL_SECRET  = module.key_vault_secrets_query.values["contracts-storage-access-key"].value
+    STORAGE_TEMPLATE_URL       = format("https://selc%sweupnpgcheckoutsa.z6.web.core.windows.net", var.env_short)
   }
 
   type = "Opaque"
