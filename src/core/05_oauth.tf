@@ -104,3 +104,4 @@ resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_secret"
 
   content_type = "text/plain"
 }
+
