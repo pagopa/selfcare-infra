@@ -275,6 +275,13 @@ paths:
       summary: onboarding
       description: The service allows the onboarding of Users to a subunit of an Institution
       operationId: onboardingUsingPOST
+      parameters:
+          - name: x-selfcare-uid
+            in: header
+            description: Logged user's unique identifier
+            required: true
+            schema:
+              type: string
       requestBody:
         content:
           application/json:
