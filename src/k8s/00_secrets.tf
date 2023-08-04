@@ -9,6 +9,7 @@ module "key_vault_secrets_query" {
     "aws-ses-access-key-id",
     "aws-ses-secret-access-key",
     "redis-primary-access-key",
+    "apim-backend-access-token",
     "jwt-private-key",
     "jwt-public-key",
     "jwt-kid",
