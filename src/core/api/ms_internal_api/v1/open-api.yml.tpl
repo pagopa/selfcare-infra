@@ -4,7 +4,7 @@ info:
   description: This service acts as an orchestrator for information coming from different services and as a proxy
   version: 0.0.1-SNAPSHOT
 servers:
-  - url: 'https://${host}/${basePath}'
+  - url: 'https://host}/basePath}'
 tags:
   - name: institutions
     description: Institution Controller
@@ -268,8 +268,399 @@ paths:
         security:
           - bearerAuth:
               - global
+  '/geotaxonomies/{geotaxId}':
+    get:
+      tags:
+        - GeographicTaxonomies
+      summary: retrieves the geographic taxonomy by code
+      description: retrieves the geographic taxonomy by code
+      operationId: retrieveGeoTaxonomiesByCodeUsingGET
+      parameters:
+        - name: geotaxId
+          in: path
+          description: 'Geographic taxonomy unique identifier '
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProxyGeographicTaxonomyResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/aoo/{codiceUniAoo}':
+    get:
+      tags:
+        - aoo
+      summary: Retrieve an AOO given its code
+      description: Returns an AOO
+      operationId: findAooByUnicodeUsingGET
+      parameters:
+        - name: codiceUniAoo
+          in: path
+          description: AOO unique identifier, the same of Id
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: categories
+          in: query
+          description: Filter from origin category
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AOOResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  /uo/{codiceUniAoo}:
+    get:
+      tags:
+        - uo
+      summary: Retrieve a UO given its code
+      description: Returns a UO
+      operationId: findUoByUnicodeUsingGET
+      parameters:
+        - name: codiceUniAoo
+          in: path
+          description: UO unique identifier, the same of Id
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: categories
+          in: query
+          description: Filter from origin category
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UOResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
+    UOResource:
+      title: UOResource
+      required:
+        - codiceCatastaleComune
+        - codiceComuneISTAT
+        - codiceFiscaleEnte
+        - codiceIpa
+        - codiceUniAoo
+        - cognomeResponsabile
+        - dataAggiornamento
+        - dataIstituzione
+        - denominazioneEnte
+        - descrizioneUo
+        - fax
+        - indirizzo
+        - mail1
+        - mailResponsabile
+        - nomeResponsabile
+        - origin
+        - telefono
+        - telefonoResponsabile
+        - tipoMail1
+        - url
+      type: object
+      properties:
+        cap:
+          type: string
+        codiceCatastaleComune:
+          type: string
+          description: swagger.model.uo.codiceCatastaleComune}
+        codiceComuneISTAT:
+          type: string
+          description: swagger.model.uo.codiceComuneISTAT}
+        codiceFiscaleEnte:
+          type: string
+          description: swagger.model.uo.codiceFiscaleEnte}
+        codiceIpa:
+          type: string
+          description: swagger.model.uo.codiceIpa}
+        codiceUniAoo:
+          type: string
+          description: swagger.model.uo.codiceUniAoo}
+        codiceUniUo:
+          type: string
+          description: UO unique identifier, the same of Id
+        codiceUniUoPadre:
+          type: string
+          description: swagger.model.uo.codiceUniUoPadre}
+        cognomeResponsabile:
+          type: string
+          description: swagger.model.uo.cognomeResponsabile}
+        dataAggiornamento:
+          type: string
+          description: swagger.model.uo.dataAggiornamento}
+        dataIstituzione:
+          type: string
+          description: swagger.model.uo.dataInstituzione}
+        denominazioneEnte:
+          type: string
+          description: swagger.model.uo.denominazioneEnte}
+        descrizioneUo:
+          type: string
+          description: swagger.model.uo.descrizioneUo}
+        fax:
+          type: string
+          description: swagger.model.uo.fax}
+        id:
+          type: string
+        indirizzo:
+          type: string
+          description: swagger.model.uo.indirizzo}
+        mail1:
+          type: string
+          description: swagger.model.uo.mail1}
+        mailResponsabile:
+          type: string
+          description: swagger.model.uo.mailResponsabile}
+        nomeResponsabile:
+          type: string
+          description: swagger.model.uo.nomeResponsabile}
+        origin:
+          type: string
+          description: Describes which is the source of data
+          enum:
+            - INFOCAMERE
+            - IPA
+            - static
+        telefono:
+          type: string
+          description: swagger.model.uo.telefono}
+        telefonoResponsabile:
+          type: string
+          description: swagger.model.uo.telefonoResponsabile}
+        tipoMail1:
+          type: string
+          description: swagger.model.uo.tipoMail1}
+        url:
+          type: string
+          description: swagger.model.uo.url}
+    AOOResource:
+      title: AOOResource
+      required:
+        - codAoo
+        - codiceCatastaleComune
+        - codiceComuneISTAT
+        - codiceFiscaleEnte
+        - codiceIpa
+        - codiceUniAoo
+        - cognomeResponsabile
+        - dataAggiornamento
+        - dataIstituzione
+        - denominazioneAoo
+        - denominazioneEnte
+        - fax
+        - indirizzo
+        - mailResponsabile
+        - nomeResponsabile
+        - origin
+        - protocolloInformatico
+        - telefono
+        - telefonoResponsabile
+      type: object
+      properties:
+        cap:
+          type: string
+        codAoo:
+          type: string
+          description: swagger.model.aoo.codAoo}
+        codiceCatastaleComune:
+          type: string
+          description: swagger.model.aoo.codiceCatastaleComune}
+        codiceComuneISTAT:
+          type: string
+          description: swagger.model.aoo.codiceComuneISTAT}
+        codiceFiscaleEnte:
+          type: string
+          description: swagger.model.aoo.codiceFiscaleEnte}
+        codiceIpa:
+          type: string
+          description: swagger.model.aoo.codiceIpa}
+        codiceUniAoo:
+          type: string
+          description: AOO unique identifier, the same of Id
+        cognomeResponsabile:
+          type: string
+          description: swagger.model.aoo.cognomeResponsabile}
+        dataAggiornamento:
+          type: string
+          description: swagger.model.aoo.dataAggiornamento}
+        dataIstituzione:
+          type: string
+          description: swagger.model.aoo.dataInstituzione}
+        denominazioneAoo:
+          type: string
+          description: swagger.model.aoo.denominazioneAoo}
+        denominazioneEnte:
+          type: string
+          description: swagger.model.aoo.denominazioneEnte}
+        fax:
+          type: string
+          description: swagger.model.aoo.fax}
+        id:
+          type: string
+        indirizzo:
+          type: string
+          description: swagger.model.aoo.indirizzo}
+        mail1:
+          type: string
+          description: swagger.model.aoo.mail1}
+        mailResponsabile:
+          type: string
+          description: swagger.model.aoo.mailResponsabile}
+        nomeResponsabile:
+          type: string
+          description: swagger.model.aoo.nomeResponsabile}
+        origin:
+          type: string
+          description: Describes which is the source of data
+          enum:
+            - INFOCAMERE
+            - IPA
+            - static
+        protocolloInformatico:
+          type: string
+          description: swagger.model.aoo.protocolloInformatico}
+        telefono:
+          type: string
+          description: swagger.model.aoo.telefono}
+        telefonoResponsabile:
+          type: string
+          description: swagger.model.aoo.telefonoResponsabile}
+        tipoMail1:
+          type: string
+          description: swagger.model.aoo.tipoMail1}
+        uriprotocolloInformatico:
+          type: string
+    ProxyGeographicTaxonomyResource:
+      title: ProxyGeographicTaxonomyResource
+      type: object
+      properties:
+        code:
+          type: string
+          description: Geographic taxonomy unique identifier
+        country:
+          type: string
+          description: Geographic taxonomy country
+        country_abbreviation:
+          type: string
+          description: Geographic taxonomy country abbreviation
+        desc:
+          type: string
+          description: Geographic taxonomy description
+        enabled:
+          type: boolean
+          description: Geographic taxonomy enabled
+          example: false
+        istat_code:
+          type: string
+          description: Geographic taxonomy istat code
+        province_abbreviation:
+          type: string
+          description: Geographic taxonomy province abbreviation
+        province_id:
+          type: string
+          description: Geographic taxonomy province unique identifier
+        region_id:
+          type: string
+          description: Geographic taxonomy region unique identifier
     GeographicTaxonomyResource:
       title: GeographicTaxonomyResource
       required:
