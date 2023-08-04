@@ -335,6 +335,7 @@ resource "kubernetes_secret" "external-interceptor-apim-internal" {
 
   data = {
     SELFCARE_APIM_INTERNAL_API_KEY = module.key_vault_secrets_query.values["external-interceptor-apim-internal"].value
+    K8S_AUTHORIZATION_TOKEN = module.key_vault_secrets_query.values["apim-backend-access-token"].value
   }
 
   type = "Opaque"
