@@ -686,7 +686,7 @@ module "apim_external_api_ms_v2" {
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
-    },
+    }
   ]
 }
 
@@ -743,6 +743,10 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "autoApprovalOnboardingUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "onboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
     {

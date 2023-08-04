@@ -353,6 +353,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "interop"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   }, {
