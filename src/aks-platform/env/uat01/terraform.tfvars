@@ -62,7 +62,7 @@ aks_user_node_pool = {
   os_disk_size_gb = 300,
   node_count_min  = 1,
   node_count_max  = 3,
-  node_labels     = { node_name : "aks-uat01-user", node_type : "user", "pagopa.it/node-scope": "app" },
+  node_labels     = { node_name : "aks-uat01-user", node_type : "user", "pagopa.it/node-scope" : "app" },
   node_taints     = [],
   node_tags       = { node_tag_2 : "2" },
 }

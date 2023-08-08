@@ -61,7 +61,7 @@ aks_user_node_pool = {
   node_count_min  = 1,
   node_count_max  = 3,
   zones           = [1, 2, 3]
-  node_labels     = { node_name : "aks-prod01-user", node_type : "user", "pagopa.it/node-scope": "app" },
+  node_labels     = { node_name : "aks-prod01-user", node_type : "user", "pagopa.it/node-scope" : "app" },
   node_taints     = [],
   node_tags       = { node_tag_2 : "2" },
 }
