@@ -56,6 +56,16 @@
                 <set-body>@{
                     JObject response = context.Response.Body.As<JObject>();
                     response.Add("logo", new JValue(new Uri("${CDN_STORAGE_URL}/institutions/" + response.GetValue("id") + "/logo.png")));
+                     if (response.TryGetValue("parentDescription", out JToken parentDescToken) && parentDescToken.Type == JTokenType.String)
+                                        {
+                                            // Create a new JObject for rootParent
+                                            JObject rootParent = new JObject();
+                                            rootParent.Add("parentDescription", parentDescToken);
+
+                                            // Add the rootParent to the response and remove the original property
+                                            response.Add("rootParent", rootParent);
+                                            response.Remove("parentDescription");
+                                        }
                     return response.ToString();
                     }</set-body>
             </when>

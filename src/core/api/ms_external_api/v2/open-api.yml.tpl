@@ -941,9 +941,9 @@ components:
         originId:
           type: string
           description: Institution's details origin Id
-        parentDescription:
-          type: string
-          description: Institutions AOO/UO unit parent's description
+        rootParent:
+          description: Institution AOO/UO root institutionDescription
+          $ref: '#/components/schemas/RootParentResource'
         pspData:
           description: Payment Service Provider (PSP) specific data
           $ref: '#/components/schemas/PspDataResource'
@@ -1109,6 +1109,16 @@ components:
           description: DPO's PEC
           format: email
           example: email@example.com
+    RootParentResource:
+      title: RootParentResource
+      type: object
+      properties:
+        description:
+          type: string
+          description: swagger.external_api.institutions.model.parentDescription
+        id:
+          type: string
+          description: Institution's unique internal Id
     CompanyInformationsResource:
       title: CompanyInformationsResource
       type: object
@@ -1324,8 +1334,9 @@ components:
           type: string
         aooParentCode:
           type: string
-        parentDescription:
-          type: string
+        rootParent:
+          description: Institution AOO/UO root institutionDescription
+          $ref: '#/components/schemas/RootParentResource'
       additionalProperties: false
     Attribute:
       type: object
