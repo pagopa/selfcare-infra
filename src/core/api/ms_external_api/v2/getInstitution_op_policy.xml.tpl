@@ -60,7 +60,7 @@
                                         {
                                             // Create a new JObject for rootParent
                                             JObject rootParent = new JObject();
-                                            rootParent.Add("parentDescription", parentDescToken);
+                                            rootParent.Add("description", parentDescToken);
 
                                             // Add the rootParent to the response and remove the original property
                                             response.Add("rootParent", rootParent);
