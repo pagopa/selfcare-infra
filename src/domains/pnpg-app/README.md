@@ -18,6 +18,7 @@
 | <a name="module_apim_pnpg"></a> [apim\_pnpg](#module\_apim\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_pnpg_product_pn_pg"></a> [apim\_pnpg\_product\_pn\_pg](#module\_apim\_pnpg\_product\_pn\_pg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_dev"></a> [apim\_product\_pnpg\_dev](#module\_apim\_product\_pnpg\_dev) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
+| <a name="module_apim_product_pnpg_hotfix"></a> [apim\_product\_pnpg\_hotfix](#module\_apim\_product\_pnpg\_hotfix) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_test"></a> [apim\_product\_pnpg\_test](#module\_apim\_product\_pnpg\_test) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_uat"></a> [apim\_product\_pnpg\_uat](#module\_apim\_product\_pnpg\_uat) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_uat_cert"></a> [apim\_product\_pnpg\_uat\_cert](#module\_apim\_product\_pnpg\_uat\_cert) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |

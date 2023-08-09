@@ -320,7 +320,7 @@ module "apim_product_pnpg_test" {
   policy_xml = file("./api_product/pnpg_test/policy.xml")
 }
 
-module "apim_product_pnpg_hotfix"{
+module "apim_product_pnpg_hotfix" {
   source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
   product_id   = "prod-pn-pg-hotfix"
   display_name = "PNPG HOTFIX"
