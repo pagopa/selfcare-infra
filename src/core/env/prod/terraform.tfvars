@@ -49,7 +49,7 @@ ddos_protection_plan = {
 # AKS Platform
 #
 aks_platform_env              = "prod01"
-vnet_aks_ddos_protection_plan = false
+vnet_aks_ddos_protection_plan = true
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
@@ -92,7 +92,7 @@ aks_upgrade_settings_max_surge    = "33%"
 aks_sku_tier                      = "Paid"
 
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
-aks_system_node_pool_node_count_min               = 2
+aks_system_node_pool_node_count_min               = 3
 aks_system_node_pool_node_count_max               = 3
 aks_system_node_pool_only_critical_addons_enabled = false
 
