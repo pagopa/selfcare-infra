@@ -146,7 +146,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_pnpg_uat.product_id,
     module.apim_product_pnpg_dev.product_id,
     module.apim_product_pnpg_uat_cert.product_id,
-    module.apim_product_pnpg_test.product_id
+    module.apim_product_pnpg_test.product_id,
+    module.apim_product_pnpg_hotfix.product_id
   ]
 
   api_operation_policies = [
@@ -317,5 +318,21 @@ module "apim_product_pnpg_test" {
   approval_required     = false
 
   policy_xml = file("./api_product/pnpg_test/policy.xml")
+}
+
+module "apim_product_pnpg_hotfix" {
+  source       = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
+  product_id   = "prod-pn-pg-hotfix"
+  display_name = "PNPG HOTFIX"
+  description  = "Piattaforma Notifiche Persone Giuridiche"
+
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/pnpg_hotfix/policy.xml")
 }
 
