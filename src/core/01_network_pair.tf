@@ -40,7 +40,7 @@ module "vnet_peering_pair_vs_core" {
 
 ## Peering between the vnet(pair) and aks
 module "vnet_peering_pair_vs_aks" {
-  source = "git::https://github.com/pagopa/azurerm.git//virtual_network_peering?ref=v2.16.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v6.14.0"
 
   location = azurerm_resource_group.rg_vnet.location
 

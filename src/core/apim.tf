@@ -119,7 +119,7 @@ resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" 
 }
 
 module "apim_uservice_party_process_v1" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v6.14.0"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.2.1"
   name                = format("%s-party-prc-api", local.project)
   api_management_name = module.apim.name
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -136,7 +136,7 @@ module "apim_uservice_party_process_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "ms-core/v1"
   })
 
@@ -300,7 +300,7 @@ module "apim_uservice_party_management_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.proxy[0].host_name
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "ms-core/v1"
   })
 
@@ -1132,7 +1132,8 @@ module "apim_product_support_io" {
 }
 
 module "apim_product_fd" {
-  source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  # source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v6.14.0"
 
   product_id   = "prod-fd"
   display_name = "Fideiussioni Digitali"

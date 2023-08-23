@@ -21,7 +21,7 @@ module "azdoa_snet" {
 }
 
 module "azdoa_li" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v6.2.1"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v7.2.1"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-app"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -37,7 +37,8 @@ module "azdoa_li" {
 }
 
 module "azdoa_li_infra" {
-  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+  # source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v6.14.0"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-infra"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -73,8 +74,8 @@ resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
 data "azuread_service_principal" "app_projects_principal" {
   count = var.enable_app_projects_pipeline ? 1 : 0
   ###???
-  # display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
-  application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
+  display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+  # application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
 }
 
 resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
