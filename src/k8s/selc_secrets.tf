@@ -321,7 +321,7 @@ resource "kubernetes_secret" "external-interceptor"{
   }
 
   data = {
-    FD_TOKEN_GRANT_TYPE = module.key_vault_secrets_query.values["prod-fd-client-grant-type"].value
+    FD_TOKEN_GRANT_TYPE = module.key_vault_secrets_query.values["prod-fd-grant-type"].value
     FD_TOKEN_CLIENT_ID = module.key_vault_secrets_query.values["prod-fd-client-id"].value
     FD_TOKEN_CLIENT_SECRET =module.key_vault_secrets_query.values["prod-fd-client-secret"].value
   }
