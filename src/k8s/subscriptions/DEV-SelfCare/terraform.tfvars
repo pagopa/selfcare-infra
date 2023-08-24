@@ -73,6 +73,10 @@ geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.pdnd.pagopa.it/geo-tax"
 }
 
+external-interceptor-url = {
+  PROD_FD_URL = "https://fid00001fe.siachain.sv.sia.eu:30008"
+}
+
 # tls_cert_check_helm = {
 #   chart_version = "1.21.0"
 #   image_name    = "ghcr.io/pagopa/infra-ssl-check"
