@@ -314,6 +314,19 @@ resource "kubernetes_secret" "external-interceptor-event-secrets" {
 
 }
 
+resource "kubernetes_secret" "external-interceptor"{
+  metadata {
+    name      = "external-interceptor"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    FD_TOKEN_GRANT_TYPE = module.key_vault_secrets_query.values["prod-fd-client-grant-type"].value
+    FD_TOKEN_CLIENT_ID = module.key_vault_secrets_query.values["prod-fd-client-id"].value
+    FD_TOKEN_CLIENT_SECRET =module.key_vault_secrets_query.values["prod-fd-client-secret"].value
+  }
+}
+
 resource "kubernetes_secret" "onboarding-interceptor-apim-internal" {
   metadata {
     name      = "onboarding-interceptor-apim-internal"
