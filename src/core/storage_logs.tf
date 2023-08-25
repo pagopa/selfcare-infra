@@ -21,10 +21,16 @@ module "selc_logs_storage" {
   advanced_threat_protection      = var.logs_advanced_threat_protection
   allow_nested_items_to_be_public = false
   public_network_access_enabled   = var.public_network_access_enabled
-
-  blob_delete_retention_days = var.logs_delete_retention_days
+  blob_delete_retention_days      = var.logs_delete_retention_days
 
   tags = var.tags
+}
+
+resource "azurerm_management_lock" "management_lock" {
+  name       = "logs-storage-blob-container-lock"
+  scope      = module.selc_logs_storage.id
+  lock_level = "CanNotDelete"
+  notes      = "This items can't be deleted in this subscription!"
 }
 
 #tfsec:ignore:AZU023
