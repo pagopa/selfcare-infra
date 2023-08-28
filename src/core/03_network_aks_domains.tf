@@ -30,7 +30,7 @@ resource "azurerm_public_ip" "outbound_ip_aks_platform" {
   resource_group_name = azurerm_resource_group.rg_vnet_aks.name
   sku                 = "Standard"
   allocation_method   = "Static"
-
+  zones               = ["1", "2", "3"]
   tags = var.tags
 }
 

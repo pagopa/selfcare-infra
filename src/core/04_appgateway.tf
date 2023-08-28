@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
-
+  zones               = ["1", "2", "3"]
   tags = var.tags
 }
 
@@ -134,7 +134,7 @@ module "app_gw" {
       listener              = "api-pnpg"
       backend               = "platform-aks"
       rewrite_rule_set_name = null
-      priority              = 1
+      priority              = 20
     }
   }
 
@@ -143,7 +143,7 @@ module "app_gw" {
       listener     = "api"
       priority     = null
       url_map_name = "api"
-      priority     = 1
+      priority     = 10
     }
   }
 

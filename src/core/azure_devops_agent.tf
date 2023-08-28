@@ -88,4 +88,5 @@ resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
   secret_permissions      = ["Get", "List"]
   certificate_permissions = []
   storage_permissions     = []
+  key_permissions         = []
 }
