@@ -642,6 +642,16 @@ paths:
           style: form
           schema:
             type: string
+        - name: mode
+          in: query
+          description: Mode (full or normal) to retreieve institution's delegations
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - FULL
+              - NORMAL
       responses:
         '200':
           description: OK
@@ -1412,7 +1422,18 @@ components:
           type: string
         institutionRootName:
           type: string
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
         productId:
+          type: string
+        taxCode:
           type: string
         type:
           type: string
