@@ -189,6 +189,14 @@ resource "kubernetes_config_map" "infocamere-service" {
   }
 }
 
+resource "kubernetes_config_map" "external-interceptor-url" {
+  metadata {
+    name      = "external-interceptor-url"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = var.external-interceptor-url
+}
 
 resource "kubernetes_config_map" "national-registries-service" {
   metadata {
@@ -200,8 +208,6 @@ resource "kubernetes_config_map" "national-registries-service" {
     NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/national-registries-private/"
   }
 }
-
-
 
 resource "kubernetes_config_map" "geo-taxonomies" {
   metadata {

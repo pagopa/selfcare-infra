@@ -70,3 +70,7 @@ aruba_sign_service = {
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
 }
+
+external-interceptor-url = {
+  PROD_FD_URL = ""
+}
