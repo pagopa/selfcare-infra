@@ -412,3 +412,25 @@ logs_enable_versioning          = false
 logs_advanced_threat_protection = true
 
 enable_load_tests_db = false
+
+
+# Functions App
+
+function_always_on = true
+
+app_service_plan_info = {
+  kind                         = "Linux"
+  sku_size                     = "P1v3"
+  sku_tier                     = "PremiumV3"
+  maximum_elastic_worker_count = 1
+  worker_count                 = 1
+  zone_balancing_enabled       = false
+}
+
+storage_account_info = {
+  account_kind                      = "StorageV2"
+  account_tier                      = "Standard"
+  account_replication_type          = "LRS"
+  access_tier                       = "Hot"
+  advanced_threat_protection_enable = true
+}

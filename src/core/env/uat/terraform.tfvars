@@ -438,3 +438,24 @@ eventhubs = [{
 
 enable_load_tests_db = true
 
+
+# Functions App
+
+function_always_on = false
+
+app_service_plan_info = {
+  kind                         = "Linux"
+  sku_size                     = "S1"
+  sku_tier                     = "StandardS1"
+  maximum_elastic_worker_count = 1
+  worker_count                 = 1
+  zone_balancing_enabled       = false
+}
+
+storage_account_info = {
+  account_kind                      = "StorageV2"
+  account_tier                      = "Standard"
+  account_replication_type          = "LRS"
+  access_tier                       = "Hot"
+  advanced_threat_protection_enable = false
+}
