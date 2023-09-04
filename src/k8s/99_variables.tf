@@ -134,6 +134,10 @@ variable "geo-taxonomies" {
   type = map(string)
 }
 
+variable "external-interceptor-url" {
+  type = map(string)
+}
+
 variable "aks_name" {
   type        = string
   description = "AKS Name"
