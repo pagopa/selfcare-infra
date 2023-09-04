@@ -262,6 +262,30 @@ eventhub_ip_rules = [
   { // PN
     ip_mask = "18.102.5.128",
     action  = "Allow"
+  },
+  { //PROD-INTEROP-TEST
+    ip_mask = "18.159.67.168",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-TEST
+    ip_mask = "3.78.75.174",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-TEST
+    ip_mask = "3.68.17.213",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.192.82.161",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "3.120.212.183",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.192.110.102",
+    action  = "Allow"
   }
 ]
 
