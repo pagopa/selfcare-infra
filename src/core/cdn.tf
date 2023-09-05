@@ -48,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-queue-services-logging-enabled:exp:2022-05-01 # already ignored, maybe a bug in tfsec
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v6.14.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v7.3.0"
 
   name                  = "checkout"
   prefix                = local.project

@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v6.14.0"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.3.0"
   name                = "${local.project_pair}-vnet"
   location            = azurerm_resource_group.rg_pair_vnet.location
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
@@ -17,7 +17,7 @@ module "vnet_pair" {
 
 ## Peering between the vnet(main) and integration vnet
 module "vnet_peering_pair_vs_core" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v6.14.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.3.0"
 
   location = azurerm_resource_group.rg_vnet.location
 
@@ -27,7 +27,7 @@ module "vnet_peering_pair_vs_core" {
   source_allow_gateway_transit     = false
   source_use_remote_gateways       = true
   # needed by vpn gateway for enabling routing from vnet to vnet_integration
-  source_allow_forwarded_traffic = true
+  source_allow_forwarded_traffic   = true
 
   target_resource_group_name       = azurerm_resource_group.rg_vnet.name
   target_virtual_network_name      = module.vnet.name
@@ -40,7 +40,7 @@ module "vnet_peering_pair_vs_core" {
 
 ## Peering between the vnet(pair) and aks
 module "vnet_peering_pair_vs_aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v6.14.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.3.0"
 
   location = azurerm_resource_group.rg_vnet.location
 
@@ -50,7 +50,7 @@ module "vnet_peering_pair_vs_aks" {
   source_allow_gateway_transit     = false
   source_use_remote_gateways       = false
   # needed by vpn gateway for enabling routing from vnet to vnet_integration
-  source_allow_forwarded_traffic = true
+  source_allow_forwarded_traffic   = true
 
   target_resource_group_name       = azurerm_resource_group.rg_vnet_aks.name
   target_virtual_network_name      = module.vnet_aks_platform.name
