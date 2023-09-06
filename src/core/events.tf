@@ -30,7 +30,7 @@ module "event_hub" {
   subnet_id           = module.eventhub_snet.id
 
   private_dns_zone_record_A_name = null
-
+  public_network_access_enabled  = true
   eventhubs = var.eventhubs
 
   network_rulesets = [
@@ -38,7 +38,7 @@ module "event_hub" {
       default_action                 = "Deny",
       virtual_network_rule           = [],
       ip_rule                        = var.eventhub_ip_rules
-      trusted_service_access_enabled = true
+      trusted_service_access_enabled = false
     }
   ]
 
