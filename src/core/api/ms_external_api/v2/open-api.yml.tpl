@@ -1414,6 +1414,10 @@ components:
           type: string
         brokerName:
           type: string
+        brokerTaxCode:
+          type: string
+        brokerType:
+          type: string
         id:
           type: string
         institutionId:
