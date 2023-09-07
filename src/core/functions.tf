@@ -14,8 +14,6 @@ module "functions_snet" {
   virtual_network_name = module.vnet.name
   address_prefixes     = var.cidr_subnet_functions
 
-  enforce_private_link_endpoint_network_policies = false
-
   delegation = {
     name = "default"
     service_delegation = {
@@ -32,15 +30,18 @@ module "onboarding_func" {
   location            = azurerm_resource_group.functions_rg.location
   resource_group_name = azurerm_resource_group.functions_rg.name
 
+  health_check_path   = "/api/v1/info"
   always_on                                = var.function_always_on
   subnet_id                                = module.functions_snet[0].id
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
-  linux_fx_version                         = "JAVA|17"
+  java_version                             = "11"
+  runtime_version     = "~4"
 
 
   app_service_plan_info = var.app_service_plan_info
 
   storage_account_info = var.storage_account_info
+
 
   tags = var.tags
 }
