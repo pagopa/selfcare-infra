@@ -34,6 +34,8 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
+cidr_subnet_functions             = ["10.1.144.0/24"]
+cidr_subnet_github_runners        = ["10.1.145.0/24"]
 
 #
 # Pair VNET
@@ -359,3 +361,25 @@ eventhubs = [{
 ##
 
 enable_load_tests_db = true
+
+
+# Functions App
+
+function_always_on = false
+
+app_service_plan_info = {
+  kind                         = "Linux"
+  sku_size                     = "S1"
+  sku_tier                     = "StandardS1"
+  maximum_elastic_worker_count = 1
+  worker_count                 = 1
+  zone_balancing_enabled       = false
+}
+
+storage_account_info = {
+  account_kind                      = "StorageV2"
+  account_tier                      = "Standard"
+  account_replication_type          = "LRS"
+  access_tier                       = "Hot"
+  advanced_threat_protection_enable = false
+}
