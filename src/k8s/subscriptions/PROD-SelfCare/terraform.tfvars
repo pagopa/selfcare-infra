@@ -34,7 +34,7 @@ configmaps_ms_core = {
   ONBOARDING_SEND_EMAIL_TO_INSTITUTION = "true"
   SELFCARE_ADMIN_NOTIFICATION_URL      = "https://selfcare.pagopa.it/dashboard/admin/onboarding/"
   GEO_TAXONOMY_URL                     = "https://api.pdnd.pagopa.it/geo-tax"
-  PAGOPA_SIGNATURE_ONBOARDING_ENABLED  = "false"
+  PAGOPA_SIGNATURE_ONBOARDING_ENABLED  = "true"
 }
 
 
@@ -68,4 +68,8 @@ aruba_sign_service = {
 
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
+}
+
+external-interceptor-url = {
+  PROD_FD_URL = ""
 }
