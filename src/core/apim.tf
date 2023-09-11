@@ -548,7 +548,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_io.product_id,
     module.apim_product_test_io.product_id,
     module.apim_product_test_io_premium.product_id,
-    module.apim_product_fd.product_id
+    module.apim_product_fd.product_id,
+    module.apim_product_fd_garantito.product_id
   ]
 
   api_operation_policies = [
