@@ -1133,3 +1133,10 @@ variable "azdo_agent_vm_sku" {
   description = "sku of the azdo agent vm"
   default     = "Standard_B1s"
 }
+
+
+variable "checkout_advanced_threat_protection" {
+  type        = string
+  description = "Enable checkout threat advanced protection"
+  default     = false
+}

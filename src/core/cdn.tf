@@ -48,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=add-variable-advanced_threat_protection-to-cdn-storage"
 
   name                  = "checkout"
   prefix                = local.project
@@ -67,8 +67,10 @@ module "checkout_cdn" {
   keyvault_resource_group_name = module.key_vault.resource_group_name
   keyvault_subscription_id     = data.azurerm_subscription.current.subscription_id
   keyvault_vault_name          = module.key_vault.name
-
+  advanced_threat_protection   = var.checkout_advanced_threat_protection
+  
   querystring_caching_behaviour = "BypassCaching"
+  
 
   global_delivery_rule = {
     cache_expiration_action       = []
@@ -270,3 +272,4 @@ resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
 
   key_vault_id = module.key_vault.id
 }
+

@@ -15,7 +15,7 @@ module "vnet_aks_platform" {
   resource_group_name  = azurerm_resource_group.rg_vnet_aks.name
   address_space        = var.cidr_aks_platform_vnet
   ddos_protection_plan = var.ddos_protection_plan
-  
+
   tags = var.tags
 }
 
