@@ -412,3 +412,5 @@ logs_enable_versioning          = false
 logs_advanced_threat_protection = true
 
 enable_load_tests_db = false
+
+checkout_advanced_threat_protection = true
