@@ -10,10 +10,11 @@ resource "azurerm_resource_group" "rg_vnet_aks" {
 module "vnet_aks_platform" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.3.0"
 
-  name                = "${local.project}-${var.location_short}-aks-${var.aks_platform_env}-vnet"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.rg_vnet_aks.name
-  address_space       = var.cidr_aks_platform_vnet
+  name                 = "${local.project}-${var.location_short}-aks-${var.aks_platform_env}-vnet"
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.rg_vnet_aks.name
+  address_space        = var.cidr_aks_platform_vnet
+  ddos_protection_plan = var.ddos_protection_plan
 
   tags = var.tags
 }
