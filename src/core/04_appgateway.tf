@@ -6,7 +6,7 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
   sku                 = "Standard"
   allocation_method   = "Static"
   zones               = ["1", "2", "3"]
-  tags = var.tags
+  tags                = var.tags
 }
 
 # Subnet to host the application gateway
@@ -16,7 +16,7 @@ module "appgateway_snet" {
   address_prefixes     = var.cidr_subnet_appgateway
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
-  
+
   private_endpoint_network_policies_enabled = true
   service_endpoints                         = ["Microsoft.Web"]
 }

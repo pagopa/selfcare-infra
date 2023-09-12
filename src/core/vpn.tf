@@ -109,6 +109,6 @@ module "vpn_pair_dns_forwarder" {
   name                = "${local.project_pair}-${random_id.pair_dns_forwarder_hash.hex}-vpn-dnsfrw"
   location            = var.location_pair
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
-  subnet_id           = module.dns_forwarder_pair_subnet.id  
+  subnet_id           = module.dns_forwarder_pair_subnet.id
   tags                = var.tags
 }

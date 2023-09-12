@@ -27,7 +27,7 @@ module "vnet_peering_pair_vs_core" {
   source_allow_gateway_transit     = false
   source_use_remote_gateways       = true
   # needed by vpn gateway for enabling routing from vnet to vnet_integration
-  source_allow_forwarded_traffic   = true
+  source_allow_forwarded_traffic = true
 
   target_resource_group_name       = azurerm_resource_group.rg_vnet.name
   target_virtual_network_name      = module.vnet.name
@@ -35,7 +35,7 @@ module "vnet_peering_pair_vs_core" {
   target_allow_gateway_transit     = true
   target_use_remote_gateways       = false
 
-  target_allow_forwarded_traffic   = true
+  target_allow_forwarded_traffic = true
 }
 
 ## Peering between the vnet(pair) and aks
@@ -50,7 +50,7 @@ module "vnet_peering_pair_vs_aks" {
   source_allow_gateway_transit     = false
   source_use_remote_gateways       = false
   # needed by vpn gateway for enabling routing from vnet to vnet_integration
-  source_allow_forwarded_traffic   = true
+  source_allow_forwarded_traffic = true
 
   target_resource_group_name       = azurerm_resource_group.rg_vnet_aks.name
   target_virtual_network_name      = module.vnet_aks_platform.name

@@ -548,7 +548,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_io.product_id,
     module.apim_product_test_io.product_id,
     module.apim_product_test_io_premium.product_id,
-    module.apim_product_fd.product_id
+    module.apim_product_fd.product_id,
+    module.apim_product_fd_garantito.product_id
   ]
 
   api_operation_policies = [
@@ -1158,6 +1159,23 @@ module "apim_product_fd" {
   approval_required     = false
 
   policy_xml = file("./api_product/prod-fd/policy.xml")
+}
+module "apim_product_fd_garantito" {
+  # source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.3.0"
+
+  product_id   = "prod-fd-garantito"
+  display_name = "Fideiussioni Digitali Garantito"
+  description  = "Fideiussioni Digitali Garantito"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/prod-fd-garantito/policy.xml")
 }
 
 ##################

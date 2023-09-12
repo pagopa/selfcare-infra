@@ -31,7 +31,7 @@ module "event_hub" {
 
   private_dns_zone_record_A_name = null
   public_network_access_enabled  = true
-  eventhubs = var.eventhubs
+  eventhubs                      = var.eventhubs
 
   network_rulesets = [
     {
