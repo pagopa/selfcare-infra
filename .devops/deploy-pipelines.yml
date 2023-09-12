@@ -59,22 +59,22 @@ stages:
               TF_ENVIRONMENT_FOLDER: "dev"
               AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
 
-  - stage: apply_DEV
-    dependsOn: [plan_DEV]
-    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
-    jobs:
+  # - stage: apply_DEV
+  #   dependsOn: [plan_DEV]
+  #   condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+  #   jobs:
       # - job: init
       #   steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-      - template: templates/terraform-plan-apply/template.yaml@terraform
-        parameters:
-          DOMAIN_NAME: 'core'
-          AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
-          ENVIRONMENT: "dev"
-          TF_ENVIRONMENT_FOLDER: "dev"
-          WORKINGDIR: 'src/core'
-          AZURE_SERVICE_CONNECTION_NAME: DEV-PAGOPA-SERVICE-CONN
+  - template: templates/terraform-plan-apply/template.yaml@terraform
+    parameters:
+      DOMAIN_NAME: 'core'
+      AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
+      ENVIRONMENT: "dev"
+      TF_ENVIRONMENT_FOLDER: "dev"
+      WORKINGDIR: 'src/core'
+      AZURE_SERVICE_CONNECTION_NAME: DEV-PAGOPA-SERVICE-CONN
 
   # UAT
   - stage: plan_UAT
@@ -97,18 +97,18 @@ stages:
               AZURE_SERVICE_CONNECTION_NAME: UAT-SELFCARE-SERVICE-CONN
 
 
-  - stage: apply_UAT
-    dependsOn: [plan_UAT]
-    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-    jobs:
-      - template: templates/terraform-plan-apply/template.yaml@terraform
-        parameters:
-          DOMAIN_NAME: 'core'
-          AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-uat-linux-infra"
-          ENVIRONMENT: "uat"
-          TF_ENVIRONMENT_FOLDER: "uat"
-          WORKINGDIR: 'src/core'
-          AZURE_SERVICE_CONNECTION_NAME: UAT-PAGOPA-SERVICE-CONN
+  # - stage: apply_UAT
+  #   dependsOn: [plan_UAT]
+  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+  #   jobs:
+  - template: templates/terraform-plan-apply/template.yaml@terraform
+    parameters:
+      DOMAIN_NAME: 'core'
+      AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-uat-linux-infra"
+      ENVIRONMENT: "uat"
+      TF_ENVIRONMENT_FOLDER: "uat"
+      WORKINGDIR: 'src/core'
+      AZURE_SERVICE_CONNECTION_NAME: UAT-PAGOPA-SERVICE-CONN
 
   # PROD
   - stage: plan_PROD
@@ -130,19 +130,19 @@ stages:
               TF_ENVIRONMENT_FOLDER: "prod"
               AZURE_SERVICE_CONNECTION_NAME: PROD-SELFCARE-SERVICE-CONN
 
-  - stage: apply_PROD
-    dependsOn: [plan_PROD]
-    condition: and(succeeded(), eq(${{parameters.PROD}}, true))
-    jobs:
+  # - stage: apply_PROD
+  #   dependsOn: [plan_PROD]
+  #   condition: and(succeeded(), eq(${{parameters.PROD}}, true))
+  #   jobs:
       # - job: init
       #   steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-      - template: templates/terraform-plan-apply/template.yaml@terraform
-        parameters:
-          DOMAIN_NAME: 'core'
-          AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-prod-linux-infra"
-          ENVIRONMENT: "prod"
-          TF_ENVIRONMENT_FOLDER: "prod"
-          WORKINGDIR: 'src/core'
-          AZURE_SERVICE_CONNECTION_NAME: PROD-PAGOPA-SERVICE-CONN
+  - template: templates/terraform-plan-apply/template.yaml@terraform
+    parameters:
+      DOMAIN_NAME: 'core'
+      AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-prod-linux-infra"
+      ENVIRONMENT: "prod"
+      TF_ENVIRONMENT_FOLDER: "prod"
+      WORKINGDIR: 'src/core'
+      AZURE_SERVICE_CONNECTION_NAME: PROD-PAGOPA-SERVICE-CONN
