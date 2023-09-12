@@ -771,13 +771,27 @@ paths:
         - name: taxCode
           in: query
           description: Institution's tax code
-          required: true
+          required: false
           style: form
           schema:
             type: string
         - name: subunitCode
           in: query
           description: Institution's subunit code
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: origin
+          in: query
+          description: origin
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: originId
+          in: query
+          description: originId
           required: false
           style: form
           schema:
