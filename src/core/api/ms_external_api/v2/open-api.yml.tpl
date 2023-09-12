@@ -716,6 +716,50 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/users/{id}':
+    get:
+      tags:
+        - users
+      summary: Retrieves user given userId and optional ProductId
+      description: Retrieves user given userId and optional ProductId
+      operationId: getUserInfoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: User's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/':
     get:
       tags:
@@ -727,13 +771,27 @@ paths:
         - name: taxCode
           in: query
           description: Institution's tax code
-          required: true
+          required: false
           style: form
           schema:
             type: string
         - name: subunitCode
           in: query
           description: Institution's subunit code
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: origin
+          in: query
+          description: origin
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: originId
+          in: query
+          description: originId
           required: false
           style: form
           schema:
@@ -1235,6 +1293,20 @@ components:
           enum:
           - ACTIVE
           - SUSPENDED
+    UserResponse:
+      title: UserResponse
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        taxCode:
+          type: string
     UserResource:
       title: UserResource
       type: object

@@ -167,7 +167,7 @@ locals {
   #     expected_http_status = 200
   #   },
   # ]
-    test_urls_map = {
+  test_urls_map = {
     "api.dev.selfcare.pagopa.it" = {
       host                 = "api.dev.selfcare.pagopa.it",
       path                 = "/health",

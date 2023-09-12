@@ -32,7 +32,7 @@ resource "azurerm_public_ip" "outbound_ip_aks_platform" {
   sku                 = "Standard"
   allocation_method   = "Static"
   zones               = ["1", "2", "3"]
-  tags = var.tags
+  tags                = var.tags
 }
 
 #
