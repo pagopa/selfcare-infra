@@ -1151,9 +1151,9 @@ variable "cidr_subnet_github_runners" {
   default     = null
 }
 
-variable "cidr_subnet_functions" {
+variable "cidr_subnet_selc" {
   type        = list(string)
-  description = "Address prefixes subnet functions"
+  description = "Address prefixes subnet selc ca and functions"
   default     = null
 }
 

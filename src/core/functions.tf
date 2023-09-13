@@ -7,12 +7,12 @@ resource "azurerm_resource_group" "functions_rg" {
 
 # subnet
 module "functions_snet" {
-  count                = var.cidr_subnet_functions != null ? 1 : 0
+  count                = var.cidr_subnet_selc != null ? 1 : 0
   source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
   name                 = format("%s-functions-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
-  address_prefixes     = var.cidr_subnet_functions
+  address_prefixes     = var.cidr_subnet_selc
 
   delegation = {
     name = "default"
