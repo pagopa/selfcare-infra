@@ -56,7 +56,7 @@ module "checkout_cdn" {
   location              = var.location
   hostname              = format("%s.%s", var.dns_zone_prefix, var.external_domain)
   https_rewrite_enabled = true
-  lock_enabled          = var.lock_enable
+  # lock_enabled          = var.lock_enable apz
 
   index_document     = "index.html"
   error_404_document = "error.html"

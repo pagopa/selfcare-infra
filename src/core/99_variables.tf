@@ -1146,7 +1146,7 @@ variable "azdo_agent_vm_sku" {
 }
 
 
-variable "checkout_advanced_threat_protection" {
+variable "checkout_advanced_threat_protection_enabled" {
   type        = string
   description = "Enable checkout threat advanced protection"
   default     = false
