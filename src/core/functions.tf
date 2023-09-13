@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "functions_rg" {
-  name     = "${local.project}-${var.env_short}-functions-resource-group"
+  name     = "${local.project}-functions-rg"
   location = var.location
 
   tags = var.tags
