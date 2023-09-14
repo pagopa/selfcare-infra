@@ -1,8 +1,6 @@
 <policies>
     <inbound>
         <base/>
-         <inbound>
-        <base/>
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
             var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
