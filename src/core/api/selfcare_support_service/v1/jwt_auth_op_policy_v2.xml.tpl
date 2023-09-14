@@ -11,6 +11,7 @@
             // 2) Construct the Base64Url-encoded payload
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var uid = "m2m";
+
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
             var payload = new { exp, uid, aud, iss };
@@ -28,17 +29,16 @@
             }
 
             }"/>
-        <set-header name="Authorization" exists-action="override">
+        <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-query-parameter name="productId" exists-action="override">
-              <value>@((string)context.Variables["productId"])</value>
-         </set-query-parameter>
-        <set-backend-service base-url="${MS_CORE_BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base/>
     </backend>
+    <outbound>
+        <base/>
+    </outbound>
     <on-error>
         <base/>
     </on-error>
