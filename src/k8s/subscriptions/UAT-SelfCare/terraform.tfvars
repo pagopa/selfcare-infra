@@ -86,7 +86,7 @@ tls_cert_check_helm = {
 }
 
 tls_checker_https_endpoints_to_check = [
-   {
+  {
     https_endpoint = "api.uat.selfcare.pagopa.it",
     alert_name     = "api-uat-selfcare-pagopa-it",
     alert_enabled  = true,
