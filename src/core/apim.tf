@@ -844,6 +844,24 @@ module "apim_selfcare_support_service_v1" {
       xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
       })
+    },
+    {
+      operation_id = "getUserInfoUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getUserInfoUsingGet_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getDelegationsUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getDelegationsUsingGET_op_policy.xml.tpl", {
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
