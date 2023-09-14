@@ -644,7 +644,7 @@ paths:
             type: string
         - name: mode
           in: query
-          description: Mode (full or normal) to retreieve institution's delegations
+          description: Mode (full or normal) to retrieve institution's delegations
           required: false
           style: form
           schema:
@@ -1485,6 +1485,10 @@ components:
         brokerId:
           type: string
         brokerName:
+          type: string
+        brokerTaxCode:
+          type: string
+        brokerType:
           type: string
         id:
           type: string
