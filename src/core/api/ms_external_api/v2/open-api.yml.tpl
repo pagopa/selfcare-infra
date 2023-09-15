@@ -720,7 +720,7 @@ paths:
     get:
       tags:
         - users
-      summary: Get user by Id
+      summary: getUuserById
       description: Get user by Id
       operationId: getUserInfoUsingGET
       parameters:
