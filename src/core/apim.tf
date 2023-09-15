@@ -843,9 +843,9 @@ module "apim_selfcare_support_service_v1" {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        API_DOMAIN                  = local.api_domain
+        KID                         = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT  = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     },
     {

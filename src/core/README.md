@@ -17,7 +17,7 @@
 |------|--------|---------|
 | <a name="module_acr"></a> [acr](#module\_acr) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_registry | v6.20.0 |
 | <a name="module_acr_common"></a> [acr\_common](#module\_acr\_common) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.3.0 |
-| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v7.3.0 |
+| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_aks"></a> [aks](#module\_aks) | git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster | v7.3.0 |
 | <a name="module_apim"></a> [apim](#module\_apim) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management | v7.3.0 |
 | <a name="module_apim_external_api_ms_v1"></a> [apim\_external\_api\_ms\_v1](#module\_apim\_external\_api\_ms\_v1) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.3.0 |
@@ -64,8 +64,8 @@
 | <a name="module_dns_forwarder_snet"></a> [dns\_forwarder\_snet](#module\_dns\_forwarder\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | git::https://github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.3.0 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
-| <a name="module_jwt"></a> [jwt](#module\_jwt) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v7.3.0 |
-| <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v7.3.0 |
+| <a name="module_jwt"></a> [jwt](#module\_jwt) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
+| <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault | v7.3.0 |
 | <a name="module_load_tests_snet"></a> [load\_tests\_snet](#module\_load\_tests\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |

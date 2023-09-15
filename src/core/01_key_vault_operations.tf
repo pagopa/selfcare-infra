@@ -26,12 +26,12 @@ module "jwt_exchange" {
 module "agid_spid" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
-  jwt_name            = "agid-spid"
-  key_vault_id        = module.key_vault.id
-  cert_common_name    = "selfcare.pagopa.it"
-  cert_password       = ""
-  tags                = var.tags
-  cert_allowed_uses   = []
+  jwt_name          = "agid-spid"
+  key_vault_id      = module.key_vault.id
+  cert_common_name  = "selfcare.pagopa.it"
+  cert_password     = ""
+  tags              = var.tags
+  cert_allowed_uses = []
 }
 
 resource "null_resource" "upload_jwks" {
