@@ -68,9 +68,9 @@ module "checkout_cdn" {
   keyvault_subscription_id     = data.azurerm_subscription.current.subscription_id
   keyvault_vault_name          = module.key_vault.name
   advanced_threat_protection   = var.checkout_advanced_threat_protection
-  
+
   querystring_caching_behaviour = "BypassCaching"
-  
+
 
   global_delivery_rule = {
     cache_expiration_action       = []
