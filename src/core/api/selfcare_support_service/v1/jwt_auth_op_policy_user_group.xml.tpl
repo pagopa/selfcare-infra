@@ -34,6 +34,7 @@
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
         <set-backend-service base-url="${USER_GROUP_BACKEND_BASE_URL}" />
+        <rewrite-uri template="/" />
     </inbound>
     <backend>
         <base/>
