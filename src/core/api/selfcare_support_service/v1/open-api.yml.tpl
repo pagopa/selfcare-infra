@@ -49,6 +49,82 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/{institutionId}/users':
+    get:
+      tags:
+        - institutions
+      summary: getInstitutionUsers
+      description: Service to get all the users related to a specific institution
+      operationId: getInstitutionUsersUsingGET
+      parameters:
+        - name: institutionId
+          in: path
+          description: Institution's unique internal identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          description: User's role
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - ADMIN
+              - LIMITED
+        - name: productRoles
+          in: query
+          description: User's roles in product
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstitutionUserResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/':
     get:
       tags:
@@ -787,6 +863,71 @@ components:
           enum:
             - AOO
             - PT
+    InstitutionUserResource:
+      title: InstitutionUserResource
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's personal email
+        id:
+          type: string
+          description: User's unique identifier
+          format: uuid
+        name:
+          type: string
+          description: User's name
+        products:
+          type: array
+          description: Authorized user products
+          items:
+            $ref: '#/components/schemas/ProductInfoResource'
+        role:
+          type: string
+          description: User's role
+          enum:
+            - ADMIN
+            - LIMITED
+        status:
+          type: string
+          description: User's status
+        surname:
+          type: string
+          description: User's surname
+    ProductInfoResource:
+      title: ProductInfoResource
+      type: object
+      properties:
+        id:
+          type: string
+          description: Product's unique identifier
+        roleInfos:
+          type: array
+          description: User's role infos in product
+          items:
+            $ref: '#/components/schemas/ProductRoleInfoResource'
+        title:
+          type: string
+          description: Product's title
+    ProductRoleInfoResource:
+      title: ProductRoleInfoResource
+      type: object
+      properties:
+        relationshipId:
+          type: string
+          description: Unique relationship identifier between User and Product
+        role:
+          type: string
+          description: User's role in product
+        selcRole:
+          type: string
+          description: User's role
+          enum:
+            - ADMIN
+            - LIMITED
+        status:
+          type: string
+          description: User's status
   securitySchemes:
     bearerAuth:
       type: http
