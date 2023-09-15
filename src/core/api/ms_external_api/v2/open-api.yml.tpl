@@ -720,8 +720,8 @@ paths:
     get:
       tags:
         - users
-      summary: Retrieves user given userId and optional ProductId
-      description: Retrieves user given userId and optional ProductId
+      summary: getUuserById
+      description: Get user by Id
       operationId: getUserInfoUsingGET
       parameters:
         - name: id
