@@ -72,7 +72,7 @@ geo-taxonomies = {
 }
 
 external-interceptor-url = {
-  PROD_FD_URL = ""
+  PROD_FD_URL = "https://fid00001fe.siachain.ti.sia.eu:30008"
 }
 
 location_string = "West Europe"
