@@ -46,7 +46,7 @@ module "vpn" {
 
 ## DNS Forwarder
 module "dns_forwarder_snet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.5.0"
   name                                      = format("%s-dns-forwarder-snet", local.project)
   address_prefixes                          = var.cidr_subnet_dns_forwarder
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
@@ -109,6 +109,6 @@ module "vpn_pair_dns_forwarder" {
   name                = "${local.project_pair}-${random_id.pair_dns_forwarder_hash.hex}-vpn-dnsfrw"
   location            = var.location_pair
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
-  subnet_id           = module.dns_forwarder_pair_subnet.id  
+  subnet_id           = module.dns_forwarder_pair_subnet.id
   tags                = var.tags
 }

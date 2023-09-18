@@ -12,6 +12,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_CORE_URL                       = "http://ms-core:8080"
     MS_PRODUCT_URL                    = "http://ms-product:8080"
     MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
+    MS_EXTERNAL_INTERCEPTOR_URL       = "http://ms-external-interceptor:8080"
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
     USERVICE_PARTY_PROCESS_URL        = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
     USERVICE_PARTY_MANAGEMENT_URL     = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
@@ -130,19 +131,20 @@ resource "kubernetes_config_map" "selfcare-core" {
   }
 
   data = merge({
-    MAIL_TEMPLATE_PATH                         = "contracts/template/mail/1.0.0.json"
-    MAIL_TEMPLATE_COMPLETE_PATH                = "contracts/template/mail/onboarding-complete/1.0.0.json"
-    MAIL_TEMPLATE_NOTIFICATION_PATH            = "contracts/template/mail/onboarding-notification/1.0.0.json"
-    MAIL_TEMPLATE_AUTOCOMPLETE_PATH            = "contracts/template/mail/import-massivo-io/1.0.0.json"
-    MAIL_TEMPLATE_REJECT_PATH                  = "contracts/template/mail/onboarding-refused/1.0.0.json"
-    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH = "contracts/template/mail/delegation-notification/1.0.0.json"
+    MAIL_TEMPLATE_PATH                          = "contracts/template/mail/1.0.0.json"
+    MAIL_TEMPLATE_COMPLETE_PATH                 = "contracts/template/mail/onboarding-complete/1.0.0.json"
+    MAIL_TEMPLATE_NOTIFICATION_PATH             = "contracts/template/mail/onboarding-notification/1.0.0.json"
+    MAIL_TEMPLATE_AUTOCOMPLETE_PATH             = "contracts/template/mail/import-massivo-io/1.0.0.json"
+    MAIL_TEMPLATE_REJECT_PATH                   = "contracts/template/mail/onboarding-refused/1.0.0.json"
+    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH  = "contracts/template/mail/delegation-notification/1.0.0.json"
+    MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
     EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
     # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
     EU_OFFICIAL_JOURNAL_URL = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG"
     SELFCARE_URL            = "https://selfcare.pagopa.it"
     PAGOPA_LOGO_URL         = "resources/logo.png"
-
+    FD_PEC_MAIL             = "pec@test.it"
     # module.key_vault_secrets_query.values["jwt-exchange-kid"].value
     },
     var.configmaps_ms_core

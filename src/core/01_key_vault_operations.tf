@@ -1,32 +1,37 @@
 # JWT
 module "jwt" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v7.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
-  jwt_name         = "jwt"
-  key_vault_id     = module.key_vault.id
-  cert_common_name = "apim"
-  cert_password    = ""
-  tags             = var.tags
+  jwt_name            = "jwt"
+  key_vault_id        = module.key_vault.id
+  cert_common_name    = "apim"
+  cert_password       = ""
+  tags                = var.tags
+  early_renewal_hours = 0
+  cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v7.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
-  jwt_name         = "jwt-exchange"
-  key_vault_id     = module.key_vault.id
-  cert_common_name = "selfcare.pagopa.it"
-  cert_password    = ""
-  tags             = var.tags
+  jwt_name            = "jwt-exchange"
+  key_vault_id        = module.key_vault.id
+  cert_common_name    = "selfcare.pagopa.it"
+  cert_password       = ""
+  tags                = var.tags
+  early_renewal_hours = 0
+  cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v7.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
-  jwt_name         = "agid-spid"
-  key_vault_id     = module.key_vault.id
-  cert_common_name = "selfcare.pagopa.it"
-  cert_password    = ""
-  tags             = var.tags
+  jwt_name          = "agid-spid"
+  key_vault_id      = module.key_vault.id
+  cert_common_name  = "selfcare.pagopa.it"
+  cert_password     = ""
+  tags              = var.tags
+  cert_allowed_uses = []
 }
 
 resource "null_resource" "upload_jwks" {

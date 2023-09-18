@@ -166,24 +166,34 @@ locals {
   #     path                 = "/auth/login",
   #     expected_http_status = 200
   #   },
+  #   # https://api-pnpg.selfcare.pagopa.it/health
+  #   {
+  #     host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
+  #     path                 = "/health",
+  #     expected_http_status = 404
+  #   },
   # ]
-    test_urls_map = {
-    "api.dev.selfcare.pagopa.it" = {
-      host                 = "api.dev.selfcare.pagopa.it",
+
+  test_urls_map = {
+    # https://api.selfcare.pagopa.it/health
+    "apigw-selfcare" = {
+      host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
       path                 = "/health",
       expected_http_status = 404
     },
-    "dev.selfcare.pagopa.it" = {
-      host                 = "dev.selfcare.pagopa.it",
-      path                 = "/auth/login",
-      expected_http_status = 200
-    },
-    "api-pnpg.selfcare.pagopa.it" = {
+    # https://api-pnpg.selfcare.pagopa.it/health
+    "apigw-selfcare" = {
       host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                 = "/health",
       expected_http_status = 404
     },
-    // Aggiungi qui altre stringhe se necessario.
+    ## CDN custom domains ##
+    # https://selfcare.pagopa.it/auth/login
+    "login-selfcare" = {
+      host                 = trimsuffix(module.checkout_cdn.fqdn, "."),
+      path                 = "/auth/login",
+      expected_http_status = 200
+    },
   }
 }
 

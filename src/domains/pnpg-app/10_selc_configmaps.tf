@@ -14,6 +14,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
     MS_CORE_URL                       = "http://ms-core:8080"
+    MS_EXTERNAL_INTERCEPTOR_URL       = "http://ms-external-interceptor:8080"
     USERVICE_PARTY_PROCESS_URL        = "http://ms-core:8080"
     USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"

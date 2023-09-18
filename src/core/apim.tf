@@ -548,7 +548,8 @@ module "apim_external_api_ms_v2" {
     module.apim_product_io.product_id,
     module.apim_product_test_io.product_id,
     module.apim_product_test_io_premium.product_id,
-    module.apim_product_fd.product_id
+    module.apim_product_fd.product_id,
+    module.apim_product_fd_garantito.product_id
   ]
 
   api_operation_policies = [
@@ -689,6 +690,17 @@ module "apim_external_api_ms_v2" {
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
+    },
+    {
+      operation_id = "getUserInfoUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getUserInfoUsingGet_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
     }
   ]
 }
@@ -816,6 +828,50 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
         BACKEND_BASE_URL           = "http://${var.reverse_proxy_ip}/dashboard/v1/support"
+      })
+    },
+    {
+      operation_id = "getInstitutionsByTaxCodeUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        API_DOMAIN                  = local.api_domain
+        KID                         = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT  = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getUserInfoUsingPOST"
+      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_v2.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getInstitutionUsersUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionUsersUsingGET_op_policy.xml.tpl", {
+        DASHBOARD_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/dashboard/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getDelegationsUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getDelegationsUsingGET_op_policy.xml.tpl", {
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                     = local.api_domain
+        KID                            = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     }
   ]
@@ -1147,6 +1203,23 @@ module "apim_product_fd" {
   approval_required     = false
 
   policy_xml = file("./api_product/prod-fd/policy.xml")
+}
+module "apim_product_fd_garantito" {
+  # source = "git::https://github.com/pagopa/azurerm.git//api_management_product?ref=v1.0.16"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.3.0"
+
+  product_id   = "prod-fd-garantito"
+  display_name = "Fideiussioni Digitali Garantito"
+  description  = "Fideiussioni Digitali Garantito"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/prod-fd-garantito/policy.xml")
 }
 
 ##################

@@ -1198,3 +1198,9 @@ variable "function_always_on" {
   description = "Always on property"
   default     = false
 }
+
+variable "checkout_advanced_threat_protection_enabled" {
+  type        = string
+  description = "Enable checkout threat advanced protection"
+  default     = false
+}
