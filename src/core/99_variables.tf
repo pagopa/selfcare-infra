@@ -1151,3 +1151,9 @@ variable "checkout_advanced_threat_protection_enabled" {
   description = "Enable checkout threat advanced protection"
   default     = false
 }
+
+variable "microsoft_defender_log_analytics_workspace_id" {
+  type        = string
+  description = "Specifies the ID of the Log Analytics Workspace where the audit logs collected by Microsoft Defender should be sent to"
+  default     = ""
+}

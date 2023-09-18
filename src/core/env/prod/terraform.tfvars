@@ -52,6 +52,9 @@ aks_platform_env              = "prod01"
 vnet_aks_ddos_protection_plan = true
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
+microsoft_defender_log_analytics_workspace_id = "/subscriptions/813119d7-0943-46ed-8ebe-cebe24f9106c/resourceGroups/DefaultResourceGroup-WEU/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-813119d7-0943-46ed-8ebe-cebe24f9106c-WEU"
+
+
 # dns
 dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"

@@ -108,7 +108,7 @@ module "aks" {
       webhook_properties = null
     }
   ]
-  microsoft_defender_log_analytics_workspace_id = var.env_short == "p" ? data.azurerm_log_analytics_workspace.log_analytics_workspace.id : null
+  microsoft_defender_log_analytics_workspace_id = var.microsoft_defender_log_analytics_workspace_id
   tags                                          = var.tags
 
 }
