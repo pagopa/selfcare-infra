@@ -159,3 +159,21 @@ variable "tls_checker_https_endpoints_to_check" {
   description = "List of https endpoint to check ssl certificate and his alert name"
   default     = []
 }
+
+variable "monitor_resource_group_name" {
+  type        = string
+  description = "Monitor resource group name"
+}
+variable "tls_cert_check_helm" {
+  type = object({
+    chart_version = string,
+    image_name    = string,
+    image_tag     = string
+  })
+  description = "tls cert helm chart configuration"
+}
+
+variable "location_string" {
+  type        = string
+  description = "One of West Europe, North Europe"
+}

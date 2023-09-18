@@ -17,13 +17,13 @@ data "azurerm_key_vault_secret" "postgres_administrator_login_password" {
 
 ## Database subnet
 module "postgres_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.60"
-  name                                           = format("%s-postgres-snet", local.project)
-  address_prefixes                               = var.cidr_subnet_postgres
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  service_endpoints                              = ["Microsoft.Sql"]
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  name                                      = format("%s-postgres-snet", local.project)
+  address_prefixes                          = var.cidr_subnet_postgres
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  service_endpoints                         = ["Microsoft.Sql"]
+  private_endpoint_network_policies_enabled = false
 }
 
 // azure-database-postgres-configuration ignored because these rules are not correctly evaluated! this configuration is enabled using postgres_configurations var
@@ -31,13 +31,11 @@ module "postgres_snet" {
 #tfsec:ignore:azure-database-postgres-configuration-connection-throttling
 #tfsec:ignore:azure-database-postgres-configuration-log-connections
 module "postgresql" {
-  source = "git::https://github.com/pagopa/azurerm.git//postgresql_server?ref=v1.0.79"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//postgresql_server?ref=v7.3.0"
 
-  name                             = format("%s-postgresql", local.project)
+  name                             = "${local.project}-postgresql"
   location                         = azurerm_resource_group.postgres_rg.location
   resource_group_name              = azurerm_resource_group.postgres_rg.name
-  virtual_network_id               = module.vnet.id
-  subnet_id                        = module.postgres_snet.id
   administrator_login              = data.azurerm_key_vault_secret.postgres_administrator_login.value
   administrator_login_password     = data.azurerm_key_vault_secret.postgres_administrator_login_password.value
   sku_name                         = var.postgres_sku_name
@@ -51,6 +49,13 @@ module "postgresql" {
 
   network_rules         = var.postgres_network_rules
   replica_network_rules = var.postgres_replica_network_rules
+
+  private_endpoint = {
+    enabled              = var.postgres_private_endpoint_enabled
+    virtual_network_id   = module.vnet.id
+    subnet_id            = module.postgres_snet.id
+    private_dns_zone_ids = []
+  }
 
   configuration         = var.postgres_configuration
   configuration_replica = var.postgres_configuration

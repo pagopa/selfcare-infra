@@ -8,27 +8,29 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source = "git::https://github.com/pagopa/azurerm.git//storage_account?ref=v2.18.10"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v7.3.0"
 
-  name                       = replace("${local.project}-st-logs", "-", "")
-  account_kind               = "StorageV2"
-  account_tier               = "Standard"
-  account_replication_type   = var.logs_account_replication_type
-  access_tier                = "Hot"
-  versioning_name            = "versioning"
-  enable_versioning          = var.logs_enable_versioning
-  resource_group_name        = azurerm_resource_group.rg_logs_storage.name
-  location                   = var.location
-  advanced_threat_protection = var.logs_advanced_threat_protection
-  allow_blob_public_access   = false
-
-  blob_properties_delete_retention_policy_days = var.logs_delete_retention_days
-
-  lock_enabled = true
-  lock_name    = "logs-storage-blob-container-lock"
-  lock_level   = "CanNotDelete"
+  name                            = replace("${local.project}-st-logs", "-", "")
+  account_kind                    = "StorageV2"
+  account_tier                    = "Standard"
+  account_replication_type        = var.logs_account_replication_type
+  access_tier                     = "Hot"
+  blob_versioning_enabled         = var.logs_enable_versioning
+  resource_group_name             = azurerm_resource_group.rg_logs_storage.name
+  location                        = var.location
+  advanced_threat_protection      = var.logs_advanced_threat_protection
+  allow_nested_items_to_be_public = false
+  public_network_access_enabled   = var.public_network_access_enabled
+  blob_delete_retention_days      = var.logs_delete_retention_days
 
   tags = var.tags
+}
+
+resource "azurerm_management_lock" "management_lock" {
+  name       = "logs-storage-blob-container-lock"
+  scope      = module.selc_logs_storage.id
+  lock_level = "CanNotDelete"
+  notes      = "This items can't be deleted in this subscription!"
 }
 
 #tfsec:ignore:AZU023
@@ -65,12 +67,12 @@ resource "azurerm_storage_container" "selc_logs_container" {
 }
 
 module "logs_storage_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.18.10"
-  name                                           = "${local.project}-logs-storage-snet"
-  address_prefixes                               = var.cidr_subnet_logs_storage
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  name                                      = "${local.project}-logs-storage-snet"
+  address_prefixes                          = var.cidr_subnet_logs_storage
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   service_endpoints = [
     "Microsoft.Storage",
@@ -97,7 +99,7 @@ resource "azurerm_private_endpoint" "logs_storage" {
 }
 
 module "spid_logs_encryption_keys" {
-  source = "git::https://github.com/pagopa/azurerm.git//jwt_keys?ref=v2.12.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v7.3.0"
 
   jwt_name         = "spid-logs-encryption"
   key_vault_id     = module.key_vault.id

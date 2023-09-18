@@ -7,22 +7,21 @@ resource "azurerm_resource_group" "azdo_rg" {
 }
 
 module "azdoa_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.58"
-  count                                          = var.enable_azdoa ? 1 : 0
-  name                                           = "${local.project}-azdoa-snet"
-  address_prefixes                               = var.cidr_subnet_azdoa
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  count                                     = var.enable_azdoa ? 1 : 0
+  name                                      = format("%s-azdoa-snet", local.project)
+  address_prefixes                          = var.cidr_subnet_azdoa
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = true
 
   service_endpoints = [
     "Microsoft.Storage",
   ]
 }
 
-
-module "azdoa_li_app" {
-  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+module "azdoa_li" {
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v7.2.1"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-app"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -38,7 +37,8 @@ module "azdoa_li_app" {
 }
 
 module "azdoa_li_infra" {
-  source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+  # source              = "git::https://github.com/pagopa/azurerm.git//azure_devops_agent?ref=v4.17.0"
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v7.3.0"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-infra"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -72,8 +72,11 @@ resource "azurerm_key_vault_access_policy" "azdevops_iac_policy" {
 
 # azure devops policy
 data "azuread_service_principal" "app_projects_principal" {
-  count        = var.enable_app_projects_pipeline ? 1 : 0
-  display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+  count = var.enable_app_projects_pipeline ? 1 : 0
+  ###???
+  # display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
+  # application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
+  application_id = "857f30ee-6e15-4b50-a9f3-cfd2ab2d3a29"
 }
 
 resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
@@ -85,4 +88,5 @@ resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
   secret_permissions      = ["Get", "List"]
   certificate_permissions = []
   storage_permissions     = []
+  key_permissions         = []
 }

@@ -48,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "git::https://github.com/pagopa/azurerm.git//cdn?ref=add-variable-advanced_threat_protection-to-cdn-storage"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v7.3.0"
 
   name                  = "checkout"
   prefix                = local.project
@@ -56,7 +56,7 @@ module "checkout_cdn" {
   location              = var.location
   hostname              = format("%s.%s", var.dns_zone_prefix, var.external_domain)
   https_rewrite_enabled = true
-  lock_enabled          = var.lock_enable
+  # lock_enabled          = var.lock_enable apz
 
   index_document     = "index.html"
   error_404_document = "error.html"
@@ -67,10 +67,10 @@ module "checkout_cdn" {
   keyvault_resource_group_name = module.key_vault.resource_group_name
   keyvault_subscription_id     = data.azurerm_subscription.current.subscription_id
   keyvault_vault_name          = module.key_vault.name
-  advanced_threat_protection   = var.checkout_advanced_threat_protection
-  
+
+  advanced_threat_protection_enabled = var.checkout_advanced_threat_protection_enabled
+
   querystring_caching_behaviour = "BypassCaching"
-  
 
   global_delivery_rule = {
     cache_expiration_action       = []
@@ -272,4 +272,3 @@ resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
 
   key_vault_id = module.key_vault.id
 }
-

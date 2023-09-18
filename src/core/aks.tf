@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/azurerm.git//kubernetes_cluster?ref=v2.15.1"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.3.0"
 
   depends_on = [
     module.k8s_snet,
@@ -83,12 +83,12 @@ module "aks" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.1.15"
-  name                                           = "${local.project}-k8s-snet"
-  address_prefixes                               = var.cidr_subnet_k8s
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  name                                      = "${local.project}-k8s-snet"
+  address_prefixes                          = var.cidr_subnet_k8s
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  private_endpoint_network_policies_enabled = false
 
   service_endpoints = [
     "Microsoft.Web",
@@ -105,6 +105,12 @@ resource "azurerm_public_ip" "aks_outbound" {
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
   allocation_method   = "Static"
+
+  zones = [
+    "1",
+    "2",
+    "3",
+  ]
 
   tags = var.tags
 }
