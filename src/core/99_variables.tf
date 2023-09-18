@@ -1145,12 +1145,6 @@ variable "azdo_agent_vm_sku" {
   default     = "Standard_B1s"
 }
 
-variable "cidr_subnet_github_runners" {
-  type        = list(string)
-  description = "Address prefixes subnet functions"
-  default     = null
-}
-
 variable "cidr_subnet_selc" {
   type        = list(string)
   description = "Address prefixes subnet selc ca and functions"
