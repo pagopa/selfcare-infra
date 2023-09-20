@@ -88,7 +88,7 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/institutions/':
+  '/institutions':
     get:
       tags:
         - institutions
