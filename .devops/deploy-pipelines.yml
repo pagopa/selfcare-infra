@@ -56,7 +56,6 @@ stages:
         ENVIRONMENT: "dev"
         TF_ENVIRONMENT_FOLDER: "dev"
         WORKINGDIR: 'src/core'
-        AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
         AKS_NAME: ${{ variables.AKS_DEV_NAME }}
         AKS_API_SERVER_URL: ${{ variables.DEV_AKS_APISERVER_URL }}
         AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_CACRT }}
