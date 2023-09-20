@@ -74,7 +74,7 @@ stages:
           ENVIRONMENT: "dev"
           TF_ENVIRONMENT_FOLDER: "dev"
           WORKINGDIR: 'src/core'
-          AZURE_SERVICE_CONNECTION_NAME: DEV-PAGOPA-SERVICE-CONN
+          AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
 
   # UAT
   - stage: plan_UAT
