@@ -54,39 +54,14 @@ paths:
       tags:
         - institutions
       summary: getInstitutionUsers
-      description: Service to get all the users related to a specific institution
+      description: Retrieve institution's users
       operationId: getInstitutionUsersUsingGET
       parameters:
         - name: institutionId
           in: path
-          description: Institution's unique internal identifier
+          description: Institution's unique identifier
           required: true
           style: simple
-          schema:
-            type: string
-        - name: productId
-          in: query
-          description: Product's unique identifier
-          required: false
-          style: form
-          schema:
-            type: string
-        - name: role
-          in: query
-          description: User's role
-          required: false
-          style: form
-          schema:
-            type: string
-            enum:
-              - ADMIN
-              - LIMITED
-        - name: productRoles
-          in: query
-          description: User's roles in product
-          required: false
-          style: form
-          explode: true
           schema:
             type: string
       responses:
@@ -97,27 +72,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/InstitutionUserResource'
+                  $ref: '#/components/schemas/UserInfoResponse'
         '400':
           description: Bad Request
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
           content:
             application/problem+json:
               schema:
@@ -928,6 +891,67 @@ components:
         status:
           type: string
           description: User's status
+    UserInfoResponse:
+      title: UserInfoResponse
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/OnboardedProduct'
+        surname:
+          type: string
+        taxCode:
+          type: string
+    OnboardedProduct:
+      title: OnboardedProduct
+      type: object
+      properties:
+        contract:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        env:
+          type: string
+          enum:
+            - COLL
+            - DEV
+            - PROD
+            - ROOT
+        productId:
+          type: string
+        productRole:
+          type: string
+        relationshipId:
+          type: string
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http
