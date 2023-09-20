@@ -27,6 +27,11 @@ parameters:
 
 variables:
   TIME_OUT: 10
+  DEV_AKS_APISERVER_URL: '$(TF_DEV_AKS_APISERVER_URL)'
+  DEV_AKS_AZURE_DEVOPS_SA_CACRT: '$(TF_DEV_AKS_AZURE_DEVOPS_SA_CACRT)'
+  DEV_AKS_AZURE_DEVOPS_SA_TOKEN: '$(TF_DEV_AKS_AZURE_DEVOPS_SA_TOKEN)'
+  AKS_DEV_NAME: '$(TF_AKS_DEV_NAME)'
+  DEV_AZURE_SERVICE_CONNECTION: '$(TF_DEV_AZURE_SERVICE_CONNECTION)'
 
 pool:
   vmImage: 'ubuntu-20.04'
@@ -69,12 +74,18 @@ stages:
       #     - template: templates/terraform-setup/template.yaml@terraform
       - template: templates/terraform-plan-apply/template.yaml@terraform
         parameters:
-          DOMAIN_NAME: 'core'
-          AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
-          ENVIRONMENT: "dev"
+          FULL_DOMAIN_NAME: "core"
           TF_ENVIRONMENT_FOLDER: "dev"
-          WORKINGDIR: 'src/core'
+          ENVIRONMENT: "dev"
+          AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
           AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
+          WORKINGDIR: 'src/core'
+          AKS_NAME: ${{ variables.AKS_DEV_NAME }}
+          AKS_API_SERVER_URL: ${{ variables.DEV01_AKS_APISERVER_URL }}
+          AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_CACRT }}
+          AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_TOKEN }}
+          AZURE_SERVICE_CONNECTION_PLAN_NAME: SELFCARE-DEV-PLAN-SERVICE-CONN
+          AZURE_SERVICE_CONNECTION_APPLY_NAME: DEV-SELFCARE-SERVICE-CONN
 
   # UAT
   - stage: plan_UAT
