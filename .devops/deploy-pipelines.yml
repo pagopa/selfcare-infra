@@ -51,7 +51,7 @@ stages:
         # DEV selfcare APP
     - template: templates/terraform-plan-apply/template.yaml@terraform
       parameters:
-        DOMAIN_NAME: 'selfcare_legacy'
+        FULL_DOMAIN_NAME: 'selfcare_legacy'
         AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
         ENVIRONMENT: "dev"
         TF_ENVIRONMENT_FOLDER: "dev"
