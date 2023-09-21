@@ -763,6 +763,14 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "onboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },{
+      operation_id = "getUserProductInfoUsingGET"
+      xml_content = templatefile("./api/ms_internal_api/v1/jwt_auth_op_policy_v2.xml.tpl",
+        {
+          API_DOMAIN                 = local.api_domain
+          KID                        = module.jwt.jwt_kid
+          JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        })
     },
     {
       operation_id = "getProductUsingGET"

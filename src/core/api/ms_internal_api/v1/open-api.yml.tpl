@@ -317,6 +317,69 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/users/{id}/onboarded-product':
+    get:
+      tags:
+        - users
+      summary: getUserProductInfo
+      description: Service to retrieve user's onboarded product info
+      operationId: getUserProductInfoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: User's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: Institution's unique internal Id
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetailsResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -332,6 +395,75 @@ components:
         desc:
          type: string
          description: Institution's geographic taxonomy extended name
+    UserDetailsResource:
+      title: UserDetailsResource
+      type: object
+      properties:
+        id:
+          type: string
+          description: User's unique identifier
+        institutionId:
+          type: string
+          description: ' swagger.external_api.institutions.model.id'
+        onboardedProductDetails:
+          description: Object that includes user's onboarded product info
+          $ref: '#/components/schemas/OnboardedProductResource'
+    OnboardedProductResource:
+      title: OnboardedProductResource
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: User product relation create date
+          format: date-time
+        productId:
+          type: string
+          description: Product's unique identifier
+        role:
+          type: string
+          description: User's role
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        roles:
+          type: array
+          description: User's roles in product
+          items:
+            type: string
+    UserDto:
+      title: UserDto
+      required:
+        - email
+        - name
+        - role
+        - surname
+        - taxCode
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's email
+          format: email
+          example: email@example.com
+        name:
+          type: string
+          description: User's name
+        role:
+          type: string
+          description: User's role
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        surname:
+          type: string
+          description: User's surname
+        taxCode:
+          type: string
+          description: User's fiscal code
     InstitutionDetailResource:
       title: InstitutionDetailResource
       required:
@@ -648,38 +780,6 @@ components:
           type: boolean
           description: PSP's Vat Number group
           example: false
-    UserDto:
-      title: UserDto
-      required:
-        - email
-        - name
-        - role
-        - surname
-        - taxCode
-      type: object
-      properties:
-        email:
-          type: string
-          description: User's email
-          format: email
-          example: email@example.com
-        name:
-          type: string
-          description: User's name
-        role:
-          type: string
-          description: User's role
-          enum:
-            - DELEGATE
-            - MANAGER
-            - OPERATOR
-            - SUB_DELEGATE
-        surname:
-          type: string
-          description: User's surname
-        taxCode:
-          type: string
-          description: User's fiscal code
     InvalidParam:
       title: InvalidParam
       required:
