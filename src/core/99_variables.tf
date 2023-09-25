@@ -12,6 +12,8 @@ locals {
   # Monitor
   action_group_selfcare_dev_name = "selcdev"
   action_group_selfcare_uat_name = "selcuat"
+
+  aks_cluster_name = "${local.project}-aks"
 }
 
 variable "cidr_pair_vnet" {
@@ -775,6 +777,12 @@ variable "postgres_sku_name" {
   description = "Specifies the SKU Name for this PostgreSQL Server."
 }
 
+variable "postgres_private_endpoint_enabled" {
+  type        = bool
+  default     = false
+  description = "Private endpoint database enable?"
+}
+
 variable "postgres_geo_redundant_backup_enabled" {
   type        = bool
   default     = false
@@ -951,6 +959,11 @@ variable "contracts_account_replication_type" {
   type        = string
   description = "Contracts replication type"
   default     = "LRS"
+}
+
+variable "public_network_access_enabled" {
+  description = "Enable or Disable public access. It should always set to false unless there are special needs"
+  type        = bool
 }
 
 variable "contracts_delete_retention_days" {
@@ -1135,8 +1148,13 @@ variable "azdo_agent_vm_sku" {
 }
 
 
-variable "checkout_advanced_threat_protection" {
+variable "checkout_advanced_threat_protection_enabled" {
   type        = string
   description = "Enable checkout threat advanced protection"
   default     = false
+}
+
+variable "k8s_kube_config_path_prefix" {
+  type    = string
+  default = "~/.kube"
 }

@@ -56,6 +56,9 @@ cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 dns_zone_prefix = "selfcare"
 external_domain = "pagopa.it"
 
+# storage account
+public_network_access_enabled = false
+
 # azure devops
 azdo_sp_tls_cert_enabled     = true
 enable_azdoa                 = true
@@ -89,7 +92,7 @@ reverse_proxy_ip                  = "10.1.1.250"
 aks_kubernetes_version            = "1.23.12"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
-aks_sku_tier                      = "Paid"
+aks_sku_tier                      = "Standard"
 
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
 aks_system_node_pool_node_count_min               = 3
@@ -413,4 +416,4 @@ logs_advanced_threat_protection = true
 
 enable_load_tests_db = false
 
-checkout_advanced_threat_protection = true
+checkout_advanced_threat_protection_enabled = true

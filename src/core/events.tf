@@ -6,17 +6,17 @@ resource "azurerm_resource_group" "event_rg" {
 }
 
 module "eventhub_snet" {
-  source                                         = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v2.18.6"
-  name                                           = "${local.project}-eventhub-snet"
-  address_prefixes                               = var.cidr_subnet_eventhub
-  resource_group_name                            = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                           = module.vnet.name
-  service_endpoints                              = ["Microsoft.EventHub"]
-  enforce_private_link_endpoint_network_policies = true
+  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  name                                      = "${local.project}-eventhub-snet"
+  address_prefixes                          = var.cidr_subnet_eventhub
+  resource_group_name                       = azurerm_resource_group.rg_vnet.name
+  virtual_network_name                      = module.vnet.name
+  service_endpoints                         = ["Microsoft.EventHub"]
+  private_endpoint_network_policies_enabled = true
 }
 
 module "event_hub" {
-  source                   = "git::https://github.com/pagopa/azurerm.git//eventhub?ref=v2.18.7"
+  source                   = "git::https://github.com/pagopa/terraform-azurerm-v3.git//eventhub?ref=v7.3.0"
   name                     = "${local.project}-eventhub-ns"
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
@@ -30,14 +30,15 @@ module "event_hub" {
   subnet_id           = module.eventhub_snet.id
 
   private_dns_zone_record_A_name = null
-
-  eventhubs = var.eventhubs
+  public_network_access_enabled  = true
+  eventhubs                      = var.eventhubs
 
   network_rulesets = [
     {
-      default_action       = "Deny",
-      virtual_network_rule = [],
-      ip_rule              = var.eventhub_ip_rules
+      default_action                 = "Deny",
+      virtual_network_rule           = [],
+      ip_rule                        = var.eventhub_ip_rules
+      trusted_service_access_enabled = false
     }
   ]
 

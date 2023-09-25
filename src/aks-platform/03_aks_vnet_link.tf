@@ -13,6 +13,7 @@ data "external" "get_dns_zone" {
   EOH
   ]
 }
+
 resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_private_link_to_vnet_core" {
   name                  = data.azurerm_virtual_network.vnet_core.name
   resource_group_name   = data.external.get_dns_zone.result["dns_zone_resource_group_name"]
@@ -31,5 +32,4 @@ resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_private_link_t
 
   depends_on = [module.aks]
 }
-
 

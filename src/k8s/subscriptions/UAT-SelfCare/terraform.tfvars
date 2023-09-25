@@ -72,5 +72,24 @@ geo-taxonomies = {
 }
 
 external-interceptor-url = {
-  PROD_FD_URL = ""
+  PROD_FD_URL = "https://fid00001fe.siachain.ti.sia.eu:30008"
 }
+
+location_string = "West Europe"
+
+monitor_resource_group_name = "selc-u-monitor-rg"
+
+tls_cert_check_helm = {
+  chart_version = "1.21.0"
+  image_name    = "ghcr.io/pagopa/infra-ssl-check"
+  image_tag     = "v1.2.2@sha256:22f4b53177cc8891bf10cbd0deb39f60e1cd12877021c3048a01e7738f63e0f9"
+}
+
+tls_checker_https_endpoints_to_check = [
+  {
+    https_endpoint = "api.uat.selfcare.pagopa.it",
+    alert_name     = "api-uat-selfcare-pagopa-it",
+    alert_enabled  = true,
+    helm_present   = true,
+  }
+]
