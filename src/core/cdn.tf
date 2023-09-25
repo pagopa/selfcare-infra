@@ -71,7 +71,7 @@ module "checkout_cdn" {
   advanced_threat_protection_enabled = var.checkout_advanced_threat_protection_enabled
 
   querystring_caching_behaviour = "BypassCaching"
-  
+
 
   global_delivery_rule = {
     cache_expiration_action       = []
