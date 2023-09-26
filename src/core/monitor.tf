@@ -182,7 +182,7 @@ locals {
       expected_http_status = 404
     },
     # https://api-pnpg.selfcare.pagopa.it/health
-    "apigw-selfcare" = {
+    "apigw-pnpg-selfcare" = {
       host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                 = "/health",
       expected_http_status = 404

@@ -72,6 +72,7 @@ module "checkout_cdn" {
 
   querystring_caching_behaviour = "BypassCaching"
 
+
   global_delivery_rule = {
     cache_expiration_action       = []
     cache_key_query_string_action = []
@@ -272,3 +273,4 @@ resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
 
   key_vault_id = module.key_vault.id
 }
+

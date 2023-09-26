@@ -95,7 +95,7 @@ external-interceptor-url = {
 
 location_string = "West Europe"
 
-monitor_resource_group_name = "selc-u-monitor-rg"
+monitor_resource_group_name = "selc-d-monitor-rg"
 
 tls_cert_check_helm = {
   chart_version = "1.21.0"

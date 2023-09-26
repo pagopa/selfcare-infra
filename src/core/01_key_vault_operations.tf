@@ -31,7 +31,7 @@ module "agid_spid" {
   cert_common_name  = "selfcare.pagopa.it"
   cert_password     = ""
   tags              = var.tags
-  cert_allowed_uses = []
+  cert_allowed_uses = ["digital_signature"]
 }
 
 resource "null_resource" "upload_jwks" {

@@ -12,6 +12,8 @@ locals {
   # Monitor
   action_group_selfcare_dev_name = "selcdev"
   action_group_selfcare_uat_name = "selcuat"
+
+  aks_cluster_name = "${local.project}-aks"
 }
 
 variable "cidr_pair_vnet" {
@@ -1150,4 +1152,9 @@ variable "checkout_advanced_threat_protection_enabled" {
   type        = string
   description = "Enable checkout threat advanced protection"
   default     = false
+}
+
+variable "k8s_kube_config_path_prefix" {
+  type    = string
+  default = "~/.kube"
 }

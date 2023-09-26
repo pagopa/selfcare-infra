@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.5.0"
 
   depends_on = [
     module.k8s_snet,
@@ -72,13 +72,11 @@ module "aks" {
     }
   ]
 
-  alerts_enabled = var.aks_alerts_enabled
-
-  outbound_ip_address_ids = azurerm_public_ip.aks_outbound.*.id
-
-  addon_azure_policy_enabled = true
-
-  tags = var.tags
+  alerts_enabled                                = var.aks_alerts_enabled
+  outbound_ip_address_ids                       = azurerm_public_ip.aks_outbound.*.id
+  addon_azure_policy_enabled                    = true
+  microsoft_defender_log_analytics_workspace_id = var.env_short == "p" ? azurerm_log_analytics_workspace.log_analytics_workspace.id : null
+  tags                                          = var.tags
 }
 
 # k8s cluster subnet
