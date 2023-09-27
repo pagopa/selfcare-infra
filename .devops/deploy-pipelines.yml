@@ -60,117 +60,39 @@ stages:
         AKS_API_SERVER_URL: ${{ variables.DEV_AKS_APISERVER_URL }}
         AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_CACRT }}
         AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_TOKEN }}
-        AZURE_SERVICE_CONNECTION_PLAN_NAME: SELFCARE-DEV-PLAN-SERVICE-CONN
+        AZURE_SERVICE_CONNECTION_PLAN_NAME: DEV-SELFCARE-SERVICE-CONN
         AZURE_SERVICE_CONNECTION_APPLY_NAME: DEV-SELFCARE-SERVICE-CONN
+  
+  # UAT  
+  - ${{ if eq(parameters['UAT'], true) }}:
+        # UAT selfcare APP
+    - template: templates/terraform-plan-apply/template.yaml@terraform
+      parameters:
+        FULL_DOMAIN_NAME: 'selfcare_legacy'
+        AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-uat-linux-infra"
+        ENVIRONMENT: "uat"
+        TF_ENVIRONMENT_FOLDER: "uat"
+        WORKINGDIR: 'src/core'
+        AKS_NAME: ${{ variables.AKS_UAT_NAME }}
+        AKS_API_SERVER_URL: ${{ variables.UAT_AKS_APISERVER_URL }}
+        AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.UAT_AKS_AZURE_DEVOPS_SA_CACRT }}
+        AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.UAT_AKS_AZURE_DEVOPS_SA_TOKEN }}
+        AZURE_SERVICE_CONNECTION_PLAN_NAME: UAT-SELFCARE-SERVICE-CONN
+        AZURE_SERVICE_CONNECTION_APPLY_NAME: UAT-SELFCARE-SERVICE-CONN
 
-  # - stage: plan_DEV
-  #   condition: and(succeeded(), eq(${{parameters.DEV}}, true))
-  #   pool:
-  #     name: selfcare-dev-linux-infra
-  #   jobs:
-  #     - job: tf_plan_core
-  #       timeoutInMinutes: $[variables.TIME_OUT]
-  #       steps:
-  #         - checkout: self
-  #         # 1. Install terraform and terragrunt
-  #         - template: templates/terraform-setup/template.yaml@terraform
-  #         # 2. Run terraform plan selfcare-common
-  #         - template: templates/terraform-plan/template.yaml@terraform
-  #           parameters:
-  #             WORKINGDIR: 'src/core'
-  #             TF_ENVIRONMENT_FOLDER: "dev"
-  #             AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
-
-  # - stage: apply_DEV
-  #   dependsOn: [plan_DEV]
-  #   condition: and(succeeded(), eq(${{parameters.DEV}}, true))
-  #   jobs:
-  #     # - job: init
-  #     #   steps:
-  #     #     # 1. Install terraform
-  #     #     - template: templates/terraform-setup/template.yaml@terraform
-  #     - template: templates/terraform-plan-apply/template.yaml@terraform
-  #       parameters:
-  #         FULL_DOMAIN_NAME: "core"
-  #         TF_ENVIRONMENT_FOLDER: "dev"
-  #         ENVIRONMENT: "dev"
-  #         AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-dev-linux-infra"
-  #         AZURE_SERVICE_CONNECTION_NAME: DEV-SELFCARE-SERVICE-CONN
-  #         WORKINGDIR: 'src/core'
-  #         AKS_NAME: ${{ variables.AKS_DEV_NAME }}
-  #         AKS_API_SERVER_URL: ${{ variables.DEV_AKS_APISERVER_URL }}
-  #         AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_CACRT }}
-  #         AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.DEV_AKS_AZURE_DEVOPS_SA_TOKEN }}
-  #         AZURE_SERVICE_CONNECTION_PLAN_NAME: SELFCARE-DEV-PLAN-SERVICE-CONN
-  #         AZURE_SERVICE_CONNECTION_APPLY_NAME: DEV-SELFCARE-SERVICE-CONN
-
-  # # UAT
-  # - stage: plan_UAT
-  #   dependsOn: []
-  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-  #   pool:
-  #     name: selfcare-uat-linux-infra
-  #   jobs:
-  #     - job: tf_plan_core
-  #       timeoutInMinutes: $[variables.TIME_OUT]
-  #       steps:
-  #         - checkout: self
-  #         # 1. Install terraform and terragrunt
-  #         - template: templates/terraform-setup/template.yaml@terraform
-  #         # 2. Run terraform plan selfcare-common
-  #         - template: templates/terraform-plan/template.yaml@terraform
-  #           parameters:
-  #             WORKINGDIR: 'src/core'
-  #             TF_ENVIRONMENT_FOLDER: "uat"
-  #             AZURE_SERVICE_CONNECTION_NAME: UAT-SELFCARE-SERVICE-CONN
-
-
-  # - stage: apply_UAT
-  #   dependsOn: [plan_UAT]
-  #   condition: and(succeeded(), eq(${{parameters.UAT}}, true))
-  #   jobs:
-  #     - template: templates/terraform-plan-apply/template.yaml@terraform
-  #       parameters:
-  #         DOMAIN_NAME: 'core'
-  #         AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-uat-linux-infra"
-  #         ENVIRONMENT: "uat"
-  #         TF_ENVIRONMENT_FOLDER: "uat"
-  #         WORKINGDIR: 'src/core'
-  #         AZURE_SERVICE_CONNECTION_NAME: UAT-PAGOPA-SERVICE-CONN
-
-  # # PROD
-  # - stage: plan_PROD
-  #   dependsOn: []
-  #   condition: and(succeeded(), eq(${{parameters.PROD}}, true))
-  #   pool:
-  #     name: selfcare-prod-linux-infra
-  #   jobs:
-  #     - job: tf_plan_core
-  #       timeoutInMinutes: $[variables.TIME_OUT]
-  #       steps:
-  #         - checkout: self
-  #         # 1. Install terraform and terragrunt
-  #         - template: templates/terraform-setup/template.yaml@terraform
-  #         # 2. Run terraform plan selfcare-common
-  #         - template: templates/terraform-plan/template.yaml@terraform
-  #           parameters:
-  #             WORKINGDIR: 'src/core'
-  #             TF_ENVIRONMENT_FOLDER: "prod"
-  #             AZURE_SERVICE_CONNECTION_NAME: PROD-SELFCARE-SERVICE-CONN
-
-  # - stage: apply_PROD
-  #   dependsOn: [plan_PROD]
-  #   condition: and(succeeded(), eq(${{parameters.PROD}}, true))
-  #   jobs:
-  #     # - job: init
-  #     #   steps:
-  #     #     # 1. Install terraform
-  #     #     - template: templates/terraform-setup/template.yaml@terraform
-  #     - template: templates/terraform-plan-apply/template.yaml@terraform
-  #       parameters:
-  #         DOMAIN_NAME: 'core'
-  #         AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-prod-linux-infra"
-  #         ENVIRONMENT: "prod"
-  #         TF_ENVIRONMENT_FOLDER: "prod"
-  #         WORKINGDIR: 'src/core'
-  #         AZURE_SERVICE_CONNECTION_NAME: PROD-PAGOPA-SERVICE-CONN
+  # PROD  
+  - ${{ if eq(parameters['UAT'], true) }}:
+        # PROD selfcare APP
+    - template: templates/terraform-plan-apply/template.yaml@terraform
+      parameters:
+        FULL_DOMAIN_NAME: 'selfcare_legacy'
+        AZURE_DEVOPS_POOL_AGENT_NAME: "selfcare-prod-linux-infra"
+        ENVIRONMENT: "prod"
+        TF_ENVIRONMENT_FOLDER: "prod"
+        WORKINGDIR: 'src/core'
+        AKS_NAME: ${{ variables.AKS_PROD_NAME }}
+        AKS_API_SERVER_URL: ${{ variables.PROD_AKS_APISERVER_URL }}
+        AKS_AZURE_DEVOPS_SA_CA_CRT: ${{ variables.PROD_AKS_AZURE_DEVOPS_SA_CACRT }}
+        AKS_AZURE_DEVOPS_SA_TOKEN: ${{ variables.PROD_AKS_AZURE_DEVOPS_SA_TOKEN }}
+        AZURE_SERVICE_CONNECTION_PLAN_NAME: PROD-SELFCARE-SERVICE-CONN
+        AZURE_SERVICE_CONNECTION_APPLY_NAME: PROD-SELFCARE-SERVICE-CONN
