@@ -2,9 +2,9 @@ variable "prefix" {
   type = string
   validation {
     condition = (
-      length(var.prefix) <= 6
+      length(var.prefix) <= 8
     )
-    error_message = "Max length is 6 chars."
+    error_message = "Max length is 8 chars."
   }
 }
 
@@ -73,5 +73,12 @@ variable "github-federation" {
   default = {
     audience = ["api://AzureADTokenExchange"]
     issuer   = "https://token.actions.githubusercontent.com"
+  }
+}
+
+variable "tags" {
+  type = map(any)
+  default = {
+    CreatedBy = "Terraform"
   }
 }

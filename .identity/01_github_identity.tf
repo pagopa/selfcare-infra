@@ -7,12 +7,16 @@ resource "azurerm_user_assigned_identity" "this_ci" {
   location            = var.location
   name                = "${local.app_name}-ci"
   resource_group_name = azurerm_resource_group.identity_rg.name
+
+  tags = var.tags
 }
 
 resource "azurerm_user_assigned_identity" "this_cd" {
   location            = var.location
   name                = "${local.app_name}-cd"
   resource_group_name = azurerm_resource_group.identity_rg.name
+
+  tags = var.tags
 }
 
 resource "azurerm_role_assignment" "environment_ci_subscription" {
