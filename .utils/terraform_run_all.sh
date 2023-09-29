@@ -20,7 +20,7 @@ array=(
     'src/domains/pnpg-app::dev'
     'src/domains/pnpg-common::dev'
     'src/k8s::dev-selfcare'
-    'src/identity::dev'
+    './.identity::dev'
 )
 
 function rm_terraform {
