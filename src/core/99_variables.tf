@@ -1165,6 +1165,12 @@ variable "cidr_subnet_selc" {
   default     = null
 }
 
+variable "cidr_subnet_selc_functions" {
+  type        = list(string)
+  description = "Address prefixes subnet selc ca and functions"
+  default     = null
+}
+
 # Storage account
 variable "storage_account_info" {
   type = object({

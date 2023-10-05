@@ -7,12 +7,12 @@ resource "azurerm_resource_group" "functions_rg" {
 
 # subnet
 module "functions_snet" {
-  count                = var.cidr_subnet_selc != null ? 1 : 0
+  count                = var.cidr_subnet_selc_functions != null ? 1 : 0
   source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.8.0"
   name                 = format("%s-functions-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
-  address_prefixes     = var.cidr_subnet_selc
+  address_prefixes     = var.cidr_subnet_selc_functions
 
   delegation = {
     name = "default"
@@ -23,7 +23,7 @@ module "functions_snet" {
   }
 }
 
-module "onboarding_func" {
+module "selc_functions" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//function_app?ref=v7.8.0"
 
   name                = format("%s-func", local.project)
@@ -37,6 +37,7 @@ module "onboarding_func" {
   java_version                             = "11"
   runtime_version     = "~4"
 
+  storage_account_name = replace(format("%s-functions-storage", local.project), "-", "")
 
   app_service_plan_info = var.app_service_plan_info
 
