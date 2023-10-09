@@ -10,9 +10,7 @@ resource "azurerm_subnet" "github_runner" {
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
   address_prefixes     = var.cidr_subnet_gh_runner
-  service_endpoints = [
-    # "Microsoft.Web",
-  ]
+  service_endpoints    = []
 }
 
 module "github_runner" {
@@ -32,7 +30,7 @@ module "github_runner" {
 }
 
 locals {
-  repo_owner = "PagoPA"
+  repo_owner = "pagopa"
   repo_name  = "selfcare-infra"
   image_name = "ghcr.io/pagopa/github-self-hosted-runner-azure:beta-dockerfile-v2@sha256:ed51ac419d78b6410be96ecaa8aa8dbe645aa0309374132886412178e2739a47"
 }
