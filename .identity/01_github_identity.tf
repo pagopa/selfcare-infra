@@ -33,6 +33,17 @@ resource "azurerm_role_assignment" "environment_cd_subscription" {
   principal_id         = azurerm_user_assigned_identity.this_cd.principal_id
 }
 
+data "azurerm_storage_container" "storage_container_state" {
+  storage_account_name = local.state_name
+  name                 = local.container_name
+}
+
+resource "azurerm_role_assignment" "storage_account_container" {
+  scope                = data.azurerm_storage_container.storage_container_state.resource_manager_id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_user_assigned_identity.this_ci.principal_id
+}
+
 resource "azurerm_federated_identity_credential" "environment_ci" {
   name                = "${local.project}-github-selfcare-infra-ci"
   resource_group_name = azurerm_resource_group.identity_rg.name
@@ -55,7 +66,6 @@ output "azure_environment_ci" {
   value = {
     app_name       = azurerm_user_assigned_identity.this_ci.name
     client_id      = azurerm_user_assigned_identity.this_ci.client_id
-    application_id = azurerm_user_assigned_identity.this_ci.client_id
     object_id      = azurerm_user_assigned_identity.this_ci.principal_id
   }
 }
@@ -64,7 +74,6 @@ output "azure_environment_cd" {
   value = {
     app_name       = azurerm_user_assigned_identity.this_cd.name
     client_id      = azurerm_user_assigned_identity.this_cd.client_id
-    application_id = azurerm_user_assigned_identity.this_cd.client_id
     object_id      = azurerm_user_assigned_identity.this_cd.principal_id
   }
 }
