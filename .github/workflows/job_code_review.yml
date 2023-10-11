@@ -1,0 +1,40 @@
+on:
+  workflow_call:
+    inputs:
+      enabled:
+        required: false
+        type: boolean
+      environment:
+        required: true
+        type: string
+
+jobs:
+  plan:
+    runs-on: self-hosted
+    if: ${{ (github.event_name != 'workflow_dispatch') || (inputs.enabled == true) }}
+    environment: '${{ inputs.environment }}'
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
+
+      - name: Set Terraform Version
+        run: |
+          echo "TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
+          # echo $GITHUB_PAT | base64
+          # echo $REGISTRATION_TOKEN | base64
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+        env:
+          VERSION: $TERRAFORM_VERSION
+
+      - name: Terraform pre apply common
+        # from https://github.com/pagopa/terraform-preapply-azure-action/commits/main
+        uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
+        with:
+          client_id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          dir: 'src/core'
+          azure_environment: '${{ inputs.environment }}'

@@ -1,0 +1,62 @@
+name: Code Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      dev:
+        description: "Run on DEV environment"
+        required: true
+        type: boolean
+        default: true
+      uat:
+        description: "Run on UAT environment"
+        required: true
+        type: boolean
+        default: true
+      prod:
+        description: "Run on PROD environment"
+        required: true
+        type: boolean
+        default: true
+  push:
+    branches: [DEVEX-7-devops-migr-code-review] # to remove
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/core/*"
+      - ".github/workflows/code-review.yml"
+      - "!**/*.lock.hcl"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan_dev:
+    uses: ./.github/workflows/job_code_review.yml
+    name: Dev Code Review
+    secrets: inherit
+    with:
+      enabled: true
+      environment: dev
+
+  # plan_uat:
+  #   uses: ./.github/workflows/job_code-review.yml
+  #   name: UAT Code Review
+  #   secrets: inherit
+  #   with:
+  #     enabled: ${{ inputs.uat }}
+  #     environment: UAT
+
+  # plan_prod:
+  #   uses: ./.github/workflows/job_code-review.yml
+  #   name: Prod Code Review
+  #   secrets: inherit
+  #   with:
+  #     enabled: ${{ inputs.prod }}
+  #     environment: PROD
