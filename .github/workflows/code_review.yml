@@ -24,7 +24,8 @@ on:
     branches: [main]
     paths:
       - "src/core/*"
-      - ".github/workflows/code-review.yml"
+      - ".github/workflows/code_review.yml"
+      - ".github/workflows/job_code_review.yml"
       - "!**/*.lock.hcl"
 
 permissions:
