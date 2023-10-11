@@ -25,6 +25,9 @@ environment_ci_roles = {
     "Key Vault Secrets User",
     "DocumentDB Account Contributor",
     "API Management Service Contributor",
+    "Website Contributor",
+    "Azure Event Hubs Data Owner",
+    "Redis Cache Contributor"
   ]
 }
 

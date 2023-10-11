@@ -11,6 +11,10 @@ resource "azurerm_key_vault_access_policy" "github_identity_ci_key_vault_policy"
   secret_permissions = [
     "Get",
   ]
+
+  certificate_permissions = [
+    "Get"
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "github_identity_cd_key_vault_policy" {
@@ -20,5 +24,9 @@ resource "azurerm_key_vault_access_policy" "github_identity_cd_key_vault_policy"
 
   secret_permissions = [
     "Get",
+  ]
+
+  certificate_permissions = [
+    "Get"
   ]
 }
