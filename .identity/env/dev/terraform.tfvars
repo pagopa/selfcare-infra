@@ -27,7 +27,8 @@ environment_ci_roles = {
     "API Management Service Contributor",
     "Website Contributor",
     "Azure Event Hubs Data Owner",
-    "Redis Cache Contributor"
+    "Redis Cache Contributor",
+    "Azure Kubernetes Service Cluster User Role"
   ]
 }
 
