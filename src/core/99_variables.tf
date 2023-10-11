@@ -555,6 +555,11 @@ variable "cidr_subnet_gh_runner" {
   description = "Container App Environment address space."
 }
 
+variable "cidr_subnet_cosmosdb_bk_mongodb" {
+  type        = list(string)
+  description = "Cosmos Mongodb BK address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
