@@ -36,6 +36,7 @@ module "cosmosdb_bk_account_mongodb" {
   kind                 = "MongoDB"
   capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
   mongo_server_version = "4.0"
+  enable_free_tier     = false
 
   public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
   private_endpoint_enabled          = var.cosmosdb_mongodb_private_endpoint_enabled
