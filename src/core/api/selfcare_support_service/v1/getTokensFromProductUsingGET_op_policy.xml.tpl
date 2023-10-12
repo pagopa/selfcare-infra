@@ -34,7 +34,6 @@
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
         <set-backend-service base-url="${MS_CORE_BACKEND_BASE_URL}" />
-        <rewrite-uri template="/institutions/" />
     </inbound>
     <backend>
         <base/>
