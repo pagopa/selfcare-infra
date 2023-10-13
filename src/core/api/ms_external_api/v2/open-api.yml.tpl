@@ -579,6 +579,7 @@ paths:
              - PSP
              - PT
              - SCP
+             - SA
       responses:
         '200':
           description: OK
