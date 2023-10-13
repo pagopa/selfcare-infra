@@ -552,6 +552,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
@@ -647,6 +648,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
         originId:
@@ -817,6 +819,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         productId:
           type: string
         taxCode:

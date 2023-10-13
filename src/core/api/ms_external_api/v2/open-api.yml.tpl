@@ -929,6 +929,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -1004,6 +1005,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -1377,6 +1379,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         attributes:
           $ref: '#/components/schemas/Attributes'
         paymentServiceProvider:
@@ -1508,6 +1511,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         productId:
           type: string
         taxCode:
@@ -1564,6 +1568,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
@@ -1631,6 +1636,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
         originId:

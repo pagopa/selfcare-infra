@@ -516,6 +516,7 @@ paths:
               - PSP
               - PT
               - SCP
+              - SA
       responses:
         '200':
           description: OK
@@ -618,6 +619,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -695,6 +697,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
