@@ -13,10 +13,10 @@ resource "azurerm_subnet" "selc_container_app_snet" {
   address_prefixes     = var.cidr_subnet_selc
 }
 
-module "selc_container_app" {
+module "selc_cae" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_environment?ref=v7.8.0"
 
-  name                      = "${local.project}-container-app"
+  name                      = "${local.project}-cae"
   resource_group_name       = azurerm_resource_group.selc_container_app_rg.name
   location                  = var.location
   vnet_internal             = true
