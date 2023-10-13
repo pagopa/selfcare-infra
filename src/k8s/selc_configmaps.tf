@@ -132,13 +132,16 @@ resource "kubernetes_config_map" "selfcare-core" {
   }
 
   data = merge({
-    MAIL_TEMPLATE_PATH                          = "contracts/template/mail/1.0.0.json"
-    MAIL_TEMPLATE_COMPLETE_PATH                 = "contracts/template/mail/onboarding-complete/1.0.0.json"
-    MAIL_TEMPLATE_NOTIFICATION_PATH             = "contracts/template/mail/onboarding-notification/1.0.0.json"
-    MAIL_TEMPLATE_AUTOCOMPLETE_PATH             = "contracts/template/mail/import-massivo-io/1.0.0.json"
-    MAIL_TEMPLATE_REJECT_PATH                   = "contracts/template/mail/onboarding-refused/1.0.0.json"
-    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH  = "contracts/template/mail/delegation-notification/1.0.0.json"
-    MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
+    MAIL_TEMPLATE_PATH                                 = "contracts/template/mail/1.0.0.json"
+    MAIL_TEMPLATE_COMPLETE_PATH                        = "contracts/template/mail/onboarding-complete/1.0.0.json"
+    MAIL_TEMPLATE_NOTIFICATION_PATH                    = "contracts/template/mail/onboarding-notification/1.0.0.json"
+    MAIL_TEMPLATE_AUTOCOMPLETE_PATH                    = "contracts/template/mail/import-massivo-io/1.0.0.json"
+    MAIL_TEMPLATE_REJECT_PATH                          = "contracts/template/mail/onboarding-refused/1.0.0.json"
+    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH         = "contracts/template/mail/delegation-notification/1.0.0.json"
+    MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH        = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
+    MAIL_TEMPLATE_REGISTRATION_REQUEST_PT_PATH         = "contracts/template/mail/registration-request-pt/1.0.0.json"
+    MAIL_TEMPLATE_REGISTRATION_NOTIFICATION_ADMIN_PATH = "contracts/template/mail/registration-notification-admin/1.0.0.json"
+    MAIL_TEMPLATE_PT_COMPLETE_PATH                     = "contracts/template/mail/registration-complete-pt/1.0.0.json"
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
     EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
     # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG

@@ -6,6 +6,7 @@
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | <= 1.9.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.33.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.30.0, <= 3.53.0 |
 | <a name="requirement_pkcs12"></a> [pkcs12](#requirement\_pkcs12) | 0.0.7 |
@@ -65,6 +66,7 @@
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | git::https://github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.3.0 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
 | <a name="module_functions_snet"></a> [functions\_snet](#module\_functions\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.8.0 |
+| <a name="module_github_runner"></a> [github\_runner](#module\_github\_runner) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_environment | v6.15.0 |
 | <a name="module_jwt"></a> [jwt](#module\_jwt) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
@@ -103,6 +105,7 @@
 
 | Name | Type |
 |------|------|
+| [azapi_resource.github_runner_job](https://registry.terraform.io/providers/azure/azapi/latest/docs/resources/resource) | resource |
 | [azuread_application.external_oauth2_client_fd](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application) | resource |
 | [azuread_application.external_oauth2_issuer](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application) | resource |
 | [azuread_application_password.external_oauth2_client_fd_password](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) | resource |
@@ -213,6 +216,7 @@
 | [azurerm_resource_group.docker_registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.event_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.functions_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
+| [azurerm_resource_group.github_runner](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.mongodb_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.monitor_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.postgres_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
@@ -232,6 +236,7 @@
 | [azurerm_storage_container.selc-contracts-container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_storage_container.selc_logs_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_subnet.selc_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
+| [azurerm_subnet.github_runner](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
 | [null_resource.download_apim_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.download_apim_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
@@ -269,6 +274,7 @@
 | [azurerm_key_vault_secret.apim_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.apim_publisher_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.external-oauth2-issuer](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.github_pat_selfcare_infra](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_slack_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.postgres_administrator_login](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
@@ -328,6 +334,7 @@
 | <a name="input_cidr_subnet_cosmosdb_mongodb"></a> [cidr\_subnet\_cosmosdb\_mongodb](#input\_cidr\_subnet\_cosmosdb\_mongodb) | Application gateway address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_dns_forwarder"></a> [cidr\_subnet\_dns\_forwarder](#input\_cidr\_subnet\_dns\_forwarder) | DNS Forwarder network address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_eventhub"></a> [cidr\_subnet\_eventhub](#input\_cidr\_subnet\_eventhub) | EventHub address space. | `list(string)` | n/a | yes |
+| <a name="input_cidr_subnet_gh_runner"></a> [cidr\_subnet\_gh\_runner](#input\_cidr\_subnet\_gh\_runner) | Container App Environment address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_k8s"></a> [cidr\_subnet\_k8s](#input\_cidr\_subnet\_k8s) | Subnet cluster kubernetes. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_load_tests"></a> [cidr\_subnet\_load\_tests](#input\_cidr\_subnet\_load\_tests) | private endpoints address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_logs_storage"></a> [cidr\_subnet\_logs\_storage](#input\_cidr\_subnet\_logs\_storage) | Logs storage address space. | `list(string)` | n/a | yes |

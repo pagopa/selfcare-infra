@@ -550,6 +550,11 @@ variable "cidr_subnet_private_endpoints" {
   description = "private endpoints address space."
 }
 
+variable "cidr_subnet_gh_runner" {
+  type        = list(string)
+  description = "Container App Environment address space."
+}
+
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
