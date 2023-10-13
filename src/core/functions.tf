@@ -30,12 +30,12 @@ module "selc_functions" {
   location            = azurerm_resource_group.functions_rg.location
   resource_group_name = azurerm_resource_group.functions_rg.name
 
-  health_check_path   = "/api/v1/info"
+  health_check_path                        = "/api/v1/info"
   always_on                                = var.function_always_on
   subnet_id                                = module.functions_snet[0].id
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
   java_version                             = "11"
-  runtime_version     = "~4"
+  runtime_version                          = "~4"
 
   storage_account_name = replace(format("%s-functions-storage", local.project), "-", "")
 
