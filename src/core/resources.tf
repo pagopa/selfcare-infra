@@ -101,3 +101,25 @@ resource "null_resource" "upload_resources_logo" {
           EOT
   }
 }
+
+# default product logo
+data "local_file" "resources_anac_data_csv" {
+  filename = "${path.module}/resources/anac/data.csv"
+}
+
+resource "null_resource" "upload_resources_anac_data_csv" {
+  triggers = {
+    "changes-in-config" : md5(data.local_file.resources_anac_data_csv.content)
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file ${data.local_file.resources_anac_data_csv.filename} \
+                --overwrite true \
+                --name data.csv
+          EOT
+  }
+}
