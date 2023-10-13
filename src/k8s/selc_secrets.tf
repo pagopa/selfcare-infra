@@ -20,6 +20,28 @@ resource "kubernetes_secret" "hub-spid-login-ms" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "hub-spid-login-ms-agid" {
+  metadata {
+    name      = "hub-spid-login-ms-agid"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    APPINSIGHTS_INSTRUMENTATIONKEY = local.appinsights_instrumentation_key
+    JWT_TOKEN_PRIVATE_KEY          = module.key_vault_secrets_query.values["jwt-private-key"].value
+    JWT_TOKEN_KID                  = module.key_vault_secrets_query.values["jwt-kid"].value
+
+    METADATA_PUBLIC_CERT  = module.key_vault_secrets_query.values["agid-login-cert"].value
+    METADATA_PRIVATE_CERT = module.key_vault_secrets_query.values["agid-login-private-key"].value
+
+    USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+
+    SPID_LOGS_STORAGE_CONNECTION_STRING = module.key_vault_secrets_query.values["logs-storage-connection-string"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "selc-redis-credentials" {
   metadata {
     name      = "redis-credentials"
