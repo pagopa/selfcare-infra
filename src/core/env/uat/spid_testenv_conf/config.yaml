@@ -16,7 +16,7 @@ cert_file: "./conf/idp.crt"
 # using different sources.
 metadata:
   remote:
-    - "https://api.uat.selfcare.pagopa.it/spid/v1/metadata"
+    - "https://api.uat.selfcare.pagopa.it/spid-login/v1/metadata"
 
 
 # Application configuration
