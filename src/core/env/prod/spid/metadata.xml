@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" ID="https___selfcare_pagopa_it" entityID="https://selfcare.pagopa.it"><ds:Signature>
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference URI="#https___selfcare_pagopa_it">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>iuNhHkMT1ZHnkoNnOdY2xQha5tTPpNKahmK28vSaEUI=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+U2S3ddR16PNLKqBtyjGYSUUGUpuQUOGkgmTrp7yKR8uRWVGc11/7hsAHSID+bY7f1PM9SRb+7Cjn
+G8LoHUfIr/YJ3MoyjghoqyRtybh1WKSgyf3/+60bgR6chEbrTnzK/9dewtpuuMJmBdFqoqgGEef7
+U1Ge5XHw73OQ/TLRDuDeH5zQfM93J/Hr7nmYGuPInM0pRGv759RegZTOuLqpX2RI8lsTXOFdXRl9
+/xdIy1NU/rdTiKh/3Z3XrSXwxeHUnN4hlS7m8NwOCxRS+O9o17KXI/pFdijKGmIWa/w6SdG/7TkG
+A71od3fv6UYWcIPSBicaVi8mE+juUH7cR321RkVO7bRDmhGIVapUzYI9aWdJTOfCJl7SinpW+p2T
+vkzgKqUS182Odc6G9UszY82jqTOP3e/aYgza8Twc1hbnBK7TcyGcWesniwAc5QuiDwuVAkzHceMT
+Bh6EjaIbiA11v03HIfP5HE/lkBNzOjRiCUqaxEX7Q9Z0rwcmq9M3NvTS
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+rWRb3kWvHaPMHVoDxa350mFH7TQnbUSMPsUvkebeSywtOJeYU/tf61OL+kru/DVccOHLMXqI+BZ8
+Vrr85XTKRIbu7ajR5rU6lZH7w3HenQey+pH8jSEDryGL60O81enUPENKvwf8EcPeAbm87lUjaMZj
+syZcuVyANUQZsnpNUfLU/fwE0Bxvnnmcove8wgwal07r9FZRaDih++0pOHD/YomcIukGfRIN6T23
+4tazam3rnLtACK3j9cuBxOOdVWqaW98CNox+/xtASHtVaE+0Qob6rCK46qkUtn4MGezB8XucUOEf
+l2UUwbQj18E8kBSnwjPlqIYARrJP5e2AcaYQYY01xMHREjb0F1eu0pX0XRqFMsYHVqmMPTYEPO/b
+TgKlExNovpDLVI46vM/hsM2Q4UvLDzabn+ZgGcKg6bJJfje+pnFYFEF/mwnIVP2pmyU94UV+EF/6
+v0mu8zXHsg7mGPM4XawV9fFOWOFGwTZkU6tEK0mDIobCMhhhdG/YJWbl
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIGHTCCBIWgAwIBAgIUM8Nq1+A/8teObX2/zvcHWMHOp0kwDQYJKoZIhvcNAQELBQAwgYcxFTAT
+BgNVBAoMDFBhZ29QQSBTLnAuQTEbMBkGA1UEAwwSc2VsZmNhcmUucGFnb3BhLml0MR4wHAYDVQRT
+DBVodHRwczovL3d3dy5wYWdvcGEuaXQxFTATBgNVBGEMDFBBOklULVBhZ29QQTELMAkGA1UEBhMC
+SVQxDTALBgNVBAcMBFJvbWEwHhcNMjMxMDE2MTA1MzI5WhcNMzMxMDEzMTA1MzI5WjCBhzEVMBMG
+A1UECgwMUGFnb1BBIFMucC5BMRswGQYDVQQDDBJzZWxmY2FyZS5wYWdvcGEuaXQxHjAcBgNVBFMM
+FWh0dHBzOi8vd3d3LnBhZ29wYS5pdDEVMBMGA1UEYQwMUEE6SVQtUGFnb1BBMQswCQYDVQQGEwJJ
+VDENMAsGA1UEBwwEUm9tYTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAK1kW95Frx2j
+zB1aA8Wt+dJhR+00J21EjD7FL5Hm3kssLTiXmFP7X+tTi/pK7vw1XHDhyzF6iPgWfFa6/OV0ykSG
+7u2o0ea1OpWR+8Nx3p0HsvqR/I0hA68hi+tDvNXp1DxDSr8H/BHD3gG5vO5VI2jGY7MmXLlcgDVE
+GbJ6TVHy1P38BNAcb555nKL3vMIMGpdO6/RWUWg4ofvtKThw/2KJnCLpBn0SDek9t+LWs2pt65y7
+QAit4/XLgcTjnVVqmlvfAjaMfv8bQEh7VWhPtEKG+qwiuOqpFLZ+DBnswfF7nFDhH5dlFMG0I9fB
+PJAUp8Iz5aiGAEayT+XtgHGmEGGNNcTB0RI29BdXrtKV9F0ahTLGB1apjD02BDzv204CpRMTaL6Q
+y1SOOrzP4bDNkOFLyw82m5/mYBnCoOmySX43vqZxWBRBf5sJyFT9qZslPeFFfhBf+r9JrvM1x7IO
+5hjzOF2sFfXxTljhRsE2ZFOrRCtJgyKGwjIYYXRv2CVm5QIDAQABo4IBfTCCAXkwCQYDVR0TBAIw
+ADAOBgNVHQ8BAf8EBAMCBsAwcwYDVR0gBGwwajAfBgMrTBAwGDAWBggrBgEFBQcCAjAKDAhBZ0lE
+cm9vdDAgBgQrTBAGMBgwFgYIKwYBBQUHAgIwCgwIYWdJRGNlcnQwJQYGK0wQBAIBMBswGQYIKwYB
+BQUHAgIwDQwLY2VydF9TUF9QdWIwHQYDVR0OBBYEFOSvGtCd1p3GEWJRFTJBD7all9hvMIHHBgNV
+HSMEgb8wgbyAFOSvGtCd1p3GEWJRFTJBD7all9hvoYGNpIGKMIGHMRUwEwYDVQQKDAxQYWdvUEEg
+Uy5wLkExGzAZBgNVBAMMEnNlbGZjYXJlLnBhZ29wYS5pdDEeMBwGA1UEUwwVaHR0cHM6Ly93d3cu
+cGFnb3BhLml0MRUwEwYDVQRhDAxQQTpJVC1QYWdvUEExCzAJBgNVBAYTAklUMQ0wCwYDVQQHDARS
+b21hghQzw2rX4D/y145tfb/O9wdYwc6nSTANBgkqhkiG9w0BAQsFAAOCAYEATBqK0zBlu4gE52Rj
+NTE+DyXC4AGMqlNQyosQlyss7vLqz1NJ0NdjLSlmr1XqVeJjA8hpgw/FDQbP3GSwlXmFsDOcua/x
+UdsBrk9CaIpHVWwszyCz/F3q1zU26Xu6iTqpxxedbu74WrzP1T4qQvTWd4DHk0MgXzzVjhg9eNG7
+rNiQ+Q8YFMbBg0L0BqyxKTAuukwSlMbSO/BX9P+8eVFsBVA3Irongfq8AtLKNr1aRZdcFqLy3yPI
+7mkV22xFbJpouYpf2O5g51Dsx3wFBoFaJhCtIHdlvMrlLHQ18673M+vAotK1jge/s8uiJTawPG+C
+jXaOv151XT+XHEpm8EsQTe3D8x+nDCGfFXkzak9dsk0Cuo2ymVRDts1UOYeW0JB/yA/73aRsL1Kw
+6HCPx3fPExOxEDmk6rF8lcvvHp9gfujB8sV46/G0KiY0m42elY/h0f1RnP0KZRrNNzj/7AJpn/T+
+I7Rgk/LZISQrx1M7ibWOI7bwhZD1A9w/fW6K9QBM
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature>
+  <SPSSODescriptor AuthnRequestsSigned="true" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIGHTCCBIWgAwIBAgIUM8Nq1+A/8teObX2/zvcHWMHOp0kwDQYJKoZIhvcNAQEL
+BQAwgYcxFTATBgNVBAoMDFBhZ29QQSBTLnAuQTEbMBkGA1UEAwwSc2VsZmNhcmUu
+cGFnb3BhLml0MR4wHAYDVQRTDBVodHRwczovL3d3dy5wYWdvcGEuaXQxFTATBgNV
+BGEMDFBBOklULVBhZ29QQTELMAkGA1UEBhMCSVQxDTALBgNVBAcMBFJvbWEwHhcN
+MjMxMDE2MTA1MzI5WhcNMzMxMDEzMTA1MzI5WjCBhzEVMBMGA1UECgwMUGFnb1BB
+IFMucC5BMRswGQYDVQQDDBJzZWxmY2FyZS5wYWdvcGEuaXQxHjAcBgNVBFMMFWh0
+dHBzOi8vd3d3LnBhZ29wYS5pdDEVMBMGA1UEYQwMUEE6SVQtUGFnb1BBMQswCQYD
+VQQGEwJJVDENMAsGA1UEBwwEUm9tYTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCC
+AYoCggGBAK1kW95Frx2jzB1aA8Wt+dJhR+00J21EjD7FL5Hm3kssLTiXmFP7X+tT
+i/pK7vw1XHDhyzF6iPgWfFa6/OV0ykSG7u2o0ea1OpWR+8Nx3p0HsvqR/I0hA68h
+i+tDvNXp1DxDSr8H/BHD3gG5vO5VI2jGY7MmXLlcgDVEGbJ6TVHy1P38BNAcb555
+nKL3vMIMGpdO6/RWUWg4ofvtKThw/2KJnCLpBn0SDek9t+LWs2pt65y7QAit4/XL
+gcTjnVVqmlvfAjaMfv8bQEh7VWhPtEKG+qwiuOqpFLZ+DBnswfF7nFDhH5dlFMG0
+I9fBPJAUp8Iz5aiGAEayT+XtgHGmEGGNNcTB0RI29BdXrtKV9F0ahTLGB1apjD02
+BDzv204CpRMTaL6Qy1SOOrzP4bDNkOFLyw82m5/mYBnCoOmySX43vqZxWBRBf5sJ
+yFT9qZslPeFFfhBf+r9JrvM1x7IO5hjzOF2sFfXxTljhRsE2ZFOrRCtJgyKGwjIY
+YXRv2CVm5QIDAQABo4IBfTCCAXkwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCBsAw
+cwYDVR0gBGwwajAfBgMrTBAwGDAWBggrBgEFBQcCAjAKDAhBZ0lEcm9vdDAgBgQr
+TBAGMBgwFgYIKwYBBQUHAgIwCgwIYWdJRGNlcnQwJQYGK0wQBAIBMBswGQYIKwYB
+BQUHAgIwDQwLY2VydF9TUF9QdWIwHQYDVR0OBBYEFOSvGtCd1p3GEWJRFTJBD7al
+l9hvMIHHBgNVHSMEgb8wgbyAFOSvGtCd1p3GEWJRFTJBD7all9hvoYGNpIGKMIGH
+MRUwEwYDVQQKDAxQYWdvUEEgUy5wLkExGzAZBgNVBAMMEnNlbGZjYXJlLnBhZ29w
+YS5pdDEeMBwGA1UEUwwVaHR0cHM6Ly93d3cucGFnb3BhLml0MRUwEwYDVQRhDAxQ
+QTpJVC1QYWdvUEExCzAJBgNVBAYTAklUMQ0wCwYDVQQHDARSb21hghQzw2rX4D/y
+145tfb/O9wdYwc6nSTANBgkqhkiG9w0BAQsFAAOCAYEATBqK0zBlu4gE52RjNTE+
+DyXC4AGMqlNQyosQlyss7vLqz1NJ0NdjLSlmr1XqVeJjA8hpgw/FDQbP3GSwlXmF
+sDOcua/xUdsBrk9CaIpHVWwszyCz/F3q1zU26Xu6iTqpxxedbu74WrzP1T4qQvTW
+d4DHk0MgXzzVjhg9eNG7rNiQ+Q8YFMbBg0L0BqyxKTAuukwSlMbSO/BX9P+8eVFs
+BVA3Irongfq8AtLKNr1aRZdcFqLy3yPI7mkV22xFbJpouYpf2O5g51Dsx3wFBoFa
+JhCtIHdlvMrlLHQ18673M+vAotK1jge/s8uiJTawPG+CjXaOv151XT+XHEpm8EsQ
+Te3D8x+nDCGfFXkzak9dsk0Cuo2ymVRDts1UOYeW0JB/yA/73aRsL1Kw6HCPx3fP
+ExOxEDmk6rF8lcvvHp9gfujB8sV46/G0KiY0m42elY/h0f1RnP0KZRrNNzj/7AJp
+n/T+I7Rgk/LZISQrx1M7ibWOI7bwhZD1A9w/fW6K9QBM
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api.selfcare.pagopa.it/spid-login/v1/slo"/>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api.selfcare.pagopa.it/spid-login/v1/acs" index="0" isDefault="true"/>
+    <AttributeConsumingService index="0">
+      <ServiceName xml:lang="it">Selfcare Portal</ServiceName>
+      <RequestedAttribute FriendlyName="Nome" Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Cognome" Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Codice fiscale" Name="fiscalNumber" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+    </AttributeConsumingService>
+  </SPSSODescriptor>
+  <Organization>
+    <OrganizationName xml:lang="it">PagoPA</OrganizationName>
+    <OrganizationDisplayName xml:lang="it">PagoPA S.p.A</OrganizationDisplayName>
+    <OrganizationURL xml:lang="it">https://pagopa.gov.it</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="other" spid:EntityType="spid:aggregator">
+    <Extensions>
+      <spid:IPACode>PagoPA</spid:IPACode>
+      <spid:VATNumber>IT15376371009</spid:VATNumber>
+      <spid:FiscalCode>15376371009</spid:FiscalCode>
+      <spid:PublicServicesFullOperator/>
+    </Extensions>
+    <Company>PagoPA</Company>
+    <EmailAddress>pagopa@pec.governo.it</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>
