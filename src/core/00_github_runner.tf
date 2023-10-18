@@ -1,5 +1,5 @@
 module "github_runner" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_job_gh_runner?ref=v7.12.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_job_gh_runner?ref=v7.13.0"
 
   location  = var.location
   prefix    = var.prefix
@@ -12,15 +12,14 @@ module "github_runner" {
   }
 
   network = {
-    rg_vnet      = module.vnet.resource_group_name
-    vnet         = module.vnet.name
-    cidr_subnets = var.cidr_subnet_gh_runner
+    vnet_resource_group_name = module.vnet.resource_group_name
+    vnet_name                = module.vnet.name
+    subnet_cidr_block        = var.cidr_subnet_gh_runner
   }
 
   environment = {
-    workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.workspace_id
-    customerId   = azurerm_log_analytics_workspace.log_analytics_workspace.workspace_id
-    sharedKey    = azurerm_log_analytics_workspace.log_analytics_workspace.primary_shared_key
+    customerId = azurerm_log_analytics_workspace.log_analytics_workspace.workspace_id
+    sharedKey  = azurerm_log_analytics_workspace.log_analytics_workspace.primary_shared_key
   }
 
   app = {
