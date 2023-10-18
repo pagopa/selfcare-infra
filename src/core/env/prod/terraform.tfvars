@@ -442,3 +442,5 @@ storage_account_info = {
   access_tier                       = "Hot"
   advanced_threat_protection_enable = true
 }
+
+gh_runner_pat_secret_name = "github-pat-selfcare-infra"

@@ -1223,3 +1223,10 @@ variable "function_always_on" {
   description = "Always on property"
   default     = false
 }
+
+# GitHub Runner
+
+variable "gh_runner_pat_secret_name" {
+  type = string
+  description = "KeyVault secret name that stores the PAT to get access to repositories"
+}
