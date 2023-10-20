@@ -290,7 +290,12 @@ eventhub_ip_rules = [
   { //PROD-INTEROP-PROD
     ip_mask = "18.192.110.102",
     action  = "Allow"
+  },
+  { //PROD-FD
+    ip_mask = "193.203.230.20",
+    action  = "Allow"
   }
+  
 ]
 
 eventhubs = [{
