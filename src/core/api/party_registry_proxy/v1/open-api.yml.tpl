@@ -312,7 +312,7 @@ paths:
                 status: 500
                 title: string
                 type: string
-  '/v1/institutions/{id}':
+  /v1/institutions/{id}:
     get:
       tags:
         - institution
@@ -414,6 +414,55 @@ paths:
                 status: 500
                 title: string
                 type: string
+  /v1/national-registries/legal-address:
+    get:
+      tags:
+        - nationalRegistries
+      summary: Retrieve data from AdE and InfoCamere
+      description: Get the legal address of the business
+      operationId: legalAddressUsingGET
+      parameters:
+        - name: taxId
+          in: query
+          description: taxId
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalAddressResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     CategoriesResource:
@@ -517,6 +566,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InstitutionResource'
+    LegalAddressResponse:
+      title: LegalAddressResponse
+      type: object
+      properties:
+        address:
+          type: string
+        zipCode:
+          type: string
     InvalidParam:
       title: InvalidParam
       required:
