@@ -418,7 +418,7 @@ paths:
     get:
       tags:
         - nationalRegistries
-      summary: Retrieve data from AdE and InfoCamere
+      summary: Retrieve legalAddress
       description: Get the legal address of the business
       operationId: legalAddressUsingGET
       parameters:
@@ -460,9 +460,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
 components:
   schemas:
     CategoriesResource:

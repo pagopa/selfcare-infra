@@ -677,6 +677,45 @@ paths:
       security:
         - bearerAuth:
             - global
+    post:
+      tags:
+        - Delegation
+      summary: Create an association between institution id and technical partner
+      description: Create an association between institution id and technical partner
+      operationId: createDelegationUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelegationRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelegationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/users':
     post:
       tags:
@@ -1775,6 +1814,25 @@ components:
           type: string
         vatNumber:
           type: string
+    DelegationRequest:
+      title: DelegationRequest
+      type: object
+      properties:
+        from:
+          type: string
+        institutionFromName:
+          type: string
+        institutionToName:
+          type: string
+        productId:
+          type: string
+        to:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
   securitySchemes:
     bearerAuth:
       type: http

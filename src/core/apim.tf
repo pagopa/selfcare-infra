@@ -704,7 +704,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "createDelegationUsingPOST"
-      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
