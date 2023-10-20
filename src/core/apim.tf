@@ -968,6 +968,14 @@ module "apim_party_registry_proxy_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "legalAddressUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
