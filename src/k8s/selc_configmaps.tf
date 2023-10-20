@@ -211,7 +211,7 @@ resource "kubernetes_config_map" "national-registries-service" {
   }
 
   data = {
-    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/national-registries-private/"
+    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.notifichedigitali.it/national-registries-private/"
   }
 }
 
