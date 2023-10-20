@@ -701,6 +701,17 @@ module "apim_external_api_ms_v2" {
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
+    },
+    {
+      operation_id = "createDelegationUsingPOST"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        TENANT_ID                  = data.azurerm_client_config.current.tenant_id
+        EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
+      })
     }
   ]
 }
