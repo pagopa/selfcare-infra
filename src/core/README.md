@@ -6,6 +6,7 @@
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | <= 1.9.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.33.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.30.0, <= 3.53.0 |
 | <a name="requirement_pkcs12"></a> [pkcs12](#requirement\_pkcs12) | 0.0.7 |
@@ -105,6 +106,7 @@
 
 | Name | Type |
 |------|------|
+| [azapi_resource.container_app_onboarding_ms](https://registry.terraform.io/providers/azure/azapi/latest/docs/resources/resource) | resource |
 | [azuread_application.external_oauth2_client_fd](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application) | resource |
 | [azuread_application.external_oauth2_issuer](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application) | resource |
 | [azuread_application_password.external_oauth2_client_fd_password](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) | resource |
@@ -151,6 +153,7 @@
 | [azurerm_key_vault_access_policy.azdevops_iac_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.azdo_sp_tls_cert](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.azure_cdn_frontdoor_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.keyvault_containerapp](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_secret.application_insights_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.cosmosdb_account_mongodb_connection_strings](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.event_hub_connection_strings](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
@@ -275,12 +278,14 @@
 | [azurerm_key_vault_secret.apim_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.apim_publisher_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.external-oauth2-issuer](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.keyvault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_slack_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.postgres_administrator_login](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.postgres_administrator_login_password](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.sec_storage_id](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.sec_workspace_id](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secrets.key_vault_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secrets) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
 | [local_file.resources_anac_data_csv](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 | [local_file.resources_default_product_depict-image](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
@@ -324,6 +329,10 @@
 | <a name="input_azdo_agent_vm_sku"></a> [azdo\_agent\_vm\_sku](#input\_azdo\_agent\_vm\_sku) | sku of the azdo agent vm | `string` | `"Standard_B1s"` | no |
 | <a name="input_azdo_sp_tls_cert_enabled"></a> [azdo\_sp\_tls\_cert\_enabled](#input\_azdo\_sp\_tls\_cert\_enabled) | Enable Azure DevOps connection for TLS cert management | `string` | `false` | no |
 | <a name="input_azuread_service_principal_azure_cdn_frontdoor_id"></a> [azuread\_service\_principal\_azure\_cdn\_frontdoor\_id](#input\_azuread\_service\_principal\_azure\_cdn\_frontdoor\_id) | Azure CDN Front Door Principal ID | `string` | `"f3b3f72f-4770-47a5-8c1e-aa298003be12"` | no |
+| <a name="input_ca_onboarding_ms_replicas"></a> [ca\_onboarding\_ms\_replicas](#input\_ca\_onboarding\_ms\_replicas) | Replica settings for onboarding ms | <pre>object({<br>    minReplicas = number<br>    maxReplicas = number<br>  })</pre> | n/a | yes |
+| <a name="input_ca_onboarding_ms_scale_rules"></a> [ca\_onboarding\_ms\_scale\_rules](#input\_ca\_onboarding\_ms\_scale\_rules) | Scaling rules for onboarding ms | <pre>list(object({<br>    name = string<br>    custom = object({<br>      metadata = map(string)<br>      type     = string<br>    })<br>  }))</pre> | n/a | yes |
+| <a name="input_ca_onboarding_ms_secrets"></a> [ca\_onboarding\_ms\_secrets](#input\_ca\_onboarding\_ms\_secrets) | List of keyvault secret names to use for onboarding ms | `set(string)` | n/a | yes |
+| <a name="input_cae_zone_redundant"></a> [cae\_zone\_redundant](#input\_cae\_zone\_redundant) | Container App Environment zone redudancy | `bool` | n/a | yes |
 | <a name="input_checkout_advanced_threat_protection_enabled"></a> [checkout\_advanced\_threat\_protection\_enabled](#input\_checkout\_advanced\_threat\_protection\_enabled) | Enable checkout threat advanced protection | `string` | `false` | no |
 | <a name="input_cidr_aks_platform_vnet"></a> [cidr\_aks\_platform\_vnet](#input\_cidr\_aks\_platform\_vnet) | vnet for aks platform. | `list(string)` | n/a | yes |
 | <a name="input_cidr_pair_vnet"></a> [cidr\_pair\_vnet](#input\_cidr\_pair\_vnet) | Virtual network address space. | `list(string)` | n/a | yes |

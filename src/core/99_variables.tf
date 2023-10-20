@@ -1230,3 +1230,34 @@ variable "gh_runner_pat_secret_name" {
   type        = string
   description = "KeyVault secret name that stores the PAT to get access to repositories"
 }
+
+# Container App
+
+variable "cae_zone_redundant" {
+  type        = bool
+  description = "Container App Environment zone redudancy"
+}
+
+variable "ca_onboarding_ms_secrets" {
+  type        = set(string)
+  description = "List of keyvault secret names to use for onboarding ms"
+}
+
+variable "ca_onboarding_ms_replicas" {
+  type = object({
+    minReplicas = number
+    maxReplicas = number
+  })
+  description = "Replica settings for onboarding ms"
+}
+
+variable "ca_onboarding_ms_scale_rules" {
+  type = list(object({
+    name = string
+    custom = object({
+      metadata = map(string)
+      type     = string
+    })
+  }))
+  description = "Scaling rules for onboarding ms"
+}
