@@ -897,6 +897,83 @@ module "apim_selfcare_support_service_v1" {
   ]
 }
 
+
+resource "azurerm_api_management_api_version_set" "apim_party_registry_proxy" {
+  name                = format("%s-party-registry-proxy-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Registry Proxy"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_party_registry_proxy_v1" {
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.3.0"
+  name                = format("%s-party-registry-proxy-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_party_registry_proxy.id
+
+
+  description  = "This service is the party registry proxy"
+  display_name = "Party Registry Proxy V1"
+  path         = "external/party-registry-proxy"
+  api_version  = "v1"
+  protocols    = ["https"]
+
+  service_url = "http://${var.reverse_proxy_ip}/party-registry-proxy"
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_registry_proxy/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
+    basePath = "party-registry-proxy/v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "findCategoriesUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "findCategoryUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "searchUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "findInstitutionUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    }
+  ]
+}
+
+
+
 ##############
 ## Products ##
 ##############
