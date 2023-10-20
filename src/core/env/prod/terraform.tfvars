@@ -295,7 +295,7 @@ eventhub_ip_rules = [
     ip_mask = "193.203.230.20",
     action  = "Allow"
   }
-  
+
 ]
 
 eventhubs = [{
