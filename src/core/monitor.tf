@@ -71,6 +71,12 @@ resource "azurerm_monitor_action_group" "error_action_group" {
     use_common_alert_schema = true
   }
 
+  webhook_receiver {
+    name                    = "opsgenie"
+    service_uri              = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
+    use_common_alert_schema = true
+  }
+
   tags = var.tags
 }
 
@@ -146,33 +152,25 @@ resource "azurerm_monitor_action_group" "slack" {
   tags = var.tags
 }
 
+#FIXME: should this be deleted?
+resource "azurerm_monitor_action_group" "opsgenie" {
+  name                = "OpsgeniePagoPA"
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  short_name          = "OpsgeniePagoPA"
+
+  email_receiver {
+    name                    = "sendtoopsgenie"
+    email_address           = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
+    use_common_alert_schema = true
+  }
+
+  tags = var.tags
+}
 #
 # Web Test
 #
 ## web availability test
 locals {
-
-  # test_urls = [
-  #   # https://api.selfcare.pagopa.it/health
-  #   {
-  #     host                 = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-  #     path                 = "/health",
-  #     expected_http_status = 404
-  #   },
-  #   # https://selfcare.pagopa.it/auth/login
-  #   ## CDN custom domains ##
-  #   {
-  #     host                 = trimsuffix(module.checkout_cdn.fqdn, "."),
-  #     path                 = "/auth/login",
-  #     expected_http_status = 200
-  #   },
-  #   # https://api-pnpg.selfcare.pagopa.it/health
-  #   {
-  #     host                 = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-  #     path                 = "/health",
-  #     expected_http_status = 404
-  #   },
-  # ]
 
   test_urls_map = {
     # https://api.selfcare.pagopa.it/health
