@@ -893,6 +893,15 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "onboardingInstitutionUsersUsingPOST"
+      xml_content = templatefile("./api/selfcare_support_service/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
