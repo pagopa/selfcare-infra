@@ -240,6 +240,7 @@ module "app_gw" {
     }
   ]
 
+
   # metrics docs
   # https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported#microsoftnetworkapplicationgateways
   monitor_metric_alert_criteria = {
@@ -257,7 +258,7 @@ module "app_gw" {
           aggregation              = "Average"
           metric_name              = "ComputeUnits"
           operator                 = "GreaterOrLessThan"
-          alert_sensitivity        = "High"
+          alert_sensitivity        = "Medium"
           evaluation_total_count   = 2
           evaluation_failure_count = 2
           dimension                = []
