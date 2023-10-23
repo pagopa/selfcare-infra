@@ -453,17 +453,3 @@ storage_account_info = {
 gh_runner_pat_secret_name = "github-pat-selfcare-infra"
 
 cae_zone_redundant = false
-
-ca_onboarding_ms_secrets = [
-  "jwt-public-key",
-  "mongodb-connection-string",
-  "user-registry-api-key",
-  "onboarding-functions-api-key"
-]
-
-ca_onboarding_ms_replicas = {
-  minReplicas = 0
-  maxReplicas = 2
-}
-
-ca_onboarding_ms_scale_rules = []

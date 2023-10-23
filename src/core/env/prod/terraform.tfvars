@@ -451,30 +451,3 @@ storage_account_info = {
 gh_runner_pat_secret_name = "github-pat-selfcare-infra"
 
 cae_zone_redundant = true
-
-ca_onboarding_ms_secrets = [
-  "jwt-public-key",
-  "mongodb-connection-string",
-  "user-registry-api-key",
-  "onboarding-functions-api-key"
-]
-
-ca_onboarding_ms_replicas = {
-  minReplicas = 0
-  maxReplicas = 5
-}
-
-ca_onboarding_ms_scale_rules = [
-  {
-    custom = {
-      metadata = {
-        "desiredReplicas" = "3"
-        "start"           = "0 8 * * MON-FRI"
-        "end"             = "0 19 * * MON-FRI"
-        "timezone"        = "Europe/Rome"
-      }
-      type = "cron"
-    }
-    name = "cron-scale-rule"
-  }
-]
