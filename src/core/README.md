@@ -6,7 +6,6 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | <= 1.9.0 |
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.33.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.30.0, <= 3.53.0 |
 | <a name="requirement_pkcs12"></a> [pkcs12](#requirement\_pkcs12) | 0.0.7 |
