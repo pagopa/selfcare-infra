@@ -58,6 +58,8 @@ resource "azurerm_key_vault_secret" "application_insights_key" {
 # Actions Groups
 #
 resource "azurerm_monitor_action_group" "error_action_group" {
+  count = var.env_short == "p" ? 1 : 0
+
   resource_group_name = azurerm_resource_group.monitor_rg.name
   name                = "${var.prefix}${var.env_short}error"
   short_name          = "${var.prefix}${var.env_short}error"
@@ -76,7 +78,7 @@ resource "azurerm_monitor_action_group" "error_action_group" {
 
   webhook_receiver {
     name                    = "opsgenie"
-    service_uri              = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
+    service_uri             = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
     use_common_alert_schema = true
   }
 
@@ -215,15 +217,21 @@ module "web_test_api" {
   ssl_cert_remaining_lifetime_check = 7
   expected_http_status              = each.value.expected_http_status
 
-  actions = [
-    {
-      action_group_id = azurerm_monitor_action_group.email.id,
-    },
-    {
-      action_group_id = azurerm_monitor_action_group.slack.id,
-    },
-  ]
-
+  actions = var.env_short == "p" ? [
+        {
+          action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+          webhook_properties = null
+        }
+      ] : [
+        {
+          action_group_id    = azurerm_monitor_action_group.slack.id
+          webhook_properties = null
+        },
+        {
+          action_group_id    = azurerm_monitor_action_group.email.id
+          webhook_properties = null
+        }
+      ]
 }
 
 resource "azurerm_dashboard" "monitoring-dashboard" {

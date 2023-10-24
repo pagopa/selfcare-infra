@@ -63,18 +63,36 @@ module "postgresql" {
   alerts_enabled                        = var.postgres_alerts_enabled
   monitor_metric_alert_criteria         = var.postgres_metric_alerts
   replica_monitor_metric_alert_criteria = var.postgres_metric_alerts
-  action = [
-    {
-      action_group_id    = azurerm_monitor_action_group.error_action_group.id
-      webhook_properties = null
-    }
-  ]
-  replica_action = [
-    {
-      action_group_id    = azurerm_monitor_action_group.error_action_group.id
-      webhook_properties = null
-    }
-  ]
+  action = var.env_short == "p" ? [
+        {
+          action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+          webhook_properties = null
+        }
+      ] : [
+        {
+          action_group_id    = azurerm_monitor_action_group.slack.id
+          webhook_properties = null
+        },
+        {
+          action_group_id    = azurerm_monitor_action_group.email.id
+          webhook_properties = null
+        }
+      ]
+  replica_action = var.env_short == "p" ? [
+        {
+          action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+          webhook_properties = null
+        }
+      ] : [
+        {
+          action_group_id    = azurerm_monitor_action_group.slack.id
+          webhook_properties = null
+        },
+        {
+          action_group_id    = azurerm_monitor_action_group.email.id
+          webhook_properties = null
+        }
+      ]
 
   tags = var.tags
 }

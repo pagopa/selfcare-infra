@@ -229,12 +229,21 @@ module "app_gw" {
 
   alerts_enabled = var.app_gateway_alerts_enabled
 
-  action = [
-    {
-      action_group_id    = azurerm_monitor_action_group.error_action_group.id
-      webhook_properties = null
-    }
-  ]
+  action = var.env_short == "p" ? [
+        {
+          action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+          webhook_properties = null
+        }
+      ] : [
+        {
+          action_group_id    = azurerm_monitor_action_group.slack.id
+          webhook_properties = null
+        },
+        {
+          action_group_id    = azurerm_monitor_action_group.email.id
+          webhook_properties = null
+        }
+      ]
 
   # metrics docs
   # https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported#microsoftnetworkapplicationgateways
