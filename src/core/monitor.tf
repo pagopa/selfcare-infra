@@ -204,7 +204,7 @@ locals {
       ssl_cert_remaining_lifetime_check = 7
     },
     "login-pnpg" = {
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
+      host                              = "imprese.notifichedigitali.it",
       path                              = "/auth/login",
       frequency                         = 900
       expected_http_status              = 200
