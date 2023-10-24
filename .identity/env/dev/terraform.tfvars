@@ -1,9 +1,7 @@
 # general
-prefix         = "selfcare"
-env_short      = "d"
-env            = "dev"
-location       = "westeurope"
-location_short = "weu"
+prefix    = "selc"
+env_short = "d"
+location  = "westeurope"
 
 tags = {
   CreatedBy   = "Terraform"
@@ -12,6 +10,17 @@ tags = {
   Source      = "https://github.com/pagopa/selfcare-infra"
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
+
+github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "DEV"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "dev"
+  }
+]
 
 environment_ci_roles = {
   subscription = [

@@ -13,11 +13,6 @@ variable "location" {
   description = "One of westeurope, northeurope"
 }
 
-variable "env" {
-  type        = string
-  description = "Environment"
-}
-
 variable "env_short" {
   type = string
   validation {
@@ -28,26 +23,13 @@ variable "env_short" {
   }
 }
 
-variable "location_short" {
-  type = string
-  validation {
-    condition = (
-      length(var.location_short) <= 3
-    )
-    error_message = "Length must be 3 chars."
-  }
-}
-
-variable "github" {
-  type = object({
-    org        = string
-    repository = string
-  })
-  description = "GitHub Organization and repository name"
-  default = {
-    org        = "pagopa"
-    repository = "selfcare-infra"
-  }
+variable "github_federations" {
+  type = list(object({
+    repository        = string
+    credentials_scope = optional(string, "environment")
+    subject           = string
+  }))
+  description = "GitHub Organization, repository name and scope permissions"
 }
 
 variable "environment_ci_roles" {
@@ -62,18 +44,6 @@ variable "environment_cd_roles" {
     subscription = list(string)
   })
   description = "GitHub Continous Delivery roles"
-}
-
-variable "github-federation" {
-  description = "Static GitHub federation data"
-  type = object({
-    audience = list(string)
-    issuer   = string
-  })
-  default = {
-    audience = ["api://AzureADTokenExchange"]
-    issuer   = "https://token.actions.githubusercontent.com"
-  }
 }
 
 variable "tags" {
