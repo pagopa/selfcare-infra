@@ -14,7 +14,7 @@ locals {
   appinsights_instrumentation_key    = format("InstrumentationKey=%s", module.key_vault_secrets_query.values["appinsights-instrumentation-key"].value)
   monitor_action_group_slack_name    = "SlackPagoPA"
   monitor_action_group_email_name    = "PagoPA"
-  monitor_action_group_opsgenie_name = "OpsgeniePagoPA"
+  monitor_action_group_opsgenie_name = "Opsgenie"
   aks_cluster_name                   = var.aks_name
   monitor_appinsights_name           = "${local.project}-appinsights"
 }

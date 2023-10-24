@@ -28,7 +28,7 @@ locals {
 
   monitor_action_group_slack_name    = "SlackPagoPA"
   monitor_action_group_email_name    = "PagoPA"
-  monitor_action_group_opsgenie_name = "OpsgeniePagoPA"
+  monitor_action_group_opsgenie_name = "Opsgenie"
   alert_action_group_core_name       = "${var.prefix}${var.env_short}core"
   alert_action_group_error_name      = "${var.prefix}${var.env_short}error"
 }

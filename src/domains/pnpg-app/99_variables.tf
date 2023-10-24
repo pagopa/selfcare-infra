@@ -19,7 +19,7 @@ locals {
   monitor_appinsights_name           = "${local.product}-appinsights"
   monitor_action_group_slack_name    = "SlackPagoPA"
   monitor_action_group_email_name    = "PagoPA"
-  monitor_action_group_opsgenie_name = "OpsgeniePagoPA"
+  monitor_action_group_opsgenie_name = "Opsgenie"
   alert_action_group_domain_name     = "${var.prefix}${var.env_short}${var.domain}"
 
   ingress_hostname_prefix               = "${var.instance}.${var.domain}"

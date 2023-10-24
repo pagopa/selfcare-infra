@@ -8,7 +8,10 @@ data "azurerm_key_vault_secret" "alert_error_notification_slack" {
   key_vault_id = module.key_vault.id
 }
 
-
+data "azurerm_key_vault_secret" "monitor_notification_opsgenie" {
+  name         = "monitor-notification-opsgenie"
+  key_vault_id = module.key_vault.id
+}
 
 # -----------------------------------------------------------------------
 
@@ -154,9 +157,9 @@ resource "azurerm_monitor_action_group" "slack" {
 
 #FIXME: should this be deleted?
 resource "azurerm_monitor_action_group" "opsgenie" {
-  name                = "OpsgeniePagoPA"
+  name                = "Opsgenie"
   resource_group_name = azurerm_resource_group.monitor_rg.name
-  short_name          = "OpsgeniePagoPA"
+  short_name          = "Opsgenie"
 
   email_receiver {
     name                    = "sendtoopsgenie"
