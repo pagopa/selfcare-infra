@@ -276,7 +276,7 @@ locals {
     "SpidL2-spiditalia-selc" = {
       # SpidL2-spiditalia https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=spiditalia
       host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/spid-login/v1/login?authLevel=SpidL2&entityID=spiditalia",
+      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=spiditalia",
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
