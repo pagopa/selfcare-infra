@@ -13,6 +13,11 @@ module "identity-ci" {
 
   github_federations = var.github_federations
 
+  ci_rbac_roles = {
+    subscription    = var.environment_ci_roles.subscription
+    resource_groups = {}
+  }
+
   tags = var.tags
 
   depends_on = [
@@ -29,6 +34,11 @@ module "identity-cd" {
   identity_role = "cd"
 
   github_federations = var.github_federations
+
+  ci_rbac_roles = {
+    subscription    = var.environment_cd_roles.subscription
+    resource_groups = {}
+  }
 
   tags = var.tags
 
