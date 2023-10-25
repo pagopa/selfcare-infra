@@ -77,8 +77,8 @@ apim_sku            = "Premium_1" # TODO
 app_gateway_api_certificate_name      = "api-selfcare-pagopa-it"
 app_gateway_api_pnpg_certificate_name = "api-pnpg-selfcare-pagopa-it"
 
-app_gateway_min_capacity   = 2
-app_gateway_max_capacity   = 20
+app_gateway_min_capacity   = 1
+app_gateway_max_capacity   = 5
 app_gateway_sku_name       = "WAF_v2"
 app_gateway_sku_tier       = "WAF_v2"
 app_gateway_alerts_enabled = true
