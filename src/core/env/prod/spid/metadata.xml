@@ -8,17 +8,17 @@
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>PnTScbqgdzCg3XjizKztJvqBMF9PIGjtFXrZV/LTeks=</ds:DigestValue>
+<ds:DigestValue>ja+8I7wroFd2KqOveDmaYPmht2npHOPaNtyMUXW5REM=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-M9YwPzJZxJDxnwTB9YkoFvkytDX7kOqdun9Zmci+1jtYujOl7S4sLmbvYpHJmWxq1gBAMJrtK1YF
-AHmsto+Fg7RUJa/85p8Xl/HUluhTp4BecmiDui/g78tqsJcm1Y9emOE2EG1hfcUmvQ0sZrxeAKTt
-wkQ9cdt2ycSTN0svQowCxBQx32fZ+ifUecSY0Kvw6HsazmGpATcJ98jmveGPLccfddATUrh/QqD3
-tCzTRouBdXXYTk0h+l7NaaR6J0yodQ030iNPABYVxyrT9qU+0xkRi5DiBpuz/i+esz4oWxTyUOd1
-DEIviNUS/8b3tVo1hOhy6z8Ld2SpDU1C/bPY2b8d9/kSWEuvVFdCWC/S3E53vpKMdvUWeIVwlsHQ
-uupjFqn8fa7wOf4muTL92gdG3a3HWvDS+CwneW4LuR1t/OFLVjhV1RSBAd4WJGgq5iaJ+S1RZo/3
-wZeqt8jH6dLE7CpGAZ2lm0ZdEvGxhbjT6zvEWLSGF6bnuaE/Lo0AOEix
+I26P+yoHpcEaHx8YVWVyk8+LhmM1iIAxJ5u8Y+C7NP5CAxwm6LfTosiE+Q3B8yIHjE/Vz5z7Tquf
+5hTyQ9QnowguIBOimqUsOsZXpYblCZ7rwo0vXt08Vpq1YFJ62wUKeKxLRlKBfgRcdHRbI0s13ATv
+WazHNqz+SHUbs6pQqqBW449wx/wmpXSbYspmUP4R3Xg2aeciBW7Q36n5eo2UJ7RLaK8T5kZPaJNF
+CXBliCTA1hatpHg8S3TfiIxjbhCpeHP0O1nxklpRlAJ9AH7klxLOxRZfRRvCxC0+KDF13NlIrPRi
+ZGNMb5zlZaMiaxvZTaXMJ6r2bUa5jT8KziDy6xU55tHtADMrCi3OYjwiH3kRQFyvhdDAY+P4ALRf
+8kPx6n8meaIREfVF46ntuqU+mwtm4R1SMZXAWVtp3dYDIdPWEFmFa/SkoOcIDZS2yVPv6SEYRO/h
+OsRNPs7pTZdYPgmgBGdw0thyT5QR4d1uI31+DrFiMMYnPU2xLR2myzLN
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -130,9 +130,9 @@ dCqgjC4IjeP7MuBIAPN2np34l2La
       <spid:IPACode>5N2TR557</spid:IPACode>
       <spid:VATNumber>IT15376371009</spid:VATNumber>
       <spid:FiscalCode>15376371009</spid:FiscalCode>
-      <spid:PublicServicesFullOperator/>
+      <spid:Public/>
     </Extensions>
-    <Company>PagoPA</Company>
+    <Company>PagoPA S.p.A.</Company>
     <EmailAddress>pagopa@pec.governo.it</EmailAddress>
   </ContactPerson>
 </EntityDescriptor>
