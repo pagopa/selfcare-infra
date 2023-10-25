@@ -229,7 +229,12 @@ module "app_gw" {
 
   alerts_enabled = var.app_gateway_alerts_enabled
 
-  action = [
+  action = var.env_short == "p" ? [
+    {
+      action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+      webhook_properties = null
+    }
+    ] : [
     {
       action_group_id    = azurerm_monitor_action_group.slack.id
       webhook_properties = null
