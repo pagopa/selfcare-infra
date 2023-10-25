@@ -17,6 +17,7 @@
 |------|--------|---------|
 | <a name="module_acr"></a> [acr](#module\_acr) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_registry | v6.20.0 |
 | <a name="module_acr_common"></a> [acr\_common](#module\_acr\_common) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.3.0 |
+| <a name="module_agid_login"></a> [agid\_login](#module\_agid\_login) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_aks"></a> [aks](#module\_aks) | git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster | v7.5.0 |
 | <a name="module_apim"></a> [apim](#module\_apim) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management | v7.3.0 |

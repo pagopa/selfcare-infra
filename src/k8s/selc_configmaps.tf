@@ -124,6 +124,68 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
+resource "kubernetes_config_map" "hub-spid-login-ms-agid" {
+  metadata {
+    name      = "hub-spid-login-ms-agid"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JAVA_TOOL_OPTIONS = ""
+
+    # SPID
+    ORG_URL          = "https://pagopa.gov.it"
+    ACS_BASE_URL     = format("%s/spid-login/v1", var.api_gateway_url)
+    ORG_DISPLAY_NAME = "PagoPA S.p.A"
+    ORG_NAME         = "PagoPA"
+
+    AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
+
+    ENDPOINT_ACS      = "/acs"
+    ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
+    ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
+    ENDPOINT_LOGIN    = "/login"
+    ENDPOINT_METADATA = "/metadata"
+    ENDPOINT_LOGOUT   = "/logout"
+
+    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
+    SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
+
+    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
+    ENABLE_FULL_OPERATOR_METADATA    = true
+    COMPANY_EMAIL                    = "pagopa@pec.governo.it"
+    COMPANY_FISCAL_CODE              = 15376371009
+    COMPANY_IPA_CODE                 = "PagoPA"
+    COMPANY_NAME                     = "PagoPA S.p.A"
+    COMPANY_VAT_NUMBER               = "IT15376371009"
+
+    ENABLE_JWT                         = "true"
+    INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
+
+    # TOKEN_EXPIRATION requires seconds
+    TOKEN_EXPIRATION = var.token_expiration_minutes * 60
+    JWT_TOKEN_ISSUER = "SPID"
+
+    # ADE
+    ENABLE_ADE_AA = "false"
+
+    APPINSIGHTS_DISABLED = "false"
+
+    ENABLE_USER_REGISTRY = "true"
+
+    JWT_TOKEN_AUDIENCE = var.jwt_audience
+
+    ENABLE_SPID_ACCESS_LOGS          = "true"
+    SPID_LOGS_PUBLIC_KEY             = module.key_vault_secrets_query.values["spid-logs-encryption-public-key"].value
+    SPID_LOGS_STORAGE_KIND           = "azurestorage"
+    SPID_LOGS_STORAGE_CONTAINER_NAME = "selc-${var.env_short}-logs-blob"
+
+    },
+    var.configmaps_hub-spid-login-ms,
+    var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}
+  )
+}
+
 
 resource "kubernetes_config_map" "selfcare-core" {
   metadata {

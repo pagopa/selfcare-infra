@@ -102,7 +102,7 @@ resource "null_resource" "upload_resources_logo" {
   }
 }
 
-# default product logo
+# anac file
 data "local_file" "resources_anac_data_csv" {
   filename = "${path.module}/resources/anac/data.csv"
 }
@@ -120,6 +120,31 @@ resource "null_resource" "upload_resources_anac_data_csv" {
                 --file ${data.local_file.resources_anac_data_csv.filename} \
                 --overwrite true \
                 --name data.csv
+          EOT
+  }
+}
+
+# metadata agid spid
+resource "null_resource" "upload_metadata" {
+  triggers = {
+    file_sha1 = filesha1("./env/${var.env}/spid/metadata.xml")
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload \
+                --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "./env/${var.env}/spid/metadata.xml" \
+                --overwrite true \
+                --name 'spid/metadata.xml' &&
+              az cdn endpoint purge \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/spid/metadata.xml" \
+                --no-wait
           EOT
   }
 }

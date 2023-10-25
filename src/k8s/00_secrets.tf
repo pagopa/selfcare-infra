@@ -16,6 +16,8 @@ module "key_vault_secrets_query" {
     "jwt-exchange-private-key",
     "jwt-exchange-public-key",
     "jwt-exchange-kid",
+    "agid-login-cert",
+    "agid-login-private-key",
     "agid-spid-cert",
     "agid-spid-private-key",
     "mongodb-connection-string",
