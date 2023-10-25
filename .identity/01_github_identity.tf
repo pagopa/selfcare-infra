@@ -15,7 +15,7 @@ module "identity-ci" {
 
   ci_rbac_roles = {
     subscription    = var.environment_ci_roles.subscription
-    resource_groups = {}
+    resource_groups = var.environment_ci_roles.resource_groups
   }
 
   tags = var.tags
@@ -37,7 +37,7 @@ module "identity-cd" {
 
   ci_rbac_roles = {
     subscription    = var.environment_cd_roles.subscription
-    resource_groups = {}
+    resource_groups = var.environment_ci_roles.resource_groups
   }
 
   tags = var.tags

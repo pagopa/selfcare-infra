@@ -34,14 +34,16 @@ variable "github_federations" {
 
 variable "environment_ci_roles" {
   type = object({
-    subscription = list(string)
+    subscription    = list(string)
+    resource_groups = map(list(string))
   })
   description = "GitHub Continous Integration roles"
 }
 
 variable "environment_cd_roles" {
   type = object({
-    subscription = list(string)
+    subscription    = list(string)
+    resource_groups = map(list(string))
   })
   description = "GitHub Continous Delivery roles"
 }

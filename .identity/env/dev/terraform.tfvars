@@ -33,8 +33,13 @@ environment_ci_roles = {
     "PagoPA Export Deployments Template",
     "Key Vault Secrets User",
     "DocumentDB Account Contributor",
-    "API Management Service Contributor",
+    "API Management Service Contributor"
   ]
+  resource_groups = {
+    "terraform-state-rg" = [
+      "Storage Blob Data Owner"
+    ]
+  }
 }
 
 environment_cd_roles = {
@@ -46,4 +51,5 @@ environment_cd_roles = {
     "Storage Queue Data Contributor",
     "Storage Table Data Contributor",
   ]
+  resource_groups = {}
 }
