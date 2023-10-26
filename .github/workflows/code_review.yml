@@ -89,6 +89,8 @@ jobs:
     with:
       environment: ${{ inputs.environment }}
       dir: "./src/core"
+    permissions:
+      id-token: write
 
 # jobs:
 #   plan_dev:
