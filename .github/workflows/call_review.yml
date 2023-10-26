@@ -8,6 +8,9 @@ on:
         type: string
         required: true
 
+env:
+  ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
+
 jobs:
   plan:
     runs-on: self-hosted
