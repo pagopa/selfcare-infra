@@ -774,6 +774,10 @@ components:
           format: date-time
         zipCode:
           type: string
+        onboarding:
+          type: array
+          items:
+            $ref: '#/components/schemas/OnboardedProductResponse'
     AttributesResponse:
       title: AttributesResponse
       type: object
@@ -1313,7 +1317,29 @@ components:
         updatedAt:
           type: string
           format: date-time
-     
+    OnboardedProductResponse:
+      title: OnboardedProductResponse
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        createdAt:
+          type: string
+          format: date-time
+        productId:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        updatedAt:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http
