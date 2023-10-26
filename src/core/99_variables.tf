@@ -1230,3 +1230,10 @@ variable "gh_runner_pat_secret_name" {
   type        = string
   description = "KeyVault secret name that stores the PAT to get access to repositories"
 }
+
+# Container App
+
+variable "cae_zone_redundant" {
+  type        = bool
+  description = "Container App Environment zone redudancy"
+}

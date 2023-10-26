@@ -449,3 +449,5 @@ storage_account_info = {
 }
 
 gh_runner_pat_secret_name = "github-pat-selfcare-infra"
+
+cae_zone_redundant = true
