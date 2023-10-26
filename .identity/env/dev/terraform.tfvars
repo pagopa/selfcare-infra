@@ -11,14 +11,25 @@ tags = {
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
-github_federations = [
+ci_github_federations = [
   {
     repository = "selfcare-infra"
     subject    = "DEV"
   },
   {
     repository = "selfcare-onboarding"
-    subject    = "dev"
+    subject    = "dev-ci"
+  }
+]
+
+cd_github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "DEV"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "dev-cd"
   }
 ]
 
@@ -37,7 +48,7 @@ environment_ci_roles = {
   ]
   resource_groups = {
     "terraform-state-rg" = [
-      "Storage Blob Data Owner"
+      "Storage Blob Data Contributor"
     ]
   }
 }
@@ -49,7 +60,11 @@ environment_cd_roles = {
     "Storage Blob Data Contributor",
     "Storage File Data SMB Share Contributor",
     "Storage Queue Data Contributor",
-    "Storage Table Data Contributor",
+    "Storage Table Data Contributor"
   ]
-  resource_groups = {}
+  resource_groups = {
+    "terraform-state-rg" = [
+      "Storage Blob Data Owner"
+    ]
+  }
 }

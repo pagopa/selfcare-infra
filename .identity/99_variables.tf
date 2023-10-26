@@ -23,7 +23,16 @@ variable "env_short" {
   }
 }
 
-variable "github_federations" {
+variable "ci_github_federations" {
+  type = list(object({
+    repository        = string
+    credentials_scope = optional(string, "environment")
+    subject           = string
+  }))
+  description = "GitHub Organization, repository name and scope permissions"
+}
+
+variable "cd_github_federations" {
   type = list(object({
     repository        = string
     credentials_scope = optional(string, "environment")

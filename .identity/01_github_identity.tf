@@ -11,7 +11,7 @@ module "identity-ci" {
 
   identity_role = "ci"
 
-  github_federations = var.github_federations
+  github_federations = var.ci_github_federations
 
   ci_rbac_roles = {
     subscription    = var.environment_ci_roles.subscription
@@ -33,11 +33,11 @@ module "identity-cd" {
 
   identity_role = "cd"
 
-  github_federations = var.github_federations
+  github_federations = var.cd_github_federations
 
-  ci_rbac_roles = {
+  cd_rbac_roles = {
     subscription    = var.environment_cd_roles.subscription
-    resource_groups = var.environment_ci_roles.resource_groups
+    resource_groups = var.environment_cd_roles.resource_groups
   }
 
   tags = var.tags

@@ -13,14 +13,25 @@ tags = {
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
-github_federations = [
+ci_github_federations = [
   {
     repository = "selfcare-infra"
     subject    = "DEV"
   },
   {
     repository = "selfcare-onboarding"
-    subject    = "dev"
+    subject    = "dev-ci"
+  }
+]
+
+cd_github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "DEV"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "dev-cd"
   }
 ]
 
