@@ -12,6 +12,7 @@ on:
       - "!**/*.lock.hcl"
 
   workflow_dispatch:
+
     inputs:
       environment:
         required: true
