@@ -1,63 +1,116 @@
-name: Code Review
+name: Core Code Review
 
 on:
-  workflow_dispatch:
-    inputs:
-      dev:
-        description: "Run on DEV environment"
-        required: true
-        type: boolean
-        default: true
-      uat:
-        description: "Run on UAT environment"
-        required: true
-        type: boolean
-        default: true
-      prod:
-        description: "Run on PROD environment"
-        required: true
-        type: boolean
-        default: true
-  push:
-    branches: [DEVEX-7-devops-migr-code-review] # to remove
   pull_request:
-    branches: [main]
+    branches:
+      - develop
+      - main
+    types: [ready_for_review]
     paths:
       - "src/core/*"
       - ".github/workflows/code_review.yml"
-      - ".github/workflows/job_code_review.yml"
       - "!**/*.lock.hcl"
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        description: Select the Environment
+        options:
+          - dev
+          - uat
+          - prod
+
+  # to remove
+  # push:
+  #   branches: [DEVEX-7-devops-migr-code-review]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
+# env:
+  # DIR: "./src/core"
+  # This condition (that unfortunately must be replicated for the first job)
+  # sets the environment depending on the current context for manually
+  # started workflows, it picks up the value coming from the UI; otherwise,
+  # it sets prod or uat depending on the current branch.
+  # Ternary operator is not supported
+  # ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
+
+# jobs:
+#   plan:
+#     name: Terraform Plan
+#     runs-on: self-hosted
+#     environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
+#     permissions:
+#       id-token: write
+
+#     steps:
+#       - uses: actions/checkout@v4
+#         name: Checkout
+#         with:
+#           ref: ${{ github.ref_name }}
+
+#       # this workaround is necessary to pass the environment value to the next job
+#       # unexpectly, global env vars cannot be read to set the environment and I don't
+#       # want to repeat that complex expression (already repeated twice)
+#       - name: Read Environment
+#         id: setenv
+#         shell: bash
+#         run: |
+#           echo "environment=$ENV_NAME" >> $GITHUB_OUTPUT
+
+#       - name: Set Terraform Version
+#         id: set-terraform-version
+#         run: |
+#           echo "terraform_version=$(cat .terraform-version)" >> $GITHUB_OUTPUT
+
+#       - uses: hashicorp/setup-terraform@v2
+#         name: Setup Terraform
+#         with:
+#           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
+
+#       - name: Terraform Plan
+#         uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
+#         with:
+#           client_id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+#           tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+#           subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+#           dir: ${{ env.DIR }}
+#           azure_environment: ${{ steps.setenv.outputs.environment }}
+
 jobs:
-  plan_dev:
-    uses: ./.github/workflows/job_code_review.yml
-    name: Dev Code Review
+  plan:
+    uses: ./.github/workflows/call_review.yml
+    name: Core Code Review
     secrets: inherit
     with:
-      enabled: true
-      environment: dev
+      environment: ${{ inputs.environment }}
+      dir: "./src/core"
 
-  # plan_uat:
-  #   uses: ./.github/workflows/job_code-review.yml
-  #   name: UAT Code Review
-  #   secrets: inherit
-  #   with:
-  #     enabled: ${{ inputs.uat }}
-  #     environment: UAT
+# jobs:
+#   plan_dev:
+#     uses: ./.github/workflows/job_code_review.yml
+#     name: Dev Code Review
+#     secrets: inherit
+#     with:
+#       enabled: true
+# environment: dev
 
-  # plan_prod:
-  #   uses: ./.github/workflows/job_code-review.yml
-  #   name: Prod Code Review
-  #   secrets: inherit
-  #   with:
-  #     enabled: ${{ inputs.prod }}
-  #     environment: PROD
+# plan_uat:
+#   uses: ./.github/workflows/job_code-review.yml
+#   name: UAT Code Review
+#   secrets: inherit
+#   with:
+#     enabled: ${{ inputs.uat }}
+#     environment: UAT
+
+# plan_prod:
+#   uses: ./.github/workflows/job_code-review.yml
+#   name: Prod Code Review
+#   secrets: inherit
+#   with:
+#     enabled: ${{ inputs.prod }}
+#     environment: PROD

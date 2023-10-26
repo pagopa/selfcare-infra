@@ -1,0 +1,48 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: false
+      dir:
+        type: string
+        required: true
+
+jobs:
+  plan:
+    runs-on: self-hosted
+    environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout
+        with:
+          ref: ${{ github.ref_name }}
+
+      # this workaround is necessary to pass the environment value to the next job
+      # unexpectly, global env vars cannot be read to set the environment and I don't
+      # want to repeat that complex expression (already repeated twice)
+      - name: Read Environment
+        id: setenv
+        shell: bash
+        run: |
+          echo "environment=$ENV_NAME" >> $GITHUB_OUTPUT
+
+      - name: Set Terraform Version
+        id: set-terraform-version
+        run: |
+          echo "terraform_version=$(cat .terraform-version)" >> $GITHUB_OUTPUT
+
+      - uses: hashicorp/setup-terraform@v2
+        name: Setup Terraform
+        with:
+          terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
+
+      - name: Terraform Plan
+        uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
+        with:
+          client_id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          dir: ${{ inputs.dir }}
+          azure_environment: ${{ steps.setenv.outputs.environment }}
