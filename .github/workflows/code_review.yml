@@ -22,49 +22,41 @@ on:
           - uat
           - prod
 
-  # to remove
-  # push:
-  #   branches: [DEVEX-7-devops-migr-code-review]
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
 
 jobs:
   plan:
-    # uses: ./.github/workflows/call_review.yml
+    uses: ./.github/workflows/call_review.yml
     name: Core Code Review
-    # secrets: inherit
-    runs-on: ubuntu-latest
-    # with:
-    #   environment: ${{ inputs.environment }}
-    #   dir: "./src/core"
+    secrets: inherit
+    with:
+      environment: ${{ inputs.environment }}
+      dir: "./src/core"
     permissions:
       id-token: write
       pull-requests: write
 
-    steps:
-      - uses: actions/github-script@v6
-        env:
-          PLAN: "terraform"
-        with:
-          script: |
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number
-            })
+    # steps:
+    #   - uses: actions/github-script@v6
+    #     env:
+    #       PLAN: "terraform"
+    #     with:
+    #       script: |
+    #         const { data: comments } = await github.rest.issues.listComments({
+    #           owner: context.repo.owner,
+    #           repo: context.repo.repo,
+    #           issue_number: context.issue.number
+    #         })
 
-            const botComment = comments.find(comment => {
-              return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
-            })
+    #         const botComment = comments.find(comment => {
+    #           return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
+    #         })
 
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `output`
-            })
-
-      # issues: write
-      # pull-requests: write
+    #         await github.rest.issues.createComment({
+    #           issue_number: context.issue.number,
+    #           owner: context.repo.owner,
+    #           repo: context.repo.repo,
+    #           body: `output`
+    #         })
