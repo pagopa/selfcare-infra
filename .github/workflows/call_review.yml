@@ -30,6 +30,7 @@ jobs:
         shell: bash
         run: |
           echo "environment=$ENV_NAME" >> $GITHUB_OUTPUT
+          echo "$ENV_NAME"
 
       - name: Set Terraform Version
         id: set-terraform-version
@@ -72,6 +73,15 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
+            })
+
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
 
             <details><summary>Show Plan</summary>
@@ -82,12 +92,21 @@ jobs:
 
             </details>
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+            if (botComment) {
+              github.rest.issues.updateComment({
+                owner: context.repo.owner
+                repo: context.repo.repo
+                comment_id: botComment.id
+                body: output
+              })
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: output
+              })
+            }
 
       # - name: Terraform Plan
       #   uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
