@@ -27,6 +27,10 @@ jwt_audience = "api.dev.selfcare.pagopa.it"
 
 jwt_social_expire = "10000000"
 
+configmaps_national_registries = {
+  NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.notifichedigitali.it/national-registries-private"
+}
+
 configmaps_ms_core = {
   USER_REGISTRY_MANAGEMENT_URL         = "https://api.uat.pdv.pagopa.it/user-registry/v1"
   MAIL_ONBOARDING_CONFIRMATION_LINK    = "https://dev.selfcare.pagopa.it/onboarding/confirm?jwt="
