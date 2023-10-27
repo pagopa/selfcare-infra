@@ -1083,6 +1083,9 @@ components:
         zipCode:
           type: string
           description: Institution's zipCode
+        logo:
+          type: string
+          description: Institution's logo
     InvalidParam:
       title: InvalidParam
       required:
