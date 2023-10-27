@@ -70,10 +70,10 @@ jobs:
 
       - uses: actions/github-script@v6
         # if: github.event_name == 'pull_request'
-        # env:
+        env:
         #   PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             #### Terraform Plan 📖
 
@@ -85,3 +85,7 @@ jobs:
       #     subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       #     dir: ${{ inputs.dir }}
       #     azure_environment: ${{ steps.setenv.outputs.environment }}
+
+      # - name: Terraform Plan Status
+      #   if: steps.plan.outcome == 'failure'
+      #   run: exit 1

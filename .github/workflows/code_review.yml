@@ -34,13 +34,21 @@ concurrency:
 
 jobs:
   plan:
-    uses: ./.github/workflows/call_review.yml
+    # uses: ./.github/workflows/call_review.yml
     name: Core Code Review
-    secrets: inherit
-    with:
-      environment: ${{ inputs.environment }}
-      dir: "./src/core"
+    # secrets: inherit
+    runs-on: [self-hosted]
+    # with:
+    #   environment: ${{ inputs.environment }}
+    #   dir: "./src/core"
     permissions:
       id-token: write
+
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            #### Terraform Plan 📖
+
       # issues: write
       # pull-requests: write
