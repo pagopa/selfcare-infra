@@ -9,12 +9,14 @@ on:
         required: true
 
 env:
-  ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
+  # ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
+  ENV_NAME: "dev"
 
 jobs:
   plan:
     runs-on: self-hosted
-    environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
+    # environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
+    environment: "dev-ci"
 
     steps:
       - uses: actions/checkout@v4
