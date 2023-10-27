@@ -37,7 +37,7 @@ jobs:
     # uses: ./.github/workflows/call_review.yml
     name: Core Code Review
     # secrets: inherit
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     # with:
     #   environment: ${{ inputs.environment }}
     #   dir: "./src/core"
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            #### Terraform Plan 📖
+            Terraform Plan
 
       # issues: write
       # pull-requests: write
