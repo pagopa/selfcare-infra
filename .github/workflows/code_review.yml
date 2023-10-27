@@ -41,6 +41,8 @@ jobs:
     #   dir: "./src/core"
     permissions:
       id-token: write
+      issues: write
+      pull-requests: write
 
     steps:
       - uses: actions/github-script@v6
