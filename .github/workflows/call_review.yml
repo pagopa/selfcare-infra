@@ -80,21 +80,19 @@ jobs:
               return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
             })
 
-            const output = `Terraform Plan`;
-
             if (botComment) {
               github.rest.issues.updateComment({
                 owner: context.repo.owner
                 repo: context.repo.repo
                 comment_id: botComment.id
-                body: output
+                body: `output`
               })
             } else {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: output
+                body: `output`
               })
             }
 
