@@ -5,10 +5,11 @@ on:
     branches:
       - develop
       - main
-    types: [ready_for_review, synchronize]
+    types: [synchronize]
     paths:
-      - "src/core/*"
+      - "src/core/**"
       - ".github/workflows/code_review.yml"
+      - ".github/workflows/call_review.yml"
       - "!**/*.lock.hcl"
 
   workflow_dispatch:
