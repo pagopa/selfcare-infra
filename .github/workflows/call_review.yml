@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout
-        with:
-          ref: ${{ github.ref_name }}
+        # with:
+        #   ref: ${{ github.ref_name }}
 
       # this workaround is necessary to pass the environment value to the next job
       # unexpectly, global env vars cannot be read to set the environment and I don't
