@@ -24,8 +24,8 @@ on:
           - prod
 
   # to remove
-  push:
-    branches: [DEVEX-7-devops-migr-code-review]
+  # push:
+  #   branches: [DEVEX-7-devops-migr-code-review]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
