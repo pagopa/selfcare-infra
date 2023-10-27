@@ -42,3 +42,5 @@ jobs:
       dir: "./src/core"
     permissions:
       id-token: write
+      # issues: write
+      # pull-requests: write
