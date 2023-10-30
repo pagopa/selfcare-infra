@@ -9,14 +9,12 @@ on:
         required: true
 
 env:
-  # ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
-  ENV_NAME: "dev"
+  ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
 
 jobs:
   plan:
     runs-on: self-hosted
-    # environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
-    environment: "dev-ci"
+    environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_CI }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -72,37 +70,6 @@ jobs:
           terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s | tee plan_output.txt
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
           echo "$OUTPUT" > plan_output_multiline.txt
-          # delimiter=$(openssl rand -hex 8)
-          # echo "plan<<$delimiter" >> $GITHUB_OUTPUT
-          # echo "$OUTPUT" >> $GITHUB_OUTPUT
-          # echo "$delimiter" >> $GITHUB_OUTPUT
-
-          # echo "plan=$OUTPUT" >> $GITHUB_OUTPUT
-
-          # echo "my output: $OUTPUT"
-
-      # - name: Read Terraform Output
-      #   id: tf_output
-      #   working-directory: ${{ inputs.dir }}
-      #   shell: bash
-      #   continue-on-error: true
-      #   run: |
-      #     # echo "reading"
-      #     # out=${{ steps.plan.outputs.plan }}
-      #     # echo "read"
-
-      #     echo 'formatted_output<<EOF' >> $GITHUB_OUTPUT
-      #     "$(echo "${{ steps.plan.outputs.plan }}" | grep -v "Refreshing state" | tail -c 60000)" >> $GITHUB_OUTPUT
-      #     echo 'EOF' >> $GITHUB_OUTPUT
-
-      # - name: Read Terraform Output
-      #   id: tf_output
-      #   working-directory: ${{ inputs.dir }}
-      #   run: |
-      #     out=${{ steps.plan.outputs.plan }}
-      #     out="$(echo "${out}" | grep -v "Refreshing state")"
-      #     out="$(echo -n "$out" | tail -c 60000)"
-      #     echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
 
       - uses: actions/github-script@v6
         with:
@@ -150,12 +117,3 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-
-      # - name: Terraform Plan
-      #   uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
-      #   with:
-      #     client_id: ${{ secrets.AZURE_CLIENT_ID_CI }}
-      #     tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-      #     subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     dir: ${{ inputs.dir }}
-      #     azure_environment: ${{ steps.setenv.outputs.environment }}
