@@ -50,17 +50,6 @@ jobs:
         with:
           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
 
-      - name: Terraform Init
-        id: init
-        run: |
-          cd ${{ inputs.dir }}
-          terraform init
-
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s
-        continue-on-error: true
-
       # - name: Terraform Plan
       #   id: plan
       #   run: |
@@ -77,9 +66,19 @@ jobs:
       #     bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s -out=tfplan-${{ steps.setenv.outputs.environment }}-${{ github.sha }} -input=false
       #   continue-on-error: true
 
+      - name: Terraform Plan
+        id: plan
+        uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
+        continue-on-error: true
+        with:
+          client_id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          dir: ${{ inputs.dir }}
+          azure_environment: ${{ steps.setenv.outputs.environment }}
+
       - uses: actions/github-script@v6
         with:
-          # github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
