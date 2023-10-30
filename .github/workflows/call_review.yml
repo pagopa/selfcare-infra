@@ -72,14 +72,14 @@ jobs:
           terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s | tee plan_output.txt
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
 
-          echo "plan<<EOF" >> $GITHUB_OUTPUT
+          delimiter=$(openssl rand -hex 8)
+          echo "plan<<$delimiter" >> $GITHUB_OUTPUT
           echo "$OUTPUT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "$delimiter" >> $GITHUB_OUTPUT
 
           echo "plan=$OUTPUT" >> $GITHUB_OUTPUT
 
-          echo "my output: $OUTPUT"
-
+          # echo "my output: $OUTPUT"
 
       # - name: Read Terraform Output
       #   id: tf_output
