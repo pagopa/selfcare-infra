@@ -67,6 +67,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         working-directory: ${{ inputs.dir }}
+        shell: bash
         run: |
           export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
           export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
@@ -80,14 +81,14 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
         continue-on-error: true
 
-      - name: Read Terraform Output
-        id: tf_output
-        working-directory: ${{ inputs.dir }}
-        run: |
-          out=${{ steps.plan.outputs.plan }}
-          out="$(echo "${out}" | grep -v "Refreshing state")"
-          out="$(echo -n "$out" | tail -c 60000)"
-          echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
+      # - name: Read Terraform Output
+      #   id: tf_output
+      #   working-directory: ${{ inputs.dir }}
+      #   run: |
+      #     out=${{ steps.plan.outputs.plan }}
+      #     out="$(echo "${out}" | grep -v "Refreshing state")"
+      #     out="$(echo -n "$out" | tail -c 60000)"
+      #     echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
 
       - uses: actions/github-script@v6
         with:
@@ -104,7 +105,7 @@ jobs:
 
             const commentBody = `#### Terraform Plan 📖
             <details><summary>Terraform Plan</summary>
-            \`\`\`${{ steps.tf_output.outputs.plan_output }}\`\`\`
+            \`\`\`${{ steps.plan.outputs.plan }}\`\`\`
             </details>`;
 
             if (botComment) {
