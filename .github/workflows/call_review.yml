@@ -67,7 +67,11 @@ jobs:
       - name: Terraform Plan
         id: plan
         working-directory: ${{ inputs.dir }}
-        run: terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false
+        run: |
+          out="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false)"
+          out="$(echo "${out}" | grep -v "Refreshing state")"
+          out="$(echo -n "$out" | tail -c 60000)"
+          echo "::set-output name=output::$out"
         continue-on-error: true
 
       # - name: Terraform Plan
@@ -98,7 +102,10 @@ jobs:
               return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
             })
 
-            const commentBody = `#### Terraform Plan 📖\n\`\`\`${{ steps.plan.outputs.stdout }}\`\`\``;
+            const commentBody = `#### Terraform Plan 📖
+            <details><summary>Terraform Plan</summary>
+            \`\`\`${{ format('{0}{1}', steps.plan.outputs.output, steps.plan.outputs.stderr) }}\`\`\`
+            </details>`;
 
             if (botComment) {
               await github.rest.issues.updateComment({
