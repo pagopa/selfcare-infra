@@ -731,12 +731,12 @@ module "apim_internal_api_ms_v1" {
   service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
 
   content_format = "openapi"
-  content_value = templatefile("./api/ms_internal_api/v1/ms_internal_api/v1/open-api.yml.tpl", {
+  content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
     host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
     basePath = "v1"
   })
 
-  xml_content = templatefile("./api/internal_jwt_base_policy.xml.tpl", {
+  xml_content = templatefile("./api/ms_internal_api/v1/internal_jwt_base_policy.xml.tpl", {
     API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint

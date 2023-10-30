@@ -272,9 +272,7 @@ resource "kubernetes_config_map" "national-registries-service" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = {
-    data = var.configmaps_national_registries
-  }
+  data = var.configmaps_national_registries
 }
 
 resource "kubernetes_config_map" "geo-taxonomies" {

@@ -13,7 +13,7 @@
                 var uid = context.Request.Headers.GetValueOrDefault("x-selfcare-uid","");
 
                 if(uid == "") {
-                  return "m2m";
+                  uid = "m2m";
                 }
 
                 var aud = "${API_DOMAIN}";
