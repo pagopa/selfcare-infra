@@ -80,21 +80,12 @@ jobs:
               return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
             })
 
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner
-                repo: context.repo.repo
-                comment_id: botComment.id
-                body: `output`
-              })
-            } else {
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: `output`
-              })
-            }
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `output`
+            })
 
       # - name: Terraform Plan Status
       #   if: steps.plan.outcome == 'failure'
