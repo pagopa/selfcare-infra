@@ -32,6 +32,14 @@ jobs:
           echo "environment=$ENV_NAME" >> $GITHUB_OUTPUT
           echo "$ENV_NAME"
 
+      - name: Login
+        id: login
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Set Terraform Version
         id: set-terraform-version
         run: |
@@ -42,29 +50,21 @@ jobs:
         with:
           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
 
-      - name: Login
-        id: login
-        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
-        with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID_CI }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Terraform Plan
+        id: plan
+        run: |
+          export PATH="${HOME}/bin:$PATH"
+          export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
+          export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
+          export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          export ARM_USE_OIDC=true
+          export ARM_USE_AZUREAD=true
+          export ARM_STORAGE_USE_AZUREAD=true
 
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: |
-      #     export PATH="${HOME}/bin:$PATH"
-      #     export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
-      #     export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
-      #     export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     export ARM_USE_OIDC=true
-      #     export ARM_USE_AZUREAD=true
-      #     export ARM_STORAGE_USE_AZUREAD=true
+          cd ${{ inputs.dir }}
 
-      #     cd ${{ inputs.dir }}
-
-      #     bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s -out=tfplan-${{ steps.setenv.outputs.environment }}-${{ github.sha }} -input=fals
-      #   continue-on-error: true
+          bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s -out=tfplan-${{ steps.setenv.outputs.environment }}-${{ github.sha }} -input=false
+        continue-on-error: true
 
       - uses: actions/github-script@v6
         with:
@@ -80,7 +80,7 @@ jobs:
               return comment.user.type === 'Bot' && comment.body.includes('Terraform Plan')
             })
 
-            const commentBody = "Hello from actions/github-script! (${{ github.sha }})"
+            const commentBody = `#### Terraform Plan 📖\`${{ steps.plan.outputs.stdout }}\``;
 
             if (botComment) {
               await github.rest.issues.updateComment({
@@ -98,9 +98,9 @@ jobs:
               })
             }
 
-      # - name: Terraform Plan Status
-      #   if: steps.plan.outcome == 'failure'
-      #   run: exit 1
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
 
       # - name: Terraform Plan
       #   uses: pagopa/terraform-preapply-azure-action@54ded8cda3437c3f6a9f46baf69cb321ce82f5cd
