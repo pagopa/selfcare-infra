@@ -71,13 +71,13 @@ jobs:
         run: |
           terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s | tee plan_output.txt
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
+          echo "$OUTPUT" > plan_output_multiline.txt
+          # delimiter=$(openssl rand -hex 8)
+          # echo "plan<<$delimiter" >> $GITHUB_OUTPUT
+          # echo "$OUTPUT" >> $GITHUB_OUTPUT
+          # echo "$delimiter" >> $GITHUB_OUTPUT
 
-          delimiter=$(openssl rand -hex 8)
-          echo "plan<<$delimiter" >> $GITHUB_OUTPUT
-          echo "$OUTPUT" >> $GITHUB_OUTPUT
-          echo "$delimiter" >> $GITHUB_OUTPUT
-
-          echo "plan=$OUTPUT" >> $GITHUB_OUTPUT
+          # echo "plan=$OUTPUT" >> $GITHUB_OUTPUT
 
           # echo "my output: $OUTPUT"
 
@@ -107,6 +107,8 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            const fs = require('fs');
+            const output = fs.readFileSync('${{ inputs.dir }}/plan_output_multiline.txt', 'utf8');
             const output = `${{ steps.plan.outputs.plan }}`;
             # const outputTruncated = output.slice(0, 60000);
 
