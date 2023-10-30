@@ -81,14 +81,14 @@ jobs:
             })
 
             if (botComment) {
-              github.rest.issues.updateComment({
+              await github.rest.issues.updateComment({
                 owner: context.repo.owner
                 repo: context.repo.repo
                 comment_id: botComment.id
                 body: `output`
               })
             } else {
-              github.rest.issues.createComment({
+              await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
