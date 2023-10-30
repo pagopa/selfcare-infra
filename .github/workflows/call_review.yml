@@ -49,6 +49,7 @@ jobs:
         name: Setup Terraform
         with:
           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
+          terraform_wrapper: true
 
       - name: Terraform Init
         id: init
@@ -74,16 +75,28 @@ jobs:
           export ARM_USE_AZUREAD=true
           export ARM_STORAGE_USE_AZUREAD=true
 
-          export TF_LOG="INFO"
-          export TF_LOG_PATH="./terraform.log"
+          # export TF_LOG="INFO"
+          # export TF_LOG_PATH="./terraform.log"
 
           terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false
-          out=$(cat ./terraform.log)
-          # out="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false)"
-          out="$(echo "${out}" | grep -v "Refreshing state")"
-          out="$(echo -n "$out" | tail -c 60000)"
-          echo "plan_output=$out" >> $GITHUB_OUTPUT
+          # out=$(cat ./terraform.log | tr '\n' ' ')
+          # echo "read"
+          # out="$(echo "${out}" | grep -v "Refreshing state")"
+          # echo "grep"
+          # out="$(echo -n "$out" | tail -c 60000)"
+          # echo "tail"
+          # echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
         continue-on-error: true
+
+      - name: Read Terraform Output
+        id: tf_output
+        working-directory: ${{ inputs.dir }}
+        run: |
+          out=$(cat << EOF
+            ${{ steps.plan.outputs.plan_output }}
+            EOF
+            )
+          echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
 
       - uses: actions/github-script@v6
         with:
