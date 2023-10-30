@@ -75,27 +75,18 @@ jobs:
           export ARM_USE_AZUREAD=true
           export ARM_STORAGE_USE_AZUREAD=true
 
-          # export TF_LOG="INFO"
-          # export TF_LOG_PATH="./terraform.log"
-
-          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false
-          # out=$(cat ./terraform.log | tr '\n' ' ')
-          # echo "read"
-          # out="$(echo "${out}" | grep -v "Refreshing state")"
-          # echo "grep"
-          # out="$(echo -n "$out" | tail -c 60000)"
-          # echo "tail"
-          # echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
+          echo 'plan<<EOF' >> $GITHUB_OUTPUT
+          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -out=tfplan >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
         continue-on-error: true
 
       - name: Read Terraform Output
         id: tf_output
         working-directory: ${{ inputs.dir }}
         run: |
-          out=$(cat << EOF
-            ${{ steps.plan.outputs.plan_output }}
-            EOF
-            )
+          out=${{ steps.plan.outputs.plan }}
+          out="$(echo "${out}" | grep -v "Refreshing state")"
+          out="$(echo -n "$out" | tail -c 60000)"
           echo -e "plan_output=$out" >> "$GITHUB_OUTPUT"
 
       - uses: actions/github-script@v6
@@ -113,7 +104,7 @@ jobs:
 
             const commentBody = `#### Terraform Plan 📖
             <details><summary>Terraform Plan</summary>
-            \`\`\`${{ steps.plan.outputs.plan_output }}\`\`\`
+            \`\`\`${{ steps.tf_output.outputs.plan_output }}\`\`\`
             </details>`;
 
             if (botComment) {
