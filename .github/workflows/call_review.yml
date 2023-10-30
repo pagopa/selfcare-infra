@@ -83,18 +83,18 @@ jobs:
             const commentBody = "Hello from actions/github-script! (${{ github.sha }})"
 
             if (botComment) {
-              await github.rest.issues.createComment({
-                issue_number: context.issue.number,
+              await github.rest.issues.updateComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: commentBody
+                body: commentBody,
+                comment_id: botComment.id
               })
             } else {
               await github.rest.issues.createComment({
-                issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: commentBody
+                body: commentBody,
+                issue_number: context.issue.number
               })
             }
 
