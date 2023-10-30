@@ -86,7 +86,7 @@ jobs:
 
           export TF_LOG="INFO"
           export TF_PATH="./terraform.log"
-          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -out=tfplan >> $GITHUB_OUTPUT
+          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -out=tfplan
 
           echo 'plan<<EOF' >> $GITHUB_OUTPUT
           echo "$(cat ./terraform.log)" >> $GITHUB_OUTPUT
