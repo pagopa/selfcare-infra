@@ -89,3 +89,31 @@ resource "azurerm_key_vault_secret" "event_hub_connection_strings" {
 
   key_vault_id = module.key_vault.id
 }
+
+locals {
+  event_hubs_iam = toset(flatten([
+    for eh in var.eventhubs : [
+      for iam in keys(eh.iam_roles) : {
+        name     = eh.name
+        resource = iam
+        role     = eh.iam_roles[iam]
+      }
+    ]
+  ]))
+}
+
+data "azurerm_eventhub" "event_hubs" {
+  for_each = { for i in local.event_hubs_iam : "${i.name}.${i.resource}" => i }
+
+  resource_group_name = azurerm_resource_group.event_rg.name
+  namespace_name      = "${local.project}-eventhub-ns"
+  name                = each.value.name
+}
+
+resource "azurerm_role_assignment" "event_hubs_assignments" {
+  for_each = { for i in local.event_hubs_iam : "${i.name}.${i.resource}" => i }
+
+  scope                = data.azurerm_eventhub.event_hubs["${each.value.name}.${each.value.resource}"].id
+  role_definition_name = each.value.role
+  principal_id         = each.value.resource
+}
