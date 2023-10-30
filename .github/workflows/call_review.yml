@@ -77,6 +77,10 @@ jobs:
         shell: bash
         continue-on-error: true
         run: |
+          OUTPUT="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s)"
+          echo "::set-output name=plan::$OUTPUT"
+          echo "$OUTPUT"
+
           # export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
           # export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
           # export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -84,27 +88,27 @@ jobs:
           # export ARM_USE_AZUREAD=true
           # export ARM_STORAGE_USE_AZUREAD=true
 
-          export TF_LOG="INFO"
-          export TF_PATH="./terraform.log"
-          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -out=tfplan
+          # export TF_LOG="INFO"
+          # export TF_PATH="./terraform.log"
+          # terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -out=tfplan
 
-          echo 'plan<<EOF' >> $GITHUB_OUTPUT
-          echo "$(cat ./terraform.log)" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+          # echo 'plan<<EOF' >> $GITHUB_OUTPUT
+          # echo "$(cat ./terraform.log)" >> $GITHUB_OUTPUT
+          # echo 'EOF' >> $GITHUB_OUTPUT
 
-      - name: Read Terraform Output
-        id: tf_output
-        working-directory: ${{ inputs.dir }}
-        shell: bash
-        continue-on-error: true
-        run: |
-          # echo "reading"
-          # out=${{ steps.plan.outputs.plan }}
-          # echo "read"
+      # - name: Read Terraform Output
+      #   id: tf_output
+      #   working-directory: ${{ inputs.dir }}
+      #   shell: bash
+      #   continue-on-error: true
+      #   run: |
+      #     # echo "reading"
+      #     # out=${{ steps.plan.outputs.plan }}
+      #     # echo "read"
 
-          echo 'formatted_output<<EOF' >> $GITHUB_OUTPUT
-          "$(echo "${{ steps.plan.outputs.plan }}" | grep -v "Refreshing state" | tail -c 60000)" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
+      #     echo 'formatted_output<<EOF' >> $GITHUB_OUTPUT
+      #     "$(echo "${{ steps.plan.outputs.plan }}" | grep -v "Refreshing state" | tail -c 60000)" >> $GITHUB_OUTPUT
+      #     echo 'EOF' >> $GITHUB_OUTPUT
 
       # - name: Read Terraform Output
       #   id: tf_output
@@ -118,6 +122,9 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            const output = `${{ steps.plan.outputs.plan }}`;
+            const outputTruncated = output.slice(0, 60000);
+
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -130,7 +137,7 @@ jobs:
 
             const commentBody = `#### Terraform Plan 📖
             <details><summary>Terraform Plan</summary>
-            \`\`\`${{ steps.tf_output.outputs.formatted_output }}\`\`\`
+            \`\`\`${outputTruncated}\`\`\`
             </details>`;
 
             if (botComment) {
