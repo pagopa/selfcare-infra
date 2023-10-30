@@ -55,12 +55,6 @@ jobs:
         id: init
         working-directory: ${{ inputs.dir }}
         run: |
-          terraform init -reconfigure -backend-config="./env/${{ steps.setenv.outputs.environment }}/backend.tfvars"
-
-      - name: Terraform Plan
-        id: plan
-        working-directory: ${{ inputs.dir }}
-        run: |
           export PATH="${HOME}/bin:$PATH"
           export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
           export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
@@ -68,7 +62,12 @@ jobs:
           export ARM_USE_OIDC=true
           export ARM_USE_AZUREAD=true
           export ARM_STORAGE_USE_AZUREAD=true
+          terraform init -reconfigure -backend-config="./env/${{ steps.setenv.outputs.environment }}/backend.tfvars"
 
+      - name: Terraform Plan
+        id: plan
+        working-directory: ${{ inputs.dir }}
+        run: |
           terraform plan ./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars -lock-timeout=3000s
         continue-on-error: true
 
