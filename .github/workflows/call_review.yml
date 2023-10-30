@@ -66,8 +66,8 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        working-directory: ${{ inputs.dir }}
         run: |
+          cd ${{ inputs.dir }}
           terraform plan ./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars -lock-timeout=3000s
         continue-on-error: true
 
