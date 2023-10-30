@@ -81,6 +81,16 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
         continue-on-error: true
 
+      - name: Read Terraform Output
+        id: tf_output
+        working-directory: ${{ inputs.dir }}
+        run: |
+          out=${{ steps.plan.outputs.plan }}
+
+          echo 'formatted_output<<EOF' >> $GITHUB_OUTPUT
+          "$(echo "${out}" | grep -v "Refreshing state" | tail -c 60000)"
+          echo 'EOF' >> $GITHUB_OUTPUT
+
       # - name: Read Terraform Output
       #   id: tf_output
       #   working-directory: ${{ inputs.dir }}
@@ -105,7 +115,7 @@ jobs:
 
             const commentBody = `#### Terraform Plan 📖
             <details><summary>Terraform Plan</summary>
-            \`\`\`${{ steps.plan.outputs.plan }}\`\`\`
+            \`\`\`${{ steps.tf_output.outputs.formatted_output }}\`\`\`
             </details>`;
 
             if (botComment) {
