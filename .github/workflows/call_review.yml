@@ -109,8 +109,6 @@ jobs:
           script: |
             const fs = require('fs');
             const output = fs.readFileSync('${{ inputs.dir }}/plan_output_multiline.txt', 'utf8');
-            const output = `${{ steps.plan.outputs.plan }}`;
-            # const outputTruncated = output.slice(0, 60000);
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
