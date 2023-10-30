@@ -75,9 +75,9 @@ jobs:
           export ARM_STORAGE_USE_AZUREAD=true
 
           out="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false)"
-          # out="$(echo "${out}" | grep -v "Refreshing state")"
+          out="$(echo "${out}" | grep -v "Refreshing state")"
           out="$(echo -n "$out" | tail -c 60000)"
-          echo "output=$out" >> $GITHUB_OUTPUT
+          echo "plan_output=$out" >> $GITHUB_OUTPUT
         continue-on-error: true
 
       # - name: Terraform Plan
@@ -110,7 +110,7 @@ jobs:
 
             const commentBody = `#### Terraform Plan 📖
             <details><summary>Terraform Plan</summary>
-            \`\`\`${{ format('{0}{1}', steps.plan.outputs.output, steps.plan.outputs.stderr) }}\`\`\`
+            \`\`\`${{ steps.plan.outputs.plan_output }}\`\`\`
             </details>`;
 
             if (botComment) {
