@@ -254,6 +254,9 @@ eventhubs = [{
   partitions        = 30
   message_retention = 7
   consumers         = []
+  iam_roles = {
+    "/subscriptions/ec285037-c673-4f58-b594-d7c480da4e8b/resourceGroups/io-p-sign-backend-rg/providers/Microsoft.Web/sites/io-p-sign-backoffice-app" = "Azure Event Hubs Data Receiver"
+  }
   keys = [
     {
       name   = "selfcare-wo"
