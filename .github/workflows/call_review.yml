@@ -81,13 +81,8 @@ jobs:
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
           echo "plan=$OUTPUT"
 
-          # OUTPUT="$(terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s)"
-          # echo "plan=$OUTPUT"
-          # echo "$OUTPUT"
+          echo "my output: $plan"
 
-          # echo 'plan<<EOF' >> $GITHUB_OUTPUT
-          # echo "$(cat ./terraform.log)" >> $GITHUB_OUTPUT
-          # echo 'EOF' >> $GITHUB_OUTPUT
 
       # - name: Read Terraform Output
       #   id: tf_output
@@ -116,7 +111,7 @@ jobs:
         with:
           script: |
             const output = `${{ steps.plan.outputs.plan }}`;
-            const outputTruncated = output.slice(0, 60000);
+            # const outputTruncated = output.slice(0, 60000);
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -131,10 +126,13 @@ jobs:
             const commentBody = `#### Terraform Plan 📖
             <details>
             <summary>Terraform Plan</summary>
+
+            \`\`\`hcl
+            ${output}
             \`\`\`
-            ${outputTruncated}
-            \`\`\`
-            </details>`;
+
+            </details>
+            `;
 
             if (botComment) {
               await github.rest.issues.updateComment({
