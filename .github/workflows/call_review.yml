@@ -74,26 +74,16 @@ jobs:
           export ARM_USE_AZUREAD=true
           export ARM_STORAGE_USE_AZUREAD=true
 
-          out="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false)"
+          export TF_LOG="INFO"
+          export TF_LOG_PATH="./terraform.log"
+
+          terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false
+          out=$(cat ./terraform.log)
+          # out="$(terraform plan -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s -input=false)"
           out="$(echo "${out}" | grep -v "Refreshing state")"
           out="$(echo -n "$out" | tail -c 60000)"
           echo "plan_output=$out" >> $GITHUB_OUTPUT
         continue-on-error: true
-
-      # - name: Terraform Plan
-      #   id: plan
-      #   working-directory: ${{ inputs.dir }}
-      #   run: |
-      #     export PATH="${HOME}/bin:$PATH"
-      #     export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
-      #     export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
-      #     export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      #     export ARM_USE_OIDC=true
-      #     export ARM_USE_AZUREAD=true
-      #     export ARM_STORAGE_USE_AZUREAD=true
-
-      #     bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s
-      #   continue-on-error: true
 
       - uses: actions/github-script@v6
         with:
