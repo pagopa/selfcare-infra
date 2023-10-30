@@ -84,9 +84,13 @@ jobs:
           export ARM_USE_AZUREAD=true
           export ARM_STORAGE_USE_AZUREAD=true
 
-          OUTPUT="$(terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s)"
+          terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s | tee plan_output.txt
+          OUTPUT="$(cat plan_output.txt)"
           echo "plan=$OUTPUT"
-          echo "$OUTPUT"
+
+          # OUTPUT="$(terraform plan -no-color -var-file="./env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s)"
+          # echo "plan=$OUTPUT"
+          # echo "$OUTPUT"
 
           # export TF_LOG="INFO"
           # export TF_PATH="./terraform.log"
