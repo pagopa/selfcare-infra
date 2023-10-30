@@ -71,7 +71,7 @@ geo-taxonomies = {
 }
 
 external-interceptor-url = {
-  PROD_FD_URL = ""
+  PROD_FD_URL = "https://portale.fideiussionidigitali.it"
 }
 
 
