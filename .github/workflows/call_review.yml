@@ -50,21 +50,30 @@ jobs:
         with:
           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version}}
 
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
       - name: Terraform Plan
         id: plan
-        run: |
-          export PATH="${HOME}/bin:$PATH"
-          export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
-          export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
-          export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          export ARM_USE_OIDC=true
-          export ARM_USE_AZUREAD=true
-          export ARM_STORAGE_USE_AZUREAD=true
-
-          cd ${{ inputs.dir }}
-
-          bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s -out=tfplan-${{ steps.setenv.outputs.environment }}-${{ github.sha }} -input=false
+        run: terraform plan -var-file="${{ inputs.dir }}/env/${{ steps.setenv.outputs.environment }}/terraform.tfvars" -lock-timeout=3000s
         continue-on-error: true
+
+      # - name: Terraform Plan
+      #   id: plan
+      #   run: |
+      #     export PATH="${HOME}/bin:$PATH"
+      #     export ARM_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID_CI }}
+      #     export ARM_TENANT_ID=${{ secrets.AZURE_TENANT_ID }}
+      #     export ARM_SUBSCRIPTION_ID=${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      #     export ARM_USE_OIDC=true
+      #     export ARM_USE_AZUREAD=true
+      #     export ARM_STORAGE_USE_AZUREAD=true
+
+      #     cd ${{ inputs.dir }}
+
+      #     bash terraform.sh plan ${{ steps.setenv.outputs.environment }} -lock-timeout=3000s -out=tfplan-${{ steps.setenv.outputs.environment }}-${{ github.sha }} -input=false
+      #   continue-on-error: true
 
       - uses: actions/github-script@v6
         with:
