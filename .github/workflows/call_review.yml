@@ -84,8 +84,11 @@ jobs:
       - name: Read Terraform Output
         id: tf_output
         working-directory: ${{ inputs.dir }}
+        shell: bash
         run: |
+          echo "reading"
           out=${{ steps.plan.outputs.plan }}
+          echo "read"
 
           echo 'formatted_output<<EOF' >> $GITHUB_OUTPUT
           "$(echo "${out}" | grep -v "Refreshing state" | tail -c 60000)"
