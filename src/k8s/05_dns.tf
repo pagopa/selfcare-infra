@@ -12,7 +12,7 @@ resource "kubernetes_manifest" "coredns_custom" {
       }
     }
     "data" = {
-      "smtps-pec-aruba-it.server" = <<EOT
+      "smtps-pec-aruba-it.server"      = <<EOT
 smtps.pec.aruba.it:53 {
   forward . 8.8.8.8
 }
@@ -22,7 +22,7 @@ asbr-pagopa.arubapec.it:53 {
   forward . 8.8.8.8
 }
 EOT
-      "eidas-agid-gov-it.server" = <<EOT
+      "eidas-agid-gov-it.server"       = <<EOT
 eidas.agid.gov.it:53 {
   forward . 8.8.8.8
 }
