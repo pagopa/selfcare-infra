@@ -76,11 +76,11 @@ resource "azurerm_monitor_action_group" "error_action_group" {
     use_common_alert_schema = true
   }
 
-  webhook_receiver {
-    name                    = "opsgenie"
-    service_uri             = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
-    use_common_alert_schema = true
-  }
+  # webhook_receiver {
+  #   name                    = "opsgenie"
+  #   service_uri             = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
+  #   use_common_alert_schema = true
+  # }
 
   tags = var.tags
 }
