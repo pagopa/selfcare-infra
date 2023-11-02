@@ -177,3 +177,7 @@ variable "location_string" {
   type        = string
   description = "One of West Europe, North Europe"
 }
+
+variable "configmaps_national_registries" {
+  type = map(string)
+}

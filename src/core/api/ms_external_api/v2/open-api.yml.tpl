@@ -1785,25 +1785,6 @@ components:
           type: string
         vatNumber:
           type: string
-    DelegationRequest:
-      title: DelegationRequest
-      type: object
-      properties:
-        from:
-          type: string
-        institutionFromName:
-          type: string
-        institutionToName:
-          type: string
-        productId:
-          type: string
-        to:
-          type: string
-        type:
-          type: string
-          enum:
-            - AOO
-            - PT
   securitySchemes:
     bearerAuth:
       type: http
