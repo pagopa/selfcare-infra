@@ -402,6 +402,48 @@ paths:
         security:
           - bearerAuth:
             - global
+  '/onboarding/users':
+    post:
+      tags:
+        - Onboarding
+      summary: The service adds users to the registry if they are not present and associates them with the institution and product contained in the body
+      description: The service adds users to the registry if they are not present and associates them with the institution and product contained in the body
+      operationId: onboardingInstitutionUsersUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingInstitutionUsersRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelationshipResult'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1241,6 +1283,192 @@ components:
         vatNumber:
           type: string
           description: Institution's VAT number
+    BillingResponse:
+      title: BillingResponse
+      type: object
+      properties:
+        publicServices:
+          type: boolean
+        recipientCode:
+          type: string
+        vatNumber:
+          type: string
+    OnboardingInstitutionUsersRequest:
+      title: OnboardingInstitutionUsersRequest
+      type: object
+      properties:
+        institutionSubunitCode:
+          type: string
+        institutionTaxCode:
+          type: string
+        productId:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+    Person:
+      title: Person
+      type: object
+      properties:
+        email:
+          type: string
+        env:
+          type: string
+          enum:
+            - COLL
+            - DEV
+            - PROD
+            - ROOT
+        id:
+          type: string
+        name:
+          type: string
+        productRole:
+          type: string
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        roleLabel:
+          type: string
+        surname:
+          type: string
+        taxCode:
+          type: string
+    RelationshipResult:
+      title: RelationshipResult
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        createdAt:
+          type: string
+          format: date-time
+        from:
+          type: string
+        id:
+          type: string
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        pricingPlan:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductInfo'
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        state:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        to:
+          type: string
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    InstitutionUpdate:
+      title: InstitutionUpdate
+      type: object
+      properties:
+        address:
+          type: string
+        businessRegisterPlace:
+          type: string
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficer'
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+        imported:
+          type: boolean
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+            - AS
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    ProductInfo:
+      title: ProductInfo
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        role:
+          type: string
+    DataProtectionOfficer:
+      title: DataProtectionOfficer
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        pec:
+          type: string
+    PaymentServiceProvider:
+      title: PaymentServiceProvider
+      type: object
+      properties:
+        abiCode:
+          type: string
+        businessRegisterNumber:
+          type: string
+        legalRegisterName:
+          type: string
+        legalRegisterNumber:
+          type: string
+        vatNumberGroup:
+          type: boolean
+    InstitutionGeographicTaxonomies:
+      title: InstitutionGeographicTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

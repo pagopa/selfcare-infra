@@ -777,6 +777,12 @@ module "apim_internal_api_ms_v1" {
       })
     },
     {
+      operation_id = "onboardingInstitutionUsersUsingPOST"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+      })
+    },
+    {
       operation_id = "autoApprovalOnboardingFromPdaUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
