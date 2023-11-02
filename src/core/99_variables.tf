@@ -14,6 +14,12 @@ locals {
   action_group_selfcare_uat_name = "selcuat"
 
   aks_cluster_name = "${local.project}-aks"
+
+  # Private DNS
+  container_app_environment_dns_zone_name = "azurecontainerapps.io"
+  container_app_resource_group_name       = "container-app-rg"
+  container_app_environment_name          = "cae"
+  container_app_onboarding_ms_name        = "onboarding-ms-ca"
 }
 
 variable "cidr_pair_vnet" {
