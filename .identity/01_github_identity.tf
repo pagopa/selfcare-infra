@@ -3,8 +3,8 @@ resource "azurerm_resource_group" "identity_rg" {
   location = var.location
 }
 
-module "identity-ci" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=gh-identity-module"
+module "identity_ci" {
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=b9c9bfc42386034aa2f49a6a836955a12e715f48"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -14,8 +14,8 @@ module "identity-ci" {
   github_federations = var.ci_github_federations
 
   ci_rbac_roles = {
-    subscription    = var.environment_ci_roles.subscription
-    resource_groups = var.environment_ci_roles.resource_groups
+    subscription_roles = var.environment_ci_roles.subscription
+    resource_groups    = var.environment_ci_roles.resource_groups
   }
 
   tags = var.tags
@@ -25,8 +25,8 @@ module "identity-ci" {
   ]
 }
 
-module "identity-cd" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=gh-identity-module"
+module "identity_cd" {
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=b9c9bfc42386034aa2f49a6a836955a12e715f48"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -36,8 +36,8 @@ module "identity-cd" {
   github_federations = var.cd_github_federations
 
   cd_rbac_roles = {
-    subscription    = var.environment_cd_roles.subscription
-    resource_groups = var.environment_cd_roles.resource_groups
+    subscription_roles = var.environment_cd_roles.subscription
+    resource_groups    = var.environment_cd_roles.resource_groups
   }
 
   tags = var.tags

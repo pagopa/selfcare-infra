@@ -32,6 +32,10 @@ cd_github_federations = [
     subject    = "DEV"
   },
   {
+    repository = "selfcare-infra"
+    subject    = "dev-cd"
+  },
+  {
     repository = "selfcare-onboarding"
     subject    = "dev-cd"
   }

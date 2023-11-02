@@ -11,8 +11,8 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_identity-cd"></a> [identity-cd](#module\_identity-cd) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | gh-identity-module |
-| <a name="module_identity-ci"></a> [identity-ci](#module\_identity-ci) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | gh-identity-module |
+| <a name="module_identity_cd"></a> [identity\_cd](#module\_identity\_cd) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | b9c9bfc42386034aa2f49a6a836955a12e715f48 |
+| <a name="module_identity_ci"></a> [identity\_ci](#module\_identity\_ci) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | b9c9bfc42386034aa2f49a6a836955a12e715f48 |
 
 ## Resources
 
