@@ -13,6 +13,36 @@ tags = {
   CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
 }
 
+ci_github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "PROD"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "prod-ci"
+  }
+]
+
+cd_github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "PROD"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "prod-cd"
+  }
+]
+
 environment_ci_roles = {
   subscription = [
     "Reader",

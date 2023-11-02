@@ -1,70 +1,48 @@
 resource "azurerm_resource_group" "identity_rg" {
-  name     = "identity-rg"
+  name     = "${local.project}-identity-rg"
   location = var.location
 }
 
-resource "azurerm_user_assigned_identity" "this_ci" {
-  location            = var.location
-  name                = "${local.app_name}-ci"
-  resource_group_name = azurerm_resource_group.identity_rg.name
+module "identity_ci" {
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.19.0"
+
+  prefix    = var.prefix
+  env_short = var.env_short
+
+  identity_role = "ci"
+
+  github_federations = var.ci_github_federations
+
+  ci_rbac_roles = {
+    subscription_roles = var.environment_ci_roles.subscription
+    resource_groups    = var.environment_ci_roles.resource_groups
+  }
 
   tags = var.tags
+
+  depends_on = [
+    azurerm_resource_group.identity_rg
+  ]
 }
 
-resource "azurerm_user_assigned_identity" "this_cd" {
-  location            = var.location
-  name                = "${local.app_name}-cd"
-  resource_group_name = azurerm_resource_group.identity_rg.name
+module "identity_cd" {
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.19.0"
+
+  prefix    = var.prefix
+  env_short = var.env_short
+
+  identity_role = "cd"
+
+  github_federations = var.cd_github_federations
+
+  cd_rbac_roles = {
+    subscription_roles = var.environment_cd_roles.subscription
+    resource_groups    = var.environment_cd_roles.resource_groups
+  }
 
   tags = var.tags
-}
 
-resource "azurerm_role_assignment" "environment_ci_subscription" {
-  for_each             = toset(var.environment_ci_roles.subscription)
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = each.key
-  principal_id         = azurerm_user_assigned_identity.this_ci.principal_id
-}
-
-resource "azurerm_role_assignment" "environment_cd_subscription" {
-  for_each             = toset(var.environment_cd_roles.subscription)
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = each.key
-  principal_id         = azurerm_user_assigned_identity.this_cd.principal_id
-}
-
-resource "azurerm_federated_identity_credential" "environment_ci" {
-  name                = "${local.project}-github-selfcare-infra-ci"
-  resource_group_name = azurerm_resource_group.identity_rg.name
-  audience            = var.github-federation.audience
-  issuer              = var.github-federation.issuer
-  parent_id           = azurerm_user_assigned_identity.this_ci.id
-  subject             = local.federation_subject_ci
-}
-
-resource "azurerm_federated_identity_credential" "environment_cd" {
-  name                = "${local.project}-github-selfcare-infra-cd"
-  resource_group_name = azurerm_resource_group.identity_rg.name
-  audience            = var.github-federation.audience
-  issuer              = var.github-federation.issuer
-  parent_id           = azurerm_user_assigned_identity.this_cd.id
-  subject             = local.federation_subject_cd
-}
-
-output "azure_environment_ci" {
-  value = {
-    app_name       = azurerm_user_assigned_identity.this_ci.name
-    client_id      = azurerm_user_assigned_identity.this_ci.client_id
-    application_id = azurerm_user_assigned_identity.this_ci.client_id
-    object_id      = azurerm_user_assigned_identity.this_ci.principal_id
-  }
-}
-
-output "azure_environment_cd" {
-  value = {
-    app_name       = azurerm_user_assigned_identity.this_cd.name
-    client_id      = azurerm_user_assigned_identity.this_cd.client_id
-    application_id = azurerm_user_assigned_identity.this_cd.client_id
-    object_id      = azurerm_user_assigned_identity.this_cd.principal_id
-  }
+  depends_on = [
+    azurerm_resource_group.identity_rg
+  ]
 }
