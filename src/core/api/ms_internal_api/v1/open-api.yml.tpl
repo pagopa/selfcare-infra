@@ -358,6 +358,50 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/pda/{injectionInstitutionType}':
+      post:
+        tags:
+          - onboarding
+        summary: autoApprovalOnboardingFromPda
+        description: The service allows the onboarding of EC and PT institutions with auto approval
+        operationId: autoApprovalOnboardingFromPdaUsingPOST
+        parameters:
+          - name: injectionInstitutionType
+            in: path
+            description: The field specified institution type for injection EC, PT
+            required: true
+            style: simple
+            schema:
+              type: string
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PdaOnboardingDto'
+        responses:
+          '201':
+            description: Created
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '401':
+            description: Unauthorized
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '500':
+            description: Internal Server Error
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1166,6 +1210,37 @@ components:
           enum:
             - AOO
             - PT
+    PdaOnboardingDto:
+      title: PdaOnboardingDto
+      required:
+        - businessName
+        - productId
+        - recipientCode
+        - taxCode
+        - users
+        - vatNumber
+      type: object
+      properties:
+        businessName:
+          type: string
+          description: Institution's legal name
+        productId:
+          type: string
+          description: Product's unique identifier
+        recipientCode:
+          type: string
+          description: Billing recipient code, not required only for institutionType SA
+        taxCode:
+          type: string
+          description: Institution's taxCode
+        users:
+          type: array
+          description: List of onboarding users
+          items:
+            $ref: '#/components/schemas/UserDto'
+        vatNumber:
+          type: string
+          description: Institution's VAT number
   securitySchemes:
     bearerAuth:
       type: http

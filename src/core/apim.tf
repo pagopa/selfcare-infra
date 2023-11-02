@@ -736,7 +736,7 @@ module "apim_internal_api_ms_v1" {
     basePath = "v1"
   })
 
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+  xml_content = templatefile("./api/ms_internal_api/v1/internal_jwt_base_policy.xml.tpl", {
     API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -769,6 +769,16 @@ module "apim_internal_api_ms_v1" {
       xml_content = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
       })
+    },
+    {
+      operation_id = "createDelegationUsingPOST"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+      })
+    },
+    {
+      operation_id = "autoApprovalOnboardingFromPdaUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
     }
   ]
 }

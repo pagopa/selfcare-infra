@@ -272,9 +272,7 @@ resource "kubernetes_config_map" "national-registries-service" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = {
-    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.notifichedigitali.it/national-registries-private/"
-  }
+  data = var.configmaps_national_registries
 }
 
 resource "kubernetes_config_map" "geo-taxonomies" {
