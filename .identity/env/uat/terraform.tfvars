@@ -16,22 +16,30 @@ tags = {
 ci_github_federations = [
   {
     repository = "selfcare-infra"
-    subject    = "DEV"
+    subject    = "UAT"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "uat-ci"
   },
   {
     repository = "selfcare-onboarding"
-    subject    = "dev-ci"
+    subject    = "uat-ci"
   }
 ]
 
 cd_github_federations = [
   {
     repository = "selfcare-infra"
-    subject    = "DEV"
+    subject    = "UAT"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "uat-cd"
   },
   {
     repository = "selfcare-onboarding"
-    subject    = "dev-cd"
+    subject    = "uat-cd"
   }
 ]
 
