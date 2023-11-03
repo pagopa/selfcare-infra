@@ -1,0 +1,57 @@
+name: test
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - "cross-sub-test"
+    paths:
+      - test
+      - .github/workflows/test.yml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev-cd
+    env:
+      ARM_USE_OIDC: true
+      ARM_USE_AZUREAD: true
+      ARM_STORAGE_USE_AZUREAD: true
+      dir: ./test
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout
+
+      - name: Login
+        id: login
+        uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - uses: hashicorp/setup-terraform@v2
+        name: Setup Terraform
+
+      - name: Terraform Init
+        id: init
+        working-directory: ${{ env.dir }}
+        run: terraform init"
+
+      - name: Terraform Plan
+        id: plan
+        working-directory: ${{ env.dir }}
+        shell: bash
+        run: |
+          terraform plan
+
+      - name: Terraform Apply
+        id: apply
+        working-directory: ${{ env.dir }}
+        shell: bash
+        run: |
+          terraform apply
