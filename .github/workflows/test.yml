@@ -45,13 +45,6 @@ jobs:
         working-directory: ${{ env.dir }}
         run: terraform init
 
-      - name: Terraform Plan
-        id: plan
-        working-directory: ${{ env.dir }}
-        shell: bash
-        run: |
-          terraform plan
-
       - name: Terraform Apply
         id: apply
         working-directory: ${{ env.dir }}
