@@ -57,4 +57,4 @@ jobs:
         working-directory: ${{ env.dir }}
         shell: bash
         run: |
-          terraform apply
+          terraform apply -auto-approve
