@@ -13,7 +13,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: dev-cd
+    environment: "dev-cd"
     env:
       ARM_USE_OIDC: true
       ARM_USE_AZUREAD: true
@@ -30,7 +30,7 @@ jobs:
         id: login
         uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID_CI }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID_CD }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
