@@ -249,6 +249,7 @@ pre-commit run -a
 | <a name="input_configmaps_common"></a> [configmaps\_common](#input\_configmaps\_common) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_hub-spid-login-ms"></a> [configmaps\_hub-spid-login-ms](#input\_configmaps\_hub-spid-login-ms) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_ms_core"></a> [configmaps\_ms\_core](#input\_configmaps\_ms\_core) | n/a | `map(string)` | n/a | yes |
+| <a name="input_configmaps_national_registries"></a> [configmaps\_national\_registries](#input\_configmaps\_national\_registries) | n/a | `map(string)` | n/a | yes |
 | <a name="input_default_service_port"></a> [default\_service\_port](#input\_default\_service\_port) | n/a | `number` | `8080` | no |
 | <a name="input_enable_postgres_replica"></a> [enable\_postgres\_replica](#input\_enable\_postgres\_replica) | Enable connection to postgres replica | `bool` | `false` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
