@@ -1239,6 +1239,8 @@ components:
           type: string
         productId:
           type: string
+        sendCreateUserNotificationEmail:
+          type: boolean
         users:
           type: array
           items:
