@@ -1,0 +1,37 @@
+name: Identity Core Review
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - .identity/**
+      - .github/workflows/identity_review.yml
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        description: Select the Environment
+        options:
+          - dev
+          - uat
+          - prod
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    uses: ./.github/workflows/call_review.yml
+    name: Identity Code Review
+    secrets: inherit
+    with:
+      environment: ${{ inputs.environment }}
+      dir: "./.identity"
+    permissions:
+      id-token: write
+      pull-requests: write
