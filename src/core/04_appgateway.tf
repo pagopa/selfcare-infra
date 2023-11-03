@@ -24,12 +24,11 @@ module "appgateway_snet" {
 locals {
   allowedIngressPathRegexps = [
     "/spid/*",
+    "/spid-login/*",
     "/dashboard/*",
     "/onboarding/*",
     "/ms-notification-manager/*",
-    # "/party-process/*",
     "/party-registry-proxy/*",
-    # "/ms-core/*",
   ]
 
   backends = {
