@@ -321,7 +321,7 @@ eventhubs = [{
   message_retention = 7
   consumers         = []
   iam_roles = {
-    "/subscriptions/ec285037-c673-4f58-b594-d7c480da4e8b/resourceGroups/io-p-sign-backend-rg/providers/Microsoft.Web/sites/io-p-sign-backoffice-func" = "Azure Event Hubs Data Receiver"
+    "ee71d0ec-0023-44ae-93dd-871d25ab7003" = "Azure Event Hubs Data Receiver" # io-p-sign-backoffice-func
   }
   keys = [
     {
