@@ -18,7 +18,6 @@ locals {
   # Private DNS
   container_app_environment_dns_zone_name = "azurecontainerapps.io"
   container_app_resource_group_name       = "container-app-rg"
-  container_app_environment_name          = "cae"
 }
 
 variable "cidr_pair_vnet" {
