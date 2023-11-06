@@ -318,12 +318,12 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/delegations':
+  '/delegations/from-taxcode':
     post:
       tags:
         - Delegation
-      summary: Create an association between institution id and technical partner
-      description: Create an association between institution id and technical partner
+      summary: Create Delegation from institutions taxCode
+      description: Create an association between institution id and technical partner given Institutions taxCode
       operationId: createDelegationUsingPOST
       requestBody:
         content:
@@ -1198,7 +1198,7 @@ components:
       title: DelegationRequest
       type: object
       properties:
-        from:
+        fromTaxCode:
           type: string
         institutionFromName:
           type: string
@@ -1206,7 +1206,7 @@ components:
           type: string
         productId:
           type: string
-        to:
+        toTaxCode:
           type: string
         type:
           type: string
