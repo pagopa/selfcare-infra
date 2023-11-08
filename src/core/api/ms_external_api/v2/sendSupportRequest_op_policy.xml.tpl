@@ -47,7 +47,7 @@
         </set-header>
         <set-body>@{
             var request = context.Request.Body.As<JObject>();  
-            request.Add("productId", @((string)context.Variables["productId"]));
+            request.Add(new JProperty("productId", ((string)context.Variables["productId"])));
             return request.ToString();
         }</set-body>
         <set-backend-service base-url="${BACKEND_BASE_URL}" />
