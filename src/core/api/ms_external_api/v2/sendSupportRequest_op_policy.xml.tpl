@@ -51,6 +51,7 @@
             return request.ToString();
         }</set-body>
         <set-backend-service base-url="${BACKEND_BASE_URL}" />
+        <rewrite-uri template="/" />
     </inbound>
     <backend>
         <base />
