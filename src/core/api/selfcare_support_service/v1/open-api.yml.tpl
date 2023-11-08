@@ -9,46 +9,6 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
-  '/':
-    post:
-      tags:
-        - support
-      summary: sendSupportRequest
-      description: Service to retrieve Support contact's form
-      operationId: sendSupportRequestUsingPOST
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportRequestDto'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
   '/institutions/{institutionId}/users':
     get:
       tags:
