@@ -45,13 +45,11 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-body>
-        @{
+        <set-body>@{
             var request = context.Request.Body.As<JObject>();  
             request.Add("productId", @((string)context.Variables["productId"]));
             return request.ToString();
-        }
-        </set-body>
+        }</set-body>
         <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
