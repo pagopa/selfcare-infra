@@ -1,7 +1,7 @@
 # general
-prefix         = "selc"
-env_short      = "p"
-location       = "westeurope"
+prefix    = "selc"
+env_short = "p"
+location  = "westeurope"
 
 tags = {
   CreatedBy   = "Terraform"
