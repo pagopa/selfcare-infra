@@ -7,13 +7,16 @@ on:
       dir:
         type: string
         required: true
+      agent:
+        type: string
+        required: true
 
 env:
   ENV_NAME: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}"
 
 jobs:
   plan:
-    runs-on: self-hosted
+    runs-on: ${{ inputs.agent }}
     environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_CI }}
