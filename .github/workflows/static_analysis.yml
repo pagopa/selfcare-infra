@@ -24,6 +24,7 @@ jobs:
             src/domains/pnpg-common
             src/domains/pnpg-common/modules/spid_testenv
             src/k8s
+            ./.identity
         run: |
           pids=()
 

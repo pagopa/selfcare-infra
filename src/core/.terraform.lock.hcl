@@ -1,6 +1,29 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
+provider "registry.terraform.io/azure/azapi" {
+  version     = "1.9.0"
+  constraints = "<= 1.9.0"
+  hashes = [
+    "h1:Ow1rr5fYBGSkplH/kcXeWz9y2wA81BnhZ7vTBzJfAAg=",
+    "h1:shpEoqcAbf+p6AvspiYO1YrX//8l1LV/owEcQpujWHw=",
+    "h1:yIJQVdnmGZdvS3yrw0M8ke9KiB/c0tjZ7KUXC46Hjx0=",
+    "h1:zaLH2Owmj61RX2G1Cy6VDy8Ttfzx+lDsSCyiu5cXkm4=",
+    "zh:349569471fbf387feaaf8b88da1690669e201147c342f905e5eb03df42b3cf87",
+    "zh:54346d5fb78cbad3eb7cfd96e1dd7ce4f78666cabaaccfec6ee9437476330018",
+    "zh:64b799da915ea3a9a58ac7a926c6a31c59fd0d911687804d8e815eda88c5580b",
+    "zh:9336ed9e112555e0fda8af6be9ba21478e30117d79ba662233311d9560d2b7c6",
+    "zh:a8aace9897b28ea0b2dbd7a3be3df033e158af40412c9c7670be0956f216ed7e",
+    "zh:ab23df7de700d9e785009a4ca9ceb38ae1ab894a13f5788847f15d018556f415",
+    "zh:b4f13f0b13560a67d427c71c85246f8920f98987120341830071df4535842053",
+    "zh:e58377bf36d8a14d28178a002657865ee17446182dac03525fd43435e41a1b5c",
+    "zh:ea5db4acc6413fd0fe6b35981e58cdc9850f5f3118031cc3d2581de511aee6aa",
+    "zh:f0b32c06c6bd4e4af2c02a62be07b947766aeeb09289a03f21aba16c2fd3c60f",
+    "zh:f1518e766a90c257d7eb36d360dafaf311593a4a9352ff8db0bcfe0ed8cf45ae",
+    "zh:fa89e84cff0776b5b61ff27049b1d8ed52040bd58c81c4628890d644a6fb2989",
+  ]
+}
+
 provider "registry.terraform.io/chilicat/pkcs12" {
   version     = "0.0.7"
   constraints = "0.0.7"
@@ -27,31 +50,31 @@ provider "registry.terraform.io/chilicat/pkcs12" {
 }
 
 provider "registry.terraform.io/hashicorp/azuread" {
-  version     = "2.42.0"
+  version     = "2.45.0"
   constraints = ">= 2.33.0"
   hashes = [
-    "h1:5+ItCYcLIRXgdfBQhmcgYP8/q0WgQh6D9QZssGMcoqo=",
-    "h1:DZ2GTCECB8s/ZY7RAlIhUSH1cGQKUp1YphzJD1ObsIs=",
-    "h1:WtWUUV8JoNY5UujSX7H8ObljJgKHIltf13ZVVogllq8=",
-    "h1:bDUzMd0edhYAne6CAzvTb5qGdoUH3INU7gZ6Bk70Sb4=",
+    "h1:/LuV4Jyl+t/BZxRsIyuz2VRKPPFxH18FcO2xMnIWlUE=",
+    "h1:/uvs5iEiakqbl4PEGzNob8Rqbnw7YaeXfjnTMfJJK2w=",
+    "h1:ANlwN9pjsAYTi5kwoTvR8OxvAJDf97wIGH/rM7dSOvQ=",
+    "h1:SRscIaJNj58cMEl4Ow5QkK7+hIx5o1aG5HO6riquoMA=",
+    "zh:08d80f6ab1d8bcb02976a5fde0b108fc008093a7a6f1b5d083d5cf1e01dc0b86",
     "zh:1c3e89cf19118fc07d7b04257251fc9897e722c16e0a0df7b07fcd261f8c12e7",
-    "zh:1ebf629ae485875bb80bf5752122ada01ee602cfb0fa01106621c7e730c10e0a",
-    "zh:33ac22d0c308fc3d8cf7fc35f4ee7b616069b6ea2a9f5692b438b8c9013b9664",
-    "zh:3f90b31f72c13b682221db47116411188bb38e91c6923d5268053817835873c1",
-    "zh:571585f46da32cbef79c2e57e06f243ede25a7677318ee748d8828910c42a95c",
-    "zh:6d4592c45916a3b0154251106c4ae7861f3735fa3524a9eda83eca353aa876a3",
-    "zh:98bd133d2580a63ab72a3043832f14f6a1ac173b5c6f558440bd8e7f01317c98",
-    "zh:b18fcfade0ba8ab73cd6fbc906d1f41676152754b06c945a2fa7ec60fb28f940",
-    "zh:d04fcd7076aaa01355cd85a01049101c9c02ad4804837f8755e9da92265d9d1f",
-    "zh:d2b041c135ed7b98e52306d4826a8d7a0d9ee5eb1821c1bf92258668c0a75188",
-    "zh:d370b2830438bd41217d7867843a2d90de4808604afe8215f1d2a4c301998b52",
-    "zh:e9388800ed433043e8707cd0f48caf9f24e274fd9caf24fb1323c15e974777a0",
+    "zh:2571a343d8e1af699c1e1d815a5654ad98665427c6f3912b41557ff775a73c75",
+    "zh:2a20afb34eaca73c2206250abbb40997498a1a9aca34e8d6524370fbf6278f82",
+    "zh:3044cb26396399f0082ee06a8f788c6260ab12e752f64c0d7921e7d4e39c14b8",
+    "zh:311fcfdee359129748caaae5b204113a3e3b7e1fc00704c21300461114eb2075",
+    "zh:a3af689267be6f7ebfd9726aa2bfd4faabb9efbcab9da24949ae5fec87d18d23",
+    "zh:adbe97fd77ef94c5f1fc8b10e7dc87048035dc39ff7ea81042350fc311034850",
+    "zh:c6ce4f348596515d1748c047b51462cb40802b57316b13f8fb4760ef1c5e775c",
+    "zh:d0b8854b5097ffd6f6d6a14544f74745b23ba949472351e585c57402f5ca28ae",
+    "zh:ebdf01510f10e468aaa6c8f5fd9fc50b7232acbbe5fcbc50e8bea2de5d964d3e",
+    "zh:f3a55da36dcfd0bf34f785ce3c47dbe8538408c1aaf729604a6ef841fc8ce6f4",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/azurerm" {
   version     = "3.53.0"
-  constraints = ">= 3.30.0, >= 3.40.0, <= 3.53.0, <= 3.64.0, <= 3.71.0"
+  constraints = ">= 3.30.0, >= 3.40.0, >= 3.44.0, <= 3.53.0, <= 3.64.0, <= 3.71.0, <= 3.76.0"
   hashes = [
     "h1:NqV7ilkolM3jBsmAx5Bh6mA9zfUHCQh3hyjOPBUeWlo=",
     "h1:bK70LV1NldhodSm58cUpawKwdUL1A5AKKglAV2wZ/QY=",

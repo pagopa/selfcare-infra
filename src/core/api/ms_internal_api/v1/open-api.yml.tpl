@@ -234,6 +234,7 @@ paths:
                 - PSP
                 - PT
                 - SCP
+                - SA
         responses:
           '200':
             description: OK
@@ -317,6 +318,132 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/delegations/from-taxcode':
+    post:
+      tags:
+        - Delegation
+      summary: Create Delegation from institutions taxCode
+      description: Create an association between institution id and technical partner given Institutions taxCode
+      operationId: createDelegationUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelegationRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelegationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/onboarding/pda/{injectionInstitutionType}':
+      post:
+        tags:
+          - onboarding
+        summary: autoApprovalOnboardingFromPda
+        description: The service allows the onboarding of EC and PT institutions with auto approval
+        operationId: autoApprovalOnboardingFromPdaUsingPOST
+        parameters:
+          - name: injectionInstitutionType
+            in: path
+            description: The field specified institution type for injection EC, PT
+            required: true
+            style: simple
+            schema:
+              type: string
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PdaOnboardingDto'
+        responses:
+          '201':
+            description: Created
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '401':
+            description: Unauthorized
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '500':
+            description: Internal Server Error
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+            - global
+  '/onboarding/users':
+    post:
+      tags:
+        - Onboarding
+      summary: The service adds users to the registry if they are not present and associates them with the institution and product contained in the body
+      description: The service adds users to the registry if they are not present and associates them with the institution and product contained in the body
+      operationId: onboardingInstitutionUsersUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingInstitutionUsersRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RelationshipResult'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -385,6 +512,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -453,6 +581,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -604,6 +733,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -1024,6 +1154,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin
@@ -1063,6 +1194,284 @@ components:
         desc:
           type: string
           description: Institution's geographic taxonomy extended name
+    DelegationRequest:
+      title: DelegationRequest
+      type: object
+      properties:
+        fromTaxCode:
+          type: string
+        institutionFromName:
+          type: string
+        institutionToName:
+          type: string
+        productId:
+          type: string
+        toTaxCode:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
+    DelegationResponse:
+      title: DelegationResponse
+      type: object
+      properties:
+        brokerId:
+          type: string
+        brokerName:
+          type: string
+        brokerTaxCode:
+          type: string
+        brokerType:
+          type: string
+        id:
+          type: string
+        institutionId:
+          type: string
+        institutionName:
+          type: string
+        institutionRootName:
+          type: string
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+        productId:
+          type: string
+        taxCode:
+          type: string
+        type:
+          type: string
+          enum:
+            - AOO
+            - PT
+    PdaOnboardingDto:
+      title: PdaOnboardingDto
+      required:
+        - businessName
+        - productId
+        - recipientCode
+        - taxCode
+        - users
+        - vatNumber
+      type: object
+      properties:
+        businessName:
+          type: string
+          description: Institution's legal name
+        productId:
+          type: string
+          description: Product's unique identifier
+        recipientCode:
+          type: string
+          description: Billing recipient code, not required only for institutionType SA
+        taxCode:
+          type: string
+          description: Institution's taxCode
+        users:
+          type: array
+          description: List of onboarding users
+          items:
+            $ref: '#/components/schemas/UserDto'
+        vatNumber:
+          type: string
+          description: Institution's VAT number
+    OnboardingInstitutionUsersRequest:
+      title: OnboardingInstitutionUsersRequest
+      type: object
+      properties:
+        institutionSubunitCode:
+          type: string
+        institutionTaxCode:
+          type: string
+        productId:
+          type: string
+        sendCreateUserNotificationEmail:
+          type: boolean
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+    Person:
+      title: Person
+      type: object
+      properties:
+        email:
+          type: string
+        env:
+          type: string
+          enum:
+            - COLL
+            - DEV
+            - PROD
+            - ROOT
+        id:
+          type: string
+        name:
+          type: string
+        productRole:
+          type: string
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        roleLabel:
+          type: string
+        surname:
+          type: string
+        taxCode:
+          type: string
+    RelationshipResult:
+      title: RelationshipResult
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        createdAt:
+          type: string
+          format: date-time
+        from:
+          type: string
+        id:
+          type: string
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        pricingPlan:
+          type: string
+        product:
+          $ref: '#/components/schemas/ProductInfo'
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        state:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        to:
+          type: string
+        tokenId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    InstitutionUpdate:
+      title: InstitutionUpdate
+      type: object
+      properties:
+        address:
+          type: string
+        businessRegisterPlace:
+          type: string
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficer'
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+        imported:
+          type: boolean
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+            - AS
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    PaymentServiceProvider:
+      title: PaymentServiceProvider
+      type: object
+      properties:
+        abiCode:
+          type: string
+        businessRegisterNumber:
+          type: string
+        legalRegisterName:
+          type: string
+        legalRegisterNumber:
+          type: string
+        vatNumberGroup:
+          type: boolean
+    DataProtectionOfficer:
+      title: DataProtectionOfficer
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        pec:
+          type: string
+    InstitutionGeographicTaxonomies:
+      title: InstitutionGeographicTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
+    ProductInfo:
+      title: ProductInfo
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        role:
+          type: string
+
+    BillingResponse:
+      title: BillingResponse
+      type: object
+      properties:
+        publicServices:
+          type: boolean
+        recipientCode:
+          type: string
+        vatNumber:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

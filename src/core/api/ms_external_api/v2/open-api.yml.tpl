@@ -579,6 +579,8 @@ paths:
              - PSP
              - PT
              - SCP
+             - SA
+             - AS
       responses:
         '200':
           description: OK
@@ -896,6 +898,15 @@ components:
         businessRegisterPlace:
           type: string
           description: Institution's business register place
+        city:
+          type: string
+          description: Institution's physical address city
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
         description:
           type: string
           description: Institution's legal name
@@ -907,7 +918,7 @@ components:
           description: Institution's unique external identifier
         geographicTaxonomies:
           type: array
-          description: Institution's geographic taxonomy list
+          description: Institution's geographic taxonomy
           items:
             $ref: '#/components/schemas/GeographicTaxonomyResource'
         id:
@@ -922,11 +933,13 @@ components:
           type: string
           description: Institution's type
           enum:
+            - AS
             - GSP
             - PA
             - PG
             - PSP
             - PT
+            - SA
             - SCP
         origin:
           type: string
@@ -961,6 +974,23 @@ components:
         zipCode:
           type: string
           description: Institution's zipCode
+    InstitutionLocationDataDto:
+      title: InstitutionLocationDataDto
+      required:
+        - city
+        - country
+        - county
+      type: object
+      properties:
+        city:
+          type: string
+          description: Institution's physical address city
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
     InstitutionResource:
       title: InstitutionResource
       type: object
@@ -974,9 +1004,18 @@ components:
         assistanceContacts:
           description: Institution's assistance contacts
           $ref: '#/components/schemas/AssistanceContactsResource'
+        city:
+          type: string
+          description: Institution's physical address city
         companyInformations:
           description: GPS, SCP, PT optional data
           $ref: '#/components/schemas/CompanyInformationsResource'
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
         description:
           type: string
           description: Institution's legal name
@@ -997,11 +1036,13 @@ components:
           type: string
           description: Institution's type
           enum:
+            - AS
             - GSP
             - PA
             - PG
             - PSP
             - PT
+            - SA
             - SCP
         origin:
           type: string
@@ -1009,15 +1050,15 @@ components:
         originId:
           type: string
           description: Institution's details origin Id
-        rootParent:
-          description: Institution AOO/UO root institutionDescription
-          $ref: '#/components/schemas/RootParentResource'
         pspData:
           description: Payment Service Provider (PSP) specific data
           $ref: '#/components/schemas/PspDataResource'
         recipientCode:
           type: string
-          description: Billing recipient code
+          description: Billing recipient code, not required only for institutionType SA
+        rootParent:
+          description: Institution AOO/UO root institutionDescription
+          $ref: '#/components/schemas/RootParentResource'
         status:
           type: string
           description: Institution onboarding status
@@ -1376,6 +1417,8 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
+            - AS
         attributes:
           $ref: '#/components/schemas/Attributes'
         paymentServiceProvider:
@@ -1507,6 +1550,8 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
+            - AS
         productId:
           type: string
         taxCode:
@@ -1563,6 +1608,8 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
+            - AS
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
@@ -1630,6 +1677,8 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
+            - AS
         origin:
           type: string
         originId:

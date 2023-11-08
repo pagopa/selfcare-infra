@@ -64,6 +64,18 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
           path = "/spid/v1/(.*)"
         }
 
+        path {
+          backend {
+            service {
+              name = "hub-spid-login-ms-agid"
+              port {
+                number = var.default_service_port
+              }
+            }
+          }
+          path = "/spid-login/v1/(.*)"
+        }
+
       }
     }
   }

@@ -34,6 +34,10 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
+cidr_subnet_selc_functions        = ["10.1.144.0/24"]
+cidr_subnet_gh_runner             = "10.1.146.0/23" # minimum subnet size required by container app environment
+
+cidr_subnet_selc = ["10.1.148.0/23"]
 
 #
 # Pair VNET
@@ -73,8 +77,8 @@ apim_sku            = "Premium_1" # TODO
 app_gateway_api_certificate_name      = "api-selfcare-pagopa-it"
 app_gateway_api_pnpg_certificate_name = "api-pnpg-selfcare-pagopa-it"
 
-app_gateway_min_capacity   = 0 # todo change to at least 1
-app_gateway_max_capacity   = 2
+app_gateway_min_capacity   = 1
+app_gateway_max_capacity   = 5
 app_gateway_sku_name       = "WAF_v2"
 app_gateway_sku_tier       = "WAF_v2"
 app_gateway_alerts_enabled = true
@@ -286,7 +290,12 @@ eventhub_ip_rules = [
   { //PROD-INTEROP-PROD
     ip_mask = "18.192.110.102",
     action  = "Allow"
+  },
+  { //PROD-FD
+    ip_mask = "193.203.230.20",
+    action  = "Allow"
   }
+
 ]
 
 eventhubs = [{
@@ -417,3 +426,28 @@ logs_advanced_threat_protection = true
 enable_load_tests_db = false
 
 checkout_advanced_threat_protection_enabled = true
+
+# Functions App
+
+function_always_on = true
+
+app_service_plan_info = {
+  kind                         = "Linux"
+  sku_size                     = "P1v3"
+  sku_tier                     = "PremiumV3"
+  maximum_elastic_worker_count = 1
+  worker_count                 = 1
+  zone_balancing_enabled       = false
+}
+
+storage_account_info = {
+  account_kind                      = "StorageV2"
+  account_tier                      = "Standard"
+  account_replication_type          = "LRS"
+  access_tier                       = "Hot"
+  advanced_threat_protection_enable = true
+}
+
+gh_runner_pat_secret_name = "github-pat-selfcare-infra"
+
+cae_zone_redundant = true

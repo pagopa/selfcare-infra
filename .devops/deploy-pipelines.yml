@@ -46,7 +46,7 @@ resources:
 
 lockBehavior: sequential
 stages:
-  # DEV  
+  # DEV
   - ${{ if eq(parameters['DEV'], true) }}:
         # DEV selfcare APP
     - template: templates/terraform-plan-apply/template.yaml@terraform

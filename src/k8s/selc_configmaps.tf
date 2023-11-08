@@ -14,6 +14,7 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_NOTIFICATION_MANAGER_URL       = "http://ms-notification-manager:8080"
     MS_EXTERNAL_INTERCEPTOR_URL       = "http://ms-external-interceptor:8080"
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
+    EXTERNAL_API_BACKEND_URL          = "http://external-api:8080"
     USERVICE_PARTY_PROCESS_URL        = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
     USERVICE_PARTY_MANAGEMENT_URL     = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
@@ -123,6 +124,68 @@ resource "kubernetes_config_map" "hub-spid-login-ms" {
   )
 }
 
+resource "kubernetes_config_map" "hub-spid-login-ms-agid" {
+  metadata {
+    name      = "hub-spid-login-ms-agid"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = merge({
+    JAVA_TOOL_OPTIONS = ""
+
+    # SPID
+    ORG_URL          = "https://pagopa.gov.it"
+    ACS_BASE_URL     = format("%s/spid-login/v1", var.api_gateway_url)
+    ORG_DISPLAY_NAME = "PagoPA S.p.A"
+    ORG_NAME         = "PagoPA"
+
+    AUTH_N_CONTEXT = "https://www.spid.gov.it/SpidL2"
+
+    ENDPOINT_ACS      = "/acs"
+    ENDPOINT_ERROR    = format("%s/auth/login/error", var.cdn_frontend_url)
+    ENDPOINT_SUCCESS  = format("%s/auth/login/success", var.cdn_frontend_url)
+    ENDPOINT_LOGIN    = "/login"
+    ENDPOINT_METADATA = "/metadata"
+    ENDPOINT_LOGOUT   = "/logout"
+
+    SPID_ATTRIBUTES    = "name,familyName,fiscalNumber"
+    SPID_VALIDATOR_URL = "https://validator.spid.gov.it"
+
+    REQUIRED_ATTRIBUTES_SERVICE_NAME = "Selfcare Portal"
+    ENABLE_FULL_OPERATOR_METADATA    = true
+    COMPANY_EMAIL                    = "pagopa@pec.governo.it"
+    COMPANY_FISCAL_CODE              = 15376371009
+    COMPANY_IPA_CODE                 = "PagoPA"
+    COMPANY_NAME                     = "PagoPA S.p.A"
+    COMPANY_VAT_NUMBER               = "IT15376371009"
+
+    ENABLE_JWT                         = "true"
+    INCLUDE_SPID_USER_ON_INTROSPECTION = "true"
+
+    # TOKEN_EXPIRATION requires seconds
+    TOKEN_EXPIRATION = var.token_expiration_minutes * 60
+    JWT_TOKEN_ISSUER = "SPID"
+
+    # ADE
+    ENABLE_ADE_AA = "false"
+
+    APPINSIGHTS_DISABLED = "false"
+
+    ENABLE_USER_REGISTRY = "true"
+
+    JWT_TOKEN_AUDIENCE = var.jwt_audience
+
+    ENABLE_SPID_ACCESS_LOGS          = "true"
+    SPID_LOGS_PUBLIC_KEY             = module.key_vault_secrets_query.values["spid-logs-encryption-public-key"].value
+    SPID_LOGS_STORAGE_KIND           = "azurestorage"
+    SPID_LOGS_STORAGE_CONTAINER_NAME = "selc-${var.env_short}-logs-blob"
+
+    },
+    var.configmaps_hub-spid-login-ms,
+    var.spid_testenv_url != null ? { SPID_TESTENV_URL = var.spid_testenv_url } : {}
+  )
+}
+
 
 resource "kubernetes_config_map" "selfcare-core" {
   metadata {
@@ -131,13 +194,16 @@ resource "kubernetes_config_map" "selfcare-core" {
   }
 
   data = merge({
-    MAIL_TEMPLATE_PATH                          = "contracts/template/mail/1.0.0.json"
-    MAIL_TEMPLATE_COMPLETE_PATH                 = "contracts/template/mail/onboarding-complete/1.0.0.json"
-    MAIL_TEMPLATE_NOTIFICATION_PATH             = "contracts/template/mail/onboarding-notification/1.0.0.json"
-    MAIL_TEMPLATE_AUTOCOMPLETE_PATH             = "contracts/template/mail/import-massivo-io/1.0.0.json"
-    MAIL_TEMPLATE_REJECT_PATH                   = "contracts/template/mail/onboarding-refused/1.0.0.json"
-    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH  = "contracts/template/mail/delegation-notification/1.0.0.json"
-    MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
+    MAIL_TEMPLATE_PATH                                 = "contracts/template/mail/1.0.0.json"
+    MAIL_TEMPLATE_COMPLETE_PATH                        = "contracts/template/mail/onboarding-complete/1.0.0.json"
+    MAIL_TEMPLATE_NOTIFICATION_PATH                    = "contracts/template/mail/onboarding-notification/1.0.0.json"
+    MAIL_TEMPLATE_AUTOCOMPLETE_PATH                    = "contracts/template/mail/import-massivo-io/1.0.0.json"
+    MAIL_TEMPLATE_REJECT_PATH                          = "contracts/template/mail/onboarding-refused/1.0.0.json"
+    MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH         = "contracts/template/mail/delegation-notification/1.0.0.json"
+    MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH        = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
+    MAIL_TEMPLATE_REGISTRATION_REQUEST_PT_PATH         = "contracts/template/mail/registration-request-pt/1.0.0.json"
+    MAIL_TEMPLATE_REGISTRATION_NOTIFICATION_ADMIN_PATH = "contracts/template/mail/registration-notification-admin/1.0.0.json"
+    MAIL_TEMPLATE_PT_COMPLETE_PATH                     = "contracts/template/mail/registration-complete-pt/1.0.0.json"
     # URL of the european List Of Trusted List see https://esignature.ec.europa.eu/efda/tl-browser/#/screen/tl/EU
     EU_LIST_OF_TRUSTED_LISTS_URL = "https://ec.europa.eu/tools/lotl/eu-lotl.xml"
     # URL of the Official Journal URL where the EU trusted certificates are listed see https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv:OJ.C_.2019.276.01.0001.01.ENG
@@ -206,9 +272,7 @@ resource "kubernetes_config_map" "national-registries-service" {
     namespace = kubernetes_namespace.selc.metadata[0].name
   }
 
-  data = {
-    NATIONAL_REGISTRIES_URL = "https://api-selcpg.dev.pn.pagopa.it/national-registries-private/"
-  }
+  data = var.configmaps_national_registries
 }
 
 resource "kubernetes_config_map" "geo-taxonomies" {

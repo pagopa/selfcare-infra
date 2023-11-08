@@ -222,6 +222,7 @@ components:
             - PSP
             - PT
             - SCP
+            - SA
         origin:
           type: string
           description: Institution data origin

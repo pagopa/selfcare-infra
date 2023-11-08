@@ -34,6 +34,25 @@ module "agid_spid" {
   cert_allowed_uses = ["digital_signature"]
 }
 
+# New certificate used for update agid metadata creating new endpoint
+module "agid_login" {
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+
+  jwt_name                 = "agid-login"
+  key_vault_id             = module.key_vault.id
+  cert_common_name         = "selfcare.pagopa.it"
+  cert_password            = ""
+  cert_country             = "IT"
+  cert_locality            = "Roma"
+  cert_organization        = "PagoPA"
+  cert_organizational_unit = "PagoPA"
+  cert_province            = "RM"
+  cert_postal_code         = "00187"
+  cert_validity_hours      = 87600
+  tags                     = var.tags
+  cert_allowed_uses        = []
+}
+
 resource "null_resource" "upload_jwks" {
   triggers = {
     "changes-in-jwt" : module.jwt.certificate_data_pem

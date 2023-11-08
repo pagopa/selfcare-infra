@@ -16,10 +16,11 @@ locals {
   contracts_storage_container     = "${local.project}-contracts-blob"
   appinsights_instrumentation_key = data.azurerm_application_insights.application_insights.instrumentation_key
 
-  monitor_appinsights_name        = "${local.product}-appinsights"
-  monitor_action_group_slack_name = "SlackPagoPA"
-  monitor_action_group_email_name = "PagoPA"
-  alert_action_group_domain_name  = "${var.prefix}${var.env_short}${var.domain}"
+  monitor_appinsights_name           = "${local.product}-appinsights"
+  monitor_action_group_slack_name    = "SlackPagoPA"
+  monitor_action_group_email_name    = "PagoPA"
+  monitor_action_group_opsgenie_name = "Opsgenie"
+  alert_action_group_domain_name     = "${var.prefix}${var.env_short}${var.domain}"
 
   ingress_hostname_prefix               = "${var.instance}.${var.domain}"
   internal_dns_zone_name                = "${var.dns_zone_internal_prefix}.${var.external_domain}"

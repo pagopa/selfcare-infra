@@ -736,7 +736,7 @@ module "apim_internal_api_ms_v1" {
     basePath = "v1"
   })
 
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+  xml_content = templatefile("./api/ms_internal_api/v1/internal_jwt_base_policy.xml.tpl", {
     API_DOMAIN                 = local.api_domain
     KID                        = module.jwt.jwt_kid
     JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -768,6 +768,22 @@ module "apim_internal_api_ms_v1" {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+      })
+    },
+    {
+      operation_id = "createDelegationUsingPOST"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+      })
+    },
+    {
+      operation_id = "autoApprovalOnboardingFromPdaUsingPOST"
+      xml_content  = file("./api/jwt_auth_op_policy.xml")
+    },
+    {
+      operation_id = "onboardingInstitutionUsersUsingPOST"
+      xml_content = templatefile("./api/ms_internal_api/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
       })
     }
   ]
@@ -873,9 +889,112 @@ module "apim_selfcare_support_service_v1" {
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "getTokensFromProductUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "onboardingInstitutionUsersUsingPOST"
+      xml_content = templatefile("./api/selfcare_support_service/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
+
+
+resource "azurerm_api_management_api_version_set" "apim_party_registry_proxy" {
+  name                = format("%s-party-registry-proxy-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Party Registry Proxy"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_party_registry_proxy_v1" {
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.3.0"
+  name                = format("%s-party-registry-proxy-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_party_registry_proxy.id
+
+
+  description  = "This service is the party registry proxy"
+  display_name = "Party Registry Proxy V1"
+  path         = "external/party-registry-proxy"
+  api_version  = "v1"
+  protocols    = ["https"]
+
+  service_url = "http://${var.reverse_proxy_ip}/party-registry-proxy"
+
+  content_format = "openapi"
+  content_value = templatefile("./api/party_registry_proxy/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
+    basePath = "party-registry-proxy/v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "findCategoriesUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "findCategoryUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "searchUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "findInstitutionUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "legalAddressUsingGET"
+      xml_content = templatefile("./api/party_registry_proxy/party_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    }
+  ]
+}
+
+
 
 ##############
 ## Products ##

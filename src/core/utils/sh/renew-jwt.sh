@@ -12,6 +12,7 @@
 #  ./renew-jwt.sh dev jwt
 #  ./renew-jwt.sh dev jwt_exchange
 #  ./renew-jwt.sh dev agid_spid
+#  ./renew-jwt.sh dev agid_login
 
 set -e
 
@@ -26,7 +27,7 @@ if [ -z "$env" ]; then
 fi
 
 if [ -z "$jwt_name" ]; then
-  echo "jwt_name should be: jwt, jwt_exchange or agid_spid."
+  echo "jwt_name should be: jwt, jwt_exchange, agid_spid or agid_login."
   exit 0
 fi
 

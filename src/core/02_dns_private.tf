@@ -166,3 +166,21 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_servicebus
 
   tags = var.tags
 }
+
+# CONTAINER APPS
+resource "azurerm_private_dns_zone" "private_azurecontainerapps_io" {
+  name                = local.container_app_environment_dns_zone_name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+
+  tags = var.tags
+}
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_azurecontainerapps_io_vnet_pair" {
+  name                  = module.vnet.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.private_azurecontainerapps_io.name
+  virtual_network_id    = module.vnet.id
+  registration_enabled  = false
+
+  tags = var.tags
+}

@@ -24,3 +24,28 @@ resource "null_resource" "upload_assets" {
           EOT
   }
 }
+
+
+resource "null_resource" "upload_alert_message" {
+  triggers = {
+    file_sha1 = filesha1("./env/${var.env}/assets/login-alert-message.json")
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload \
+                --container '$web' \
+                --account-name ${replace(replace(local.cdn_name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${local.storage_primary_access_key} \
+                --file "./env/${var.env}/assets/login-alert-message.json" \
+                --overwrite true \
+                --name 'assets/login-alert-message.json'
+
+              az cdn endpoint purge \
+                --resource-group ${local.cdn_rg_name} \
+                --name ${local.cdn_name} \
+                --profile-name ${replace(local.cdn_name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/assets/login-alert-message.json" \
+                --no-wait
+          EOT
+  }
+}

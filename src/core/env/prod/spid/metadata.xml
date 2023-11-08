@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" ID="https___selfcare_pagopa_it" entityID="https://selfcare.pagopa.it"><ds:Signature>
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference URI="#https___selfcare_pagopa_it">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>yt4K95/C9mQqZ8v5XYssDl99T5w4mf/ZwkUFlPofTOQ=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+hHbNJTOYV2SYhZLKLoygqV+CAB64R1wfmO0Udt1yWgkV6qKuo+8/AtVCiQQlmdOkblkUYx17WRRf
+w0uMrCXea0ClXYu3/wTdVWH3s63ZgWgvFjdhX4tbM95RjKKuW+OIvLmjqWKQSjZBwF5DrHAexKCH
+lxQ8J/SSfSLOA0tg9L+YwHAjRpuVCZGRgsxOv6Wh4BbcK8qywQjYtQRlUkzRyiERjDCVZOeMOxME
+Lq/ahFeJVa753s4IzL6fLZ7Tnemhs8BX/T9Emp8u6kXpIg1ik061lmj7z9fvsPVH2z20DtgQ0AeJ
+w7lnA2y9rpUWN5JXRY8sqeMC2lXlq4c5yrfKCQ==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+tqxfO1d592njhS0BFA5ouVpSPdSbViw02/+wgkd/5lOU4ku2xRS6gEHeO2v6Iq5PdLCZlmS94YW9
+W9gaahVJ6S9y8xTIQ213ISNjJniScErVuMPZIDzjJt1Z2CxhQ93ZdoPctOzgo0HjYPhmstjufvF4
+G0rUvamvJXqr4uvebqmgMZKzzHVA0OFtdACAxo7Jm+Ee0MAqf6ODu6xVSHuSgaEsGgH9RQVmiqDO
+9mg4TXfJthPIUvO6MNU5W78c3zyyVdL5W+VflaNGK5Vilcc9BHTZ1SCj7oL/C1n5YzKSDgCbqqWm
+H9ZvWxGeH9RdDEnr8e2n8DOixYsukvnruayODQ==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIIFETCCA/mgAwIBAgIUYIi8VdS7jI0u1CRPYc2N2/YXC6UwDQYJKoZIhvcNAQELBQAwgYMxFjAU
+BgNVBAoMDVBhZ29QQSBTLnAuQS4xDzANBgNVBAMMBlBhZ29QQTEjMCEGA1UEUwwaaHR0cHM6Ly9z
+ZWxmY2FyZS5wYWdvcGEuaXQxFzAVBgNVBGEMDlBBOklULTVOMlRSNTU3MQswCQYDVQQGEwJJVDEN
+MAsGA1UEBwwEUm9tYTAeFw0yMzExMDEwODE1MjBaFw0zMzEwMjkwODE1MjBaMIGDMRYwFAYDVQQK
+DA1QYWdvUEEgUy5wLkEuMQ8wDQYDVQQDDAZQYWdvUEExIzAhBgNVBFMMGmh0dHBzOi8vc2VsZmNh
+cmUucGFnb3BhLml0MRcwFQYDVQRhDA5QQTpJVC01TjJUUjU1NzELMAkGA1UEBhMCSVQxDTALBgNV
+BAcMBFJvbWEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2rF87V3n3aeOFLQEUDmi5
+WlI91JtWLDTb/7CCR3/mU5TiS7bFFLqAQd47a/oirk90sJmWZL3hhb1b2BpqFUnpL3LzFMhDbXch
+I2MmeJJwStW4w9kgPOMm3VnYLGFD3dl2g9y07OCjQeNg+Gay2O5+8XgbStS9qa8leqvi695uqaAx
+krPMdUDQ4W10AIDGjsmb4R7QwCp/o4O7rFVIe5KBoSwaAf1FBWaKoM72aDhNd8m2E8hS87ow1Tlb
+vxzfPLJV0vlb5V+Vo0YrlWKVxz0EdNnVIKPugv8LWfljMpIOAJuqpaYf1m9bEZ4f1F0MSevx7afw
+M6LFiy6S+eu5rI4NAgMBAAGjggF5MIIBdTAJBgNVHRMEAjAAMA4GA1UdDwEB/wQEAwIGwDBzBgNV
+HSAEbDBqMB8GAytMEDAYMBYGCCsGAQUFBwICMAoMCEFnSURyb290MCAGBCtMEAYwGDAWBggrBgEF
+BQcCAjAKDAhhZ0lEY2VydDAlBgYrTBAEAgEwGzAZBggrBgEFBQcCAjANDAtjZXJ0X1NQX1B1YjAd
+BgNVHQ4EFgQU6Twom/wYH33oTMH9+MBBwTaa4McwgcMGA1UdIwSBuzCBuIAU6Twom/wYH33oTMH9
++MBBwTaa4MehgYmkgYYwgYMxFjAUBgNVBAoMDVBhZ29QQSBTLnAuQS4xDzANBgNVBAMMBlBhZ29Q
+QTEjMCEGA1UEUwwaaHR0cHM6Ly9zZWxmY2FyZS5wYWdvcGEuaXQxFzAVBgNVBGEMDlBBOklULTVO
+MlRSNTU3MQswCQYDVQQGEwJJVDENMAsGA1UEBwwEUm9tYYIUYIi8VdS7jI0u1CRPYc2N2/YXC6Uw
+DQYJKoZIhvcNAQELBQADggEBAFMS//YP2QMdy0SozuUFUNAihr2kE2HFaDAwfINuglqyOMYsLSOB
+s6nVCvZSE12iudzt73hskbTMoE+Z6wYs8LgBZt7jdoU5KmwFCIgqwpbpqCEbYXeu56cZoKTIiOdW
+HepvU2nMebMbD3bl9AHcdVZd5AQox1RzDEGUqMBsMFWSOjzjLzanBbGav9XFYI2a1DvlwPjgN/Cp
+ltqfAwMgZTIz0h8Mj4YBAa9o6eguYQEhzuiZ5IRMb8vqx01OoLNIZQ9vp1yoFw8RWQcCHRhZ5Mfh
+mdZeIhLl0t2buPhRZVfEdTZLaAXXMvNTM/5WQK9vPbYwADKp+0Lbu7owXfP3Z+E=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature>
+  <SPSSODescriptor AuthnRequestsSigned="true" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>MIIFETCCA/mgAwIBAgIUYIi8VdS7jI0u1CRPYc2N2/YXC6UwDQYJKoZIhvcNAQEL
+BQAwgYMxFjAUBgNVBAoMDVBhZ29QQSBTLnAuQS4xDzANBgNVBAMMBlBhZ29QQTEj
+MCEGA1UEUwwaaHR0cHM6Ly9zZWxmY2FyZS5wYWdvcGEuaXQxFzAVBgNVBGEMDlBB
+OklULTVOMlRSNTU3MQswCQYDVQQGEwJJVDENMAsGA1UEBwwEUm9tYTAeFw0yMzEx
+MDEwODE1MjBaFw0zMzEwMjkwODE1MjBaMIGDMRYwFAYDVQQKDA1QYWdvUEEgUy5w
+LkEuMQ8wDQYDVQQDDAZQYWdvUEExIzAhBgNVBFMMGmh0dHBzOi8vc2VsZmNhcmUu
+cGFnb3BhLml0MRcwFQYDVQRhDA5QQTpJVC01TjJUUjU1NzELMAkGA1UEBhMCSVQx
+DTALBgNVBAcMBFJvbWEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2
+rF87V3n3aeOFLQEUDmi5WlI91JtWLDTb/7CCR3/mU5TiS7bFFLqAQd47a/oirk90
+sJmWZL3hhb1b2BpqFUnpL3LzFMhDbXchI2MmeJJwStW4w9kgPOMm3VnYLGFD3dl2
+g9y07OCjQeNg+Gay2O5+8XgbStS9qa8leqvi695uqaAxkrPMdUDQ4W10AIDGjsmb
+4R7QwCp/o4O7rFVIe5KBoSwaAf1FBWaKoM72aDhNd8m2E8hS87ow1TlbvxzfPLJV
+0vlb5V+Vo0YrlWKVxz0EdNnVIKPugv8LWfljMpIOAJuqpaYf1m9bEZ4f1F0MSevx
+7afwM6LFiy6S+eu5rI4NAgMBAAGjggF5MIIBdTAJBgNVHRMEAjAAMA4GA1UdDwEB
+/wQEAwIGwDBzBgNVHSAEbDBqMB8GAytMEDAYMBYGCCsGAQUFBwICMAoMCEFnSURy
+b290MCAGBCtMEAYwGDAWBggrBgEFBQcCAjAKDAhhZ0lEY2VydDAlBgYrTBAEAgEw
+GzAZBggrBgEFBQcCAjANDAtjZXJ0X1NQX1B1YjAdBgNVHQ4EFgQU6Twom/wYH33o
+TMH9+MBBwTaa4McwgcMGA1UdIwSBuzCBuIAU6Twom/wYH33oTMH9+MBBwTaa4Meh
+gYmkgYYwgYMxFjAUBgNVBAoMDVBhZ29QQSBTLnAuQS4xDzANBgNVBAMMBlBhZ29Q
+QTEjMCEGA1UEUwwaaHR0cHM6Ly9zZWxmY2FyZS5wYWdvcGEuaXQxFzAVBgNVBGEM
+DlBBOklULTVOMlRSNTU3MQswCQYDVQQGEwJJVDENMAsGA1UEBwwEUm9tYYIUYIi8
+VdS7jI0u1CRPYc2N2/YXC6UwDQYJKoZIhvcNAQELBQADggEBAFMS//YP2QMdy0So
+zuUFUNAihr2kE2HFaDAwfINuglqyOMYsLSOBs6nVCvZSE12iudzt73hskbTMoE+Z
+6wYs8LgBZt7jdoU5KmwFCIgqwpbpqCEbYXeu56cZoKTIiOdWHepvU2nMebMbD3bl
+9AHcdVZd5AQox1RzDEGUqMBsMFWSOjzjLzanBbGav9XFYI2a1DvlwPjgN/Cpltqf
+AwMgZTIz0h8Mj4YBAa9o6eguYQEhzuiZ5IRMb8vqx01OoLNIZQ9vp1yoFw8RWQcC
+HRhZ5MfhmdZeIhLl0t2buPhRZVfEdTZLaAXXMvNTM/5WQK9vPbYwADKp+0Lbu7ow
+XfP3Z+E=
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api.selfcare.pagopa.it/spid-login/v1/slo"/>
+    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+    <AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://api.selfcare.pagopa.it/spid-login/v1/acs" index="0" isDefault="true"/>
+    <AttributeConsumingService index="0">
+      <ServiceName xml:lang="it">Selfcare Portal</ServiceName>
+      <RequestedAttribute FriendlyName="Nome" Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Cognome" Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+      <RequestedAttribute FriendlyName="Codice fiscale" Name="fiscalNumber" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+    </AttributeConsumingService>
+  </SPSSODescriptor>
+  <Organization>
+    <OrganizationName xml:lang="it">PagoPA S.p.A.</OrganizationName>
+    <OrganizationDisplayName xml:lang="it">PagoPA S.p.A.</OrganizationDisplayName>
+    <OrganizationURL xml:lang="it">https://pagopa.gov.it</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="other" spid:EntityType="spid:aggregator">
+    <Extensions>
+      <spid:IPACode>5N2TR557</spid:IPACode>
+      <spid:VATNumber>IT15376371009</spid:VATNumber>
+      <spid:FiscalCode>15376371009</spid:FiscalCode>
+      <spid:Public/>
+    </Extensions>
+    <Company>PagoPA S.p.A.</Company>
+    <EmailAddress>pagopa@pec.governo.it</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>

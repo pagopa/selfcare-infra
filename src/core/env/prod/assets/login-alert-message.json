@@ -1,0 +1,7 @@
+{
+  "warning-banner": {
+    "severity": "error",
+    "description": "Ci scusiamo per il disagio, per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione.",
+    "enable": true
+  }
+}

@@ -24,12 +24,11 @@ module "appgateway_snet" {
 locals {
   allowedIngressPathRegexps = [
     "/spid/*",
+    "/spid-login/*",
     "/dashboard/*",
     "/onboarding/*",
     "/ms-notification-manager/*",
-    # "/party-process/*",
     "/party-registry-proxy/*",
-    # "/ms-core/*",
   ]
 
   backends = {
@@ -229,7 +228,12 @@ module "app_gw" {
 
   alerts_enabled = var.app_gateway_alerts_enabled
 
-  action = [
+  action = var.env_short == "p" ? [
+    {
+      action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
+      webhook_properties = null
+    }
+    ] : [
     {
       action_group_id    = azurerm_monitor_action_group.slack.id
       webhook_properties = null
@@ -258,8 +262,8 @@ module "app_gw" {
           metric_name              = "ComputeUnits"
           operator                 = "GreaterOrLessThan"
           alert_sensitivity        = "High"
-          evaluation_total_count   = 2
-          evaluation_failure_count = 2
+          evaluation_total_count   = 4
+          evaluation_failure_count = 4
           dimension                = []
         }
       ]

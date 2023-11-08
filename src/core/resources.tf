@@ -101,3 +101,72 @@ resource "null_resource" "upload_resources_logo" {
           EOT
   }
 }
+
+# anac file
+data "local_file" "resources_anac_data_csv" {
+  filename = "${path.module}/resources/anac/data.csv"
+}
+
+resource "null_resource" "upload_resources_anac_data_csv" {
+  triggers = {
+    "changes-in-config" : md5(data.local_file.resources_anac_data_csv.content)
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file ${data.local_file.resources_anac_data_csv.filename} \
+                --overwrite true \
+                --name anac-data.csv
+          EOT
+  }
+}
+
+# ivass file
+data "local_file" "resources_ivass_data_csv" {
+  filename = "${path.module}/resources/ivass/data.csv"
+}
+
+resource "null_resource" "upload_resources_ivass_data_csv" {
+  triggers = {
+    "changes-in-config" : md5(data.local_file.resources_ivass_data_csv.content)
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file ${data.local_file.resources_ivass_data_csv.filename} \
+                --overwrite true \
+                --name ivass-data.csv
+          EOT
+  }
+}
+
+# metadata agid spid
+resource "null_resource" "upload_metadata" {
+  triggers = {
+    file_sha1 = filesha1("./env/${var.env}/spid/metadata.xml")
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload \
+                --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "./env/${var.env}/spid/metadata.xml" \
+                --overwrite true \
+                --name 'spid/metadata.xml' &&
+              az cdn endpoint purge \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/spid/metadata.xml" \
+                --no-wait
+          EOT
+  }
+}

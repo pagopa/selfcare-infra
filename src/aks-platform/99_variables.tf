@@ -26,10 +26,11 @@ locals {
   monitor_appinsights_name             = "${local.product}-appinsights"
   monitor_security_storage_name        = replace("${local.product}-sec-monitor-st", "-", "")
 
-  monitor_action_group_slack_name = "SlackPagoPA"
-  monitor_action_group_email_name = "PagoPA"
-  alert_action_group_core_name    = "${var.prefix}${var.env_short}core"
-  alert_action_group_error_name   = "${var.prefix}${var.env_short}error"
+  monitor_action_group_slack_name    = "SlackPagoPA"
+  monitor_action_group_email_name    = "PagoPA"
+  monitor_action_group_opsgenie_name = "Opsgenie"
+  alert_action_group_core_name       = "${var.prefix}${var.env_short}core"
+  alert_action_group_error_name      = "${var.prefix}${var.env_short}error"
 }
 
 variable "prefix" {
