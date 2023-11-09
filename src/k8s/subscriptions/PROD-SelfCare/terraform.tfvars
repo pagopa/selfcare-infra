@@ -99,5 +99,5 @@ tls_checker_https_endpoints_to_check = [
 ]
 
 secrets_tls_certificates = [
-  "selc-internal-pagopa-it"
+  "selc-internal-selfcare-pagopa-it"
 ]
