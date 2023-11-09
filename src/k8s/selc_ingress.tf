@@ -50,6 +50,7 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
 
   spec {
     rule {
+      host = "selc.internal.dev.selfcare.pagopa.it"
       http {
 
         path {
@@ -77,6 +78,11 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
         }
 
       }
+    }
+
+    tls {
+      hosts       = ["selc.internal.dev.selfcare.pagopa.it"]
+      secret_name = "selc-internal-dev-selfcare-pagopa-it"
     }
   }
 }
