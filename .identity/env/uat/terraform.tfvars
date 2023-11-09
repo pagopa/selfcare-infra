@@ -16,10 +16,6 @@ tags = {
 ci_github_federations = [
   {
     repository = "selfcare-infra"
-    subject    = "UAT"
-  },
-  {
-    repository = "selfcare-infra"
     subject    = "uat-ci"
   },
   {
@@ -29,10 +25,6 @@ ci_github_federations = [
 ]
 
 cd_github_federations = [
-  {
-    repository = "selfcare-infra"
-    subject    = "UAT"
-  },
   {
     repository = "selfcare-infra"
     subject    = "uat-cd"
@@ -80,12 +72,6 @@ environment_cd_roles = {
     "Storage Table Data Contributor"
   ]
   resource_groups = {
-    "terraform-state-rg" = [
-      "Storage Blob Data Contributor"
-    ],
-    "io-infra-rg" = [
-      "Storage Blob Data Contributor"
-    ],
     "selc-u-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
     ]
