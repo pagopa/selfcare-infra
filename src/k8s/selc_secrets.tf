@@ -460,3 +460,18 @@ resource "kubernetes_secret" "support-secrets" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "secret-tls-selc-internal" {
+  for_each = var.secrets_tls_certificates
+
+  metadata {
+    name      = each.value
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    "tls.crt" = data.azurerm_key_vault_certificate_data.values[each.value].pem
+    "tls.key" = data.azurerm_key_vault_certificate_data.values[each.value].key
+  }
+
+  type = "kubernetes.io/tls"
+}

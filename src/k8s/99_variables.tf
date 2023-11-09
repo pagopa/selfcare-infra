@@ -181,3 +181,7 @@ variable "location_string" {
 variable "configmaps_national_registries" {
   type = map(string)
 }
+
+variable "secrets_tls_certificates" {
+  type = set(string)
+}
