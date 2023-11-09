@@ -469,7 +469,7 @@ resource "kubernetes_secret" "secret-tls-selc-internal" {
   }
 
   data = {
-    "tls.crt" = data.azurerm_key_vault_certificate_data.values[each.value].hex
+    "tls.crt" = data.azurerm_key_vault_certificate_data.values[each.value].pem
     "tls.key" = data.azurerm_key_vault_certificate_data.values[each.value].key
   }
 
