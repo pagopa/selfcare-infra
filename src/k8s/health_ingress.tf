@@ -3,7 +3,7 @@ resource "kubernetes_ingress_v1" "health_ingress" {
 
   metadata {
     name      = "${kubernetes_namespace.health.metadata[0].name}-ingress"
-    namespace = kubernetes_namespace.health.metadata[0].name
+    namespace = kubernetes_namespace.selc.metadata[0].name
     annotations = {
       "kubernetes.io/ingress.class"                = "nginx"
       "nginx.ingress.kubernetes.io/rewrite-target" = "/$1"
