@@ -546,8 +546,7 @@ module "apim_external_api_ms_v2" {
     module.apim_product_idpay.product_id,
     module.apim_product_io_sign.product_id,
     module.apim_product_io.product_id,
-    module.apim_product_test_io.product_id,
-    module.apim_product_test_io_premium.product_id,
+    module.apim_product_io_premium.product_id,
     module.apim_product_fd.product_id,
     module.apim_product_fd_garantito.product_id
   ]
@@ -1255,6 +1254,23 @@ module "apim_product_io" {
   approval_required     = false
 
   policy_xml = file("./api_product/io/policy.xml")
+}
+
+module "apim_product_io_premium" {
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.3.0"
+
+  product_id   = "io-premium"
+  display_name = "IO Premium"
+  description  = "App IO Premium"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io-premium/policy.xml")
 }
 
 module "apim_product_test_io" {
