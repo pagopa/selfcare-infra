@@ -132,7 +132,7 @@ module "apim_uservice_party_process_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = "http://${var.reverse_proxy_ip}/ms-core/v1"
+  service_url = "http://${var.private_dns_name}/ms-core/v1"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
@@ -210,7 +210,7 @@ module "apim_external_api_onboarding_auto_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-auto/v1/open-api.yml.tpl", {
@@ -249,7 +249,7 @@ module "apim_external_api_onboarding_io_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
@@ -296,7 +296,7 @@ module "apim_uservice_party_management_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = "http://${var.reverse_proxy_ip}/ms-core/v1"
+  service_url = "http://${var.private_dns_name}/ms-core/v1"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
@@ -395,7 +395,7 @@ module "apim_user_group_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/ms-user-group/user-groups/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/ms-user-group/user-groups/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
@@ -443,7 +443,7 @@ module "apim_external_api_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
@@ -481,20 +481,20 @@ module "apim_external_api_ms_v1" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v1/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
       })
     },
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v1/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
       })
     },
     {
@@ -519,7 +519,7 @@ module "apim_external_api_ms_v2" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
@@ -597,7 +597,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
         TENANT_ID                   = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -614,7 +614,7 @@ module "apim_external_api_ms_v2" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -625,7 +625,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
         TENANT_ID                   = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -653,7 +653,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "messageAcknowledgmentUsingPOST"
       xml_content = templatefile("./api/ms_external_api/v2/messageAcknowledgment_op_policy.xml.tpl", {
-        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-external-interceptor/v1"
+        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-external-interceptor/v1"
         TENANT_ID                                = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER                   = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -661,7 +661,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getDelegationsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getDelegationsUsingGET_op_policy.xml.tpl", {
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -672,7 +672,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getOnboardingsInstitutionUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getOnboardingsInstitutionUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -683,7 +683,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getInstitutionsByTaxCodeUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -694,7 +694,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserInfoUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getUserInfoUsingGet_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -708,7 +708,7 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-        BACKEND_BASE_URL           = "http://${var.reverse_proxy_ip}/dashboard/v1/"
+        BACKEND_BASE_URL           = "http://${var.private_dns_name}/dashboard/v1/"
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -739,7 +739,7 @@ module "apim_internal_api_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
@@ -764,7 +764,7 @@ module "apim_internal_api_ms_v1" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL             = "https://${module.checkout_cdn.storage_primary_web_host}"
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
       })
     },
     {
@@ -778,13 +778,13 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
       })
     },
     {
       operation_id = "createDelegationUsingPOST"
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
       })
     },
     {
@@ -794,7 +794,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/ms_internal_api/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
       })
     }
   ]
@@ -823,7 +823,7 @@ module "apim_selfcare_support_service_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.reverse_proxy_ip)
+  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/selfcare_support_service/v1/open-api.yml.tpl", {
@@ -851,7 +851,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getInstitutionsByTaxCodeUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -860,7 +860,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
         API_DOMAIN                  = local.api_domain
         KID                         = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT  = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -877,7 +877,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getInstitutionUsersUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionUsersUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -886,7 +886,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getDelegationsUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getDelegationsUsingGET_op_policy.xml.tpl", {
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -895,7 +895,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getTokensFromProductUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -904,7 +904,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/selfcare_support_service/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -936,7 +936,7 @@ module "apim_party_registry_proxy_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = "http://${var.reverse_proxy_ip}/party-registry-proxy"
+  service_url = "http://${var.private_dns_name}/party-registry-proxy"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/open-api.yml.tpl", {

@@ -88,6 +88,7 @@ aks_system_node_pool_node_count_min = 2
 aks_system_node_pool_node_count_max = 3
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
+private_dns_name = "selc.internal.dev.selfcare.pagopa.it"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = false
