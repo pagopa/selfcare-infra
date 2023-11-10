@@ -34,7 +34,7 @@ module "selc_functions" {
   always_on                                = var.function_always_on
   subnet_id                                = module.functions_snet[0].id
   application_insights_instrumentation_key = azurerm_application_insights.application_insights.instrumentation_key
-  java_version                             = "11"
+  java_version                             = "17"
   runtime_version                          = "~4"
 
   storage_account_name = replace(format("%s-functions-storage", local.project), "-", "")
