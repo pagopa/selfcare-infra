@@ -712,6 +712,15 @@ module "apim_external_api_ms_v2" {
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
+    {
+      operation_id = "getTokensFromProductUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
   ]
 }
 
@@ -889,15 +898,6 @@ module "apim_selfcare_support_service_v1" {
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getTokensFromProductUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
     },
     {
