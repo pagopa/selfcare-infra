@@ -714,7 +714,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getTokensFromProductUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_external_api/v2/getTokensFromProductUsingGET_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
