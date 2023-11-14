@@ -14,7 +14,7 @@ resource "kubernetes_ingress_v1" "health_ingress" {
 
   spec {
     rule {
-      host = "selc.internal.dev.selfcare.pagopa.it"
+      host = var.ingress_health.host
       http {
         path {
           backend {
@@ -31,8 +31,8 @@ resource "kubernetes_ingress_v1" "health_ingress" {
     }
 
     tls {
-      hosts       = ["selc.internal.dev.selfcare.pagopa.it"]
-      secret_name = "selc-internal-dev-selfcare-pagopa-it"
+      hosts       = [var.ingress_health.host]
+      secret_name = var.ingress_health.secret_name
     }
   }
 }
