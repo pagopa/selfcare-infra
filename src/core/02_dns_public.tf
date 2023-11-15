@@ -228,12 +228,3 @@ resource "azurerm_dns_cname_record" "dkim-aws-ses-selfcare-pagopa-it" {
   record              = each.value.value
   tags                = var.tags
 }
-
-resource "azurerm_dns_a_record" "selc_internal" {
-  name                = "selc.internal"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-  ttl                 = var.dns_default_ttl_sec
-  records             = [var.reverse_proxy_ip]
-  tags                = var.tags
-}
