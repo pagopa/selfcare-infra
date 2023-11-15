@@ -6,7 +6,7 @@ resource "azurerm_private_dns_zone" "internal_private_dns_zone" {
   resource_group_name = azurerm_resource_group.rg_vnet.name
 }
 
-resource "azurerm_dns_a_record" "selc_internal" {
+resource "azurerm_private_dns_a_record" "selc" {
   name                = "selc"
   zone_name           = azurerm_private_dns_zone.internal_private_dns_zone.name
   resource_group_name = azurerm_resource_group.rg_vnet.name
