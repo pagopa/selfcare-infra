@@ -134,7 +134,7 @@ pre-commit run -a
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | = 2.5.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | = 2.79.1 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.2.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.11.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.18.0 |
 
 ## Modules
 
