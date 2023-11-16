@@ -577,6 +577,8 @@ components:
           type: string
         role:
           type: string
+        status:
+          type: string
     UserResource:
       title: UserResource
       type: object

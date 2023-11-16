@@ -349,3 +349,16 @@ resource "kubernetes_secret" "national-registry-secrets" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_secret" "support-secrets" {
+  metadata {
+    name      = "support-secrets"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    SUPPORT_API_KEY = module.key_vault_secrets_query.values["zendesk-support-api-key"].value
+  }
+
+  type = "Opaque"
+}
