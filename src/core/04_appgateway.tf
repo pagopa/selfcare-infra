@@ -33,14 +33,14 @@ locals {
 
   backends = {
     aks = {
-      protocol                    = "Http"
-      host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
-      port                        = 80
-      ip_addresses                = [var.reverse_proxy_ip]
+      protocol                    = "Https"
+      host                        = "selc.internal.${var.dns_zone_prefix}.${var.external_domain}"
+      port                        = 443
+      ip_addresses                = null
       probe                       = "/health"
       probe_name                  = "probe-aks"
       request_timeout             = 60
-      fqdns                       = null
+      fqdns                       = ["selc.internal.${var.dns_zone_prefix}.${var.external_domain}"]
       pick_host_name_from_backend = false
     }
     apim = {

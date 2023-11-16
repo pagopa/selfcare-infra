@@ -230,6 +230,11 @@ variable "reverse_proxy_ip" {
   description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
 }
 
+variable "private_dns_name" {
+  type        = string
+  description = "AKS private DNS record"
+}
+
 variable "aks_num_outbound_ips" {
   type        = number
   default     = 1
