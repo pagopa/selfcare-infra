@@ -3,7 +3,7 @@ resource "helm_release" "ingress" {
   name       = "nginx-ingress"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
-  version    = "4.1.1"
+  version    = "4.7.1"
   namespace  = kubernetes_namespace.ingress.metadata[0].name
   wait       = false
 
@@ -29,5 +29,10 @@ resource "helm_release" "ingress" {
   set {
     name  = "controller.admissionWebhooks.patch.nodeSelector.beta\\.kubernetes\\.io/os"
     value = "linux"
+  }
+
+  set {
+    name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/azure-load-balancer-health-probe-request-path"
+    value = "/healthz"
   }
 }
