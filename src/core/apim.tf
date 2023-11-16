@@ -20,11 +20,10 @@ resource "azurerm_resource_group" "rg_api" {
 locals {
   apim_cert_name_proxy_endpoint = format("%s-proxy-endpoint-cert", local.project)
 
-  api_domain = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
-
-  apim_base_url = "selc.internal.${var.env}.selfcare.pagopa.it/external"
-
-  aks_base_url = "selc.internal.${var.env}.selfcare.pagopa.it"
+  api_domain    = format("api.%s.%s", var.dns_zone_prefix, var.external_domain)
+  apim_base_url = var.env == "dev" ? "selc.internal.${var.env}.selfcare.pagopa.it/external" : "${azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name}/external"
+  aks_base_url  = var.env == "dev" ? "selc.internal.${var.env}.selfcare.pagopa.it" : "${var.reverse_proxy_ip}"
+  host_name     = var.env == "dev" ? "selc.internal.${var.env}.selfcare.pagopa.it" : azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
 }
 
 resource "azurerm_api_management_custom_domain" "api_custom_domain" {
@@ -138,7 +137,7 @@ module "apim_uservice_party_process_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "ms-core/v1"
   })
 
@@ -216,7 +215,7 @@ module "apim_external_api_onboarding_auto_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-auto/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "/onboarding-api/v1"
   })
 
@@ -255,7 +254,7 @@ module "apim_external_api_onboarding_io_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "/onboarding-api/v1"
   })
 
@@ -302,7 +301,7 @@ module "apim_uservice_party_management_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "ms-core/v1"
   })
 
@@ -401,7 +400,7 @@ module "apim_user_group_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "user-groups/v1/"
   })
 
@@ -449,7 +448,7 @@ module "apim_external_api_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "v1"
   })
 
@@ -525,7 +524,7 @@ module "apim_external_api_ms_v2" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "v2"
   })
 
@@ -548,8 +547,7 @@ module "apim_external_api_ms_v2" {
     module.apim_product_idpay.product_id,
     module.apim_product_io_sign.product_id,
     module.apim_product_io.product_id,
-    module.apim_product_test_io.product_id,
-    module.apim_product_test_io_premium.product_id,
+    module.apim_product_io_premium.product_id,
     module.apim_product_fd.product_id,
     module.apim_product_fd_garantito.product_id
   ]
@@ -715,6 +713,15 @@ module "apim_external_api_ms_v2" {
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
     },
+    {
+      operation_id = "getTokensFromProductUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/getTokensFromProductUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
   ]
 }
 
@@ -745,7 +752,7 @@ module "apim_internal_api_ms_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "v1"
   })
 
@@ -829,7 +836,7 @@ module "apim_selfcare_support_service_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/selfcare_support_service/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "v1"
   })
 
@@ -895,15 +902,6 @@ module "apim_selfcare_support_service_v1" {
       })
     },
     {
-      operation_id = "getTokensFromProductUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getTokensFromProductUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${local.aks_base_url}/ms-core/v1/"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/selfcare_support_service/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${local.aks_base_url}/ms-core/v1/"
@@ -942,7 +940,7 @@ module "apim_party_registry_proxy_v1" {
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/open-api.yml.tpl", {
-    host     = local.aks_base_url
+    host     = local.host_name
     basePath = "party-registry-proxy/v1"
   })
 
@@ -1257,6 +1255,23 @@ module "apim_product_io" {
   approval_required     = false
 
   policy_xml = file("./api_product/io/policy.xml")
+}
+
+module "apim_product_io_premium" {
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.3.0"
+
+  product_id   = "io-premium"
+  display_name = "IO Premium"
+  description  = "App IO Premium"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/io-premium/policy.xml")
 }
 
 module "apim_product_test_io" {
