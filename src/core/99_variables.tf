@@ -168,6 +168,12 @@ variable "aks_system_node_pool_only_critical_addons_enabled" {
   default     = true
 }
 
+variable "system_node_pool_enable_host_encryption" {
+  type        = bool
+  description = "(Optional) Should the nodes in the Default Node Pool have host encryption enabled? Defaults to true."
+  default     = true
+}
+
 #
 # User Node Pool
 #
