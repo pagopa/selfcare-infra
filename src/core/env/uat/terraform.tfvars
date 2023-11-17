@@ -92,7 +92,7 @@ private_dns_name = "selc.internal.uat.selfcare.pagopa.it"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = true
-system_node_pool_enable_host_encryption = false
+system_node_pool_enable_host_encryption           = false
 
 aks_user_node_pool_enabled        = true
 aks_user_node_pool_os_disk_type   = "Managed"
