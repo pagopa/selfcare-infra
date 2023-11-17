@@ -19,13 +19,13 @@ module "aks" {
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
-  system_node_pool_vm_size         = var.aks_system_node_pool_vm_size
-  system_node_pool_os_disk_type    = var.aks_system_node_pool_os_disk_type
-  system_node_pool_os_disk_size_gb = var.aks_system_node_pool_os_disk_size_gb
-  system_node_pool_name            = local.aks_system_node_pool_node_name
-  system_node_pool_node_count_min  = var.aks_system_node_pool_node_count_min
-  system_node_pool_node_count_max  = var.aks_system_node_pool_node_count_max
-
+  system_node_pool_vm_size                      = var.aks_system_node_pool_vm_size
+  system_node_pool_os_disk_type                 = var.aks_system_node_pool_os_disk_type
+  system_node_pool_os_disk_size_gb              = var.aks_system_node_pool_os_disk_size_gb
+  system_node_pool_name                         = local.aks_system_node_pool_node_name
+  system_node_pool_node_count_min               = var.aks_system_node_pool_node_count_min
+  system_node_pool_node_count_max               = var.aks_system_node_pool_node_count_max
+  system_node_pool_enable_host_encryption       = var.system_node_pool_enable_host_encryption
   system_node_pool_only_critical_addons_enabled = var.aks_system_node_pool_only_critical_addons_enabled
 
   user_node_pool_enabled         = var.aks_user_node_pool_enabled
