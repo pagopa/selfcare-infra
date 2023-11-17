@@ -82,7 +82,7 @@ redis_version                  = 6
 
 # aks
 aks_alerts_enabled                  = false
-aks_kubernetes_version              = "1.23.12"
+aks_kubernetes_version              = "1.25.11"
 aks_system_node_pool_os_disk_type   = "Managed"
 aks_system_node_pool_node_count_min = 2
 aks_system_node_pool_node_count_max = 3
