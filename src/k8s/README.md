@@ -259,6 +259,7 @@ pre-commit run -a
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | n/a | `string` | n/a | yes |
 | <a name="input_external-interceptor-url"></a> [external-interceptor-url](#input\_external-interceptor-url) | n/a | `map(string)` | n/a | yes |
 | <a name="input_geo-taxonomies"></a> [geo-taxonomies](#input\_geo-taxonomies) | n/a | `map(string)` | n/a | yes |
+| <a name="input_ingress_health"></a> [ingress\_health](#input\_ingress\_health) | n/a | <pre>object({<br>    host        = string<br>    secret_name = string<br>  })</pre> | n/a | yes |
 | <a name="input_ingress_load_balancer_ip"></a> [ingress\_load\_balancer\_ip](#input\_ingress\_load\_balancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_ingress_replica_count"></a> [ingress\_replica\_count](#input\_ingress\_replica\_count) | n/a | `string` | n/a | yes |
 | <a name="input_jwt_audience"></a> [jwt\_audience](#input\_jwt\_audience) | configs/secrets | `string` | n/a | yes |

@@ -185,3 +185,10 @@ variable "configmaps_national_registries" {
 variable "secrets_tls_certificates" {
   type = set(string)
 }
+
+variable "ingress_health" {
+  type = object({
+    host        = string
+    secret_name = string
+  })
+}
