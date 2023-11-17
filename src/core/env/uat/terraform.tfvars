@@ -97,7 +97,7 @@ system_node_pool_enable_host_encryption = false
 aks_user_node_pool_enabled        = true
 aks_user_node_pool_os_disk_type   = "Managed"
 aks_user_node_pool_node_count_min = 2
-aks_user_node_pool_node_count_max = 2
+aks_user_node_pool_node_count_max = 3
 user_node_pool_node_labels = {
   node_type = "user"
 }
