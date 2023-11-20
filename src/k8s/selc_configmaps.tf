@@ -43,10 +43,12 @@ resource "kubernetes_config_map" "jwt-exchange" {
   }
 
   data = {
-    JWT_TOKEN_EXCHANGE_DURATION   = var.jwt_token_exchange_duration
-    JWT_TOKEN_EXCHANGE_KID        = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
-    JWT_TOKEN_EXCHANGE_PUBLIC_KEY = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
-    WELL_KNOWN_URL                = format("%s/.well-known/jwks.json", var.cdn_storage_url)
+    JWT_TOKEN_EXCHANGE_DURATION     = var.jwt_token_exchange_duration
+    JWT_TOKEN_EXCHANGE_KID          = module.key_vault_secrets_query.values["jwt-exchange-kid"].value
+    JWT_TOKEN_EXCHANGE_PUBLIC_KEY   = module.key_vault_secrets_query.values["jwt-exchange-public-key"].value
+    WELL_KNOWN_URL                  = format("%s/.well-known/jwks.json", var.cdn_storage_url)
+    TOKEN_EXCHANGE_BILLING_URL      = var.token_exchange_billing_url
+    TOKEN_EXCHANGE_BILLING_AUDIENCE = var.token_exchange_billing_audience
   }
 }
 
