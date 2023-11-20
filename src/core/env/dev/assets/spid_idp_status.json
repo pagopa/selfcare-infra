@@ -1,0 +1,44 @@
+{
+  "arubaid": {
+    "migrated": false
+  },
+  "posteid": {
+    "migrated": false
+  },
+  "infocertid": {
+    "migrated": false
+  },
+  "spiditalia": {
+    "migrated": false
+  },
+  "sielteid": {
+    "migrated": false
+  },
+  "namirialid": {
+    "migrated": false
+  },
+  "timid": {
+    "migrated": false
+  },
+  "lepidaid": {
+    "migrated": false
+  },
+  "teamsystemid": {
+    "migrated": false
+  },
+  "ehtid": {
+    "migrated": false
+  },
+  "infocamereid": {
+    "migrated": false
+  },
+  "intesiid": {
+    "migrated": false
+  },
+  "xx_testenv2": {
+    "migrated": true
+  },
+  "xx_validator": {
+    "migrated": false
+  }
+}

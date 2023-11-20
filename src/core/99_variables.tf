@@ -18,8 +18,6 @@ locals {
   # Private DNS
   container_app_environment_dns_zone_name = "azurecontainerapps.io"
   container_app_resource_group_name       = "container-app-rg"
-  container_app_environment_name          = "cae"
-  container_app_onboarding_ms_name        = "onboarding-ms-ca"
 }
 
 variable "cidr_pair_vnet" {
@@ -170,6 +168,12 @@ variable "aks_system_node_pool_only_critical_addons_enabled" {
   default     = true
 }
 
+variable "system_node_pool_enable_host_encryption" {
+  type        = bool
+  description = "(Optional) Should the nodes in the Default Node Pool have host encryption enabled? Defaults to true."
+  default     = true
+}
+
 #
 # User Node Pool
 #
@@ -230,6 +234,11 @@ variable "reverse_proxy_ip" {
   type        = string
   default     = "127.0.0.1"
   description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
+}
+
+variable "private_dns_name" {
+  type        = string
+  description = "AKS private DNS record"
 }
 
 variable "aks_num_outbound_ips" {

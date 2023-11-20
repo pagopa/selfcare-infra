@@ -134,7 +134,7 @@ pre-commit run -a
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | = 2.5.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | = 2.79.1 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | ~> 2.2.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.11.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.18.0 |
 
 ## Modules
 
@@ -208,6 +208,7 @@ pre-commit run -a
 | [kubernetes_secret.pagopa-backoffice-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [kubernetes_secret.secret-tls-selc-internal](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [kubernetes_secret.social-login](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
@@ -225,6 +226,8 @@ pre-commit run -a
 | [azuread_group.adgroup_technical_project_managers](https://registry.terraform.io/providers/hashicorp/azuread/2.5.0/docs/data-sources/group) | data source |
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/application_insights) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/client_config) | data source |
+| [azurerm_key_vault.key_vault](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/key_vault) | data source |
+| [azurerm_key_vault_certificate_data.values](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/key_vault_certificate_data) | data source |
 | [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_monitor_action_group.email](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/monitor_action_group) | data source |
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/2.79.1/docs/data-sources/monitor_action_group) | data source |
@@ -256,6 +259,7 @@ pre-commit run -a
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | n/a | `string` | n/a | yes |
 | <a name="input_external-interceptor-url"></a> [external-interceptor-url](#input\_external-interceptor-url) | n/a | `map(string)` | n/a | yes |
 | <a name="input_geo-taxonomies"></a> [geo-taxonomies](#input\_geo-taxonomies) | n/a | `map(string)` | n/a | yes |
+| <a name="input_ingress_health"></a> [ingress\_health](#input\_ingress\_health) | n/a | <pre>object({<br>    host        = string<br>    secret_name = string<br>  })</pre> | n/a | yes |
 | <a name="input_ingress_load_balancer_ip"></a> [ingress\_load\_balancer\_ip](#input\_ingress\_load\_balancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_ingress_replica_count"></a> [ingress\_replica\_count](#input\_ingress\_replica\_count) | n/a | `string` | n/a | yes |
 | <a name="input_jwt_audience"></a> [jwt\_audience](#input\_jwt\_audience) | configs/secrets | `string` | n/a | yes |
@@ -271,6 +275,7 @@ pre-commit run -a
 | <a name="input_monitor_resource_group_name"></a> [monitor\_resource\_group\_name](#input\_monitor\_resource\_group\_name) | Monitor resource group name | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
 | <a name="input_rbac_namespaces"></a> [rbac\_namespaces](#input\_rbac\_namespaces) | n/a | `list(string)` | <pre>[<br>  "selc"<br>]</pre> | no |
+| <a name="input_secrets_tls_certificates"></a> [secrets\_tls\_certificates](#input\_secrets\_tls\_certificates) | n/a | `set(string)` | n/a | yes |
 | <a name="input_spid_testenv_url"></a> [spid\_testenv\_url](#input\_spid\_testenv\_url) | n/a | `string` | `null` | no |
 | <a name="input_tls_cert_check_helm"></a> [tls\_cert\_check\_helm](#input\_tls\_cert\_check\_helm) | tls cert helm chart configuration | <pre>object({<br>    chart_version = string,<br>    image_name    = string,<br>    image_tag     = string<br>  })</pre> | n/a | yes |
 | <a name="input_tls_checker_https_endpoints_to_check"></a> [tls\_checker\_https\_endpoints\_to\_check](#input\_tls\_checker\_https\_endpoints\_to\_check) | List of https endpoint to check ssl certificate and his alert name | <pre>list(object({<br>    https_endpoint = string<br>    # max 53 chars, alfanumeric and '-', and lower case<br>    alert_name    = string<br>    alert_enabled = bool<br>    helm_present  = bool<br>  }))</pre> | `[]` | no |

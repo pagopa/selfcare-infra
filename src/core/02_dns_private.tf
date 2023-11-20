@@ -6,6 +6,15 @@ resource "azurerm_private_dns_zone" "internal_private_dns_zone" {
   resource_group_name = azurerm_resource_group.rg_vnet.name
 }
 
+resource "azurerm_private_dns_a_record" "selc" {
+  name                = "selc"
+  zone_name           = azurerm_private_dns_zone.internal_private_dns_zone.name
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  ttl                 = var.dns_default_ttl_sec
+  records             = [var.reverse_proxy_ip]
+  tags                = var.tags
+}
+
 #
 # DNS private Link
 #
@@ -183,22 +192,4 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_azureconta
   registration_enabled  = false
 
   tags = var.tags
-}
-
-data "azurerm_container_app_environment" "cae" {
-  name                = "${local.project}-${local.container_app_environment_name}"
-  resource_group_name = "${local.project}-${local.container_app_resource_group_name}"
-}
-
-data "azurerm_container_app" "onboarding_ms_ca" {
-  name                = "${local.project}-${local.container_app_onboarding_ms_name}"
-  resource_group_name = "${local.project}-${local.container_app_resource_group_name}"
-}
-
-resource "azurerm_private_dns_a_record" "private_dns_record_a_azurecontainerapps_io" {
-  name                = "${data.azurerm_container_app.onboarding_ms_ca.name}.${trimsuffix(data.azurerm_container_app_environment.cae.default_domain, ".${local.container_app_environment_dns_zone_name}")}"
-  zone_name           = azurerm_private_dns_zone.private_azurecontainerapps_io.name
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-  ttl                 = 3600
-  records             = [data.azurerm_container_app_environment.cae.static_ip_address]
 }

@@ -39,6 +39,7 @@ module "key_vault_secrets_query" {
     "logs-storage-connection-string",
     "mongodb-connection-string",
     "national-registry-api-key",
+    "zendesk-support-api-key",
     "onboarding-interceptor-apim-internal",
     "party-test-institution-email",
     "portal-admin-operator-email",

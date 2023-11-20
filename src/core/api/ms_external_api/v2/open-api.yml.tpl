@@ -11,6 +11,46 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/support':
+    post:
+      tags:
+        - support
+      summary: sendSupportRequest
+      description: Service to retrieve Support contact's form
+      operationId: sendSupportRequestUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SupportRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/message/{messageId}/status/{status}':
     post:
       tags:
@@ -558,6 +598,59 @@ paths:
       security:
       - bearerAuth:
         - global
+  '/tokens/products/{productId}':
+    get:
+      tags:
+        - Token
+      summary: Retrieve tokens given the product identifier
+      description: Retrieve tokens given the product identifier
+      operationId: getTokensFromProductUsingGET
+      parameters:
+        - name: productId
+          in: path
+          description: Product's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The number of the current page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: The size of the page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenListResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/product':
     get:
       tags:
@@ -898,6 +991,15 @@ components:
         businessRegisterPlace:
           type: string
           description: Institution's business register place
+        city:
+          type: string
+          description: Institution's physical address city
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
         description:
           type: string
           description: Institution's legal name
@@ -909,7 +1011,7 @@ components:
           description: Institution's unique external identifier
         geographicTaxonomies:
           type: array
-          description: Institution's geographic taxonomy list
+          description: Institution's geographic taxonomy
           items:
             $ref: '#/components/schemas/GeographicTaxonomyResource'
         id:
@@ -924,14 +1026,14 @@ components:
           type: string
           description: Institution's type
           enum:
+            - AS
             - GSP
             - PA
             - PG
             - PSP
             - PT
-            - SCP
             - SA
-            - AS
+            - SCP
         origin:
           type: string
           description: Institution data origin
@@ -965,6 +1067,23 @@ components:
         zipCode:
           type: string
           description: Institution's zipCode
+    InstitutionLocationDataDto:
+      title: InstitutionLocationDataDto
+      required:
+        - city
+        - country
+        - county
+      type: object
+      properties:
+        city:
+          type: string
+          description: Institution's physical address city
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
     InstitutionResource:
       title: InstitutionResource
       type: object
@@ -978,9 +1097,18 @@ components:
         assistanceContacts:
           description: Institution's assistance contacts
           $ref: '#/components/schemas/AssistanceContactsResource'
+        city:
+          type: string
+          description: Institution's physical address city
         companyInformations:
           description: GPS, SCP, PT optional data
           $ref: '#/components/schemas/CompanyInformationsResource'
+        country:
+          type: string
+          description: Institution's physical address country
+        county:
+          type: string
+          description: Institution's physical address county
         description:
           type: string
           description: Institution's legal name
@@ -1001,29 +1129,29 @@ components:
           type: string
           description: Institution's type
           enum:
+            - AS
             - GSP
             - PA
             - PG
             - PSP
             - PT
-            - SCP
             - SA
-            - AS
+            - SCP
         origin:
           type: string
           description: Institution data origin
         originId:
           type: string
           description: Institution's details origin Id
-        rootParent:
-          description: Institution AOO/UO root institutionDescription
-          $ref: '#/components/schemas/RootParentResource'
         pspData:
           description: Payment Service Provider (PSP) specific data
           $ref: '#/components/schemas/PspDataResource'
         recipientCode:
           type: string
-          description: Billing recipient code
+          description: Billing recipient code, not required only for institutionType SA
+        rootParent:
+          description: Institution AOO/UO root institutionDescription
+          $ref: '#/components/schemas/RootParentResource'
         status:
           type: string
           description: Institution onboarding status
@@ -1044,9 +1172,6 @@ components:
         zipCode:
           type: string
           description: Institution's zipCode
-        logo:
-          type: string
-          description: Institution's logo
     InvalidParam:
       title: InvalidParam
       required:
@@ -1784,6 +1909,170 @@ components:
         recipientCode:
           type: string
         vatNumber:
+          type: string
+    SupportRequestDto:
+      title: SupportRequestDto
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's email
+          format: email
+          example: email@example.com
+    SupportResponse:
+      title: SupportResponse
+      type: object
+      properties:
+        redirectUrl:
+          type: string
+    TokenListResponse:
+      title: TokenListResponse
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+    TokenResponse:
+      title: TokenResponse
+      type: object
+      properties:
+        checksum:
+          type: string
+        closedAt:
+          type: string
+          format: date-time
+        contentType:
+          type: string
+        contractSigned:
+          type: string
+        contractTemplate:
+          type: string
+        contractVersion:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiringDate:
+          type: string
+          format: date-time
+        id:
+          type: string
+        institutionId:
+          type: string
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        legals:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalsResponse'
+        productId:
+          type: string
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        updatedAt:
+          type: string
+          format: date-time
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenUser'
+    TokenUser:
+      title: TokenUser
+      type: object
+      properties:
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        userId:
+          type: string
+    InstitutionUpdate:
+      title: InstitutionUpdate
+      type: object
+      properties:
+        address:
+          type: string
+        businessRegisterPlace:
+          type: string
+        dataProtectionOfficer:
+          $ref: '#/components/schemas/DataProtectionOfficer'
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+        imported:
+          type: boolean
+        institutionType:
+          type: string
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+            - AS
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    LegalsResponse:
+      title: LegalsResponse
+      type: object
+      properties:
+        env:
+          type: string
+          enum:
+            - COLL
+            - DEV
+            - PROD
+            - ROOT
+        partyId:
+          type: string
+        relationshipId:
+          type: string
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+    InstitutionGeographicTaxonomies:
+      title: InstitutionGeographicTaxonomies
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
           type: string
   securitySchemes:
     bearerAuth:

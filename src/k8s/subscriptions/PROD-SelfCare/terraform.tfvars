@@ -97,3 +97,12 @@ tls_checker_https_endpoints_to_check = [
     helm_present   = true,
   }
 ]
+
+secrets_tls_certificates = [
+  "selc-internal-selfcare-pagopa-it"
+]
+
+ingress_health = {
+  host        = "selc.internal.selfcare.pagopa.it"
+  secret_name = "selc-internal-selfcare-pagopa-it"
+}

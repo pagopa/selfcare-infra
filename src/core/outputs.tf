@@ -81,6 +81,10 @@ output "reverse_proxy_ip" {
   value = var.reverse_proxy_ip
 }
 
+output "private_dns_name" {
+  value = var.private_dns_name
+}
+
 ## CosmosDb - MongoDB ##
 output "cosmosdb_account_mongodb_id" {
   value = module.cosmosdb_account_mongodb.id
