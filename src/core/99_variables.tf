@@ -1086,6 +1086,7 @@ variable "eventhubs" {
       send   = bool
       manage = bool
     }))
+    iam_roles = optional(map(string), {})
   }))
   default = []
 }
