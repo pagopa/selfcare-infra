@@ -100,6 +100,14 @@ variable "jwt_token_exchange_duration" {
   default = "PT15S"
 }
 
+variable "token_exchange_billing_audience"{
+  type    = string
+}
+
+variable "token_exchange_billing_url"{
+  type    = string
+}
+
 # configs/secrets
 variable "jwt_audience" {
   type = string
