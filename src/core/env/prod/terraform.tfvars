@@ -94,7 +94,7 @@ redis_version  = 6
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                  = "10.1.1.250"
 private_dns_name                  = "selc.internal.selfcare.pagopa.it"
-aks_kubernetes_version            = "1.23.12"
+aks_kubernetes_version            = "1.25.11"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
 aks_sku_tier                      = "Standard"
@@ -102,7 +102,17 @@ aks_sku_tier                      = "Standard"
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
 aks_system_node_pool_node_count_min               = 3
 aks_system_node_pool_node_count_max               = 3
-aks_system_node_pool_only_critical_addons_enabled = false
+aks_system_node_pool_only_critical_addons_enabled = true
+system_node_pool_enable_host_encryption           = true
+
+aks_user_node_pool_enabled        = true
+aks_user_node_pool_vm_size        = "Standard_D4ds_v5"
+aks_user_node_pool_os_disk_type   = "Ephemeral"
+aks_user_node_pool_node_count_min = 3
+aks_user_node_pool_node_count_max = 5
+user_node_pool_node_labels = {
+  node_type = "user"
+}
 
 #
 # Docker
