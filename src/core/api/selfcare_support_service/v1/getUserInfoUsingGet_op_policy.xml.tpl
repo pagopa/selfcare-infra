@@ -31,9 +31,6 @@
         <set-header name="Authorization" exists-action="override">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-query-parameter name="productId" exists-action="override">
-              <value>@((string)context.Variables["productId"])</value>
-         </set-query-parameter>
         <set-backend-service base-url="${MS_CORE_BACKEND_BASE_URL}" />
     </inbound>
     <backend>
