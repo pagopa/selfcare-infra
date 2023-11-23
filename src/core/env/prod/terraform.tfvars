@@ -100,14 +100,14 @@ aks_upgrade_settings_max_surge    = "33%"
 aks_sku_tier                      = "Standard"
 
 aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
-aks_system_node_pool_node_count_min               = 1
-aks_system_node_pool_node_count_max               = 1
+aks_system_node_pool_node_count_min               = 3
+aks_system_node_pool_node_count_max               = 3
 aks_system_node_pool_only_critical_addons_enabled = true
 system_node_pool_enable_host_encryption           = true
 
 aks_user_node_pool_enabled        = true
 aks_user_node_pool_vm_size        = "Standard_D4ds_v5"
-aks_user_node_pool_os_disk_type   = "Managed"
+aks_user_node_pool_os_disk_type   = "Ephemeral"
 aks_user_node_pool_node_count_min = 3
 aks_user_node_pool_node_count_max = 5
 user_node_pool_node_labels = {
