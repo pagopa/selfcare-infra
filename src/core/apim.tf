@@ -883,6 +883,15 @@ module "apim_selfcare_support_service_v1" {
       })
     },
     {
+      operation_id = "getUserInfoUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getUserInfoUsingGet_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
       operation_id = "getInstitutionUsersUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionUsersUsingGET_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
