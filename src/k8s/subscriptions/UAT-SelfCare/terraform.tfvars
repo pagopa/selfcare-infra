@@ -20,7 +20,7 @@ api-version_uservice-party-process        = "0.1"
 api-version_uservice-party-registry-proxy = "v1"
 
 # Billing Token Exchange audience and url
-token_exchange_billing_audience = "api.uat.selfcare.pagopa.it"
+token_exchange_billing_audience = "dev.portalefatturazione.pagopa.it"
 token_exchange_billing_url      = "http://dev.portalefatturazione.pagopa.it?selfcareToken=<IdentityToken>"
 
 # session jwt audience
