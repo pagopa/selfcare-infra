@@ -13,22 +13,118 @@ tags = {
 
 ci_github_federations = [
   {
+    repository = "hub-spid-login-ms"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-dashboard-backend"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-hub-spid-login-ms"
+    subject    = "prod-ci"
+  },
+  {
     repository = "selfcare-infra"
     subject    = "prod-ci"
   },
   {
+    repository = "selfcare-ms-core"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "prod-ci"
+  },
+  {
     repository = "selfcare-onboarding"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-onboarding-backend"
     subject    = "prod-ci"
   }
 ]
 
 cd_github_federations = [
   {
+    repository = "hub-spid-login-ms"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-dashboard-backend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-hub-spid-login-ms"
+    subject    = "prod-cd"
+  },
+  {
     repository = "selfcare-infra"
     subject    = "prod-cd"
   },
   {
+    repository = "selfcare-ms-core"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "prod-cd"
+  },
+  {
     repository = "selfcare-onboarding"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-onboarding-backend"
     subject    = "prod-cd"
   }
 ]
