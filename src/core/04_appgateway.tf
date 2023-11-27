@@ -228,7 +228,7 @@ module "app_gw" {
 
   alerts_enabled = var.app_gateway_alerts_enabled
 
-  action = var.env_short == "p" ? [
+  action = var.env_short == "x" ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null

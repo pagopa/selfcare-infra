@@ -49,7 +49,7 @@ module "event_hub" {
 
   alerts_enabled = var.eventhub_alerts_enabled
   metric_alerts  = var.eventhub_metric_alerts
-  action = var.env_short == "p" ? [
+  action = var.env_short == "x" ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null
