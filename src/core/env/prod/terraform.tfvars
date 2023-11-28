@@ -110,7 +110,7 @@ aks_user_node_pool_os_disk_type   = "Ephemeral"
 aks_user_node_pool_node_count_min = 3
 aks_user_node_pool_node_count_max = 5
 user_node_pool_node_labels = {
-  node_type = "user"
+  "node_type" = "user"
 }
 
 #
