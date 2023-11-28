@@ -63,7 +63,7 @@ module "postgresql" {
   alerts_enabled                        = var.postgres_alerts_enabled
   monitor_metric_alert_criteria         = var.postgres_metric_alerts
   replica_monitor_metric_alert_criteria = var.postgres_metric_alerts
-  action = var.env_short == "p" ? [
+  action = var.env_short == "x" ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null
