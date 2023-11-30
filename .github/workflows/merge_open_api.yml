@@ -30,7 +30,7 @@ jobs:
           token: ${{ github.token }}
     - name: Generate merged open api
       run: |
-        cd src/core/api/selfcare_support_service/v1
+        cd ./src/core/api/selfcare_support_service/v1
         npm i openapi-merge-cli
         npx openapi-merge-cli
     - name: Commit api-docs
