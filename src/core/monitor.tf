@@ -282,13 +282,13 @@ locals {
       ssl_cert_remaining_lifetime_check = 1,
     },
     "SpidL2-etna-selc" = {
-     # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
-     name                              = "SpidL2-etna",
-     host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-     path                              = "/login?authLevel=SpidL2&entityID=ehtid",
-     frequency                         = 900
-     expected_http_status              = 200,
-     ssl_cert_remaining_lifetime_check = 1,
+      # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
+      name                              = "SpidL2-etna",
+      host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
+      path                              = "/login?authLevel=SpidL2&entityID=ehtid",
+      frequency                         = 900
+      expected_http_status              = 200,
+      ssl_cert_remaining_lifetime_check = 1,
     },
     "SpidL2-infocamere-selc" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocamereid
@@ -387,13 +387,13 @@ locals {
       ssl_cert_remaining_lifetime_check = 1,
     },
     "SpidL2-etna-pnpg" = {
-     # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
-     name                              = "SpidL2-etna",
-     host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-     path                              = "/login?authLevel=SpidL2&entityID=ehtid",
-     frequency                         = 900
-     expected_http_status              = 200,
-     ssl_cert_remaining_lifetime_check = 1,
+      # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
+      name                              = "SpidL2-etna",
+      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
+      path                              = "/login?authLevel=SpidL2&entityID=ehtid",
+      frequency                         = 900
+      expected_http_status              = 200,
+      ssl_cert_remaining_lifetime_check = 1,
     },
     "SpidL2-infocamere-pnpg" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocamereid
