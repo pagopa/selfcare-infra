@@ -33,6 +33,9 @@ jobs:
       run: |
         ls -l
         npm i openapi-merge-cli
+        cd ./src/core/api/selfcare_support_service/v1
+        cd ../../../../../ms-core/app/src/main/resources/swagger
+        ls -l
         npx openapi-merge-cli --config ./src/core/api/selfcare_support_service/v1/openapi-merge.json
     - name: Commit api-docs
       run: |
