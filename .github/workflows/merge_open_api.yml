@@ -14,6 +14,7 @@ jobs:
     permissions: write-all
     #if: github.event.pull_request.merged == true
     steps:
+    - uses: actions/checkout@v4
     - name: Check out ms-core
       uses: actions/checkout@v4
       with:
@@ -30,6 +31,7 @@ jobs:
           token: ${{ github.token }}
     - name: Generate merged open api
       run: |
+        ls -l
         cd ./src/core/api/selfcare_support_service/v1
         npm i openapi-merge-cli
         npx openapi-merge-cli
