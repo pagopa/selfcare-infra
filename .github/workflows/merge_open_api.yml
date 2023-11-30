@@ -32,9 +32,8 @@ jobs:
     - name: Generate merged open api
       run: |
         ls -l
-        cd ./src/core/api/selfcare_support_service/v1
         npm i openapi-merge-cli
-        npx openapi-merge-cli
+        npx openapi-merge-cli --config src/core/api/selfcare_support_service/v1
     - name: Commit api-docs
       run: |
           git ls-files ./src** | grep 'api-docs*' | xargs git add
