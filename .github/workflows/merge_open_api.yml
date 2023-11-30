@@ -15,14 +15,14 @@ jobs:
     #if: github.event.pull_request.merged == true
     steps:
     - name: Check out ms-core
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
           name: pagopa/selfcare-ms-core
           ref: feature/SELC-3460
           path: ms-core
           token: ${{ github.token }}
     - name: Check out external-api 
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
           name: pagopa/selfcare-external-api-backend
           ref: feature/SELC-3460
