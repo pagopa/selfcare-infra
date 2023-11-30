@@ -475,3 +475,17 @@ resource "kubernetes_secret" "secret-tls-selc-internal" {
 
   type = "kubernetes.io/tls"
 }
+
+resource "kubernetes_secret" "anac-ftp-secret" {
+  metadata {
+    name      = "anac-ftp-secret"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    ANAC_FTP_PASSWORD = module.key_vault_secrets_query.values["anac-ftp-password"].value
+    ANAC_FTP_KNOWN_HOST = module.key_vault_secrets_query.values["anac-ftp-known-host"].value
+  }
+
+  type = "Opaque"
+}

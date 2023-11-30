@@ -63,7 +63,8 @@ module "key_vault_secrets_query" {
     "zendesk-support-api-key",
     "prod-fd-client-id",
     "prod-fd-client-secret",
-    "prod-fd-grant-type"
-
+    "prod-fd-grant-type",
+    "anac-ftp-password",
+    "anac-ftp-known-host"
   ]
 }

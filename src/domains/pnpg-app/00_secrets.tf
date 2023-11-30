@@ -53,6 +53,8 @@ module "key_vault_secrets_query" {
     "user-registry-api-key",
     "user-registry-api-key",
     "web-storage-connection-string",
-    "alert-pnpg-http-status-slack"
+    "alert-pnpg-http-status-slack",
+    "anac-ftp-password",
+    "anac-ftp-known-host"
   ]
 }

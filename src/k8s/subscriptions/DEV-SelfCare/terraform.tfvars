@@ -81,6 +81,12 @@ geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.pdnd.pagopa.it/geo-tax"
 }
 
+anac-ftp = {
+  ANAC_FTP_IP = "93.43.119.85"
+  ANAC_FTP_USER = "PagoPA_user"
+  ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
+}
+
 external-interceptor-url = {
   PROD_FD_URL = "https://fid00001fe.siachain.sv.sia.eu:30008"
 }

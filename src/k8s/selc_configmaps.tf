@@ -285,3 +285,12 @@ resource "kubernetes_config_map" "geo-taxonomies" {
 
   data = var.geo-taxonomies
 }
+
+resource "kubernetes_config_map" "anac-ftp" {
+  metadata {
+    name      = "anac-ftp"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = var.anac-ftp
+}

@@ -255,3 +255,12 @@ resource "kubernetes_config_map" "national-registries-service" {
   data = var.configmaps_national_registries
 
 }
+
+resource "kubernetes_config_map" "anac-ftp" {
+  metadata {
+    name      = "anac-ftp"
+    namespace = var.domain
+  }
+
+  data = var.anac-ftp
+}
