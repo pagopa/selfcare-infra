@@ -1,0 +1,49 @@
+name: Generate Support Open Api
+on:
+  pull_request:
+    branches:
+      - develop
+      -feature/SELC-3490
+    types: [ opened, reopened ]
+  workflow_dispatch: #allow to run github action manually
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    #if: github.event.pull_request.merged == true
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Check out ms-core
+      uses: actions/checkout@v3
+      with:
+          name: pagopa/selfcare-ms-core
+          ref: feature/SELC-3460
+          path: ms-core
+          token: ${{ github.token }}
+    - name: Check out external-api 
+      uses: actions/checkout@v3
+      with:
+          name: pagopa/selfcare-external-api-backend
+          ref: feature/SELC-3460
+          path: external-api
+          token: ${{ github.token }}
+    - name: Generate merged open api
+      run: |
+        cd src/core/api/selfcare_support_service/v1
+        npm i openapi-merge-cli
+        npx openapi-merge-cli
+    - name: Commit api-docs
+      run: |
+          git ls-files ./app** | grep 'api-docs*' | xargs git add
+          git config --global user.email "selfcare-github@pagopa.it"
+          git config --global user.name "selfcare-github-bot"
+          git commit -m "Generated Support Swagger documentation" || exit 0
+          git push origin ${{ github.ref_name}}
