@@ -42,7 +42,7 @@ jobs:
         npx openapi-merge-cli
     - name: Commit api-docs
       run: |
-          git ls-files ./app** | grep 'api-docs*' | xargs git add
+          git ls-files ./src** | grep 'api-docs*' | xargs git add
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
