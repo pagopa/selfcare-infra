@@ -249,6 +249,10 @@ variable "geo-taxonomies" {
   type = map(string)
 }
 
+variable "anac-ftp" {
+  type = map(string)
+}
+
 variable "api_gateway_url" {
   type = string
 }

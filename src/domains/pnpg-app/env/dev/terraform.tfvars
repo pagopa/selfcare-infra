@@ -128,6 +128,12 @@ geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api-pnpg.dev.selfcare.pagopa.it/external"
 }
 
+anac-ftp = {
+  ANAC_FTP_IP = "93.43.119.85"
+  ANAC_FTP_USER = "PagoPA_user"
+  ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
+}
+
 
 terraform_remote_state_core = {
   resource_group_name  = "terraform-state-rg"

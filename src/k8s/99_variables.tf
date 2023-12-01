@@ -142,6 +142,10 @@ variable "geo-taxonomies" {
   type = map(string)
 }
 
+variable "anac-ftp" {
+  type = map(string)
+}
+
 variable "external-interceptor-url" {
   type = map(string)
 }
