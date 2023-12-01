@@ -36,9 +36,10 @@ jobs:
         cd ./src/core/api/selfcare_support_service/v1/
         npx openapi-merge-cli
         cp -rf output.swagger.json open-api.yml.tpl
+        ls -l
     - name: Commit api-docs
       run: |
-          git ls-files ./src** | grep 'open-api*' | xargs git add
+          git ls-files ./src/core/api/selfcare_support_service** | grep 'open-api*' | xargs git add
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
