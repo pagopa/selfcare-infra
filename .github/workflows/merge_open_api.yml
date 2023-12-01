@@ -33,8 +33,8 @@ jobs:
       run: |
         ls -l
         npm i openapi-merge-cli
-        move ms-core/app/src/main/resources/swagger/api-docs.json src/core/api/selfcare_support_service/v1/core-api-docs.json
-        move external-api/app/src/main/resources/swagger/api-docs.json src/core/api/selfcare_support_service/v1/external-api-docs.json
+        mv ms-core/app/src/main/resources/swagger/api-docs.json src/core/api/selfcare_support_service/v1/core-api-docs.json
+        mv external-api/app/src/main/resources/swagger/api-docs.json src/core/api/selfcare_support_service/v1/external-api-docs.json
         npx openapi-merge-cli --config ./src/core/api/selfcare_support_service/v1/openapi-merge.json
     - name: Commit api-docs
       run: |
