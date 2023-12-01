@@ -1,13 +1,13 @@
 {
     "inputs": [
       {
-        "inputFile": "core-api-docs.json",
+        "inputFile": "https://github.com/pagopa/selfcare-ms-core/blob/feature/SELC-3460/app/src/main/resources/swagger/api-docs-v1.json",
         "operationSelection": {
           "includeTags": ["support"]
         }
       },
       {
-        "inputFile": "external-api-docs.json",
+        "inputFile": "https://github.com/pagopa/selfcare-external-api-backend/blob/feature/SELC-3460/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["support"]
         }
