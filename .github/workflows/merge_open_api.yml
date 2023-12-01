@@ -32,8 +32,6 @@ jobs:
     - name: Generate merged open api
       run: |
         ls -l
-        cd ms-core
-        ls -l
         npm i openapi-merge-cli
         mv ./ms-core/app/src/main/resources/swagger/api-docs.json ./src/core/api/selfcare_support_service/v1/core-api-docs.json
         mv ./external-api/app/src/main/resources/swagger/api-docs.json ./src/core/api/selfcare_support_service/v1/external-api-docs.json
