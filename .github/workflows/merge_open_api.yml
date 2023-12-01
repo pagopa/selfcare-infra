@@ -33,7 +33,8 @@ jobs:
       run: |
         ls -l
         npm i openapi-merge-cli
-        npx openapi-merge-cli --config ./src/core/api/selfcare_support_service/v1/openapi-merge.json
+        cd ./src/core/api/selfcare_support_service/v1/
+        npx openapi-merge-cli
     - name: Commit api-docs
       run: |
           git ls-files ./src** | grep 'api-docs*' | xargs git add
