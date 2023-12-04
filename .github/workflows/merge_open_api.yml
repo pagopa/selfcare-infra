@@ -18,7 +18,7 @@ jobs:
     - name: Create branch for action
       run: |
         export COMMIT_ID=$(git log --format="%H" -n 1)
-        echo "BRANCH_NAME=support-open-api-$(COMMIT_ID)" >> $GITHUB_ENV
+        echo "BRANCH_NAME=support-open-api-$COMMIT_ID" >> $GITHUB_ENV
         git checkout -b "support-open-api-${{ env.BRANCH_NAME }}"
         git push --set-upstream origin "support-open-api-${{ env.BRANCH_NAME }}"
         
