@@ -40,7 +40,7 @@ jobs:
         npx openapi-merge-cli
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Open pull request
-      run: gh pr create -B develop -H open-api-$COMMIT_ID --title 'Merge open-api-$COMMIT_ID into develop' --body 'Created by Github action'
+      run: gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
       env:
           GH_TOKEN: ${{ github.token }}
     - name: Commit api-docs
