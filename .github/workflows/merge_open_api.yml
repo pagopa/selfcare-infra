@@ -48,6 +48,8 @@ jobs:
           git commit -m "Generated Support Swagger documentation" || exit 0
           git push
     - name: Create pull request
-      run: gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
+      run: |
+        echo $COMMIT_ID
+        gh pr create -B develop -H "support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
       env:
           GH_TOKEN: ${{ github.token }}
