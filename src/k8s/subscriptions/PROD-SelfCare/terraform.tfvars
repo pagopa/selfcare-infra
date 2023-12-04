@@ -55,7 +55,7 @@ configmaps_hub-spid-login-ms = {
   USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
 
   # SPID
-  ORG_ISSUER = "https://selfcare.pagopa.it"
+  ORG_ISSUER = "https://selfcare.pagopa.it/pub-op-full/"
 
   CIE_URL          = "https://api.is.eng.pagopa.it/idp-keys/cie/latest"
   SERVER_PORT      = "8080"
