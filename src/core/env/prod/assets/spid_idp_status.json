@@ -1,33 +1,33 @@
 {
   "arubaid": {
-    "migrated": false
+    "migrated": true
   },
   "posteid": {
-    "migrated": false
+    "migrated": true
   },
   "infocertid": {
-    "migrated": false
+    "migrated": true
   },
   "spiditalia": {
-    "migrated": false
+    "migrated": true
   },
   "sielteid": {
-    "migrated": false
+    "migrated": true
   },
   "namirialid": {
-    "migrated": false
+    "migrated": true
   },
   "timid": {
-    "migrated": false
+    "migrated": true
   },
   "lepidaid": {
-    "migrated": false
+    "migrated": true
   },
   "teamsystemid": {
     "migrated": true
   },
   "ehtid": {
-    "migrated": false
+    "migrated": true
   },
   "infocamereid": {
     "migrated": false
