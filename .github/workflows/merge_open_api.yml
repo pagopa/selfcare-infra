@@ -18,9 +18,9 @@ jobs:
     - name: Create branch for action
       run: |
         export COMMIT_ID=$(git log --format="%H" -n 1)
-        echo $COMMIT_ID >> $GITHUB_ENV
-        git checkout -b "support-open-api-$COMMIT_ID"
-        git push --set-upstream origin "support-open-api-$COMMIT_ID"
+        echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
+        git checkout -b "support-open-api-${{ env.COMMIT_ID }}"
+        git push --set-upstream origin "support-open-api-${{ env.COMMIT_ID }}"
     - name: Check out ms-core
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
