@@ -18,11 +18,9 @@ jobs:
     - name: Create branch for action
       run: |
         export COMMIT_ID=$(git log --format="%H" -n 1)
-        echo $COMMIT_ID
-        echo "BRANCH_NAME=support-open-api-$(git log --format="%H" -n 1)" >> $GITHUB_ENV
-        git checkout -b "support-open-api-${{ env.BRANCH_NAME }}"
-        git push --set-upstream origin "support-open-api-${{ env.BRANCH_NAME }}"
-        
+        echo $COMMIT_ID >> $GITHUB_ENV
+        git checkout -b "support-open-api-$COMMIT_ID"
+        git push --set-upstream origin "support-open-api-$COMMIT_ID"
     - name: Check out ms-core
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
@@ -49,8 +47,8 @@ jobs:
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin ${{ env.BRANCH_NAME }}"
+          git push origin "support-open-api-${{ env.COMMIT_ID }}"
     - name: Create pull request
-      run: gh pr create -B develop -H ${{ env.BRANCH_NAME }}" --title '${{ env.BRANCH_NAME }}" into develop' --body 'Created by Github action'
+      run: gh pr create -B develop -H support-open-api-${{ env.COMMIT_ID }} --title 'support-open-api-${{ env.COMMIT_ID }} into develop' --body 'Created by Github action'
       env:
           GH_TOKEN: ${{ github.token }}
