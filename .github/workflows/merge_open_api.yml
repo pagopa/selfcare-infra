@@ -17,7 +17,8 @@ jobs:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
     - name: Create branch for action
       run: |
-        echo "BRANCH_NAME=support-open-api-$(git log --format="%H" -n 1)" >> $GITHUB_ENV
+        var COMMIT_ID=$(git log --format="%H" -n 1)
+        echo "BRANCH_NAME=support-open-api-$(COMMIT_ID)" >> $GITHUB_ENV
         git checkout -b "support-open-api-${{ env.BRANCH_NAME }}"
         git push --set-upstream origin "support-open-api-${{ env.BRANCH_NAME }}"
         
