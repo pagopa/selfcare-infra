@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
     - name: Create branch for action
       run: |
-        EXPORT COMMIT_ID = $(git log --format="%H" -n 1)
+        export COMMIT_ID = $(git log --format="%H" -n 1)
         git checkout -b "open-api-$COMMIT_ID"
     - name: Check out ms-core
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
