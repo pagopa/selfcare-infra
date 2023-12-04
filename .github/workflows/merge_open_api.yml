@@ -40,7 +40,7 @@ jobs:
         npx openapi-merge-cli
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Open pull request
-      run: gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
+      run: gh pr create -B develop -H support-open-api-$(git log --format="%H" -n 1) --title 'Merge support-open-api-$(git log --format="%H" -n 1) into develop' --body 'Created by Github action'
       env:
           GH_TOKEN: ${{ github.token }}
     - name: Commit api-docs
@@ -49,5 +49,5 @@ jobs:
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin "support-open-api-$COMMIT_ID"
+          git push origin support-open-api-$(git log --format="%H" -n 1)
   
