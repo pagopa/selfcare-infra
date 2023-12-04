@@ -19,9 +19,7 @@ jobs:
       run: |
         export COMMIT_ID=$(git log --format="%H" -n 1)
         git checkout -b "support-open-api-$COMMIT_ID"
-        gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
-      env:
-          GH_TOKEN: ${{ github.token }}
+        git push --set-upstream origin "support-open-api-$COMMIT_ID"
     - name: Check out ms-core
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
@@ -48,5 +46,8 @@ jobs:
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin "support-open-api-$COMMIT_ID"
-  
+          git push origin support-open-api-$COMMIT_ID
+    - name: Create pull request
+      run: gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
+      env:
+          GH_TOKEN: ${{ github.token }}
