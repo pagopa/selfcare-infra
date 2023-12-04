@@ -46,7 +46,7 @@ jobs:
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
           git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin support-open-api-$COMMIT_ID
+          git push
     - name: Create pull request
       run: gh pr create -B develop -H support-open-api-$COMMIT_ID --title 'Merge support-open-api-$COMMIT_ID into develop' --body 'Created by Github action'
       env:
