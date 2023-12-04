@@ -370,7 +370,7 @@ resource "kubernetes_secret" "anac-ftp-secret" {
   }
 
   data = {
-    ANAC_FTP_PASSWORD = module.key_vault_secrets_query.values["anac-ftp-password"].value
+    ANAC_FTP_PASSWORD   = module.key_vault_secrets_query.values["anac-ftp-password"].value
     ANAC_FTP_KNOWN_HOST = module.key_vault_secrets_query.values["anac-ftp-known-host"].value
   }
 

@@ -44,6 +44,7 @@
 | [azurerm_monitor_metric_alert.pnpg_error_5xx](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_private_dns_a_record.ingress](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [helm_release.reloader](https://registry.terraform.io/providers/hashicorp/helm/2.7.1/docs/resources/release) | resource |
+| [kubernetes_config_map.anac-ftp](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
 | [kubernetes_config_map.aruba-sign-service](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
 | [kubernetes_config_map.common](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
 | [kubernetes_config_map.geo-taxonomies](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/config_map) | resource |
@@ -62,6 +63,7 @@
 | [kubernetes_role_binding.deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.system_deployer_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/role_binding) | resource |
 | [kubernetes_role_binding.tokenreview_role_binding](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/role_binding) | resource |
+| [kubernetes_secret.anac-ftp-secret](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.aruba-sign-service-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.b4f-dashboard](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.cdn-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
@@ -119,6 +121,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_aks_name"></a> [aks\_name](#input\_aks\_name) | AKS cluster name | `string` | n/a | yes |
 | <a name="input_aks_resource_group_name"></a> [aks\_resource\_group\_name](#input\_aks\_resource\_group\_name) | AKS cluster resource name | `string` | n/a | yes |
+| <a name="input_anac-ftp"></a> [anac-ftp](#input\_anac-ftp) | n/a | `map(string)` | n/a | yes |
 | <a name="input_api_gateway_url"></a> [api\_gateway\_url](#input\_api\_gateway\_url) | n/a | `string` | n/a | yes |
 | <a name="input_aruba_sign_service"></a> [aruba\_sign\_service](#input\_aruba\_sign\_service) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_common"></a> [configmaps\_common](#input\_configmaps\_common) | n/a | `map(string)` | n/a | yes |
