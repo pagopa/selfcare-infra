@@ -11,14 +11,14 @@
         "inputFile": "../../../../../external-api/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["institutions", "onboarding", "product", "users", "institutions-pnpg"]
+          "excludeTags": ["institutions", "onboarding", "product", "users", "institutions-pnpg", "support"]
         }
       },
       {
         "inputFile": "../../../../../dashboard-backend/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["support", "products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups"]
+          "excludeTags": ["support", "products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups", "institutions"]
         }
       },
       {
