@@ -1,7 +1,7 @@
 {
     "inputs": [
       {
-        "inputFile": "../../../../../ms-core/app/src/main/resources/swagger/api-docs-v1.json",
+        "inputFile": "../../../../../ms-core/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["support"],
           "excludeTags": ["Migration", "Delegation", "External", "Management", "Institution", "Onboarding", "scheduler", "Token", "Persons"]
@@ -12,6 +12,13 @@
         "operationSelection": {
           "includeTags": ["support"],
           "excludeTags": ["institutions", "onboarding", "product", "users", "institutions-pnpg"]
+        }
+      },
+      {
+        "inputFile": "../../../../../user-group/app/src/main/resources/swagger/api-docs.json",
+        "operationSelection": {
+          "includeTags": ["support"],
+          "excludeTags": ["user-group"]
         }
       }
     ], 

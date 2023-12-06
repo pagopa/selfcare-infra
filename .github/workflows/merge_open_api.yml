@@ -35,10 +35,43 @@ jobs:
           ref: feature/SELC-3460
           path: external-api
           token: ${{ github.token }}
-    - name: Generate merged open api
+    - name: Check out dashboard-backend
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-dashboard-backend
+          ref: feature/SELC-3460
+          path: dashboard-backend
+          token: ${{ github.token }}
+    - name: Check out external-interceptor
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-external-interceptor
+          ref: feature/SELC-3460
+          path: ms-external-interceptor
+          token: ${{ github.token }}
+    - name: Check out user group
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-user-group
+          ref: feature/SELC-3460
+          path: user-group
+          token: ${{ github.token }}
+    - name: Check out ms-product
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-product
+          ref: feature/SELC-3460
+          path: ms-product
+          token: ${{ github.token }}
+    - name: Generate merged open api for support
       run: |
         npm i openapi-merge-cli
         cd ./src/core/api/selfcare_support_service/v1/
+        npx openapi-merge-cli
+        cp -rf output.swagger.json open-api.yml.tpl
+    - name: Generate merged open api for external v2
+      run: |
+        cd ./src/core/api/ms_external_api/v2/
         npx openapi-merge-cli
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Commit api-docs
@@ -49,6 +82,6 @@ jobs:
           git commit -m "Generated Support Swagger documentation" || exit 0
           git push origin "support-open-api-${{ env.COMMIT_ID }}"
     - name: Create pull request
-      run: gh pr create -B develop -H support-open-api-${{ env.COMMIT_ID }} --title 'support-open-api-${{ env.COMMIT_ID }} into develop' --body 'Created by Github action'
+      run: gh pr create -B develop -H generated-open-api-${{ env.COMMIT_ID }} --title 'generated-open-api-${{ env.COMMIT_ID }} into develop' --body 'Created by Github action'
       env:
           GH_TOKEN: ${{ github.token }}
