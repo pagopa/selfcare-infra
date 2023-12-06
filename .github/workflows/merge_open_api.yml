@@ -19,8 +19,8 @@ jobs:
       run: |
         export COMMIT_ID=$(git log --format="%H" -n 1)
         echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
-        git checkout -b "support-open-api-$COMMIT_ID"
-        git push --set-upstream origin "support-open-api-$COMMIT_ID"
+        git checkout -b "generated-open-api-$COMMIT_ID"
+        git push --set-upstream origin "generated-open-api-$COMMIT_ID"
     - name: Check out ms-core
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
@@ -79,8 +79,8 @@ jobs:
           git ls-files ./src** | grep 'open-api*' | xargs git add
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
-          git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin "support-open-api-${{ env.COMMIT_ID }}"
+          git commit -m "Generated Swagger documentation" || exit 0
+          git push origin "generated-open-api-${{ env.COMMIT_ID }}"
     - name: Create pull request
       run: gh pr create -B develop -H generated-open-api-${{ env.COMMIT_ID }} --title 'generated-open-api-${{ env.COMMIT_ID }} into develop' --body 'Created by Github action'
       env:
