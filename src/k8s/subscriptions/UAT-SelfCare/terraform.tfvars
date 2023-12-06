@@ -81,6 +81,7 @@ geo-taxonomies = {
 
 anac-ftp = {
   ANAC_FTP_IP        = "93.43.119.85"
+  ANAC_FTP_PORT      = 22
   ANAC_FTP_USER      = "PagoPA_user"
   ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
 }
