@@ -4,7 +4,7 @@
         "inputFile": "../../../../../ms-core/app/src/main/resources/swagger/api-docs-v1.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["Migration", "Delegation", "External", "Management", "Institution", "Onboarding", "scheduler", "Token", "Persons"]
+          "excludeTags": ["Migration", "Delegation", "External", "Management", "Onboarding", "scheduler","Persons"]
         }
       },
       {
@@ -18,7 +18,7 @@
         "inputFile": "../../../../../dashboard-backend/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["support", "products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups", "institutions"]
+          "excludeTags": ["products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups", "institutions"]
         }
       },
       {
