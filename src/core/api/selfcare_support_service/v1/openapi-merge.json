@@ -18,7 +18,7 @@
         "inputFile": "../../../../../user-group/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["support"],
-          "excludeTags": ["user-group"]
+          "excludeTags": ["user-group", "external-v2"]
         }
       }
     ], 

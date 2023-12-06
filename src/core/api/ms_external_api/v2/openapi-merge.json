@@ -18,14 +18,14 @@
         "inputFile": "../../../../../dashboard-backend/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["support"]
+          "excludeTags": ["support", "products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups"]
         }
       },
       {
         "inputFile": "../../../../../user-group/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
           "includeTags": ["external-v2"],
-          "excludeTags": ["user-group"]
+          "excludeTags": ["user-group", "support"]
         }
       },
       {
