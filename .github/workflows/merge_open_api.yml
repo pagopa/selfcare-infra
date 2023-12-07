@@ -68,11 +68,13 @@ jobs:
         npm i openapi-merge-cli
         cd ./src/core/api/selfcare_support_service/v1/
         npx openapi-merge-cli
+        jq 'del(.tags)' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Generate merged open api for external v2
       run: |
         cd ./src/core/api/ms_external_api/v2/
         npx openapi-merge-cli
+        jq 'del(.tags)' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Commit api-docs
       run: |
