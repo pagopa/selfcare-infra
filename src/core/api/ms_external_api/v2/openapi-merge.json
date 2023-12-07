@@ -3,43 +3,37 @@
       {
         "inputFile": "../../../../../ms-core/app/src/main/resources/swagger/api-docs-v1.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["Migration", "Delegation", "External", "Management", "Institution", "Onboarding", "scheduler", "Token", "Persons"]
+          "includeTags": ["external-v2"]
         }
       },
       {
         "inputFile": "../../../../../external-api/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["institutions", "onboarding", "product", "users", "institutions-pnpg"]
+          "includeTags": ["external-v2"]
         }
       },
       {
         "inputFile": "../../../../../dashboard-backend/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["products", "delegations", "onboarding", "pnPGInstitutions", "relationships", "token", "user", "user-groups", "institutions"]
+          "includeTags": ["external-v2", "support"]
         }
       },
       {
         "inputFile": "../../../../../user-group/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["user-group", "support"]
+          "includeTags": ["external-v2"]
         }
       },
       {
         "inputFile": "../../../../../ms-product/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["product"]
+          "includeTags": ["external-v2"]
         }
       },
       {
         "inputFile": "../../../../../ms-external-interceptor/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"],
-          "excludeTags": ["interceptor", "scheduler"]
+          "includeTags": ["external-v2"]
         }
       }
     ], 
