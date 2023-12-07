@@ -75,6 +75,7 @@ jobs:
       run: |
         cd ./src/core/api/ms_external_api/v2/
         npx openapi-merge-cli
+        jq 'del(..|.tags?)' output.swagger.json
         sed -r "s/.tags//" output.swagger.json
         jq 'del(.tags[])' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
