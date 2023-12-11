@@ -46,21 +46,21 @@ jobs:
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
           repository: pagopa/selfcare-ms-external-interceptor
-          ref: feature/SELC-3460
+          ref: release-dev
           path: ms-external-interceptor
           token: ${{ github.token }}
     - name: Check out user group
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
           repository: pagopa/selfcare-ms-user-group
-          ref: feature/SELC-3460
+          ref: release-dev
           path: user-group
           token: ${{ github.token }}
     - name: Check out ms-product
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
           repository: pagopa/selfcare-ms-product
-          ref: feature/SELC-3460
+          ref: release-dev
           path: ms-product
           token: ${{ github.token }}
     - name: Generate merged open api for support
@@ -68,7 +68,7 @@ jobs:
         npm i openapi-merge-cli
         cd ./src/core/api/selfcare_support_service/v1/
         npx openapi-merge-cli
-        sed '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
+        sed -i '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
         jq 'del(.tags[])' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Generate merged open api for external v2
@@ -76,7 +76,7 @@ jobs:
         cd ./src/core/api/ms_external_api/v2/
         npx openapi-merge-cli
         jq 'del(..|.tags?)' output.swagger.json
-        sed '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
+        sed -i '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
         jq 'del(.tags[])' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Commit api-docs
