@@ -68,7 +68,7 @@ jobs:
         npm i openapi-merge-cli
         cd ./src/core/api/selfcare_support_service/v1/
         npx openapi-merge-cli
-        sed '/\"tags\"/,/}/ d; /^$/d' 1.a
+        sed '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
         jq 'del(.tags[])' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Generate merged open api for external v2
@@ -76,7 +76,7 @@ jobs:
         cd ./src/core/api/ms_external_api/v2/
         npx openapi-merge-cli
         jq 'del(..|.tags?)' output.swagger.json
-        sed '/\"tags\"/,/}/ d; /^$/d' 1.a
+        sed '/\"tags\"/,/}/ d; /^$/d' output.swagger.json
         jq 'del(.tags[])' output.swagger.json
         cp -rf output.swagger.json open-api.yml.tpl
     - name: Commit api-docs
