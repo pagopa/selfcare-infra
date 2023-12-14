@@ -1,4 +1,5 @@
 codiceFiscaleGestore,denominazioneGestore,PEC,codiceIPA,ANAC_incaricato,ANAC_in_convalida,ANAC_abilitato
+80012000826,REGIONE SICILIANA - DIPARTIMENTO REGIONALE TECNICO,dipartimento.tecnico@certmail.regione.sicilia.it,r_sicili,true,false,false
 03553050927,DigitalPA s.r.l.,digitalpa@pec.it,,true,false,false
 02362600344,Net4market - CSAmed S.r.l.,csamed@pec.csamed.it,,true,false,false
 11244750961,ACCENTURE FINANCIAL ADVANCED SOLUTIONS & TECHNOLOGY S.R.L.,accenturefast@legalmail.it,,true,false,false
@@ -31,3 +32,4 @@ codiceFiscaleGestore,denominazioneGestore,PEC,codiceIPA,ANAC_incaricato,ANAC_in_
 00990320228,Trentino Digitale SpA,tndigit@pec.tndigit.it,its_022,true,false,false
 00118410323,INSIEL S.p.A. con socio unico,protocollo@pec.insiel.it,,true,false,false
 80000100802,Città Metropolitana di Reggio Calabria - Settore 3 Innovazione Digitale,protocollo@pec.cittametropolitana.rc.it,cmdrc,true,false,false
+04786681215,Società Regionale per la Sanità,soresa@pec.soresa.it ,soresa,true,false,false
