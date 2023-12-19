@@ -14,36 +14,76 @@ jobs:
     permissions: write-all
     #if: github.event.pull_request.merged == true
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+    - name: Create branch for action
+      run: |
+        export COMMIT_ID=$(git log --format="%H" -n 1)
+        echo "COMMIT_ID=$COMMIT_ID" >> $GITHUB_ENV
+        git checkout -b "generated-open-api-$COMMIT_ID"
+        git push --set-upstream origin "generated-open-api-$COMMIT_ID"
     - name: Check out ms-core
-      uses: actions/checkout@v3
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
-          name: pagopa/selfcare-ms-core
-          ref: feature/SELC-3460
+          repository: pagopa/selfcare-ms-core
+          ref: release-dev
           path: ms-core
           token: ${{ github.token }}
     - name: Check out external-api 
-      uses: actions/checkout@v3
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
-          name: pagopa/selfcare-external-api-backend
-          ref: feature/SELC-3460
+          repository: pagopa/selfcare-external-api-backend
+          ref: release-dev
           path: external-api
           token: ${{ github.token }}
-    - name: Generate merged open api
+    - name: Check out dashboard-backend
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-dashboard-backend
+          ref: feature/SELC-3460
+          path: dashboard-backend
+          token: ${{ github.token }}
+    - name: Check out external-interceptor
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-external-interceptor
+          ref: release-dev
+          path: ms-external-interceptor
+          token: ${{ github.token }}
+    - name: Check out user group
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-user-group
+          ref: release-dev
+          path: user-group
+          token: ${{ github.token }}
+    - name: Check out ms-product
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      with:
+          repository: pagopa/selfcare-ms-product
+          ref: release-dev
+          path: ms-product
+          token: ${{ github.token }}
+    - name: Generate merged open api for support
       run: |
-        cd src/core/api/selfcare_support_service/v1
         npm i openapi-merge-cli
+        cd ./src/core/api/selfcare_support_service/v1/
         npx openapi-merge-cli
+        cat <<< $(jq 'del(.tags)') output.swagger.json> output.json
+        cp -rf output.json open-api.yml.tpl
+    - name: Generate merged open api for external v2
+      run: |
+        cd ./src/core/api/ms_external_api/v2/
+        npx openapi-merge-cli
+        cat <<< $(jq 'del(.tags)') output.swagger.json> output.json
+        cp -rf output.json open-api.yml.tpl
     - name: Commit api-docs
       run: |
-          git ls-files ./app** | grep 'api-docs*' | xargs git add
+          git ls-files ./src** | grep 'open-api*' | xargs git add
           git config --global user.email "selfcare-github@pagopa.it"
           git config --global user.name "selfcare-github-bot"
-          git commit -m "Generated Support Swagger documentation" || exit 0
-          git push origin ${{ github.ref_name}}
+          git commit -m "Generated Swagger documentation" || exit 0
+          git push origin "generated-open-api-${{ env.COMMIT_ID }}"
+    - name: Create pull request
+      run: gh pr create -B develop -H generated-open-api-${{ env.COMMIT_ID }} --title 'generated-open-api-${{ env.COMMIT_ID }} into develop' --body 'Created by Github action'
+      env:
+          GH_TOKEN: ${{ github.token }}
