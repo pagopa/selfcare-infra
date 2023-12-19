@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       with:
           repository: pagopa/selfcare-ms-core
-          ref: feature/SELC-3460
+          ref: release-dev
           path: ms-core
           token: ${{ github.token }}
     - name: Check out external-api 
