@@ -81,7 +81,7 @@ redis_version                  = 6
 
 # aks
 aks_alerts_enabled                  = false
-aks_kubernetes_version              = "1.25.11"
+aks_kubernetes_version              = "1.27.7"
 aks_system_node_pool_os_disk_type   = "Managed"
 aks_system_node_pool_node_count_min = 1
 aks_system_node_pool_node_count_max = 1
@@ -95,8 +95,8 @@ aks_system_node_pool_only_critical_addons_enabled = true
 
 aks_user_node_pool_enabled        = true
 aks_user_node_pool_os_disk_type   = "Managed"
-aks_user_node_pool_node_count_min = 2
-aks_user_node_pool_node_count_max = 2
+aks_user_node_pool_node_count_min = 1
+aks_user_node_pool_node_count_max = 3
 user_node_pool_node_labels = {
   "node_type" = "user"
 }

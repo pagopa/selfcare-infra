@@ -1041,7 +1041,7 @@ module "apim_external_api_contract_v1" {
   })
 
   subscription_required = true
-  
+
   api_operation_policies = [
     {
       operation_id = "getContractUsingGET"
