@@ -1,5 +1,10 @@
 name: Generate Support Open Api
 on:
+  pull_request:
+    branches:
+      - develop
+      - feature/SELC-3490
+    types: [ opened, reopened ]
   workflow_dispatch: #allow to run github action manually
 permissions:
   contents: write
