@@ -80,10 +80,10 @@ redis_version  = 6
 
 # aks
 aks_alerts_enabled                  = false
-aks_kubernetes_version              = "1.25.11"
+aks_kubernetes_version              = "1.27.7"
 aks_system_node_pool_os_disk_type   = "Managed"
 aks_system_node_pool_node_count_min = 1
-aks_system_node_pool_node_count_max = 1
+aks_system_node_pool_node_count_max = 2
 
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip = "10.1.1.250"
@@ -95,7 +95,7 @@ system_node_pool_enable_host_encryption           = false
 
 aks_user_node_pool_enabled        = true
 aks_user_node_pool_os_disk_type   = "Managed"
-aks_user_node_pool_node_count_min = 3
+aks_user_node_pool_node_count_min = 2
 aks_user_node_pool_node_count_max = 4
 user_node_pool_node_labels = {
   "node_type" = "user"
