@@ -71,9 +71,12 @@ jobs:
         shell: bash
         continue-on-error: true
         run: |
-          bash ./terraform.sh plan ${{ steps.env_read.outputs.environment }} -no-color | tee plan_output.txt
+          bash ./terraform.sh plan ${{ steps.env_read.outputs.environment }} | tee plan_output.txt
+          echo "plan terminated"
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
           echo "$OUTPUT" > plan_output_multiline.txt
+          pwd
+          ls
 
       - uses: actions/github-script@v6
         id: terraform_plan_comment
