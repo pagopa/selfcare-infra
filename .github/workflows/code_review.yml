@@ -34,6 +34,3 @@ jobs:
       environment: ${{ inputs.environment }}
       dir: "./src/core"
       agent: ubuntu-latest
-    permissions:
-      id-token: write
-      pull-requests: write
