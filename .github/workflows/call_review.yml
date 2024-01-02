@@ -71,7 +71,7 @@ jobs:
         shell: bash
         continue-on-error: true
         run: |
-          bash ./terraform.sh plan prod -no-color | tee plan_output.txt
+          bash ./terraform.sh plan "$ENV_NAME" -no-color | tee plan_output.txt
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
           echo "$OUTPUT" > plan_output_multiline.txt
 
