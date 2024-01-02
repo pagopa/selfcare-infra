@@ -33,4 +33,4 @@ jobs:
     with:
       environment: ${{ inputs.environment }}
       dir: "./src/core"
-      agent: ubuntu-latest
+      agent: self-hosted
