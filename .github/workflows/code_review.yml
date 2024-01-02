@@ -33,4 +33,4 @@ jobs:
     with:
       environment: dev
       dir: "./src/core"
-      agent: self-hosted
+      agent: ubuntu-latest
