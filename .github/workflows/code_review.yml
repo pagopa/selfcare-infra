@@ -31,6 +31,6 @@ jobs:
     name: Core Code Review
     secrets: inherit
     with:
-      environment: dev
+      environment: ${{ inputs.environment }}
       dir: "./src/core"
       agent: self-hosted
