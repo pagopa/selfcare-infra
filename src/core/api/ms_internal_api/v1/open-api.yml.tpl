@@ -444,6 +444,57 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/{tokenId}/consume':
+    post:
+      tags:
+        - Onboarding
+      summary: 'Complete onboarding given tokenId'
+      description: 'Consume token onboarding request without digest verification '
+      operationId: completeOnboardingTokenConsume
+      parameters:
+        - name: tokenId
+          in: path
+          description: contract's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - contract
+              type: object
+              properties:
+                contract:
+                  type: string
+                  description: contract
+                  format: binary
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '409':
+          description: Conflict
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
