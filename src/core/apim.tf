@@ -552,6 +552,12 @@ module "apim_external_api_ms_v2" {
 
   api_operation_policies = [
     {
+      operation_id = "getAllTokensUsingGET"
+      xml_content = templatefile("./api/ms_external_api/v2/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+      })
+    },
+    {
       operation_id = "getInstitutionsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitutions_op_policy.xml.tpl", {
         CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"

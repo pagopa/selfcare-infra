@@ -11,6 +11,67 @@ tags:
   - name: product
     description: Product Controller
 paths:
+  '/tokens':
+    get:
+      tags:
+        - Token
+      summary: Retrieve paginated token list filter by status
+      description: Retrieve paginated token list filter by status
+      operationId: getAllTokensUsingGET
+      parameters:
+        - name: states
+          in: query
+          description: states
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
+        - name: page
+          in: query
+          description: page number
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: number of element of every page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginatedTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/support':
     post:
       tags:
@@ -959,6 +1020,114 @@ paths:
             - global
 components:
   schemas:
+    PaginatedTokenResponse:
+      title: PaginatedTokenResponse
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScContractResponse'
+        totalNumber:
+          type: integer
+          format: int64
+    ScContractResponse:
+      title: ScContractResponse
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        closedAt:
+          type: string
+          format: date-time
+        contentType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        filePath:
+          type: string
+        id:
+          type: string
+        institution:
+          $ref: '#/components/schemas/InstitutionToNotifyResponse'
+        internalIstitutionID:
+          type: string
+        notificationType:
+          type: string
+          enum:
+            - ADD
+            - UPDATE
+        onboardingTokenId:
+          type: string
+        pricingPlan:
+          type: string
+        product:
+          type: string
+        state:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    InstitutionToNotifyResponse:
+      title: InstitutionToNotifyResponse
+      type: object
+      properties:
+        address:
+          type: string
+        category:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        county:
+          type: string
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        institutionType:
+          type: string
+          enum:
+            - AS
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+        istatCode:
+          type: string
+        origin:
+          type: string
+        originId:
+          type: string
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        rootParent:
+          $ref: '#/components/schemas/RootParent'
+        subUnitCode:
+          type: string
+        subUnitType:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    RootParent:
+      title: RootParent
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        originId:
+          type: string
     AckPayloadRequest:
         title: AckPayloadRequest
         required:
