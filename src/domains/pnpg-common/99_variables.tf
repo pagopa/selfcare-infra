@@ -83,11 +83,6 @@ variable "dns_zone_prefix" {
   description = "The dns subdomain. E.g: selfcare"
 }
 
-variable "dns_zone_prefix_ar" {
-  type        = string
-  description = "The dns subdomain for areariservata"
-}
-
 
 variable "monitor_resource_group_name" {
   type        = string

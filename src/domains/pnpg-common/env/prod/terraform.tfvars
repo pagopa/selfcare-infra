@@ -7,7 +7,6 @@ location_short = "weu"
 instance       = "prod"
 
 dns_zone_prefix = "selfcare"
-dns_zone_prefix_ar = "areariservata"
 external_domain = "pagopa.it"
 
 tags = {
