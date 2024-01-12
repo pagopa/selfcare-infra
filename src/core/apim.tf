@@ -924,6 +924,24 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "getUsersUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getUsersUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+    {
+      operation_id = "getAllTokensUsingGET"
+      xml_content = templatefile("./api/selfcare_support_service/v1/getAllTokensUsingGET_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
