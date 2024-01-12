@@ -511,7 +511,7 @@ paths:
               - TOBEVALIDATED
         - name: page
           in: query
-          description: ${swagger.mscore.page.number}
+          description: page
           required: false
           style: form
           schema:
@@ -519,7 +519,7 @@ paths:
             format: int32
         - name: size
           in: query
-          description: ${swagger.mscore.page.size}
+          description: size
           required: false
           style: form
           schema:
