@@ -1,6 +1,6 @@
-resource "azurerm_dns_zone" "selfcare_public" {
-  count               = (var.dns_zone_prefix == null || var.external_domain == null) ? 0 : 1
-  name                = join(".", [var.dns_zone_prefix, var.external_domain])
+resource "azurerm_dns_zone" "areariservata_public" {
+  count               = (var.dns_zone_prefix_ar == null || var.external_domain == null) ? 0 : 1
+  name                = join(".", [var.dns_zone_prefix_ar, var.external_domain])
   resource_group_name = azurerm_resource_group.rg_vnet.name
 
   tags = var.tags
@@ -10,9 +10,9 @@ resource "azurerm_dns_zone" "selfcare_public" {
 # @Records
 #
 
-resource "azurerm_dns_caa_record" "caa_selfcare" {
+resource "azurerm_dns_caa_record" "caa_areariservata" {
   name                = "@"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   ttl                 = var.dns_default_ttl_sec
 
@@ -67,10 +67,10 @@ resource "azurerm_dns_caa_record" "caa_selfcare" {
 
 # MX record for sub domain email
 
-resource "azurerm_dns_mx_record" "dns-mx-email-selfcare-pagopa-it" {
+resource "azurerm_dns_mx_record" "dns-mx-email-areariservata-pagopa-it" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "email"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   ttl                 = var.dns_default_ttl_sec
 
@@ -83,10 +83,10 @@ resource "azurerm_dns_mx_record" "dns-mx-email-selfcare-pagopa-it" {
 }
 
 # spf record
-resource "azurerm_dns_txt_record" "dns-txt-email-selfcare-pagopa-it-aws-ses" {
+resource "azurerm_dns_txt_record" "dns-txt-email-areariservata-pagopa-it-aws-ses" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "email"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   ttl                 = var.dns_default_ttl_sec
   record {
@@ -95,10 +95,10 @@ resource "azurerm_dns_txt_record" "dns-txt-email-selfcare-pagopa-it-aws-ses" {
   tags = var.tags
 }
 
-resource "azurerm_dns_txt_record" "dns-txt-selfcare-pagopa-it-aws-ses" {
+resource "azurerm_dns_txt_record" "dns-txt-areariservata-pagopa-it-aws-ses" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "_amazonses"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   ttl                 = var.dns_default_ttl_sec
   record {
@@ -109,26 +109,26 @@ resource "azurerm_dns_txt_record" "dns-txt-selfcare-pagopa-it-aws-ses" {
 
 
 locals {
-  dkim_aws_ses_selfcare_pagopa_it = [
+  dkim_aws_ses_areariservata_pagopa_it = [
     {
-      "name"  = "6h45kkrdd3vjdinlyiiidtxxsphoaubs._domainkey"
-      "value" = "6h45kkrdd3vjdinlyiiidtxxsphoaubs.dkim.eu-south-1.amazonses.com"
+      "name"  = "jhxmcfdewlxudlkkwf7zqmbcyh7gxfqi._domainkey"
+      "value" = "jhxmcfdewlxudlkkwf7zqmbcyh7gxfqi.dkim.eu-south-1.amazonses.com"
     },
     {
-      "name"  = "xzxgkpr57rtojhujy5pa7allv7mpoxs4._domainkey"
-      "value" = "xzxgkpr57rtojhujy5pa7allv7mpoxs4.dkim.eu-south-1.amazonses.com"
+      "name"  = "ziwig3w7kxrs22pp57pgva6gwgrrvsxt._domainkey"
+      "value" = "ziwig3w7kxrs22pp57pgva6gwgrrvsxt.dkim.eu-south-1.amazonses.com"
     },
     {
-      "name"  = "6ozapd6v5bdmceyr2ap246as3mvafyd2._domainkey"
-      "value" = "6ozapd6v5bdmceyr2ap246as3mvafyd2.dkim.eu-south-1.amazonses.com"
+      "name"  = "fpkweq37v2mlearalahfhfy4nwuzoiyv._domainkey"
+      "value" = "fpkweq37v2mlearalahfhfy4nwuzoiyv.dkim.eu-south-1.amazonses.com"
     }
   ]
 }
 
-resource "azurerm_dns_cname_record" "dkim-aws-ses-selfcare-pagopa-it" {
-  for_each            = var.env_short == "p" ? { for d in local.dkim_aws_ses_selfcare_pagopa_it : d.name => d } : {}
+resource "azurerm_dns_cname_record" "dkim-aws-ses-areariservata-pagopa-it" {
+  for_each            = var.env_short == "p" ? { for d in local.dkim_aws_ses_areariservata_pagopa_it : d.name => d } : {}
   name                = each.value.name
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   ttl                 = var.dns_default_ttl_sec
   record              = each.value.value
