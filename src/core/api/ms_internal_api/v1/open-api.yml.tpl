@@ -9,6 +9,92 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
+  /users/{id}/status:
+    put:
+      tags:
+        - support
+      summary: Update user status with optional filter
+      description: Update user status with optional filter
+      operationId: updateUserStatusUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: User's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          description: role
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - DELEGATE
+              - MANAGER
+              - OPERATOR
+              - SUB_DELEGATE
+        - name: productRole
+          in: query
+          description: productRole
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: status
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/{institutionId}/products/{productId}/users':
       get:
         tags:
