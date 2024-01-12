@@ -53,7 +53,7 @@ cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
 dns_zone_prefix = "uat.selfcare"
-dns_zone_prefi_ar = "uat.areariservata"
+dns_zone_prefix_ar = "uat.areariservata"
 external_domain = "pagopa.it"
 
 # storage account
