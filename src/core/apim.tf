@@ -897,7 +897,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUserInfoUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getUserInfoUsingGet_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
@@ -906,7 +906,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getInstitutionUsersUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionUsersUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
@@ -933,7 +933,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUsersUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getUsersUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
@@ -942,7 +942,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getAllTokensUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getAllTokensUsingGET_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
