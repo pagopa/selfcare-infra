@@ -9,10 +9,10 @@ resource "azurerm_dns_zone" "areariservata_public" {
 
 
 # Prod ONLY record to DEV public DNS delegation
-resource "azurerm_dns_ns_record" "dev_selfcare" {
+resource "azurerm_dns_ns_record" "dev_areariservata" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "dev"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   records = [
     "ns1-06.azure-dns.com.",
@@ -25,10 +25,10 @@ resource "azurerm_dns_ns_record" "dev_selfcare" {
 }
 
 # Prod ONLY record to UAT public DNS delegation
-resource "azurerm_dns_ns_record" "uat_selfcare" {
+resource "azurerm_dns_ns_record" "uat_areariservata" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "uat"
-  zone_name           = azurerm_dns_zone.selfcare_public[0].name
+  zone_name           = azurerm_dns_zone.areariservata_public[0].name
   resource_group_name = azurerm_resource_group.rg_vnet.name
   records = [
     "ns1-07.azure-dns.com.",
