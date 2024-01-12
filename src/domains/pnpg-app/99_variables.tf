@@ -186,6 +186,7 @@ variable "dns_zone_prefix" {
   description = "The dns subdomain."
 }
 
+
 variable "dns_zone_internal_prefix" {
   type        = string
   default     = null

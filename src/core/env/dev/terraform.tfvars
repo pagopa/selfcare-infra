@@ -52,8 +52,9 @@ vnet_aks_ddos_protection_plan = false
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
-dns_zone_prefix = "dev.selfcare"
-external_domain = "pagopa.it"
+dns_zone_prefix    = "dev.selfcare"
+dns_zone_prefix_ar = "dev.areariservata"
+external_domain    = "pagopa.it"
 
 # storage account
 public_network_access_enabled = false

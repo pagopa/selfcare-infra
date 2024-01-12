@@ -601,6 +601,13 @@ variable "dns_zone_prefix" {
   description = "The dns subdomain."
 }
 
+variable "dns_zone_prefix_ar" {
+  type        = string
+  default     = "areariservat"
+  description = "The dns subdomain."
+}
+
+
 # apim
 variable "apim_publisher_name" {
   type = string
