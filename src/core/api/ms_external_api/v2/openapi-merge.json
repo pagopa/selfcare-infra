@@ -10,7 +10,8 @@
       {
         "inputFile": "../../../../../external-api/app/src/main/resources/swagger/api-docs.json",
         "operationSelection": {
-          "includeTags": ["external-v2"]
+          "includeTags": ["external-v2"],
+          "excludeTags": ["institutions"]
         }
       },
       {
