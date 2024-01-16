@@ -67,7 +67,6 @@
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | git::https://github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.3.0 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
 | <a name="module_functions_snet"></a> [functions\_snet](#module\_functions\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.8.0 |
-| <a name="module_github_runner"></a> [github\_runner](#module\_github\_runner) | git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_job_gh_runner | v7.14.0 |
 | <a name="module_jwt"></a> [jwt](#module\_jwt) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.3.0 |
@@ -348,7 +347,6 @@
 | <a name="input_cidr_subnet_cosmosdb_mongodb"></a> [cidr\_subnet\_cosmosdb\_mongodb](#input\_cidr\_subnet\_cosmosdb\_mongodb) | Application gateway address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_dns_forwarder"></a> [cidr\_subnet\_dns\_forwarder](#input\_cidr\_subnet\_dns\_forwarder) | DNS Forwarder network address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_eventhub"></a> [cidr\_subnet\_eventhub](#input\_cidr\_subnet\_eventhub) | EventHub address space. | `list(string)` | n/a | yes |
-| <a name="input_cidr_subnet_gh_runner"></a> [cidr\_subnet\_gh\_runner](#input\_cidr\_subnet\_gh\_runner) | Container App Environment address space. | `string` | n/a | yes |
 | <a name="input_cidr_subnet_k8s"></a> [cidr\_subnet\_k8s](#input\_cidr\_subnet\_k8s) | Subnet cluster kubernetes. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_load_tests"></a> [cidr\_subnet\_load\_tests](#input\_cidr\_subnet\_load\_tests) | private endpoints address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_logs_storage"></a> [cidr\_subnet\_logs\_storage](#input\_cidr\_subnet\_logs\_storage) | Logs storage address space. | `list(string)` | n/a | yes |
@@ -398,7 +396,6 @@
 | <a name="input_eventhubs"></a> [eventhubs](#input\_eventhubs) | A list of event hub topics to add to namespace. | <pre>list(object({<br>    name              = string<br>    partitions        = number<br>    message_retention = number<br>    consumers         = list(string)<br>    keys = list(object({<br>      name   = string<br>      listen = bool<br>      send   = bool<br>      manage = bool<br>    }))<br>  }))</pre> | `[]` | no |
 | <a name="input_external_domain"></a> [external\_domain](#input\_external\_domain) | Domain for delegation | `string` | `"pagopa.it"` | no |
 | <a name="input_function_always_on"></a> [function\_always\_on](#input\_function\_always\_on) | Always on property | `bool` | `false` | no |
-| <a name="input_gh_runner_pat_secret_name"></a> [gh\_runner\_pat\_secret\_name](#input\_gh\_runner\_pat\_secret\_name) | KeyVault secret name that stores the PAT to get access to repositories | `string` | n/a | yes |
 | <a name="input_k8s_kube_config_path_prefix"></a> [k8s\_kube\_config\_path\_prefix](#input\_k8s\_kube\_config\_path\_prefix) | n/a | `string` | `"~/.kube"` | no |
 | <a name="input_law_daily_quota_gb"></a> [law\_daily\_quota\_gb](#input\_law\_daily\_quota\_gb) | The workspace daily quota for ingestion in GB. | `number` | `-1` | no |
 | <a name="input_law_retention_in_days"></a> [law\_retention\_in\_days](#input\_law\_retention\_in\_days) | The workspace data retention in days | `number` | `30` | no |

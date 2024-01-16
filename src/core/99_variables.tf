@@ -560,11 +560,6 @@ variable "cidr_subnet_private_endpoints" {
   description = "private endpoints address space."
 }
 
-variable "cidr_subnet_gh_runner" {
-  type        = string
-  description = "Container App Environment address space."
-}
-
 # DNS
 variable "dns_default_ttl_sec" {
   type        = number
@@ -1232,13 +1227,6 @@ variable "function_always_on" {
   type        = bool
   description = "Always on property"
   default     = false
-}
-
-# GitHub Runner
-
-variable "gh_runner_pat_secret_name" {
-  type        = string
-  description = "KeyVault secret name that stores the PAT to get access to repositories"
 }
 
 # Container App
