@@ -34,7 +34,6 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
-cidr_subnet_gh_runner             = "10.1.146.0/23" # minimum subnet size required by container app environment
 
 cidr_subnet_selc = ["10.1.148.0/23"]
 
@@ -376,7 +375,5 @@ eventhubs = [{
 ##
 
 enable_load_tests_db = true
-
-gh_runner_pat_secret_name = "github-pat-selfcare-infra"
 
 cae_zone_redundant = false
