@@ -223,6 +223,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin

@@ -321,6 +321,8 @@ paths:
                 - PT
                 - SCP
                 - SA
+                - REC
+                - CON
         responses:
           '200':
             description: OK
@@ -650,6 +652,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -719,6 +723,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -871,6 +877,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -1292,6 +1300,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -1380,6 +1390,8 @@ components:
             - PT
             - SA
             - SCP
+            - REC
+            - CON
         productId:
           type: string
         taxCode:
@@ -1541,6 +1553,8 @@ components:
             - SA
             - SCP
             - AS
+            - REC
+            - CON
         paymentServiceProvider:
           $ref: '#/components/schemas/PaymentServiceProvider'
         rea:
