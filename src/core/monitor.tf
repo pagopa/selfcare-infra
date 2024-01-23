@@ -185,37 +185,42 @@ locals {
       frequency                         = 300
       expected_http_status              = 404
       ssl_cert_remaining_lifetime_check = 7
+      opsgenie                          = true
     },
     # https://api-pnpg.selfcare.pagopa.it/health
     "apigw-pnpg-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                              = "/health",
-      frequency                         = 300
-      expected_http_status              = 404
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 300,
+      expected_http_status              = 404,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = true
     },
     ## CDN custom domains ##
     # https://selfcare.pagopa.it/auth/login
     "login-selfcare" = {
       host                              = trimsuffix(module.checkout_cdn.fqdn, "."),
       path                              = "/auth/login",
-      frequency                         = 900
-      expected_http_status              = 200
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 200,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = true
     },
     "login-pnpg" = {
       host                              = "imprese.notifichedigitali.it",
       path                              = "/auth/login",
-      frequency                         = 900
-      expected_http_status              = 200
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 200,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = true
     },
     "Spid-registry" = {
       host                              = "registry.spid.gov.it",
       path                              = "/metadata/idp/spid-entities-idps.xml",
-      frequency                         = 900
+      frequency                         = 900,
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = true
     },
     "CIE-selc" = {
       # CIE https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=xx_servizicie
@@ -224,6 +229,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = true
     },
     "SpidL2-arubaid-selc" = {
       # SpidL2-arubaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=arubaid
@@ -232,6 +238,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-infocertid-selc" = {
       # SpidL2-infocertid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocertid
@@ -240,6 +247,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-lepidaid-selc" = {
       # SpidL2-lepidaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=lepidaid
@@ -248,6 +256,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-namirialid-selc" = {
       # SpidL2-namirialid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=namirialid
@@ -256,6 +265,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-posteid-selc" = {
       # SpidL2-posteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=posteid
@@ -264,6 +274,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-sielteid-selc" = {
       # SpidL2-sielteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=sielteid
@@ -272,6 +283,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-spiditalia-selc" = {
       # SpidL2-spiditalia https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=spiditalia
@@ -280,6 +292,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-etna-selc" = {
       # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
@@ -289,6 +302,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-infocamere-selc" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocamereid
@@ -297,6 +311,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-intesiid-selc" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=intesiid
@@ -305,6 +320,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-timid-selc" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=timid
@@ -313,6 +329,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-teamsystemid-selc" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=teamsystemid
@@ -321,6 +338,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "CIE-pnpg" = {
       # CIE https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=xx_servizicie
@@ -329,6 +347,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-arubaid-pnpg" = {
       # SpidL2-arubaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=arubaid
@@ -337,6 +356,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-infocertid-pnpg" = {
       # SpidL2-infocertid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocertid
@@ -345,6 +365,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-lepidaid-pnpg" = {
       # SpidL2-lepidaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=lepidaid
@@ -353,6 +374,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-namirialid-pnpg" = {
       # SpidL2-namirialid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=namirialid
@@ -361,6 +383,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-posteid-pnpg" = {
       # SpidL2-posteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=posteid
@@ -369,6 +392,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-sielteid-pnpg" = {
       # SpidL2-sielteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=sielteid
@@ -377,6 +401,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-spiditalia-pnpg" = {
       # SpidL2-spiditalia https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=spiditalia
@@ -385,6 +410,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-etna-pnpg" = {
       # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
@@ -394,6 +420,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-infocamere-pnpg" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocamereid
@@ -402,6 +429,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-intesiid-pnpg" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=intesiid
@@ -410,6 +438,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-timid-pnpg" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=timid
@@ -418,6 +447,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
     "SpidL2-teamsystemid-pnpg" = {
       # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=teamsystemid
@@ -426,6 +456,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
+      opsgenie                          = false
     },
   }
 
@@ -434,40 +465,45 @@ locals {
     "apigw-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
       path                              = "/health",
-      frequency                         = 900
-      expected_http_status              = 404
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 404,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = false
     },
     # https://api-pnpg.selfcare.pagopa.it/health
     "apigw-pnpg-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                              = "/health",
-      frequency                         = 900
-      expected_http_status              = 404
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 404,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = false
     },
     ## CDN custom domains ##
     # https://selfcare.pagopa.it/auth/login
     "login-selfcare" = {
       host                              = trimsuffix(module.checkout_cdn.fqdn, "."),
       path                              = "/auth/login",
-      frequency                         = 900
-      expected_http_status              = 200
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 200,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = false
     },
     "TestEnv-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
       path                              = "/spid-login/v1/login?entityID=xx_testenv2&authLevel=SpidL2",
-      frequency                         = 900
-      expected_http_status              = 308
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 308,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = false
     },
     "TestEnv-pnpg" = {
       host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
       path                              = "/spid/v1/login?entityID=xx_testenv2&authLevel=SpidL2",
-      frequency                         = 900
-      expected_http_status              = 308
-      ssl_cert_remaining_lifetime_check = 7
+      frequency                         = 900,
+      expected_http_status              = 308,
+      ssl_cert_remaining_lifetime_check = 7,
+      opsgenie                          = false
     }
   }
 }
@@ -491,7 +527,7 @@ module "web_test_api" {
   frequency                         = each.value.frequency
   alert_description                 = "Web availability check alert triggered when it fails. Runbook: https://pagopa.atlassian.net/wiki/spaces/SCP/pages/823722319/Web+Availability+Test+-+TLS+Probe+Check"
 
-  actions = var.env_short == "p" ? [
+  actions = var.env_short == "p" && each.value.opsgenie ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null
