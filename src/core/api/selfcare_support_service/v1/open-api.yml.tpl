@@ -525,6 +525,13 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: productId
+          in: query
+          description: productId
+          required: false
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
