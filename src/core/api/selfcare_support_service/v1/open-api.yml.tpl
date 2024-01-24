@@ -713,6 +713,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
@@ -812,6 +814,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         origin:
           type: string
         originId:
@@ -988,6 +992,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         productId:
           type: string
         taxCode:
@@ -1226,6 +1232,8 @@ components:
             - SA
             - SCP
             - AS
+            - REC
+            - CON
         paymentServiceProvider:
           $ref: '#/components/schemas/PaymentServiceProvider'
         rea:
@@ -1564,6 +1572,8 @@ components:
             - PT
             - SA
             - SCP
+            - REC
+            - CON
         istatCode:
           type: string
         origin:
