@@ -34,7 +34,7 @@
         <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
-        <base/>
+        <forward-request timeout="240"/>
     </backend>
     <outbound>
         <base />

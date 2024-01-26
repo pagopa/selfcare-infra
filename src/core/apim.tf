@@ -890,7 +890,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUserInfoUsingPOST"
-      xml_content = xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
