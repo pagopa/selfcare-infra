@@ -3,6 +3,7 @@ module "identity_ci" {
 
   prefix    = var.prefix
   env_short = var.env_short
+  domain    = var.domain
 
   identity_role = "ci"
 

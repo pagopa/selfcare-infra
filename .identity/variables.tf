@@ -13,6 +13,10 @@ variable "location" {
   description = "One of westeurope, northeurope"
 }
 
+variable "env" {
+  type = string
+}
+
 variable "env_short" {
   type = string
   validation {
@@ -21,6 +25,11 @@ variable "env_short" {
     )
     error_message = "Max length is 1 chars."
   }
+}
+
+variable "domain" {
+  type    = string
+  default = "infra"
 }
 
 variable "ci_github_federations" {
@@ -62,4 +71,24 @@ variable "tags" {
   default = {
     CreatedBy = "Terraform"
   }
+}
+
+variable "github_repository_environment_ci" {
+  type = object({
+    protected_branches     = bool
+    custom_branch_policies = bool
+    reviewers_teams        = optional(list(string), [])
+    branch_pattern         = optional(string, null)
+  })
+  description = "GitHub Continous Integration roles"
+}
+
+variable "github_repository_environment_cd" {
+  type = object({
+    protected_branches     = bool
+    custom_branch_policies = bool
+    reviewers_teams        = optional(list(string), [])
+    branch_pattern         = optional(string, null)
+  })
+  description = "GitHub Continous Delivery roles"
 }
