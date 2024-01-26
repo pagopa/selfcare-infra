@@ -864,7 +864,7 @@ module "apim_selfcare_support_service_v1" {
   api_operation_policies = [
     {
       operation_id = "getContractUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getContract_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -873,7 +873,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getInstitutionsByTaxCodeUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -890,7 +890,7 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUserInfoUsingPOST"
-      xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_v2.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -898,8 +898,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUserInfoUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -907,8 +907,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getInstitutionUsersUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -916,8 +916,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getDelegationsUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/getDelegationsUsingGET_op_policy.xml.tpl", {
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -925,8 +925,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
-      xml_content = templatefile("./api/selfcare_support_service/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -934,8 +934,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getUsersUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -943,8 +943,8 @@ module "apim_selfcare_support_service_v1" {
     },
     {
       operation_id = "getAllTokensUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
