@@ -24,8 +24,9 @@ provider "registry.terraform.io/hashicorp/azurerm" {
   ]
 }
 
-provider "registry.terraform.io/hashicorp/github" {
-  version = "5.45.0"
+provider "registry.terraform.io/integrations/github" {
+  version     = "5.45.0"
+  constraints = "5.45.0"
   hashes = [
     "h1:6nxolUZ963kZ3squxzUbO1F+WPXKUxtpuiVsVtbaY7U=",
     "h1:cP5uEN9jpePr+/Kc7OyAZMhysbDhQoLGpLqgQpLFewg=",
