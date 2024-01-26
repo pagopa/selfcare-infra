@@ -10,14 +10,11 @@ on:
       - edited
       - synchronize
       - reopened
-      # - ready_for_review
+      - ready_for_review
     paths:
       - ./src/core/**
       - ./.github/workflows/call_code_review.yml
       - ./.github/workflows/pr_core_infra.yml
-  push:
-    branches:
-      - EC-108-setting-git-hub-repo-via-terraform
 
   workflow_dispatch:
     inputs:
