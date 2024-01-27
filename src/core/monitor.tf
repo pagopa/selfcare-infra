@@ -220,7 +220,7 @@ locals {
       frequency                         = 900,
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = true
+      opsgenie                          = false
     },
     "CIE-selc" = {
       # CIE https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=xx_servizicie
@@ -229,7 +229,7 @@ locals {
       frequency                         = 900
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = true
+      opsgenie                          = false
     },
     "SpidL2-arubaid-selc" = {
       # SpidL2-arubaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=arubaid
