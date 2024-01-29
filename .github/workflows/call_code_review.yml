@@ -61,6 +61,11 @@ jobs:
           terraform_version: ${{ steps.set-terraform-version.outputs.terraform_version }}
           terraform_wrapper: true
 
+      - name: Terraform Init
+        working-directory: ${{ inputs.dir }}
+        run: |
+          bash ./terraform.sh init ${{ steps.env_read.outputs.environment }}
+
       - name: Terraform Plan
         working-directory: ${{ inputs.dir }}
         continue-on-error: true
