@@ -2,7 +2,7 @@
 set -e
 ############################################################
 # Setup configuration relative to a given subscription
-# Subscription are defined in ./subscription
+# Subscription are defined in ./env
 # Fingerprint: c2V0dXAuc2gK
 ############################################################
 
@@ -45,10 +45,10 @@ function def_var() {
     installpkg "azure-cli"
   fi
 
-  aks_name_from_cli=$(az aks list -o tsv --query "[?contains(name,'$ENV-aks')].{Name:name}" 2>/dev/null | tr -d '\r')
+  aks_name_from_cli=$(az aks list -o tsv --query "[?contains(name,'${ENV}01-aks')].{Name:name}" 2>/dev/null | tr -d '\r')
   aks_name=${aks_name_from_cli}
   echo "[INFO] aks_name_from_cli: ${aks_name_from_cli}"
-  aks_resource_group_name_from_cli=$(az aks list -o tsv --query "[?contains(name,'$ENV-aks')].{Name:resourceGroup}" 2>/dev/null)
+  aks_resource_group_name_from_cli=$(az aks list -o tsv --query "[?contains(name,'${ENV}01-aks')].{Name:resourceGroup}" 2>/dev/null)
   echo "[INFO] aks_resource_group_name_from_cli: ${aks_resource_group_name_from_cli}"
 
   # ⚠️ in windows, even if using cygwin, these variables will contain a landing \r character
@@ -82,7 +82,7 @@ function check_env() {
 
   # Check if backend.ini exists
   if [ -f "$env_file_path" ]; then
-    #shellcheck source=../env/dev01/backend.ini
+    #shellcheck source=../env/dev/backend.ini
     source "$env_file_path"
   else
     echo "[ERROR] File $env_file_path not found."
