@@ -1,0 +1,43 @@
+name: GitHub Runner Code Review
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - ./src/github-runner/**
+      - ./.github/workflows/call_code_review.yml
+      - ./.github/workflows/pr_github_runner.yml
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        description: 'Select the Environment'
+        default: dev
+        options:
+          - dev
+          - uat
+          - prod
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    uses: ./.github/workflows/call_code_review.yml
+    name: Core Code Review
+    secrets: inherit
+    with:
+      environment: ${{ inputs.environment }}
+      dir: './src/github-runner'
+      agent: self-hosted
