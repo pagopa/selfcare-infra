@@ -2,13 +2,13 @@
 
 #
 # Setup configuration relative to a given subscription
-# Subscription are defined in ./subscription
+# Subscription are defined in ./env
 # Usage:
-#  ./setup.sh ENV-SelfCare
+#  ./setup.sh ENV
 #
-#  ./setup.sh DEV-SelfCare
-#  ./setup.sh UAT-SelfCare
-#  ./setup.sh PROD-SelfCare
+#  ./setup.sh dev
+#  ./setup.sh uat
+#  ./setup.sh prod
 
 
 # installs a package if not already installed
@@ -60,27 +60,27 @@ aks_name=""
 
 set -e
 
-SUBSCRIPTION=$1
+env=$1
 
-if [ -z "${SUBSCRIPTION}" ]; then
+if [ -z "${env}" ]; then
     printf "\e[1;31mYou must provide a subscription as first argument.\n"
     exit 1
 fi
 
-if [ ! -d "${WORKDIR}/subscriptions/${SUBSCRIPTION}" ]; then
-    printf "\e[1;31mYou must provide a subscription for which a variable file is defined. You provided: '%s'.\n" "${SUBSCRIPTION}" > /dev/stderr
+if [ ! -d "${WORKDIR}/env/${env}" ]; then
+    printf "\e[1;31mYou must provide a subscription for which a variable file is defined. You provided: '%s'.\n" "${env}" > /dev/stderr
     exit 1
 fi
 
-source ../subscriptions/${SUBSCRIPTION}/backend.ini
+source ../env/${env}/backend.ini
 
-az account set -s "${SUBSCRIPTION}"
+az account set -s "${subscription}"
 
 aks_name=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:name}")
 aks_resource_group_name=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:resourceGroup}")
 aks_private_fqdn=$(az aks list -o tsv --query "[?contains(name,'${aks_name}')].{Name:privateFqdn}")
 
-# in widows, even if using cygwin, these variables will contain a landing \r character
+# in windows, even if using cygwin, these variables will contain a landing \r character
 aks_name=${aks_name//[$'\r']}
 aks_resource_group_name=${aks_resource_group_name//[$'\r']}
 aks_private_fqdn=${aks_private_fqdn//[$'\r']}
@@ -93,10 +93,10 @@ if [[ $HOME_DIR == /cygdrive/* ]]; then
 fi
 
 rm -rf "${HOME}/.kube/config-${aks_name}"
-az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --file "~/.kube/config-${aks_name}"
-az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${SUBSCRIPTION}" --overwrite-existing
-echo "aks_private_fqdn=${aks_private_fqdn}" >> "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
-echo "kube_config_path=${HOME_DIR}/.kube/config-${aks_name}" >> "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
+az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${subscription}" --file "~/.kube/config-${aks_name}"
+az aks get-credentials -g "${aks_resource_group_name}" -n "${aks_name}" --subscription "${subscription}" --overwrite-existing
+echo "aks_private_fqdn=${aks_private_fqdn}" >> "${WORKDIR}/env/${env}/.bastianhost.ini"
+echo "kube_config_path=${HOME_DIR}/.kube/config-${aks_name}" >> "${WORKDIR}/env/${env}/.bastianhost.ini"
 
 # configuration format conversion
 installpkg "kubelogin"
