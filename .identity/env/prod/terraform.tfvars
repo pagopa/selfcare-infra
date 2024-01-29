@@ -1,6 +1,6 @@
-# general
 prefix    = "selc"
 env_short = "p"
+env       = "prod"
 location  = "westeurope"
 
 tags = {
@@ -14,14 +14,6 @@ tags = {
 ci_github_federations = [
   {
     repository = "selfcare-infra"
-    subject    = "PROD"
-  },
-  {
-    repository = "selfcare-infra"
-    subject    = "prod-ci"
-  },
-  {
-    repository = "selfcare-onboarding"
     subject    = "prod-ci"
   }
 ]
@@ -29,14 +21,6 @@ ci_github_federations = [
 cd_github_federations = [
   {
     repository = "selfcare-infra"
-    subject    = "PROD"
-  },
-  {
-    repository = "selfcare-infra"
-    subject    = "prod-cd"
-  },
-  {
-    repository = "selfcare-onboarding"
     subject    = "prod-cd"
   }
 ]
@@ -44,16 +28,31 @@ cd_github_federations = [
 environment_ci_roles = {
   subscription = [
     "Reader",
-    "Reader and Data Access",
-    "Storage Blob Data Reader",
-    "Storage File Data SMB Share Reader",
-    "Storage Queue Data Reader",
-    "Storage Table Data Reader",
-    "Key Vault Secrets User",
-    "DocumentDB Account Contributor",
-    "API Management Service Contributor",
-    "PagoPA Export Deployments Template",
-    "PagoPA IaC Reader"
+    "PagoPA IaC Reader",
+    "Reader and Data Access"
+  ]
+  resource_groups = {
+    "terraform-state-rg" = [
+      "Storage Blob Data Contributor"
+    ],
+    "io-infra-rg" = [
+      "Storage Blob Data Contributor"
+    ],
+    "selc-p-aks-rg" = [
+      "Azure Kubernetes Service Cluster Admin Role"
+    ]
+    "selc-p-contracts-storage-rg" = [
+      "Storage Blob Data Contributor"
+    ],
+    "selc-p-logs-storage-rg" = [
+      "Storage Blob Data Contributor"
+    ]
+  }
+}
+
+environment_cd_roles = {
+  subscription = [
+    "Contributor"
   ]
   resource_groups = {
     "terraform-state-rg" = [
@@ -68,25 +67,12 @@ environment_ci_roles = {
   }
 }
 
-environment_cd_roles = {
-  subscription = [
-    "Contributor",
-    "Storage Account Contributor",
-    "Storage Blob Data Contributor",
-    "Storage File Data SMB Share Contributor",
-    "Storage Queue Data Contributor",
-    "Storage Table Data Contributor"
-  ]
-  resource_groups = {
-    "terraform-state-rg" = [
-      "Storage Blob Data Contributor"
-    ],
-    "io-infra-rg" = [
-      "Storage Blob Data Contributor"
-    ],
-    "selc-p-aks-rg" = [
-      "Azure Kubernetes Service Cluster Admin Role"
-    ]
-  }
+github_repository_environment_ci = {
+  protected_branches     = true
+  custom_branch_policies = false
 }
-  
+
+github_repository_environment_cd = {
+  protected_branches     = true
+  custom_branch_policies = false
+}
