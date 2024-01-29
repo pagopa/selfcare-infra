@@ -17,13 +17,13 @@ jobs:
       - name: init_terraform_folders
         env:
           FOLDERS: >
-            src/aks-platform
-            src/core
-            src/core/modules/spid_testenv
-            src/domains/pnpg-app
-            src/domains/pnpg-common
-            src/domains/pnpg-common/modules/spid_testenv
-            src/k8s
+            # src/aks-platform
+            # src/core
+            # src/core/modules/spid_testenv
+            # src/domains/pnpg-app
+            # src/domains/pnpg-common
+            # src/domains/pnpg-common/modules/spid_testenv
+            # src/k8s
             ./.identity
         run: |
           pids=()
