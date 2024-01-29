@@ -17,22 +17,24 @@ jobs:
       - name: init_terraform_folders
         env:
           FOLDERS: >
-            # src/aks-platform
-            # src/core
-            # src/core/modules/spid_testenv
-            # src/domains/pnpg-app
-            # src/domains/pnpg-common
-            # src/domains/pnpg-common/modules/spid_testenv
-            # src/k8s
-            ./.identity
+            src/aks-platform
+            src/core
+            src/core/modules/spid_testenv
+            src/domains/pnpg-app
+            src/domains/pnpg-common
+            src/domains/pnpg-common/modules/spid_testenv
+            src/k8s
+            .identity
         run: |
           pids=()
 
           TAG=$(cat .terraform-version)
           for f in $FOLDERS; do
             pushd "$(pwd)/${f}"
-              if [[ -f "*main.tf" ]]; then
+              if [[ -f "99_main.tf" ]]; then
                 sed -i -e 's/  backend "azurerm" {}//g' 99_main.tf # use local backend
+              elif [[ -f "main.tf" ]]; then
+                sed -i -e 's/  backend "azurerm" {}//g' main.tf # use local backend
               fi
               docker run -v $(pwd):/tmp -w /tmp hashicorp/terraform:$TAG init &
               pids+=($!)
