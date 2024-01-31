@@ -776,10 +776,6 @@ module "apim_internal_api_ms_v1" {
       })
     },
     {
-      operation_id = "autoApprovalOnboardingUsingPOST"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
-    },
-    {
       operation_id = "onboardingUsingPOST"
       xml_content  = file("./api/jwt_auth_op_policy.xml")
     },
@@ -817,6 +813,13 @@ module "apim_internal_api_ms_v1" {
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
         }
+      )
+    },
+    {
+      operation_id = "completeOnboardingTokenConsume"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_ONBOARDING_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+      }
       )
     }
   ]
