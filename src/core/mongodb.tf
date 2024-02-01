@@ -14,7 +14,7 @@ locals {
 
 # cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
-  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source               = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                 = format("%s-cosmosb-mongodb-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
@@ -26,7 +26,7 @@ module "cosmosdb_mongodb_snet" {
 
 ###???
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v7.50.1"
 
   name                 = format("%s-cosmosdb-mongodb-account", local.project)
   location             = azurerm_resource_group.mongodb_rg.location
@@ -123,7 +123,7 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
 
 # Collections
 module "mongdb_collection_products" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
 
   name                = "products"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
@@ -145,7 +145,7 @@ module "mongdb_collection_products" {
 }
 
 module "mongdb_collection_user-groups" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
 
   name                = "userGroups"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
@@ -275,7 +275,7 @@ locals {
 }
 
 module "selc_ms_core_collections" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
 
   for_each = {
     for index, coll in local.mongo.selcMsCore.collections :

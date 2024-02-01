@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg_pair_vnet" {
 }
 
 module "vnet_pair" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.3.0"
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.50.1"
   name                = "${local.project_pair}-vnet"
   location            = azurerm_resource_group.rg_pair_vnet.location
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
@@ -17,7 +17,7 @@ module "vnet_pair" {
 
 ## Peering between the vnet(main) and integration vnet
 module "vnet_peering_pair_vs_core" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.50.1"
 
   location = azurerm_resource_group.rg_vnet.location
 
@@ -40,7 +40,7 @@ module "vnet_peering_pair_vs_core" {
 
 ## Peering between the vnet(pair) and aks
 module "vnet_peering_pair_vs_aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.50.1"
 
   location = azurerm_resource_group.rg_vnet.location
 

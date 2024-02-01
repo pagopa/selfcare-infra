@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.5.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.50.1"
 
   depends_on = [
     module.k8s_snet,
@@ -87,7 +87,7 @@ module "aks" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                                      = "${local.project}-k8s-snet"
   address_prefixes                          = var.cidr_subnet_k8s
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
