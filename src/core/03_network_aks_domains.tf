@@ -42,8 +42,6 @@ resource "azurerm_public_ip" "outbound_ip_aks_platform" {
 module "vnet_peering_core_2_aks" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.50.1"
 
-  location = var.location
-
   source_resource_group_name       = azurerm_resource_group.rg_vnet.name
   source_virtual_network_name      = module.vnet.name
   source_remote_virtual_network_id = module.vnet.id
