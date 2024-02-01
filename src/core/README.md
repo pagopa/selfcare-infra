@@ -84,7 +84,7 @@
 | <a name="module_secrets_selfcare_status_dev"></a> [secrets\_selfcare\_status\_dev](#module\_secrets\_selfcare\_status\_dev) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_secrets_selfcare_status_uat"></a> [secrets\_selfcare\_status\_uat](#module\_secrets\_selfcare\_status\_uat) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_selc-contracts-storage"></a> [selc-contracts-storage](#module\_selc-contracts-storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
-| <a name="module_selc_cae"></a> [selc\_cae](#module\_selc\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment_v2 | v7.50.1 |
+| <a name="module_selc_cae"></a> [selc\_cae](#module\_selc\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment | v7.50.1 |
 | <a name="module_selc_functions"></a> [selc\_functions](#module\_selc\_functions) | github.com/pagopa/terraform-azurerm-v3.git//function_app | v7.50.1 |
 | <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
 | <a name="module_selc_ms_core_collections"></a> [selc\_ms\_core\_collections](#module\_selc\_ms\_core\_collections) | github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v7.50.1 |
