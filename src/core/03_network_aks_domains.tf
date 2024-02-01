@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_vnet_aks" {
 
 # vnet
 module "vnet_aks_platform" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network?ref=v7.50.1"
 
   name                 = "${local.project}-${var.location_short}-aks-${var.aks_platform_env}-vnet"
   location             = var.location
@@ -40,9 +40,7 @@ resource "azurerm_public_ip" "outbound_ip_aks_platform" {
 #
 
 module "vnet_peering_core_2_aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.3.0"
-
-  location = var.location
+  source = "github.com/pagopa/terraform-azurerm-v3.git//virtual_network_peering?ref=v7.50.1"
 
   source_resource_group_name       = azurerm_resource_group.rg_vnet.name
   source_virtual_network_name      = module.vnet.name

@@ -14,7 +14,7 @@ resource "azurerm_subnet" "selc_container_app_snet" {
 }
 
 module "selc_cae" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//container_app_environment?ref=v7.8.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//container_app_environment?ref=v7.50.1"
 
   name                      = "${local.project}-cae"
   resource_group_name       = azurerm_resource_group.selc_container_app_rg.name

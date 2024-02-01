@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_contracts_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc-contracts-storage" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v7.50.1"
 
   name                            = replace(format("%s-contracts-storage", local.project), "-", "")
   account_kind                    = "StorageV2"
@@ -61,7 +61,7 @@ resource "azurerm_storage_container" "selc-contracts-container" {
 }
 
 module "contracts_storage_snet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                                      = format("%s-contracts-storage-snet", local.project)
   address_prefixes                          = var.cidr_subnet_contract_storage
   resource_group_name                       = azurerm_resource_group.rg_vnet.name

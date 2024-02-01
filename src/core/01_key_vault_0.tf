@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "sec_rg" {
 }
 
 module "key_vault" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault?ref=v7.3.0"
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//key_vault?ref=v7.50.1"
   name                = "${local.project}-kv"
   location            = azurerm_resource_group.sec_rg.location
   resource_group_name = azurerm_resource_group.sec_rg.name
@@ -153,48 +153,4 @@ resource "azurerm_user_assigned_identity" "appgateway" {
   name                = "${local.project}-appgateway-identity"
 
   tags = var.tags
-}
-
-## github identity
-
-data "azurerm_user_assigned_identity" "identity_ci" {
-  resource_group_name = "${local.project}-identity-rg"
-  name                = "${local.project}-github-ci-identity"
-}
-
-data "azurerm_user_assigned_identity" "identity_cd" {
-  resource_group_name = "${local.project}-identity-rg"
-  name                = "${local.project}-github-cd-identity"
-}
-
-resource "azurerm_key_vault_access_policy" "github_identity_ci_policy" {
-  key_vault_id = module.key_vault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = data.azurerm_user_assigned_identity.identity_ci.principal_id
-
-  secret_permissions = [
-    "Get",
-    "List",
-  ]
-
-  certificate_permissions = [
-    "Get",
-    "List"
-  ]
-}
-
-resource "azurerm_key_vault_access_policy" "github_identity_cd_policy" {
-  key_vault_id = module.key_vault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = data.azurerm_user_assigned_identity.identity_cd.principal_id
-
-  secret_permissions = [
-    "Get",
-    "List",
-  ]
-
-  certificate_permissions = [
-    "Get",
-    "List"
-  ]
 }

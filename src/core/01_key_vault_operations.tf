@@ -1,6 +1,6 @@
 # JWT
 module "jwt" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
   jwt_name            = "jwt"
   key_vault_id        = module.key_vault.id
@@ -12,7 +12,7 @@ module "jwt" {
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
   jwt_name            = "jwt-exchange"
   key_vault_id        = module.key_vault.id
@@ -24,7 +24,7 @@ module "jwt_exchange" {
 }
 
 module "agid_spid" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
   jwt_name          = "agid-spid"
   key_vault_id      = module.key_vault.id
@@ -36,7 +36,7 @@ module "agid_spid" {
 
 # New certificate used for update agid metadata creating new endpoint
 module "agid_login" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
   jwt_name                 = "agid-login"
   key_vault_id             = module.key_vault.id

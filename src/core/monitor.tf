@@ -428,7 +428,7 @@ module "web_test_api" {
   for_each = var.env_short == "p" ? local.test_urls_map : local.test_urls_map_internal
   # for_each = { for v in local.test_urls : v.host => v if v != null }
 
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v7.50.1"
 
   subscription_id                   = data.azurerm_subscription.current.subscription_id
   name                              = "${each.key}-test"
