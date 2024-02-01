@@ -7,7 +7,7 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) | >= 2.33.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.87.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.89.0 |
 | <a name="requirement_pkcs12"></a> [pkcs12](#requirement\_pkcs12) | 0.0.7 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | <= 3.5.1 |
 
@@ -63,7 +63,7 @@
 | <a name="module_cosmosdb_mongodb_snet"></a> [cosmosdb\_mongodb\_snet](#module\_cosmosdb\_mongodb\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_dns_forwarder"></a> [dns\_forwarder](#module\_dns\_forwarder) | github.com/pagopa/terraform-azurerm-v3.git//dns_forwarder | v7.50.1 |
 | <a name="module_dns_forwarder_pair_subnet"></a> [dns\_forwarder\_pair\_subnet](#module\_dns\_forwarder\_pair\_subnet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
-| <a name="module_dns_forwarder_snet"></a> [dns\_forwarder\_snet](#module\_dns\_forwarder\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.5.0 |
+| <a name="module_dns_forwarder_snet"></a> [dns\_forwarder\_snet](#module\_dns\_forwarder\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.50.1 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_functions_snet"></a> [functions\_snet](#module\_functions\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
@@ -84,7 +84,7 @@
 | <a name="module_secrets_selfcare_status_dev"></a> [secrets\_selfcare\_status\_dev](#module\_secrets\_selfcare\_status\_dev) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_secrets_selfcare_status_uat"></a> [secrets\_selfcare\_status\_uat](#module\_secrets\_selfcare\_status\_uat) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_selc-contracts-storage"></a> [selc-contracts-storage](#module\_selc-contracts-storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
-| <a name="module_selc_cae"></a> [selc\_cae](#module\_selc\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment | v7.50.1 |
+| <a name="module_selc_cae"></a> [selc\_cae](#module\_selc\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment_v2 | v7.50.1 |
 | <a name="module_selc_functions"></a> [selc\_functions](#module\_selc\_functions) | github.com/pagopa/terraform-azurerm-v3.git//function_app | v7.50.1 |
 | <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
 | <a name="module_selc_ms_core_collections"></a> [selc\_ms\_core\_collections](#module\_selc\_ms\_core\_collections) | github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v7.50.1 |
