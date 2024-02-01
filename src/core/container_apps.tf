@@ -52,3 +52,17 @@ module "selc_pnpg_cae" {
 
   tags = var.tags
 }
+
+resource "azurerm_management_lock" "lock_selc_cae" {
+  lock_level = "CanNotDelete"
+  name       = "${local.project}-cae"
+  notes      = "This Container App Environment cannot be deleted"
+  scope      = module.selc_cae.id
+}
+
+resource "azurerm_management_lock" "lock_selc_pnpg_cae" {
+  lock_level = "CanNotDelete"
+  name       = "${local.project}-pnpg-cae"
+  notes      = "This Container App Environment cannot be deleted"
+  scope      = module.selc_pnpg_cae.id
+}
