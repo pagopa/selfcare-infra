@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "sec_rg" {
 }
 
 module "key_vault" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault?ref=v7.3.0"
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//key_vault?ref=v7.50.1"
   name                = "${local.project}-kv"
   location            = azurerm_resource_group.sec_rg.location
   resource_group_name = azurerm_resource_group.sec_rg.name
@@ -159,12 +159,12 @@ resource "azurerm_user_assigned_identity" "appgateway" {
 
 data "azurerm_user_assigned_identity" "identity_ci" {
   resource_group_name = "${local.project}-identity-rg"
-  name                = "${local.project}-github-ci-identity"
+  name                = "${local.project}-infra-github-ci-identity"
 }
 
 data "azurerm_user_assigned_identity" "identity_cd" {
   resource_group_name = "${local.project}-identity-rg"
-  name                = "${local.project}-github-cd-identity"
+  name                = "${local.project}-infra-github-cd-identity"
 }
 
 resource "azurerm_key_vault_access_policy" "github_identity_ci_policy" {

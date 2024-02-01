@@ -17,7 +17,7 @@ data "azurerm_key_vault_secret" "postgres_administrator_login_password" {
 
 ## Database subnet
 module "postgres_snet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                                      = format("%s-postgres-snet", local.project)
   address_prefixes                          = var.cidr_subnet_postgres
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
@@ -31,7 +31,7 @@ module "postgres_snet" {
 #tfsec:ignore:azure-database-postgres-configuration-connection-throttling
 #tfsec:ignore:azure-database-postgres-configuration-log-connections
 module "postgresql" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//postgresql_server?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//postgresql_server?ref=v7.50.1"
 
   name                             = "${local.project}-postgresql"
   location                         = azurerm_resource_group.postgres_rg.location
