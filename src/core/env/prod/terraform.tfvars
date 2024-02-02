@@ -93,6 +93,7 @@ redis_version  = 6
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                  = "10.1.1.250"
 private_dns_name                  = "selc.internal.selfcare.pagopa.it"
+private_onboarding_dns_name       = "selc-onboarding-ms-ca.gentleflower-c63e62fe.westeurope.azurecontainerapps.io"
 aks_kubernetes_version            = "1.25.11"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"

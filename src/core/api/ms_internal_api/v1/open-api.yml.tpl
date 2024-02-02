@@ -514,6 +514,40 @@ paths:
       security:
         - bearerAuth:
             - global
+  /onboarding/{onboardingId}/complete:
+    put:
+      tags:
+        - Onboarding
+      summary: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
+      description: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
+      operationId: onboardingCompleteUsingPUT
+      parameters:
+        - name: onboardingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contract:
+                  format: binary
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:

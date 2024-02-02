@@ -776,8 +776,9 @@ module "apim_internal_api_ms_v1" {
       })
     },
     {
-      operation_id = "onboardingUsingPOST"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      operation_id                 = "onboardingUsingPOST"
+      xml_content                  = file("./api/external_op_policy.xml")
+      MS_EXTERNAL_BACKEND_BASE_URL = "http://${var.private_dns_name}/external-api/v2/"
     },
     {
       operation_id = "getProductUsingGET"
@@ -812,6 +813,13 @@ module "apim_internal_api_ms_v1" {
       operation_id = "completeOnboardingTokenConsume"
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        }
+      )
+    },
+    {
+      operation_id = "completeOnboardingUsingPUT"
+      xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
+        MS_CORE_ONBOARDING_BASE_URL = "http://${var.private_onboarding_dns_name}/v1/"
         }
       )
     }
