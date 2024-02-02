@@ -777,7 +777,7 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "onboardingUsingPOST"
-      xml_content = templatefile("./api/external_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/ms_internal_api/v1/external_op_policy.xml.tpl", {
         MS_EXTERNAL_BACKEND_BASE_URL = "http://${var.private_dns_name}/external-api/v2/"
       })
     },
@@ -820,7 +820,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "completeOnboardingUsingPUT"
       xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
-        MS_CORE_ONBOARDING_BASE_URL = "http://${var.private_onboarding_dns_name}/v1/"
+        MS_ONBOARDING_BACKEND_BASE_URL = "http://${var.private_onboarding_dns_name}/v1/"
         }
       )
     }
