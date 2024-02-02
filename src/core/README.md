@@ -190,6 +190,9 @@
 | [azurerm_monitor_action_group.selfcare_status_uat](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_network_profile.network_profile_load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_profile) | resource |
+| [azurerm_network_security_group.selc_pnpg_subnet_nsg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
+| [azurerm_network_security_rule.selc_pnpg_cae_subnet_inbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
+| [azurerm_network_security_rule.selc_pnpg_cae_subnet_outbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
 | [azurerm_postgresql_database.selc_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_database) | resource |
 | [azurerm_private_dns_a_record.selc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_zone.internal_private_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_zone) | resource |
@@ -250,6 +253,7 @@
 | [azurerm_storage_container.selc_logs_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_subnet.selc_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
 | [azurerm_subnet.selc_pnpg_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
+| [azurerm_subnet_network_security_group_association.selc_pnpg_nsg_cae_subnet_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
 | [null_resource.download_apim_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.download_apim_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
