@@ -463,61 +463,44 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/onboarding/{tokenId}/consume':
-    post:
+  '/onboarding/{onboardingId}/consume':
+    put:
       tags:
-        - Onboarding
-      summary: 'Complete onboarding given tokenId'
-      description: 'Consume token onboarding request without digest verification '
+        - Onboarding Controller
+      summary: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      description: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
       operationId: completeOnboardingTokenConsume
       parameters:
-        - name: tokenId
+        - name: onboardingId
           in: path
-          description: contract's unique identifier
           required: true
-          style: simple
           schema:
             type: string
       requestBody:
         content:
           multipart/form-data:
             schema:
-              required:
-                - contract
               type: object
               properties:
                 contract:
-                  type: string
-                  description: contract
                   format: binary
+                  type: string
       responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
+        '200':
+          description: OK
           content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '409':
-          description: Conflict
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
       security:
         - bearerAuth:
             - global
-  /onboarding/{onboardingId}/complete:
+  '/onboarding/{onboardingId}/complete':
     put:
       tags:
-        - Onboarding
+        - Onboarding Controller
       summary: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
       description: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
       operationId: onboardingCompleteUsingPUT
