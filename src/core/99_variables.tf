@@ -1199,9 +1199,20 @@ variable "cidr_subnet_selc" {
   default     = null
 }
 
+variable "cidr_subnet_selc_pnpg" {
+  type        = list(string)
+  description = "Address prefixes subnet selc ca and functions"
+  default     = null
+}
+
 # Container App
 
 variable "cae_zone_redundant" {
+  type        = bool
+  description = "Container App Environment zone redudancy"
+}
+
+variable "cae_zone_redundant_pnpg" {
   type        = bool
   description = "Container App Environment zone redudancy"
 }
