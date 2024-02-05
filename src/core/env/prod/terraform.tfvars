@@ -35,7 +35,8 @@ cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
 
-cidr_subnet_selc = ["10.1.148.0/23"]
+cidr_subnet_selc      = ["10.1.148.0/23"]
+cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
 
 #
 # Pair VNET
@@ -440,4 +441,5 @@ enable_load_tests_db = false
 
 checkout_advanced_threat_protection_enabled = true
 
-cae_zone_redundant = true
+cae_zone_redundant      = true
+cae_zone_redundant_pnpg = true
