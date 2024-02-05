@@ -780,6 +780,7 @@ module "apim_internal_api_ms_v1" {
       xml_content = templatefile("./api/ms_internal_api/v1/external_op_policy.xml.tpl", {
         API_DOMAIN                   = local.api_domain
         KID                          = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT   = azurerm_api_management_certificate.jwt_certificate.thumbprint
         MS_EXTERNAL_BACKEND_BASE_URL = "http://${var.private_dns_name}/external-api/v2/"
       })
     },
