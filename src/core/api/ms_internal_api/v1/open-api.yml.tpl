@@ -503,7 +503,7 @@ paths:
         - Onboarding Controller
       summary: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
       description: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
-      operationId: onboardingCompleteUsingPUT
+      operationId: completeOnboardingUsingPUT
       parameters:
         - name: onboardingId
           in: path
