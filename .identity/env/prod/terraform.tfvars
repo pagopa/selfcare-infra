@@ -15,6 +15,60 @@ ci_github_federations = [
   {
     repository = "selfcare-infra"
     subject    = "prod-ci"
+  }
+]
+
+cd_github_federations = [
+  {
+    repository = "selfcare-infra"
+    subject    = "prod-cd"
+  }
+]
+
+ci_github_federations_ms = [
+  {
+    repository = "selfcare-dashboard-backend"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-core"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "prod-ci"
   },
   {
     repository = "selfcare-onboarding-backend"
@@ -22,9 +76,45 @@ ci_github_federations = [
   }
 ]
 
-cd_github_federations = [
+cd_github_federations_ms = [
   {
-    repository = "selfcare-infra"
+    repository = "selfcare-dashboard-backend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-core"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-onboarding"
     subject    = "prod-cd"
   },
   {
@@ -65,6 +155,29 @@ environment_cd_roles = {
   resource_groups = {
     "selc-p-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
+    ]
+  }
+}
+
+environment_ci_roles_ms = {
+  subscription = [
+    "Reader",
+    "PagoPA IaC Reader"
+  ]
+  resource_groups = {
+    terraform-state-rg = [
+      "Storage Blob Data Contributor"
+    ]
+  }
+}
+
+environment_cd_roles_ms = {
+  subscription = [
+    "Contributor"
+  ]
+  resource_groups = {
+    terraform-state-rg = [
+      "Storage Blob Data Contributor"
     ]
   }
 }

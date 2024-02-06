@@ -41,7 +41,25 @@ variable "ci_github_federations" {
   description = "GitHub Organization, repository name and scope permissions"
 }
 
+variable "ci_github_federations_ms" {
+  type = list(object({
+    repository        = string
+    credentials_scope = optional(string, "environment")
+    subject           = string
+  }))
+  description = "GitHub Organization, repository name and scope permissions"
+}
+
 variable "cd_github_federations" {
+  type = list(object({
+    repository        = string
+    credentials_scope = optional(string, "environment")
+    subject           = string
+  }))
+  description = "GitHub Organization, repository name and scope permissions"
+}
+
+variable "cd_github_federations_ms" {
   type = list(object({
     repository        = string
     credentials_scope = optional(string, "environment")
@@ -58,7 +76,23 @@ variable "environment_ci_roles" {
   description = "GitHub Continous Integration roles"
 }
 
+variable "environment_ci_roles_ms" {
+  type = object({
+    subscription    = list(string)
+    resource_groups = map(list(string))
+  })
+  description = "GitHub Continous Integration roles"
+}
+
 variable "environment_cd_roles" {
+  type = object({
+    subscription    = list(string)
+    resource_groups = map(list(string))
+  })
+  description = "GitHub Continous Delivery roles"
+}
+
+variable "environment_cd_roles_ms" {
   type = object({
     subscription    = list(string)
     resource_groups = map(list(string))
