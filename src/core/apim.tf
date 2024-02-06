@@ -249,7 +249,7 @@ module "apim_external_api_onboarding_io_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("http://%s/external-api/v2/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
