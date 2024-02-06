@@ -471,6 +471,12 @@ paths:
       description: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
       operationId: completeOnboardingTokenConsume
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: onboardingId
           in: path
           required: true
@@ -505,6 +511,12 @@ paths:
       description: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
       operationId: completeOnboardingUsingPUT
       parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
         - name: onboardingId
           in: path
           required: true
