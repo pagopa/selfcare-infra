@@ -27,9 +27,9 @@ paths:
         '200':
           description: OK
           content:
-            application/json:
+            text/html:
               schema:
-                $ref: '#/components/schemas/SupportResponse'
+                type: string
         '400':
           description: Bad Request
           content:
@@ -1935,12 +1935,15 @@ components:
           description: User's email
           format: email
           example: email@example.com
-    SupportResponse:
-      title: SupportResponse
-      type: object
-      properties:
-        redirectUrl:
+        institutionId:
           type: string
+          description: Institution's identifier
+        productId:
+          type: string
+          description: Product's identifier
+        userId:
+          type: string
+          description: User's identifier
     TokenListResponse:
       title: TokenListResponse
       type: object
