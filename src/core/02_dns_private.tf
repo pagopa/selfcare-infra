@@ -193,3 +193,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_azureconta
 
   tags = var.tags
 }
+
+resource "azurerm_private_dns_zone_virtual_network_link" "privatelink_azurecontainerapps_io_weu_vnet_pair" {
+  name                  = module.vnet_aks_platform.name
+  resource_group_name   = azurerm_resource_group.rg_vnet.name
+  private_dns_zone_name = azurerm_private_dns_zone.private_azurecontainerapps_io.name
+  virtual_network_id    = module.vnet_aks_platform.id
+  registration_enabled  = false
+
+  tags = var.tags
+}
