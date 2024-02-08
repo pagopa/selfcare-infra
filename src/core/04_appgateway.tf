@@ -26,7 +26,7 @@ locals {
     "/spid/*",
     "/spid-login/*",
     "/dashboard/*",
-    "/onboarding/*",
+    "^/onboarding/v\\d+/.*$",
     "/ms-notification-manager/*",
     "/party-registry-proxy/*",
   ]
