@@ -14,7 +14,7 @@
             var uid = "m2m";
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
-             var name = "apim";
+            var name = "apim";
             var payload = new { name, exp, uid, aud, iss, iat };
             var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
