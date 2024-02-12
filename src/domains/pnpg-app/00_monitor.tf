@@ -25,10 +25,10 @@ data "azurerm_monitor_action_group" "email" {
   name                = local.monitor_action_group_email_name
 }
 
-data "azurerm_monitor_action_group" "opsgenie" {
-  resource_group_name = var.monitor_resource_group_name
-  name                = local.monitor_action_group_opsgenie_name
-}
+# data "azurerm_monitor_action_group" "opsgenie" {
+#   resource_group_name = var.monitor_resource_group_name
+#   name                = local.monitor_action_group_opsgenie_name
+# }
 
 resource "azurerm_monitor_action_group" "http_status" {
   count = var.env_short == "d" ? 0 : 1

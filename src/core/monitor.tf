@@ -14,6 +14,11 @@ data "azurerm_key_vault_secret" "monitor_notification_opsgenie" {
 }
 
 # -----------------------------------------------------------------------
+resource "azurerm_resource_group" "dashboards" {
+  name     = "dashboards"
+  location = var.location
+  tags     = var.tags
+}
 
 resource "azurerm_resource_group" "monitor_rg" {
   name     = "${local.project}-monitor-rg"
