@@ -43,3 +43,25 @@ module "identity_cd_ms" {
     azurerm_resource_group.identity_rg
   ]
 }
+
+resource "azurerm_key_vault_access_policy" "key_vault_access_policy_identity_cd" {
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = module.identity_cd_ms.identity_principal_id
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identity_cd" {
+  key_vault_id = data.azurerm_key_vault.key_vault_pnpg.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = module.identity_cd_ms.identity_principal_id
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
+}
