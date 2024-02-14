@@ -15,7 +15,7 @@ locals {
 
   aks_cluster_name = "${local.project}-aks"
 
-  alert_functions_exceptions_name = "functions-exception"
+  alert_functions_exceptions_name       = "functions-exception"
   alert_functions_exceptions_role_names = ["selc-${var.env_short}-onboarding-fn"]
 
   # Private DNS
