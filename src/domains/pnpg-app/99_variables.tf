@@ -55,8 +55,8 @@ locals {
 
   # Monitor
   alert_pnpg_error_5xx_name = "pnpg-error-5xx"
-  alert_functions_exceptions_name = "functions-exception"
-  alert_functions_exceptions_role_names = ["selc-${var.env_short}-onboarding-fn"]
+  alert_functions_exceptions_name = "pnpg-functions-exception"
+  alert_functions_exceptions_role_names = ["selc-${var.env_short}-pnpg-onboarding-fn"]
 }
 
 variable "prefix" {
