@@ -15,6 +15,9 @@ locals {
 
   aks_cluster_name = "${local.project}-aks"
 
+  alert_functions_exceptions_name = "functions-exception"
+  alert_functions_exceptions_role_names = ["selc-${var.env_short}-onboarding-fn"]
+
   # Private DNS
   container_app_environment_dns_zone_name = "azurecontainerapps.io"
   container_app_resource_group_name       = "container-app-rg"
