@@ -14,6 +14,11 @@ data "azurerm_key_vault_secret" "monitor_notification_opsgenie" {
 }
 
 # -----------------------------------------------------------------------
+resource "azurerm_resource_group" "dashboards" {
+  name     = "dashboards"
+  location = var.location
+  tags     = var.tags
+}
 
 resource "azurerm_resource_group" "monitor_rg" {
   name     = "${local.project}-monitor-rg"
@@ -555,4 +560,34 @@ resource "azurerm_dashboard" "monitoring-dashboard" {
       subscription_id = data.azurerm_subscription.current.subscription_id
       prefix          = "${var.prefix}-${var.env_short}"
   })
+}
+
+
+
+resource "azurerm_monitor_metric_alert" "functions_exceptions" {
+  count = var.env_short == "d" ? 0 : 1
+
+  name                = local.alert_functions_exceptions_name
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+  scopes              = [azurerm_application_insights.application_insights.id]
+  description         = "Action will be triggered when Functions throw some exceptions."
+  auto_mitigate       = false
+
+  criteria {
+    metric_namespace = "Microsoft.Insights/Components"
+    metric_name      = "exceptions/count"
+    aggregation      = "Count"
+    operator         = "GreaterThan"
+    threshold        = 0
+
+    dimension {
+      name     = "cloud/roleName"
+      operator = "Include"
+      values   = local.alert_functions_exceptions_role_names
+    }
+  }
+
+  action {
+    action_group_id = azurerm_monitor_action_group.slack.id
+  }
 }

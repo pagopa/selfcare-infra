@@ -25,10 +25,10 @@ data "azurerm_monitor_action_group" "email" {
   name                = local.monitor_action_group_email_name
 }
 
-data "azurerm_monitor_action_group" "opsgenie" {
-  resource_group_name = local.monitor_rg_name
-  name                = local.alert_action_group_core_name
-}
+# data "azurerm_monitor_action_group" "opsgenie" {
+#   resource_group_name = local.monitor_rg_name
+#   name                = local.alert_action_group_core_name
+# }
 
 data "azurerm_monitor_action_group" "error" {
   resource_group_name = local.monitor_rg_name

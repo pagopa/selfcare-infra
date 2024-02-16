@@ -106,6 +106,12 @@ tls_checker_https_endpoints_to_check = [
     alert_name     = "api-uat-selfcare-pagopa-it",
     alert_enabled  = true,
     helm_present   = true,
+  },
+  {
+    https_endpoint = "selc.internal.uat.selfcare.pagopa.it",
+    alert_name     = "selc.internal.uat.selfcare.pagopa.it",
+    alert_enabled  = true,
+    helm_present   = true,
   }
 ]
 
