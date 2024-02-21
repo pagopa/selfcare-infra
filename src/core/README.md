@@ -25,6 +25,7 @@
 | <a name="module_apim_external_api_onboarding_auto_v1"></a> [apim\_external\_api\_onboarding\_auto\_v1](#module\_apim\_external\_api\_onboarding\_auto\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_external_api_onboarding_io_v1"></a> [apim\_external\_api\_onboarding\_io\_v1](#module\_apim\_external\_api\_onboarding\_io\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_internal_api_ms_v1"></a> [apim\_internal\_api\_ms\_v1](#module\_apim\_internal\_api\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
+| <a name="module_apim_notification_event_api_v1"></a> [apim\_notification\_event\_api\_v1](#module\_apim\_notification\_event\_api\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.62.0 |
 | <a name="module_apim_party_registry_proxy_v1"></a> [apim\_party\_registry\_proxy\_v1](#module\_apim\_party\_registry\_proxy\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_product_fd"></a> [apim\_product\_fd](#module\_apim\_product\_fd) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_fd_garantito"></a> [apim\_product\_fd\_garantito](#module\_apim\_product\_fd\_garantito) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
@@ -114,6 +115,7 @@
 | [azurerm_api_management_api_version_set.apim_external_api_onboarding_auto](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_onboarding_io](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_internal_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
+| [azurerm_api_management_api_version_set.apim_notification_event_api](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_party_registry_proxy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_selfcare_support_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_user_group_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
