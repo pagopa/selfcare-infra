@@ -1036,6 +1036,56 @@ module "apim_party_registry_proxy_v1" {
   ]
 }
 
+resource "azurerm_api_management_api_version_set" "apim_notification_event_api" {
+  name                = format("%s-notification-event-api", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "Notification Event API Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_notification_event_api_v1" {
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.62.0"
+  name                = format("%s-notification-event-api", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_notification_event_api.id
+
+  description  = "This service is the proxy for internal services"
+  display_name = "Notification Event API service"
+  path         = "external/notification-event"
+  api_version  = "v1"
+  protocols = [
+    "https"
+  ]
+
+  service_url = format("http://%s/ms-core/v1/", var.private_dns_name)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/notification_event_api/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
+    basePath = "v1"
+  })
+
+  xml_content = templatefile("./api/notification_event_api/v1/internal_jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "resendUsersUsingPOST"
+      xml_content  = templatefile("./api/notification_event_api/v1/internal_jwt_base_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    },
+  ]
+}
 resource "azurerm_api_management_api_version_set" "apim_external_api_contract" {
   name                = format("%s-external-api-contract", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
