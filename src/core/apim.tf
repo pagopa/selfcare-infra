@@ -949,6 +949,12 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "updateCreatedAtUsingPUT"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "http://${var.reverse_proxy_ip}/ms-core/v1/"
+      })
     }
   ]
 }

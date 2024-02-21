@@ -583,6 +583,50 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/institutions/{institutionId}/createdAt':
+      put:
+        tags:
+          - Institution
+        summary: The service updates the createdAt field for the institution-product pair
+        description: The service updates the createdAt field for the institution-product pair
+        operationId: updateCreatedAtUsingPUT
+        parameters:
+          - name: institutionId
+            in: path
+            description: institutionId
+            required: true
+            style: simple
+            schema:
+              type: string
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatedAtRequest'
+        responses:
+          '200':
+            description: OK
+          '400':
+            description: Bad Request
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '403':
+            description: Forbidden
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+          '404':
+            description: Not Found
+            content:
+              application/problem+json:
+                schema:
+                  $ref: '#/components/schemas/Problem'
+        security:
+          - bearerAuth:
+              - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -1623,6 +1667,18 @@ components:
           type: string
         vatNumber:
           type: string
+    CreatedAtRequest:
+          title: CreatedAtRequest
+          type: object
+          properties:
+            activatedAt:
+              type: string
+              format: date-time
+            createdAt:
+              type: string
+              format: date-time
+            productId:
+              type: string
   securitySchemes:
     bearerAuth:
       type: http
