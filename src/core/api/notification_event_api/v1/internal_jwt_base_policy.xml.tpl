@@ -33,6 +33,9 @@
                 }
 
                 }"/>
+        <set-header exists-action="override" name="Authorization">
+            <value>@((string)context.Variables["jwt"])</value>
+        </set-header>
         <set-header name="X-Client-Ip" exists-action="override">
             <value>@(context.Request.IpAddress)</value>
         </set-header>
