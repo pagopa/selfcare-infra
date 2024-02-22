@@ -352,7 +352,7 @@ paths:
           - name: userIdForAuth
             in: query
             description: User's unique identifier
-            required: true
+            required: false
             style: form
             schema:
               type: string
