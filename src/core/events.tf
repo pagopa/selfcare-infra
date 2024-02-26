@@ -90,6 +90,17 @@ resource "azurerm_key_vault_secret" "event_hub_connection_strings" {
   key_vault_id = module.key_vault.id
 }
 
+#tfsec:ignore:AZU023
+resource "azurerm_key_vault_secret" "event_hub_connection_strings_lc" {
+  for_each = module.event_hub.key_ids
+
+  name         = "eventhub-${lower(replace(each.key, ".", "-"))}-connection-string-lc"
+  value        = module.event_hub.keys[each.key].primary_connection_string
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
 locals {
   event_hubs_iam = toset(flatten([
     for eh in var.eventhubs : [
