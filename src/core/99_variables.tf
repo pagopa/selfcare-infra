@@ -250,6 +250,11 @@ variable "private_dns_name" {
   description = "AKS private DNS record"
 }
 
+variable "private_onboarding_dns_name" {
+  type        = string
+  description = "AKS private onboarding DNS record"
+}
+
 variable "aks_num_outbound_ips" {
   type        = number
   default     = 1

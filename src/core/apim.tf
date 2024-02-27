@@ -249,7 +249,7 @@ module "apim_external_api_onboarding_io_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("http://%s/external-api/v2/", var.private_dns_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
@@ -642,6 +642,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getContractUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getContractUsingGet_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "http://${var.private_dns_name}/external-api/v2/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -715,7 +716,6 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getTokensFromProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getTokensFromProductUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -781,7 +781,9 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "onboardingUsingPOST"
-      xml_content  = file("./api/jwt_auth_op_policy.xml")
+      xml_content = templatefile("./api/ms_internal_api/v1/external_op_policy.xml.tpl", {
+        MS_EXTERNAL_BACKEND_BASE_URL = "http://${var.private_dns_name}/external-api/v2/"
+      })
     },
     {
       operation_id = "getProductUsingGET"
@@ -808,14 +810,21 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/ms_internal_api/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "https://${var.private_dns_name}/ms-core/v1/"
         }
       )
     },
     {
       operation_id = "completeOnboardingTokenConsume"
-      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+      xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
+        MS_ONBOARDING_BACKEND_BASE_URL = "https://${var.private_onboarding_dns_name}/v1/"
+        }
+      )
+    },
+    {
+      operation_id = "completeOnboardingUsingPUT"
+      xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
+        MS_ONBOARDING_BACKEND_BASE_URL = "https://${var.private_onboarding_dns_name}/v1/"
         }
       )
     }
@@ -864,7 +873,8 @@ module "apim_selfcare_support_service_v1" {
   api_operation_policies = [
     {
       operation_id = "getContractUsingGET"
-      xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy.xml.tpl", {
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "http://${var.private_dns_name}/external-api/v2/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -940,6 +950,16 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "completeOnboardingTokenConsume"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://${var.private_onboarding_dns_name}/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+        }
+      )
     },
     {
       operation_id = "getAllTokensUsingGET"

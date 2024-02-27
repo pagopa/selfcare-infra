@@ -486,6 +486,46 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/{onboardingId}/consume':
+    put:
+      tags:
+        - Onboarding Controller
+      summary: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      description: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      operationId: completeOnboardingTokenConsume
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: onboardingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contract:
+                  format: binary
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
   '/tokens':
     get:
       tags:

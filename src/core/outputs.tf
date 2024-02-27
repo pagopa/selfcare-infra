@@ -85,6 +85,10 @@ output "private_dns_name" {
   value = var.private_dns_name
 }
 
+output "private_onboarding_dns_name" {
+  value = var.private_onboarding_dns_name
+}
+
 ## CosmosDb - MongoDB ##
 output "cosmosdb_account_mongodb_id" {
   value = module.cosmosdb_account_mongodb.id
