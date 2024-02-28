@@ -299,6 +299,7 @@ resource "kubernetes_secret" "event-secrets" {
   type = "Opaque"
 }
 
+
 resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
   metadata {
     name      = "onboarding-interceptor-event-secrets"
