@@ -353,7 +353,7 @@ resource "kubernetes_secret" "national-registry-secrets" {
 resource "kubernetes_secret" "product-storage" {
   metadata {
     name      = "product-storage"
-    namespace = kubernetes_namespace.selc.metadata[0].name
+    namespace = var.domain
   }
 
   data = {
