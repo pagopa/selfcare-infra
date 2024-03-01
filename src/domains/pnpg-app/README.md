@@ -81,6 +81,7 @@
 | [kubernetes_secret.onboarding-interceptor-event-secrets](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.postgres](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.product-external-api](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
+| [kubernetes_secret.product-storage](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.selc-application-insights](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.selc-redis-credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
 | [kubernetes_secret.social-login](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |

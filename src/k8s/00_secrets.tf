@@ -65,6 +65,7 @@ module "key_vault_secrets_query" {
     "prod-fd-client-secret",
     "prod-fd-grant-type",
     "anac-ftp-password",
-    "anac-ftp-known-host"
+    "anac-ftp-known-host",
+    "blob-storage-product-connection-string"
   ]
 }

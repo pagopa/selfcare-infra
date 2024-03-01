@@ -350,6 +350,19 @@ resource "kubernetes_secret" "national-registry-secrets" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-storage" {
+  metadata {
+    name      = "product-storage"
+    namespace = var.domain
+  }
+
+  data = {
+    BLOB-STORAGE-PRODUCT-CONNECTION-STRING = module.key_vault_secrets_query.values["blob-storage-product-connection-string"].value
+  }
+
+  type = "Opaque"
+}
+
 resource "kubernetes_secret" "support-secrets" {
   metadata {
     name      = "support-secrets"
