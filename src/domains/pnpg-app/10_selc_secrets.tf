@@ -214,6 +214,8 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    # can be remove after mmigration of onboarding-backend to container apps
+    USER-REGISTRY-API-KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
