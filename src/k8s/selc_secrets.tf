@@ -463,6 +463,19 @@ resource "kubernetes_secret" "support-secrets" {
   type = "Opaque"
 }
 
+resource "kubernetes_secret" "product-storage" {
+  metadata {
+      name      = "product-storage"
+      namespace = kubernetes_namespace.selc.metadata[0].name
+    }
+
+    data = {
+      BLOB-STORAGE-PRODUCT-CONNECTION-STRING = module.key_vault_secrets_query.values["blob-storage-product-connection-string"].value
+    }
+
+    type = "Opaque"
+}
+
 resource "kubernetes_secret" "secret-tls-selc-internal" {
   for_each = var.secrets_tls_certificates
 

@@ -55,6 +55,7 @@ module "key_vault_secrets_query" {
     "web-storage-connection-string",
     "alert-pnpg-http-status-slack",
     "anac-ftp-password",
-    "anac-ftp-known-host"
+    "anac-ftp-known-host",
+    "blob-storage-product-connection-string"
   ]
 }
