@@ -85,30 +85,6 @@ resource "kubernetes_secret" "mongo-credentials" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "postgres" {
-  metadata {
-    name      = "postgres"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    #principal database name
-    POSTGRES_DB = "selc"
-    #principal database hostname or ip
-    POSTGRES_HOST = local.postgres_hostname
-    #principal database hostname or ip
-    POSTGRES_PORT = "5432"
-    #replica database name
-    POSTGRES_REPLICA_DB = "selc"
-    #replica database hostname or ip
-    POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
-    #replica database hostname or ip
-    POSTGRES_REPLICA_PORT = "5432"
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "mail" {
   metadata {
     name      = "mail"
@@ -247,20 +223,6 @@ resource "kubernetes_secret" "social-login" {
     GOOGLE_CLIENT_SECRET = module.key_vault_secrets_query.values["google-client-secret"].value
     GOOGLE_CLIENT_ID     = module.key_vault_secrets_query.values["google-client-id"].value
     JWT_SECRET           = module.key_vault_secrets_query.values["jwt-secret"].value
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
-    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
   }
 
   type = "Opaque"
