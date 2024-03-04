@@ -145,23 +145,6 @@ cosmosdb_mongodb_additional_geo_locations = [{
   zone_redundant    = false
 }]
 
-#postgres
-postgres_sku_name                     = "GP_Gen5_2"
-postgres_geo_redundant_backup_enabled = true
-postgres_enable_replica               = false
-postgres_configuration = {
-  autovacuum_work_mem         = "-1"
-  effective_cache_size        = "5242880"
-  log_autovacuum_min_duration = "5000"
-  log_connections             = "off"
-  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
-  log_temp_files              = "4096"
-  maintenance_work_mem        = "524288"
-  max_wal_size                = "4096"
-  log_connections             = "on"
-  log_checkpoints             = "on"
-  connection_throttling       = "on"
-}
 
 # contracts storage
 contracts_account_replication_type   = "RAGZRS"
