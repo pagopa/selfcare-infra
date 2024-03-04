@@ -265,30 +265,6 @@ resource "kubernetes_secret" "infocamere-service-secrets" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "postgres" {
-  metadata {
-    name      = "postgres"
-    namespace = var.domain
-  }
-
-  data = {
-    # #principal database name
-    # POSTGRES_DB = "selc"
-    # #principal database hostname or ip
-    # POSTGRES_HOST = local.postgres_hostname
-    # #principal database hostname or ip
-    # POSTGRES_PORT = "5432"
-    # #replica database name
-    # POSTGRES_REPLICA_DB = "selc"
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_PORT = "5432"
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
   metadata {
     name      = "onboarding-interceptor-event-secrets"
@@ -320,20 +296,6 @@ resource "kubernetes_secret" "event-secrets" {
 
     # KAFKA_CONTRACTS_TOPIC                        = "SC-Contracts"
     # KAFKA_CONTRACTS_SELFCARE_WO_SASL_JAAS_CONFIG = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"${module.key_vault_secrets_query.values["eventhub-SC-Contracts-selfcare-wo-connection-string"].value}\";"
-  }
-
-  type = "Opaque"
-}
-
-resource "kubernetes_secret" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = var.domain
-  }
-
-  data = {
-    # POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
-    # POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
   }
 
   type = "Opaque"

@@ -43,7 +43,6 @@ module "key_vault_secrets_query" {
     "onboarding-interceptor-apim-internal",
     "party-test-institution-email",
     "portal-admin-operator-email",
-    "postgres-party-user-password",
     "redis-primary-access-key",
     "smtp-not-pec-psw",
     "smtp-not-pec-usr",
