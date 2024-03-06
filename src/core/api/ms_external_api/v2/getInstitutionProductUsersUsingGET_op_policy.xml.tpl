@@ -13,7 +13,7 @@
             var uid = context.Request.Url.Query.GetValueOrDefault("userIdForAuth", "");
 
             if(uid == "") {
-              return "";
+              uid = "m2m";
             }
 
             var aud = "${API_DOMAIN}";

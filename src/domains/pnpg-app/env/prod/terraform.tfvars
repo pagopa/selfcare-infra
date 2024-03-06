@@ -56,11 +56,6 @@ api_gateway_url = "https://api-pnpg.selfcare.pagopa.it"
 # cdn_storage_url  = "https://selcdcheckoutsa.z6.web.core.windows.net"
 # spid_testenv_url = "https://selc-p-pnpg-spid-testenv.westeurope.azurecontainer.io"
 
-# uservice versions
-api-version_uservice-party-management     = "0.1"
-api-version_uservice-party-process        = "0.1"
-api-version_uservice-party-registry-proxy = "v1"
-
 # jwt exchange duration
 jwt_token_exchange_duration = "PT15M"
 
@@ -125,6 +120,12 @@ aruba_sign_service = {
 
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api-pnpg.selfcare.pagopa.it/external"
+}
+
+anac-ftp = {
+  ANAC_FTP_IP        = "93.43.119.85"
+  ANAC_FTP_USER      = "PagoPA_user"
+  ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
 }
 
 

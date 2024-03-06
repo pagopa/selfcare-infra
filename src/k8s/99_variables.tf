@@ -75,29 +75,18 @@ variable "spid_testenv_url" {
   default = null
 }
 
-variable "enable_postgres_replica" {
-  type        = bool
-  default     = false
-  description = "Enable connection to postgres replica"
-}
-
-# uservice versions
-variable "api-version_uservice-party-management" {
-  type = string
-}
-
-variable "api-version_uservice-party-process" {
-  type = string
-}
-
-variable "api-version_uservice-party-registry-proxy" {
-  type = string
-}
-
 #tfsec:ignore:general-secrets-no-plaintext-exposure
 variable "jwt_token_exchange_duration" {
   type    = string
   default = "PT15S"
+}
+
+variable "token_exchange_billing_audience" {
+  type = string
+}
+
+variable "token_exchange_billing_url" {
+  type = string
 }
 
 # configs/secrets
@@ -131,6 +120,10 @@ variable "aruba_sign_service" {
 }
 
 variable "geo-taxonomies" {
+  type = map(string)
+}
+
+variable "anac-ftp" {
   type = map(string)
 }
 
@@ -180,4 +173,15 @@ variable "location_string" {
 
 variable "configmaps_national_registries" {
   type = map(string)
+}
+
+variable "secrets_tls_certificates" {
+  type = set(string)
+}
+
+variable "ingress_health" {
+  type = object({
+    host        = string
+    secret_name = string
+  })
 }

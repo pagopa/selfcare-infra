@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?><EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" ID="https___selfcare_pagopa_it" entityID="https://selfcare.pagopa.it"><ds:Signature>
+<?xml version="1.0" encoding="UTF-8"?><EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:spid="https://spid.gov.it/saml-extensions" ID="https___selfcare_pagopa_it_pub_op_full_" entityID="https://selfcare.pagopa.it/pub-op-full/"><ds:Signature>
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-<ds:Reference URI="#https___selfcare_pagopa_it">
+<ds:Reference URI="#https___selfcare_pagopa_it_pub_op_full_">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
 <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-<ds:DigestValue>yt4K95/C9mQqZ8v5XYssDl99T5w4mf/ZwkUFlPofTOQ=</ds:DigestValue>
+<ds:DigestValue>nvsoZE0bOHDkxNgSTtoXRQQzN2ZPcLu+dYt9MXn+GRU=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
 <ds:SignatureValue>
-hHbNJTOYV2SYhZLKLoygqV+CAB64R1wfmO0Udt1yWgkV6qKuo+8/AtVCiQQlmdOkblkUYx17WRRf
-w0uMrCXea0ClXYu3/wTdVWH3s63ZgWgvFjdhX4tbM95RjKKuW+OIvLmjqWKQSjZBwF5DrHAexKCH
-lxQ8J/SSfSLOA0tg9L+YwHAjRpuVCZGRgsxOv6Wh4BbcK8qywQjYtQRlUkzRyiERjDCVZOeMOxME
-Lq/ahFeJVa753s4IzL6fLZ7Tnemhs8BX/T9Emp8u6kXpIg1ik061lmj7z9fvsPVH2z20DtgQ0AeJ
-w7lnA2y9rpUWN5JXRY8sqeMC2lXlq4c5yrfKCQ==
+rj+SZm1F4EzW8Rm8kQnzJsfELFRKq14AxXMclFyn29xk3YQifACMyDHku4D4hweMQHSiyGedXL9+
+eFGcNN2Zq5CO0M5Jl9ToTVXbl7xeGMY1fdwcLwhWlPKmHQGCHvOYYR/fo7pCtIj6Yp6qPWDcZGUO
+3JbNGS05tT5CGvCnPx1arJt2iIOdFm2wCk7EWh6ng6b9qs/HFS25ak2sb7RZZ4B6zGydhtH4aOBq
+lvN3KtSo7urJyKODSfkzINLzWd/WszM5b15/6s1VmOGmfEREi5ibyvdYPN2KtE8xgcGg+5S6m+OC
+g6sWxkrT8P30UNdacHpcl2gnCMnxqlz5rBGJwQ==
 </ds:SignatureValue>
 <ds:KeyInfo>
 <ds:KeyValue>
@@ -109,14 +109,14 @@ XfP3Z+E=
   <Organization>
     <OrganizationName xml:lang="it">PagoPA S.p.A.</OrganizationName>
     <OrganizationDisplayName xml:lang="it">PagoPA S.p.A.</OrganizationDisplayName>
-    <OrganizationURL xml:lang="it">https://pagopa.gov.it</OrganizationURL>
+    <OrganizationURL xml:lang="it">https://www.pagopa.it</OrganizationURL>
   </Organization>
   <ContactPerson contactType="other" spid:EntityType="spid:aggregator">
     <Extensions>
       <spid:IPACode>5N2TR557</spid:IPACode>
       <spid:VATNumber>IT15376371009</spid:VATNumber>
       <spid:FiscalCode>15376371009</spid:FiscalCode>
-      <spid:Public/>
+      <spid:PublicServicesFullOperator/>
     </Extensions>
     <Company>PagoPA S.p.A.</Company>
     <EmailAddress>pagopa@pec.governo.it</EmailAddress>

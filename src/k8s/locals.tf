@@ -4,8 +4,6 @@ locals {
   key_vault_resource_group           = format("%s-sec-rg", local.project)
   key_vault_id                       = "${data.azurerm_subscription.current.id}/resourceGroups/${local.key_vault_resource_group}/providers/Microsoft.KeyVault/vaults/${local.key_vault_name}"
   redis_url                          = "${format("%s-redis", local.project)}.redis.cache.windows.net"
-  postgres_hostname                  = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
-  postgres_replica_hostname          = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
   mongodb_name_selc_core             = "selcMsCore"
   mongodb_name_selc_product          = "selcProduct"
   mongodb_name_selc_user_group       = "selcUserGroup"

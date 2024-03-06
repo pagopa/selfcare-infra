@@ -39,10 +39,10 @@ module "key_vault_secrets_query" {
     "logs-storage-connection-string",
     "mongodb-connection-string",
     "national-registry-api-key",
+    "zendesk-support-api-key",
     "onboarding-interceptor-apim-internal",
     "party-test-institution-email",
     "portal-admin-operator-email",
-    "postgres-party-user-password",
     "redis-primary-access-key",
     "smtp-not-pec-psw",
     "smtp-not-pec-usr",
@@ -52,6 +52,9 @@ module "key_vault_secrets_query" {
     "user-registry-api-key",
     "user-registry-api-key",
     "web-storage-connection-string",
-    "alert-pnpg-http-status-slack"
+    "alert-pnpg-http-status-slack",
+    "anac-ftp-password",
+    "anac-ftp-known-host",
+    "blob-storage-product-connection-string"
   ]
 }

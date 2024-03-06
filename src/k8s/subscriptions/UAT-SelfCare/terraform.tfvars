@@ -14,10 +14,9 @@ cdn_frontend_url = "https://uat.selfcare.pagopa.it"
 cdn_storage_url  = "https://selcucheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 
-# uservice versions
-api-version_uservice-party-management     = "0.1"
-api-version_uservice-party-process        = "0.1"
-api-version_uservice-party-registry-proxy = "v1"
+# Billing Token Exchange audience and url
+token_exchange_billing_audience = "dev.portalefatturazione.pagopa.it"
+token_exchange_billing_url      = "https://dev.portalefatturazione.pagopa.it/auth?selfcareToken=<IdentityToken>"
 
 # session jwt audience
 jwt_audience = "api.uat.selfcare.pagopa.it"
@@ -75,6 +74,13 @@ geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
 }
 
+anac-ftp = {
+  ANAC_FTP_IP        = "93.43.119.85"
+  ANAC_FTP_PORT      = 22
+  ANAC_FTP_USER      = "PagoPA_user"
+  ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
+}
+
 external-interceptor-url = {
   PROD_FD_URL = "https://fid00001fe.siachain.ti.sia.eu:30008"
 }
@@ -95,5 +101,20 @@ tls_checker_https_endpoints_to_check = [
     alert_name     = "api-uat-selfcare-pagopa-it",
     alert_enabled  = true,
     helm_present   = true,
+  },
+  {
+    https_endpoint = "selc.internal.uat.selfcare.pagopa.it",
+    alert_name     = "selc.internal.uat.selfcare.pagopa.it",
+    alert_enabled  = true,
+    helm_present   = true,
   }
 ]
+
+secrets_tls_certificates = [
+  "selc-internal-uat-selfcare-pagopa-it"
+]
+
+ingress_health = {
+  host        = "selc.internal.uat.selfcare.pagopa.it"
+  secret_name = "selc-internal-uat-selfcare-pagopa-it"
+}

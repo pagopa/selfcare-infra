@@ -7,8 +7,6 @@ locals {
 
   redis_url = "selc-${var.env_short}-${var.location_short}-pnpg-redis.redis.cache.windows.net"
 
-  # postgres_hostname               = "${format("%s-postgresql", local.project)}.postgres.database.azure.com"
-  # postgres_replica_hostname       = var.enable_postgres_replica ? "${format("%s-postgresql-rep", local.project)}.postgres.database.azure.com" : local.postgres_hostname
   mongodb_name_selc_core          = "selcMsCore"
   mongodb_name_selc_product       = "selcProduct"
   mongodb_name_selc_user_group    = "selcUserGroup"
@@ -54,7 +52,9 @@ locals {
 
 
   # Monitor
-  alert_pnpg_error_5xx_name = "pnpg-error-5xx"
+  alert_pnpg_error_5xx_name             = "pnpg-error-5xx"
+  alert_functions_exceptions_name       = "pnpg-functions-exception"
+  alert_functions_exceptions_role_names = ["selc-${var.env_short}-pnpg-onboarding-fn"]
 }
 
 variable "prefix" {
@@ -186,6 +186,7 @@ variable "dns_zone_prefix" {
   description = "The dns subdomain."
 }
 
+
 variable "dns_zone_internal_prefix" {
   type        = string
   default     = null
@@ -246,6 +247,10 @@ variable "aruba_sign_service" {
 }
 
 variable "geo-taxonomies" {
+  type = map(string)
+}
+
+variable "anac-ftp" {
   type = map(string)
 }
 

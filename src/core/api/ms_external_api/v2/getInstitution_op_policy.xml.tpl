@@ -55,7 +55,7 @@
             <when condition="@(context.Response.StatusCode == 200)">
                 <set-body>@{
                     JObject response = context.Response.Body.As<JObject>();
-                    response.Add("logo", new JValue(new Uri("${CDN_STORAGE_URL}/institutions/" + response.GetValue("id") + "/logo.png")));
+                    response.Add("logo", new JValue(new Uri("${LOGO_URL}/institutions/" + response.GetValue("id") + "/logo.png")));
                     return response.ToString();
                     }</set-body>
             </when>

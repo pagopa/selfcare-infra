@@ -1,7 +1,7 @@
 resource "kubernetes_deployment" "health" {
   metadata {
     name      = "health"
-    namespace = kubernetes_namespace.health.metadata[0].name
+    namespace = kubernetes_namespace.selc.metadata[0].name
     labels = {
       app = "health"
     }
@@ -44,7 +44,7 @@ resource "kubernetes_deployment" "health" {
 resource "kubernetes_service" "health" {
   metadata {
     name      = "health"
-    namespace = kubernetes_namespace.health.metadata[0].name
+    namespace = kubernetes_namespace.selc.metadata[0].name
     labels = {
       app = "health"
     }

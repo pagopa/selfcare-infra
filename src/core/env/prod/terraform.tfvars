@@ -34,9 +34,9 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
-cidr_subnet_selc_functions        = ["10.1.144.0/24"]
 
-cidr_subnet_selc = ["10.1.148.0/23"]
+cidr_subnet_selc      = ["10.1.148.0/23"]
+cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
 
 #
 # Pair VNET
@@ -56,8 +56,9 @@ vnet_aks_ddos_protection_plan = true
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
-dns_zone_prefix = "selfcare"
-external_domain = "pagopa.it"
+dns_zone_prefix    = "selfcare"
+dns_zone_prefix_ar = "areariservata"
+external_domain    = "pagopa.it"
 
 # storage account
 public_network_access_enabled = false
@@ -92,6 +93,8 @@ redis_version  = 6
 # aks
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                  = "10.1.1.250"
+private_dns_name                  = "selc.internal.selfcare.pagopa.it"
+private_onboarding_dns_name       = "selc-p-onboarding-ms-ca.bluedune-cc0f8752.westeurope.azurecontainerapps.io"
 aks_kubernetes_version            = "1.27.7"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
@@ -101,12 +104,13 @@ aks_system_node_pool_vm_size                      = "Standard_D4ds_v5"
 aks_system_node_pool_node_count_min               = 2
 aks_system_node_pool_node_count_max               = 3
 aks_system_node_pool_only_critical_addons_enabled = true
+system_node_pool_enable_host_encryption           = true
 
 aks_user_node_pool_enabled        = true
+aks_user_node_pool_vm_size        = "Standard_D4ds_v5"
 aks_user_node_pool_os_disk_type   = "Ephemeral"
 aks_user_node_pool_node_count_min = 3
 aks_user_node_pool_node_count_max = 5
-aks_user_node_pool_vm_size        = "Standard_D4ds_v5"
 user_node_pool_node_labels = {
   "node_type" = "user"
 }
@@ -141,23 +145,6 @@ cosmosdb_mongodb_additional_geo_locations = [{
   zone_redundant    = false
 }]
 
-#postgres
-postgres_sku_name                     = "GP_Gen5_2"
-postgres_geo_redundant_backup_enabled = true
-postgres_enable_replica               = false
-postgres_configuration = {
-  autovacuum_work_mem         = "-1"
-  effective_cache_size        = "5242880"
-  log_autovacuum_min_duration = "5000"
-  log_connections             = "off"
-  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
-  log_temp_files              = "4096"
-  maintenance_work_mem        = "524288"
-  max_wal_size                = "4096"
-  log_connections             = "on"
-  log_checkpoints             = "on"
-  connection_throttling       = "on"
-}
 
 # contracts storage
 contracts_account_replication_type   = "RAGZRS"
@@ -311,6 +298,9 @@ eventhubs = [{
   partitions        = 30
   message_retention = 7
   consumers         = []
+  iam_roles = {
+    "ee71d0ec-0023-44ae-93dd-871d25ab7003" = "Azure Event Hubs Data Receiver" # io-p-sign-backoffice-func
+  }
   keys = [
     {
       name   = "selfcare-wo"
@@ -435,25 +425,5 @@ enable_load_tests_db = false
 
 checkout_advanced_threat_protection_enabled = true
 
-# Functions App
-
-function_always_on = true
-
-app_service_plan_info = {
-  kind                         = "Linux"
-  sku_size                     = "P1v3"
-  sku_tier                     = "PremiumV3"
-  maximum_elastic_worker_count = 1
-  worker_count                 = 1
-  zone_balancing_enabled       = false
-}
-
-storage_account_info = {
-  account_kind                      = "StorageV2"
-  account_tier                      = "Standard"
-  account_replication_type          = "LRS"
-  access_tier                       = "Hot"
-  advanced_threat_protection_enable = true
-}
-
-cae_zone_redundant = true
+cae_zone_redundant      = true
+cae_zone_redundant_pnpg = true

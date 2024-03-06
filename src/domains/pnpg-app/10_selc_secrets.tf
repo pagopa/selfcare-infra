@@ -214,6 +214,8 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    # can be remove after mmigration of onboarding-backend to container apps
+    USER-REGISTRY-API-KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
@@ -263,30 +265,6 @@ resource "kubernetes_secret" "infocamere-service-secrets" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "postgres" {
-  metadata {
-    name      = "postgres"
-    namespace = var.domain
-  }
-
-  data = {
-    # #principal database name
-    # POSTGRES_DB = "selc"
-    # #principal database hostname or ip
-    # POSTGRES_HOST = local.postgres_hostname
-    # #principal database hostname or ip
-    # POSTGRES_PORT = "5432"
-    # #replica database name
-    # POSTGRES_REPLICA_DB = "selc"
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
-    # #replica database hostname or ip
-    # POSTGRES_REPLICA_PORT = "5432"
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
   metadata {
     name      = "onboarding-interceptor-event-secrets"
@@ -323,20 +301,6 @@ resource "kubernetes_secret" "event-secrets" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = var.domain
-  }
-
-  data = {
-    # POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
-    # POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "national-registry-secrets" {
   metadata {
     name      = "national-registry-secrets"
@@ -345,6 +309,46 @@ resource "kubernetes_secret" "national-registry-secrets" {
 
   data = {
     NATIONAL_REGISTRY_API_KEY = module.key_vault_secrets_query.values["national-registry-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "product-storage" {
+  metadata {
+    name      = "product-storage"
+    namespace = var.domain
+  }
+
+  data = {
+    BLOB-STORAGE-PRODUCT-CONNECTION-STRING = module.key_vault_secrets_query.values["blob-storage-product-connection-string"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "support-secrets" {
+  metadata {
+    name      = "support-secrets"
+    namespace = var.domain
+  }
+
+  data = {
+    SUPPORT_API_KEY = module.key_vault_secrets_query.values["zendesk-support-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "anac-ftp-secret" {
+  metadata {
+    name      = "anac-ftp-secret"
+    namespace = var.domain
+  }
+
+  data = {
+    ANAC_FTP_PASSWORD   = module.key_vault_secrets_query.values["anac-ftp-password"].value
+    ANAC_FTP_KNOWN_HOST = module.key_vault_secrets_query.values["anac-ftp-known-host"].value
   }
 
   type = "Opaque"

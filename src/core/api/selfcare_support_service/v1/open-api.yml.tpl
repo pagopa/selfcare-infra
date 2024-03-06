@@ -9,46 +9,6 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
-  '/':
-    post:
-      tags:
-        - support
-      summary: sendSupportRequest
-      description: Service to retrieve Support contact's form
-      operationId: sendSupportRequestUsingPOST
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SupportRequestDto'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SupportResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '401':
-          description: Unauthorized
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '500':
-          description: Internal Server Error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
   '/institutions/{institutionId}/users':
     get:
       tags:
@@ -229,6 +189,102 @@ paths:
       security:
         - bearerAuth:
             - global
+    get:
+      tags:
+        - users
+      summary: getUsers
+      description: Retrieve all users for DL according to optional params in input
+      operationId: getUsersUsingGET
+      parameters:
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: productId
+          in: query
+          description: productId
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UsersNotificationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
+  '/users/{id}':
+    get:
+      tags:
+        - users
+      summary: getUserById
+      description: Get user by Id
+      operationId: getUserInfoUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: User's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/delegations':
     get:
       tags:
@@ -388,59 +444,6 @@ paths:
       security:
       - bearerAuth:
         - global
-  '/tokens/products/{productId}':
-    get:
-      tags:
-        - Token
-      summary: Retrieve tokens given the product identifier
-      description: Retrieve tokens given the product identifier
-      operationId: getTokensFromProductUsingGET
-      parameters:
-        - name: productId
-          in: path
-          description: Product's unique identifier
-          required: true
-          style: simple
-          schema:
-            type: string
-        - name: page
-          in: query
-          description: The number of the current page
-          required: false
-          style: form
-          schema:
-            type: integer
-            format: int32
-        - name: size
-          in: query
-          description: The size of the page
-          required: false
-          style: form
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/TokenListResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
   '/onboarding/users':
     post:
       tags:
@@ -483,7 +486,114 @@ paths:
       security:
         - bearerAuth:
             - global
-  
+  '/onboarding/{onboardingId}/consume':
+    put:
+      tags:
+        - Onboarding Controller
+      summary: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      description: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      operationId: completeOnboardingTokenConsume
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: onboardingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contract:
+                  format: binary
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
+  '/tokens':
+    get:
+      tags:
+        - Token
+      summary: Retrieve all tokens filtered by status
+      description: Retrieve all tokens filtered by status
+      operationId: getAllTokensUsingGET
+      parameters:
+        - name: states
+          in: query
+          description: states
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: productId
+          in: query
+          description: productId
+          required: false
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginatedTokenResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     InvalidParam:
@@ -650,6 +760,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
@@ -669,6 +781,8 @@ components:
         id:
           type: string
         role:
+          type: string
+        status:
           type: string
     UserResource:
       title: UserResource
@@ -747,6 +861,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         origin:
           type: string
         originId:
@@ -923,6 +1039,8 @@ components:
             - SCP
             - SA
             - AS
+            - REC
+            - CON
         productId:
           type: string
         taxCode:
@@ -1161,6 +1279,8 @@ components:
             - SA
             - SCP
             - AS
+            - REC
+            - CON
         paymentServiceProvider:
           $ref: '#/components/schemas/PaymentServiceProvider'
         rea:
@@ -1342,6 +1462,193 @@ components:
         updatedAt:
           type: string
           format: date-time
+    UserResponse:
+      title: UserResponse
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        taxCode:
+          type: string
+    UsersNotificationResponse:
+      title: UsersNotificationResponse
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserNotificationResponse'
+    UserNotificationResponse:
+      title: UserNotificationResponse
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        eventType:
+          type: string
+          enum:
+            - ADD
+            - UPDATE
+        id:
+          type: string
+        institutionId:
+          type: string
+        onboardingTokenId:
+          type: string
+        productId:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/UserToNotify'
+    UserToNotify:
+      title: UserToNotify
+      type: object
+      properties:
+        email:
+          type: string
+        familyName:
+          type: string
+        name:
+          type: string
+        productRole:
+          type: string
+        relationshipStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - DELETED
+            - PENDING
+            - REJECTED
+            - SUSPENDED
+            - TOBEVALIDATED
+        role:
+          type: string
+          enum:
+            - DELEGATE
+            - MANAGER
+            - OPERATOR
+            - SUB_DELEGATE
+        userId:
+          type: string
+    PaginatedTokenResponse:
+      title: PaginatedTokenResponse
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScContractResponse'
+        totalNumber:
+          type: integer
+          format: int64
+    ScContractResponse:
+      title: ScContractResponse
+      type: object
+      properties:
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        closedAt:
+          type: string
+          format: date-time
+        contentType:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        filePath:
+          type: string
+        id:
+          type: string
+        institution:
+          $ref: '#/components/schemas/InstitutionToNotifyResponse'
+        internalIstitutionID:
+          type: string
+        notificationType:
+          type: string
+          enum:
+            - ADD
+            - UPDATE
+        onboardingTokenId:
+          type: string
+        pricingPlan:
+          type: string
+        product:
+          type: string
+        state:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+    InstitutionToNotifyResponse:
+      title: InstitutionToNotifyResponse
+      type: object
+      properties:
+        address:
+          type: string
+        category:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        county:
+          type: string
+        description:
+          type: string
+        digitalAddress:
+          type: string
+        institutionType:
+          type: string
+          enum:
+            - AS
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SA
+            - SCP
+            - REC
+            - CON
+        istatCode:
+          type: string
+        origin:
+          type: string
+        originId:
+          type: string
+        paymentServiceProvider:
+          $ref: '#/components/schemas/PaymentServiceProvider'
+        rootParent:
+          $ref: '#/components/schemas/RootParent'
+        subUnitCode:
+          type: string
+        subUnitType:
+          type: string
+        taxCode:
+          type: string
+        zipCode:
+          type: string
+    RootParent:
+      title: RootParent
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        originId:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

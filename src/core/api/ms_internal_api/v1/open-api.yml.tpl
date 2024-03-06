@@ -9,6 +9,92 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
+  /users/{id}/status:
+    put:
+      tags:
+        - support
+      summary: Update user status with optional filter
+      description: Update user status with optional filter
+      operationId: updateUserStatusUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: User's unique identifier
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: The internal identifier of the institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: productId
+          in: query
+          description: Product's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: role
+          in: query
+          description: role
+          required: false
+          style: form
+          schema:
+            type: string
+            enum:
+              - DELEGATE
+              - MANAGER
+              - OPERATOR
+              - SUB_DELEGATE
+        - name: productRole
+          in: query
+          description: productRole
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: status
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/{institutionId}/products/{productId}/users':
       get:
         tags:
@@ -235,6 +321,8 @@ paths:
                 - PT
                 - SCP
                 - SA
+                - REC
+                - CON
         responses:
           '200':
             description: OK
@@ -444,6 +532,86 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/{onboardingId}/consume':
+    put:
+      tags:
+        - Onboarding Controller
+      summary: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      description: Perform complete operation of an onboarding request as /complete but without signature verification of the contract
+      operationId: completeOnboardingTokenConsume
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: onboardingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contract:
+                  format: binary
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
+  '/onboarding/{onboardingId}/complete':
+    put:
+      tags:
+        - Onboarding Controller
+      summary: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
+      description: Perform complete operation of an onboarding request receiving onboarding id and contract signed by the institution.It checks the contract's signature and upload the contract on an azure storageAt the end, function triggers async activities related to complete onboarding that consist of create the institution, activate the onboarding and sending data to notification queue.
+      operationId: completeOnboardingUsingPUT
+      parameters:
+        - name: x-selfcare-uid
+          in: header
+          description: Logged user's unique identifier
+          required: true
+          schema:
+            type: string
+        - name: onboardingId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                contract:
+                  format: binary
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -513,6 +681,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -582,6 +752,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -734,6 +906,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -1155,6 +1329,8 @@ components:
             - PT
             - SCP
             - SA
+            - REC
+            - CON
         origin:
           type: string
           description: Institution data origin
@@ -1243,6 +1419,8 @@ components:
             - PT
             - SA
             - SCP
+            - REC
+            - CON
         productId:
           type: string
         taxCode:
@@ -1404,6 +1582,8 @@ components:
             - SA
             - SCP
             - AS
+            - REC
+            - CON
         paymentServiceProvider:
           $ref: '#/components/schemas/PaymentServiceProvider'
         rea:

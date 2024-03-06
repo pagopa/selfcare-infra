@@ -13,10 +13,9 @@ api_gateway_url  = "https://api.selfcare.pagopa.it"
 cdn_frontend_url = "https://selfcare.pagopa.it"
 cdn_storage_url  = "https://selcpcheckoutsa.z6.web.core.windows.net"
 
-# uservice versions
-api-version_uservice-party-management     = "0.1"
-api-version_uservice-party-process        = "0.1"
-api-version_uservice-party-registry-proxy = "v1"
+# Billing Token Exchange audience and url
+token_exchange_billing_audience = "portalefatturazione.pagopa.it"
+token_exchange_billing_url      = "https://portalefatturazione.pagopa.it/auth?selfcareToken=<IdentityToken>"
 
 # session jwt audience
 jwt_audience = "api.selfcare.pagopa.it"
@@ -51,7 +50,7 @@ configmaps_hub-spid-login-ms = {
   USER_REGISTRY_URL = "https://api.pdv.pagopa.it/user-registry/v1"
 
   # SPID
-  ORG_ISSUER = "https://selfcare.pagopa.it"
+  ORG_ISSUER = "https://selfcare.pagopa.it/pub-op-full/"
 
   CIE_URL          = "https://api.is.eng.pagopa.it/idp-keys/cie/latest"
   SERVER_PORT      = "8080"
@@ -72,6 +71,13 @@ aruba_sign_service = {
 
 geo-taxonomies = {
   GEO_TAXONOMIES_URL = "https://api.dev.selfcare.pagopa.it/external"
+}
+
+anac-ftp = {
+  ANAC_FTP_IP        = "93.43.119.85"
+  ANAC_FTP_PORT      = 22
+  ANAC_FTP_USER      = "PagoPA_user"
+  ANAC_FTP_DIRECTORY = "/mnt/RegistroGestoriPiattaforme/Collaudo/"
 }
 
 external-interceptor-url = {
@@ -95,5 +101,20 @@ tls_checker_https_endpoints_to_check = [
     alert_name     = "api-selfcare-pagopa-it",
     alert_enabled  = true,
     helm_present   = true,
+  },
+  {
+    https_endpoint = "selc.internal.selfcare.pagopa.it",
+    alert_name     = "selc.internal.selfcare.pagopa.it",
+    alert_enabled  = true,
+    helm_present   = true,
   }
 ]
+
+secrets_tls_certificates = [
+  "selc-internal-selfcare-pagopa-it"
+]
+
+ingress_health = {
+  host        = "selc.internal.selfcare.pagopa.it"
+  secret_name = "selc-internal-selfcare-pagopa-it"
+}

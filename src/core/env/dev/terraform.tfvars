@@ -34,9 +34,9 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
-cidr_subnet_selc_functions        = ["10.1.144.0/24"]
 
-cidr_subnet_selc = ["10.1.148.0/23"]
+cidr_subnet_selc      = ["10.1.148.0/23"]
+cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
 
 #
 # Pair VNET
@@ -52,8 +52,9 @@ vnet_aks_ddos_protection_plan = false
 cidr_aks_platform_vnet        = ["10.11.0.0/16"]
 
 # dns
-dns_zone_prefix = "dev.selfcare"
-external_domain = "pagopa.it"
+dns_zone_prefix    = "dev.selfcare"
+dns_zone_prefix_ar = "dev.areariservata"
+external_domain    = "pagopa.it"
 
 # storage account
 public_network_access_enabled = false
@@ -81,15 +82,27 @@ redis_version                  = 6
 
 # aks
 aks_alerts_enabled                  = false
-aks_kubernetes_version              = "1.23.12"
+aks_kubernetes_version              = "1.27.7"
 aks_system_node_pool_os_disk_type   = "Managed"
-aks_system_node_pool_node_count_min = 2
-aks_system_node_pool_node_count_max = 3
+aks_system_node_pool_node_count_min = 1
+aks_system_node_pool_node_count_max = 1
+
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip = "10.1.1.250"
+reverse_proxy_ip            = "10.1.1.250"
+private_dns_name            = "selc.internal.dev.selfcare.pagopa.it"
+private_onboarding_dns_name = "selc-d-onboarding-ms-ca.gentleflower-c63e62fe.westeurope.azurecontainerapps.io"
+
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
-aks_system_node_pool_only_critical_addons_enabled = false
+aks_system_node_pool_only_critical_addons_enabled = true
+
+aks_user_node_pool_enabled        = true
+aks_user_node_pool_os_disk_type   = "Managed"
+aks_user_node_pool_node_count_min = 1
+aks_user_node_pool_node_count_max = 3
+user_node_pool_node_labels = {
+  "node_type" = "user"
+}
 
 #
 # Docker
@@ -117,25 +130,6 @@ law_daily_quota_gb    = 2
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
-
-# postgres
-postgres_sku_name       = "GP_Gen5_2"
-postgres_enable_replica = false
-postgres_configuration = {
-  autovacuum_work_mem         = "-1"
-  effective_cache_size        = "655360"
-  log_autovacuum_min_duration = "5000"
-  log_connections             = "off"
-  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
-  log_temp_files              = "4096"
-  maintenance_work_mem        = "524288"
-  max_wal_size                = "4096"
-  log_connections             = "on"
-  log_checkpoints             = "on"
-  connection_throttling       = "on"
-}
-postgres_private_endpoint_enabled = false
-postgres_alerts_enabled           = false
 
 # spid-testenv
 enable_spid_test = true
@@ -253,6 +247,9 @@ eventhubs = [{
   partitions        = 30
   message_retention = 7
   consumers         = []
+  iam_roles = {
+    "ee71d0ec-0023-44ae-93dd-871d25ab7003" = "Azure Event Hubs Data Receiver" # io-p-sign-backoffice-func
+  }
   keys = [
     {
       name   = "selfcare-wo"
@@ -363,25 +360,5 @@ eventhubs = [{
 
 enable_load_tests_db = true
 
-# Functions App
-
-function_always_on = false
-
-app_service_plan_info = {
-  kind                         = "Linux"
-  sku_size                     = "P1v3"
-  sku_tier                     = "PremiumV3"
-  maximum_elastic_worker_count = 1
-  worker_count                 = 1
-  zone_balancing_enabled       = false
-}
-
-storage_account_info = {
-  account_kind                      = "StorageV2"
-  account_tier                      = "Standard"
-  account_replication_type          = "LRS"
-  access_tier                       = "Hot"
-  advanced_threat_protection_enable = false
-}
-
-cae_zone_redundant = false
+cae_zone_redundant      = false
+cae_zone_redundant_pnpg = false
