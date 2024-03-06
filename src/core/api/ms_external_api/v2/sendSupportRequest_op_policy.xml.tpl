@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-        <base />
+        <base/>
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
             var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
@@ -30,10 +30,27 @@
             }
 
             }"/>
-        <set-header name="Authorization" exists-action="override">
+           <choose>
+            <when condition="@(((string)context.Variables["productId"]).Contains("prod-fd"))">
+                <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized" require-expiration-time="false" require-scheme="Bearer" require-signed-tokens="true">
+                    <openid-config url="https://login.microsoftonline.com/${TENANT_ID}/.well-known/openid-configuration" />
+                    <required-claims>
+                        <claim name="aud" match="all">
+                            <value>${EXTERNAL-OAUTH2-ISSUER}</value>
+                        </claim>
+                    </required-claims>
+                </validate-jwt>
+            </when>
+        </choose>
+        <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-backend-service base-url="${MS_CORE_BACKEND_BASE_URL}" />
+        <set-body>@{
+            var request = context.Request.Body.As<JObject>();  
+            request.Add(new JProperty("productId", ((string)context.Variables["productId"])));
+            return request.ToString();
+        }</set-body>
+        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base />

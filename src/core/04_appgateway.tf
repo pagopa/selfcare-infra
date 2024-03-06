@@ -11,7 +11,7 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
 
 # Subnet to host the application gateway
 module "appgateway_snet" {
-  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source               = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                 = "${local.project}-appgateway-snet"
   address_prefixes     = var.cidr_subnet_appgateway
   resource_group_name  = azurerm_resource_group.rg_vnet.name
@@ -26,21 +26,21 @@ locals {
     "/spid/*",
     "/spid-login/*",
     "/dashboard/*",
-    "/onboarding/*",
+    "^/onboarding/v\\d+/.*$",
     "/ms-notification-manager/*",
     "/party-registry-proxy/*",
   ]
 
   backends = {
     aks = {
-      protocol                    = "Http"
-      host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
-      port                        = 80
-      ip_addresses                = [var.reverse_proxy_ip]
+      protocol                    = "Https"
+      host                        = "selc.internal.${var.dns_zone_prefix}.${var.external_domain}"
+      port                        = 443
+      ip_addresses                = null
       probe                       = "/health"
       probe_name                  = "probe-aks"
       request_timeout             = 60
-      fqdns                       = null
+      fqdns                       = ["selc.internal.${var.dns_zone_prefix}.${var.external_domain}"]
       pick_host_name_from_backend = false
     }
     apim = {
@@ -104,7 +104,7 @@ locals {
 
 # Application gateway: Multilistener configuraiton
 module "app_gw" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//app_gateway?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//app_gateway?ref=v7.50.1"
 
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
@@ -228,7 +228,7 @@ module "app_gw" {
 
   alerts_enabled = var.app_gateway_alerts_enabled
 
-  action = var.env_short == "p" ? [
+  action = var.env_short == "x" ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null

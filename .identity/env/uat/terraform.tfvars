@@ -26,6 +26,116 @@ cd_github_federations = [
   }
 ]
 
+ci_github_federations_ms = [
+  {
+    repository = "selfcare-dashboard-backend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-core"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-onboarding-backend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-user"
+    subject    = "uat-ci"
+  }
+]
+
+cd_github_federations_ms = [
+  {
+    repository = "selfcare-dashboard-backend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-external-api-backend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-infra"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-core"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-external-interceptor"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-notification-manager"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-onboarding-interceptor"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-party-registry-proxy"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-product"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-ms-user-group"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-onboarding"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-onboarding-backend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-user"
+    subject    = "uat-cd"
+  }
+]
+
 environment_ci_roles = {
   subscription = [
     "Reader",
@@ -56,14 +166,31 @@ environment_cd_roles = {
     "Contributor"
   ]
   resource_groups = {
-    "terraform-state-rg" = [
-      "Storage Blob Data Contributor"
-    ],
-    "io-infra-rg" = [
-      "Storage Blob Data Contributor"
-    ],
     "selc-u-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
+    ]
+  }
+}
+
+environment_ci_roles_ms = {
+  subscription = [
+    "Reader",
+    "PagoPA IaC Reader"
+  ]
+  resource_groups = {
+    terraform-state-rg = [
+      "Storage Blob Data Contributor"
+    ]
+  }
+}
+
+environment_cd_roles_ms = {
+  subscription = [
+    "Contributor"
+  ]
+  resource_groups = {
+    terraform-state-rg = [
+      "Storage Blob Data Contributor"
     ]
   }
 }

@@ -176,7 +176,7 @@ resource "azurerm_dns_mx_record" "dns-mx-email-selfcare-pagopa-it" {
   tags = var.tags
 }
 
-# spf record 
+# spf record
 resource "azurerm_dns_txt_record" "dns-txt-email-selfcare-pagopa-it-aws-ses" {
   count               = var.env_short == "p" ? 1 : 0
   name                = "email"

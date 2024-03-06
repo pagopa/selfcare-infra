@@ -81,6 +81,14 @@ output "reverse_proxy_ip" {
   value = var.reverse_proxy_ip
 }
 
+output "private_dns_name" {
+  value = var.private_dns_name
+}
+
+output "private_onboarding_dns_name" {
+  value = var.private_onboarding_dns_name
+}
+
 ## CosmosDb - MongoDB ##
 output "cosmosdb_account_mongodb_id" {
   value = module.cosmosdb_account_mongodb.id
@@ -105,21 +113,3 @@ output "cosmosdb_account_mongodb_connection_strings" {
   sensitive = true
 }
 
-## Postgresql server
-output "postgresql_fqdn" {
-  value = module.postgresql.fqdn
-}
-
-output "postgresql_administrator_login" {
-  value     = data.azurerm_key_vault_secret.postgres_administrator_login.value
-  sensitive = true
-}
-
-output "postgresql_administrator_login_password" {
-  value     = data.azurerm_key_vault_secret.postgres_administrator_login_password.value
-  sensitive = true
-}
-
-output "postgresql_replica_fqdn" {
-  value = module.postgresql.replica_fqdn
-}

@@ -1,6 +1,18 @@
 <policies>
     <inbound>
-        <base/>
+        <base />
+        <set-header name="X-Forwarded-For" exists-action="override">
+            <value>@{ 
+            string headerValue = context.Request.Headers.GetValueOrDefault("x-forwarded-for",""); 
+            string[] sourceIP = headerValue.Split(':'); 
+            if(sourceIP.Length == 2) { headerValue = sourceIP[0]; } 
+            return headerValue; }</value>
+        </set-header>
+        <check-header name="X-Forwarded-For" failed-check-httpcode="403" failed-check-error-message="Unauthorized IP Address" ignore-case="true">
+            <value>93.63.219.230</value>
+            <value>93.63.219.232</value>
+            <value>93.63.219.234</value>
+        </check-header>
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
             var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
@@ -30,10 +42,9 @@
             }
 
             }"/>
-        <set-header exists-action="override" name="Authorization">
+        <set-header name="Authorization" exists-action="override">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base />

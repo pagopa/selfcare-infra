@@ -1,7 +1,7 @@
 module "secrets_selfcare_status_dev" {
   count = var.env_short == "d" ? 1 : 0
 
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query?ref=v7.50.1"
 
   resource_group = azurerm_resource_group.sec_rg.name
   key_vault_name = module.key_vault.name
@@ -15,7 +15,7 @@ module "secrets_selfcare_status_dev" {
 module "secrets_selfcare_status_uat" {
   count = var.env_short == "u" ? 1 : 0
 
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query?ref=v7.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query?ref=v7.50.1"
 
   resource_group = azurerm_resource_group.sec_rg.name
   key_vault_name = module.key_vault.name

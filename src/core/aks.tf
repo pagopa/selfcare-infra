@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg_aks" {
 }
 
 module "aks" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.5.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.50.1"
 
   depends_on = [
     module.k8s_snet,
@@ -19,14 +19,15 @@ module "aks" {
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
-  system_node_pool_vm_size         = var.aks_system_node_pool_vm_size
-  system_node_pool_os_disk_type    = var.aks_system_node_pool_os_disk_type
-  system_node_pool_os_disk_size_gb = var.aks_system_node_pool_os_disk_size_gb
-  system_node_pool_name            = local.aks_system_node_pool_node_name
-  system_node_pool_node_count_min  = var.aks_system_node_pool_node_count_min
-  system_node_pool_node_count_max  = var.aks_system_node_pool_node_count_max
-
+  system_node_pool_vm_size                      = var.aks_system_node_pool_vm_size
+  system_node_pool_os_disk_type                 = var.aks_system_node_pool_os_disk_type
+  system_node_pool_os_disk_size_gb              = var.aks_system_node_pool_os_disk_size_gb
+  system_node_pool_name                         = local.aks_system_node_pool_node_name
+  system_node_pool_node_count_min               = var.aks_system_node_pool_node_count_min
+  system_node_pool_node_count_max               = var.aks_system_node_pool_node_count_max
+  system_node_pool_enable_host_encryption       = var.system_node_pool_enable_host_encryption
   system_node_pool_only_critical_addons_enabled = var.aks_system_node_pool_only_critical_addons_enabled
+  user_node_pool_node_labels                    = var.user_node_pool_node_labels
 
   user_node_pool_enabled         = var.aks_user_node_pool_enabled
   user_node_pool_os_disk_type    = var.aks_user_node_pool_os_disk_type
@@ -42,7 +43,6 @@ module "aks" {
 
   private_cluster_enabled = true
 
-  rbac_enabled = true
   aad_admin_group_ids = var.env_short == "d" ? [
     data.azuread_group.adgroup_admin.object_id,
     data.azuread_group.adgroup_developers.object_id,
@@ -62,7 +62,7 @@ module "aks" {
   }
 
   default_metric_alerts = var.aks_metric_alerts
-  action = var.env_short == "p" ? [
+  action = var.env_short == "x" ? [
     {
       action_group_id    = azurerm_monitor_action_group.error_action_group[0].id
       webhook_properties = null
@@ -87,7 +87,7 @@ module "aks" {
 
 # k8s cluster subnet
 module "k8s_snet" {
-  source                                    = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.3.0"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                                      = "${local.project}-k8s-snet"
   address_prefixes                          = var.cidr_subnet_k8s
   resource_group_name                       = azurerm_resource_group.rg_vnet.name

@@ -50,6 +50,7 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
 
   spec {
     rule {
+      host = var.ingress_health.host
       http {
 
         path {
@@ -77,6 +78,10 @@ resource "kubernetes_ingress_v1" "selc_ingress" {
         }
 
       }
+    }
+    tls {
+      hosts       = [var.ingress_health.host]
+      secret_name = var.ingress_health.secret_name
     }
   }
 }
