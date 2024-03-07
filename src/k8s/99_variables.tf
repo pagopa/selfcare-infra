@@ -75,25 +75,6 @@ variable "spid_testenv_url" {
   default = null
 }
 
-variable "enable_postgres_replica" {
-  type        = bool
-  default     = false
-  description = "Enable connection to postgres replica"
-}
-
-# uservice versions
-variable "api-version_uservice-party-management" {
-  type = string
-}
-
-variable "api-version_uservice-party-process" {
-  type = string
-}
-
-variable "api-version_uservice-party-registry-proxy" {
-  type = string
-}
-
 #tfsec:ignore:general-secrets-no-plaintext-exposure
 variable "jwt_token_exchange_duration" {
   type    = string

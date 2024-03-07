@@ -88,8 +88,10 @@ aks_system_node_pool_node_count_min = 1
 aks_system_node_pool_node_count_max = 1
 
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip = "10.1.1.250"
-private_dns_name = "selc.internal.dev.selfcare.pagopa.it"
+reverse_proxy_ip            = "10.1.1.250"
+private_dns_name            = "selc.internal.dev.selfcare.pagopa.it"
+private_onboarding_dns_name = "selc-d-onboarding-ms-ca.gentleflower-c63e62fe.westeurope.azurecontainerapps.io"
+
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = true
@@ -128,25 +130,6 @@ law_daily_quota_gb    = 2
 # CosmosDb MongoDb
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
-
-# postgres
-postgres_sku_name       = "GP_Gen5_2"
-postgres_enable_replica = false
-postgres_configuration = {
-  autovacuum_work_mem         = "-1"
-  effective_cache_size        = "655360"
-  log_autovacuum_min_duration = "5000"
-  log_connections             = "off"
-  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
-  log_temp_files              = "4096"
-  maintenance_work_mem        = "524288"
-  max_wal_size                = "4096"
-  log_connections             = "on"
-  log_checkpoints             = "on"
-  connection_throttling       = "on"
-}
-postgres_private_endpoint_enabled = false
-postgres_alerts_enabled           = false
 
 # spid-testenv
 enable_spid_test = true

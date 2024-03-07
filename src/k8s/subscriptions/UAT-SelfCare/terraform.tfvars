@@ -14,11 +14,6 @@ cdn_frontend_url = "https://uat.selfcare.pagopa.it"
 cdn_storage_url  = "https://selcucheckoutsa.z6.web.core.windows.net"
 spid_testenv_url = "https://selc-u-spid-testenv.westeurope.azurecontainer.io"
 
-# uservice versions
-api-version_uservice-party-management     = "0.1"
-api-version_uservice-party-process        = "0.1"
-api-version_uservice-party-registry-proxy = "v1"
-
 # Billing Token Exchange audience and url
 token_exchange_billing_audience = "dev.portalefatturazione.pagopa.it"
 token_exchange_billing_url      = "https://dev.portalefatturazione.pagopa.it/auth?selfcareToken=<IdentityToken>"
