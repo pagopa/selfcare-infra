@@ -368,6 +368,7 @@ module "apim_external_api_ms_v2" {
     module.apim_product_support_io.product_id,
     module.apim_product_interop.product_id,
     module.apim_product_interop_coll.product_id,
+    module.apim_product_interop_atst.product_id,
     module.apim_product_pn.product_id,
     module.apim_product_pn_svil.product_id,
     module.apim_product_pn_dev.product_id,
@@ -1036,6 +1037,23 @@ module "apim_product_interop_coll" {
   approval_required     = false
 
   policy_xml = file("./api_product/interop-coll/policy.xml")
+}
+
+module "apim_product_interop_atst" {
+  source = "github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.50.1"
+
+  product_id   = "interop-atst"
+  display_name = "INTEROP ATTESTAZIONE"
+  description  = "Interoperabilità Attestazione"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop-atst/policy.xml")
 }
 
 module "apim_product_pn" {

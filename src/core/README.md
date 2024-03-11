@@ -31,6 +31,7 @@
 | <a name="module_apim_product_fd_garantito"></a> [apim\_product\_fd\_garantito](#module\_apim\_product\_fd\_garantito) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_interop"></a> [apim\_product\_interop](#module\_apim\_product\_interop) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
+| <a name="module_apim_product_interop_atst"></a> [apim\_product\_interop\_atst](#module\_apim\_product\_interop\_atst) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_interop_coll"></a> [apim\_product\_interop\_coll](#module\_apim\_product\_interop\_coll) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_io"></a> [apim\_product\_io](#module\_apim\_product\_io) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_io_premium"></a> [apim\_product\_io\_premium](#module\_apim\_product\_io\_premium) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
