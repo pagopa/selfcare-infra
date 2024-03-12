@@ -109,7 +109,6 @@ module "monitor" {
   ]
 }
 
-
 resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding_auto" {
   name                = format("%s-external-api-onboarding-auto", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -203,7 +202,6 @@ module "apim_external_api_onboarding_io_v1" {
     }
   ]
 }
-
 
 resource "azurerm_api_management_api_version_set" "apim_user_group_ms" {
   name                = format("%s-ms-user-group-api", var.env_short)

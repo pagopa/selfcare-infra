@@ -27,7 +27,6 @@ module "aks" {
   system_node_pool_node_count_max               = var.aks_system_node_pool_node_count_max
   system_node_pool_enable_host_encryption       = var.system_node_pool_enable_host_encryption
   system_node_pool_only_critical_addons_enabled = var.aks_system_node_pool_only_critical_addons_enabled
-  user_node_pool_node_labels                    = var.user_node_pool_node_labels
 
   user_node_pool_enabled         = var.aks_user_node_pool_enabled
   user_node_pool_os_disk_type    = var.aks_user_node_pool_os_disk_type
@@ -36,6 +35,7 @@ module "aks" {
   user_node_pool_name            = local.aks_user_node_pool_node_name
   user_node_pool_node_count_min  = var.aks_user_node_pool_node_count_min
   user_node_pool_node_count_max  = var.aks_user_node_pool_node_count_max
+  user_node_pool_node_labels     = var.user_node_pool_node_labels
 
   upgrade_settings_max_surge = var.aks_upgrade_settings_max_surge
   sku_tier                   = var.aks_sku_tier

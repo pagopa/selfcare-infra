@@ -171,12 +171,6 @@ variable "aks_system_node_pool_only_critical_addons_enabled" {
   default     = true
 }
 
-variable "user_node_pool_node_labels" {
-  type        = map(string)
-  description = "(Optional) A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created."
-  default     = {}
-}
-
 variable "system_node_pool_enable_host_encryption" {
   type        = bool
   description = "(Optional) Should the nodes in the Default Node Pool have host encryption enabled? Defaults to true."
@@ -186,6 +180,12 @@ variable "system_node_pool_enable_host_encryption" {
 #
 # User Node Pool
 #
+variable "user_node_pool_node_labels" {
+  type        = map(string)
+  description = "(Optional) A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created."
+  default     = {}
+}
+
 variable "aks_user_node_pool_enabled" {
   type        = bool
   default     = false
