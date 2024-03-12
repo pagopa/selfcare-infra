@@ -109,76 +109,6 @@ module "monitor" {
   ]
 }
 
-## JWT generator ##
-resource "azurerm_api_management_api_version_set" "apim_uservice_party_process" {
-  name                = format("%s-party-prc-api", var.env_short)
-  resource_group_name = azurerm_resource_group.rg_api.name
-  api_management_name = module.apim.name
-  display_name        = "Party Process Micro Service"
-  versioning_scheme   = "Segment"
-}
-
-module "apim_uservice_party_process_v1" {
-  source              = "github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.50.1"
-  name                = format("%s-party-prc-api", local.project)
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_process.id
-
-
-  description  = "This service is the party process"
-  display_name = "Party Process Micro Service"
-  path         = "external/party-process"
-  api_version  = "v1"
-  protocols    = ["https"]
-
-  service_url = "http://${var.private_dns_name}/ms-core/v1"
-
-  content_format = "openapi"
-  content_value = templatefile("./api/party_process/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
-    basePath = "ms-core/v1"
-  })
-
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
-    API_DOMAIN                 = local.api_domain
-    KID                        = module.jwt.jwt_kid
-    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-  })
-
-  subscription_required = true
-
-  api_operation_policies = [
-    {
-      operation_id = "getUserInstitutionRelationships"
-      xml_content = templatefile("./api/party_process/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getRelationship"
-      xml_content = templatefile("./api/party_process/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getInstitution"
-      xml_content = templatefile("./api/party_process/getInstitution_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    }
-  ]
-}
-
 resource "azurerm_api_management_api_version_set" "apim_external_api_onboarding_auto" {
   name                = format("%s-external-api-onboarding-auto", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
@@ -265,104 +195,6 @@ module "apim_external_api_onboarding_io_v1" {
     {
       operation_id = "contractOnboardingUsingPOST"
       xml_content = templatefile("./api/external-api-onboarding-io/v1/contractOnboarding_op_policy.xml.tpl", {
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    }
-  ]
-}
-
-
-resource "azurerm_api_management_api_version_set" "apim_uservice_party_management" {
-  name                = format("%s-party-mgmt-api", var.env_short)
-  resource_group_name = azurerm_resource_group.rg_api.name
-  api_management_name = module.apim.name
-  display_name        = "Party Management Micro Service"
-  versioning_scheme   = "Segment"
-}
-
-module "apim_uservice_party_management_v1" {
-  source              = "github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.50.1"
-  name                = format("%s-party-mgmt-api", local.project)
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-  version_set_id      = azurerm_api_management_api_version_set.apim_uservice_party_management.id
-
-
-  description  = "This service is the party manager"
-  display_name = "Party Management Micro Service V1"
-  path         = "external/party-management"
-  api_version  = "v1"
-  protocols    = ["https"]
-
-  service_url = "http://${var.private_dns_name}/ms-core/v1"
-
-  content_format = "openapi"
-  content_value = templatefile("./api/party_management/v1/open-api.yml.tpl", {
-    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
-    basePath = "ms-core/v1"
-  })
-
-  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
-    API_DOMAIN                 = local.api_domain
-    KID                        = module.jwt.jwt_kid
-    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-  })
-
-  subscription_required = true
-
-  api_operation_policies = [
-    {
-      operation_id = "getInstitutionById"
-      # xml_content  = file("./api/jwt_auth_op_policy.xml")
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getPartyAttributes"
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getInstitutionByExternalId"
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getRelationships"
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "getRelationshipById"
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
-        API_DOMAIN                 = local.api_domain
-        KID                        = module.jwt.jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      })
-    },
-    {
-      operation_id = "bulkInstitutions"
-      xml_content = templatefile("./api/party_management/v1/party_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${module.checkout_cdn.storage_primary_web_host}"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -534,6 +366,7 @@ module "apim_external_api_ms_v2" {
     module.apim_product_support_io.product_id,
     module.apim_product_interop.product_id,
     module.apim_product_interop_coll.product_id,
+    module.apim_product_interop_atst.product_id,
     module.apim_product_pn.product_id,
     module.apim_product_pn_svil.product_id,
     module.apim_product_pn_dev.product_id,
@@ -827,6 +660,12 @@ module "apim_internal_api_ms_v1" {
         MS_ONBOARDING_BACKEND_BASE_URL = "https://${var.private_onboarding_dns_name}/v1/"
         }
       )
+    },
+    {
+      operation_id = "updateCreatedAtUsingPUT"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+      })
     }
   ]
 }
@@ -1202,6 +1041,23 @@ module "apim_product_interop_coll" {
   approval_required     = false
 
   policy_xml = file("./api_product/interop-coll/policy.xml")
+}
+
+module "apim_product_interop_atst" {
+  source = "github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v7.50.1"
+
+  product_id   = "interop-atst"
+  display_name = "INTEROP ATTESTAZIONE"
+  description  = "Interoperabilità Attestazione"
+
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+
+  published             = true
+  subscription_required = true
+  approval_required     = false
+
+  policy_xml = file("./api_product/interop-atst/policy.xml")
 }
 
 module "apim_product_pn" {
