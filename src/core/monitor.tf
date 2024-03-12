@@ -162,20 +162,6 @@ resource "azurerm_monitor_action_group" "slack" {
   tags = var.tags
 }
 
-#FIXME: should this be deleted?
-resource "azurerm_monitor_action_group" "opsgenie" {
-  name                = "Opsgenie"
-  resource_group_name = azurerm_resource_group.monitor_rg.name
-  short_name          = "Opsgenie"
-
-  email_receiver {
-    name                    = "sendtoopsgenie"
-    email_address           = data.azurerm_key_vault_secret.monitor_notification_opsgenie.value
-    use_common_alert_schema = true
-  }
-
-  tags = var.tags
-}
 #
 # Web Test
 #

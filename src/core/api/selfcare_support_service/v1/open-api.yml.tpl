@@ -324,6 +324,22 @@ paths:
             enum:
               - FULL
               - NORMAL
+        - name: page
+          in: query
+          description: page
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: size
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
       responses:
         '200':
           description: OK
