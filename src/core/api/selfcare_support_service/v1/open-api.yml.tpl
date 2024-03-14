@@ -340,6 +340,13 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: search
+          in: query
+          description: Description institution
+          required: false
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
