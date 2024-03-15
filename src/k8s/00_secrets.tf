@@ -21,7 +21,6 @@ module "key_vault_secrets_query" {
     "agid-spid-cert",
     "agid-spid-private-key",
     "mongodb-connection-string",
-    "postgres-party-user-password",
     "smtp-usr",
     "smtp-psw",
     "smtp-not-pec-usr",
@@ -65,6 +64,7 @@ module "key_vault_secrets_query" {
     "prod-fd-client-secret",
     "prod-fd-grant-type",
     "anac-ftp-password",
-    "anac-ftp-known-host"
+    "anac-ftp-known-host",
+    "blob-storage-product-connection-string"
   ]
 }

@@ -15,8 +15,8 @@ resource "kubernetes_config_map" "inner-service-url" {
     MS_EXTERNAL_INTERCEPTOR_URL       = "http://ms-external-interceptor:8080"
     MS_USER_GROUP_URL                 = "http://ms-user-group:8080"
     EXTERNAL_API_BACKEND_URL          = "http://external-api:8080"
-    USERVICE_PARTY_PROCESS_URL        = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-process:8088/party-process/%s", var.api-version_uservice-party-process)
-    USERVICE_PARTY_MANAGEMENT_URL     = (var.env != "x") ? "http://ms-core:8080" : format("http://interop-be-party-management:8088/party-management/%s", var.api-version_uservice-party-management)
+    USERVICE_PARTY_PROCESS_URL        = "http://ms-core:8080"
+    USERVICE_PARTY_MANAGEMENT_URL     = "http://ms-core:8080"
     USERVICE_PARTY_REGISTRY_PROXY_URL = "http://ms-party-registry-proxy:8080"
     MOCK_SERVER                       = "http://mock-server:1080"
   }

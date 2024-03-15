@@ -131,25 +131,6 @@ law_daily_quota_gb    = 2
 cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
 
-# postgres
-postgres_sku_name       = "GP_Gen5_2"
-postgres_enable_replica = false
-postgres_configuration = {
-  autovacuum_work_mem         = "-1"
-  effective_cache_size        = "655360"
-  log_autovacuum_min_duration = "5000"
-  log_connections             = "off"
-  log_line_prefix             = "%t [%p apps:%a host:%r]: [%l-1] db=%d,user=%u"
-  log_temp_files              = "4096"
-  maintenance_work_mem        = "524288"
-  max_wal_size                = "4096"
-  log_connections             = "on"
-  log_checkpoints             = "on"
-  connection_throttling       = "on"
-}
-postgres_private_endpoint_enabled = false
-postgres_alerts_enabled           = false
-
 # spid-testenv
 enable_spid_test = true
 

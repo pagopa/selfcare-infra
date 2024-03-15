@@ -85,30 +85,6 @@ resource "kubernetes_secret" "mongo-credentials" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "postgres" {
-  metadata {
-    name      = "postgres"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    #principal database name
-    POSTGRES_DB = "selc"
-    #principal database hostname or ip
-    POSTGRES_HOST = local.postgres_hostname
-    #principal database hostname or ip
-    POSTGRES_PORT = "5432"
-    #replica database name
-    POSTGRES_REPLICA_DB = "selc"
-    #replica database hostname or ip
-    POSTGRES_REPLICA_HOST = local.postgres_replica_hostname
-    #replica database hostname or ip
-    POSTGRES_REPLICA_PORT = "5432"
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "mail" {
   metadata {
     name      = "mail"
@@ -252,20 +228,6 @@ resource "kubernetes_secret" "social-login" {
   type = "Opaque"
 }
 
-resource "kubernetes_secret" "uservice-party-management" {
-  metadata {
-    name      = "uservice-party-management"
-    namespace = kubernetes_namespace.selc.metadata[0].name
-  }
-
-  data = {
-    POSTGRES_USR = format("%s@%s", "PARTY_USER", local.postgres_hostname)
-    POSTGRES_PSW = module.key_vault_secrets_query.values["postgres-party-user-password"].value
-  }
-
-  type = "Opaque"
-}
-
 resource "kubernetes_secret" "common-secrets" {
   metadata {
     name      = "common-secrets"
@@ -274,6 +236,8 @@ resource "kubernetes_secret" "common-secrets" {
 
   data = {
     USERVICE_USER_REGISTRY_API_KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
+    # can be remove after mmigration of onboarding-backend to container apps
+    USER-REGISTRY-API-KEY = module.key_vault_secrets_query.values["user-registry-api-key"].value
   }
 
   type = "Opaque"
@@ -298,6 +262,7 @@ resource "kubernetes_secret" "event-secrets" {
 
   type = "Opaque"
 }
+
 
 resource "kubernetes_secret" "onboarding-interceptor-event-secrets" {
   metadata {
@@ -458,6 +423,19 @@ resource "kubernetes_secret" "support-secrets" {
 
   data = {
     SUPPORT_API_KEY = module.key_vault_secrets_query.values["zendesk-support-api-key"].value
+  }
+
+  type = "Opaque"
+}
+
+resource "kubernetes_secret" "product-storage" {
+  metadata {
+    name      = "product-storage"
+    namespace = kubernetes_namespace.selc.metadata[0].name
+  }
+
+  data = {
+    BLOB-STORAGE-PRODUCT-CONNECTION-STRING = module.key_vault_secrets_query.values["blob-storage-product-connection-string"].value
   }
 
   type = "Opaque"
