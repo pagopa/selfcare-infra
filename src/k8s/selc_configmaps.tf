@@ -200,7 +200,7 @@ resource "kubernetes_config_map" "selfcare-core" {
     MAIL_TEMPLATE_COMPLETE_PATH                        = "contracts/template/mail/onboarding-complete/1.0.0.json"
     MAIL_TEMPLATE_NOTIFICATION_PATH                    = "contracts/template/mail/onboarding-notification/1.0.0.json"
     MAIL_TEMPLATE_AUTOCOMPLETE_PATH                    = "contracts/template/mail/import-massivo-io/1.0.0.json"
-    MAIL_TEMPLATE_REJECT_PATH                          = "contracts/template/mail/onboarding-refused/1.0.0.json"
+    MAIL_TEMPLATE_REJECT_PATH                          = "contracts/template/mail/onboarding-refused/1.0.1.json"
     MAIL_TEMPLATE_DELEGATION_NOTIFICATION_PATH         = "contracts/template/mail/delegation-notification/1.0.0.json"
     MAIL_TEMPLATE_DELEGATION_USER_NOTIFICATION_PATH    = "contracts/template/mail/delegation-notification/user-1.0.0.json"
     MAIL_TEMPLATE_FD_COMPLETE_NOTIFICATION_PATH        = "contracts/template/mail/onboarding-complete-fd/1.0.0.json"
