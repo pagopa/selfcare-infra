@@ -156,6 +156,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
+        bff_api = {
+          paths                 = ["/dashboard/*","/onboarding/*","/party-registry-proxy/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
       }
     }
   }
