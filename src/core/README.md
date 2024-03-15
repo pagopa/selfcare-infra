@@ -420,7 +420,7 @@
 | <a name="input_logs_enable_versioning"></a> [logs\_enable\_versioning](#input\_logs\_enable\_versioning) | Enable logs versioning | `bool` | `false` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
 | <a name="input_private_dns_name"></a> [private\_dns\_name](#input\_private\_dns\_name) | AKS private DNS record | `string` | n/a | yes |
-| <a name="input_private_onboarding_dns_name"></a> [private\_onboarding\_dns\_name](#input\_private\_onboarding\_dns\_name) | AKS private onboarding DNS record | `string` | n/a | yes |
+| <a name="input_ca_suffix_dns_private_name"></a> [private\_onboarding\_dns\_name](#input\_private\_onboarding\_dns\_name) | AKS private onboarding DNS record | `string` | n/a | yes |
 | <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Enable or Disable public access. It should always set to false unless there are special needs | `bool` | n/a | yes |
 | <a name="input_redis_capacity"></a> [redis\_capacity](#input\_redis\_capacity) | # Redis cache | `number` | `1` | no |
 | <a name="input_redis_family"></a> [redis\_family](#input\_redis\_family) | n/a | `string` | `"C"` | no |
@@ -459,7 +459,7 @@
 | <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name) | n/a |
 | <a name="output_key_vault_uri"></a> [key\_vault\_uri](#output\_key\_vault\_uri) | # key vault ## |
 | <a name="output_private_dns_name"></a> [private\_dns\_name](#output\_private\_dns\_name) | n/a |
-| <a name="output_private_onboarding_dns_name"></a> [private\_onboarding\_dns\_name](#output\_private\_onboarding\_dns\_name) | n/a |
+| <a name="output_ca_suffix_dns_private_name"></a> [private\_onboarding\_dns\_name](#output\_private\_onboarding\_dns\_name) | n/a |
 | <a name="output_redis_hostname"></a> [redis\_hostname](#output\_redis\_hostname) | n/a |
 | <a name="output_redis_port"></a> [redis\_port](#output\_redis\_port) | n/a |
 | <a name="output_redis_primary_access_key"></a> [redis\_primary\_access\_key](#output\_redis\_primary\_access\_key) | # Redis cache |

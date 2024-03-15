@@ -140,7 +140,7 @@ module "apim_external_api_onboarding_auto_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-auto/v1/open-api.yml.tpl", {
@@ -179,7 +179,7 @@ module "apim_external_api_onboarding_io_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v2/", var.private_dns_name)
+  service_url = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
 
   content_format = "openapi"
   content_value = templatefile("./api/external-api-onboarding-io/v1/open-api.yml.tpl", {
@@ -227,7 +227,7 @@ module "apim_user_group_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/ms-user-group/user-groups/v1/", var.private_dns_name)
+  service_url = "https://selc-${var.env_short}-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_user_group/v1/open-api.yml.tpl", {
@@ -275,7 +275,7 @@ module "apim_external_api_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v1/open-api.yml.tpl", {
@@ -313,14 +313,14 @@ module "apim_external_api_ms_v1" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v1/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "https://selc-${var.env_short}-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
       })
     },
     {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${module.checkout_cdn.storage_primary_web_host}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
       })
     },
     {
@@ -351,7 +351,7 @@ module "apim_external_api_ms_v2" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_external_api/v2/open-api.yml.tpl", {
@@ -429,7 +429,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "https://selc-${var.env_short}-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
         TENANT_ID                   = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -446,7 +446,7 @@ module "apim_external_api_ms_v2" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitution_op_policy.xml.tpl", {
         LOGO_URL                       = "https://${local.logo_api_domain}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -475,7 +475,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getContractUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getContractUsingGet_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/external-api/v2/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -486,7 +486,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "messageAcknowledgmentUsingPOST"
       xml_content = templatefile("./api/ms_external_api/v2/messageAcknowledgment_op_policy.xml.tpl", {
-        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-external-interceptor/v1"
+        MS_EXTERNAL_INTERCEPTOR_BACKEND_BASE_URL = "https://selc-${var.env_short}-ext-interceptor-ca.${var.ca_suffix_dns_private_name}/v1"
         TENANT_ID                                = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER                   = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -494,7 +494,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getDelegationsUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getDelegationsUsingGET_op_policy.xml.tpl", {
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -505,7 +505,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getOnboardingsInstitutionUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getOnboardingsInstitutionUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -516,7 +516,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getInstitutionsByTaxCodeUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -527,7 +527,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserInfoUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getUserInfoUsingGet_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL   = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL   = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -541,7 +541,7 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/dashboard/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-dashboard-backend-ca.${var.ca_suffix_dns_private_name}/v1/"
         TENANT_ID                  = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER     = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -580,7 +580,7 @@ module "apim_internal_api_ms_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/ms_internal_api/v1/open-api.yml.tpl", {
@@ -605,7 +605,7 @@ module "apim_internal_api_ms_v1" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/ms_internal_api/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL             = "https://${module.checkout_cdn.storage_primary_web_host}"
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
       })
     },
     {
@@ -615,7 +615,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "onboardingUsingPOST"
       xml_content = templatefile("./api/ms_internal_api/v1/external_op_policy.xml.tpl", {
-        MS_EXTERNAL_BACKEND_BASE_URL = "http://${var.private_dns_name}/external-api/v2/"
+        MS_EXTERNAL_BACKEND_BASE_URL = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
       })
     },
     {
@@ -627,13 +627,13 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "createDelegationUsingPOST"
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
       })
     },
     {
       operation_id = "updateUserStatusUsingPUT"
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
       })
     },
     {
@@ -650,21 +650,21 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "completeOnboardingTokenConsume"
       xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
-        MS_ONBOARDING_BACKEND_BASE_URL = "https://${var.private_onboarding_dns_name}/v1/"
+        MS_ONBOARDING_BACKEND_BASE_URL = "https://selc-${var.env_short}-onboarding-ms-ca.${var.ca_suffix_dns_private_name}/v1/"
         }
       )
     },
     {
       operation_id = "completeOnboardingUsingPUT"
       xml_content = templatefile("./api/ms_internal_api/v1/onboarding_op_policy.xml.tpl", {
-        MS_ONBOARDING_BACKEND_BASE_URL = "https://${var.private_onboarding_dns_name}/v1/"
+        MS_ONBOARDING_BACKEND_BASE_URL = "https://selc-${var.env_short}-onboarding-ms-ca.${var.ca_suffix_dns_private_name}/v1/"
         }
       )
     },
     {
       operation_id = "updateCreatedAtUsingPUT"
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
-        MS_CORE_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-core/v1/"
+        MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
       })
     }
   ]
@@ -693,7 +693,7 @@ module "apim_selfcare_support_service_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/selfcare_support_service/v1/open-api.yml.tpl", {
@@ -713,7 +713,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getContractUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/external-api/v2/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -722,7 +722,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getInstitutionsByTaxCodeUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/getInstitutionsByTaxCodeUsingGET_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -731,7 +731,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "https://selc-${var.env_short}-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
         API_DOMAIN                  = local.api_domain
         KID                         = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT  = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -748,7 +748,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getUserInfoUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -757,7 +757,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getInstitutionUsersUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -766,7 +766,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getDelegationsUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -775,7 +775,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -784,7 +784,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getUsersUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -793,7 +793,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "completeOnboardingTokenConsume"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "https://${var.private_onboarding_dns_name}/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-onboarding-ms-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -803,7 +803,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "getAllTokensUsingGET"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "http://${var.private_dns_name}/ms-core/v1/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
@@ -835,7 +835,7 @@ module "apim_party_registry_proxy_v1" {
   api_version  = "v1"
   protocols    = ["https"]
 
-  service_url = "http://${var.private_dns_name}/party-registry-proxy"
+  service_url = "https://selc-${var.env_short}-party-reg-proxy-ca.${var.ca_suffix_dns_private_name}"
 
   content_format = "openapi"
   content_value = templatefile("./api/party_registry_proxy/v1/open-api.yml.tpl", {
@@ -918,7 +918,7 @@ module "apim_notification_event_api_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/ms-core/v1/", var.private_dns_name)
+  service_url = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/v1/"
 
   content_format = "openapi"
   content_value = templatefile("./api/notification_event_api/v1/open-api.yml.tpl", {
@@ -976,7 +976,7 @@ module "apim_external_api_contract_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.private_dns_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external_api_contract/v1/open-api.yml.tpl", {
