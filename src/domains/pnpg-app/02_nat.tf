@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "nat_rg" {
   tags     = var.tags
 }
 
-resource "azurerm_public_ip" "functions_pip_outbound" {
+resource "azurerm_public_ip" "functions_pip_outboud" {
   name                = "${local.app_name_fn}-pip-outbound"
   resource_group_name = azurerm_resource_group.nat_rg.name
   location            = azurerm_resource_group.nat_rg.location
