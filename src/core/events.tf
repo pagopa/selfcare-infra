@@ -79,6 +79,16 @@ resource "azurerm_key_vault_secret" "event_hub_keys" {
   key_vault_id = module.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "event_hub_keys-lc" {
+  for_each = module.event_hub.key_ids
+
+  name         = "eventhub-${lower(replace(each.key, ".", "-"))}-key-lc"
+  value        = module.event_hub.keys[each.key].primary_key
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}
+
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "event_hub_connection_strings" {
   for_each = module.event_hub.key_ids
