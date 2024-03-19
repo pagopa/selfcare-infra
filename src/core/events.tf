@@ -79,7 +79,7 @@ resource "azurerm_key_vault_secret" "event_hub_keys" {
   key_vault_id = module.key_vault.id
 }
 
-resource "azurerm_key_vault_secret" "event_hub_keys-lc" {
+resource "azurerm_key_vault_secret" "event_hub_keys_lc" {
   for_each = module.event_hub.key_ids
 
   name         = "eventhub-${lower(replace(each.key, ".", "-"))}-key-lc"
