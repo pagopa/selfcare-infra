@@ -167,6 +167,11 @@ variable "ingress_load_balancer_hostname" {
   type = string
 }
 
+variable "ca_suffix_dns_private_name" {
+  type        = string
+  description = "CA suffix private DNS record"
+}
+
 variable "reverse_proxy_ip" {
   type        = string
   default     = "127.0.0.1"

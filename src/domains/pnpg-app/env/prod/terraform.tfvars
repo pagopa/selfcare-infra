@@ -28,6 +28,7 @@ aks_resource_group_name = "selc-p-weu-prod01-aks-rg"
 
 ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "prod01.pnpg.internal.selfcare.pagopa.it"
+ca_suffix_dns_private_name     = "bluedune-cc0f8752.westeurope.azurecontainerapps.io"
 reverse_proxy_be_io            = "10.1.0.250"
 
 #
