@@ -286,11 +286,22 @@ eventhub_ip_rules = [
     ip_mask = "18.192.110.102",
     action  = "Allow"
   },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.193.152.144",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "52.29.238.249",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.153.188.40",
+    action  = "Allow"
+  },
   { //PROD-FD
     ip_mask = "193.203.230.20",
     action  = "Allow"
   }
-
 ]
 
 eventhubs = [{
