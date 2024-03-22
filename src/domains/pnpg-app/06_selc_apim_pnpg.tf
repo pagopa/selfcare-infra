@@ -184,9 +184,9 @@ module "apim_external_api_ms_v2" {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-product/v1/"
-        API_DOMAIN                     = local.api_domain
-        KID                            = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
-        JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+        API_DOMAIN                  = local.api_domain
+        KID                         = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT  = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     }
   ]
