@@ -461,6 +461,9 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v2/getProduct_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
         TENANT_ID                   = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
@@ -1308,20 +1311,6 @@ module "apim_product_fd_garantito" {
 ##################
 ## Named values ##
 ##################
-
-resource "azurerm_api_management_named_value" "apim_named_value_backend_access_token" {
-
-  name                = "backend-access-token"
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-
-  display_name = "backend-access-token"
-  secret       = true
-  value_from_key_vault {
-    secret_id = data.azurerm_key_vault_secret.apim_backend_access_token.id
-  }
-
-}
 
 data "azurerm_key_vault_secret" "apim_backend_access_token" {
   name         = "apim-backend-access-token"
