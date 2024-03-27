@@ -134,7 +134,7 @@ resource "kubernetes_config_map" "interop-be-party-process" {
 
   data = merge({
     APPLICATIONINSIGHTS_ROLE_NAME : "interop-be-party-process"
-    MAIL_TEMPLATE_PATH : "contracts/template/mail/1.0.0.json"
+    MAIL_TEMPLATE_PATH : "contracts/template/mail/onboarding-request/1.0.1.json"
     MAIL_TEMPLATE_COMPLETE_PATH : "contracts/template/mail/onboarding-complete/1.0.0.json"
     MAIL_TEMPLATE_NOTIFICATION_PATH : "contracts/template/mail/onboarding-notification/1.0.0.json"
     MAIL_TEMPLATE_REJECT_PATH : "contracts/template/mail/onboarding-refused/1.0.0.json"
