@@ -11,11 +11,11 @@
                         </claim>
                     </required-claims>
                 </validate-jwt>
-                <set-header name="Authorization" exists-action="override">
-                    <value>Bearer {{backend-access-token}}</value>
-                </set-header>
             </when>
         </choose>
+        <set-header name="Authorization" exists-action="override">
+            <value>@((string)context.Variables["jwt"])</value>
+        </set-header>
         <set-backend-service base-url="${MS_PRODUCT_BACKEND_BASE_URL}" />
         <rewrite-uri template="@("/products/" + (string)context.Variables["productId"])" />
     </inbound>
