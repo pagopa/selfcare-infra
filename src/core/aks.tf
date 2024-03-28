@@ -9,7 +9,7 @@ module "aks" {
 
   depends_on = [
     module.k8s_snet,
-    azurerm_public_ip.aks_outbound,
+    azurerm_public_ip.aks_outbound_temp,
   ]
 
   name                       = "${local.project}-aks"
@@ -78,7 +78,7 @@ module "aks" {
   ]
 
   alerts_enabled                                = var.aks_alerts_enabled
-  outbound_ip_address_ids                       = azurerm_public_ip.aks_outbound.*.id
+  outbound_ip_address_ids                       = azurerm_public_ip.aks_outbound_temp.*.id
   addon_azure_policy_enabled                    = true
   microsoft_defender_log_analytics_workspace_id = var.env_short == "p" ? azurerm_log_analytics_workspace.log_analytics_workspace.id : null
   tags                                          = var.tags
@@ -104,6 +104,24 @@ resource "azurerm_public_ip" "aks_outbound" {
   count = var.aks_num_outbound_ips
 
   name                = format("%s-aksoutbound-pip-%02d", local.project, count.index + 1)
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  location            = azurerm_resource_group.rg_vnet.location
+  sku                 = "Standard"
+  allocation_method   = "Static"
+
+  zones = [
+    "1",
+    "2",
+    "3",
+  ]
+
+  tags = var.tags
+}
+
+resource "azurerm_public_ip" "aks_outbound_temp" {
+  count = var.aks_num_outbound_ips
+
+  name                = format("%s-aksoutbound-pip-temp-%02d", local.project, count.index + 1)
   resource_group_name = azurerm_resource_group.rg_vnet.name
   location            = azurerm_resource_group.rg_vnet.location
   sku                 = "Standard"
