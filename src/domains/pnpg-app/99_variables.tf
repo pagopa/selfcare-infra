@@ -2,6 +2,8 @@ locals {
   product = "${var.prefix}-${var.env_short}"
   project = "${var.prefix}-${var.env_short}-${var.location_short}-${var.domain}"
 
+  app_name_fn = "${local.product}-pnpg-onboarding-fn"
+
   key_vault_name           = "${local.product}-${var.domain}-kv"
   key_vault_resource_group = "${local.product}-${var.domain}-sec-rg"
 
