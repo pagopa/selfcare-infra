@@ -900,7 +900,7 @@ module "apim_external_api_contract_v1" {
     "https"
   ]
 
-  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v2/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external_api_contract/v1/open-api.yml.tpl", {
