@@ -326,7 +326,7 @@ module "apim_external_api_ms_v1" {
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_external_api/v1/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "https://selc-${var.env_short}-product-ca.${var.ca_suffix_dns_private_name}/"
       })
     },
     {
@@ -464,7 +464,7 @@ module "apim_external_api_ms_v2" {
         API_DOMAIN                  = local.api_domain
         KID                         = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT  = azurerm_api_management_certificate.jwt_certificate.thumbprint
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "https://selc-${var.env_short}-product-ca.${var.ca_suffix_dns_private_name}/"
         TENANT_ID                   = data.azurerm_client_config.current.tenant_id
         EXTERNAL-OAUTH2-ISSUER      = data.azurerm_key_vault_secret.external-oauth2-issuer.value
       })
@@ -628,7 +628,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/ms_internal_api/v1/getProduct_op_policy.xml.tpl", {
-        MS_PRODUCT_BACKEND_BASE_URL = "http://${var.private_dns_name}/ms-product/v1/"
+        MS_PRODUCT_BACKEND_BASE_URL = "https://selc-${var.env_short}-product-ca.${var.ca_suffix_dns_private_name}/"
       })
     },
     {
