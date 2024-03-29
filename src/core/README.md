@@ -26,7 +26,6 @@
 | <a name="module_apim_external_api_onboarding_io_v1"></a> [apim\_external\_api\_onboarding\_io\_v1](#module\_apim\_external\_api\_onboarding\_io\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_internal_api_ms_v1"></a> [apim\_internal\_api\_ms\_v1](#module\_apim\_internal\_api\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_notification_event_api_v1"></a> [apim\_notification\_event\_api\_v1](#module\_apim\_notification\_event\_api\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.62.0 |
-| <a name="module_apim_party_registry_proxy_v1"></a> [apim\_party\_registry\_proxy\_v1](#module\_apim\_party\_registry\_proxy\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_product_fd"></a> [apim\_product\_fd](#module\_apim\_product\_fd) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_fd_garantito"></a> [apim\_product\_fd\_garantito](#module\_apim\_product\_fd\_garantito) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
 | <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
@@ -113,12 +112,10 @@
 | [azurerm_api_management_api_version_set.apim_external_api_onboarding_io](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_internal_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_notification_event_api](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_party_registry_proxy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_selfcare_support_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_user_group_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_certificate.jwt_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_certificate) | resource |
 | [azurerm_api_management_custom_domain.api_custom_domain](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_custom_domain) | resource |
-| [azurerm_api_management_named_value.apim_named_value_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_named_value) | resource |
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_container_group.load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group) | resource |
 | [azurerm_cosmosdb_mongo_database.selc_ms_core](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_mongo_database) | resource |
@@ -343,6 +340,7 @@
 | <a name="input_azdo_agent_vm_sku"></a> [azdo\_agent\_vm\_sku](#input\_azdo\_agent\_vm\_sku) | sku of the azdo agent vm | `string` | `"Standard_B1s"` | no |
 | <a name="input_azdo_sp_tls_cert_enabled"></a> [azdo\_sp\_tls\_cert\_enabled](#input\_azdo\_sp\_tls\_cert\_enabled) | Enable Azure DevOps connection for TLS cert management | `string` | `false` | no |
 | <a name="input_azuread_service_principal_azure_cdn_frontdoor_id"></a> [azuread\_service\_principal\_azure\_cdn\_frontdoor\_id](#input\_azuread\_service\_principal\_azure\_cdn\_frontdoor\_id) | Azure CDN Front Door Principal ID | `string` | `"f3b3f72f-4770-47a5-8c1e-aa298003be12"` | no |
+| <a name="input_ca_suffix_dns_private_name"></a> [ca\_suffix\_dns\_private\_name](#input\_ca\_suffix\_dns\_private\_name) | CA suffix private DNS record | `string` | n/a | yes |
 | <a name="input_cae_zone_redundant"></a> [cae\_zone\_redundant](#input\_cae\_zone\_redundant) | Container App Environment zone redudancy | `bool` | n/a | yes |
 | <a name="input_cae_zone_redundant_pnpg"></a> [cae\_zone\_redundant\_pnpg](#input\_cae\_zone\_redundant\_pnpg) | Container App Environment zone redudancy | `bool` | n/a | yes |
 | <a name="input_checkout_advanced_threat_protection_enabled"></a> [checkout\_advanced\_threat\_protection\_enabled](#input\_checkout\_advanced\_threat\_protection\_enabled) | Enable checkout threat advanced protection | `string` | `false` | no |
@@ -420,7 +418,6 @@
 | <a name="input_logs_enable_versioning"></a> [logs\_enable\_versioning](#input\_logs\_enable\_versioning) | Enable logs versioning | `bool` | `false` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
 | <a name="input_private_dns_name"></a> [private\_dns\_name](#input\_private\_dns\_name) | AKS private DNS record | `string` | n/a | yes |
-| <a name="input_private_onboarding_dns_name"></a> [private\_onboarding\_dns\_name](#input\_private\_onboarding\_dns\_name) | AKS private onboarding DNS record | `string` | n/a | yes |
 | <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Enable or Disable public access. It should always set to false unless there are special needs | `bool` | n/a | yes |
 | <a name="input_redis_capacity"></a> [redis\_capacity](#input\_redis\_capacity) | # Redis cache | `number` | `1` | no |
 | <a name="input_redis_family"></a> [redis\_family](#input\_redis\_family) | n/a | `string` | `"C"` | no |
@@ -448,6 +445,7 @@
 | <a name="output_api_fqdn"></a> [api\_fqdn](#output\_api\_fqdn) | n/a |
 | <a name="output_app_gateway_fqdn"></a> [app\_gateway\_fqdn](#output\_app\_gateway\_fqdn) | n/a |
 | <a name="output_app_gateway_public_ip"></a> [app\_gateway\_public\_ip](#output\_app\_gateway\_public\_ip) | # Application gateway. |
+| <a name="output_ca_suffix_dns_private_name"></a> [ca\_suffix\_dns\_private\_name](#output\_ca\_suffix\_dns\_private\_name) | n/a |
 | <a name="output_container_registry_admin_password"></a> [container\_registry\_admin\_password](#output\_container\_registry\_admin\_password) | n/a |
 | <a name="output_container_registry_admin_username"></a> [container\_registry\_admin\_username](#output\_container\_registry\_admin\_username) | n/a |
 | <a name="output_container_registry_login_server"></a> [container\_registry\_login\_server](#output\_container\_registry\_login\_server) | # Container registry ## |
@@ -459,7 +457,6 @@
 | <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name) | n/a |
 | <a name="output_key_vault_uri"></a> [key\_vault\_uri](#output\_key\_vault\_uri) | # key vault ## |
 | <a name="output_private_dns_name"></a> [private\_dns\_name](#output\_private\_dns\_name) | n/a |
-| <a name="output_private_onboarding_dns_name"></a> [private\_onboarding\_dns\_name](#output\_private\_onboarding\_dns\_name) | n/a |
 | <a name="output_redis_hostname"></a> [redis\_hostname](#output\_redis\_hostname) | n/a |
 | <a name="output_redis_port"></a> [redis\_port](#output\_redis\_port) | n/a |
 | <a name="output_redis_primary_access_key"></a> [redis\_primary\_access\_key](#output\_redis\_primary\_access\_key) | # Redis cache |

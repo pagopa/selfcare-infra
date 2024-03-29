@@ -26,6 +26,7 @@ locals {
     "/spid/*",
     "/spid-login/*",
     "/dashboard/*",
+    "^/imprese/onboarding/v\\d+/.*$",
     "^/onboarding/v\\d+/.*$",
     "/ms-notification-manager/*",
     "/party-registry-proxy/*",
@@ -128,14 +129,7 @@ module "app_gw" {
   listeners = local.listeners
 
   # maps listener to backend
-  routes = {
-    api-pnpg-to-platform-aks = {
-      listener              = "api-pnpg"
-      backend               = "platform-aks"
-      rewrite_rule_set_name = null
-      priority              = 20
-    }
-  }
+  routes = {}
 
   routes_path_based = {
     api = {
@@ -143,6 +137,12 @@ module "app_gw" {
       priority     = null
       url_map_name = "api"
       priority     = 10
+    }
+    api-pnpg = {
+      listener     = "api-pnpg"
+      priority     = null
+      url_map_name = "api-pnpg"
+      priority     = 20
     }
   }
 
@@ -153,6 +153,22 @@ module "app_gw" {
       path_rule = {
         external_api = {
           paths                 = ["/external/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
+        bff_api = {
+          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
+      }
+    }
+    api-pnpg = {
+      default_backend               = "platform-aks"
+      default_rewrite_rule_set_name = "rewrite-rule-set-api"
+      path_rule = {
+        bff_pnpg_api = {
+          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*"]
           backend               = "apim"
           rewrite_rule_set_name = null
         }
