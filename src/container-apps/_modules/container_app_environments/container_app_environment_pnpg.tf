@@ -5,8 +5,8 @@ resource "azurerm_container_app_environment" "cae_pnpg" {
 
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
 
-  infrastructure_subnet_id       = var.subnet_id
-  zone_redundancy_enabled        = var.subnet_id == null ? null : var.zone_redundant
+  infrastructure_subnet_id       = var.pnpg_subnet_id
+  zone_redundancy_enabled        = var.pnpg_subnet_id == null ? null : var.zone_redundant
   internal_load_balancer_enabled = true
 
   workload_profile {
