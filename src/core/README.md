@@ -80,10 +80,8 @@
 | <a name="module_secrets_selfcare_status_dev"></a> [secrets\_selfcare\_status\_dev](#module\_secrets\_selfcare\_status\_dev) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_secrets_selfcare_status_uat"></a> [secrets\_selfcare\_status\_uat](#module\_secrets\_selfcare\_status\_uat) | github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v7.50.1 |
 | <a name="module_selc-contracts-storage"></a> [selc-contracts-storage](#module\_selc-contracts-storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
-| <a name="module_selc_cae"></a> [selc\_cae](#module\_selc\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment_v2 | v7.50.1 |
 | <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | github.com/pagopa/terraform-azurerm-v3.git//storage_account | v7.50.1 |
 | <a name="module_selc_ms_core_collections"></a> [selc\_ms\_core\_collections](#module\_selc\_ms\_core\_collections) | github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v7.50.1 |
-| <a name="module_selc_pnpg_cae"></a> [selc\_pnpg\_cae](#module\_selc\_pnpg\_cae) | github.com/pagopa/terraform-azurerm-v3.git//container_app_environment_v2 | v7.50.1 |
 | <a name="module_spid-test-env"></a> [spid-test-env](#module\_spid-test-env) | ./modules/spid_testenv | n/a |
 | <a name="module_spid_logs_encryption_keys"></a> [spid\_logs\_encryption\_keys](#module\_spid\_logs\_encryption\_keys) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_vnet"></a> [vnet](#module\_vnet) | github.com/pagopa/terraform-azurerm-v3.git//virtual_network | v7.50.1 |
@@ -158,6 +156,7 @@
 | [azurerm_key_vault_secret.event_hub_connection_strings](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.event_hub_connection_strings_lc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.event_hub_keys](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.event_hub_keys_lc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_id](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_secret](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_issuer_identifier_uri](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
@@ -172,8 +171,6 @@
 | [azurerm_key_vault_secret.selc_web_storage_blob_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.selc_web_storage_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_log_analytics_workspace.log_analytics_workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
-| [azurerm_management_lock.lock_selc_cae](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
-| [azurerm_management_lock.lock_selc_pnpg_cae](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
 | [azurerm_management_lock.management_lock](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
 | [azurerm_management_lock.mongodb_selc_ms_core](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
 | [azurerm_management_lock.mongodb_selc_product](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
@@ -185,9 +182,6 @@
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_metric_alert.functions_exceptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_network_profile.network_profile_load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_profile) | resource |
-| [azurerm_network_security_group.selc_pnpg_subnet_nsg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
-| [azurerm_network_security_rule.selc_pnpg_cae_subnet_inbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
-| [azurerm_network_security_rule.selc_pnpg_cae_subnet_outbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
 | [azurerm_private_dns_a_record.selc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_zone.internal_private_dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_zone) | resource |
 | [azurerm_private_dns_zone.private_azurecontainerapps_io](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_zone) | resource |
@@ -246,9 +240,6 @@
 | [azurerm_role_assignment.external_oauth2_issuer_apim_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_storage_container.selc-contracts-container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_storage_container.selc_logs_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
-| [azurerm_subnet.selc_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
-| [azurerm_subnet.selc_pnpg_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
-| [azurerm_subnet_network_security_group_association.selc_pnpg_nsg_cae_subnet_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
 | [null_resource.download_apim_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.download_apim_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
