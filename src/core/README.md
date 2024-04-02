@@ -66,6 +66,7 @@
 | <a name="module_dns_forwarder_snet"></a> [dns\_forwarder\_snet](#module\_dns\_forwarder\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.50.1 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
+| <a name="module_evh_rds_vm_snet"></a> [evh\_rds\_vm\_snet](#module\_evh\_rds\_vm\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_jwt"></a> [jwt](#module\_jwt) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
@@ -161,6 +162,7 @@
 | [azurerm_key_vault_secret.event_hub_connection_strings](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.event_hub_connection_strings_lc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.event_hub_keys](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.evh_rds_vm_password](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_id](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_client_fd_sp_client_secret](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.external_oauth2_issuer_identifier_uri](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
@@ -174,6 +176,7 @@
 | [azurerm_key_vault_secret.selc_web_storage_access_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.selc_web_storage_blob_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.selc_web_storage_connection_string](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
+| [azurerm_linux_virtual_machine.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine) | resource |
 | [azurerm_log_analytics_workspace.log_analytics_workspace](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
 | [azurerm_management_lock.lock_selc_cae](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
 | [azurerm_management_lock.lock_selc_pnpg_cae](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock) | resource |
@@ -187,7 +190,10 @@
 | [azurerm_monitor_action_group.selfcare_status_uat](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_action_group.slack](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_metric_alert.functions_exceptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
+| [azurerm_network_interface.evh_rds_vm_public](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface) | resource |
+| [azurerm_network_interface_security_group_association.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_security_group_association) | resource |
 | [azurerm_network_profile.network_profile_load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_profile) | resource |
+| [azurerm_network_security_group.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
 | [azurerm_network_security_group.selc_pnpg_subnet_nsg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group) | resource |
 | [azurerm_network_security_rule.selc_pnpg_cae_subnet_inbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
 | [azurerm_network_security_rule.selc_pnpg_cae_subnet_outbound_rule](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule) | resource |
@@ -223,6 +229,7 @@
 | [azurerm_private_endpoint.logs_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [azurerm_public_ip.aks_outbound](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
 | [azurerm_public_ip.appgateway_public_ip](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
+| [azurerm_public_ip.evh_rds](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
 | [azurerm_public_ip.outbound_ip_aks_platform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
 | [azurerm_resource_group.azdo_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.checkout_fe_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
@@ -253,6 +260,7 @@
 | [azurerm_subnet.selc_pnpg_container_app_snet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet) | resource |
 | [azurerm_subnet_network_security_group_association.selc_pnpg_nsg_cae_subnet_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_network_security_group_association) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
+| [azurerm_virtual_machine_extension.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension) | resource |
 | [null_resource.download_apim_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.download_apim_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_alert_message](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
@@ -275,6 +283,7 @@
 | [null_resource.upload_spid_idp_status](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [pkcs12_from_pem.jwt_pkcs12](https://registry.terraform.io/providers/chilicat/pkcs12/0.0.7/docs/resources/from_pem) | resource |
 | [random_id.pair_dns_forwarder_hash](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
+| [random_password.evh_rds_vm_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_uuid.identifier_uri](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
 | [random_uuid.scope_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
 | [time_rotating.client](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) | resource |
@@ -356,6 +365,7 @@
 | <a name="input_cidr_subnet_cosmosdb_mongodb"></a> [cidr\_subnet\_cosmosdb\_mongodb](#input\_cidr\_subnet\_cosmosdb\_mongodb) | Application gateway address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_dns_forwarder"></a> [cidr\_subnet\_dns\_forwarder](#input\_cidr\_subnet\_dns\_forwarder) | DNS Forwarder network address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_eventhub"></a> [cidr\_subnet\_eventhub](#input\_cidr\_subnet\_eventhub) | EventHub address space. | `list(string)` | n/a | yes |
+| <a name="input_cidr_subnet_eventhub_rds"></a> [cidr\_subnet\_eventhub\_rds](#input\_cidr\_subnet\_eventhub\_rds) | EventHub rds vm address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_k8s"></a> [cidr\_subnet\_k8s](#input\_cidr\_subnet\_k8s) | Subnet cluster kubernetes. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_load_tests"></a> [cidr\_subnet\_load\_tests](#input\_cidr\_subnet\_load\_tests) | private endpoints address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_logs_storage"></a> [cidr\_subnet\_logs\_storage](#input\_cidr\_subnet\_logs\_storage) | Logs storage address space. | `list(string)` | n/a | yes |
@@ -401,6 +411,7 @@
 | <a name="input_eventhub_ip_rules"></a> [eventhub\_ip\_rules](#input\_eventhub\_ip\_rules) | eventhub network rules | <pre>list(object({<br>    ip_mask = string<br>    action  = string<br>  }))</pre> | `[]` | no |
 | <a name="input_eventhub_maximum_throughput_units"></a> [eventhub\_maximum\_throughput\_units](#input\_eventhub\_maximum\_throughput\_units) | Specifies the maximum number of throughput units when Auto Inflate is Enabled | `number` | `null` | no |
 | <a name="input_eventhub_metric_alerts"></a> [eventhub\_metric\_alerts](#input\_eventhub\_metric\_alerts) | Map of name = criteria objects | <pre>map(object({<br>    # criteria.*.aggregation to be one of [Average Count Minimum Maximum Total]<br>    aggregation = string<br>    metric_name = string<br>    description = string<br>    # criteria.0.operator to be one of [Equals NotEquals GreaterThan GreaterThanOrEqual LessThan LessThanOrEqual]<br>    operator  = string<br>    threshold = number<br>    # Possible values are PT1M, PT5M, PT15M, PT30M and PT1H<br>    frequency = string<br>    # Possible values are PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H and P1D.<br>    window_size = string<br><br>    dimension = list(object(<br>      {<br>        name     = string<br>        operator = string<br>        values   = list(string)<br>      }<br>    ))<br>  }))</pre> | `{}` | no |
+| <a name="input_eventhub_rds_vm"></a> [eventhub\_rds\_vm](#input\_eventhub\_rds\_vm) | n/a | <pre>object({<br>    size                = string<br>    allowed_ipaddresses = list(string)<br>  })</pre> | n/a | yes |
 | <a name="input_eventhub_sku_name"></a> [eventhub\_sku\_name](#input\_eventhub\_sku\_name) | Defines which tier to use. | `string` | `"Basic"` | no |
 | <a name="input_eventhub_zone_redundant"></a> [eventhub\_zone\_redundant](#input\_eventhub\_zone\_redundant) | Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). | `bool` | `false` | no |
 | <a name="input_eventhubs"></a> [eventhubs](#input\_eventhubs) | A list of event hub topics to add to namespace. | <pre>list(object({<br>    name              = string<br>    partitions        = number<br>    message_retention = number<br>    consumers         = list(string)<br>    keys = list(object({<br>      name   = string<br>      listen = bool<br>      send   = bool<br>      manage = bool<br>    }))<br>    iam_roles = optional(map(string), {})<br>  }))</pre> | `[]` | no |
@@ -456,6 +467,7 @@
 | <a name="output_cosmosdb_account_mongodb_id"></a> [cosmosdb\_account\_mongodb\_id](#output\_cosmosdb\_account\_mongodb\_id) | # CosmosDb - MongoDB ## |
 | <a name="output_cosmosdb_account_mongodb_primary_key"></a> [cosmosdb\_account\_mongodb\_primary\_key](#output\_cosmosdb\_account\_mongodb\_primary\_key) | n/a |
 | <a name="output_cosmosdb_account_mongodb_primary_readonly_key"></a> [cosmosdb\_account\_mongodb\_primary\_readonly\_key](#output\_cosmosdb\_account\_mongodb\_primary\_readonly\_key) | n/a |
+| <a name="output_evh_rds_addresses"></a> [evh\_rds\_addresses](#output\_evh\_rds\_addresses) | n/a |
 | <a name="output_key_vault_name"></a> [key\_vault\_name](#output\_key\_vault\_name) | n/a |
 | <a name="output_key_vault_uri"></a> [key\_vault\_uri](#output\_key\_vault\_uri) | # key vault ## |
 | <a name="output_private_dns_name"></a> [private\_dns\_name](#output\_private\_dns\_name) | n/a |
