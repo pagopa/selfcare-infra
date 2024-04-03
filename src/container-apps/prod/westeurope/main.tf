@@ -49,7 +49,7 @@ module "container_app_environments" {
   selc_subnet_id = module.networking.subnet_selfcare.id
   pnpg_subnet_id = module.networking.subnet_pnpg.id
 
-  zone_redundant = false
+  zone_redundant = true
 
   tags = local.tags
 }
