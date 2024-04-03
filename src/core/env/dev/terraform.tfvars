@@ -221,26 +221,26 @@ eventhub_ip_rules = [
     ip_mask = "2.228.86.218",
     action  = "Allow"
   },
-  { // FD
-    ip_mask = "193.203.230.25",
-    action  = "Allow"
-  },
-  # {//PROD-FD
+  # { // FD
+  #   ip_mask = "193.203.230.25",
+  #   action  = "Allow"
+  # },
+  # { // PROD-FD
   #   ip_mask = "91.218.226.15/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "91.218.224.5/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "91.218.224.15/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "2.228.86.218/32",
   #   action = "Allow"
-  # }
+  # },
 ]
 
 eventhub_rds_vm = {
