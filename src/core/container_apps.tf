@@ -75,10 +75,10 @@ module "selc_cae" {
 }
 
 
-resource "azurerm_subnet_nat_gateway_association" "selc_cae_subnet_nat_gateway" {
-  subnet_id      = azurerm_subnet.selc_container_app_snet.id
-  nat_gateway_id = azurerm_nat_gateway.nat_gateway.id
-}
+# resource "azurerm_subnet_nat_gateway_association" "selc_cae_subnet_nat_gateway" {
+#   subnet_id      = azurerm_subnet.selc_container_app_snet.id
+#   nat_gateway_id = azurerm_nat_gateway.nat_gateway.id
+# }
 
 module "selc_pnpg_cae" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//container_app_environment_v2?ref=v7.50.1"
