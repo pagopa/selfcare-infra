@@ -33,8 +33,10 @@ module "networking" {
 
   # inferred from vnet-common with cidr 10.1.0.0/16
   # https://github.com/pagopa/selfcare-infra/blob/9de7d03852904c1e743684a9edd40ae9df0645a8/src/core/01_network_0.tf#L9-L10
-  cidr_subnet_selc_cae = "10.1.148.0/23"
-  cidr_subnet_pnpg_cae = "10.1.150.0/23"
+  cidr_subnet_selc_cae = "10.1.158.0/23"
+  cidr_subnet_pnpg_cae = "10.1.160.0/23"
+  selc_container_app_name_snet = local.selc_container_app_name_snet
+  pnpg_container_app_name_snet = local.pnpg_container_app_name_snet
 
   tags = local.tags
 }

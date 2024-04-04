@@ -5,6 +5,9 @@ locals {
 
   location = "westeurope"
 
+  selc_container_app_name_snet = "${local.project}-ca-snet"
+  pnpg_container_app_name_snet = "${local.project}-pnpg-ca-snet"
+
   tags = {
     CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
     CreatedBy   = "Terraform"

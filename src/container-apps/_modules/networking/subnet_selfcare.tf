@@ -1,5 +1,5 @@
 resource "azurerm_subnet" "selc_container_app_snet" {
-  name                 = "${var.project}-container-app-snet"
+  name                 = "${var.selc_container_app_name_snet}"
   resource_group_name  = data.azurerm_virtual_network.vnet_selc.resource_group_name
   virtual_network_name = data.azurerm_virtual_network.vnet_selc.name
 
