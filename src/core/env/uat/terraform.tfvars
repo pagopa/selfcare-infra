@@ -312,7 +312,7 @@ eventhub_ip_rules = [
 eventhub_rds_vm = {
   size = "Standard_B1ls"
   allowed_ipaddresses = [
-    "193.203.230.20/32", # Nexi FD
+    "193.203.230.25/32", # Nexi FD
   ]
 }
 
