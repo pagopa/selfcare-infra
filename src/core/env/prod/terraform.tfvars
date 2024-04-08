@@ -95,6 +95,7 @@ redis_version  = 6
 reverse_proxy_ip                  = "10.1.1.250"
 private_dns_name                  = "selc.internal.selfcare.pagopa.it"
 ca_suffix_dns_private_name        = "bluedune-cc0f8752.westeurope.azurecontainerapps.io"
+ca_pnpg_suffix_dns_private_name   = "salmonpond-60269923.westeurope.azurecontainerapps.io"
 aks_kubernetes_version            = "1.27.7"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
