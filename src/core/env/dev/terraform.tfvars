@@ -91,7 +91,7 @@ aks_system_node_pool_node_count_max = 1
 reverse_proxy_ip           = "10.1.1.250"
 private_dns_name           = "selc.internal.dev.selfcare.pagopa.it"
 ca_suffix_dns_private_name = "livelydesert-633675bb.westeurope.azurecontainerapps.io"
-ca_pnpg_suffix_dns_private_name = "yellowdesert-85d3792d.westeurope.azurecontainerapps.io"
+ca_pnpg_suffix_dns_private_name = "victoriousfield-e39534b8.westeurope.azurecontainerapps.io"
 
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
