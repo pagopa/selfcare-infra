@@ -52,6 +52,9 @@ module "container_app_environments" {
   selc_subnet_id = module.networking.subnet_selfcare.id
   pnpg_subnet_id = module.networking.subnet_pnpg.id
 
+  selc_cae_name = "${local.project}-cae"
+  pnpg_cae_name = "${local.project}-pnpg-cae"
+
   zone_redundant = false
 
   tags = local.tags

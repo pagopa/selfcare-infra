@@ -1,5 +1,5 @@
 resource "azurerm_container_app_environment" "cae_pnpg" {
-  name                = "${var.project}-pnpg-cae"
+  name                = var.pnpg_cae_name
   location            = var.location
   resource_group_name = var.resource_group_name
 

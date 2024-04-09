@@ -1,5 +1,5 @@
 resource "azurerm_container_app_environment" "cae_selc" {
-  name                = "${var.project}-cae"
+  name                = var.selc_cae_name
   location            = var.location
   resource_group_name = var.resource_group_name
 

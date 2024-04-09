@@ -53,5 +53,8 @@ module "container_app_environments" {
 
   zone_redundant = true
 
+  selc_cae_name = "${local.project}-cae"
+  pnpg_cae_name = "${local.project}-pnpg-cae"
+
   tags = local.tags
 }
