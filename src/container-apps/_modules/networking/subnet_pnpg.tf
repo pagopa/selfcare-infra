@@ -15,6 +15,7 @@ resource "azurerm_subnet" "pnpg_container_app_snet" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "pnpg_subnet_gateway_association" {
+  count          = 0
   nat_gateway_id = data.azurerm_nat_gateway.nat_gateway.id
   subnet_id      = azurerm_subnet.pnpg_container_app_snet.id
 }
