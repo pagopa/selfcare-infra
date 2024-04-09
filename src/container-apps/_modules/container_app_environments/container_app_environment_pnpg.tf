@@ -9,11 +9,14 @@ resource "azurerm_container_app_environment" "cae_pnpg" {
   zone_redundancy_enabled        = var.pnpg_subnet_id == null ? null : var.zone_redundant
   internal_load_balancer_enabled = true
 
-  workload_profile {
-    name                  = "Consumption"
-    workload_profile_type = "Consumption"
-    minimum_count         = 0
-    maximum_count         = 1
+  dynamic "workload_profile" {
+    for_each = var.pnpg_workload_profile
+    content {
+      name                  = var.pnpg_workload_profile.name
+      workload_profile_type = var.pnpg_workload_profile.workload_profile_type
+      minimum_count         = var.pnpg_workload_profile.minimum_count
+      maximum_count         = var.pnpg_workload_profile.maximum_count
+    }
   }
 }
 
