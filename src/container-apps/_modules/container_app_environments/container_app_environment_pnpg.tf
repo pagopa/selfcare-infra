@@ -10,12 +10,12 @@ resource "azurerm_container_app_environment" "cae_pnpg" {
   internal_load_balancer_enabled = true
 
   dynamic "workload_profile" {
-    for_each = var.pnpg_workload_profile
+    for_each = var.pnpg_workload_profiles
     content {
-      name                  = var.pnpg_workload_profile.name
-      workload_profile_type = var.pnpg_workload_profile.workload_profile_type
-      minimum_count         = var.pnpg_workload_profile.minimum_count
-      maximum_count         = var.pnpg_workload_profile.maximum_count
+      name                  = workload_profile.value.name
+      workload_profile_type = workload_profile.value.workload_profile_type
+      minimum_count         = workload_profile.value.minimum_count
+      maximum_count         = workload_profile.value.maximum_count
     }
   }
 }

@@ -43,34 +43,38 @@ variable "pnpg_cae_name" {
   description = "Name of Container App env"
 }
 
-variable "selc_workload_profile" {
-  description = "Selfcare workload profile"
-  type = object({
+variable "selc_workload_profiles" {
+  description = "SELC workload profiles"
+  type = list(object({
     name = string
     workload_profile_type = string
     minimum_count = number
     maximum_count = number
-  })
-  default = {
-    name = "Consumption"
-    workload_profile_type = "Consumption"
-    minimum_count = 0
-    maximum_count = 1
-  }
+  }))
+  default = [
+    {
+      name = "Consumption"
+      workload_profile_type = "Consumption"
+      minimum_count = 0
+      maximum_count = 1
+    }
+  ]
 }
 
-variable "pnpg_workload_profile" {
-  description = "Pnpg workload profile"
-  type = object({
+variable "pnpg_workload_profiles" {
+  description = "PNPG workload profiles"
+  type = list(object({
     name = string
     workload_profile_type = string
     minimum_count = number
     maximum_count = number
-  })
-  default = {
-    name = "Consumption"
-    workload_profile_type = "Consumption"
-    minimum_count = 0
-    maximum_count = 1
-  }
+  }))
+  default = [
+    {
+      name = "Consumption"
+      workload_profile_type = "Consumption"
+      minimum_count = 0
+      maximum_count = 1
+    }
+  ]
 }
