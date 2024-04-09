@@ -39,6 +39,9 @@ module "networking" {
   selc_container_app_name_snet = "${local.project}-cae-cp-snet"
   pnpg_container_app_name_snet = "${local.project}-pnpg-cae-cp-snet"
 
+  pnpg_delegation = []
+  selc_delegation = []
+
   tags = local.tags
 }
 

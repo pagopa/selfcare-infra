@@ -5,11 +5,14 @@ resource "azurerm_subnet" "pnpg_container_app_snet" {
 
   address_prefixes = [var.cidr_subnet_pnpg_cae]
 
-  delegation {
-    name = "Microsoft.App/environments"
-    service_delegation {
-      name    = "Microsoft.App/environments"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+  dynamic "delegation" {
+    for_each = var.pnpg_delegation
+    content {
+      name = delegation.value.name
+      service_delegation {
+        name    = delegation.value.service_delegation_name
+        actions = delegation.value.service_delegation_actions
+      }
     }
   }
 }
