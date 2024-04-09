@@ -4,8 +4,6 @@ locals {
   project   = "${local.prefix}-${local.env_short}"
 
   location = "westeurope"
-  selc_container_app_name_snet = "${local.project}-container-app-snet"
-  pnpg_container_app_name_snet = "${local.project}-pnpg-container-app-snet"
 
   tags = {
     CostCenter  = "TS310 - PAGAMENTI & SERVIZI"
