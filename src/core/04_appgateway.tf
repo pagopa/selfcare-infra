@@ -280,9 +280,9 @@ module "app_gw" {
           request_header_configurations  = []
           response_header_configurations = []
           url = {
-            path            = "{var_uri_path_1}"
-            query_string    = ""
-            components      = "path_only"
+            path         = "{var_uri_path_1}"
+            query_string = ""
+            components   = "path_only"
           }
         }
       ]
