@@ -199,6 +199,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
+        hub_spid_pnpg = {
+          paths                 = ["/spid/v1/*"]
+          backend               = "hub-spid-pnpg"
+          rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
+        }
       }
     }
   }
