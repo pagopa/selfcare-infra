@@ -91,6 +91,7 @@ reverse_proxy_ip           = "10.1.1.250"
 private_dns_name           = "selc.internal.uat.selfcare.pagopa.it"
 ca_suffix_dns_private_name = "agreeablesky-f71e6306.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "calmforest-ffe47bf1.westeurope.azurecontainerapps.io"
+spid_path_prefix = "/spid/v1"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = true

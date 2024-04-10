@@ -68,24 +68,24 @@ locals {
     }
     hub-spid-selc = {
       protocol                    = "Https"
-      host                        = "selc-d-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"
+      host                        = "selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"
       port                        = 443
       ip_addresses                = null
       probe                       = "/info"
       probe_name                  = "probe-hub-spid-selc"
       request_timeout             = 60
-      fqdns                       = ["selc-d-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"]
+      fqdns                       = ["selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"]
       pick_host_name_from_backend = false
     }
     hub-spid-pnpg = {
       protocol                    = "Https"
-      host                        = "selc-d-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"
+      host                        = "selc-${var.env_short}-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"
       port                        = 443
       ip_addresses                = null
       probe                       = "/info"
       probe_name                  = "probe-hub-spid-pnpg"
       request_timeout             = 60
-      fqdns                       = ["selc-d-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"]
+      fqdns                       = ["selc-${var.env_short}-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"]
       pick_host_name_from_backend = false
     }
   }
@@ -281,7 +281,7 @@ module "app_gw" {
           response_header_configurations = []
           url = {
             path            = "{var_uri_path_1}"
-            query_string    = null
+            query_string    = ""
             components      = "path_only"
           }
         }
