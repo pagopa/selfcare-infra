@@ -281,7 +281,8 @@ module "app_gw" {
           response_header_configurations = []
           url = {
             path            = "{var_uri_path_1}"
-            query_string = null
+            query_string    = null
+            components      = "path_only"
           }
         }
       ]
