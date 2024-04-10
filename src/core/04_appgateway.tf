@@ -184,7 +184,7 @@ module "app_gw" {
           rewrite_rule_set_name = null
         }
         hub_spid_selc = {
-          paths                 = ["/spid/v1/*"]
+          paths                 = ["${var.spid_path_prefix}/*"]
           backend               = "hub-spid-selc"
           rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
         }
@@ -200,7 +200,7 @@ module "app_gw" {
           rewrite_rule_set_name = null
         }
         hub_spid_pnpg = {
-          paths                 = ["/spid/v1/*"]
+          paths                 = ["${var.spid_path_prefix}/*"]
           backend               = "hub-spid-pnpg"
           rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
         }
@@ -274,7 +274,7 @@ module "app_gw" {
           conditions = [{
             ignore_case = true
             negate      = false
-            pattern     = "/spid/v1/(.*)"
+            pattern     = "${var.spid_path_prefix}/(.*)"
             variable    = "var_uri_path"
           }]
           request_header_configurations  = []
