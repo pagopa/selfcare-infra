@@ -255,6 +255,17 @@ variable "ca_suffix_dns_private_name" {
   description = "CA suffix private DNS record"
 }
 
+variable "ca_pnpg_suffix_dns_private_name" {
+  type        = string
+  description = "CA PNPG suffix private DNS record"
+}
+
+variable "spid_path_prefix" {
+  type        = string
+  description = "Path prefix to hub spid login"
+  default     = "/spid/v1"
+}
+
 variable "aks_num_outbound_ips" {
   type        = number
   default     = 1
