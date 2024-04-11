@@ -89,7 +89,7 @@ aks_system_node_pool_node_count_max = 2
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                = "10.1.1.250"
 private_dns_name                = "selc.internal.uat.selfcare.pagopa.it"
-ca_suffix_dns_private_name      = "agreeablesky-f71e6306.westeurope.azurecontainerapps.io"
+ca_suffix_dns_private_name      = "proudglacier-20652b81.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "calmforest-ffe47bf1.westeurope.azurecontainerapps.io"
 spid_path_prefix                = "/spid/v1"
 
