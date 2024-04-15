@@ -123,6 +123,35 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/notification-event/users/count':
+    get:
+      tags:
+        - kafka
+      summary: countUsers
+      description: Users' Count for single product
+      operationId: countUsersUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductCountResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     Problem:
@@ -139,6 +168,23 @@ components:
     ProblemError:
       title: ProblemError
       type: object
+    ProductCount:
+      title: ProductCount
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        productId:
+          type: string
+    ProductCountResponse:
+      title: ProductCountResponse
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCount'
   securitySchemes:
     bearerAuth:
       type: http
