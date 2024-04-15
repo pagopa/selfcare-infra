@@ -270,6 +270,18 @@ locals {
             }
           ]
         },
+        {
+          name = "Delegations"
+          indexes = [{
+            keys   = ["_id"]
+            unique = true
+            },
+            {
+              keys   = ["institutionFromName"]
+              unique = false
+            }
+          ]
+        },
       ]
     }
   }
