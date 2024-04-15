@@ -46,17 +46,17 @@ variable "pnpg_cae_name" {
 variable "selc_workload_profiles" {
   description = "SELC workload profiles"
   type = list(object({
-    name = string
+    name                  = string
     workload_profile_type = string
-    minimum_count = number
-    maximum_count = number
+    minimum_count         = number
+    maximum_count         = number
   }))
   default = [
     {
-      name = "Consumption"
+      name                  = "Consumption"
       workload_profile_type = "Consumption"
-      minimum_count = 0
-      maximum_count = 1
+      minimum_count         = 0
+      maximum_count         = 1
     }
   ]
 }
@@ -64,17 +64,17 @@ variable "selc_workload_profiles" {
 variable "pnpg_workload_profiles" {
   description = "PNPG workload profiles"
   type = list(object({
-    name = string
+    name                  = string
     workload_profile_type = string
-    minimum_count = number
-    maximum_count = number
+    minimum_count         = number
+    maximum_count         = number
   }))
   default = [
     {
-      name = "Consumption"
+      name                  = "Consumption"
       workload_profile_type = "Consumption"
-      minimum_count = 0
-      maximum_count = 1
+      minimum_count         = 0
+      maximum_count         = 1
     }
   ]
 }

@@ -31,13 +31,13 @@ variable "pnpg_container_app_name_snet" {
 variable "pnpg_delegation" {
   description = "PNPG subnet delegation"
   type = list(object({
-    name = string
-    service_delegation_name = string
+    name                       = string
+    service_delegation_name    = string
     service_delegation_actions = list(string)
   }))
   default = [
     {
-      name = "Microsoft.App/environments"
+      name                       = "Microsoft.App/environments"
       service_delegation_name    = "Microsoft.App/environments"
       service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
@@ -47,13 +47,13 @@ variable "pnpg_delegation" {
 variable "selc_delegation" {
   description = "PNPG subnet delegation"
   type = list(object({
-    name = string
-    service_delegation_name = string
+    name                       = string
+    service_delegation_name    = string
     service_delegation_actions = list(string)
   }))
   default = [
     {
-      name = "Microsoft.App/environments"
+      name                       = "Microsoft.App/environments"
       service_delegation_name    = "Microsoft.App/environments"
       service_delegation_actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
