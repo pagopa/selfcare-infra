@@ -651,8 +651,8 @@ module "apim_internal_api_ms_v1" {
     },
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
-      xml_content = templatefile("./api/ms_internal_api/v1/external_op_policy.xml.tpl", {
-        MS_EXTERNAL_BACKEND_BASE_URL = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
+      xml_content = templatefile("./api/ms_internal_api/v1/postOnboardingInstitutionUsers_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         }
       )
     },
@@ -785,7 +785,7 @@ module "apim_selfcare_support_service_v1" {
     {
       operation_id = "onboardingInstitutionUsersUsingPOST"
       xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint

@@ -1306,7 +1306,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
         imported:
           type: boolean
         institutionType:
