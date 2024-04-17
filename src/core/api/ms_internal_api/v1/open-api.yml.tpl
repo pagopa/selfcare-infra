@@ -1543,7 +1543,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+            type: string
         imported:
           type: boolean
         institutionType:
