@@ -642,7 +642,7 @@ module "apim_internal_api_ms_v1" {
     {
       operation_id = "updateUserStatusUsingPUT"
       xml_content = templatefile("./api/ms_internal_api/v1/user_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-user-ms-ca.${var.ca_suffix_dns_private_name}/"
+        BACKEND_BASE_URL = "https://selc-${var.env_short}-user-ms-ca.${var.ca_suffix_dns_private_name}/"
       })
     },
     {
