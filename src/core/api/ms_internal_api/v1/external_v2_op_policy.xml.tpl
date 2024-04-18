@@ -4,7 +4,7 @@
         <set-header exists-action="override" name="Authorization">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-backend-service base-url="${MS_CORE_BACKEND_BASE_URL}" />
+        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base />

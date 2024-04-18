@@ -743,6 +743,18 @@ components:
         fiscalCode:
           type: string
           description: User's fiscal code
+        statuses:
+          type: array
+          description: User's statuses
+          items:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
     UserInfoResource:
       title: UserInfoResource
       type: object
@@ -788,9 +800,15 @@ components:
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
+        state:
+          type: string
+          description: Onboarding's state
         taxCode:
           type: string
           description: Institution's tax code
+        userEmail:
+          type: string
+          description: User's email linked to the institution
         zipCode:
           type: string
           description: Institution's zip code
@@ -1288,7 +1306,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+            type: string
         imported:
           type: boolean
         institutionType:

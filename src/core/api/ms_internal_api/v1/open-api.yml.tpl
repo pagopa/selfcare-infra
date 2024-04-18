@@ -217,75 +217,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/onboarding/{externalInstitutionId}/products/{productId}':
-      post:
-        tags:
-          - onboarding
-        summary: autoApprovalOnboarding
-        description: The service allows the onboarding of institutions with auto approval
-        operationId: autoApprovalOnboardingUsingPOST
-        parameters:
-          - name: x-selfcare-uid
-            in: header
-            description: Logged user's unique identifier
-            required: true
-            schema:
-              type: string
-          - name: externalInstitutionId
-            in: path
-            description: Institution's unique external identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-          - name: productId
-            in: path
-            description: Product's unique identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OnboardingDto'
-        responses:
-          '201':
-            description: Created
-          '400':
-            description: Bad Request
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-          '401':
-            description: Unauthorized
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-          '403':
-                    description: Forbidden
-                    content:
-                      application/problem+json:
-                        schema:
-                          $ref: '#/components/schemas/Problem'
-          '409':
-                  description: Conflict
-                  content:
-                      application/problem+json:
-                        schema:
-                          $ref: '#/components/schemas/Problem'
-          '500':
-            description: Internal Server Error
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-        security:
-          - bearerAuth:
-              - global
   '/products/{productId}':
       get:
         tags:
@@ -1612,7 +1543,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+            type: string
         imported:
           type: boolean
         institutionType:
