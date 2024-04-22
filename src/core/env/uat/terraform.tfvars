@@ -360,6 +360,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sma"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   }, {
@@ -410,13 +416,21 @@ eventhubs = [{
       listen = false
       send   = true
       manage = false
-      }, {
+    }, 
+    {
       name   = "datalake"
       listen = true
       send   = false
       manage = false
-      }, {
+    }, 
+    {
       name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "sma"
       listen = true
       send   = false
       manage = false
