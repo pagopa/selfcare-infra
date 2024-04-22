@@ -183,11 +183,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
-        hub_spid_selc = {
-          paths                 = ["${var.spid_path_prefix}/*"]
-          backend               = "hub-spid-selc"
-          rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
-        }
+        #hub_spid_selc = {
+        #  paths                 = ["${var.spid_path_prefix}/*"]
+        #  backend               = "hub-spid-selc"
+        #  rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
+        #}
       }
     }
     api-pnpg = {
@@ -199,11 +199,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
-        hub_spid_pnpg = {
-          paths                 = ["${var.spid_path_prefix}/*"]
-          backend               = "hub-spid-pnpg"
-          rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
-        }
+        #hub_spid_pnpg = {
+        #  paths                 = ["${var.spid_path_prefix}/*"]
+        #  backend               = "hub-spid-pnpg"
+        #  rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
+        #}
       }
     }
   }
