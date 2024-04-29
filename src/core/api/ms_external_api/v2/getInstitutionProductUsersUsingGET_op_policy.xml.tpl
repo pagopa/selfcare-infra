@@ -49,6 +49,8 @@
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
         <!-- TODO: remove previous elements after Party will accept k8s token -->
+
+        <set-backend-service base-url="${BACKEND_BASE_URL}" />
         <rewrite-uri template="@("/institutions/{institutionId}/products/" + (string)context.Variables["productId"] + "/users")" />
     </inbound>
     <backend>
