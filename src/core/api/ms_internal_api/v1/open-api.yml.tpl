@@ -251,6 +251,7 @@ paths:
                 - PSP
                 - PT
                 - SCP
+                - AS
                 - SA
                 - REC
                 - CON
@@ -656,6 +657,7 @@ components:
             - PT
             - SCP
             - SA
+            - AS
             - REC
             - CON
         origin:
@@ -727,6 +729,7 @@ components:
             - PT
             - SCP
             - SA
+            - AS
             - REC
             - CON
         origin:
@@ -880,6 +883,7 @@ components:
             - PSP
             - PT
             - SCP
+            - AS
             - SA
             - REC
             - CON
@@ -1271,11 +1275,9 @@ components:
     OnboardingProductDto:
       title: OnboardingProductDto
       required:
-        - billingData
         - geographicTaxonomies
         - institutionType
         - productId
-        - taxCode
         - users
       type: object
       properties:
@@ -1306,6 +1308,7 @@ components:
             - SA
             - REC
             - CON
+            - AS
         origin:
           type: string
           description: Institution data origin
@@ -1394,6 +1397,7 @@ components:
             - PT
             - SA
             - SCP
+            - AS
             - REC
             - CON
         productId:
