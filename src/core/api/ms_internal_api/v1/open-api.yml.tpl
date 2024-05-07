@@ -588,6 +588,52 @@ paths:
         security:
           - bearerAuth:
               - global
+  '/notification-event/contracts':
+    put:
+      tags:
+        - kafka
+      summary: resendContractsByInstitutionIdAndTokenId
+      description: 'Function to send a specific onboarding using institutionId and tokenId '
+      operationId: resendContractsByInstitutionIdAndTokenIdUsingPUT
+      parameters:
+        - name: tokenId
+          in: query
+          description: tokenId
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: institutionId
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:

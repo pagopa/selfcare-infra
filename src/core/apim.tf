@@ -678,6 +678,12 @@ module "apim_internal_api_ms_v1" {
       xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
         MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/"
       })
+    },
+    {
+      operation_id = "resendContractsByInstitutionIdAndTokenIdUsingPUT"
+      xml_content = templatefile("./api/ms_internal_api/v1/core_op_policy.xml.tpl", {
+        MS_CORE_BACKEND_BASE_URL = "https://selc-${var.env_short}-ms-core-ca.${var.ca_suffix_dns_private_name}/"
+      })
     }
   ]
 }
