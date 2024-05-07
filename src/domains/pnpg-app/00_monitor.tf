@@ -83,7 +83,7 @@ resource "azurerm_monitor_metric_alert" "functions_exceptions" {
     metric_name      = "exceptions/count"
     aggregation      = "Count"
     operator         = "GreaterThan"
-    threshold        = 0
+    threshold        = 2
 
     dimension {
       name     = "cloud/roleName"
