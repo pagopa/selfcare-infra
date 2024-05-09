@@ -901,7 +901,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_contract" {
   name                = format("%s-external-api-contract", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
-  display_name        = "External API Contract"
+  display_name        = "External API Contract limited by IP source"
   versioning_scheme   = "Segment"
 }
 
@@ -912,8 +912,8 @@ module "apim_external_api_contract_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_contract.id
 
-  description  = "This service is the proxy for external get contract"
-  display_name = "External API service get contract"
+  description  = "This service is the proxy for external get contract limited by IP source"
+  display_name = "External API service get contract limited by IP source"
   path         = "external/contract"
   api_version  = "v1"
   protocols = [
@@ -940,6 +940,58 @@ module "apim_external_api_contract_v1" {
     {
       operation_id = "getContractUsingGET"
       xml_content = templatefile("./api/external_api_contract/v1/getContractUsingGet_op_policy.xml.tpl", {
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
+    }
+  ]
+}
+
+
+resource "azurerm_api_management_api_version_set" "apim_external_api_contracts_public" {
+  name                = format("%s-external-api-contracts-public", var.env_short)
+  resource_group_name = azurerm_resource_group.rg_api.name
+  api_management_name = module.apim.name
+  display_name        = "External API Contracts Public"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_external_api_contract_public_v1" {
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v7.50.1"
+  name                = format("%s-external-api-contracts-public", local.project)
+  api_management_name = module.apim.name
+  resource_group_name = azurerm_resource_group.rg_api.name
+  version_set_id      = azurerm_api_management_api_version_set.apim_external_api_contracts_public.id
+
+  description  = "Proxy for external get contract used by conservazione"
+  display_name = "External API service get contract"
+  path         = "external/contracts"
+  api_version  = "v1"
+  protocols = [
+    "https"
+  ]
+
+  service_url = format("https://selc-%s-ext-api-backend-ca.%s/v2/", var.env_short, var.ca_suffix_dns_private_name)
+
+  content_format = "openapi"
+  content_value = templatefile("./api/external_api_contract/v1/open-api.yml.tpl", {
+    host     = azurerm_api_management_custom_domain.api_custom_domain.gateway[0].host_name
+    basePath = "v1"
+  })
+
+  xml_content = templatefile("./api/jwt_base_policy.xml.tpl", {
+    API_DOMAIN                 = local.api_domain
+    KID                        = module.jwt.jwt_kid
+    JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+  })
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getContractUsingGET"
+      xml_content = templatefile("./api/external_api_contract_public/v1/jwt_base_policy.xml.tpl", {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
