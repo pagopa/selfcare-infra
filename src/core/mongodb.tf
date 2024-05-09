@@ -229,6 +229,10 @@ locals {
             {
               keys   = ["onboarding.productId"]
               unique = false
+            },
+            {
+              keys   = ["taxCode"]
+              unique = false
             }
           ]
         },
