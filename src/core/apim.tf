@@ -901,7 +901,7 @@ resource "azurerm_api_management_api_version_set" "apim_external_api_contract" {
   name                = format("%s-external-api-contract", var.env_short)
   resource_group_name = azurerm_resource_group.rg_api.name
   api_management_name = module.apim.name
-  display_name        = "External API Contract"
+  display_name        = "External API Contract limited by IP source"
   versioning_scheme   = "Segment"
 }
 
@@ -912,8 +912,8 @@ module "apim_external_api_contract_v1" {
   resource_group_name = azurerm_resource_group.rg_api.name
   version_set_id      = azurerm_api_management_api_version_set.apim_external_api_contract.id
 
-  description  = "This service is the proxy for external get contract"
-  display_name = "External API service get contract"
+  description  = "This service is the proxy for external get contract limited by IP source"
+  display_name = "External API service get contract limited by IP source"
   path         = "external/contract"
   api_version  = "v1"
   protocols = [
