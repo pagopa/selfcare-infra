@@ -1774,6 +1774,8 @@ components:
           format: date-time
         id:
           type: string
+        productRole:
+          type: string
         role:
           type: string
         status:
