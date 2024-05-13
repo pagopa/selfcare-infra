@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-        <base/>
+        <base />
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
             var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
@@ -11,11 +11,13 @@
             // 2) Construct the Base64Url-encoded payload
             var iat = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
-            var uid = "pnpg";
+            var uid = "m2m";
+
+
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
             var name = "apim";
-            var payload = new { name, exp, uid, aud, iss, iat };
+            var payload = new { name, exp, uid, aud, iss , iat};
             var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
             // 3) Construct the Base64Url-encoded signature
@@ -30,32 +32,17 @@
             }
 
             }"/>
-        <set-header exists-action="override" name="Authorization">
-                  <value>@((string)context.Variables["jwt"])</value>
+        <set-header name="Authorization" exists-action="override">
+            <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-query-parameter name="productId" exists-action="override">
-            <value>@((string)context.Variables["productId"])</value>
-        </set-query-parameter>
-        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
-        <base/>
+        <base />
     </backend>
     <outbound>
-        <base/>
-        <choose>
-            <when condition="@(context.Response.StatusCode == 200)">
-                <set-body>@{
-                    JArray response = context.Response.Body.As<JArray>();
-                    foreach(JObject item in response.Children()) {
-                    item.Add("logo", new JValue(new Uri("${CDN_STORAGE_URL}/institutions/" + item.GetValue("id") + "/logo.png")));
-                    }
-                    return response.ToString();
-                    }</set-body>
-            </when>
-        </choose>
+        <base />
     </outbound>
     <on-error>
-        <base/>
+        <base />
     </on-error>
 </policies>

@@ -9,6 +9,7 @@
             // var jwtHeaderBase64UrlEncoded = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9";
 
             // 2) Construct the Base64Url-encoded payload
+            var iat = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var uid = context.Request.Url.Query.GetValueOrDefault("userIdForAuth", "");
 
@@ -18,7 +19,8 @@
 
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
-            var payload = new { exp, uid, aud, iss };
+            var name = "apim";
+            var payload = new { name, exp, uid, aud, iss, iat };
             var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
             // 3) Construct the Base64Url-encoded signature
@@ -52,6 +54,7 @@
         <set-query-parameter name="productId" exists-action="override">
             <value>@((string)context.Variables["productId"])</value>
         </set-query-parameter>
+        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
         <base/>
