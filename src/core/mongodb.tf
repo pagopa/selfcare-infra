@@ -283,6 +283,14 @@ locals {
             {
               keys   = ["institutionFromName"]
               unique = false
+            },
+            {
+              keys   = ["from"]
+              unique = false
+            },
+            {
+              keys   = ["to"]
+              unique = false
             }
           ]
         },
