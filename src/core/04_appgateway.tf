@@ -183,11 +183,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
-        #hub_spid_selc = {
-        #  paths                 = ["${var.spid_path_prefix}/*"]
-        #  backend               = "hub-spid-selc"
-        #  rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
-        #}
+        hub_spid_selc = {
+          paths                 = ["${var.spid_selc_path_prefix}/*"]
+          backend               = "hub-spid-selc"
+          rewrite_rule_set_name = "rewrite-rule-set-hub-spid-selc"
+        }
       }
     }
     api-pnpg = {
@@ -199,11 +199,11 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
-        #hub_spid_pnpg = {
-        #  paths                 = ["${var.spid_path_prefix}/*"]
-        #  backend               = "hub-spid-pnpg"
-        #  rewrite_rule_set_name = "rewrite-rule-set-hub-spid"
-        #}
+        hub_spid_pnpg = {
+          paths                 = ["${var.spid_pnpg_path_prefix}/*"]
+          backend               = "hub-spid-pnpg"
+          rewrite_rule_set_name = "rewrite-rule-set-hub-spid-pnpg"
+        }
       }
     }
   }
@@ -266,7 +266,7 @@ module "app_gw" {
       ]
     },
     {
-      name = "rewrite-rule-set-hub-spid"
+      name = "rewrite-rule-set-hub-spid-selc"
       rewrite_rules = [
         {
           name          = "remove-spid-path"
@@ -274,11 +274,35 @@ module "app_gw" {
           conditions = [{
             ignore_case = true
             negate      = false
-            pattern     = "${var.spid_path_prefix}/(.*)"
+            pattern     = "${var.spid_selc_path_prefix}/(.*)"
             variable    = "var_uri_path"
           }]
           request_header_configurations  = []
           response_header_configurations = []
+          ## set path only on azure portal
+          url = {
+            path         = "{var_uri_path_1}"
+            query_string = ""
+            components   = "path_only"
+          }
+        }
+      ]
+    },
+    {
+      name = "rewrite-rule-set-hub-spid-pnpg"
+      rewrite_rules = [
+        {
+          name          = "remove-spid-path"
+          rule_sequence = 1
+          conditions = [{
+            ignore_case = true
+            negate      = false
+            pattern     = "${var.spid_pnpg_path_prefix}/(.*)"
+            variable    = "var_uri_path"
+          }]
+          request_header_configurations  = []
+          response_header_configurations = []
+          ## set path only on azure portal
           url = {
             path         = "{var_uri_path_1}"
             query_string = ""
