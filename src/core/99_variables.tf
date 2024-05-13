@@ -260,7 +260,13 @@ variable "ca_pnpg_suffix_dns_private_name" {
   description = "CA PNPG suffix private DNS record"
 }
 
-variable "spid_path_prefix" {
+variable "spid_selc_path_prefix" {
+  type        = string
+  description = "Path prefix to hub spid login"
+  default     = "/spid/v1"
+}
+
+variable "spid_pnpg_path_prefix" {
   type        = string
   description = "Path prefix to hub spid login"
   default     = "/spid/v1"
