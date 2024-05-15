@@ -772,6 +772,13 @@ paths:
           style: form
           schema:
             type: string
+        - name: taxCode
+          in: query
+          description: Institution's tax code
+          required: false
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
