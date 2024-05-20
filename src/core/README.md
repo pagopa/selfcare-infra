@@ -19,6 +19,7 @@
 | <a name="module_acr_common"></a> [acr\_common](#module\_acr\_common) | github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.50.1 |
 | <a name="module_aks"></a> [aks](#module\_aks) | github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster | v7.50.1 |
 | <a name="module_apim"></a> [apim](#module\_apim) | github.com/pagopa/terraform-azurerm-v3.git//api_management | v7.50.1 |
+| <a name="module_apim_external_api_contract_public_v1"></a> [apim\_external\_api\_contract\_public\_v1](#module\_apim\_external\_api\_contract\_public\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_external_api_contract_v1"></a> [apim\_external\_api\_contract\_v1](#module\_apim\_external\_api\_contract\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_external_api_ms_v1"></a> [apim\_external\_api\_ms\_v1](#module\_apim\_external\_api\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_apim_external_api_ms_v2"></a> [apim\_external\_api\_ms\_v2](#module\_apim\_external\_api\_ms\_v2) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
@@ -105,6 +106,7 @@
 | [azuread_service_principal.external_oauth2_client_fd_sp](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal) | resource |
 | [azuread_service_principal.external_oauth2_issuer](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_contract](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
+| [azurerm_api_management_api_version_set.apim_external_api_contracts_public](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_onboarding_auto](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_onboarding_io](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
@@ -418,7 +420,8 @@
 | <a name="input_reverse_proxy_ip"></a> [reverse\_proxy\_ip](#input\_reverse\_proxy\_ip) | AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller. | `string` | `"127.0.0.1"` | no |
 | <a name="input_robots_indexed_paths"></a> [robots\_indexed\_paths](#input\_robots\_indexed\_paths) | List of cdn paths to allow robots index | `list(string)` | n/a | yes |
 | <a name="input_spa"></a> [spa](#input\_spa) | spa root dirs | `list(string)` | <pre>[<br>  "auth",<br>  "onboarding",<br>  "dashboard"<br>]</pre> | no |
-| <a name="input_spid_path_prefix"></a> [spid\_path\_prefix](#input\_spid\_path\_prefix) | Path prefix to hub spid login | `string` | `"/spid/v1"` | no |
+| <a name="input_spid_pnpg_path_prefix"></a> [spid\_pnpg\_path\_prefix](#input\_spid\_pnpg\_path\_prefix) | Path prefix to hub spid login | `string` | `"/spid/v1"` | no |
+| <a name="input_spid_selc_path_prefix"></a> [spid\_selc\_path\_prefix](#input\_spid\_selc\_path\_prefix) | Path prefix to hub spid login | `string` | `"/spid/v1"` | no |
 | <a name="input_system_node_pool_enable_host_encryption"></a> [system\_node\_pool\_enable\_host\_encryption](#input\_system\_node\_pool\_enable\_host\_encryption) | (Optional) Should the nodes in the Default Node Pool have host encryption enabled? Defaults to true. | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br>  "CreatedBy": "Terraform"<br>}</pre> | no |
 | <a name="input_user_node_pool_node_labels"></a> [user\_node\_pool\_node\_labels](#input\_user\_node\_pool\_node\_labels) | (Optional) A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created. | `map(string)` | `{}` | no |
