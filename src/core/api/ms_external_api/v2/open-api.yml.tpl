@@ -804,6 +804,66 @@ paths:
         - bearerAuth:
             - global
   '/users':
+    get:
+      tags:
+        - users
+      summary: The API retrieves paged users with optional filters in input as query params
+      operationId: getUserInstitutionUsingGET
+      parameters:
+        - name: institutionId
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            format: int32
+            default: '0'
+            type: integer
+        - name: productRoles
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: roles
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+        - name: size
+          in: query
+          schema:
+            format: int32
+            default: '100'
+            type: integer
+        - name: states
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: userId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserInstitutionResponse'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
     post:
       tags:
         - users
@@ -2145,6 +2205,71 @@ components:
           type: string
         desc:
           type: string
+    PartyRole:
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+      type: string
+    UserInstitutionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        institutionId:
+          type: string
+        institutionDescription:
+          type: string
+        institutionRootName:
+          type: string
+        userMailUuid:
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/OnboardedProductResponse'
+    OnboardedProductResponse:
+      type: object
+      properties:
+        productId:
+          type: string
+        tokenId:
+          type: string
+        status:
+          $ref: '#/components/schemas/OnboardedProductState'
+        productRole:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+        env:
+          $ref: '#/components/schemas/Env'
+        createdAt:
+          $ref: '#/components/schemas/LocalDateTime'
+        updatedAt:
+          $ref: '#/components/schemas/LocalDateTime'
+    OnboardedProductState:
+      enum:
+        - ACTIVE
+        - PENDING
+        - TOBEVALIDATED
+        - SUSPENDED
+        - DELETED
+        - REJECTED
+      type: string
+    Env:
+      enum:
+        - ROOT
+        - DEV
+        - COLL
+        - PROD
+      type: string
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: '2022-03-10T12:15:50'
   securitySchemes:
     bearerAuth:
       type: http
