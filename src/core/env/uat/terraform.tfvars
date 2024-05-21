@@ -415,13 +415,13 @@ eventhubs = [{
       listen = false
       send   = true
       manage = false
-    }, 
+    },
     {
       name   = "datalake"
       listen = true
       send   = false
       manage = false
-    }, 
+    },
     {
       name   = "external-interceptor"
       listen = true
