@@ -812,6 +812,7 @@ paths:
       operationId: getUserInstitutionUsingGET
       parameters:
         - name: institutionId
+          description: "Institution's identifier"
           in: query
           schema:
             type: string
@@ -822,12 +823,14 @@ paths:
             default: '0'
             type: integer
         - name: productRoles
+          description: "User product role on institution"
           in: query
           schema:
             type: array
             items:
               type: string
         - name: roles
+          description: "User role on institution"
           in: query
           schema:
             type: array
@@ -840,12 +843,14 @@ paths:
             default: '100'
             type: integer
         - name: states
+          description: "User status on institution <br>Available values: ACTIVE, PENDING, TOBEVALIDATED, SUSPENDED, DELETED, REJECTED"
           in: query
           schema:
             type: array
             items:
               type: string
         - name: userId
+          description: "User's identifier"
           in: query
           schema:
             type: string
