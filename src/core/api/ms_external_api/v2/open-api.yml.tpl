@@ -807,7 +807,8 @@ paths:
     get:
       tags:
         - users
-      summary: The API retrieves paged users with optional filters in input as query params
+      summary: getUserInstitutionUsingGET
+      description: The API retrieves paged users and related institutions with optional filters (institutionId, userId, roles, states and productRoles) as query params
       operationId: getUserInstitutionUsingGET
       parameters:
         - name: institutionId
