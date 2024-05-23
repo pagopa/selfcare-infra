@@ -808,11 +808,11 @@ paths:
       tags:
         - users
       summary: getUserInstitution
-      description: The API retrieves paged users and related institutions with optional filters (institutionId, userId, roles, states and productRoles) as query params
+      description: "This endpoint retrieves detailed information about a user's association with various products within an institution. The response provides a comprehensive view of the user's roles, product statuses, and the relevant timestamps.<br><br><b>Response JSON Structure:</b><ul><li><b>id:</b> A unique identifier for the user-institution association record.</li><li><b>userId:</b> A unique identifier for the user.</li><li><b>institutionId:</b> A unique identifier for the institution to which the user is associated.</li><li><b>institutionDescription:</b> A textual description of the institution.</li><li><b>institutionRootName:</b> The root name of the institution.</li><li><b>userMailUuid:</b> A unique identifier for the user's email.</li><li><b>products:</b> A list of products associated with the user. Each product object contains:<ul><li><b>productId:</b> A unique identifier for the product.<li><b>tokenId:</b> A unique identifier for the token associated with the product.</li><li><b>status:</b> The current status of the user on the product. Example: ACTIVE.</li><li><b>productRole:</b> The specific role of the user related to the product.</li><li><b>role:</b> The general role of the user related to the product. Example: MANAGER.</li><li><b>env:</b> The environment in which the product is used. Example: ROOT.</li><li><b>createdAt:</b> The timestamp when the product association was created.</li><li><b>updatedAt:</b> The timestamp when the product association was last updated.</li></li></ul></ul>"
       operationId: getUserInstitutionUsingGET
       parameters:
         - name: institutionId
-          description: "Institution's identifier"
+          description: Institution's unique identifier.
           in: query
           schema:
             type: string
@@ -823,14 +823,14 @@ paths:
             default: '0'
             type: integer
         - name: productRoles
-          description: "User product role on institution"
+          description: Specific role of the user related to the product.
           in: query
           schema:
             type: array
             items:
               type: string
         - name: roles
-          description: "User role on institution"
+          description: General role of the user related to the the product.
           in: query
           schema:
             type: array
@@ -843,14 +843,14 @@ paths:
             default: '100'
             type: integer
         - name: states
-          description: "User status on institution <br>Available values: ACTIVE, PENDING, TOBEVALIDATED, SUSPENDED, DELETED, REJECTED"
+          description: "The current status of the user on the product. <br>Available values: ACTIVE, PENDING, TOBEVALIDATED, SUSPENDED, DELETED, REJECTED"
           in: query
           schema:
             type: array
             items:
               type: string
         - name: userId
-          description: "User's identifier"
+          description: User's unique identifier.
           in: query
           schema:
             type: string
@@ -2218,23 +2218,31 @@ components:
         - SUB_DELEGATE
         - OPERATOR
       type: string
+      description: The general role of the user related to the product.
     UserInstitutionResponse:
       type: object
       properties:
         id:
           type: string
+          description: A unique identifier for the user-institution association record.
         userId:
           type: string
+          description: A unique identifier for the user.
         institutionId:
           type: string
+          description: A unique identifier for the institution to which the user is associated.
         institutionDescription:
           type: string
+          description: A textual description of the institution.
         institutionRootName:
           type: string
+          description: The root name of the institution.
         userMailUuid:
           type: string
+          description: A unique identifier for the user's email.
         products:
           type: array
+          description: A list of products associated with the user.
           items:
             $ref: '#/components/schemas/OnboardedProductResponse'
     OnboardedProductResponse:
@@ -2242,12 +2250,15 @@ components:
       properties:
         productId:
           type: string
+          description: A unique identifier for the product.
         tokenId:
           type: string
+          description: A unique identifier for the token associated with the product.
         status:
           $ref: '#/components/schemas/OnboardedProductState'
         productRole:
           type: string
+          description: The specific role of the user related to the product.
         role:
           $ref: '#/components/schemas/PartyRole'
         env:
@@ -2265,6 +2276,7 @@ components:
         - DELETED
         - REJECTED
       type: string
+      description: The current status of the user on the product.
     Env:
       enum:
         - ROOT
@@ -2272,6 +2284,7 @@ components:
         - COLL
         - PROD
       type: string
+      description: The environment in which the product is used.
     LocalDateTime:
       format: date-time
       type: string
