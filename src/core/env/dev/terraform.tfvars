@@ -240,7 +240,11 @@ eventhub_ip_rules = [
   # {//PROD-FD
   #   ip_mask = "2.228.86.218/32",
   #   action = "Allow"
-  # }
+  # },
+  { // KONECTA
+    ip_mask = "185.170.36.80",
+    action  = "Allow"
+  }
 ]
 
 eventhubs = [{
@@ -296,6 +300,12 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "conservazione"
       listen = true
       send   = false
       manage = false
