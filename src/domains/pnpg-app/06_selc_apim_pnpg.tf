@@ -258,7 +258,7 @@ module "apim_pnpg_support_service_v2" {
       })
     },
     {
-      operation_id = "getNationalRegistries"
+      operation_id = "verifyLegalByPOST"
       xml_content  = templatefile("./api/pnpg_support_service/v1/verifyLegal_op_policy.xml.tpl", {
         CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
         BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-party-reg-proxy-ca.${var.ca_suffix_dns_private_name}/"
