@@ -257,7 +257,7 @@ module "apim_pnpg_support_service_v2" {
     {
       operation_id = "verifyLegalByPOST"
       xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ext-api-backend.${var.ca_suffix_dns_private_name}/"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
