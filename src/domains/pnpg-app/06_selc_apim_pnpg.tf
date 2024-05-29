@@ -223,7 +223,6 @@ module "apim_pnpg_support_service_v2" {
     basePath = "v1"
   })
 
-  xml_content = file("./api/pnpg_support_service/v1/base_policy.xml")
 
   subscription_required = true
 
@@ -231,8 +230,7 @@ module "apim_pnpg_support_service_v2" {
     {
       operation_id = "getUsersByInstitution"
       xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-ms-ca.${var.ca_suffix_dns_private_name}/v2/"
-        CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-ms-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
@@ -240,7 +238,7 @@ module "apim_pnpg_support_service_v2" {
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/pnpg_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
@@ -250,7 +248,6 @@ module "apim_pnpg_support_service_v2" {
     {
       operation_id = "getInstitutionByTaxCode"
       xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
         BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
@@ -259,9 +256,8 @@ module "apim_pnpg_support_service_v2" {
     },
     {
       operation_id = "verifyLegalByPOST"
-      xml_content  = templatefile("./api/pnpg_support_service/v1/verifyLegal_op_policy.xml.tpl", {
-        CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-party-reg-proxy-ca.${var.ca_suffix_dns_private_name}/"
+      xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ext-api-backend.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint

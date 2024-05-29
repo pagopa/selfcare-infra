@@ -242,7 +242,7 @@ components:
       title: VerifyLegalRequest
       type: object
       properties:
-        vatNumer:
+        vatNumber:
           type: string
         taxId:
           type: string
