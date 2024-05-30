@@ -250,9 +250,26 @@ variable "private_dns_name" {
   description = "AKS private DNS record"
 }
 
-variable "private_onboarding_dns_name" {
+variable "ca_suffix_dns_private_name" {
   type        = string
-  description = "AKS private onboarding DNS record"
+  description = "CA suffix private DNS record"
+}
+
+variable "ca_pnpg_suffix_dns_private_name" {
+  type        = string
+  description = "CA PNPG suffix private DNS record"
+}
+
+variable "spid_selc_path_prefix" {
+  type        = string
+  description = "Path prefix to hub spid login"
+  default     = "/spid/v1"
+}
+
+variable "spid_pnpg_path_prefix" {
+  type        = string
+  description = "Path prefix to hub spid login"
+  default     = "/spid/v1"
 }
 
 variable "aks_num_outbound_ips" {

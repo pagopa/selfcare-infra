@@ -26,6 +26,7 @@ locals {
     "/spid/*",
     "/spid-login/*",
     "/dashboard/*",
+    "^/imprese/onboarding/v\\d+/.*$",
     "^/onboarding/v\\d+/.*$",
     "/ms-notification-manager/*",
     "/party-registry-proxy/*",
@@ -63,6 +64,28 @@ locals {
       probe_name                  = "probe-platform-aks"
       request_timeout             = 60
       fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
+      pick_host_name_from_backend = false
+    }
+    hub-spid-selc = {
+      protocol                    = "Https"
+      host                        = "selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"
+      port                        = 443
+      ip_addresses                = null
+      probe                       = "/info"
+      probe_name                  = "probe-hub-spid-selc"
+      request_timeout             = 60
+      fqdns                       = ["selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"]
+      pick_host_name_from_backend = false
+    }
+    hub-spid-pnpg = {
+      protocol                    = "Https"
+      host                        = "selc-${var.env_short}-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"
+      port                        = 443
+      ip_addresses                = null
+      probe                       = "/info"
+      probe_name                  = "probe-hub-spid-pnpg"
+      request_timeout             = 60
+      fqdns                       = ["selc-${var.env_short}-pnpg-hub-spid-login-ca.${var.ca_pnpg_suffix_dns_private_name}"]
       pick_host_name_from_backend = false
     }
   }
@@ -128,14 +151,7 @@ module "app_gw" {
   listeners = local.listeners
 
   # maps listener to backend
-  routes = {
-    api-pnpg-to-platform-aks = {
-      listener              = "api-pnpg"
-      backend               = "platform-aks"
-      rewrite_rule_set_name = null
-      priority              = 20
-    }
-  }
+  routes = {}
 
   routes_path_based = {
     api = {
@@ -143,6 +159,12 @@ module "app_gw" {
       priority     = null
       url_map_name = "api"
       priority     = 10
+    }
+    api-pnpg = {
+      listener     = "api-pnpg"
+      priority     = null
+      url_map_name = "api-pnpg"
+      priority     = 20
     }
   }
 
@@ -155,6 +177,32 @@ module "app_gw" {
           paths                 = ["/external/*"]
           backend               = "apim"
           rewrite_rule_set_name = null
+        }
+        bff_api = {
+          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
+        hub_spid_selc = {
+          paths                 = ["${var.spid_selc_path_prefix}/*"]
+          backend               = "hub-spid-selc"
+          rewrite_rule_set_name = "rewrite-rule-set-hub-spid-selc"
+        }
+      }
+    }
+    api-pnpg = {
+      default_backend               = "platform-aks"
+      default_rewrite_rule_set_name = "rewrite-rule-set-api"
+      path_rule = {
+        bff_pnpg_api = {
+          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*"]
+          backend               = "apim"
+          rewrite_rule_set_name = null
+        }
+        hub_spid_pnpg = {
+          paths                 = ["${var.spid_pnpg_path_prefix}/*"]
+          backend               = "hub-spid-pnpg"
+          rewrite_rule_set_name = "rewrite-rule-set-hub-spid-pnpg"
         }
       }
     }
@@ -217,6 +265,52 @@ module "app_gw" {
         },
       ]
     },
+    {
+      name = "rewrite-rule-set-hub-spid-selc"
+      rewrite_rules = [
+        {
+          name          = "remove-spid-path"
+          rule_sequence = 1
+          conditions = [{
+            ignore_case = true
+            negate      = false
+            pattern     = "${var.spid_selc_path_prefix}/(.*)"
+            variable    = "var_uri_path"
+          }]
+          request_header_configurations  = []
+          response_header_configurations = []
+          ## set path only on azure portal
+          url = {
+            path         = "{var_uri_path_1}"
+            query_string = ""
+            components   = "path_only"
+          }
+        }
+      ]
+    },
+    {
+      name = "rewrite-rule-set-hub-spid-pnpg"
+      rewrite_rules = [
+        {
+          name          = "remove-spid-path"
+          rule_sequence = 1
+          conditions = [{
+            ignore_case = true
+            negate      = false
+            pattern     = "${var.spid_pnpg_path_prefix}/(.*)"
+            variable    = "var_uri_path"
+          }]
+          request_header_configurations  = []
+          response_header_configurations = []
+          ## set path only on azure portal
+          url = {
+            path         = "{var_uri_path_1}"
+            query_string = ""
+            components   = "path_only"
+          }
+        }
+      ]
+    }
   ]
 
   # TLS

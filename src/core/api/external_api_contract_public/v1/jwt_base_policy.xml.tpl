@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-        <base/>
+        <base />
         <set-variable name="jwt" value="@{
             // 1) Construct the Base64Url-encoded header
             var header = new { typ = "JWT", alg = "RS256", kid = "${KID}" };
@@ -12,10 +12,12 @@
             var iat = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var exp = new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds();  // sets the expiration of the token to be 30 seconds from now
             var uid = "m2m";
+
+
             var aud = "${API_DOMAIN}";
             var iss = "SPID";
             var name = "apim";
-            var payload = new { name, exp, uid, aud, iss, iat };
+            var payload = new { name, exp, uid, aud, iss , iat};
             var jwtPayloadBase64UrlEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload))).Replace("/", "_").Replace("+", "-"). Replace("=", "");
 
             // 3) Construct the Base64Url-encoded signature
@@ -30,33 +32,17 @@
             }
 
             }"/>
-        <choose>
-            <when condition="@(((string)context.Variables["productId"]).Contains("prod-fd"))">
-                <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized" require-expiration-time="false" require-scheme="Bearer" require-signed-tokens="true">
-                    <openid-config url="https://login.microsoftonline.com/${TENANT_ID}/.well-known/openid-configuration" />
-                    <required-claims>
-                        <claim name="aud" match="all">
-                            <value>${EXTERNAL-OAUTH2-ISSUER}</value>
-                        </claim>
-                    </required-claims>
-                </validate-jwt>
-            </when>
-        </choose>
         <set-header name="Authorization" exists-action="override">
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
-        <set-query-parameter name="productId" exists-action="override">
-              <value>@((string)context.Variables["productId"])</value>
-         </set-query-parameter>
-        <set-backend-service base-url="${BACKEND_BASE_URL}" />
     </inbound>
     <backend>
-        <forward-request timeout="240"/>
+        <base />
     </backend>
     <outbound>
         <base />
     </outbound>
     <on-error>
-        <base/>
+        <base />
     </on-error>
 </policies>

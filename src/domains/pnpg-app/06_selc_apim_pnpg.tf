@@ -60,7 +60,8 @@ module "apim_external_api_data_vault_v1" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
+  service_url = format("https://selc-%s-pnpg-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
+
 
   content_format = "openapi"
   content_value = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
@@ -86,7 +87,7 @@ module "apim_external_api_data_vault_v1" {
       operation_id = "addInstitutionUsingPOST"
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/external-api/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                     = local.api_domain
         KID                            = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
@@ -96,7 +97,7 @@ module "apim_external_api_data_vault_v1" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                     = local.api_domain
         KID                            = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
@@ -128,7 +129,7 @@ module "apim_external_api_ms_v2" {
     "https"
   ]
 
-  service_url = format("http://%s/external-api/v1/", var.ingress_load_balancer_hostname)
+  service_url = format("https://selc-%s-pnpg-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
   content_value = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
@@ -154,6 +155,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getInstitutionsUsingGET"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
         CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
@@ -163,7 +165,7 @@ module "apim_external_api_ms_v2" {
     {
       operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
-        USER_GROUP_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-user-group/user-groups/v1/"
+        USER_GROUP_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
         API_DOMAIN                  = local.api_domain
         KID                         = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT  = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
@@ -173,7 +175,7 @@ module "apim_external_api_ms_v2" {
       operation_id = "getInstitution"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
-        PARTY_PROCESS_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-core/v1/"
+        PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                     = local.api_domain
         KID                            = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT     = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
@@ -183,27 +185,12 @@ module "apim_external_api_ms_v2" {
       operation_id = "getProductUsingGET"
       xml_content = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-product/v1/"
+        API_DOMAIN                  = local.api_domain
+        KID                         = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT  = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     }
   ]
-}
-resource "azurerm_api_management_named_value" "apim_named_value_backend_access_token" {
-
-  name                = "backend-access-token-pnpg"
-  api_management_name = local.apim_name
-  resource_group_name = local.apim_rg
-
-  display_name = "backend-access-token-pnpg"
-  secret       = true
-  value_from_key_vault {
-    secret_id = data.azurerm_key_vault_secret.apim_backend_access_token.id
-  }
-
-}
-
-data "azurerm_key_vault_secret" "apim_backend_access_token" {
-  name         = "apim-backend-access-token"
-  key_vault_id = data.azurerm_key_vault.kv_domain.id
 }
 
 # PRODUCTS

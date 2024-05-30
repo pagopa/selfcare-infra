@@ -52,7 +52,6 @@ locals {
 
 
   # Monitor
-  alert_pnpg_error_5xx_name             = "pnpg-error-5xx"
   alert_functions_exceptions_name       = "pnpg-functions-exception"
   alert_functions_exceptions_role_names = ["selc-${var.env_short}-pnpg-onboarding-fn"]
 }
@@ -165,6 +164,11 @@ variable "ingress_load_balancer_ip" {
 
 variable "ingress_load_balancer_hostname" {
   type = string
+}
+
+variable "ca_suffix_dns_private_name" {
+  type        = string
+  description = "CA suffix private DNS record"
 }
 
 variable "reverse_proxy_ip" {

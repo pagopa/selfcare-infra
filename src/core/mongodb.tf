@@ -229,6 +229,10 @@ locals {
             {
               keys   = ["onboarding.productId"]
               unique = false
+            },
+            {
+              keys   = ["taxCode"]
+              unique = false
             }
           ]
         },
@@ -266,6 +270,26 @@ locals {
             },
             {
               keys   = ["productId"]
+              unique = false
+            }
+          ]
+        },
+        {
+          name = "Delegations"
+          indexes = [{
+            keys   = ["_id"]
+            unique = true
+            },
+            {
+              keys   = ["institutionFromName"]
+              unique = false
+            },
+            {
+              keys   = ["from"]
+              unique = false
+            },
+            {
+              keys   = ["to"]
               unique = false
             }
           ]

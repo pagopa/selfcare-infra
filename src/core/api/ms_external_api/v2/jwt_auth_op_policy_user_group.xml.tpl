@@ -11,9 +11,6 @@
                         </claim>
                     </required-claims>
                 </validate-jwt>
-                <set-header name="Authorization" exists-action="override">
-                    <value>Bearer {{backend-access-token}}</value>
-                </set-header>
             </when>
         </choose>
         <set-backend-service base-url="${USER_GROUP_BACKEND_BASE_URL}" />
@@ -21,6 +18,10 @@
         <set-query-parameter name="productId" exists-action="override">
             <value>@((string)context.Variables["productId"])</value>
         </set-query-parameter>
+
+        <set-header name="Authorization" exists-action="override">
+            <value>@((string)context.Variables["jwt"])</value>
+        </set-header>
     </inbound>
     <backend>
         <base/>

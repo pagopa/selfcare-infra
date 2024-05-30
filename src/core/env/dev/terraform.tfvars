@@ -89,9 +89,10 @@ aks_system_node_pool_node_count_min = 1
 aks_system_node_pool_node_count_max = 1
 
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip            = "10.1.1.250"
-private_dns_name            = "selc.internal.dev.selfcare.pagopa.it"
-private_onboarding_dns_name = "selc-d-onboarding-ms-ca.gentleflower-c63e62fe.westeurope.azurecontainerapps.io"
+reverse_proxy_ip                = "10.1.1.250"
+private_dns_name                = "selc.internal.dev.selfcare.pagopa.it"
+ca_suffix_dns_private_name      = "politewater-9af33050.westeurope.azurecontainerapps.io"
+ca_pnpg_suffix_dns_private_name = "victoriousfield-e39534b8.westeurope.azurecontainerapps.io"
 
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
@@ -241,6 +242,10 @@ eventhub_ip_rules = [
   #   ip_mask = "2.228.86.218/32",
   #   action = "Allow"
   # },
+  { // KONECTA
+    ip_mask = "185.170.36.80",
+    action  = "Allow"
+  }
 ]
 
 eventhub_rds_vm = {
@@ -300,6 +305,18 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "conservazione"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   }, {
@@ -356,8 +373,15 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
-      }, {
+    },
+    {
       name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "sma"
       listen = true
       send   = false
       manage = false

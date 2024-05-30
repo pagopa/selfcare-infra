@@ -765,6 +765,20 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: search
+          in: query
+          description: Description institution
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: taxCode
+          in: query
+          description: Institution's tax code
+          required: false
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -790,6 +804,72 @@ paths:
         - bearerAuth:
             - global
   '/users':
+    get:
+      tags:
+        - users
+      summary: getUserInstitution
+      description: "This endpoint retrieves detailed information about a user's association with various products within an institution. The response provides a comprehensive view of the user's roles, product statuses and the relevant timestamps."
+      operationId: getUserInstitutionUsingGET
+      parameters:
+        - name: institutionId
+          description: Institution's unique identifier.
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            format: int32
+            default: '0'
+            type: integer
+        - name: productRoles
+          description: Specific role of the user related to the product.
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: roles
+          description: General role of the user related to the the product.
+          in: query
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PartyRole'
+        - name: size
+          in: query
+          schema:
+            format: int32
+            default: '100'
+            type: integer
+        - name: states
+          description: "The current status of the user on the product. <br>Available values: ACTIVE, PENDING, TOBEVALIDATED, SUSPENDED, DELETED, REJECTED"
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: userId
+          description: User's unique identifier.
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserInstitutionResponse'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
     post:
       tags:
         - users
@@ -1689,6 +1769,18 @@ components:
         fiscalCode:
           type: string
           description: User's fiscal code
+        statuses:
+          type: array
+          description: User's statuses
+          items:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
     UserInfoResource:
       title: UserInfoResource
       type: object
@@ -1734,9 +1826,15 @@ components:
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
+        state:
+          type: string
+          description: Onboarding's state
         taxCode:
           type: string
           description: Institution's tax code
+        userEmail:
+          type: string
+          description: User's email linked to the institution
         zipCode:
           type: string
           description: Institution's zip code
@@ -1749,7 +1847,11 @@ components:
           format: date-time
         id:
           type: string
+        productRole:
+          type: string
         role:
+          type: string
+        status:
           type: string
     InstitutionsResponse:
       title: InstitutionsResponse
@@ -2109,6 +2211,84 @@ components:
           type: string
         desc:
           type: string
+    PartyRole:
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+      type: string
+      description: The general role of the user related to the product.
+    UserInstitutionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the user-institution association record.
+        userId:
+          type: string
+          description: A unique identifier for the user.
+        institutionId:
+          type: string
+          description: A unique identifier for the institution to which the user is associated.
+        institutionDescription:
+          type: string
+          description: A textual description of the institution.
+        institutionRootName:
+          type: string
+          description: The root name of the institution.
+        userMailUuid:
+          type: string
+          description: A unique identifier for the user's email.
+        products:
+          type: array
+          description: A list of products associated with the user.
+          items:
+            $ref: '#/components/schemas/OnboardedProductResponse'
+    OnboardedProductResponse:
+      type: object
+      properties:
+        productId:
+          type: string
+          description: A unique identifier for the product.
+        tokenId:
+          type: string
+          description: A unique identifier for the token associated with the product.
+        status:
+          $ref: '#/components/schemas/OnboardedProductState'
+        productRole:
+          type: string
+          description: The specific role of the user related to the product.
+        role:
+          $ref: '#/components/schemas/PartyRole'
+        env:
+          $ref: '#/components/schemas/Env'
+        createdAt:
+          $ref: '#/components/schemas/LocalDateTime'
+        updatedAt:
+          $ref: '#/components/schemas/LocalDateTime'
+    OnboardedProductState:
+      enum:
+        - ACTIVE
+        - PENDING
+        - TOBEVALIDATED
+        - SUSPENDED
+        - DELETED
+        - REJECTED
+      type: string
+      description: The current status of the user on the product.
+    Env:
+      enum:
+        - ROOT
+        - DEV
+        - COLL
+        - PROD
+      type: string
+      description: The environment in which the product is used.
+    LocalDateTime:
+      format: date-time
+      type: string
+      example: '2022-03-10T12:15:50'
   securitySchemes:
     bearerAuth:
       type: http

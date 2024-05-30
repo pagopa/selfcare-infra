@@ -340,6 +340,13 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: search
+          in: query
+          description: Description institution
+          required: false
+          style: form
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -736,6 +743,18 @@ components:
         fiscalCode:
           type: string
           description: User's fiscal code
+        statuses:
+          type: array
+          description: User's statuses
+          items:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
     UserInfoResource:
       title: UserInfoResource
       type: object
@@ -781,9 +800,15 @@ components:
         productInfo:
           description: Products' info of onboardings
           $ref: '#/components/schemas/ProductInfo'
+        state:
+          type: string
+          description: Onboarding's state
         taxCode:
           type: string
           description: Institution's tax code
+        userEmail:
+          type: string
+          description: User's email linked to the institution
         zipCode:
           type: string
           description: Institution's zip code
@@ -795,6 +820,8 @@ components:
           type: string
           format: date-time
         id:
+          type: string
+        productRole:
           type: string
         role:
           type: string
@@ -1281,7 +1308,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+            type: string
         imported:
           type: boolean
         institutionType:
