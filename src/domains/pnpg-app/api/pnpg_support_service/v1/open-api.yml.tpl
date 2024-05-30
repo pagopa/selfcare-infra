@@ -145,14 +145,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VerifyLegalRequest'
+              $ref: '#/components/schemas/VerifyRequestDto'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/LegalVerificationResult"
+                "$ref": "#/components/schemas/LegalVerificationResource"
         '400':
           description: Bad Request
           content:
@@ -228,8 +228,8 @@ components:
       description: >-
         A "problem detail" as a way to carry machine-readable details of errors
         (https://datatracker.ietf.org/doc/html/rfc7807)
-    LegalVerificationResult:
-      title: LegalVerificationResult
+    LegalVerificationResource:
+      title: LegalVerificationResource
       type: object
       properties:
         resultCode:
@@ -238,13 +238,16 @@ components:
           type: string
         verificationResult:
           type: boolean
-    VerifyLegalRequest:
-      title: VerifyLegalRequest
+    VerifyRequestDto:
+      title: VerifyRequestDto
+      required:
+        - taxId
+        - vatNumber
       type: object
       properties:
-        vatNumber:
-          type: string
         taxId:
+          type: string
+        vatNumber:
           type: string
     PageOfUserGroupResource:
       title: PageOfUserGroupResource
