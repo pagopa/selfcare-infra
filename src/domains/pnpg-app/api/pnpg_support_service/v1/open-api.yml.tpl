@@ -100,6 +100,33 @@ paths:
           style: simple
           schema:
             type: string
+        - name: productId
+          in: query
+          description: Users group's productId
+          required: false
+          style: form
+          schema:
+            type: string
+        - name: userId
+          in: query
+          description: Member's unique identifier
+          required: false
+          style: form
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: query
+          description: If filter on status is present, it must be used with at least one of the other filters
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - SUSPENDED
       responses:
         '200':
           description: OK
