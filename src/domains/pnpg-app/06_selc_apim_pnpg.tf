@@ -1,4 +1,3 @@
-
 module "apim_pnpg" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product?ref=v4.1.17"
 
@@ -56,7 +55,7 @@ module "apim_external_api_data_vault_v1" {
   display_name = "External API Data Vault"
   path         = "external/data-vault"
   api_version  = "v1"
-  protocols = [
+  protocols    = [
     "https"
   ]
 
@@ -64,7 +63,7 @@ module "apim_external_api_data_vault_v1" {
 
 
   content_format = "openapi"
-  content_value = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
+  content_value  = templatefile("./api/external_api_data_vault/v1/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
@@ -72,7 +71,7 @@ module "apim_external_api_data_vault_v1" {
   xml_content = file("./api/external_api_data_vault/v1/base_policy.xml")
 
   subscription_required = true
-  product_ids = [
+  product_ids           = [
     module.apim_pnpg_product_pn_pg.product_id,
     module.apim_product_pnpg_uat_coll.product_id,
     module.apim_product_pnpg_uat_svil.product_id,
@@ -85,7 +84,7 @@ module "apim_external_api_data_vault_v1" {
   api_operation_policies = [
     {
       operation_id = "addInstitutionUsingPOST"
-      xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                     = local.api_domain
@@ -95,7 +94,7 @@ module "apim_external_api_data_vault_v1" {
     },
     {
       operation_id = "getInstitution"
-      xml_content = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_data_vault/v1/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                     = local.api_domain
@@ -125,14 +124,14 @@ module "apim_external_api_ms_v2" {
   display_name = "External API service for PNPG"
   path         = "external/pn-pg"
   api_version  = "v2"
-  protocols = [
+  protocols    = [
     "https"
   ]
 
   service_url = format("https://selc-%s-pnpg-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
 
   content_format = "openapi"
-  content_value = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
+  content_value  = templatefile("./api/external_api_for_pnpg/v2/open-api.yml.tpl", {
     host     = local.pnpg_hostname
     basePath = "v1"
   })
@@ -140,7 +139,7 @@ module "apim_external_api_ms_v2" {
   xml_content = file("./api/external_api_for_pnpg/v2/base_policy.xml")
 
   subscription_required = true
-  product_ids = [
+  product_ids           = [
     module.apim_pnpg_product_pn_pg.product_id,
     module.apim_product_pnpg_uat_coll.product_id,
     module.apim_product_pnpg_uat_svil.product_id,
@@ -154,7 +153,7 @@ module "apim_external_api_ms_v2" {
   api_operation_policies = [
     {
       operation_id = "getInstitutionsUsingGET"
-      xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitutions_op_policy.xml.tpl", {
         BACKEND_BASE_URL           = "https://selc-${var.env_short}-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2/"
         CDN_STORAGE_URL            = "https://${local.cdn_storage_hostname}"
         API_DOMAIN                 = local.api_domain
@@ -164,7 +163,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getUserGroupsUsingGET"
-      xml_content = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/jwt_auth_op_policy_user_group.xml.tpl", {
         USER_GROUP_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1/"
         API_DOMAIN                  = local.api_domain
         KID                         = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
@@ -173,7 +172,7 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getInstitution"
-      xml_content = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getInstitution_op_policy.xml.tpl", {
         CDN_STORAGE_URL                = "https://${local.cdn_storage_hostname}"
         PARTY_PROCESS_BACKEND_BASE_URL = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
         API_DOMAIN                     = local.api_domain
@@ -183,13 +182,87 @@ module "apim_external_api_ms_v2" {
     },
     {
       operation_id = "getProductUsingGET"
-      xml_content = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
+      xml_content  = templatefile("./api/external_api_for_pnpg/v2/getProduct_op_policy.xml.tpl", {
         MS_PRODUCT_BACKEND_BASE_URL = "http://${var.ingress_load_balancer_hostname}/ms-product/v1/"
         API_DOMAIN                  = local.api_domain
         KID                         = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT  = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
       })
     }
+  ]
+}
+
+resource "azurerm_api_management_api_version_set" "apim_pnpg_support_service" {
+  name                = format("%s-support-service-pnpg", var.env_short)
+  resource_group_name = local.apim_rg
+  api_management_name = local.apim_name
+  display_name        = "PNPG Support API Service"
+  versioning_scheme   = "Segment"
+}
+
+module "apim_pnpg_support_service_v2" {
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api?ref=v4.1.17"
+  name                = format("%s-support-service-pnpg", local.project)
+  api_management_name = local.apim_name
+  resource_group_name = local.apim_rg
+  version_set_id      = azurerm_api_management_api_version_set.apim_pnpg_support_service.id
+
+  description  = "This service collects the APIs for Support use"
+  display_name = "PNPG Support API service"
+  path         = "external/pn-pg/support"
+  api_version  = "v1"
+  protocols    = [
+    "https"
+  ]
+
+  service_url = format("https://selc-%s-pnpg-ext-api-backend-ca.%s/v1/", var.env_short, var.ca_suffix_dns_private_name)
+
+  content_format = "openapi"
+  content_value  = templatefile("./api/pnpg_support_service/v1/open-api.yml.tpl", {
+    host     = local.pnpg_hostname
+    basePath = "v1"
+  })
+
+
+  subscription_required = true
+
+  api_operation_policies = [
+    {
+      operation_id = "getUsersByInstitution"
+      xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-ms-ca.${var.ca_suffix_dns_private_name}/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+      })
+    },
+    {
+      operation_id = "getUserGroupsUsingGET"
+      xml_content  = templatefile("./api/pnpg_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+      })
+    },
+    {
+      operation_id = "getInstitutionByTaxCode"
+      xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ms-core-ca.${var.ca_suffix_dns_private_name}/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+      })
+    },
+    {
+      operation_id = "verifyLegalByPOST"
+      xml_content  = templatefile("./api/pnpg_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-ext-api-backend-ca.${var.ca_suffix_dns_private_name}/v2"
+        API_DOMAIN                 = local.api_domain
+        KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint
+      })
+    },
   ]
 }
 
