@@ -34,7 +34,9 @@ module "cosmosdb_account_mongodb" {
   resource_group_name  = azurerm_resource_group.mongodb_rg.name
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
-  capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
+  capabilities         = concat([
+    "EnableMongo"
+  ], var.cosmosdb_mongodb_extra_capabilities)
   mongo_server_version = "4.2"
 
   public_network_access_enabled         = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
@@ -42,7 +44,9 @@ module "cosmosdb_account_mongodb" {
   private_endpoint_mongo_name           = "${local.project}-cosmosdb-mongodb-account"
   private_service_connection_mongo_name = "${local.project}-cosmosdb-mongodb-account-private-endpoint-mongo"
   subnet_id                             = module.cosmosdb_mongodb_snet.id
-  private_dns_zone_mongo_ids            = var.cosmosdb_mongodb_private_endpoint_enabled ? [azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id] : []
+  private_dns_zone_mongo_ids            = var.cosmosdb_mongodb_private_endpoint_enabled ? [
+    azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id
+  ] : []
   is_virtual_network_filter_enabled     = true
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
@@ -65,7 +69,9 @@ resource "azurerm_cosmosdb_mongo_database" "selc_product" {
   throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
 
   dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [
+      ""
+    ] : []
     content {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
@@ -93,7 +99,9 @@ resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
   throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
 
   dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [
+      ""
+    ] : []
     content {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
@@ -132,9 +140,10 @@ module "mongdb_collection_products" {
   cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
   cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_product.name
 
-  indexes = [{
-    keys   = ["_id"]
-    unique = true
+  indexes = [
+    {
+      keys   = ["_id"]
+      unique = true
     },
     {
       keys   = ["parent"]
@@ -154,9 +163,10 @@ module "mongdb_collection_user-groups" {
   cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
   cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_user_group.name
 
-  indexes = [{
-    keys   = ["_id"]
-    unique = true
+  indexes = [
+    {
+      keys   = ["_id"]
+      unique = true
     },
     {
       keys   = ["institutionId", "productId", "name"]
@@ -188,7 +198,9 @@ resource "azurerm_cosmosdb_mongo_database" "selc_ms_core" {
   throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
 
   dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
+    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [
+      ""
+    ] : []
     content {
       max_throughput = var.cosmosdb_mongodb_max_throughput
     }
@@ -213,10 +225,11 @@ locals {
     selcMsCore = {
       collections = [
         {
-          name = "Institution"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
+          name    = "Institution"
+          indexes = [
+            {
+              keys   = ["_id"]
+              unique = true
             },
             {
               keys   = ["externalId"]
@@ -238,10 +251,11 @@ locals {
         },
 
         {
-          name = "User"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
+          name    = "User"
+          indexes = [
+            {
+              keys   = ["_id"]
+              unique = true
             },
             {
               keys   = ["bindings.institutionId"]
@@ -259,10 +273,11 @@ locals {
         },
 
         {
-          name = "Token"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
+          name    = "Token"
+          indexes = [
+            {
+              keys   = ["_id"]
+              unique = true
             },
             {
               keys   = ["institutionId"]
@@ -275,10 +290,11 @@ locals {
           ]
         },
         {
-          name = "Delegations"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
+          name    = "Delegations"
+          indexes = [
+            {
+              keys   = ["_id"]
+              unique = true
             },
             {
               keys   = ["institutionFromName"]
@@ -290,6 +306,10 @@ locals {
             },
             {
               keys   = ["to"]
+              unique = false
+            },
+            {
+              keys   = ["toTaxCode"]
               unique = false
             }
           ]
