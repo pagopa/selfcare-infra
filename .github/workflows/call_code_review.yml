@@ -76,7 +76,7 @@ jobs:
           OUTPUT="$(cat plan_output.txt | grep -v "Refreshing state" | tail -c 60000)"
           echo "$OUTPUT" > plan_output_multiline.txt
 
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
         name: Post Plan on PR
         if: success() && github.event_name == 'pull_request'
         with:
