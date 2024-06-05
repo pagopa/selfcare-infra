@@ -837,7 +837,7 @@ module "apim_selfcare_support_service_v1" {
         API_DOMAIN                 = local.api_domain
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
-      }
+        }
       )
     },
     {
