@@ -509,6 +509,50 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/institutionOnboardings':
+    get:
+      tags:
+        - Onboarding Controller
+      summary: Returns onboardings record by institution taxCode/subunitCode/origin/originId
+      description: Returns onboardings record by institution taxCode/subunitCode/origin/originId
+      operationId: onboardingInstitutionUsingGET
+      parameters:
+        - name: origin
+          in: query
+          schema:
+            type: string
+        - name: originId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/OnboardingStatus'
+        - name: subunitCode
+          in: query
+          schema:
+            type: string
+        - name: taxCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingResponse'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
   '/onboarding/{onboardingId}/consume':
     put:
       tags:
@@ -1001,46 +1045,6 @@ components:
           type: string
         vatNumberGroup:
           type: boolean
-    OnboardingsResponse:
-      title: OnboardingsResponse
-      type: object
-      properties:
-        onboardings:
-          type: array
-          items:
-            $ref: '#/components/schemas/OnboardingResponse'
-    OnboardingResponse:
-      title: OnboardingResponse
-      type: object
-      properties:
-        billing:
-          $ref: '#/components/schemas/BillingResponse'
-        closedAt:
-          type: string
-          format: date-time
-        contract:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        pricingPlan:
-          type: string
-        productId:
-          type: string
-        status:
-          type: string
-          enum:
-            - ACTIVE
-            - DELETED
-            - PENDING
-            - REJECTED
-            - SUSPENDED
-            - TOBEVALIDATED
-        tokenId:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
     BillingResponse:
       title: BillingResponse
       type: object
@@ -1552,6 +1556,80 @@ components:
           format: date-time
         user:
           $ref: '#/components/schemas/UserToNotify'
+    OnboardingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        productId:
+          type: string
+        workflowType:
+          type: string
+        institution:
+          $ref: '#/components/schemas/InstitutionResponse'
+        pricingPlan:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOnboardingResponse'
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        status:
+          type: string
+        additionalInformations:
+          $ref: '#/components/schemas/AdditionalInformationsDto'
+        userRequestUid:
+          type: string
+    UserOnboardingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+        productRole:
+          type: string
+        userMailUuid:
+          type: string
+    AdditionalInformationsDto:
+      type: object
+      properties:
+        belongRegulatedMarket:
+          type: boolean
+        regulatedMarketNote:
+          type: string
+        ipa:
+          type: boolean
+        ipaCode:
+          type: string
+        establishedByRegulatoryProvision:
+          type: boolean
+        establishedByRegulatoryProvisionNote:
+          type: string
+        agentOfPublicService:
+          type: boolean
+        agentOfPublicServiceNote:
+          type: string
+        otherNote:
+          type: string
+    PartyRole:
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+      type: string
+    OnboardingStatus:
+      enum:
+        - REQUEST
+        - TOBEVALIDATED
+        - PENDING
+        - COMPLETED
+        - FAILED
+        - REJECTED
+        - DELETED
+      type: string
     UserToNotify:
       title: UserToNotify
       type: object
