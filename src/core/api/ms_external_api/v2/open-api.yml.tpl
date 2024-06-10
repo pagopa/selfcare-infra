@@ -16,6 +16,7 @@ paths:
       tags:
         - support
       summary: sendSupportRequest
+      deprecated: true
       description: Service to retrieve Support contact's form
       operationId: sendSupportRequestUsingPOST
       requestBody:
@@ -110,6 +111,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutionsByGeoTaxonomies
+      deprecated: true
       description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode
       operationId: getInstitutionsByGeoTaxonomiesUsingGET
       parameters:
@@ -230,6 +232,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutionGeographicTaxonomies
+      deprecated: true
       description: The service retrieve the institution's geographic taxonomy
       operationId: getInstitutionGeographicTaxonomiesUsingGET
       parameters:
@@ -288,6 +291,7 @@ paths:
       tags:
         - institutions
       summary: getInstitutions
+      deprecated: true
       description: The service retrieves all the onboarded institutions related to the provided user and the product retrieved from Subscription Key
       operationId: getInstitutionsUsingGET
       parameters:
@@ -656,6 +660,7 @@ paths:
       tags:
         - product
       summary: getProduct
+      deprecated: true
       description: The service retrieves Product information related to Subscription Key
       operationId: getProductUsingGET
       parameters:
