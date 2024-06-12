@@ -28,13 +28,13 @@ module "cosmosdb_mongodb_snet" {
 module "cosmosdb_account_mongodb" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v7.50.1"
 
-  name                 = format("%s-cosmosdb-mongodb-account", local.project)
-  location             = azurerm_resource_group.mongodb_rg.location
-  domain               = var.external_domain
-  resource_group_name  = azurerm_resource_group.mongodb_rg.name
-  offer_type           = var.cosmosdb_mongodb_offer_type
-  kind                 = "MongoDB"
-  capabilities         = concat([
+  name                = format("%s-cosmosdb-mongodb-account", local.project)
+  location            = azurerm_resource_group.mongodb_rg.location
+  domain              = var.external_domain
+  resource_group_name = azurerm_resource_group.mongodb_rg.name
+  offer_type          = var.cosmosdb_mongodb_offer_type
+  kind                = "MongoDB"
+  capabilities = concat([
     "EnableMongo"
   ], var.cosmosdb_mongodb_extra_capabilities)
   mongo_server_version = "4.2"
@@ -44,10 +44,10 @@ module "cosmosdb_account_mongodb" {
   private_endpoint_mongo_name           = "${local.project}-cosmosdb-mongodb-account"
   private_service_connection_mongo_name = "${local.project}-cosmosdb-mongodb-account-private-endpoint-mongo"
   subnet_id                             = module.cosmosdb_mongodb_snet.id
-  private_dns_zone_mongo_ids            = var.cosmosdb_mongodb_private_endpoint_enabled ? [
+  private_dns_zone_mongo_ids = var.cosmosdb_mongodb_private_endpoint_enabled ? [
     azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id
   ] : []
-  is_virtual_network_filter_enabled     = true
+  is_virtual_network_filter_enabled = true
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
 
@@ -225,7 +225,7 @@ locals {
     selcMsCore = {
       collections = [
         {
-          name    = "Institution"
+          name = "Institution"
           indexes = [
             {
               keys   = ["_id"]
@@ -251,7 +251,7 @@ locals {
         },
 
         {
-          name    = "User"
+          name = "User"
           indexes = [
             {
               keys   = ["_id"]
@@ -273,7 +273,7 @@ locals {
         },
 
         {
-          name    = "Token"
+          name = "Token"
           indexes = [
             {
               keys   = ["_id"]
@@ -290,7 +290,7 @@ locals {
           ]
         },
         {
-          name    = "Delegations"
+          name = "Delegations"
           indexes = [
             {
               keys   = ["_id"]
