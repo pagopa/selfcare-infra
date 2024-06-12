@@ -1400,6 +1400,80 @@ components:
             - MANAGER
             - OPERATOR
             - SUB_DELEGATE
+    OnboardingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        productId:
+          type: string
+        workflowType:
+          type: string
+        institution:
+          $ref: '#/components/schemas/InstitutionResponse'
+        pricingPlan:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOnboardingResponse'
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        status:
+          type: string
+        additionalInformations:
+          $ref: '#/components/schemas/AdditionalInformationsDto'
+        userRequestUid:
+          type: string
+    UserOnboardingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+        productRole:
+          type: string
+        userMailUuid:
+          type: string
+    AdditionalInformationsDto:
+      type: object
+      properties:
+        belongRegulatedMarket:
+          type: boolean
+        regulatedMarketNote:
+          type: string
+        ipa:
+          type: boolean
+        ipaCode:
+          type: string
+        establishedByRegulatoryProvision:
+          type: boolean
+        establishedByRegulatoryProvisionNote:
+          type: string
+        agentOfPublicService:
+          type: boolean
+        agentOfPublicServiceNote:
+          type: string
+        otherNote:
+          type: string
+    PartyRole:
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+      type: string
+    OnboardingStatus:
+      enum:
+        - REQUEST
+        - TOBEVALIDATED
+        - PENDING
+        - COMPLETED
+        - FAILED
+        - REJECTED
+        - DELETED
+      type: string
   securitySchemes:
     bearerAuth:
       type: http
