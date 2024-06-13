@@ -361,10 +361,10 @@ paths:
   '/user-groups':
     get:
       tags:
-      - user-group
+      - UserGroup
       summary: getUserGroups
-      description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
-      operationId: getUserGroupsUsingGET
+      description: Service that allows to get a list of UserGroup entities
+      operationId: getUserGroupsUsingGET_1
       parameters:
       - name: institutionId
         in: query
@@ -411,46 +411,47 @@ paths:
           format: uuid
       - name: status
         in: query
-        description: If filter on status is present, it must be used with at least
-          one of the other filters
+        description: If filter on status is present, it must be used with at least one of the other filters
         required: false
         style: form
+        explode: true
         schema:
           type: string
           enum:
-          - ACTIVE
-          - SUSPENDED
+            - ACTIVE
+            - DELETED
+            - SUSPENDED
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/PageOfUserGroupResource"
+                $ref: '#/components/schemas/PageOfUserGroupResource'
         '400':
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
       security:
       - bearerAuth:
         - global
@@ -952,6 +953,12 @@ components:
         institutionId:
           type: string
           description: Users group's institutionId
+        members:
+          type: array
+          description: List of all the members of the group
+          items:
+            type: string
+            format: uuid
         name:
           type: string
           description: Users group's name
@@ -963,6 +970,7 @@ components:
           description: Users group's status
           enum:
           - ACTIVE
+          - DELETED
           - SUSPENDED
     UserResource:
       title: UserResource
