@@ -85,21 +85,49 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/institutions/{institutionId}/groups':
+  '/user-groups':
     get:
       tags:
-        - institutions
+        - UserGroup
       summary: getUserGroups
-      description: Service that allows to get a list of UserGroup entities filtered by the product related to Subscription Key
-      operationId: getUserGroupsUsingGET
+      description: Service that allows to get a list of UserGroup entities
+      operationId: getUserGroupsUsingGET_1
       parameters:
         - name: institutionId
-          in: path
-          description: Institution's unique identifier
-          required: true
-          style: simple
+          in: query
+          description: Users group's institutionId
+          required: false
+          style: form
           schema:
             type: string
+        - name: page
+          in: query
+          description: The page number to access (0 indexed, defaults to 0)
+          required: false
+          style: form
+          allowReserved: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: Number of records per page (defaults to 20, max 2000)
+          required: false
+          style: form
+          allowReserved: true
+          schema:
+            type: integer
+            format: int32
+        - name: sort
+          in: query
+          description: 'Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.'
+          required: false
+          style: form
+          allowReserved: true
+          schema:
+            type: array
+            items:
+              type: string
         - name: productId
           in: query
           description: Users group's productId
@@ -133,31 +161,31 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/PageOfUserGroupResource"
+                $ref: '#/components/schemas/PageOfUserGroupResource'
         '400':
           description: Bad Request
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '401':
           description: Unauthorized
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
         '500':
           description: Internal Server Error
           content:
             application/problem+json:
               schema:
-                "$ref": "#/components/schemas/Problem"
+                $ref: '#/components/schemas/Problem'
       security:
         - bearerAuth:
             - global
@@ -314,6 +342,12 @@ components:
         institutionId:
           type: string
           description: Users group's institutionId
+        members:
+          type: array
+          description: List of all the members of the group
+          items:
+            type: string
+            format: uuid
         name:
           type: string
           description: Users group's name
@@ -325,6 +359,7 @@ components:
           description: Users group's status
           enum:
             - ACTIVE
+            - DELETED
             - SUSPENDED
     InstitutionsResponse:
       title: InstitutionsResponse

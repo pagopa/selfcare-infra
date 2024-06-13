@@ -237,9 +237,9 @@ module "apim_pnpg_support_service_v2" {
       })
     },
     {
-      operation_id = "getUserGroupsUsingGET"
+      operation_id = "getUserGroupsUsingGET_1"
       xml_content = templatefile("./api/pnpg_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
-        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/user-groups/v1"
+        BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
         KID                        = data.terraform_remote_state.core.outputs.jwt_auth_jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = data.terraform_remote_state.core.outputs.azurerm_api_management_certificate_jwt_certificate_thumbprint

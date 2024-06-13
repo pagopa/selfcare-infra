@@ -34,11 +34,6 @@
             <value>@((string)context.Variables["jwt"])</value>
         </set-header>
         <set-backend-service base-url="${BACKEND_BASE_URL}" />
-        <set-variable name="institutionId" value="@(context.Request.MatchedParameters["institutionId"])" />
-        <set-variable name="rewriteUri" value="@{
-          return string.Format("/?institutionId={0}", context.Variables["institutionId"]);
-        }" />
-        <rewrite-uri template="@((string)context.Variables["rewriteUri"])" />
     </inbound>
     <backend>
         <base/>
