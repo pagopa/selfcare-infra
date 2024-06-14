@@ -839,6 +839,15 @@ module "apim_selfcare_support_service_v1" {
         KID                        = module.jwt.jwt_kid
         JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
       })
+    },
+    {
+      operation_id = "updateOnboardiUsingPUT"
+      xml_content = templatefile("./api/selfcare_support_service/v1/support_op_policy.xml.tpl", {
+        BACKEND_BASE_URL = "https://selc-${var.env_short}-onboarding-ms-ca.${var.ca_suffix_dns_private_name}/v1/"
+        API_DOMAIN                 = local.api_domain
+        KID                        = module.jwt.jwt_kid
+        JWT_CERTIFICATE_THUMBPRINT = azurerm_api_management_certificate.jwt_certificate.thumbprint
+      })
     }
   ]
 }
