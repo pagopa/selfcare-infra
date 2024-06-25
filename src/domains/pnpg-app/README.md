@@ -17,6 +17,7 @@
 | <a name="module_apim_external_api_ms_v2"></a> [apim\_external\_api\_ms\_v2](#module\_apim\_external\_api\_ms\_v2) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v4.1.17 |
 | <a name="module_apim_pnpg"></a> [apim\_pnpg](#module\_apim\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_pnpg_product_pn_pg"></a> [apim\_pnpg\_product\_pn\_pg](#module\_apim\_pnpg\_product\_pn\_pg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
+| <a name="module_apim_pnpg_support_service_v2"></a> [apim\_pnpg\_support\_service\_v2](#module\_apim\_pnpg\_support\_service\_v2) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v4.1.17 |
 | <a name="module_apim_product_pnpg_dev"></a> [apim\_product\_pnpg\_dev](#module\_apim\_product\_pnpg\_dev) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_hotfix"></a> [apim\_product\_pnpg\_hotfix](#module\_apim\_product\_pnpg\_hotfix) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_apim_product_pnpg_test"></a> [apim\_product\_pnpg\_test](#module\_apim\_product\_pnpg\_test) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
@@ -34,7 +35,7 @@
 |------|------|
 | [azurerm_api_management_api_version_set.apim_external_api_data_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_api_management_api_version_set.apim_external_api_v2_for_pnpg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_named_value.apim_named_value_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_named_value) | resource |
+| [azurerm_api_management_api_version_set.apim_pnpg_support_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.appinsights-instrumentation-key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_aks_apiserver_url](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
@@ -42,8 +43,13 @@
 | [azurerm_key_vault_secret.azure_devops_sa_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_monitor_action_group.http_status](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 | [azurerm_monitor_metric_alert.functions_exceptions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
+<<<<<<< HEAD
 | [azurerm_monitor_metric_alert.pnpg_error_5xx](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_nat_gateway.nat_gateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/nat_gateway) | resource |
+=======
+| [azurerm_monitor_metric_alert.http_error_5xx](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
+| [azurerm_monitor_metric_alert.unhealthy_error_503](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
+>>>>>>> develop
 | [azurerm_private_dns_a_record.ingress](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
 | [azurerm_public_ip.functions_pip_outbound](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
 | [azurerm_public_ip.pip_outbound](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip) | resource |
@@ -98,6 +104,7 @@
 | [null_resource.upload_alert_message](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_one_trust](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [null_resource.upload_robots](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [azuread_group.adgroup_admin](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_developers](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
 | [azuread_group.adgroup_externals](https://registry.terraform.io/providers/hashicorp/azuread/2.33.0/docs/data-sources/group) | data source |
@@ -106,7 +113,6 @@
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 | [azurerm_dns_zone.public](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/dns_zone) | data source |
 | [azurerm_key_vault.kv_domain](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_secret.apim_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_kubernetes_cluster.aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/kubernetes_cluster) | data source |
 | [azurerm_log_analytics_workspace.log_analytics](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/log_analytics_workspace) | data source |
 | [azurerm_monitor_action_group.email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/monitor_action_group) | data source |
@@ -127,6 +133,7 @@
 | <a name="input_anac-ftp"></a> [anac-ftp](#input\_anac-ftp) | n/a | `map(string)` | n/a | yes |
 | <a name="input_api_gateway_url"></a> [api\_gateway\_url](#input\_api\_gateway\_url) | n/a | `string` | n/a | yes |
 | <a name="input_aruba_sign_service"></a> [aruba\_sign\_service](#input\_aruba\_sign\_service) | n/a | `map(string)` | n/a | yes |
+| <a name="input_ca_suffix_dns_private_name"></a> [ca\_suffix\_dns\_private\_name](#input\_ca\_suffix\_dns\_private\_name) | CA suffix private DNS record | `string` | n/a | yes |
 | <a name="input_configmaps_common"></a> [configmaps\_common](#input\_configmaps\_common) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_hub-spid-login-ms"></a> [configmaps\_hub-spid-login-ms](#input\_configmaps\_hub-spid-login-ms) | n/a | `map(string)` | n/a | yes |
 | <a name="input_configmaps_interop-be-party-process"></a> [configmaps\_interop-be-party-process](#input\_configmaps\_interop-be-party-process) | ConfigMaps & Secrets | `map(string)` | n/a | yes |
