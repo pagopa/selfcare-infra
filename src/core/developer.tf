@@ -1,7 +1,7 @@
 locals {
   resource_groups_name   = format("%s-api-rg", local.project)
   service_name           = format("%s-apim", local.project)
-  azure_apim_api_version = "2021-08-01"
+  azure_apim_api_version = "2023-05-01-preview"
 }
 
 resource "null_resource" "download_apim_external_api_v1" {
