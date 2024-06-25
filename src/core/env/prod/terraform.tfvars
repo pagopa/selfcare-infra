@@ -94,7 +94,9 @@ redis_version  = 6
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                  = "10.1.1.250"
 private_dns_name                  = "selc.internal.selfcare.pagopa.it"
-private_onboarding_dns_name       = "selc-p-onboarding-ms-ca.bluedune-cc0f8752.westeurope.azurecontainerapps.io"
+ca_suffix_dns_private_name        = "greensand-62fc96da.westeurope.azurecontainerapps.io"
+ca_pnpg_suffix_dns_private_name   = "calmmoss-0be48755.westeurope.azurecontainerapps.io"
+spid_selc_path_prefix             = "/spid-login/v1"
 aks_kubernetes_version            = "1.27.7"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
@@ -349,6 +351,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "sma"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   }, {
@@ -405,8 +413,15 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
-      }, {
+    },
+    {
       name   = "external-interceptor"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "sma"
       listen = true
       send   = false
       manage = false

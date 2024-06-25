@@ -85,8 +85,8 @@ output "private_dns_name" {
   value = var.private_dns_name
 }
 
-output "private_onboarding_dns_name" {
-  value = var.private_onboarding_dns_name
+output "ca_suffix_dns_private_name" {
+  value = var.ca_suffix_dns_private_name
 }
 
 ## CosmosDb - MongoDB ##

@@ -217,75 +217,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-  '/onboarding/{externalInstitutionId}/products/{productId}':
-      post:
-        tags:
-          - onboarding
-        summary: autoApprovalOnboarding
-        description: The service allows the onboarding of institutions with auto approval
-        operationId: autoApprovalOnboardingUsingPOST
-        parameters:
-          - name: x-selfcare-uid
-            in: header
-            description: Logged user's unique identifier
-            required: true
-            schema:
-              type: string
-          - name: externalInstitutionId
-            in: path
-            description: Institution's unique external identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-          - name: productId
-            in: path
-            description: Product's unique identifier
-            required: true
-            style: simple
-            schema:
-              type: string
-        requestBody:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OnboardingDto'
-        responses:
-          '201':
-            description: Created
-          '400':
-            description: Bad Request
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-          '401':
-            description: Unauthorized
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-          '403':
-                    description: Forbidden
-                    content:
-                      application/problem+json:
-                        schema:
-                          $ref: '#/components/schemas/Problem'
-          '409':
-                  description: Conflict
-                  content:
-                      application/problem+json:
-                        schema:
-                          $ref: '#/components/schemas/Problem'
-          '500':
-            description: Internal Server Error
-            content:
-              application/problem+json:
-                schema:
-                  $ref: '#/components/schemas/Problem'
-        security:
-          - bearerAuth:
-              - global
   '/products/{productId}':
       get:
         tags:
@@ -320,6 +251,7 @@ paths:
                 - PSP
                 - PT
                 - SCP
+                - AS
                 - SA
                 - REC
                 - CON
@@ -656,6 +588,52 @@ paths:
         security:
           - bearerAuth:
               - global
+  '/notification-event/contracts':
+    put:
+      tags:
+        - kafka
+      summary: resendContractsByInstitutionIdAndTokenId
+      description: 'Function to send a specific onboarding using institutionId and tokenId '
+      operationId: resendContractsByInstitutionIdAndTokenIdUsingPUT
+      parameters:
+        - name: tokenId
+          in: query
+          description: tokenId
+          required: true
+          style: form
+          schema:
+            type: string
+        - name: institutionId
+          in: query
+          description: institutionId
+          required: true
+          style: form
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
 components:
   schemas:
     GeographicTaxonomyResource:
@@ -725,6 +703,7 @@ components:
             - PT
             - SCP
             - SA
+            - AS
             - REC
             - CON
         origin:
@@ -796,6 +775,7 @@ components:
             - PT
             - SCP
             - SA
+            - AS
             - REC
             - CON
         origin:
@@ -949,6 +929,7 @@ components:
             - PSP
             - PT
             - SCP
+            - AS
             - SA
             - REC
             - CON
@@ -1340,11 +1321,9 @@ components:
     OnboardingProductDto:
       title: OnboardingProductDto
       required:
-        - billingData
         - geographicTaxonomies
         - institutionType
         - productId
-        - taxCode
         - users
       type: object
       properties:
@@ -1375,6 +1354,7 @@ components:
             - SA
             - REC
             - CON
+            - AS
         origin:
           type: string
           description: Institution data origin
@@ -1463,6 +1443,7 @@ components:
             - PT
             - SA
             - SCP
+            - AS
             - REC
             - CON
         productId:
@@ -1612,7 +1593,7 @@ components:
         geographicTaxonomies:
           type: array
           items:
-            $ref: '#/components/schemas/InstitutionGeographicTaxonomies'
+            type: string
         imported:
           type: boolean
         institutionType:
