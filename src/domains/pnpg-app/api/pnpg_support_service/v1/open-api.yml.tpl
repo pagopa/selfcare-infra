@@ -9,6 +9,46 @@ tags:
   - name: institutions
     description: Institution Controller
 paths:
+  '/users':
+    post:
+      tags:
+        - users
+      summary: getUserInfo
+      description: Service to retrieve user info including institutions and products linked to him
+      operationId: getUserInfoUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchUserDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfoResource'
+        '400':
+          description: Bad Request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      security:
+        - bearerAuth:
+            - global
   '/institutions/{institutionId}/users':
     get:
       tags:
@@ -255,6 +295,124 @@ components:
       description: >-
         A "problem detail" as a way to carry machine-readable details of errors
         (https://datatracker.ietf.org/doc/html/rfc7807)
+    SearchUserDto:
+      title: SearchUserDto
+      required:
+        - fiscalCode
+      type: object
+      properties:
+        fiscalCode:
+          type: string
+          description: User's fiscal code
+        statuses:
+          type: array
+          description: User's statuses
+          items:
+            type: string
+            enum:
+              - ACTIVE
+              - DELETED
+              - PENDING
+              - REJECTED
+              - SUSPENDED
+              - TOBEVALIDATED
+    UserInfoResource:
+      title: UserInfoResource
+      type: object
+      properties:
+        onboardedInstitutions:
+          type: array
+          description: Object that includes all info about onboarded institutions linked to a user
+          items:
+            $ref: '#/components/schemas/OnboardedInstitutionResource'
+        user:
+          description: Object that includes all info about a user
+          $ref: '#/components/schemas/UserResource'
+    UserResource:
+      title: UserResource
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's institutional email
+        id:
+          type: string
+          description: User's unique identifier
+          format: uuid
+        name:
+          type: string
+          description: User's name
+        roles:
+          type: array
+          description: User's roles in product
+          items:
+            type: string
+        surname:
+          type: string
+          description: User's surname
+        fiscalCode:
+          type: string
+          description: User's fiscal code
+    OnboardedInstitutionResource:
+      title: OnboardedInstitutionResource
+      type: object
+      properties:
+        address:
+          type: string
+          description: Institution's address
+        description:
+          type: string
+          description: Institution's description
+        digitalAddress:
+          type: string
+          description: Institution's digital address
+        id:
+          type: string
+          description: Institution's Id
+        institutionType:
+          type: string
+          description: Institution's type
+          enum:
+            - GSP
+            - PA
+            - PG
+            - PSP
+            - PT
+            - SCP
+            - SA
+            - AS
+            - REC
+            - CON
+        productInfo:
+          description: Products' info of onboardings
+          $ref: '#/components/schemas/ProductInfo'
+        state:
+          type: string
+          description: Onboarding's state
+        taxCode:
+          type: string
+          description: Institution's tax code
+        userEmail:
+          type: string
+          description: User's email linked to the institution
+        zipCode:
+          type: string
+          description: Institution's zip code
+    ProductInfo:
+      title: ProductInfo
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        id:
+          type: string
+        productRole:
+          type: string
+        role:
+          type: string
+        status:
+          type: string
     LegalVerificationResource:
       title: LegalVerificationResource
       type: object
