@@ -7,6 +7,9 @@ locals {
   aks_system_node_pool_node_name = replace("${local.project}sys", "-", "")
   aks_user_node_pool_node_name   = replace("${local.project}usr", "-", "")
 
+  # NAT
+  nat_rg_name = "${local.project}-nat-rg"
+
   internal_selfcare_private_domain = var.env_short == "p" ? "internal.selfcare.pagopa.it" : "internal.${var.env}.selfcare.pagopa.it"
 
   # Monitor
@@ -21,7 +24,10 @@ locals {
   # Private DNS
   container_app_environment_dns_zone_name = "azurecontainerapps.io"
   container_app_resource_group_name       = "container-app-rg"
+
+  app_name_fn = "${local.project}-onboarding-fn"
 }
+
 
 variable "cidr_pair_vnet" {
   type        = list(string)
