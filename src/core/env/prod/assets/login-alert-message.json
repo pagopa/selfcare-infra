@@ -3,5 +3,15 @@
     "severity": "error",
     "description": "Ci scusiamo per il disagio, per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione.",
     "enable": true
+  },
+  "disservice-error-banner": {
+    "severity": "error",
+    "description": "Ci scusiamo per il disagio, per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione.",
+    "enable": false
+  },
+  "disservice-warning-banner": {
+    "severity": "warning",
+    "description": "Potresti riscontrare problemi di accesso con SPID. In tal caso, prova ad accedere con un altro identity provider o con CIE",
+    "enable": false
   }
 }
