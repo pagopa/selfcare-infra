@@ -575,6 +575,28 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/api/ResendNotification':
+    post:
+      tags:
+        - Notification
+      operationId: sendOnboardigNotificationUsingPOST
+      summary: ''
+      description: ''
+      parameters:
+        - name: onboardingId
+          in: query
+          description: Onboarding Id
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: ''
+          content:
+            application/json: {}
+      security:
+        - bearerAuth:
+            - global
   '/tokens/products/{productId}':
     get:
       tags:
