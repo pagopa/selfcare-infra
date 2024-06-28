@@ -92,7 +92,7 @@ reverse_proxy_ip                = "10.1.1.250"
 private_dns_name                = "selc.internal.uat.selfcare.pagopa.it"
 ca_suffix_dns_private_name      = "proudglacier-20652b81.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "orangeground-0bd2d4dc.westeurope.azurecontainerapps.io"
-spid_selc_path_prefix             = "/spid-login/v1"
+spid_selc_path_prefix           = "/spid-login/v1"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = true
