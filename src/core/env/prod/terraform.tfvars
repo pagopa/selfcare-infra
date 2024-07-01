@@ -295,6 +295,10 @@ eventhub_ip_rules = [
   { // KONECTA
     ip_mask = "185.170.36.80",
     action  = "Allow"
+  },
+  { //PROD-SMA
+    ip_mask = "10.20.7.0/27",
+    action  = "Allow"
   }
 
 ]
