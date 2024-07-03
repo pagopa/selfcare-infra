@@ -10,9 +10,8 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
 }
 
 data "azurerm_api_management" "this" {
-  # The condition is a temporary solution during apim migration to v2
-  name                = contains(["d", "u"], var.env_short) ? format("%s-apim-v2", local.project) : format("%s-apim", local.project)
-  resource_group_name = contains(["d", "u"], var.env_short) ? format("%s-api-v2-rg", local.project) : format("%s-api-rg", local.project)
+  name                = format("%s-apim-v2", local.project)
+  resource_group_name = format("%s-api-v2-rg", local.project)
 }
 
 # Subnet to host the application gateway
