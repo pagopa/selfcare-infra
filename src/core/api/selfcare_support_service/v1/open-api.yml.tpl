@@ -541,6 +541,40 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/{onboardingId}/update':
+    put:
+      tags:
+      - Onboarding
+      operationId: updateOnboardiUsingPUT
+      summary: 'Update onboarding request receiving onboarding id.Function can change
+        some values. '
+      parameters:
+      - name: onboardingId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/OnboardingStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingDefaultRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json: {}
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+        - bearerAuth:
+            - global
   '/tokens/products/{productId}':
     get:
       tags:
@@ -808,6 +842,19 @@ components:
         zipCode:
           type: string
           description: Institution's zip code
+    InstitutionType:
+      enum:
+      - PA
+      - PG
+      - GSP
+      - SA
+      - PT
+      - SCP
+      - PSP
+      - AS
+      - REC
+      - CON
+      type: string
     ProductInfo:
       title: ProductInfo
       type: object
@@ -961,6 +1008,17 @@ components:
           type: string
         desc:
           type: string
+    Origin:
+      enum:
+      - MOCK
+      - IPA
+      - SELC
+      - ANAC
+      - UNKNOWN
+      - ADE
+      - INFOCAMERE
+      - IVASS
+      type: string
     GeographicTaxonomies:
       title: GeographicTaxonomies
       type: object
@@ -1400,6 +1458,109 @@ components:
             - MANAGER
             - OPERATOR
             - SUB_DELEGATE
+    OnboardingDefaultRequest:
+      required:
+      - productId
+      - users
+      - institution
+      type: object
+      properties:
+        productId:
+          minLength: 1
+          type: string
+        users:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRequest'
+        pricingPlan:
+          type: string
+        signContract:
+          type: boolean
+        institution:
+          $ref: '#/components/schemas/InstitutionBaseRequest'
+        billing:
+          $ref: '#/components/schemas/BillingRequest'
+        additionalInformations:
+          $ref: '#/components/schemas/AdditionalInformationsDto'
+    BillingRequest:
+      type: object
+      properties:
+        vatNumber:
+          type: string
+        recipientCode:
+          type: string
+        publicServices:
+          type: boolean
+    UserRequest:
+      type: object
+      properties:
+        taxCode:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+    InstitutionBaseRequest:
+      required:
+      - institutionType
+      - digitalAddress
+      type: object
+      properties:
+        institutionType:
+          $ref: '#/components/schemas/InstitutionType'
+        taxCode:
+          type: string
+        subunitCode:
+          type: string
+        subunitType:
+          $ref: '#/components/schemas/InstitutionPaSubunitType'
+        origin:
+          $ref: '#/components/schemas/Origin'
+        originId:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        county:
+          type: string
+        description:
+          type: string
+        digitalAddress:
+          minLength: 1
+          type: string
+        address:
+          type: string
+        zipCode:
+          type: string
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomyDto'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        businessRegisterPlace:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        imported:
+          type: boolean
+    GeographicTaxonomyDto:
+      type: object
+      properties:
+        code:
+          type: string
+        desc:
+          type: string
     OnboardingResponse:
       type: object
       properties:
@@ -1425,6 +1586,11 @@ components:
           $ref: '#/components/schemas/AdditionalInformationsDto'
         userRequestUid:
           type: string
+    InstitutionPaSubunitType:
+      enum:
+      - AOO
+      - UO
+      type: string
     UserOnboardingResponse:
       type: object
       properties:
