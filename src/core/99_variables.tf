@@ -592,6 +592,11 @@ variable "cidr_subnet_eventhub" {
   description = "EventHub address space."
 }
 
+variable "cidr_subnet_eventhub_rds" {
+  type        = list(string)
+  description = "EventHub rds vm address space."
+}
+
 variable "cidr_subnet_logs_storage" {
   type        = list(string)
   description = "Logs storage address space."
@@ -999,6 +1004,14 @@ EOD
     ))
   }))
 }
+
+variable "eventhub_rds_vm" {
+  type = object({
+    size                = string
+    allowed_ipaddresses = list(string)
+  })
+}
+
 ##
 
 variable "docker_registry" {

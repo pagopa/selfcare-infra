@@ -34,6 +34,7 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.140.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_private_endpoints     = ["10.1.141.0/24"]
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
+cidr_subnet_eventhub_rds          = ["10.1.153.0/26"]
 
 cidr_subnet_selc      = ["10.1.148.0/23"]
 cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
@@ -92,6 +93,7 @@ reverse_proxy_ip                = "10.1.1.250"
 private_dns_name                = "selc.internal.dev.selfcare.pagopa.it"
 ca_suffix_dns_private_name      = "politewater-9af33050.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "victoriousfield-e39534b8.westeurope.azurecontainerapps.io"
+spid_selc_path_prefix           = "/spid-login/v1"
 
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
@@ -221,23 +223,23 @@ eventhub_ip_rules = [
     ip_mask = "2.228.86.218",
     action  = "Allow"
   },
-  { // FD
-    ip_mask = "193.203.230.25",
-    action  = "Allow"
-  },
-  # {//PROD-FD
+  # { // FD
+  #   ip_mask = "193.203.230.25",
+  #   action  = "Allow"
+  # },
+  # { // PROD-FD
   #   ip_mask = "91.218.226.15/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "91.218.224.5/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "91.218.224.15/32",
   #   action = "Allow"
   # },
-  # {//PROD-FD
+  # { // PROD-FD
   #   ip_mask = "2.228.86.218/32",
   #   action = "Allow"
   # },
@@ -246,6 +248,13 @@ eventhub_ip_rules = [
     action  = "Allow"
   }
 ]
+
+eventhub_rds_vm = {
+  size = "Standard_B1ls"
+  allowed_ipaddresses = [
+    "*"
+  ]
+}
 
 eventhubs = [{
   name              = "SC-Contracts"
