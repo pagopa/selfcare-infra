@@ -189,58 +189,6 @@ paths:
       security:
         - bearerAuth:
             - global
-    get:
-      tags:
-        - users
-      summary: getUsers
-      description: Retrieve all users for DL according to optional params in input
-      operationId: getUsersUsingGET
-      parameters:
-        - name: size
-          in: query
-          description: size
-          required: false
-          style: form
-          schema:
-            type: integer
-            format: int32
-        - name: page
-          in: query
-          description: page
-          required: false
-          style: form
-          schema:
-            type: integer
-            format: int32
-        - name: productId
-          in: query
-          description: productId
-          required: false
-          style: form
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/UsersNotificationResponse'
-        '400':
-          description: Bad Request
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        '404':
-          description: Not Found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-      security:
-        - bearerAuth:
-            - global
   '/users/{id}':
     get:
       tags:
@@ -509,6 +457,50 @@ paths:
       security:
         - bearerAuth:
             - global
+  '/onboarding/institutionOnboardings':
+    get:
+      tags:
+        - Onboarding Controller
+      summary: Returns onboardings record by institution taxCode/subunitCode/origin/originId
+      description: Returns onboardings record by institution taxCode/subunitCode/origin/originId
+      operationId: onboardingInstitutionUsingGET
+      parameters:
+        - name: origin
+          in: query
+          schema:
+            type: string
+        - name: originId
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            $ref: '#/components/schemas/OnboardingStatus'
+        - name: subunitCode
+          in: query
+          schema:
+            type: string
+        - name: taxCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OnboardingResponse'
+        '401':
+          description: Not Authorized
+        '403':
+          description: Not Allowed
+      security:
+        - bearerAuth:
+            - global
   '/onboarding/{onboardingId}/consume':
     put:
       tags:
@@ -549,32 +541,58 @@ paths:
       security:
         - bearerAuth:
             - global
-  '/tokens':
+  '/onboarding/{onboardingId}/update':
+    put:
+      tags:
+      - Onboarding
+      operationId: updateOnboardiUsingPUT
+      summary: 'Update onboarding request receiving onboarding id.Function can change
+        some values. '
+      parameters:
+      - name: onboardingId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/OnboardingStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnboardingDefaultRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json: {}
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+        - bearerAuth:
+            - global
+  '/tokens/products/{productId}':
     get:
       tags:
         - Token
-      summary: Retrieve all tokens filtered by status
-      description: Retrieve all tokens filtered by status
-      operationId: getAllTokensUsingGET
+      summary: Service to retrieve tokens from product's identifier
+      description: Service to retrieve tokens from product's identifier
+      operationId: getTokensFromProductUsingGET
       parameters:
-        - name: states
-          in: query
-          description: states
-          required: false
-          style: form
-          explode: true
+        - name: productId
+          in: path
+          description: Product's identifier
+          required: true
+          style: simple
           schema:
             type: string
-            enum:
-              - ACTIVE
-              - DELETED
-              - PENDING
-              - REJECTED
-              - SUSPENDED
-              - TOBEVALIDATED
         - name: page
           in: query
-          description: page
+          description: Number of page
           required: false
           style: form
           schema:
@@ -582,15 +600,15 @@ paths:
             format: int32
         - name: size
           in: query
-          description: size
+          description: Number of elements per page
           required: false
           style: form
           schema:
             type: integer
             format: int32
-        - name: productId
+        - name: status
           in: query
-          description: productId
+          description: 'Token''s status. Available values: REQUEST, TOBEVALIDATED, PENDING, COMPLETED, FAILED, REJECTED, DELETED'
           required: false
           style: form
           schema:
@@ -599,17 +617,29 @@ paths:
         '200':
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedTokenResponse'
+                $ref: '#/components/schemas/TokensResource'
         '400':
           description: Bad Request
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
         '404':
           description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
           content:
             application/problem+json:
               schema:
@@ -812,6 +842,19 @@ components:
         zipCode:
           type: string
           description: Institution's zip code
+    InstitutionType:
+      enum:
+      - PA
+      - PG
+      - GSP
+      - SA
+      - PT
+      - SCP
+      - PSP
+      - AS
+      - REC
+      - CON
+      type: string
     ProductInfo:
       title: ProductInfo
       type: object
@@ -965,6 +1008,17 @@ components:
           type: string
         desc:
           type: string
+    Origin:
+      enum:
+      - MOCK
+      - IPA
+      - SELC
+      - ANAC
+      - UNKNOWN
+      - ADE
+      - INFOCAMERE
+      - IVASS
+      type: string
     GeographicTaxonomies:
       title: GeographicTaxonomies
       type: object
@@ -1001,46 +1055,6 @@ components:
           type: string
         vatNumberGroup:
           type: boolean
-    OnboardingsResponse:
-      title: OnboardingsResponse
-      type: object
-      properties:
-        onboardings:
-          type: array
-          items:
-            $ref: '#/components/schemas/OnboardingResponse'
-    OnboardingResponse:
-      title: OnboardingResponse
-      type: object
-      properties:
-        billing:
-          $ref: '#/components/schemas/BillingResponse'
-        closedAt:
-          type: string
-          format: date-time
-        contract:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        pricingPlan:
-          type: string
-        productId:
-          type: string
-        status:
-          type: string
-          enum:
-            - ACTIVE
-            - DELETED
-            - PENDING
-            - REJECTED
-            - SUSPENDED
-            - TOBEVALIDATED
-        tokenId:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
     BillingResponse:
       title: BillingResponse
       type: object
@@ -1093,71 +1107,6 @@ components:
           enum:
             - AOO
             - PT
-    InstitutionUserResource:
-      title: InstitutionUserResource
-      type: object
-      properties:
-        email:
-          type: string
-          description: User's personal email
-        id:
-          type: string
-          description: User's unique identifier
-          format: uuid
-        name:
-          type: string
-          description: User's name
-        products:
-          type: array
-          description: Authorized user products
-          items:
-            $ref: '#/components/schemas/ProductInfoResource'
-        role:
-          type: string
-          description: User's role
-          enum:
-            - ADMIN
-            - LIMITED
-        status:
-          type: string
-          description: User's status
-        surname:
-          type: string
-          description: User's surname
-    ProductInfoResource:
-      title: ProductInfoResource
-      type: object
-      properties:
-        id:
-          type: string
-          description: Product's unique identifier
-        roleInfos:
-          type: array
-          description: User's role infos in product
-          items:
-            $ref: '#/components/schemas/ProductRoleInfoResource'
-        title:
-          type: string
-          description: Product's title
-    ProductRoleInfoResource:
-      title: ProductRoleInfoResource
-      type: object
-      properties:
-        relationshipId:
-          type: string
-          description: Unique relationship identifier between User and Product
-        role:
-          type: string
-          description: User's role in product
-        selcRole:
-          type: string
-          description: User's role
-          enum:
-            - ADMIN
-            - LIMITED
-        status:
-          type: string
-          description: User's status
     UserInfoResponse:
       title: UserInfoResponse
       type: object
@@ -1219,78 +1168,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-    TokenListResponse:
-      title: TokenListResponse
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenResponse'
-    TokenResponse:
-      title: TokenResponse
-      type: object
-      properties:
-        checksum:
-          type: string
-        closedAt:
-          type: string
-          format: date-time
-        contentType:
-          type: string
-        contractSigned:
-          type: string
-        contractTemplate:
-          type: string
-        contractVersion:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        expiringDate:
-          type: string
-          format: date-time
-        id:
-          type: string
-        institutionId:
-          type: string
-        institutionUpdate:
-          $ref: '#/components/schemas/InstitutionUpdate'
-        legals:
-          type: array
-          items:
-            $ref: '#/components/schemas/LegalsResponse'
-        productId:
-          type: string
-        status:
-          type: string
-          enum:
-            - ACTIVE
-            - DELETED
-            - PENDING
-            - REJECTED
-            - SUSPENDED
-            - TOBEVALIDATED
-        updatedAt:
-          type: string
-          format: date-time
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenUser'
-    TokenUser:
-      title: TokenUser
-      type: object
-      properties:
-        role:
-          type: string
-          enum:
-            - DELEGATE
-            - MANAGER
-            - OPERATOR
-            - SUB_DELEGATE
-        userId:
-          type: string
     InstitutionUpdate:
       title: InstitutionUpdate
       type: object
@@ -1384,14 +1261,6 @@ components:
           type: string
         vatNumberGroup:
           type: boolean
-    InstitutionGeographicTaxonomies:
-      title: InstitutionGeographicTaxonomies
-      type: object
-      properties:
-        code:
-          type: string
-        desc:
-          type: string
     OnboardingInstitutionUsersRequest:
       title: OnboardingInstitutionUsersRequest
       type: object
@@ -1519,60 +1388,69 @@ components:
           type: string
         taxCode:
           type: string
-    UsersNotificationResponse:
-      title: UsersNotificationResponse
+    TokensResource:
+      title: TokensResource
       type: object
       properties:
-        users:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/UserNotificationResponse'
-    UserNotificationResponse:
-      title: UserNotificationResponse
+            $ref: '#/components/schemas/TokenResource'
+    TokenResource:
+      title: TokenResource
       type: object
       properties:
+        checksum:
+          type: string
+        closedAt:
+          type: string
+          format: date-time
+        contentType:
+          type: string
+        contractSigned:
+          type: string
+        contractTemplate:
+          type: string
+        contractVersion:
+          type: string
         createdAt:
           type: string
           format: date-time
-        eventType:
+        expiringDate:
           type: string
-          enum:
-            - ADD
-            - UPDATE
+          format: date-time
         id:
           type: string
         institutionId:
           type: string
-        onboardingTokenId:
-          type: string
+        institutionUpdate:
+          $ref: '#/components/schemas/InstitutionUpdate'
+        legals:
+          type: array
+          items:
+            $ref: '#/components/schemas/LegalsResource'
         productId:
+          type: string
+        status:
           type: string
         updatedAt:
           type: string
           format: date-time
-        user:
-          $ref: '#/components/schemas/UserToNotify'
-    UserToNotify:
-      title: UserToNotify
+    LegalsResource:
+      title: LegalsResource
       type: object
       properties:
-        email:
-          type: string
-        familyName:
-          type: string
-        name:
-          type: string
-        productRole:
-          type: string
-        relationshipStatus:
+        env:
           type: string
           enum:
-            - ACTIVE
-            - DELETED
-            - PENDING
-            - REJECTED
-            - SUSPENDED
-            - TOBEVALIDATED
+            - COLL
+            - DEV
+            - PROD
+            - ROOT
+        partyId:
+          type: string
+        relationshipId:
+          type: string
         role:
           type: string
           enum:
@@ -1580,66 +1458,70 @@ components:
             - MANAGER
             - OPERATOR
             - SUB_DELEGATE
-        userId:
-          type: string
-    PaginatedTokenResponse:
-      title: PaginatedTokenResponse
+    OnboardingDefaultRequest:
+      required:
+      - productId
+      - users
+      - institution
       type: object
       properties:
-        items:
+        productId:
+          minLength: 1
+          type: string
+        users:
+          minItems: 1
           type: array
           items:
-            $ref: '#/components/schemas/ScContractResponse'
-        totalNumber:
-          type: integer
-          format: int64
-    ScContractResponse:
-      title: ScContractResponse
-      type: object
-      properties:
-        billing:
-          $ref: '#/components/schemas/BillingResponse'
-        closedAt:
-          type: string
-          format: date-time
-        contentType:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        fileName:
-          type: string
-        filePath:
-          type: string
-        id:
-          type: string
-        institution:
-          $ref: '#/components/schemas/InstitutionToNotifyResponse'
-        internalIstitutionID:
-          type: string
-        notificationType:
-          type: string
-          enum:
-            - ADD
-            - UPDATE
-        onboardingTokenId:
-          type: string
+            $ref: '#/components/schemas/UserRequest'
         pricingPlan:
           type: string
-        product:
-          type: string
-        state:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-    InstitutionToNotifyResponse:
-      title: InstitutionToNotifyResponse
+        signContract:
+          type: boolean
+        institution:
+          $ref: '#/components/schemas/InstitutionBaseRequest'
+        billing:
+          $ref: '#/components/schemas/BillingRequest'
+        additionalInformations:
+          $ref: '#/components/schemas/AdditionalInformationsDto'
+    BillingRequest:
       type: object
       properties:
-        address:
+        vatNumber:
           type: string
-        category:
+        recipientCode:
+          type: string
+        publicServices:
+          type: boolean
+    UserRequest:
+      type: object
+      properties:
+        taxCode:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+    InstitutionBaseRequest:
+      required:
+      - institutionType
+      - digitalAddress
+      type: object
+      properties:
+        institutionType:
+          $ref: '#/components/schemas/InstitutionType'
+        taxCode:
+          type: string
+        subunitCode:
+          type: string
+        subunitType:
+          $ref: '#/components/schemas/InstitutionPaSubunitType'
+        origin:
+          $ref: '#/components/schemas/Origin'
+        originId:
           type: string
         city:
           type: string
@@ -1650,48 +1532,114 @@ components:
         description:
           type: string
         digitalAddress:
+          minLength: 1
           type: string
-        institutionType:
-          type: string
-          enum:
-            - AS
-            - GSP
-            - PA
-            - PG
-            - PSP
-            - PT
-            - SA
-            - SCP
-            - REC
-            - CON
-        istatCode:
-          type: string
-        origin:
-          type: string
-        originId:
-          type: string
-        paymentServiceProvider:
-          $ref: '#/components/schemas/PaymentServiceProvider'
-        rootParent:
-          $ref: '#/components/schemas/RootParent'
-        subUnitCode:
-          type: string
-        subUnitType:
-          type: string
-        taxCode:
+        address:
           type: string
         zipCode:
           type: string
-    RootParent:
-      title: RootParent
+        geographicTaxonomies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicTaxonomyDto'
+        rea:
+          type: string
+        shareCapital:
+          type: string
+        businessRegisterPlace:
+          type: string
+        supportEmail:
+          type: string
+        supportPhone:
+          type: string
+        imported:
+          type: boolean
+    GeographicTaxonomyDto:
       type: object
       properties:
-        description:
+        code:
           type: string
+        desc:
+          type: string
+    OnboardingResponse:
+      type: object
+      properties:
         id:
           type: string
-        originId:
+        productId:
           type: string
+        workflowType:
+          type: string
+        institution:
+          $ref: '#/components/schemas/InstitutionResponse'
+        pricingPlan:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOnboardingResponse'
+        billing:
+          $ref: '#/components/schemas/BillingResponse'
+        status:
+          type: string
+        additionalInformations:
+          $ref: '#/components/schemas/AdditionalInformationsDto'
+        userRequestUid:
+          type: string
+    InstitutionPaSubunitType:
+      enum:
+      - AOO
+      - UO
+      type: string
+    UserOnboardingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        role:
+          $ref: '#/components/schemas/PartyRole'
+        productRole:
+          type: string
+        userMailUuid:
+          type: string
+    AdditionalInformationsDto:
+      type: object
+      properties:
+        belongRegulatedMarket:
+          type: boolean
+        regulatedMarketNote:
+          type: string
+        ipa:
+          type: boolean
+        ipaCode:
+          type: string
+        establishedByRegulatoryProvision:
+          type: boolean
+        establishedByRegulatoryProvisionNote:
+          type: string
+        agentOfPublicService:
+          type: boolean
+        agentOfPublicServiceNote:
+          type: string
+        otherNote:
+          type: string
+    PartyRole:
+      enum:
+        - MANAGER
+        - DELEGATE
+        - SUB_DELEGATE
+        - OPERATOR
+      type: string
+    OnboardingStatus:
+      enum:
+        - REQUEST
+        - TOBEVALIDATED
+        - PENDING
+        - COMPLETED
+        - FAILED
+        - REJECTED
+        - DELETED
+      type: string
   securitySchemes:
     bearerAuth:
       type: http

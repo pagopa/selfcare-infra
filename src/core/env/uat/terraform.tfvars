@@ -308,6 +308,10 @@ eventhub_ip_rules = [
   { //PROD-INTEROP-DEV
     ip_mask = "3.74.178.135",
     action  = "Allow"
+  },
+  { // KONECTA
+    ip_mask = "185.170.36.80",
+    action  = "Allow"
   }
 ]
 
@@ -371,6 +375,12 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "conservazione"
       listen = true
       send   = false
       manage = false

@@ -16,7 +16,8 @@ paths:
       tags:
         - support
       summary: sendSupportRequest
-      description: Service to retrieve Support contact's form
+      deprecated: true
+      description: Service to retrieve Support contact's form. It is deprecated because  is no longer used
       operationId: sendSupportRequestUsingPOST
       requestBody:
         content:
@@ -110,7 +111,8 @@ paths:
       tags:
         - institutions
       summary: getInstitutionsByGeoTaxonomies
-      description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode
+      deprecated: true
+      description: The service retrieves all the institutions based on given a list of geotax ids and a searchMode. It is deprecated because  is no longer used
       operationId: getInstitutionsByGeoTaxonomiesUsingGET
       parameters:
         - name: geoTaxonomies
@@ -230,7 +232,8 @@ paths:
       tags:
         - institutions
       summary: getInstitutionGeographicTaxonomies
-      description: The service retrieve the institution's geographic taxonomy
+      deprecated: true
+      description: The service retrieve the institution's geographic taxonomy. It is deprecated in favor of endpoint /institutions/{institutionId}
       operationId: getInstitutionGeographicTaxonomiesUsingGET
       parameters:
         - name: institutionId
@@ -288,7 +291,8 @@ paths:
       tags:
         - institutions
       summary: getInstitutions
-      description: The service retrieves all the onboarded institutions related to the provided user and the product retrieved from Subscription Key
+      deprecated: true
+      description: The service retrieves all the onboarded institutions related to the provided user and the product retrieved from Subscription Key. It is deprecated in favor of endpoint /users?institutionId={institutionId}
       operationId: getInstitutionsUsingGET
       parameters:
         - name: userIdForAuth
@@ -656,7 +660,8 @@ paths:
       tags:
         - product
       summary: getProduct
-      description: The service retrieves Product information related to Subscription Key
+      deprecated: true
+      description: The service retrieves Product information related to Subscription Key. It is deprecated because  is no longer used
       operationId: getProductUsingGET
       parameters:
        - name: institutionType
