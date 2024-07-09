@@ -13,18 +13,6 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_apim_external_api_data_vault_v1"></a> [apim\_external\_api\_data\_vault\_v1](#module\_apim\_external\_api\_data\_vault\_v1) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v4.1.17 |
-| <a name="module_apim_external_api_ms_v2"></a> [apim\_external\_api\_ms\_v2](#module\_apim\_external\_api\_ms\_v2) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v4.1.17 |
-| <a name="module_apim_pnpg"></a> [apim\_pnpg](#module\_apim\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_pnpg_product_pn_pg"></a> [apim\_pnpg\_product\_pn\_pg](#module\_apim\_pnpg\_product\_pn\_pg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_pnpg_support_service_v2"></a> [apim\_pnpg\_support\_service\_v2](#module\_apim\_pnpg\_support\_service\_v2) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v4.1.17 |
-| <a name="module_apim_product_pnpg_dev"></a> [apim\_product\_pnpg\_dev](#module\_apim\_product\_pnpg\_dev) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_hotfix"></a> [apim\_product\_pnpg\_hotfix](#module\_apim\_product\_pnpg\_hotfix) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_test"></a> [apim\_product\_pnpg\_test](#module\_apim\_product\_pnpg\_test) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_uat"></a> [apim\_product\_pnpg\_uat](#module\_apim\_product\_pnpg\_uat) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_uat_cert"></a> [apim\_product\_pnpg\_uat\_cert](#module\_apim\_product\_pnpg\_uat\_cert) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_uat_coll"></a> [apim\_product\_pnpg\_uat\_coll](#module\_apim\_product\_pnpg\_uat\_coll) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
-| <a name="module_apim_product_pnpg_uat_svil"></a> [apim\_product\_pnpg\_uat\_svil](#module\_apim\_product\_pnpg\_uat\_svil) | git::https://github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v4.1.17 |
 | <a name="module_domain_pod_identity"></a> [domain\_pod\_identity](#module\_domain\_pod\_identity) | git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_pod_identity | v4.1.17 |
 | <a name="module_key_vault_secrets_query"></a> [key\_vault\_secrets\_query](#module\_key\_vault\_secrets\_query) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v5.1.0 |
 | <a name="module_tls_checker"></a> [tls\_checker](#module\_tls\_checker) | git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker | v6.7.0 |
@@ -33,9 +21,6 @@
 
 | Name | Type |
 |------|------|
-| [azurerm_api_management_api_version_set.apim_external_api_data_vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_v2_for_pnpg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_pnpg_support_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
 | [azurerm_key_vault_secret.apim_service_account_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.appinsights-instrumentation-key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [azurerm_key_vault_secret.azure_devops_aks_apiserver_url](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |

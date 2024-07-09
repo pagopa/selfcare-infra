@@ -93,16 +93,3 @@ resource "null_resource" "upload_jwks" {
           EOT
   }
 }
-
-resource "pkcs12_from_pem" "jwt_pkcs12" {
-  password        = ""
-  cert_pem        = module.jwt.certificate_data_pem
-  private_key_pem = module.jwt.jwt_private_key_pem
-}
-
-resource "azurerm_api_management_certificate" "jwt_certificate" {
-  name                = "jwt-spid-crt"
-  api_management_name = module.apim.name
-  resource_group_name = azurerm_resource_group.rg_api.name
-  data                = pkcs12_from_pem.jwt_pkcs12.result
-}
