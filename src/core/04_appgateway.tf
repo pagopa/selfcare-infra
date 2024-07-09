@@ -9,6 +9,11 @@ resource "azurerm_public_ip" "appgateway_public_ip" {
   tags                = var.tags
 }
 
+data "azurerm_api_management" "this" {
+  name                = format("%s-apim-v2", local.project)
+  resource_group_name = format("%s-api-v2-rg", local.project)
+}
+
 # Subnet to host the application gateway
 module "appgateway_snet" {
   source               = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
@@ -48,7 +53,7 @@ locals {
       protocol                    = "Https"
       host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
       port                        = 443
-      ip_addresses                = module.apim.private_ip_addresses
+      ip_addresses                = data.azurerm_api_management.this.private_ip_addresses
       probe                       = "/external/status"
       probe_name                  = "probe-apim"
       request_timeout             = 60

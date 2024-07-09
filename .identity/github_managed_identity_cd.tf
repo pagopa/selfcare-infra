@@ -53,6 +53,11 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_identity_cd"
     "Get",
     "List",
   ]
+
+  certificate_permissions = [
+    "Get",
+    "List",
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identity_cd" {

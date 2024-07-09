@@ -34,6 +34,7 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/24"]
+cidr_subnet_eventhub_rds          = ["10.1.153.0/26"]
 
 cidr_subnet_selc      = ["10.1.148.0/23"]
 cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
@@ -91,6 +92,7 @@ reverse_proxy_ip                = "10.1.1.250"
 private_dns_name                = "selc.internal.uat.selfcare.pagopa.it"
 ca_suffix_dns_private_name      = "proudglacier-20652b81.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "orangeground-0bd2d4dc.westeurope.azurecontainerapps.io"
+spid_selc_path_prefix           = "/spid-login/v1"
 
 aks_system_node_pool_vm_size                      = "Standard_B4ms"
 aks_system_node_pool_only_critical_addons_enabled = true
@@ -312,6 +314,13 @@ eventhub_ip_rules = [
     action  = "Allow"
   }
 ]
+
+eventhub_rds_vm = {
+  size = "Standard_B1ls"
+  allowed_ipaddresses = [
+    "193.203.230.25/32", # Nexi FD
+  ]
+}
 
 eventhubs = [{
   name              = "SC-Contracts"

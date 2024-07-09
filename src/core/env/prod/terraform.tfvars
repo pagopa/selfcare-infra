@@ -34,6 +34,7 @@ cidr_subnet_logs_storage          = ["10.1.139.0/24"]
 cidr_subnet_private_endpoints     = ["10.1.140.0/24"]
 cidr_subnet_pnpg_cosmosdb_mongodb = ["10.1.141.0/24"] #this is a place holder for pnpg mongo
 cidr_subnet_load_tests            = ["10.1.142.0/29"]
+cidr_subnet_eventhub_rds          = ["10.1.153.0/26"]
 
 cidr_subnet_selc      = ["10.1.148.0/23"]
 cidr_subnet_selc_pnpg = ["10.1.150.0/23"]
@@ -97,6 +98,7 @@ private_dns_name                  = "selc.internal.selfcare.pagopa.it"
 ca_suffix_dns_private_name        = "greensand-62fc96da.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name   = "calmmoss-0be48755.westeurope.azurecontainerapps.io"
 spid_selc_path_prefix             = "/spid-login/v1"
+private_onboarding_dns_name       = "selc-p-onboarding-ms-ca.greensand-62fc96da.westeurope.azurecontainerapps.io"
 aks_kubernetes_version            = "1.27.7"
 aks_system_node_pool_os_disk_type = "Ephemeral"
 aks_upgrade_settings_max_surge    = "33%"
@@ -288,6 +290,18 @@ eventhub_ip_rules = [
     ip_mask = "18.192.110.102",
     action  = "Allow"
   },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.193.152.144",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "52.29.238.249",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.153.188.40",
+    action  = "Allow"
+  },
   { //PROD-FD
     ip_mask = "193.203.230.20",
     action  = "Allow"
@@ -300,8 +314,14 @@ eventhub_ip_rules = [
     ip_mask = "10.20.7.0/27",
     action  = "Allow"
   }
-
 ]
+
+eventhub_rds_vm = {
+  size = "Standard_B1ms"
+  allowed_ipaddresses = [
+    "193.203.230.20/32", # Nexi FD
+  ]
+}
 
 eventhubs = [{
   name              = "SC-Contracts"
