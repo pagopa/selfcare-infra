@@ -131,7 +131,7 @@ paths:
         - UserGroup
       summary: getUserGroups
       description: Service that allows to get a list of UserGroup entities
-      operationId: getUserGroupsUsingGET_1
+      operationId: getUserGroupsUsingGET
       parameters:
         - name: institutionId
           in: query

@@ -237,7 +237,7 @@ module "apim_pnpg_support_service_v2" {
       })
     },
     {
-      operation_id = "getUserGroupsUsingGET_1"
+      operation_id = "getUserGroupsUsingGET"
       xml_content = templatefile("./api/pnpg_support_service/v1/jwt_auth_op_policy_user_group.xml.tpl", {
         BACKEND_BASE_URL           = "https://selc-${var.env_short}-pnpg-user-group-ca.${var.ca_suffix_dns_private_name}/v1/"
         API_DOMAIN                 = local.api_domain
