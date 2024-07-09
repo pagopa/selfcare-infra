@@ -221,45 +221,7 @@ locals {
               unique = false
             }
           ]
-        },
-
-        {
-          name = "User"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
-            },
-            {
-              keys   = ["bindings.institutionId"]
-              unique = false
-            },
-            {
-              keys   = ["bindings.products.productId"]
-              unique = false
-            },
-            {
-              keys   = ["bindings.products.relationshipId"]
-              unique = false
-            }
-          ]
-        },
-
-        {
-          name = "Token"
-          indexes = [{
-            keys   = ["_id"]
-            unique = true
-            },
-            {
-              keys   = ["institutionId"]
-              unique = false
-            },
-            {
-              keys   = ["productId"]
-              unique = false
-            }
-          ]
-        },
+        }
       ]
     }
   }
