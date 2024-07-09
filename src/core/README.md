@@ -18,40 +18,6 @@
 | <a name="module_acr"></a> [acr](#module\_acr) | github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.50.1 |
 | <a name="module_acr_common"></a> [acr\_common](#module\_acr\_common) | github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.50.1 |
 | <a name="module_aks"></a> [aks](#module\_aks) | github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster | v7.50.1 |
-| <a name="module_apim"></a> [apim](#module\_apim) | github.com/pagopa/terraform-azurerm-v3.git//api_management | v7.50.1 |
-| <a name="module_apim_external_api_contract_public_v1"></a> [apim\_external\_api\_contract\_public\_v1](#module\_apim\_external\_api\_contract\_public\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_external_api_contract_v1"></a> [apim\_external\_api\_contract\_v1](#module\_apim\_external\_api\_contract\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_external_api_ms_v1"></a> [apim\_external\_api\_ms\_v1](#module\_apim\_external\_api\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_external_api_ms_v2"></a> [apim\_external\_api\_ms\_v2](#module\_apim\_external\_api\_ms\_v2) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_external_api_onboarding_auto_v1"></a> [apim\_external\_api\_onboarding\_auto\_v1](#module\_apim\_external\_api\_onboarding\_auto\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_external_api_onboarding_io_v1"></a> [apim\_external\_api\_onboarding\_io\_v1](#module\_apim\_external\_api\_onboarding\_io\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_internal_api_ms_v1"></a> [apim\_internal\_api\_ms\_v1](#module\_apim\_internal\_api\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_notification_event_api_v1"></a> [apim\_notification\_event\_api\_v1](#module\_apim\_notification\_event\_api\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.62.0 |
-| <a name="module_apim_product_fd"></a> [apim\_product\_fd](#module\_apim\_product\_fd) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_fd_garantito"></a> [apim\_product\_fd\_garantito](#module\_apim\_product\_fd\_garantito) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_idpay"></a> [apim\_product\_idpay](#module\_apim\_product\_idpay) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_interop"></a> [apim\_product\_interop](#module\_apim\_product\_interop) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_interop_atst"></a> [apim\_product\_interop\_atst](#module\_apim\_product\_interop\_atst) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_interop_coll"></a> [apim\_product\_interop\_coll](#module\_apim\_product\_interop\_coll) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_io"></a> [apim\_product\_io](#module\_apim\_product\_io) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_io_premium"></a> [apim\_product\_io\_premium](#module\_apim\_product\_io\_premium) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_io_sign"></a> [apim\_product\_io\_sign](#module\_apim\_product\_io\_sign) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pagopa"></a> [apim\_product\_pagopa](#module\_apim\_product\_pagopa) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn"></a> [apim\_product\_pn](#module\_apim\_product\_pn) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_cert"></a> [apim\_product\_pn\_cert](#module\_apim\_product\_pn\_cert) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_coll"></a> [apim\_product\_pn\_coll](#module\_apim\_product\_pn\_coll) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_dev"></a> [apim\_product\_pn\_dev](#module\_apim\_product\_pn\_dev) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_hotfix"></a> [apim\_product\_pn\_hotfix](#module\_apim\_product\_pn\_hotfix) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_prod"></a> [apim\_product\_pn\_prod](#module\_apim\_product\_pn\_prod) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_svil"></a> [apim\_product\_pn\_svil](#module\_apim\_product\_pn\_svil) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_test"></a> [apim\_product\_pn\_test](#module\_apim\_product\_pn\_test) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_pn_uat"></a> [apim\_product\_pn\_uat](#module\_apim\_product\_pn\_uat) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_support_io"></a> [apim\_product\_support\_io](#module\_apim\_product\_support\_io) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_test_io"></a> [apim\_product\_test\_io](#module\_apim\_product\_test\_io) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_product_test_io_premium"></a> [apim\_product\_test\_io\_premium](#module\_apim\_product\_test\_io\_premium) | github.com/pagopa/terraform-azurerm-v3.git//api_management_product | v7.50.1 |
-| <a name="module_apim_selfcare_support_service_v1"></a> [apim\_selfcare\_support\_service\_v1](#module\_apim\_selfcare\_support\_service\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
-| <a name="module_apim_snet"></a> [apim\_snet](#module\_apim\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
-| <a name="module_apim_user_group_ms_v1"></a> [apim\_user\_group\_ms\_v1](#module\_apim\_user\_group\_ms\_v1) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_app_gw"></a> [app\_gw](#module\_app\_gw) | github.com/pagopa/terraform-azurerm-v3.git//app_gateway | v7.50.1 |
 | <a name="module_appgateway_snet"></a> [appgateway\_snet](#module\_appgateway\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_azdoa_li"></a> [azdoa\_li](#module\_azdoa\_li) | github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent | v7.50.1 |
@@ -75,7 +41,6 @@
 | <a name="module_logs_storage_snet"></a> [logs\_storage\_snet](#module\_logs\_storage\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_mongdb_collection_products"></a> [mongdb\_collection\_products](#module\_mongdb\_collection\_products) | github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v7.50.1 |
 | <a name="module_mongdb_collection_user-groups"></a> [mongdb\_collection\_user-groups](#module\_mongdb\_collection\_user-groups) | github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v7.50.1 |
-| <a name="module_monitor"></a> [monitor](#module\_monitor) | github.com/pagopa/terraform-azurerm-v3.git//api_management_api | v7.50.1 |
 | <a name="module_private_endpoints_subnet"></a> [private\_endpoints\_subnet](#module\_private\_endpoints\_subnet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_redis"></a> [redis](#module\_redis) | github.com/pagopa/terraform-azurerm-v3.git//redis_cache | v7.50.1 |
 | <a name="module_redis_snet"></a> [redis\_snet](#module\_redis\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
@@ -106,17 +71,6 @@
 | [azuread_application_password.external_oauth2_client_fd_password](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) | resource |
 | [azuread_service_principal.external_oauth2_client_fd_sp](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal) | resource |
 | [azuread_service_principal.external_oauth2_issuer](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/service_principal) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_contract](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_contracts_public](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_onboarding_auto](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_external_api_onboarding_io](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_internal_api_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_notification_event_api](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_selfcare_support_service](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_api_version_set.apim_user_group_ms](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_version_set) | resource |
-| [azurerm_api_management_certificate.jwt_certificate](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_certificate) | resource |
-| [azurerm_api_management_custom_domain.api_custom_domain](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_custom_domain) | resource |
 | [azurerm_application_insights.application_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_container_group.load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/container_group) | resource |
 | [azurerm_cosmosdb_mongo_database.selc_ms_core](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_mongo_database) | resource |
@@ -234,7 +188,6 @@
 | [azurerm_resource_group.mongodb_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.monitor_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.rg_aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
-| [azurerm_resource_group.rg_api](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.rg_contracts_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.rg_load_tests_db](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.rg_logs_storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
@@ -250,15 +203,9 @@
 | [azurerm_storage_container.selc_logs_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
 | [azurerm_virtual_machine_extension.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension) | resource |
-| [null_resource.download_apim_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.download_apim_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_alert_message](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_contract_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.upload_developer_external_api_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.upload_developer_external_api_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.upload_developer_index_v1](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.upload_developer_index_v2](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_jwks](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_metadata](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_one_trust](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
@@ -270,7 +217,6 @@
 | [null_resource.upload_resources_products_logo](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_resources_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_spid_idp_status](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [pkcs12_from_pem.jwt_pkcs12](https://registry.terraform.io/providers/chilicat/pkcs12/0.0.7/docs/resources/from_pem) | resource |
 | [random_id.pair_dns_forwarder_hash](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
 | [random_password.evh_rds_vm_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_uuid.identifier_uri](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/uuid) | resource |
@@ -284,6 +230,7 @@
 | [azuread_service_principal.app_projects_principal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.azdo_sp_tls_cert](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) | data source |
 | [azuread_service_principal.iac_principal](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/service_principal) | data source |
+| [azurerm_api_management.apim](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/api_management) | data source |
 | [azurerm_api_management.this](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/api_management) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 | [azurerm_eventhub.event_hubs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/eventhub) | data source |
@@ -291,9 +238,7 @@
 | [azurerm_key_vault_certificate.app_gw_platform](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_certificate) | data source |
 | [azurerm_key_vault_secret.alert_error_notification_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.alert_error_notification_slack](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.apim_backend_access_token](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.apim_publisher_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.external-oauth2-issuer](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_opsgenie](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.monitor_notification_slack_email](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault_secret) | data source |
@@ -329,8 +274,6 @@
 | <a name="input_aks_user_node_pool_os_disk_type"></a> [aks\_user\_node\_pool\_os\_disk\_type](#input\_aks\_user\_node\_pool\_os\_disk\_type) | (Optional) The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. | `string` | `"Managed"` | no |
 | <a name="input_aks_user_node_pool_vm_size"></a> [aks\_user\_node\_pool\_vm\_size](#input\_aks\_user\_node\_pool\_vm\_size) | The size of the AKS Virtual Machine in the Node Pool. | `string` | `"Standard_DS3_v2"` | no |
 | <a name="input_api_config_enabled"></a> [api\_config\_enabled](#input\_api\_config\_enabled) | Api Config enabled | `bool` | `false` | no |
-| <a name="input_apim_publisher_name"></a> [apim\_publisher\_name](#input\_apim\_publisher\_name) | apim | `string` | n/a | yes |
-| <a name="input_apim_sku"></a> [apim\_sku](#input\_apim\_sku) | n/a | `string` | n/a | yes |
 | <a name="input_app_gateway_alerts_enabled"></a> [app\_gateway\_alerts\_enabled](#input\_app\_gateway\_alerts\_enabled) | Enable alerts | `bool` | `false` | no |
 | <a name="input_app_gateway_api_certificate_name"></a> [app\_gateway\_api\_certificate\_name](#input\_app\_gateway\_api\_certificate\_name) | Application gateway: api certificate name on Key Vault | `string` | n/a | yes |
 | <a name="input_app_gateway_api_pnpg_certificate_name"></a> [app\_gateway\_api\_pnpg\_certificate\_name](#input\_app\_gateway\_api\_pnpg\_certificate\_name) | Application gateway: api-pnpg certificate name on Key Vault | `string` | n/a | yes |
@@ -350,7 +293,6 @@
 | <a name="input_cidr_aks_platform_vnet"></a> [cidr\_aks\_platform\_vnet](#input\_cidr\_aks\_platform\_vnet) | vnet for aks platform. | `list(string)` | n/a | yes |
 | <a name="input_cidr_pair_vnet"></a> [cidr\_pair\_vnet](#input\_cidr\_pair\_vnet) | Virtual network address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_api_config"></a> [cidr\_subnet\_api\_config](#input\_cidr\_subnet\_api\_config) | Address prefixes subnet api config | `list(string)` | `null` | no |
-| <a name="input_cidr_subnet_apim"></a> [cidr\_subnet\_apim](#input\_cidr\_subnet\_apim) | Address prefixes subnet api management. | `list(string)` | `null` | no |
 | <a name="input_cidr_subnet_appgateway"></a> [cidr\_subnet\_appgateway](#input\_cidr\_subnet\_appgateway) | Application gateway address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_azdoa"></a> [cidr\_subnet\_azdoa](#input\_cidr\_subnet\_azdoa) | Azure DevOps agent network address space. | `list(string)` | n/a | yes |
 | <a name="input_cidr_subnet_contract_storage"></a> [cidr\_subnet\_contract\_storage](#input\_cidr\_subnet\_contract\_storage) | Contracts storage address space. | `list(string)` | n/a | yes |
