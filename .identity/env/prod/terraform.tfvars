@@ -47,23 +47,11 @@ ci_github_federations_ms = [
     subject    = "prod-ci"
   },
   {
-    repository = "selfcare-ms-notification-manager"
-    subject    = "prod-ci"
-  },
-  {
-    repository = "selfcare-ms-onboarding-interceptor"
-    subject    = "prod-ci"
-  },
-  {
     repository = "selfcare-ms-party-registry-proxy"
     subject    = "prod-ci"
   },
   {
     repository = "selfcare-ms-product"
-    subject    = "prod-ci"
-  },
-  {
-    repository = "selfcare-ms-user-group"
     subject    = "prod-ci"
   },
   {
@@ -76,6 +64,10 @@ ci_github_federations_ms = [
   },
   {
     repository = "selfcare-user"
+    subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-institution"
     subject    = "prod-ci"
   }
 ]
@@ -98,23 +90,11 @@ cd_github_federations_ms = [
     subject    = "prod-cd"
   },
   {
-    repository = "selfcare-ms-notification-manager"
-    subject    = "prod-cd"
-  },
-  {
-    repository = "selfcare-ms-onboarding-interceptor"
-    subject    = "prod-cd"
-  },
-  {
     repository = "selfcare-ms-party-registry-proxy"
     subject    = "prod-cd"
   },
   {
     repository = "selfcare-ms-product"
-    subject    = "prod-cd"
-  },
-  {
-    repository = "selfcare-ms-user-group"
     subject    = "prod-cd"
   },
   {
@@ -127,6 +107,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-user"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-institution"
     subject    = "prod-cd"
   }
 ]
