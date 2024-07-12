@@ -38,7 +38,7 @@ resource "azuread_service_principal" "external_oauth2_issuer" {
 }
 
 resource "azurerm_role_assignment" "external_oauth2_issuer_apim_contributor" {
-  scope                = module.apim.id
+  scope                = data.azurerm_api_management.apim.id
   role_definition_name = "API Management Service Contributor"
   principal_id         = azuread_service_principal.external_oauth2_issuer.object_id
 }
