@@ -1,3 +1,8 @@
+data "azurerm_api_management" "apim" {
+  name                = format("%s-apim-v2", local.project)
+  resource_group_name = format("%s-api-v2-rg", local.project)
+}
+
 resource "azurerm_resource_group" "sec_rg" {
   name     = "${local.project}-sec-rg"
   location = var.location
@@ -19,7 +24,7 @@ module "key_vault" {
 resource "azurerm_key_vault_access_policy" "api_management_policy" {
   key_vault_id = module.key_vault.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = module.apim.principal_id
+  object_id    = data.azurerm_api_management.apim.identity[0].principal_id
 
   key_permissions         = []
   secret_permissions      = ["Get", "List"]
