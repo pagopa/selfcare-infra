@@ -54,8 +54,8 @@ module "networking" {
 module "container_app_environments" {
   source = "../../_modules/container_app_environments"
 
-  project             = local.project
-  location            = local.location
+  project                  = local.project
+  location                 = local.location
   selc_resource_group_name = azurerm_resource_group.selc_cae_rg.name
   pnpg_resource_group_name = azurerm_resource_group.selc_container_app_rg.name
 
