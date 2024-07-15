@@ -1,7 +1,7 @@
 resource "azurerm_container_app_environment" "cae_selc" {
   name                = var.selc_cae_name
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = var.selc_resource_group_name
 
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.log_analytics_workspace.id
 
