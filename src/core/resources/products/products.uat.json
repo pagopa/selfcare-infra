@@ -1,0 +1,2294 @@
+[
+   {
+     "consumers": ["Standard", "SAP"],
+     "contractTemplatePath": "contracts/template/io/2.4.2/io-accordo_di_adesione-v.2.4.2.html",
+     "contractTemplateUpdatedAt": "2022-04-22T13:28:51.967768Z",
+     "contractTemplateVersion": "2.4.2",
+     "createdAt": "2022-04-22T13:28:51.967768Z",
+     "delegable": false,
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io/depict-image.jpeg",
+     "description": "Offri ai cittadini i servizi del tuo ente in un unico canale",
+     "enabled": true,
+     "id": "prod-io",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io/logo.svg",
+     "logoBgColor": "#0073E6",
+     "modifiedAt": "2023-05-09T07:39:42.782Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "App IO",
+     "urlBO": "https://api.io.selfcare.pagopa.it/idp/selfcare/resolve-identity?id=<IdentityToken>",
+     "urlPublic": "https://io.italia.it/",
+     "userContractTemplatePath": "contracts/template/io/user/1.0.0/io-aggiunta-amministratore-v.1.0.html",
+     "userContractTemplateVersion": "1.0.0"
+   },
+   {
+     "contractTemplatePath": "contracts/template/pn/2.0.0/pn-accordo_di_adesione-v.2.0.0.html",
+     "contractTemplateUpdatedAt": "2022-07-13T11:06:03.616794Z",
+     "contractTemplateVersion": "1.0.0",
+     "consumers": ["Standard", "SAP", "FD"],
+     "createdAt": "2022-04-22T13:41:24.742073Z",
+     "depictImageUrl": "https://uat.selfcare.pagopa.it/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali description",
+     "enabled": true,
+     "id": "prod-pn",
+     "identityTokenAudience": "selfcare.uat.notifichedigitali.it",
+     "invoiceable": true,
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-22T15:21:35.335Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "SEND - Servizio Notifiche Digitali",
+     "urlBO": "https://selfcare.uat.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/",
+     "userContractTemplatePath": "contracts/template/pn/user/1.0.0/pn-aggiunta-amministratore-v.1.0.html",
+     "userContractTemplateVersion": "1.0.0"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/interop/2.3.1/interop-accordo_di_adesione-v.2.3.1.html",
+     "contractTemplateUpdatedAt": "2022-07-05T08:34:31.466Z",
+     "contractTemplateVersion": "2.3.1",
+     "createdAt": "2022-04-26T08:34:31.466Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://uat.selfcare.pagopa.it/resources/products/default/depict-image.jpeg",
+     "description": "Condividi dati con altri Enti in maniera semplice, sicura ed economica.",
+     "enabled": true,
+     "id": "prod-interop",
+     "identityTokenAudience": "dev.interop.pagopa.it/ui",
+     "institutionContractMappings": {
+       "AS": {
+         "contractTemplatePath": "contracts/template/interop/ivass/2.1.0/interop-accordo_di_adesione_as-v.2.1.0.html",
+         "contractTemplateUpdatedAt": "2023-10-20T18:32:00.167Z",
+         "contractTemplateVersion": "1.0.0",
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource"
+       }
+     },
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-interop/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-22T15:43:31.550Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "api",
+             "label": "Operatore API",
+             "description": "Gestisce il ciclo di vita degli e-service"
+           },
+           {
+             "code": "security",
+             "label": "Operatore Sicurezza",
+             "description": "Gestisce il ciclo di vita dei client di connessione"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Interoperabilità",
+     "urlBO": "https://selfcare.dev.interop.pagopa.it/ui#id=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-digitale-nazionale-dati",
+     "userContractTemplatePath": "contracts/template/interop/user/2.0.0/interop-aggiunta-amministratore-v.2.0.html",
+     "userContractTemplateVersion": "2.0.0",
+     "testEnvProductIds": [
+       "prod-interop-coll",
+       "prod-interop-atst"
+     ]
+   },
+   {
+     "consumers": ["Standard", "SAP"],
+     "contractTemplatePath": "contracts/template/io-premium/1.1.0/io-premium-accordo_di_adesione-v.1.1.0.html",
+     "contractTemplateUpdatedAt": "2022-07-04T14:49:52.071Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-05-03T13:46:58.893Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io-premium/depict-image.jpeg",
+     "description": "Accedi alle funzionalità avanzate per i messaggi dell'app IO",
+     "enabled": true,
+     "id": "prod-io-premium",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io-premium/logo.svg",
+     "logoBgColor": "#0073E6",
+     "modifiedAt": "2023-05-10T12:25:17.353Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "parentId": "prod-io",
+     "status": "ACTIVE",
+     "title": "Premium",
+     "urlPublic": "https://io.italia.it/",
+     "userContractTemplatePath": "contracts/template/io/user/1.0.0/io-aggiunta-amministratore-v.1.0.html",
+     "userContractTemplateVersion": "1.0.0"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2022-07-13T15:28:53.880868Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-04-22T13:41:24.742073Z",
+     "depictImageUrl": "https://uat.selfcare.pagopa.it/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali COLL",
+     "enabled": true,
+     "id": "prod-pn-coll",
+     "identityTokenAudience": "portale-pa.coll.pn.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-pn-coll/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-22T15:45:17.895Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "SEND - Servizio Notifiche Digitali - Collaudo",
+     "urlBO": "https://portale-pa.coll.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/"
+   },
+   {
+     "consumers": ["Standard"], 
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2022-06-30T09:19:10.925Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-06-30T09:19:10.925Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-idpay/depict-image.jpeg",
+     "description": "La piattaforma IDPay si pone l'obiettivo di fornire una soluzione centralizzata, e flessibile, riusabile con effort limitato da parte degli stakeholder coinvolti, per l'erogazione dei programmi di welfare (es. sconti, bonus, etc.) promossi dalle amministrazioni pubbliche centrali o locali a favore degli utenti beneficiari.",
+     "enabled": true,
+     "id": "prod-idpay",
+     "identityTokenAudience": "idpay.welfare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-idpay/logo.png",
+     "logoBgColor": "#000000",
+     "modifiedAt": "2022-11-22T15:45:29.131Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ope_base",
+             "label": "Operatore",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "IDPay",
+     "urlBO": "https://welfare.uat.cstar.pagopa.it/portale-enti/auth#token=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2022-07-13T15:45:23.360529Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-07-13T15:45:23.360529Z",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali DEV",
+     "enabled": true,
+     "id": "prod-pn-dev",
+     "identityTokenAudience": "selfcare.dev.notifichedigitali.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-pn-dev/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-22T15:45:41.005Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "SEND - Servizio Notifiche Digitali - DEV",
+     "urlBO": "https://selfcare.dev.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/io/2.3.0/io-accordo_di_adesione-v.2.3.0.html",
+     "contractTemplateUpdatedAt": "2022-07-15T10:43:58.944884Z",
+     "contractTemplateVersion": "2.3.0",
+     "createdAt": "2022-07-15T10:43:58.944884Z",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Prova Cancellazione Logica descrizione",
+     "enabled": false,
+     "id": "prod-prova-cancellazione-logica",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "modifiedAt": "2022-11-22T15:42:26.899Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "INACTIVE",
+     "title": "Prova Cancellazione Logica",
+     "urlBO": "https://api.io.selfcare.pagopa.it/idp/selfcare/resolve-identity?id=<IdentityToken>",
+     "urlPublic": "https://io.italia.it/"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2022-07-20T10:29:28.550906Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-07-20T10:29:28.550906Z",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Richiedi la convenzione e gestisci i dati e le agevolazioni da offrire.",
+     "enabled": true,
+     "id": "prod-cgn",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-cgn/logo.svg",
+     "modifiedAt": "2022-11-22T15:46:05.855Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleManagementURL": "string",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente operativo",
+             "label": "Referente Operativo",
+             "description": "Descrizione Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Carta Giovani",
+     "urlBO": "http://cartagiovani/bo",
+     "urlPublic": "http://www.google.it"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2022-07-20T16:35:53.758709Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-07-20T16:35:53.758709Z",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Verifica l'abbinamento di un IBAN ad un CF di un cittadino o di un'impresa.",
+     "enabled": true,
+     "id": "prod-ciban",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-ciban/logo.svg",
+     "logoBgColor": "#008CA8",
+     "modifiedAt": "2022-12-14T15:17:55.827Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleManagementURL": "string",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente operativo",
+             "label": "Referente Operativo",
+             "description": "Descrizione Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "referente amministrativo",
+             "label": "Referente Amministrativo",
+             "description": "Descrizione Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "INACTIVE",
+     "title": "Check-IBAN",
+     "urlBO": "http://checkiban/bo",
+     "urlPublic": "http://www.google.it"
+   },
+   {
+     "backOfficeEnvironmentConfigurations": {
+       "Collaudo": {
+         "url": "https://api.uat.platform.pagopa-test.it/ui#id=<IdentityToken>",
+         "identityTokenAudience": "api.uat.platform.pagopa-test.it",
+         "_class": "it.pagopa.selfcare.product.web.model.BackOfficeConfigurationsResource"
+       }
+     },
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pagopa/1.0.0/pagopa-accordo_di_adesione_ec-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2022-09-08T13:33:53.897Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-07-20T16:37:15.928Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "delegable": true,
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Gestisci gli incassi in modo centralizzato, efficiente e immediato",
+     "enabled": true,
+     "id": "prod-pagopa",
+     "identityTokenAudience": "api.platform.pagopa.it",
+     "institutionContractMappings": {
+       "PA": {
+         "contractTemplatePath": "contracts/template/pagopa/1.0.0/pagopa-accordo_di_adesione_ec-v.1.0.0.html",
+         "contractTemplateUpdatedAt": "2022-12-23T18:32:00.167Z",
+         "contractTemplateVersion": "1.0.0",
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource"
+       },
+       "PSP": {
+         "contractTemplatePath": "contracts/template/pagopa/1.0.0/pagopa-accordo_di_adesione_psp-v.1.0.0.html",
+         "contractTemplateUpdatedAt": "2022-12-23T18:32:00.167Z",
+         "contractTemplateVersion": "1.0.0",
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource"
+       }
+     },
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-pagopa/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-25T10:52:50.201Z",
+     "modifiedBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Piattaforma pagoPA",
+     "urlBO": "https://selfcare.uat.platform.pagopa.it/ui#id=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.gov.it/",
+     "userContractTemplatePath": "contracts/template/pagopa/user/1.0.0/pagopa-aggiunta-amministratore-v.1.0.html",
+     "userContractTemplateVersion": "1.0.0"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/io/2.3.0/io-accordo_di_adesione-v.2.3.0.html",
+     "contractTemplateUpdatedAt": "2022-09-19T09:49:07.480Z",
+     "contractTemplateVersion": "2.3.0",
+     "createdAt": "2022-09-19T09:49:07.525Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "prova campi Audit descrizione",
+     "enabled": false,
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "id": "prod-prova",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0073E6",
+     "modifiedAt": "2022-11-22T15:40:39.267Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "INACTIVE",
+     "title": "prova campi audit",
+     "urlBO": "https://api.io.selfcare.pagopa.it/idp/selfcare/resolve-identity?id=<IdentityToken>",
+     "urlPublic": "https://io.italia.it/"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/io/2.3.0/io-accordo_di_adesione-v.2.3.0.html",
+     "contractTemplateUpdatedAt": "2022-09-19T09:50:10.895Z",
+     "contractTemplateVersion": "2.3.0",
+     "createdAt": "2022-09-19T09:50:10.895Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "prova campi Audit descrizione",
+     "enabled": false,
+     "id": "prod-prova2",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0073E6",
+     "modifiedAt": "2022-11-22T15:39:57.377Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "INACTIVE",
+     "title": "prova campi audit 2",
+     "urlBO": "https://api.io.selfcare.pagopa.it/idp/selfcare/resolve-identity?id=<IdentityToken>",
+     "urlPublic": "https://io.italia.it/"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/io/2.3.0/io-accordo_di_adesione-v.2.3.0.html",
+     "contractTemplateUpdatedAt": "2022-09-19T14:13:25.832Z",
+     "contractTemplateVersion": "2.3.0",
+     "createdAt": "2022-09-19T14:13:25.832Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "prova campi Audit descrizione",
+     "enabled": false,
+     "id": "prod-prova3",
+     "identityTokenAudience": "api.io.selfcare.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0073E6",
+     "modifiedAt": "2022-11-22T15:39:37.052Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Referente Operativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Referente Amministrativo"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "prova campi audit",
+     "urlBO": "https://api.io.selfcare.pagopa.it/idp/selfcare/resolve-identity?id=<IdentityToken>",
+     "urlPublic": "https://io.italia.it/"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pagopa/1.0.0/pagopa-accordo_di_adesione_ec-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2022-12-23T18:05:10.820Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-12-23T18:05:10.836Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Gestisci gli incassi in modo centralizzato ed efficiente, risparmiando.",
+     "enabled": true,
+     "id": "prod-pagopa-ec",
+     "identityTokenAudience": "api.platform.pagopa.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Pagamenti pagoPA EC ",
+     "urlBO": "https://selfcare.uat.platform.pagopa.it/ui#id=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.gov.it/"
+   },
+   {
+     "consumers": [],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-pn-pg-dev",
+     "identityTokenAudience": "imprese.dev.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "TEST PG DEV",
+     "urlBO": "https://imprese.dev.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-02-01T10:09:53.345Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-02-01T10:09:53.347Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "La piattaforma IDPay si pone l'obiettivo di fornire una soluzione centralizzata, e flessibile, riusabile con effort limitato da parte degli stakeholder coinvolti, per l'erogazione dei programmi di welfare (es. sconti, bonus, etc.) promossi dalle amministrazioni pubbliche centrali o locali a favore degli utenti beneficiari.",
+     "enabled": true,
+     "id": "prod-idpay-gi",
+     "identityTokenAudience": "idpay.welfare.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#000000",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pagopa_admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pagopa_admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pagopa_admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "IDPay - Gestione iniziative",
+     "urlBO": "https://welfare.uat.cstar.pagopa.it/portale-enti/auth#token=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici"
+   },
+   {
+     "consumers": ["Standard"], 
+     "contractTemplatePath": "contracts/template/interop/2.0.0/interop-accordo_di_adesione-v.2.0.0.html",
+     "contractTemplateUpdatedAt": "2023-02-24T16:53:43.922Z",
+     "contractTemplateVersion": "2.0.0",
+     "createdAt": "2023-02-24T16:53:43.938Z",
+     "createdBy": "a9793531-5e3b-4761-8041-c8a92e51c924",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Condividi dati con altri Enti in maniera semplice, sicura ed economica.",
+     "enabled": true,
+     "id": "prod-interop-coll",
+     "identityTokenAudience": "qa.interop.pagopa.it/ui",
+     "institutionContractMappings": {
+       "AS": {
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource",
+         "contractTemplatePath": "contracts/template/interop/ivass/2.1.0/interop-accordo_di_adesione_as-v.2.1.0.html",
+         "contractTemplateUpdatedAt": "2024-04-19T14:00:00.167Z",
+         "contractTemplateVersion": "2.1.0"
+       }
+     },
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-interop/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2023-02-24T16:53:43.938Z",
+     "modifiedBy": "a9793531-5e3b-4761-8041-c8a92e51c924",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "api",
+             "label": "Operatore API",
+             "description": "Gestisce il ciclo di vita degli e-service"
+           },
+           {
+             "code": "security",
+             "label": "Operatore Sicurezza",
+             "description": "Gestisce il ciclo di vita dei client di connessione"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Interoperabilità Collaudo",
+     "urlBO": "https://selfcare.qa.interop.pagopa.it/ui#id=<IdentityToken>",
+     "urlPublic": "http://www.google.it"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-02-21T16:52:39.283Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-02-21T16:52:39.283Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Test PG SVIL",
+     "enabled": true,
+     "id": "prod-pn-pg-svil",
+     "identityTokenAudience": "portale-pg.dev.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "SEND - Servizio Notifiche Digitali - PG SVIL",
+     "urlBO": "https://portale-pg.svil.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-02-21T16:52:42.909Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-02-21T16:52:42.909Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Test PG COLL",
+     "enabled": true,
+     "id": "prod-pn-pg-coll",
+     "identityTokenAudience": "portale-pg.coll.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Test PG COLL",
+     "urlBO": "https://portale-pg.coll.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/io-sign/1.0.1/io_sign-accordo_di_adesione-v.1.0.1.html",
+     "contractTemplateUpdatedAt": "2023-02-23T16:22:40.005Z",
+     "contractTemplateVersion": "1.0.1",
+     "createdAt": "2023-02-23T16:22:40.006Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io/depict-image.jpeg",
+     "description": "Firma con IO, la nuova funzionalità integrata nell’App IO che consente ai cittadini di firmare documenti e contratti direttamente dall’app e agli Issuer di gestire tutti i processi di firma in un unico posto.",
+     "enabled": true,
+     "id": "prod-io-sign",
+     "identityTokenAudience": "firmaconio.selfcare.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-io/logo.svg",
+     "logoBgColor": "#0073E6",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Operatore",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Firma con IO",
+     "urlBO": "https://firmaconio.selfcare.pagopa.it/auth/<IdentityToken>",
+     "urlPublic": "https://io.italia.it/firma-con-io"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-pn-pg-uat",
+     "identityTokenAudience": "imprese.uat.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Test PG DEV",
+     "urlBO": "https://imprese.uat.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-pn-pg-uat-svil",
+     "identityTokenAudience": "portale-pg.svil.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Test PG DEV",
+     "urlBO": "https://portale-pg.svil.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-pn-pg-uat-coll",
+     "identityTokenAudience": "portale-pg.coll.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Test PG DEV",
+     "urlBO": "https://portale-pg.coll.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-pn-pg-uat-cert",
+     "identityTokenAudience": "portale-pg.cert.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Test PG DEV",
+     "urlBO": "https://portale-pg.cert.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pn/1.0.0/pn-accordo_di_adesione-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2023-05-09T13:37:45.692Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-05-09T13:37:45.719Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali Test",
+     "enabled": true,
+     "id": "prod-pn-test",
+     "identityTokenAudience": "selfcare.test.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "SEND - Servizio Notifiche Digitali - TEST",
+     "urlBO": "https://selfcare.test.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],    
+     "contractTemplatePath": "contracts/template/pn/1.0.0/pn-accordo_di_adesione-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2023-05-09T13:42:04.104Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-05-09T13:42:04.104Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali description",
+     "enabled": true,
+     "id": "prod-pn-pg-test",
+     "identityTokenAudience": "portale-pg.test.pn.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "PN Non Usato",
+     "urlBO": "https://portale-pg.test.pn.pagopa.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pn/1.0.0/pn-accordo_di_adesione-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2022-07-13T11:06:03.616794Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2022-04-22T13:41:24.742073Z",
+     "depictImageUrl": "https://uat.selfcare.pagopa.it/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali description",
+     "enabled": true,
+     "id": "prod-pn-pg",
+     "identityTokenAudience": "selfcare.uat.notifichedigitali.it",
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.svg",
+     "logoBgColor": "#0066CC",
+     "modifiedAt": "2022-11-22T15:21:35.335Z",
+     "modifiedBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Test PG",
+     "urlBO": "https://selfcare.uat.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/"
+   },
+   {
+     "consumers": ["Standard"], 
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-05-19T09:10:56.743Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-05-19T09:10:56.766Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "La piattaforma IDPay Esercenti si pone l’obiettivo di fornire una soluzione centralizzata e riutilizzabile dai merchant coinvolti su iniziative di welfare (es. sconti, bonus, etc.) promosse dalle amministrazioni pubbliche centrali o locali a favore degli utenti beneficiari.",
+     "enabled": true,
+     "id": "prod-idpay-merchant",
+     "identityTokenAudience": "idpay.merchant.welfare.pagopa.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#000000",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi sul prodotto IDPay - Esercenti, ha la responsabilità di calcolare il premio e generare QRCode o deep link. Inoltre gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Rappresentante Legale dell'Ente",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "IDPay - Esercenti",
+     "urlBO": "https://welfare.uat.cstar.pagopa.it/portale-esercenti/auth#token=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/centro-stella-pagamenti-elettronici"
+   },
+   {
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pn/1.0.0/pn-accordo_di_adesione-v.1.0.0.html",
+     "contractTemplateUpdatedAt": "2023-07-18T14:28:58.324Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-07-18T14:28:58.345Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "delegable": false,
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali hotfix description",
+     "enabled": true,
+     "id": "prod-pn-hotfix",
+     "identityTokenAudience": "selfcare.hotfix.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "SEND - Servizio Notifiche Digitali - HOTFIX",
+     "urlBO": "https://selfcare.hotfix.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": [],
+     "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+     "contractTemplateUpdatedAt": "2023-01-27T12:08:39.225Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2023-01-27T12:08:39.244Z",
+     "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "SEND - Servizio Notifiche Digitali PG",
+     "enabled": true,
+     "id": "prod-still-testing",
+     "identityTokenAudience": "imprese.dev.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "pg-operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "TESTING PRODUCT",
+     "urlBO": "https://imprese.dev.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://www.pagopa.it/it/prodotti-e-servizi/piattaforma-notifiche-digitali"
+   },
+   {
+     "consumers": ["Standard", "FD"],
+     "contractTemplatePath": "contracts/template/fd/1.0.0/Regolamento di Piattaforma Garantito e Contraente PA_Cetif Advisory_FD_v. 1.0.pdf",
+     "contractTemplateUpdatedAt": "2023-06-20T10:56:41.552Z",
+     "contractTemplateVersion": "v.1.2.0",
+     "createdAt": "2023-06-12T11:36:41.553Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Fideiussioni Digitali",
+     "enabled": true,
+     "id": "prod-fd",
+     "identityTokenAudience": "fid00001fe.siachain.ti.sia.eu",
+     "institutionContractMappings": {
+       "PA": {
+         "contractTemplatePath": "contracts/template/fd/1.0.0/Regolamento di Piattaforma Garantito e Contraente PA_Cetif Advisory_FD_v. 1.0.pdf",
+         "contractTemplateVersion": "v.1.0.0",
+         "contractTemplateUpdatedAt": "2023-06-20T10:56:41.552Z",
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource"
+       }
+     },
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#000000",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_OPERATOR",
+             "label": "Operatore",
+             "description": "Operatore"
+           },
+           {
+             "code": "READ_ONLY",
+             "label": "read only",
+             "description": "Read Only"
+           },
+           {
+             "code": "ARCHIVER",
+             "label": "archiviatore",
+             "description": "Archiviatore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Prod Fideiussioni Digitali",
+     "urlBO": "https://fid00001fe.siachain.ti.sia.eu:30008/api/callback?token=<IdentityToken>",
+     "urlPublic": "string"
+   },
+   {
+     "consumers": ["Standard", "FD"],
+     "contractTemplatePath": "contracts/template/fd/1.0.0/Regolamento di Piattaforma Garantito e Contraente PA_Cetif Advisory_FD_v. 1.0.pdf",
+     "contractTemplateUpdatedAt": "2023-06-20T10:56:41.552Z",
+     "contractTemplateVersion": "v.1.0.0",
+     "createdAt": "2023-06-12T11:36:41.553Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Fideiussioni Digitali Garantito",
+     "enabled": true,
+     "id": "prod-fd-garantito",
+     "identityTokenAudience": "fid00001fe.siachain.ti.sia.eu",
+     "institutionContractMappings": {
+       "PA": {
+         "contractTemplatePath": "contracts/template/fd/1.0.0/Regolamento di Piattaforma Garantito e Contraente PA_Cetif Advisory_FD_v. 1.0.pdf",
+         "contractTemplateVersion": "v.1.0.0",
+         "contractTemplateUpdatedAt": "2023-06-20T10:56:41.552Z",
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource"
+       }
+     },
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#000000",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_OPERATOR",
+             "label": "Operatore",
+             "description": "Operatore"
+           },
+           {
+             "code": "READ_ONLY",
+             "label": "read only",
+             "description": "Read Only"
+           },
+           {
+             "code": "ARCHIVER",
+             "label": "archiviatore",
+             "description": "Archiviatore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "ORG_ADMIN",
+             "label": "Amministratore",
+             "description": "Amministratore"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "ACTIVE",
+     "title": "Prod Fideiussioni Digitali Garantito",
+     "urlBO": "https://fid00001fe.siachain.ti.sia.eu:30008/api/callback?token=<IdentityToken>",
+     "urlPublic": "string"
+   },
+   {
+     "backOfficeEnvironmentConfigurations": {},
+     "consumers": ["Standard"],
+     "contractTemplatePath": "contracts/template/pn/2.0.0/pn-accordo_di_adesione-v.2.0.0.html",
+     "contractTemplateUpdatedAt": "2024-01-22T15:10:01.500Z",
+     "contractTemplateVersion": "1.0.0",
+     "createdAt": "2024-01-22T15:10:01.584Z",
+     "createdBy": "8c9ed305-f1ab-4031-b3f0-5241216d0635",
+     "delegable": false,
+     "depictImageUrl": "https://uat.selfcare.pagopa.it/resources/products/default/depict-image.jpeg",
+     "description": "Sendino",
+     "enabled": true,
+     "id": "prod-sendino",
+     "identityTokenAudience": "selfcare.uat.notifichedigitali.it",
+     "institutionContractMappings": {},
+     "invoiceable": true,
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "operator",
+             "label": "Gestore Notifiche",
+             "description": "Gestisce l’integrazione tecnologica e/o l'operatività dei servizi"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ],
+         "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+       }
+     },
+     "status": "TESTING",
+     "title": "Sendino",
+     "urlBO": "https://selfcare.uat.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+     "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/"
+   },
+   {
+     "consumers": ["Standard"],
+     "createdAt": "2024-03-05T13:58:06.997Z",
+     "createdBy": "b9b89ef9-4dcb-4e27-8192-d972efef614e",
+     "contractTemplatePath": "contracts/template/interop/2.0.0/interop-accordo_di_adesione-v.2.0.0.html",
+     "contractTemplateVersion": "2.0.0",
+     "contractTemplateUpdatedAt": "2024-03-05T13:58:06.919Z",
+     "delegable": false,
+     "depictImageUrl": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+     "description": "Condividi dati con altri Enti in maniera semplice, sicura ed economica.",
+     "id": "prod-interop-atst",
+     "identityTokenAudience": "refactor.dev.interop.pagopa.it/ui",
+     "institutionContractMappings": {
+       "AS": {
+         "_class": "it.pagopa.selfcare.product.web.model.ContractResource",
+         "contractTemplatePath": "contracts/template/interop/ivass/2.1.0/interop-accordo_di_adesione_as-v.2.1.0.html",
+         "contractTemplateUpdatedAt": "2024-04-19T14:00:00.167Z",
+         "contractTemplateVersion": "2.1.0"
+       }
+     },
+     "invoiceable": false,
+     "logo": "https://selcucheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+     "logoBgColor": "#0066CC",
+     "roleMappings": {
+       "MANAGER": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Stipula il contratto e identifica gli amministratori"
+           }
+         ]
+       },
+       "DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ]
+       },
+       "SUB_DELEGATE": {
+         "multiroleAllowed": false,
+         "roles": [
+           {
+             "code": "admin",
+             "label": "Amministratore",
+             "description": "Ha tutti i permessi e gestisce gli utenti"
+           }
+         ]
+       },
+       "OPERATOR": {
+         "multiroleAllowed": true,
+         "roles": [
+           {
+             "code": "api",
+             "label": "Operatore API",
+             "description": "Gestisce il ciclo di vita degli e-service"
+           },
+           {
+             "code": "security",
+             "label": "Operatore Sicurezza",
+             "description": "Gestisce il ciclo di vita dei client di connessione"
+           }
+         ]
+       }
+     },
+     "status": "TESTING",
+     "title": "Interoperabilità Attestazioni",
+     "urlPublic": "https://www.interop.pagopa.it/",
+     "urlBO": "https://selfcare.refactor.dev.interop.pagopa.it/ui#id=<IdentityToken>"
+   },
+   {
+      "id": "prod-piattaforma-unitaria",
+      "title": "Piattaforma Unitaria",
+      "description": "La piattaforma offre agli Enti regionali un sistema per gestire i pagamenti dei cittadini e delle imprese. Ha un front office per i pagamenti elettronici e un back office per la gestione delle posizioni debitorie. Inoltre, fornisce servizi tecnologici agli Enti Creditori delle regioni per collegarsi e scambiare flussi con la piattaforma PagoPA.",
+      "logoBgColor": "#0073E6",
+      "identityTokenAudience": "dev.piattaformaunitaria.pagopa.it",
+      "urlPublic": "https://www.pagopa.it",
+      "urlBO": "https://payhub.dev.p4pa.pagopa.it/myoperatore/logged?login_token=<IdentityToken>",
+      "roleMappings": {
+         "MANAGER": {
+            "multiroleAllowed": false,
+            "roles": [
+               {
+                  "code": "ROLE_ADMIN",
+                  "label": "Amministratore",
+                  "description": "L'amministratore firmatario è la persona che firma il contratto di adesione. Avrà anche il ruolo di Amministratore e potrà eseguire le sue stesse operazioni."
+               }
+            ]
+         },
+         "DELEGATE": {
+            "multiroleAllowed": false,
+            "roles": [
+               {
+                  "code": "ROLE_ADMIN",
+                  "label": "Amministratore",
+                  "description": "L'amministratore dell'ente (con ruolo di Gestore del BackOffice dell'Ente) ha accesso, oltre alle funzioni Gestione flussi e alla Gestione Dovuti, anche al BackOffice per la gestione del proprio Ente."
+               }
+            ]
+         },
+         "OPERATOR": {
+            "multiroleAllowed": false,
+            "roles": [
+               {
+                  "code": "ROLE_OPER",
+                  "label": "Operatore",
+                  "description": "Avrà accesso solo alla Gestione flussi e alla Gestione Dovuti relative al proprio Ente"
+               }
+            ]
+         }
+      },
+      "status": "ACTIVE",
+      "delegable": false,
+      "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+      "contractTemplateVersion": "1.0.0",
+      "contractTemplateUpdatedAt": "2024-05-14T08:30:55.801Z",
+      "logo": "https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/logo.png",
+      "depictImageUrl": "https://selcdcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+      "createdAt": "2024-05-14T08:30:55.815Z",
+      "createdBy": "c5ae981f-c651-45f9-bb7f-589297c88416",
+      "invoiceable": false,
+      "enabled": true,
+      "consumers": [
+         "Standard"
+      ]
+   }
+ ]

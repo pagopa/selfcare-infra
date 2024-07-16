@@ -1,0 +1,54 @@
+[{
+  "id": "prod-pn-pg",
+  "contractTemplatePath": "contracts/dummy-accordo_di_adesione.html",
+  "contractTemplateUpdatedAt":  "2023-01-27T12:08:39.225Z",
+  "contractTemplateVersion": "1.0.0",
+  "createdAt":  "2023-01-27T12:08:39.244Z",
+  "createdBy": "f07ddb8f-17f9-47d4-b31e-35d1ac10e521",
+  "depictImageUrl": "https://selcpweupnpgcheckoutsa.z6.web.core.windows.net/resources/products/default/depict-image.jpeg",
+  "description": "SEND - Notifiche Digitali",
+  "enabled": true,
+  "identityTokenAudience": "imprese.notifichedigitali.it",
+  "institutionContractMappings": {},
+  "logo": "https://selcpweupnpgcheckoutsa.z6.web.core.windows.net/resources/products/prod-pn/logo.png",
+  "logoBgColor": "#0B3EE3",
+  "roleMappings": {
+    "MANAGER": {
+      "multiroleAllowed": false,
+      "roles": [
+        {
+          "code": "pg-admin",
+          "label": "Amministratore",
+          "description": "Stipula il contratto e identifica gli amministratori"
+        }
+      ],
+      "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+    },
+    "OPERATOR": {
+      "multiroleAllowed": false,
+      "roles": [
+        {
+          "code": "pg-operator",
+          "label": "Gestore Notifiche",
+          "description": "Gestisce l'integrazione tecnologica e/o l'operatività dei servizi"
+        }
+      ],
+      "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+    },
+    "SUB_DELEGATE": {
+      "multiroleAllowed": false,
+      "roles": [
+        {
+          "code": "pg-admin",
+          "label": "Amministratore",
+          "description": "Ha tutti i permessi e gestisce gli utenti"
+        }
+      ],
+      "_class": "it.pagopa.selfcare.product.web.model.ProductRoleInfo"
+    }
+  },
+  "status": "ACTIVE",
+  "title": "SEND - Notifiche Digitali",
+  "urlBO": "https://imprese.notifichedigitali.it/#selfCareToken=<IdentityToken>",
+  "urlPublic": "https://notifichedigitali.pagopa.it/pubbliche-amministrazioni/"
+}]
