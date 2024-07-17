@@ -44,7 +44,7 @@ module "networking" {
   cidr_subnet_pnpg_cae = "10.1.156.0/23"
 
   selc_container_app_name_snet = "${local.project}-cae-002-snet"
-  pnpg_container_app_name_snet = "${local.project}-pnpg-cae$-001-snet"
+  pnpg_container_app_name_snet = "${local.project}-pnpg-cae-001-snet"
 
   pnpg_delegation = []
 
