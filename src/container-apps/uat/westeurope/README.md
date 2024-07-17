@@ -18,6 +18,7 @@
 
 | Name | Type |
 |------|------|
+| [azurerm_resource_group.selc_cae_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.selc_container_app_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 
 ## Inputs
