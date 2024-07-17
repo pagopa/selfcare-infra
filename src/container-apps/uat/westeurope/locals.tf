@@ -12,6 +12,4 @@ locals {
     Owner       = "SelfCare"
     Source      = "https://github.com/pagopa/selfcare-infra/blob/main/src/container-apps/uat/westeurope"
   }
-
-  suffix_increment = "-001"
 }
