@@ -70,6 +70,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-institution"
     subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-infra-private"
+    subject    = "uat-ci"
   }
 ]
 
@@ -116,6 +120,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-institution"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-infra-private"
     subject    = "uat-cd"
   }
 ]
