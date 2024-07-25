@@ -52,7 +52,7 @@ jobs:
             az storage copy \
               --account-name "$STORAGE_ACCOUNT_NAME" \
               --account-key ${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }} \
-              --destination-container $container \
+              --destination-container "$STORAGE_CONTAINER" \
               --source './contracts/template/*' \
               --recursive
      
