@@ -12,7 +12,7 @@ on:
       env:
         type: choice
         description: Environment
-        default: 'prod'
+        default: 'dev'
         options: 
         - dev
         - uat
@@ -22,7 +22,7 @@ jobs:
   release_dev:
     uses: ./.github/workflows/call_publish_contracts_template.yml
     name: '[DEV] Selfcare Infra Release contracts template'
-    if: ${{ inputs.env == 'dev' }}
+    if: ${{ (inputs.env == null) || inputs.env == 'dev' }}
     secrets: inherit
     with:
       environment: dev
@@ -40,7 +40,7 @@ jobs:
   release_prod:
     uses: ./.github/workflows/call_publish_contracts_template.yml
     name: '[PROD] Selfcare Infra Release contracts template'
-    if: ${{ (inputs.env == null) || inputs.env == 'prod' }}
+    if: ${{ inputs.env == 'prod' }}
     secrets: inherit
     with:
       environment: prod
