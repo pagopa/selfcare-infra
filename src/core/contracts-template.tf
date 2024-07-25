@@ -6,9 +6,10 @@ resource "null_resource" "upload_contract_templates" {
     command = <<EOT
               az storage blob sync --container ${azurerm_storage_container.selc-contracts-container.name} \
                   --account-name ${module.selc-contracts-storage.name} \
-                  --account-key "${module.selc-contracts-storage.primary_access_key}" \
+                  --account-key "${module.selc-contracts-storyesage.primary_access_key}" \
                   --source "${path.module}/contracts_template/" \
                   --destination contracts/template/
+                  --delete-destination false
           EOT
   }
 }
