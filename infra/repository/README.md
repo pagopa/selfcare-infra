@@ -19,10 +19,6 @@ Make sure your PAT has access to this repository. Then, follow these steps:
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
 
-## Providers
-
-No providers.
-
 ## Modules
 
 | Name | Source | Version |
