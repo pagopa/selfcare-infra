@@ -10,6 +10,7 @@ on:
 
 env:
   STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}contractsstorage"
+  STORAGE_CONTAINER: "selc-{{ inputs.environment_short }}-contracts-blob"
   STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-contracts-storage-rg"  
 
 jobs:
@@ -45,13 +46,10 @@ jobs:
         # uses: azure/CLI@965c8d7571d2231a54e321ddd07f7b10317f34d9 # v2
         with:
           inlineScript: |
-            # workaround to escape dollar sign
-            container='$web'
-
             az storage copy \
               --account-name "$STORAGE_ACCOUNT_NAME" \
               --account-key ${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }} \
-              --destination-container $container \
+              --destination-container "$STORAGE_CONTAINER" \
               --source './contracts/template/*' \
               --recursive
      
