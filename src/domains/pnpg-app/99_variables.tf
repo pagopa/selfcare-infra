@@ -10,7 +10,6 @@ locals {
   redis_url = "selc-${var.env_short}-${var.location_short}-pnpg-redis.redis.cache.windows.net"
 
   mongodb_name_selc_core          = "selcMsCore"
-  mongodb_name_selc_product       = "selcProduct"
   mongodb_name_selc_user_group    = "selcUserGroup"
   contracts_storage_account_name  = replace("${local.project}-contracts-storage", "-", "")
   contracts_storage_container     = "${local.project}-contracts-blob"

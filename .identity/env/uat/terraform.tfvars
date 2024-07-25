@@ -52,10 +52,6 @@ ci_github_federations_ms = [
     subject    = "uat-ci"
   },
   {
-    repository = "selfcare-ms-product"
-    subject    = "uat-ci"
-  },
-  {
     repository = "selfcare-onboarding"
     subject    = "uat-ci"
   },
@@ -100,10 +96,6 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-ms-party-registry-proxy"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-ms-product"
     subject    = "uat-cd"
   },
   {
