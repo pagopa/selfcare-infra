@@ -60,6 +60,12 @@ resource "azurerm_storage_container" "selc-contracts-container" {
   container_access_type = "private"
 }
 
+resource "azurerm_storage_container" "selc-contracts-template-container" {
+  name                  = format("%s-contracts-template-blob", local.project)
+  storage_account_name  = module.selc-contracts-storage.name
+  container_access_type = "private"
+}
+
 module "contracts_storage_snet" {
   source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
   name                                      = format("%s-contracts-storage-snet", local.project)
