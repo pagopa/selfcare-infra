@@ -52,10 +52,6 @@ ci_github_federations_ms = [
     subject    = "dev-ci"
   },
   {
-    repository = "selfcare-ms-product"
-    subject    = "dev-ci"
-  },
-  {
     repository = "selfcare-onboarding"
     subject    = "dev-ci"
   },
@@ -96,10 +92,6 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-ms-party-registry-proxy"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-ms-product"
     subject    = "dev-cd"
   },
   {
