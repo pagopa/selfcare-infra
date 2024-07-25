@@ -61,36 +61,6 @@ module "cosmosdb_account_mongodb" {
   tags = var.tags
 }
 
-resource "azurerm_cosmosdb_mongo_database" "selc_product" {
-  name                = "selcProduct"
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-  account_name        = module.cosmosdb_account_mongodb.name
-
-  throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
-
-  dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [
-      ""
-    ] : []
-    content {
-      max_throughput = var.cosmosdb_mongodb_max_throughput
-    }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      autoscale_settings
-    ]
-  }
-}
-
-resource "azurerm_management_lock" "mongodb_selc_product" {
-  name       = "mongodb-selc-product-lock"
-  scope      = azurerm_cosmosdb_mongo_database.selc_product.id
-  lock_level = "CanNotDelete"
-  notes      = "This items can't be deleted in this subscription!"
-}
-
 resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
   name                = "selcUserGroup"
   resource_group_name = azurerm_resource_group.mongodb_rg.name
@@ -128,30 +98,6 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
   content_type = "text/plain"
 
   key_vault_id = module.key_vault.id
-}
-
-# Collections
-module "mongdb_collection_products" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
-
-  name                = "products"
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-
-  cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
-  cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_product.name
-
-  indexes = [
-    {
-      keys   = ["_id"]
-      unique = true
-    },
-    {
-      keys   = ["parent"]
-      unique = false
-    }
-  ]
-
-  lock_enable = true
 }
 
 module "mongdb_collection_user-groups" {
