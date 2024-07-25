@@ -78,7 +78,6 @@ resource "kubernetes_secret" "mongo-credentials" {
 
   data = {
     MONGODB_CONNECTION_URI       = module.key_vault_secrets_query.values["mongodb-connection-string"].value
-    MONGODB_NAME_SELC_PRODUCT    = local.mongodb_name_selc_product
     MONGODB_NAME_SELC_USER_GROUP = local.mongodb_name_selc_user_group
   }
 
