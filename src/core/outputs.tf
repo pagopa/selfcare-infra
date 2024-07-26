@@ -52,15 +52,15 @@ output "key_vault_name" {
 
 ## Container registry ##
 output "container_registry_login_server" {
-  value = module.acr.login_server
+  value = contains(["u", "p"], var.env_short) ? module.acr.login_server : null
 }
 
 output "container_registry_admin_username" {
-  value = module.acr.admin_username
+  value = contains(["u", "p"], var.env_short) ? module.acr.admin_username : null
 }
 
 output "container_registry_admin_password" {
-  value     = module.acr.admin_password
+  value     = contains(["u", "p"], var.env_short) ? module.acr[0].admin_password : null
   sensitive = true
 }
 

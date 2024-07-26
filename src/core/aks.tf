@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "rg_aks" {
   count = contains(["u", "p"], var.env_short) ? 1 : 0
-  
+
   name     = "${local.project}-aks-rg"
   location = var.location
   tags     = var.tags
@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_aks" {
 
 module "aks" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster?ref=v7.50.1"
-  count = contains(["u", "p"], var.env_short) ? 1 : 0
+  count  = contains(["u", "p"], var.env_short) ? 1 : 0
 
   depends_on = [
     module.k8s_snet,
@@ -16,9 +16,9 @@ module "aks" {
   ]
 
   name                       = "${local.project}-aks"
-  location                   = azurerm_resource_group.rg_aks.location
+  location                   = azurerm_resource_group.rg_aks[0].location
   dns_prefix                 = "${local.project}-aks"
-  resource_group_name        = azurerm_resource_group.rg_aks.name
+  resource_group_name        = azurerm_resource_group.rg_aks[0].name
   kubernetes_version         = var.aks_kubernetes_version
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
