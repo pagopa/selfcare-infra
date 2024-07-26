@@ -26,15 +26,15 @@ output "redis_ssl_port" {
 
 ## AKS
 output "aks_cluster_name" {
-  value = module.aks.name
+  value = contains(["u", "p"], var.env_short) ? module.aks.name : null
 }
 
 output "aks_fqdn" {
-  value = module.aks.fqdn
+  value = contains(["u", "p"], var.env_short) ? module.aks.fqdn : null
 }
 
 output "aks_private_fqdn" {
-  value = module.aks.private_fqdn
+  value = contains(["u", "p"], var.env_short) ? module.aks.private_fqdn : null
 }
 
 output "aks_outbound_ips" {
