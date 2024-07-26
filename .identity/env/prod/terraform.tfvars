@@ -154,7 +154,8 @@ environment_cd_roles = {
 environment_ci_roles_ms = {
   subscription = [
     "Reader",
-    "PagoPA IaC Reader"
+    "PagoPA IaC Reader",
+    "ContainerApp Reader"
   ]
   resource_groups = {
     terraform-state-rg = [

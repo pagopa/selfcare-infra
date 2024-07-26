@@ -33,7 +33,7 @@ module "identity_ci_ms" {
   github_federations = var.ci_github_federations_ms
 
   ci_rbac_roles = {
-    subscription_roles = var.environment_ci_roles_ms.subscription
+    subscription_roles = concat(var.environment_ci_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_reader.name])
     resource_groups    = var.environment_ci_roles_ms.resource_groups
   }
 
@@ -71,3 +71,23 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identit
     "List",
   ]
 }
+
+resource "azurerm_role_definition" "container_apps_jobs_reader" {
+  name        = "SelfCare ${var.env} ContainerApp Jobs Reader"
+  scope       = data.azurerm_subscription.current.id
+  description = "Custom role used to read container apps jobs execution properties"
+
+  permissions {
+    actions = [
+      "microsoft.app/jobs/read",
+      "microsoft.app/jobs/listsecrets/action",
+      "microsoft.app/jobs/detectors/read",
+      "microsoft.app/jobs/execution/read",
+      "microsoft.app/jobs/executions/read"
+    ]
+  }
+
+  assignable_scopes = [
+    data.azurerm_subscription.current.id
+  ]
+} 
