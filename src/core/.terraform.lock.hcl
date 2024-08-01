@@ -70,6 +70,7 @@ provider "registry.terraform.io/hashicorp/github" {
   version = "6.2.3"
   hashes = [
     "h1:igRdbZ2jqI6oKAr78+8smF3xw/97xKrbhdITKubKQQM=",
+    "h1:qBH3fN/NItflQkBoIVdQa7n8WvBOuu7Ao20oeoAubKM=",
     "zh:05874671652a260b12d784cc46b0eea156f493a5f12e00368d1f6cb319156257",
     "zh:0c7a3cae5a66e5c5efc3b25ba646a0d46bfe1fd3edba1f5a75f51aede85a9d1b",
     "zh:174310010d08f13e36e53ff18e44a21dd040c89884ef190a192c6ce27926a912",
