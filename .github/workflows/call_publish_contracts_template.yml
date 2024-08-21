@@ -50,7 +50,7 @@ jobs:
               --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
               --destination-container "$STORAGE_CONTAINER" \
               --source 'src/core/contracts/*' \
-              --recursive
+              --recursive \
       - name: Azure Logout
         id: az_logout
         if: always()
