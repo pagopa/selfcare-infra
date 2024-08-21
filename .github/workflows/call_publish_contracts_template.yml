@@ -48,8 +48,8 @@ jobs:
             az storage copy \
               --account-name "$STORAGE_ACCOUNT_NAME" \
               --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-              --destination-container "$STORAGE_CONTAINER" \
-              --source 'src/core/contracts/*' \
+              --destination-container "$STORAGE_CONTAINER/contracts" \
+              --source '.src/core/contracts/*' \
               --recursive \
       - name: Azure Logout
         id: az_logout
