@@ -90,7 +90,7 @@ resource "azurerm_role_definition" "container_apps_jobs_reader" {
   assignable_scopes = [
     data.azurerm_subscription.current.id
   ]
-} 
+}
 
 resource "azurerm_role_definition" "apim_integration_reader" {
   name        = "SelfCare ${var.env} APIM Integration Reader"
