@@ -33,7 +33,7 @@ module "identity_ci_ms" {
   github_federations = var.ci_github_federations_ms
 
   ci_rbac_roles = {
-    subscription_roles = concat(var.environment_ci_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_reader.name])
+    subscription_roles = concat(var.environment_ci_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_reader.name, azurerm_role_definition.apim_integration_reader.name])
     resource_groups    = var.environment_ci_roles_ms.resource_groups
   }
 
@@ -91,3 +91,18 @@ resource "azurerm_role_definition" "container_apps_jobs_reader" {
     data.azurerm_subscription.current.id
   ]
 } 
+
+resource "azurerm_role_definition" "apim_integration_reader" {
+  name        = "SelfCare ${var.env} APIM Integration Reader"
+  scope       = data.azurerm_subscription.current.id
+  description = "Custom role used to read APIM integration secrets"
+
+  permissions {
+    actions     = ["Microsoft.ApiManagement/service/portalSettings/listSecrets/action", "Microsoft.ApiManagement/service/tenant/listSecrets/action"]
+    not_actions = []
+  }
+
+  assignable_scopes = [
+    data.azurerm_subscription.current.id,
+  ]
+}
