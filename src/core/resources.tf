@@ -24,24 +24,25 @@ resource "null_resource" "upload_resources_templates" {
 # aggregates csv templates
 resource "null_resource" "upload_resources_aggregates" {
   triggers = {
-    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/resources/aggregates", "**") : filesha1("${path.module}/resources/aggregates")]))
+    dir_sha1 = sha1(join("", [for f in fileset("${path.module}/resources/aggregates", "**") : filesha1("${path.module}/resources/aggregates/${f}")]))
   }
   provisioner "local-exec" {
     command = <<EOT
               az storage blob sync --container '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
-                --source "./resources/aggregates" \
+                --source "${path.module}/resources/aggregates" \
                 --destination 'resources/aggregates/'
               az cdn endpoint purge \
                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
                 --name ${module.checkout_cdn.name} \
                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
-                --content-paths "/resources/aggregates" \
+                --content-paths "/resources/aggregates/*" \
                 --no-wait
           EOT
   }
 }
+
 
 resource "null_resource" "upload_resources_products_logo" {
   triggers = {
