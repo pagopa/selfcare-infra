@@ -1,0 +1,224 @@
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <style type="text/css">
+        @import url('https://themes.googleusercontent.com/fonts/css?kit=Lx1xfUTR4qFjwg0Z_pb90xR-87vaoTAqAPpQ7gmlN_UhAejD8URiUMLgbPL-bx9yW1dFrxNXBMgKCKucmGZUnA');
+
+         .title {
+            padding-top: 0pt;
+            color: #000000;
+            font-size: 26pt;
+            padding-bottom: 3pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 0pt;
+            color: #666666;
+            font-size: 15pt;
+            padding-bottom: 16pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        h1 {
+            padding-top: 20pt;
+            color: #000000;
+            font-size: 20pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-size: 16pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 16pt;
+            color: #434343;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 14pt;
+            color: #666666;
+            font-size: 12pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+    </style>
+</head>
+
+<body>
+    <div><img
+        alt="" src="https://selfcare.pagopa.it/assets/logo_pagopacorp.png"
+        style="width: 145.83px; height: 40.76px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
+        title="" /><span class="title" style="margin-left: 16px">Placeholder da usare nell'accordo di adesione</span>
+    </div>
+
+    <div class="subtitle">POC</div>
+    <table>
+        <tr>
+            <td><h2>institutionName</h2></td>
+            <td><p>${institutionName}</p></td>
+            <td>name of the institution this onboarding is for</td>
+        </tr>
+        <tr>
+            <td><h2>institutionMail</h2></td>
+            <td><p>${institutionMail}</p></td>
+            <td>digital address of the institution</td>
+        </tr>
+        <tr>
+            <td><h2>institutionTaxCode</h2></td>
+            <td><p>${institutionTaxCode}</p></td>
+            <td>tax code of the institution</td>
+        </tr>
+        <tr>
+            <td><h2>institutionType</h2></td>
+            <td><p>${institutionType}</p></td>
+            <td>institution's type. One of: <i>Pubblica Amministrazione</i>, <i>Gestore di servizi pubblici</i>, <i>Società a controllo pubblico</i>, <i>Partner tecnologico</i></td>
+        </tr>
+        <tr>
+            <td><h2>address</h2></td>
+            <td><p>${address}</p></td>
+            <td>address of the institution</td>
+        </tr>
+        <tr>
+            <td><h2>zipCode</h2></td>
+            <td><p>${zipCode}</p></td>
+            <td>zip code of the institution</td>
+        </tr>
+        <tr>
+            <td><h2>pricingPlan</h2></td>
+            <td><p>${pricingPlan}</p></td>
+            <td>pricing plan used for the institution to onboard on the product</td>
+        </tr>
+        <tr>
+            <td><h2>isPublicServicesManager</h2></td>
+            <td><p>${isPublicServicesManager}</p></td>
+            <td>in case of <i>Gestore di servizi pubblici</i> it will contain "Y" or "N", otherwise it will an be empty string</td>
+        </tr>
+        <tr>
+            <td><h2>institutionVatNumber</h2></td>
+            <td><p>${institutionVatNumber}</p></td>
+            <td>vat number of the institution declared for this product</td>
+        </tr>
+        <tr>
+            <td><h2>institutionRecipientCode</h2></td>
+            <td><p>${institutionRecipientCode}</p></td>
+            <td>recipient code of the institution declared for this product</td>
+        </tr>
+        <tr>
+            <td><h2>manager</h2></td>
+            <td><p>${manager}</p></td>
+            <td>name, surname and tax code of the institution MANAGER</td>
+        </tr>
+        <tr>
+            <td><h2>delegates</h2></td>
+            <td><p>${delegates}</p></td>
+            <td>a set of rows each containing the name, the surname, the tax code and the role of a user</td>
+        </tr>
+        <tr>
+            <td><h2>originId</h2></td>
+            <td><p>${originId}</p></td>
+            <td>id of the institution inside the origin from which has been retrieved</td>
+        </tr>
+        <tr>
+            <td><h2>managerName</h2></td>
+            <td><p>${managerName}</p></td>
+            <td>name of the manager</td>
+        </tr>
+        <tr>
+            <td><h2>managerSurname</h2></td>
+            <td><p>${managerSurname}</p></td>
+            <td>surname of the manager</td>
+        </tr>
+        <tr>
+            <td><h2>managerTaxCode</h2></td>
+            <td><p>${managerTaxCode}</p></td>
+            <td>tax code of the manager</td>
+        </tr>
+        <tr>
+            <td><h2>managerEmail</h2></td>
+            <td><p>${managerEmail}</p></td>
+            <td>email of the manager</td>
+        </tr>
+    </table>
+</body>
+
+</html>
