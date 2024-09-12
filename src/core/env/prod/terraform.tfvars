@@ -309,6 +309,18 @@ eventhub_ip_rules = [
     ip_mask = "15.161.78.171",
     action  = "Allow"
   },
+  { //PROD-INTEROP-ATST
+    ip_mask = "15.161.194.50",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-ATST
+    ip_mask = "18.102.169.250",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-ATST
+    ip_mask = "35.152.133.54",
+    action  = "Allow"
+  },
   { //PROD-FD
     ip_mask = "193.203.230.20",
     action  = "Allow"
