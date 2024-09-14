@@ -33,7 +33,7 @@ module "cosmosdb_account_mongodb" {
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
   capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
-  mongo_server_version = "4.0"
+  mongo_server_version = "4.2"
   enable_free_tier     = var.cosmosdb_mongodb_enable_free_tier
 
   domain = var.domain
