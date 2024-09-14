@@ -33,12 +33,12 @@ module "cosmosdb_account_mongodb" {
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
   capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
-  mongo_server_version = "4.0"
+  mongo_server_version = "4.2"
   enable_free_tier     = var.cosmosdb_mongodb_enable_free_tier
 
   domain = var.domain
 
-  public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
+  public_network_access_enabled     = var.env_short == "p" ? false : true
   private_endpoint_enabled          = var.cosmosdb_mongodb_private_endpoint_enabled
   subnet_id                         = module.cosmosdb_mongodb_snet.id
   private_dns_zone_ids              = var.cosmosdb_mongodb_private_endpoint_enabled ? [data.azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id] : []
