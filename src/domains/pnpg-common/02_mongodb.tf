@@ -38,7 +38,7 @@ module "cosmosdb_account_mongodb" {
 
   domain = var.domain
 
-  public_network_access_enabled     = var.env_short == "p" ? false : true
+  public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
   private_endpoint_enabled          = var.cosmosdb_mongodb_private_endpoint_enabled
   subnet_id                         = module.cosmosdb_mongodb_snet.id
   private_dns_zone_ids              = var.cosmosdb_mongodb_private_endpoint_enabled ? [data.azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id] : []
