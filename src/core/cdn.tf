@@ -105,6 +105,11 @@ module "checkout_cdn" {
         action = "Append"
         name   = "X-Content-Type-Options"
         value  = "nosniff"
+      },
+      {
+        action = "Append"
+        name   = "Content-Security-Policy"
+        value  = format("frame-ancestors 'none'; object-src 'none'; frame-src 'self' *.%s.%s;", var.dns_zone_prefix, var.external_domain)
       }
     ]
   }
