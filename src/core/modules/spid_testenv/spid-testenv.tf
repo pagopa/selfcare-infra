@@ -48,7 +48,9 @@ resource "azurerm_container_group" "spid_testenv" {
   os_type             = "Linux"
 
   image_registry_credential {
-    server = "selcucommonacr.azurecr.io"
+    server   = "index.docker.io"
+    username = var.username
+    password = var.password
   }
 
   container {
