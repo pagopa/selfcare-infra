@@ -316,7 +316,7 @@ eventhub_ip_rules = [
   { //PROD-INTEROP-PROD
     ip_mask = "18.102.126.92",
     action  = "Allow"
-  },{ //PROD-INTEROP-PROD
+    }, { //PROD-INTEROP-PROD
     ip_mask = "18.102.141.181",
     action  = "Allow"
   },
