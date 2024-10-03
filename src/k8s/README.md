@@ -257,7 +257,7 @@ pre-commit run -a
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | n/a | `string` | n/a | yes |
 | <a name="input_external-interceptor-url"></a> [external-interceptor-url](#input\_external-interceptor-url) | n/a | `map(string)` | n/a | yes |
 | <a name="input_geo-taxonomies"></a> [geo-taxonomies](#input\_geo-taxonomies) | n/a | `map(string)` | n/a | yes |
-| <a name="input_ingress_health"></a> [ingress\_health](#input\_ingress\_health) | n/a | <pre>object({<br/>    host        = string<br/>    secret_name = string<br/>  })</pre> | n/a | yes |
+| <a name="input_ingress_health"></a> [ingress\_health](#input\_ingress\_health) | n/a | <pre>object({<br>    host        = string<br>    secret_name = string<br>  })</pre> | n/a | yes |
 | <a name="input_ingress_load_balancer_ip"></a> [ingress\_load\_balancer\_ip](#input\_ingress\_load\_balancer\_ip) | n/a | `string` | n/a | yes |
 | <a name="input_ingress_replica_count"></a> [ingress\_replica\_count](#input\_ingress\_replica\_count) | n/a | `string` | n/a | yes |
 | <a name="input_jwt_audience"></a> [jwt\_audience](#input\_jwt\_audience) | configs/secrets | `string` | n/a | yes |
@@ -272,11 +272,11 @@ pre-commit run -a
 | <a name="input_location_string"></a> [location\_string](#input\_location\_string) | One of West Europe, North Europe | `string` | n/a | yes |
 | <a name="input_monitor_resource_group_name"></a> [monitor\_resource\_group\_name](#input\_monitor\_resource\_group\_name) | Monitor resource group name | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
-| <a name="input_rbac_namespaces"></a> [rbac\_namespaces](#input\_rbac\_namespaces) | n/a | `list(string)` | <pre>[<br/>  "selc"<br/>]</pre> | no |
+| <a name="input_rbac_namespaces"></a> [rbac\_namespaces](#input\_rbac\_namespaces) | n/a | `list(string)` | <pre>[<br>  "selc"<br>]</pre> | no |
 | <a name="input_secrets_tls_certificates"></a> [secrets\_tls\_certificates](#input\_secrets\_tls\_certificates) | n/a | `set(string)` | n/a | yes |
 | <a name="input_spid_testenv_url"></a> [spid\_testenv\_url](#input\_spid\_testenv\_url) | n/a | `string` | `null` | no |
-| <a name="input_tls_cert_check_helm"></a> [tls\_cert\_check\_helm](#input\_tls\_cert\_check\_helm) | tls cert helm chart configuration | <pre>object({<br/>    chart_version = string,<br/>    image_name    = string,<br/>    image_tag     = string<br/>  })</pre> | n/a | yes |
-| <a name="input_tls_checker_https_endpoints_to_check"></a> [tls\_checker\_https\_endpoints\_to\_check](#input\_tls\_checker\_https\_endpoints\_to\_check) | List of https endpoint to check ssl certificate and his alert name | <pre>list(object({<br/>    https_endpoint = string<br/>    # max 53 chars, alfanumeric and '-', and lower case<br/>    alert_name    = string<br/>    alert_enabled = bool<br/>    helm_present  = bool<br/>  }))</pre> | `[]` | no |
+| <a name="input_tls_cert_check_helm"></a> [tls\_cert\_check\_helm](#input\_tls\_cert\_check\_helm) | tls cert helm chart configuration | <pre>object({<br>    chart_version = string,<br>    image_name    = string,<br>    image_tag     = string<br>  })</pre> | n/a | yes |
+| <a name="input_tls_checker_https_endpoints_to_check"></a> [tls\_checker\_https\_endpoints\_to\_check](#input\_tls\_checker\_https\_endpoints\_to\_check) | List of https endpoint to check ssl certificate and his alert name | <pre>list(object({<br>    https_endpoint = string<br>    # max 53 chars, alfanumeric and '-', and lower case<br>    alert_name    = string<br>    alert_enabled = bool<br>    helm_present  = bool<br>  }))</pre> | `[]` | no |
 | <a name="input_token_exchange_billing_audience"></a> [token\_exchange\_billing\_audience](#input\_token\_exchange\_billing\_audience) | n/a | `string` | n/a | yes |
 | <a name="input_token_exchange_billing_url"></a> [token\_exchange\_billing\_url](#input\_token\_exchange\_billing\_url) | n/a | `string` | n/a | yes |
 | <a name="input_token_expiration_minutes"></a> [token\_expiration\_minutes](#input\_token\_expiration\_minutes) | n/a | `number` | `540` | no |
