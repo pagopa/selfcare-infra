@@ -49,7 +49,6 @@ jobs:
         with:
           inlineScript: |
             az storage copy \
-              --auth-mode login
               --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
               --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
               --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
