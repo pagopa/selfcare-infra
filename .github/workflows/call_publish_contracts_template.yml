@@ -48,9 +48,9 @@ jobs:
             az storage copy \
               --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
               --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-              --destination-container "${{ env.STORAGE_CONTAINER }}" \
+              --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
               --blob-type BlockBlob \
-              --source '${{ github.workspace }}/src/core/contracts_template/*' \
+              --source '${{ github.workspace }}/src/core/contracts_template/contracts/*' \
               --recursive
       - name: Azure Logout
         id: az_logout
