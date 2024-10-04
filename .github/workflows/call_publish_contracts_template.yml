@@ -47,7 +47,13 @@ jobs:
           AZCOPY_AUTO_LOGIN_TYPE: MSI
         with:
           inlineScript: |
-            ls -la ./src/core
+            az storage copy \
+              --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+              --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+              --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
+              --blob-type BlockBlob \
+              --source './src/core/contracts_template/contracts/*' \
+              --recursive
       - name: Azure Logout
         id: az_logout
         if: always()
