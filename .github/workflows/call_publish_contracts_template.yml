@@ -47,6 +47,7 @@ jobs:
           AZCOPY_AUTO_LOGIN_TYPE: MSI
         with:
           inlineScript: |
+            ls -la \
             az storage copy \
               --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
               --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
