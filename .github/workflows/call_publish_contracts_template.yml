@@ -12,6 +12,9 @@ env:
   STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}contractsstorage"
   STORAGE_CONTAINER: "selc-${{ inputs.environment_short }}-contracts-blob"
   STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-contracts-storage-rg"  
+  ARM_USE_OIDC: true
+  ARM_USE_AZUREAD: true
+  ARM_STORAGE_USE_AZUREAD: true
 
 jobs:
 
