@@ -25,6 +25,7 @@ jobs:
     permissions:
       id-token: write
       pull-requests: write
+      contents: read
 
     steps:
 
@@ -44,7 +45,6 @@ jobs:
           subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
       - name: Upload to blob storage
-        id: storage_upload
         uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd
         with:
           inlineScript: |
@@ -56,6 +56,7 @@ jobs:
               --blob-type BlockBlob \
               --source './src/core/contracts_template/contracts/*' \
               --recursive
+              
       - name: Azure Logout
         id: az_logout
         if: always()
