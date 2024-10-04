@@ -43,6 +43,8 @@ jobs:
       - name: Upload to blob storage
         id: storage_upload
         uses: azure/CLI@965c8d7571d2231a54e321ddd07f7b10317f34d9
+        env:
+          AZCOPY_AUTO_LOGIN_TYPE: AZCLI
         with:
           inlineScript: |
             az storage copy \
