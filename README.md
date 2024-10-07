@@ -72,3 +72,19 @@ https://github.com/antonbabenko/pre-commit-terraform#how-to-install
 ```sh
 pre-commit run -a
 ```
+
+-----
+
+## Java formatter installation (Intellij)
+1. Open plugins window (CTRL+Shift+A or CMD+Shift+A) and type "plugins"
+2. Click on browse repositories.
+3. Search for google-java-format and install it
+4. Restart the IDE.
+
+
+To enable the plugin executing the action (CTRL+Shift+A or CMD+Shift+A) ant type: Reformat with google-java-format 
+
+Enable format on save:
+1. File -> Settings -> Tools or CTRL+Alt+S/CMD+Alt+S -> Tools 
+2. Click on "Action on Save"
+3. Enable: "Reformat Code"
