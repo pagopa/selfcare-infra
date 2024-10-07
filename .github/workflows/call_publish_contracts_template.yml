@@ -27,72 +27,36 @@ jobs:
       pull-requests: write
       contents: read
 
-    jobs:
+    steps:
 
-      create_runner:
-        runs-on: ubuntu-22.04
-        
-        environment: ${{ inputs.environment }}
-        
-        permissions:
-          id-token: write
-        
-        outputs:
-          runner_name: ${{ steps.create_github_runner.outputs.runner_name }}
-        
-        steps:
-          - name: Create GitHub Runner
-            id: create_github_runner
-            uses: pagopa/eng-github-actions-iac-template/azure/github-self-hosted-runner-azure-create-action@main
-            with:
-              client_id: ${{ secrets.AZURE_CLIENT_ID }}
-              tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-              subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-              container_app_environment_name: ${{ secrets.AZURE_CONTAINER_APP_ENVIRONMENT_NAME }}
-              resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
-              pat_token: ${{ secrets.GIT_PAT }}
-              self_hosted_runner_image_tag: "latest"
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
+      with:
+        persist-credentials: false
+        fetch-depth: 0
 
-      deploy:
-        runs-on: [self-hosted, "${{ needs.create_runner.outputs.runner_name }}"]
-        
-        environment: ${{ inputs.environment }}
-        
-        permissions:
-          id-token: write
+    - name: Azure Login
+      id: az_login
+      uses: azure/login@a65d910e8af852a8061c627c456678983e180302
+      with:
+        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        tenant-id: ${{ vars.ARM_TENANT_ID }}
+        subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
-        needs: create_runner
-        
-        steps:
-        
-          - name: Checkout
-            id: checkout
-            uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
-            with:
-              persist-credentials: false
-              fetch-depth: 0
+    - name: Upload to blob storage
+      uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd
+      with:
+        inlineScript: |
+          az storage copy \
+            --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+            --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+            --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
+            --source './src/core/contracts_template/contracts/*' \
+            --recursive
 
-          - name: Azure Login
-            id: az_login
-            uses: azure/login@a65d910e8af852a8061c627c456678983e180302
-            with:
-              client-id: ${{ secrets.ARM_CLIENT_ID }}
-              tenant-id: ${{ vars.ARM_TENANT_ID }}
-              subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
-
-          - name: Upload to blob storage
-            uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd
-            with:
-              inlineScript: |
-                az storage copy \
-                  --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                  --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-                  --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
-                  --source './src/core/contracts_template/contracts/*' \
-                  --recursive
-
-          - name: Azure Logout
-            id: az_logout
-            if: always()
-            run: |
-              az logout
+    - name: Azure Logout
+      id: az_logout
+      if: always()
+      run: |
+        az logout
