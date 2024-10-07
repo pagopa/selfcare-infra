@@ -20,7 +20,7 @@ jobs:
 
   publish:
     name: Publish contracts template ${{ inputs.environment }}
-    runs-on: 'self-hosted'
+    runs-on: self-hosted
     environment: ${{ inputs.environment }}-ci
     permissions:
       id-token: write
