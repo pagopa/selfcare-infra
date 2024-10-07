@@ -13,3 +13,16 @@ resource "null_resource" "upload_contract_templates" {
           EOT
   }
 }
+
+resource "null_resource" "upload_io_contracts" {
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage copy \
+                --account-name ${module.selc-contracts-storage.name} \
+                --account-key "${module.selc-contracts-storage.primary_access_key}" \
+                --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
+                --source "${path.module}/contracts_io/" \
+                --recursive
+          EOT
+  }
+}
