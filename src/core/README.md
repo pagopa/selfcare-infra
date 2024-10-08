@@ -210,6 +210,7 @@
 | [github_repository_environment.github_repository_environment_cd](https://registry.terraform.io/providers/hashicorp/github/latest/docs/resources/repository_environment) | resource |
 | [null_resource.upload_alert_message](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [null_resource.upload_config](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_contract_templates](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_jwks](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_metadata](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
