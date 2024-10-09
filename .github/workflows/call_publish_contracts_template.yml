@@ -29,16 +29,16 @@ jobs:
 
     steps:
 
-    - name: Upload to blob storage
-      run: |
-          ls -la
-
     - name: Checkout
       id: checkout
       uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
       with:
         persist-credentials: false
         fetch-depth: 0
+
+    - name: Upload to blob storage
+      run: |
+          ls -la
 
     - name: Azure Login
       id: az_login
