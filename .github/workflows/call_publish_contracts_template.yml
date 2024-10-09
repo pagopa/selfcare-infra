@@ -44,14 +44,8 @@ jobs:
         tenant-id: ${{ vars.ARM_TENANT_ID }}
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
-    - name: Test AZ CLI
-      run: |
-          az --version
-
     - name: Upload to blob storage
-      uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd
-      with:
-        inlineScript: |
+      run: |
           az storage copy \
             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
             --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
