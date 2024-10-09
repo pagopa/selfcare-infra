@@ -45,7 +45,6 @@ jobs:
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
     - name: Test AZ CLI
-      uses: shell
       run: |
           az --version
 
