@@ -21,7 +21,7 @@ resource "null_resource" "upload_io_contracts" {
                 --account-name ${module.selc-contracts-storage.name} \
                 --account-key "${module.selc-contracts-storage.primary_access_key}" \
                 --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
-                --source "${path.module}/contracts_io/" \
+                --source "./contracts_io/*" \
                 --recursive
           EOT
   }
