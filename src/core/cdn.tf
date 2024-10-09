@@ -99,6 +99,11 @@ module "checkout_cdn" {
       {
         action = "Append"
         name   = "Content-Security-Policy-Report-Only"
+        value  = "script-src 'self'; style-src 'self' 'unsafe-inline' https://selfcare.pagopa.it/assets/config.json; worker-src 'none';"
+      },
+      {
+        action = "Append"
+        name   = "Content-Security-Policy-Report-Only"
         value  = format("img-src 'self' https://assets.cdn.io.italia.it https://%s data:; ", module.checkout_cdn.storage_primary_web_host)
       },
       {
