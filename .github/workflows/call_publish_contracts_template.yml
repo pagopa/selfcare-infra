@@ -17,30 +17,7 @@ env:
   ARM_STORAGE_USE_AZUREAD: true
 
 jobs:
-  create_runner:
-    runs-on: ubuntu-22.04
-    
-    environment: ${{ inputs.environment }}
-    
-    permissions:
-      id-token: write
-    
-    outputs:
-      runner_name: ${{ steps.create_github_runner.outputs.runner_name }}
-    
-    steps:
-      - name: Create GitHub Runner
-        id: create_github_runner
-        uses: pagopa/eng-github-actions-iac-template/azure/github-self-hosted-runner-azure-create-action@main
-        with:
-          client_id: ${{ secrets.ARM_CLIENT_ID }}
-          tenant_id: ${{ secrets.ARM_TENANT_ID }}
-          subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          container_app_environment_name: ${{ secrets.AZURE_CONTAINER_APP_ENVIRONMENT_NAME }}
-          resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
-          pat_token: ${{ secrets.GIT_PAT }}
-          self_hosted_runner_image_tag: "latest"
-
+  
   publish:
     name: Publish contracts template ${{ inputs.environment }}
     runs-on: self-hosted
@@ -66,6 +43,11 @@ jobs:
         client-id: ${{ secrets.ARM_CLIENT_ID }}
         tenant-id: ${{ vars.ARM_TENANT_ID }}
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
+
+    - name: Test AZ CLI
+      uses: shell
+      run: |
+          az --version
 
     - name: Upload to blob storage
       uses: azure/CLI@089eac9d8cc39f5d003e94f8b65efc51076c9cbd
