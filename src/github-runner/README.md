@@ -28,12 +28,12 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_env_short"></a> [env\_short](#input\_env\_short) | n/a | `string` | n/a | yes |
-| <a name="input_key_vault"></a> [key\_vault](#input\_key\_vault) | n/a | <pre>object({<br/>    name                = string<br/>    resource_group_name = string<br/>    pat_secret_name     = string<br/>  })</pre> | n/a | yes |
-| <a name="input_law"></a> [law](#input\_law) | n/a | <pre>object({<br/>    name                = string<br/>    resource_group_name = string<br/>  })</pre> | n/a | yes |
+| <a name="input_key_vault"></a> [key\_vault](#input\_key\_vault) | n/a | <pre>object({<br>    name                = string<br>    resource_group_name = string<br>    pat_secret_name     = string<br>  })</pre> | n/a | yes |
+| <a name="input_law"></a> [law](#input\_law) | n/a | <pre>object({<br>    name                = string<br>    resource_group_name = string<br>  })</pre> | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | n/a | `string` | `"westeurope"` | no |
-| <a name="input_networking"></a> [networking](#input\_networking) | n/a | <pre>object({<br/>    vnet_resource_group_name = string<br/>    vnet_name                = string<br/>    subnet_cidr_block        = string<br/>  })</pre> | n/a | yes |
+| <a name="input_networking"></a> [networking](#input\_networking) | n/a | <pre>object({<br>    vnet_resource_group_name = string<br>    vnet_name                = string<br>    subnet_cidr_block        = string<br>  })</pre> | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | `"selc"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br/>  "CreatedBy": "Terraform"<br/>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | <pre>{<br>  "CreatedBy": "Terraform"<br>}</pre> | no |
 
 ## Outputs
 
