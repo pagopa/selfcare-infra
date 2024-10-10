@@ -1,5 +1,5 @@
 module "container_app_job" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//container_app_job_gh_runner_v2?ref=v8.47.0"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//container_app_job_gh_runner?ref=v8.48.0"
 
   location  = var.location
   prefix    = var.prefix
