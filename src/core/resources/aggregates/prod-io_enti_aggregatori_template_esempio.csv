@@ -1,4 +1,8 @@
-Ragione Sociale*;PEC*;Codice Fiscale*;P.IVA*;Sede legale - Indirizzo*;Sede legale - Citta'*;Sede legale - Provincia (sigla)*;Codice IPA***;AOO/UO**;Codice Univoco**
-(*) campo obbligatorio;;;;;;;;;
-(**) campo obbligatorio in caso di AOO/UO;;;;;;;;;
-(***) campo obbligatorio in caso di Ente Centrale;;;;;;;;;
+Codice Fiscale*;P.IVA*;AOO/UO**;Codice Univoco**
+;;;
+;;;
+;;;
+;;;
+Note: ;;;
+(*) campo obbligatorio;;;
+(**) campo obbligatorio in caso di AOO/UO;;;
