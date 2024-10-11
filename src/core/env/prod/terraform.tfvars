@@ -491,26 +491,26 @@ eventhubs = [{
       manage = false
     }
   ]
-},
-{
-  name              = "SC-UserGroups"
-  partitions        = 10
-  message_retention = 7
-  consumers         = []
-  keys = [
-    {
-      name   = "selfcare-wo"
-      listen = false
-      send   = true
-      manage = false
-    },
-    {
-      name   = "io"
-      listen = true
-      send   = false
-      manage = false
-    }
-  ]
+  },
+  {
+    name              = "SC-UserGroups"
+    partitions        = 10
+    message_retention = 7
+    consumers         = []
+    keys = [
+      {
+        name   = "selfcare-wo"
+        listen = false
+        send   = true
+        manage = false
+      },
+      {
+        name   = "io"
+        listen = true
+        send   = false
+        manage = false
+      }
+    ]
 }]
 ##
 
