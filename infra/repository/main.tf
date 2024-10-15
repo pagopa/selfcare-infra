@@ -6,7 +6,7 @@ terraform {
 
 provider "azurerm" {
   subscription_id = local.subscription_id_prod
-  
+
   features {
     subscription {
       prevent_cancellation_on_destroy = false
