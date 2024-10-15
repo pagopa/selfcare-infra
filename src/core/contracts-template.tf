@@ -8,7 +8,7 @@ resource "null_resource" "upload_contract_templates" {
                 --account-name ${module.selc-contracts-storage.name} \
                 --account-key "${module.selc-contracts-storage.primary_access_key}" \
                 --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
-                --source "${path.module}/contracts/" \
+                --source "${path.module}/src/core/contracts/*" \
                 --recursive
           EOT
   }

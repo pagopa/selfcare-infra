@@ -29,9 +29,11 @@ No modules.
 | <a name="input_hub_spid_login_metadata_url"></a> [hub\_spid\_login\_metadata\_url](#input\_hub\_spid\_login\_metadata\_url) | n/a | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | General Variables | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
+| <a name="input_password"></a> [password](#input\_password) | n/a | `string` | n/a | yes |
 | <a name="input_spid_testenv_local_config_dir"></a> [spid\_testenv\_local\_config\_dir](#input\_spid\_testenv\_local\_config\_dir) | n/a | `string` | n/a | yes |
 | <a name="input_subscription_name"></a> [subscription\_name](#input\_subscription\_name) | n/a | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | n/a | `map(any)` | n/a | yes |
+| <a name="input_username"></a> [username](#input\_username) | n/a | `string` | n/a | yes |
 
 ## Outputs
 

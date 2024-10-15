@@ -309,6 +309,29 @@ eventhub_ip_rules = [
     ip_mask = "15.161.78.171",
     action  = "Allow"
   },
+  { //PROD-INTEROP-PROD
+    ip_mask = "35.152.114.229",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-PROD
+    ip_mask = "18.102.126.92",
+    action  = "Allow"
+    }, { //PROD-INTEROP-PROD
+    ip_mask = "18.102.141.181",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-ATST
+    ip_mask = "15.161.194.50",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-ATST
+    ip_mask = "18.102.169.250",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-ATST
+    ip_mask = "35.152.133.54",
+    action  = "Allow"
+  },
   { //PROD-FD
     ip_mask = "193.203.230.20",
     action  = "Allow"
@@ -463,6 +486,26 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    }
+  ]
+},
+{
+  name              = "SC-UserGroups"
+  partitions        = 10
+  message_retention = 7
+  consumers         = []
+  keys = [
+    {
+      name   = "selfcare-wo"
+      listen = false
+      send   = true
+      manage = false
+    },
+    {
+      name   = "io"
       listen = true
       send   = false
       manage = false

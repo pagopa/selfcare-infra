@@ -74,8 +74,7 @@ data "azuread_service_principal" "app_projects_principal" {
   count = var.enable_app_projects_pipeline ? 1 : 0
   ###???
   # display_name = format("pagopaspa-selfcare-platform-app-projects-%s", data.azurerm_subscription.current.subscription_id)
-  # application_id = "062e68b9-2585-41d0-9067-a8b896c12058"
-  application_id = "857f30ee-6e15-4b50-a9f3-cfd2ab2d3a29"
+  client_id = "857f30ee-6e15-4b50-a9f3-cfd2ab2d3a29"
 }
 
 resource "azurerm_key_vault_access_policy" "azdevops_app_projects_policy" {
