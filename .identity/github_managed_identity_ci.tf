@@ -1,5 +1,5 @@
 module "identity_ci" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -22,7 +22,7 @@ module "identity_ci" {
 }
 
 module "identity_ci_ms" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
 
   prefix    = var.prefix
   env_short = var.env_short
