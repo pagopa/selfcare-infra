@@ -5,17 +5,17 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.86.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | <= 3.116.0 |
 | <a name="requirement_github"></a> [github](#requirement\_github) | 5.45.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_identity_cd"></a> [identity\_cd](#module\_identity\_cd) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v7.50.1 |
-| <a name="module_identity_cd_ms"></a> [identity\_cd\_ms](#module\_identity\_cd\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v7.50.1 |
-| <a name="module_identity_ci"></a> [identity\_ci](#module\_identity\_ci) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v7.50.1 |
-| <a name="module_identity_ci_ms"></a> [identity\_ci\_ms](#module\_identity\_ci\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v7.50.1 |
+| <a name="module_identity_cd"></a> [identity\_cd](#module\_identity\_cd) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
+| <a name="module_identity_cd_ms"></a> [identity\_cd\_ms](#module\_identity\_cd\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
+| <a name="module_identity_ci"></a> [identity\_ci](#module\_identity\_ci) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
+| <a name="module_identity_ci_ms"></a> [identity\_ci\_ms](#module\_identity\_ci\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
 
 ## Resources
 
