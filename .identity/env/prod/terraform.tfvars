@@ -69,6 +69,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-infra-private"
     subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-login-frontend"
+    subject    = "prod-ci"
   }
 ]
 
@@ -111,6 +115,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-infra-private"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-login-frontend"
     subject    = "prod-cd"
   }
 ]

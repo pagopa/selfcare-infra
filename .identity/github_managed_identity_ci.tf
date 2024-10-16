@@ -1,5 +1,5 @@
 module "identity_ci" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -22,7 +22,7 @@ module "identity_ci" {
 }
 
 module "identity_ci_ms" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -35,9 +35,9 @@ module "identity_ci_ms" {
   ci_rbac_roles = {
     subscription_roles = concat(var.environment_ci_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_reader.name, azurerm_role_definition.apim_integration_reader.name])
     resource_groups = merge(var.environment_ci_roles_ms.resource_groups,
-      { 
-        "selc-${var.env_short}-checkout-fe-rg" = [ "Storage Blob Data Contributor", "Storage Account Key Operator Service Role" ] 
-      })
+      {
+        "selc-${var.env_short}-checkout-fe-rg" = ["Storage Blob Data Contributor", "Storage Account Key Operator Service Role"]
+    })
   }
 
   tags = var.tags
