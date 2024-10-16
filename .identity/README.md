@@ -30,7 +30,6 @@
 | [azurerm_role_definition.container_apps_jobs_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [github_actions_environment_secret.env_cd_secrets](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/actions_environment_secret) | resource |
 | [github_actions_environment_secret.env_ci_secrets](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/actions_environment_secret) | resource |
-| [github_actions_secret.repo_secrets](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/actions_secret) | resource |
 | [github_branch_default.default_main](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/branch_default) | resource |
 | [github_branch_protection_v3.protection_develop](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/branch_protection_v3) | resource |
 | [github_branch_protection_v3.protection_main](https://registry.terraform.io/providers/integrations/github/5.45.0/docs/resources/branch_protection_v3) | resource |
