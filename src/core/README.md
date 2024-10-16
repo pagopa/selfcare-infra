@@ -17,7 +17,6 @@
 |------|--------|---------|
 | <a name="module_acr"></a> [acr](#module\_acr) | github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.50.1 |
 | <a name="module_acr_common"></a> [acr\_common](#module\_acr\_common) | github.com/pagopa/terraform-azurerm-v3.git//container_registry | v7.50.1 |
-| <a name="module_aks"></a> [aks](#module\_aks) | github.com/pagopa/terraform-azurerm-v3.git//kubernetes_cluster | v7.50.1 |
 | <a name="module_app_gw"></a> [app\_gw](#module\_app\_gw) | github.com/pagopa/terraform-azurerm-v3.git//app_gateway | v7.50.1 |
 | <a name="module_appgateway_snet"></a> [appgateway\_snet](#module\_appgateway\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_azdoa_li"></a> [azdoa\_li](#module\_azdoa\_li) | github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent | v7.50.1 |
@@ -35,7 +34,6 @@
 | <a name="module_evh_rds_vm_snet"></a> [evh\_rds\_vm\_snet](#module\_evh\_rds\_vm\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_jwt"></a> [jwt](#module\_jwt) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
-| <a name="module_k8s_snet"></a> [k8s\_snet](#module\_k8s\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | github.com/pagopa/terraform-azurerm-v3.git//key_vault | v7.50.1 |
 | <a name="module_load_tests_snet"></a> [load\_tests\_snet](#module\_load\_tests\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_logs_storage_snet"></a> [logs\_storage\_snet](#module\_logs\_storage\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
@@ -198,7 +196,6 @@
 | [azurerm_resource_group.rg_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.rg_vnet_aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_resource_group.sec_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
-| [azurerm_role_assignment.aks_to_acr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.client_eventhub_access](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.event_hubs_assignments](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
 | [azurerm_role_assignment.external_oauth2_issuer_apim_contributor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment) | resource |
@@ -397,18 +394,12 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_aks_cluster_name"></a> [aks\_cluster\_name](#output\_aks\_cluster\_name) | # AKS |
-| <a name="output_aks_fqdn"></a> [aks\_fqdn](#output\_aks\_fqdn) | n/a |
 | <a name="output_aks_outbound_ips"></a> [aks\_outbound\_ips](#output\_aks\_outbound\_ips) | n/a |
 | <a name="output_aks_outbound_temp_ips"></a> [aks\_outbound\_temp\_ips](#output\_aks\_outbound\_temp\_ips) | n/a |
-| <a name="output_aks_private_fqdn"></a> [aks\_private\_fqdn](#output\_aks\_private\_fqdn) | n/a |
 | <a name="output_api_fqdn"></a> [api\_fqdn](#output\_api\_fqdn) | n/a |
 | <a name="output_app_gateway_fqdn"></a> [app\_gateway\_fqdn](#output\_app\_gateway\_fqdn) | n/a |
 | <a name="output_app_gateway_public_ip"></a> [app\_gateway\_public\_ip](#output\_app\_gateway\_public\_ip) | # Application gateway. |
 | <a name="output_ca_suffix_dns_private_name"></a> [ca\_suffix\_dns\_private\_name](#output\_ca\_suffix\_dns\_private\_name) | n/a |
-| <a name="output_container_registry_admin_password"></a> [container\_registry\_admin\_password](#output\_container\_registry\_admin\_password) | n/a |
-| <a name="output_container_registry_admin_username"></a> [container\_registry\_admin\_username](#output\_container\_registry\_admin\_username) | n/a |
-| <a name="output_container_registry_login_server"></a> [container\_registry\_login\_server](#output\_container\_registry\_login\_server) | # Container registry ## |
 | <a name="output_cosmosdb_account_mongodb_connection_strings"></a> [cosmosdb\_account\_mongodb\_connection\_strings](#output\_cosmosdb\_account\_mongodb\_connection\_strings) | n/a |
 | <a name="output_cosmosdb_account_mongodb_endpoint"></a> [cosmosdb\_account\_mongodb\_endpoint](#output\_cosmosdb\_account\_mongodb\_endpoint) | n/a |
 | <a name="output_cosmosdb_account_mongodb_id"></a> [cosmosdb\_account\_mongodb\_id](#output\_cosmosdb\_account\_mongodb\_id) | # CosmosDb - MongoDB ## |
