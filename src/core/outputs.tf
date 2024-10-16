@@ -41,6 +41,10 @@ output "aks_outbound_ips" {
   value = azurerm_public_ip.aks_outbound.*.ip_address
 }
 
+output "aks_outbound_temp_ips" {
+  value = azurerm_public_ip.aks_outbound_temp.*.ip_address
+}
+
 ## key vault ##
 output "key_vault_uri" {
   value = module.key_vault.vault_uri

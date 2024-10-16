@@ -50,11 +50,15 @@ cosmosdb_mongodb_consistency_policy = {
 }
 # cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
-cosmosdb_mongodb_additional_geo_locations         = []
-cosmosdb_mongodb_throughput                       = 1000
-cosmosdb_mongodb_max_throughput                   = 1000
-cosmosdb_mongodb_enable_autoscaling               = true
-cosmosdb_mongodb_private_endpoint_enabled         = true
+cosmosdb_mongodb_additional_geo_locations = [{
+  location          = "northeurope"
+  failover_priority = 1
+  zone_redundant    = false
+}]
+cosmosdb_mongodb_throughput               = 1000
+cosmosdb_mongodb_max_throughput           = 1000
+cosmosdb_mongodb_enable_autoscaling       = true
+cosmosdb_mongodb_private_endpoint_enabled = true
 
 # CDN
 robots_indexed_paths = []

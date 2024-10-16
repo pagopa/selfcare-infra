@@ -5,7 +5,6 @@ locals {
   key_vault_id                       = "${data.azurerm_subscription.current.id}/resourceGroups/${local.key_vault_resource_group}/providers/Microsoft.KeyVault/vaults/${local.key_vault_name}"
   redis_url                          = "${format("%s-redis", local.project)}.redis.cache.windows.net"
   mongodb_name_selc_core             = "selcMsCore"
-  mongodb_name_selc_product          = "selcProduct"
   mongodb_name_selc_user_group       = "selcUserGroup"
   contracts_storage_account_name     = replace(format("%s-contracts-storage", local.project), "-", "")
   contracts_storage_container        = format("%s-contracts-blob", local.project)

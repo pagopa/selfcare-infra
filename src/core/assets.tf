@@ -71,3 +71,28 @@ resource "null_resource" "upload_spid_idp_status" {
           EOT
   }
 }
+
+resource "null_resource" "upload_config" {
+  triggers = {
+    file_sha1 = filesha1("./env/${var.env}/assets/config.json")
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage blob upload \
+                --container '$web' \
+                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+                --account-key ${module.checkout_cdn.storage_primary_access_key} \
+                --file "./env/${var.env}/assets/config.json" \
+                --overwrite true \
+                --name 'assets/config.json'
+
+              az cdn endpoint purge \
+                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+                --name ${module.checkout_cdn.name} \
+                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")}  \
+                --content-paths "/assets/config.json" \
+                --no-wait
+          EOT
+  }
+}

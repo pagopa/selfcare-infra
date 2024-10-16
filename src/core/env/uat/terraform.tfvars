@@ -85,7 +85,7 @@ aks_system_node_pool_node_count_max = 2
 # This is the k8s ingress controller ip. It must be in the aks subnet range.
 reverse_proxy_ip                = "10.1.1.250"
 private_dns_name                = "selc.internal.uat.selfcare.pagopa.it"
-ca_suffix_dns_private_name      = "proudglacier-20652b81.westeurope.azurecontainerapps.io"
+ca_suffix_dns_private_name      = "mangopond-2a5d4d65.westeurope.azurecontainerapps.io"
 ca_pnpg_suffix_dns_private_name = "orangeground-0bd2d4dc.westeurope.azurecontainerapps.io"
 spid_selc_path_prefix           = "/spid-login/v1"
 
@@ -303,6 +303,22 @@ eventhub_ip_rules = [
   { //PROD-INTEROP-DEV
     ip_mask = "3.74.178.135",
     action  = "Allow"
+  },
+  { //PROD-INTEROP-DEV
+    ip_mask = "15.160.66.15",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-DEV
+    ip_mask = "35.152.65.78",
+    action  = "Allow"
+  },
+  { //PROD-INTEROP-DEV
+    ip_mask = "18.102.113.84",
+    action  = "Allow"
+  },
+  { // KONECTA
+    ip_mask = "185.170.36.80",
+    action  = "Allow"
   }
 ]
 
@@ -366,6 +382,12 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "conservazione"
       listen = true
       send   = false
       manage = false
@@ -439,6 +461,26 @@ eventhubs = [{
       manage = false
     }
   ]
+  },
+  {
+    name              = "SC-UserGroups"
+    partitions        = 10
+    message_retention = 7
+    consumers         = []
+    keys = [
+      {
+        name   = "selfcare-wo"
+        listen = false
+        send   = true
+        manage = false
+      },
+      {
+        name   = "io"
+        listen = true
+        send   = false
+        manage = false
+      }
+    ]
 }]
 ##
 
