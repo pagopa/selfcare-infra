@@ -22,7 +22,7 @@ on:
 jobs:
   release_dev:
     uses: ./.github/workflows/call_publish_contracts_template.yml
-    name: [DEV] Selfcare Infra Release contracts template
+    name: '[DEV] Selfcare Infra Release contracts template'
     if: ${{ inputs.env == 'dev' }}
     secrets: inherit
     with:
