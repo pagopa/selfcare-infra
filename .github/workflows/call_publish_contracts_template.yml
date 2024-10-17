@@ -7,6 +7,9 @@ on:
       environment_short:
         type: string
         required: true
+      agent:
+        type: string
+        required: true
 
 env:
   STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}contractsstorage"
@@ -20,7 +23,7 @@ jobs:
   
   publish:
     name: Publish contracts template ${{ inputs.environment }}
-    runs-on: self-hosted
+    runs-on: [ ${{ inputs.agent }}, ${{ inputs.environment }} ]
     environment: ${{ inputs.environment }}-ci
     permissions:
       id-token: write

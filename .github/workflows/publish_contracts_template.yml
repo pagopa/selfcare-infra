@@ -10,8 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       env:
+        required: true
         type: choice
-        description: Environment
+        description: 'Select the Environment'
         default: 'dev'
         options: 
         - dev
@@ -27,6 +28,7 @@ jobs:
     with:
       environment: dev
       environment_short: d
+      agent: self-hosted
 
   release_uat:
     uses: ./.github/workflows/call_publish_contracts_template.yml
@@ -36,6 +38,7 @@ jobs:
     with:
       environment: uat
       environment_short: u
+      agent: self-hosted
 
   release_prod:
     uses: ./.github/workflows/call_publish_contracts_template.yml
@@ -45,3 +48,4 @@ jobs:
     with:
       environment: prod
       environment_short: p
+      agent: self-hosted
