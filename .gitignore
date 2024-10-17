@@ -35,6 +35,7 @@ settings.json
 __TMP
 .metals/
 __azurite_*
+__blobstorage*
 /.idea
 .bastianhost.ini
 **/modules/**/.terraform.lock.hcl
