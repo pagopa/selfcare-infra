@@ -22,7 +22,7 @@ on:
 jobs:
   release_dev:
     uses: ./.github/workflows/call_publish_contracts_template.yml
-    name: '[DEV] Selfcare Infra Release contracts template'
+    name: DEV Selfcare Infra Release contracts template
     if: ${{ inputs.env == 'dev' }}
     secrets: inherit
     with:
@@ -32,7 +32,7 @@ jobs:
 
   release_uat:
     uses: ./.github/workflows/call_publish_contracts_template.yml
-    name: '[UAT] Selfcare Infra Release contracts template'
+    name: UAT Selfcare Infra Release contracts template
     if: ${{ inputs.env == 'uat' }}
     secrets: inherit
     with:
@@ -42,7 +42,7 @@ jobs:
 
   release_prod:
     uses: ./.github/workflows/call_publish_contracts_template.yml
-    name: '[PROD] Selfcare Infra Release contracts template'
+    name: PROD Selfcare Infra Release contracts template
     if: ${{ inputs.env == 'prod' }}
     secrets: inherit
     with:
