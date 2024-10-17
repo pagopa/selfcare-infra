@@ -13,9 +13,14 @@ variable "tags" {
   description = "Resource tags"
 }
 
-variable "resource_group_name" {
+variable "selc_resource_group_name" {
   type        = string
-  description = "Name of the resource group where resources will be created"
+  description = "Name of the Selfcare resource group where resources will be created"
+}
+
+variable "pnpg_resource_group_name" {
+  type        = string
+  description = "Name of the PNPG resource group where resources will be created"
 }
 
 variable "selc_subnet_id" {

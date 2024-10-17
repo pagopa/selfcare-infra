@@ -172,18 +172,18 @@ locals {
     # https://api.selfcare.pagopa.it/health
     "apigw-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/health",
+      path                              = "/external/status",
       frequency                         = 300
-      expected_http_status              = 404
+      expected_http_status              = 200
       ssl_cert_remaining_lifetime_check = 7
       opsgenie                          = true
     },
     # https://api-pnpg.selfcare.pagopa.it/health
     "apigw-pnpg-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/health",
+      path                              = "/external/status",
       frequency                         = 300,
-      expected_http_status              = 404,
+      expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 7,
       opsgenie                          = true
     },
@@ -452,21 +452,21 @@ locals {
   }
 
   test_urls_map_internal = {
-    # https://api.selfcare.pagopa.it/health
+    # https://api.selfcare.pagopa.it/external/status
     "apigw-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/health",
+      path                              = "/external/status",
       frequency                         = 900,
-      expected_http_status              = 404,
+      expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 7,
       opsgenie                          = false
     },
-    # https://api-pnpg.selfcare.pagopa.it/health
+    # https://api-pnpg.selfcare.pagopa.it/external/status
     "apigw-pnpg-selfcare" = {
       host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/health",
+      path                              = "/external/status",
       frequency                         = 900,
-      expected_http_status              = 404,
+      expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 7,
       opsgenie                          = false
     },

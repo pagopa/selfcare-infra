@@ -7,7 +7,10 @@ module "spid-test-env" {
   location          = var.location
   subscription_name = data.azurerm_subscription.current.display_name
 
-  hub_spid_login_metadata_url = format("https://api.%s.%s/spid/v1/metadata", var.dns_zone_prefix, var.external_domain)
+  username = data.azurerm_key_vault_secret.hub_docker_user.value
+  password = data.azurerm_key_vault_secret.hub_docker_pwd.value
+
+  hub_spid_login_metadata_url = format("https://api.%s.%s/spid-login/v1/metadata", var.dns_zone_prefix, var.external_domain)
 
   spid_testenv_local_config_dir = format("./env/%s/spid_testenv_conf", var.env)
 

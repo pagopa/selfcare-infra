@@ -25,20 +25,13 @@ output "redis_ssl_port" {
 }
 
 ## AKS
-output "aks_cluster_name" {
-  value = contains(["u", "p"], var.env_short) ? module.aks.name : null
-}
-
-output "aks_fqdn" {
-  value = contains(["u", "p"], var.env_short) ? module.aks.fqdn : null
-}
-
-output "aks_private_fqdn" {
-  value = contains(["u", "p"], var.env_short) ? module.aks.private_fqdn : null
-}
 
 output "aks_outbound_ips" {
   value = azurerm_public_ip.aks_outbound.*.ip_address
+}
+
+output "aks_outbound_temp_ips" {
+  value = azurerm_public_ip.aks_outbound_temp.*.ip_address
 }
 
 ## key vault ##
@@ -48,20 +41,6 @@ output "key_vault_uri" {
 
 output "key_vault_name" {
   value = module.key_vault.name
-}
-
-## Container registry ##
-output "container_registry_login_server" {
-  value = contains(["u", "p"], var.env_short) ? module.acr.login_server : null
-}
-
-output "container_registry_admin_username" {
-  value = contains(["u", "p"], var.env_short) ? module.acr.admin_username : null
-}
-
-output "container_registry_admin_password" {
-  value     = contains(["u", "p"], var.env_short) ? module.acr[0].admin_password : null
-  sensitive = true
 }
 
 ## Application gateway.

@@ -17,7 +17,6 @@ jobs:
       - name: init_terraform_folders
         env:
           FOLDERS: >
-            src/aks-platform
             src/core
             src/core/modules/spid_testenv
             src/domains/pnpg-app
@@ -58,5 +57,5 @@ jobs:
       - name: run_pre_commit_terraform
         run: |
           # from https://github.com/antonbabenko/pre-commit-terraform/pkgs/container/pre-commit-terraform
-          TAG=v1.76.0@sha256:50ed39dc67b6a5b198e45fa7b06aa73b50ccc20613bc795f1a7841fd41b2c838
+          TAG=v1.94.1@sha256:638e8892cb2647240c175064254c2fda80214597275c81a360a878dc80323076
           docker run -v $(pwd):/lint -w /lint ghcr.io/antonbabenko/pre-commit-terraform:$TAG run -a

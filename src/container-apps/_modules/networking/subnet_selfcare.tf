@@ -18,7 +18,11 @@ resource "azurerm_subnet" "selc_container_app_snet" {
 }
 
 resource "azurerm_subnet_nat_gateway_association" "selc_subnet_gateway_association" {
-  count          = 0
   nat_gateway_id = data.azurerm_nat_gateway.nat_gateway.id
   subnet_id      = azurerm_subnet.selc_container_app_snet.id
+}
+
+resource "azurerm_nat_gateway_public_ip_association" "selc_subnet_pip_nat_gateway" {
+  nat_gateway_id       = data.azurerm_nat_gateway.nat_gateway.id
+  public_ip_address_id = data.azurerm_public_ip.pip_outbound.id
 }

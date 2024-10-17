@@ -2,13 +2,14 @@ locals {
   product = "${var.prefix}-${var.env_short}"
   project = "${var.prefix}-${var.env_short}-${var.location_short}-${var.domain}"
 
+  app_name_fn = "${local.product}-pnpg-onboarding-fn"
+
   key_vault_name           = "${local.product}-${var.domain}-kv"
   key_vault_resource_group = "${local.product}-${var.domain}-sec-rg"
 
   redis_url = "selc-${var.env_short}-${var.location_short}-pnpg-redis.redis.cache.windows.net"
 
   mongodb_name_selc_core          = "selcMsCore"
-  mongodb_name_selc_product       = "selcProduct"
   mongodb_name_selc_user_group    = "selcUserGroup"
   contracts_storage_account_name  = replace("${local.project}-contracts-storage", "-", "")
   contracts_storage_container     = "${local.project}-contracts-blob"

@@ -48,23 +48,7 @@ ci_github_federations_ms = [
     subject    = "uat-ci"
   },
   {
-    repository = "selfcare-ms-notification-manager"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-ms-onboarding-interceptor"
-    subject    = "uat-ci"
-  },
-  {
     repository = "selfcare-ms-party-registry-proxy"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-ms-product"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-ms-user-group"
     subject    = "uat-ci"
   },
   {
@@ -77,6 +61,18 @@ ci_github_federations_ms = [
   },
   {
     repository = "selfcare-user"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-institution"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-infra-private"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-login-frontend"
     subject    = "uat-ci"
   }
 ]
@@ -103,23 +99,7 @@ cd_github_federations_ms = [
     subject    = "uat-cd"
   },
   {
-    repository = "selfcare-ms-notification-manager"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-ms-onboarding-interceptor"
-    subject    = "uat-cd"
-  },
-  {
     repository = "selfcare-ms-party-registry-proxy"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-ms-product"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-ms-user-group"
     subject    = "uat-cd"
   },
   {
@@ -132,6 +112,18 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-user"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-institution"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-infra-private"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-login-frontend"
     subject    = "uat-cd"
   }
 ]
@@ -175,7 +167,8 @@ environment_cd_roles = {
 environment_ci_roles_ms = {
   subscription = [
     "Reader",
-    "PagoPA IaC Reader"
+    "PagoPA IaC Reader",
+    "ContainerApp Reader"
   ]
   resource_groups = {
     terraform-state-rg = [

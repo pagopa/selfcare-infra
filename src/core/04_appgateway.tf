@@ -200,7 +200,7 @@ module "app_gw" {
       default_rewrite_rule_set_name = "rewrite-rule-set-api"
       path_rule = {
         bff_pnpg_api = {
-          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*"]
+          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*", "/external/*"]
           backend               = "apim"
           rewrite_rule_set_name = null
         }

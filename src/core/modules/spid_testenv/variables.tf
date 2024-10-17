@@ -27,3 +27,11 @@ variable "hub_spid_login_metadata_url" {
 variable "tags" {
   type = map(any)
 }
+
+variable "username" {
+  type = string
+}
+
+variable "password" {
+  type = string
+}
