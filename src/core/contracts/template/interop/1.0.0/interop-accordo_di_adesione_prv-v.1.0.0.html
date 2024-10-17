@@ -604,27 +604,27 @@
     <p style="text-align: center;"><span class="text-style">versione 1.0</p>
 
     <p>
-        <span class="text-style">Lo/la scrivente ______________, con sede legale in
-            ____________________________________, nella persona del legale rappresentante pro tempore/procuratore munito
-            dei necessari poteri ___________________________ (di seguito &quot;<b>Aderente</b>”), con i seguenti dati
+        <span class="text-style">Lo/la scrivente ${institutionName}, con sede legale in
+            ${address}, ${zipCode}, nella persona del legale rappresentante pro tempore/procuratore munito
+            dei necessari poteri ${managerName} ${managerSurname} (di seguito &quot;<b>Aderente</b>”), con i seguenti dati
             identificativi:</span>.
         </span>
     </p>
 
     <p style="margin-left:20px">
         <span class="text-style">
-            - codice fiscale _________________________; </span>
+            - codice fiscale ${institutionTaxCode}; </span>
         <br />
         <span class="text-style">
-            - partita IVA _____________________________ (da valorizzare solo se esistente e diversa dal codice fiscale
+            - partita IVA ${institutionVatNumber} (da valorizzare solo se esistente e diversa dal codice fiscale
             altrimenti eliminare/non compilare il campo); </span>
         <br />
         <span class="text-style">
-            - n. Iscrizione registro delle imprese di ______________________________ REA ___________________
-            capitale sociale ___________________________; </span>
+            - n. Iscrizione registro delle imprese di ${institutionBusinessRegisterPlace} REA ${institutionREA}
+            capitale sociale ${institutionShareCapital}; </span>
         <br />
         <span class="text-style">
-            - Indirizzo PEC presente nel Registro Imprese ______________________________________________;
+            - Indirizzo PEC presente nel Registro Imprese ${institutionMail};
         </span>
     </p>
 
@@ -776,8 +776,8 @@
         <span class="text-style">
             Distinti saluti,
             <br />
-            Legale Rappresentante/Procuratore munito dei necessari poteri dell&rsquo;Aderente, ______________________, C.F.
-            ______________________, e-mail ______________________.
+            Legale Rappresentante/Procuratore munito dei necessari poteri dell&rsquo;Aderente, ${managerName} ${managerSurname}, C.F.
+            ${managerTaxCode}, e-mail ${managerEmail}.
         </span>
     </p>
 
