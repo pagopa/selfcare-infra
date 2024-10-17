@@ -14,15 +14,3 @@ module "acr" {
 
   tags = var.tags
 }
-
-# add the role to the identity the kubernetes cluster was assigned
-resource "azurerm_role_assignment" "aks_to_acr" {
-  scope                = module.acr.id
-  role_definition_name = "AcrPull"
-  principal_id         = module.aks.kubelet_identity_id
-
-  depends_on = [
-    module.aks,
-    module.acr
-  ]
-}

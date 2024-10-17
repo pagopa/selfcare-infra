@@ -15,7 +15,6 @@ pids=()
 ACTION="$1"
 
 array=(
-    'src/aks-platform::dev01'
     'src/core::dev'
     'src/domains/pnpg-app::dev'
     'src/domains/pnpg-common::dev'

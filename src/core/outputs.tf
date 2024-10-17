@@ -25,17 +25,6 @@ output "redis_ssl_port" {
 }
 
 ## AKS
-output "aks_cluster_name" {
-  value = module.aks.name
-}
-
-output "aks_fqdn" {
-  value = module.aks.fqdn
-}
-
-output "aks_private_fqdn" {
-  value = module.aks.private_fqdn
-}
 
 output "aks_outbound_ips" {
   value = azurerm_public_ip.aks_outbound.*.ip_address
@@ -52,20 +41,6 @@ output "key_vault_uri" {
 
 output "key_vault_name" {
   value = module.key_vault.name
-}
-
-## Container registry ##
-output "container_registry_login_server" {
-  value = module.acr.login_server
-}
-
-output "container_registry_admin_username" {
-  value = module.acr.admin_username
-}
-
-output "container_registry_admin_password" {
-  value     = module.acr.admin_password
-  sensitive = true
 }
 
 ## Application gateway.
