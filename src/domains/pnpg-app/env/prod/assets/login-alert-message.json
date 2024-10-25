@@ -3,5 +3,20 @@
     "severity": "warning",
     "description": "Per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione. ",
     "enable": false
+  },
+  "disservice-error-banner": {
+    "severity": "error",
+    "description": "Ci scusiamo per il disagio, per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione.",
+    "enable": false
+  },
+  "disservice-warning-banner": {
+    "severity": "warning",
+    "description": "Potresti riscontrare problemi di accesso con SPID. In tal caso, prova ad accedere con un altro identity provider o con CIE",
+    "enable": false
+  },
+	"maintenance-warning-banner": {
+    "severity": "warning",
+    "description": "Per un intervento di manutenzione previsto in data 20/10/2024, potresti avere difficoltà a inserire una nuova adesione.",
+    "enable": false
   }
 }
