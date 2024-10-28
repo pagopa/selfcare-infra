@@ -1,0 +1,3129 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      * {
+        font-family: "Montserrat" !important;
+      }
+
+      .title {
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none;
+        vertical-align: baseline;
+        font-size: 10pt;
+        font-family: "Monserrat";
+        font-style: normal;
+      }
+
+      .sub-title {
+        color: #000000;
+        font-weight: 700;
+        text-decoration: none;
+        vertical-align: baseline;
+        font-size: 10pt;
+        font-family: "Monserrat";
+        font-style: normal;
+      }
+
+      .text-style {
+        font-size: 9pt;
+        font-family: "Montserrat";
+        text-align: justify;
+        line-height: 23px;
+      }
+
+      .title-position {
+        margin-left: 10%;
+        padding-top: 27.7pt;
+        padding-bottom: 15pt;
+        line-height: 1.0137622356414795;
+        text-align: justify;
+        margin-right: 10%;
+      }
+
+      .title-position-center {
+        margin-left: 10%;
+        padding-top: 27.7pt;
+        padding-bottom: 15pt;
+        line-height: 1.0137622356414795;
+        text-align: justify;
+        margin-right: 10%;
+        text-align: center;
+      }
+
+      .logo-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .logo-sx {
+        margin-left: 25pt;
+        padding-top: 0pt;
+        padding-bottom: 0pt;
+        line-height: 1;
+        text-align: left;
+        margin-right: 50%;
+      }
+
+      .logo-dx {
+        z-index: 100;
+        margin-left: 25pt;
+        margin-right: 50pt;
+        padding-top: 0pt;
+        padding-bottom: 0pt;
+        margin-bottom: 50pt;
+        text-align: right;
+      }
+
+      .c6 {
+        padding-top: 14.1pt;
+        padding-bottom: 10pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .content-body-style {
+        background-color: #ffffff;
+      }
+
+      li {
+        color: #000000;
+        font-size: 11pt;
+        font-family: "Arial";
+      }
+
+      p {
+        margin: 0;
+        color: #000000;
+        font-size: 11pt;
+        font-family: "Arial";
+      }
+
+      .table-style {
+        border-spacing: 0;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      .c42a {
+        border-right-style: solid;
+        padding: 3pt 3pt 3pt 3pt;
+        border-bottom-color: #000000;
+        border-top-width: 1pt;
+        border-right-width: 1pt;
+        border-left-color: #000000;
+        vertical-align: top;
+        border-right-color: #000000;
+        border-left-width: 1pt;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-bottom-width: 1pt;
+        width: 116.2pt;
+        border-top-color: #000000;
+        border-bottom-style: solid;
+      }
+
+      .c69a {
+        border-right-style: solid;
+        padding: 3pt 3pt 3pt 3pt;
+        border-bottom-color: #000000;
+        border-top-width: 1pt;
+        border-right-width: 1pt;
+        border-left-color: #000000;
+        vertical-align: top;
+        border-right-color: #000000;
+        border-left-width: 1pt;
+        border-top-style: solid;
+        border-left-style: solid;
+        border-bottom-width: 1pt;
+        width: 116.2pt;
+        border-top-color: #000000;
+        border-bottom-style: solid;
+      }
+
+      .c72a {
+        height: 17.2pt;
+      }
+
+      #l1 {
+        padding-left: 0pt;
+        counter-reset: c1 1;
+      }
+
+      #l1 > li > *:first-child:before {
+        counter-increment: c1;
+        content: counter(c1, decimal) ". ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l1 > li:first-child > *:first-child:before {
+        counter-increment: c1 0;
+      }
+
+      #l2 {
+        padding-left: 10pt;
+        counter-reset: d1 1;
+      }
+
+      #l2 > li > *:first-child:before {
+        counter-increment: d1;
+        content: counter(d1, upper-latin) ". ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l2 > li:first-child > *:first-child:before {
+        counter-increment: d1 0;
+      }
+
+      #l3 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l3 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l3 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l4 {
+        padding-left: 0pt;
+      }
+
+      #l4 > li > *:first-child:before {
+        content: "● ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l5 {
+        padding-left: 0pt;
+        counter-reset: e1 2;
+      }
+
+      #l5 > li > *:first-child:before {
+        counter-increment: e1;
+        content: counter(e1, upper-latin) ") ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l5 > li:first-child > *:first-child:before {
+        counter-increment: e1 0;
+      }
+
+      #l6 {
+        padding-left: 0pt;
+      }
+
+      #l6 > li > *:first-child:before {
+        content: "● ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l7 {
+        padding-left: 0pt;
+      }
+
+      #l7 > li > *:first-child:before {
+        content: "● ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l8 {
+        padding-left: 0pt;
+      }
+
+      #l8 > li > *:first-child:before {
+        content: "- ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l9 {
+        padding-left: 0pt;
+        counter-reset: g1 1;
+      }
+
+      #l9 > li > *:first-child:before {
+        counter-increment: g1;
+        content: counter(g1, lower-latin) ") ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l9 > li:first-child > *:first-child:before {
+        counter-increment: g1 0;
+      }
+
+      #l10 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l10 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l10 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l11 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l11 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l11 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l12 {
+        padding-left: 0pt;
+        counter-reset: h1 1;
+      }
+
+      #l12 > li > *:first-child:before {
+        counter-increment: h1;
+        content: counter(h1, lower-latin) ") ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l12 > li:first-child > *:first-child:before {
+        counter-increment: h1 0;
+      }
+
+      #l13 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l13 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l13 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l14 {
+        padding-left: 0pt;
+        counter-reset: i1 1;
+      }
+
+      #l14 > li > *:first-child:before {
+        counter-increment: i1;
+        content: counter(i1, lower-latin) ") ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l14 > li:first-child > *:first-child:before {
+        counter-increment: i1 0;
+      }
+
+      #l15 {
+        padding-left: 0pt;
+        counter-reset: i2 1;
+      }
+
+      #l15 > li > *:first-child:before {
+        counter-increment: i2;
+        content: counter(i2, decimal) ". ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l15 > li:first-child > *:first-child:before {
+        counter-increment: i2 0;
+      }
+
+      #l16 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l16 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l16 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l17 {
+        padding-left: 0pt;
+        counter-reset: c2 1;
+      }
+
+      #l17 > li > *:first-child:before {
+        counter-increment: c2;
+        content: counter(c1, decimal) "." counter(c2, decimal) " ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l17 > li:first-child > *:first-child:before {
+        counter-increment: c2 0;
+      }
+
+      #l18 {
+        padding-left: 0pt;
+        counter-reset: j1 12;
+      }
+
+      #l18 > li > *:first-child:before {
+        counter-increment: j1;
+        content: counter(j1, decimal) " ";
+        color: black;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      #l18 > li:first-child > *:first-child:before {
+        counter-increment: j1 0;
+      }
+
+      #l19 {
+        padding-left: 0pt;
+        counter-reset: j2 1;
+      }
+
+      #l19 > li > *:first-child:before {
+        counter-increment: j2;
+        content: counter(j1, decimal) "." counter(j2, decimal) ". ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l19 > li:first-child > *:first-child:before {
+        counter-increment: j2 0;
+      }
+
+      li {
+        display: block;
+      }
+
+      #l20 {
+        padding-left: 0pt;
+        counter-reset: k1 13;
+      }
+
+      #l20 > li > *:first-child:before {
+        counter-increment: k1;
+        content: counter(k1, decimal) " ";
+        color: black;
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      #l20 > li:first-child > *:first-child:before {
+        counter-increment: k1 0;
+      }
+
+      #l21 {
+        padding-left: 0pt;
+        counter-reset: k2 1;
+      }
+
+      #l21 > li > *:first-child:before {
+        counter-increment: k2;
+        content: counter(k1, decimal) "." counter(k2, decimal) ". ";
+        color: black;
+        font-family: "Monserrat";
+        font-style: normal;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: 11pt;
+      }
+
+      #l21 > li:first-child > *:first-child:before {
+        counter-increment: k2 0;
+      }
+
+      .c141 {
+        line-height: 1.5;
+        text-align: justify;
+        font-family: "Montserrat";
+      }
+
+      .c6 {
+        margin-right: 1pt;
+      }
+
+      ul#forced-list-point {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li#forced-list-point:before {
+        content: "•";
+        color: black;
+      }
+    </style>
+  </head>
+
+  <body class="content-body-style">
+    <div class="logo-container" id="banner">
+      <span style="margin-left: 75%"></span>
+
+      <span
+        class="logo-dx"
+        style="
+          overflow: hidden;
+          display: inline-block;
+          margin: 0;
+          border: 0 solid #000000;
+          transform: rotate(0rad) translateZ(0px);
+          -webkit-transform: rotate(0rad) translateZ(0px);
+          width: 128.16px;
+          height: 35.6px;
+        "
+        ><img
+          alt="logo_dx_pagopa"
+          src="https://selfcare.pagopa.it/assets/logo_pagopacorp.png"
+          style="
+            width: 128.16px;
+            height: 35.6px;
+            transform: rotate(0rad) translateZ(0px);
+            -webkit-transform: rotate(0rad) translateZ(0px);
+          "
+          title="logo_dx_pagopa"
+        />
+      </span>
+    </div>
+
+    <p class="title-position">
+      <span class="title"
+        >Oggetto: Accordo di Adesione alla Piattaforma Digitale Nazionale Dati
+        ai sensi dell&rsquo;art. 50-ter, comma 2, del Decreto Legislativo 7
+        marzo 2005, n. 82</span
+      >
+    </p>
+
+    <p style="text-align: center">
+      <span class="text-style">versione 1.0</span>
+    </p>
+
+    <p>
+      <span class="text-style"
+        >Lo/la scrivente ${institutionName}, con sede legale in ${address},
+        ${zipCode}, nella persona del legale rappresentante pro
+        tempore/procuratore munito dei necessari poteri ${managerName}
+        ${managerSurname} (di seguito &quot;<b>Aderente</b>”), con i seguenti
+        dati identificativi:
+      </span>
+    </p>
+
+    <p style="margin-left: 20px">
+      <span class="text-style"> - codice fiscale ${institutionTaxCode}; </span>
+      <br />
+      <span class="text-style">
+        - partita IVA ${institutionVatNumber} (da valorizzare solo se esistente
+        e diversa dal codice fiscale altrimenti eliminare/non compilare il
+        campo);
+      </span>
+      <br />
+      <span class="text-style">
+        - n. Iscrizione registro delle imprese di
+        ${institutionBusinessRegisterPlace} REA ${institutionREA} capitale
+        sociale ${institutionShareCapital};
+      </span>
+      <br />
+      <span class="text-style">
+        - Indirizzo PEC presente nel Registro Imprese ${institutionMail};
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        richiede di aderire alla Piattaforma Digitale Nazionale Dati (di seguito
+        &quot;<b>Infrastruttura</b>”), di cui all&rsquo;art. 50-ter, comma 2,
+        del Decreto Legislativo 7 marzo 2005, n. 82 recante Codice
+        dell&rsquo;Amministrazione Digitale (di seguito &quot;<b>CAD</b>”),
+        sviluppata da, e nella gestione di, PagoPA S.p.A. ai sensi
+        dell&rsquo;art. 8, commi 2 e 3, del D.L. n. 135/2018, con n. di
+        iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009 (di
+        seguito &quot;<b>Società</b>” o &quot;<b>PagoPA S.p.A.</b>”), e
+        costituita da una infrastruttura tecnologica che rende possibile
+        l&rsquo;interoperabilità dei sistemi informativi e delle basi di dati.
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        L&rsquo;Aderente dichiara che non rientra nella qualifica di Gestore
+        della piattaforma di approvvigionamento digitale (come definito
+        all&rsquo;art. 1 dei T&C che segue) e che per tale ragione non ha già
+        sottoscritto, ed in essere, un valido accordo di adesione alla
+        Infrastruttura.
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        A tal fine, l&rsquo;Aderente, con la presente accetta di conformarsi ai
+        termini e condizioni contenuti nei seguenti documenti, ove applicabili:
+        <br />
+        i) i termini e condizioni di adesione e d&rsquo;uso della Infrastruttura
+        (&quot;<b>T&C</b>” sub <b><a href="#allegato-1">Allegato 1</a></b
+        >);
+        <br />
+        ii) la documentazione tecnica (&quot;<b>Documentazione Tecnica</b>”
+        pubblicata sulla Infrastruttura);
+        <br />
+        iii) l&rsquo;Informativa Privacy della Società
+        (&quot;<b>Informativa</b>” sub
+        <b><a href="#allegato-2">Allegato 2</a></b
+        >);
+        <br />
+        iv) la nomina dell&rsquo;Utente con ruolo di Operatore amministrativo
+        (&quot;<b>Nomina</b>” sub <a href="#allegato-3"><b>Allegato 3</b></a
+        >);
+        <br />
+        v) eventuali termini e condizioni d&rsquo;uso del portale di accesso ai
+        prodotti offerti da PagoPA S.p.A., (di seguito &quot;<b>Portale</b>”),
+        ivi inclusa la relativa Informativa Privacy pubblicata sul Portale
+        stesso;
+        <br />
+        vii) eventuale liberatoria e consenso privacy all&rsquo;uso di video e
+        immagini durante la/e fasi di sperimentazione e di evolutiva
+        (&quot;<b>Liberatoria</b>” sub
+        <a href="#allegato-4"><b>Allegato 4</b></a
+        >).
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        La presente Lettera di Adesione, gli Allegati alla stessa, la
+        Documentazione Tecnica e gli eventuali termini e condizioni d&rsquo;uso
+        del Portale regolano il rapporto tra l&rsquo;Aderente e la Società e
+        costituiscono congiuntamente l&rsquo;&quot;<b>Accordo di Adesione</b>” o
+        &quot;<b>Accordo</b>”.
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        L&rsquo;Aderente accetta e riconosce che, su richiesta dallo stesso
+        inviata alla Società, potrà prendere parte alla e/o alle fasi di
+        sperimentazione e di evolutiva della Infrastruttura che saranno
+        eventualmente avviate dalla Società, ove ammesso a parteciparvi
+        successivamente alla propria adesione alla Infrastruttura.
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        Con riferimento alla partecipazione alle fasi di sperimentazione e di
+        evolutiva, l&rsquo;Aderente, riconosce e accetta che, durante lo
+        svolgimento di tali fasi:
+        <ol id="l9" class="text-style;">
+          <li data-list-text="a)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                la Società erogherà le componenti e le funzionalità messe a
+                disposizione dalla Infrastruttura per permettere
+                l&rsquo;erogazione e la fruizione degli E-service (di seguito
+                &quot;<b>Servizi</b>”) come individuati nella Documentazione
+                Tecnica appositamente predisposta per tali fasi e pubblicata
+                sulla Infrastruttura. Resta inteso che la Documentazione Tecnica
+                predisposta per tali fasi di sperimentazione e di evolutiva
+                potrebbe presentare differenze rispetto alla Documentazione
+                Tecnica che sarà pubblicata sulla Infrastruttura al termine
+                delle fasi di sperimentazione e di evolutiva;
+              </span>
+            </p>
+          </li>
+          <li data-list-text="b)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                le funzionalità della Infrastruttura potranno essere
+                depotenziate, presentare problematiche di funzionamento e/o di
+                indisponibilità e, comunque, non saranno garantiti livelli di
+                servizio;
+              </span>
+            </p>
+          </li>
+
+          <li data-list-text="c)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                in caso di partecipazione a fasi di sperimentazione/evolutiva
+                con dati fittizi, comunicherà alla Società dati fittizi da lui
+                creati ad hoc - rimanendo l&rsquo;unico soggetto in grado di
+                valutare il carattere fittizio dei dati trasmessi;
+              </span>
+            </p>
+          </li>
+          <li data-list-text="d)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                in caso di partecipazione a fasi di sperimentazione/evolutiva
+                con dati fittizi, non troveranno applicazione gli articoli 6, 10
+                e 11 di cui al presente Accordo;
+              </span>
+            </p>
+          </li>
+          <li data-list-text="e)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                in caso di partecipazione alle fasi di sperimentazione/evolutiva
+                con dati reali non troverà applicazione l&rsquo;articolo 6 di
+                cui al presente Accordo.
+              </span>
+            </p>
+          </li>
+        </ol>
+        <span class="text-style">
+          Resta inteso che al di fuori delle fasi di sperimentazione e di
+          evolutiva, ogni articolo del presente Accordo risulterà pienamente
+          applicabile.
+        </span>
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        In fase di partecipazione alla/e fase/i di sperimentazione e di
+        evolutiva, l&rsquo;Aderente si impegna a far utilizzare la
+        Infrastruttura unicamente da Utenti comunicati alla Società e con
+        riferimento ai quali la Società stessa potrà decidere di:
+        <ol id="l9" class="text-style;">
+          <li data-list-text="a)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                ottenere la Liberatoria all&rsquo;utilizzo di suoni e immagini
+                direttamente in fase di partecipazione ad un&rsquo;attività di
+                sperimentazione e di evolutiva, raccogliendo il consenso anche
+                tramite registrazione audio e/o video; oppure
+              </span>
+            </p>
+          </li>
+          <li data-list-text="b)">
+            <p
+              style="
+                padding-left: 41pt;
+                text-indent: -18pt;
+                line-height: 149%;
+                text-align: justify;
+              "
+            >
+              <span class="text-style">
+                chiedere all&rsquo;Aderente di produrre preventivamente la
+                predetta Liberatoria compilata e sottoscritta dall&rsquo;Utente
+                partecipante.
+              </span>
+            </p>
+          </li>
+        </ol>
+        <span class="text-style">
+          Resta inteso quindi che, in assenza di specifica richiesta della
+          Società, l&rsquo;Aderente non dovrà procedere a far compilare e
+          sottoscrivere la Liberatoria agli Utenti partecipanti alla/e fase/i di
+          sperimentazione e di evolutiva. Diversamente, in caso di richiesta di
+          compilazione e sottoscrizione della Liberatoria, l&rsquo;Aderente
+          dovrà inviarla al domicilio digitale della Società debitamente
+          compilata e sottoscritta dal/i soggetto/i partecipante/i a tali fasi.
+        </span>
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p>
+      <span class="text-style">
+        Distinti saluti,
+        <br />
+        Legale Rappresentante/Procuratore munito dei necessari poteri
+        dell&rsquo;Aderente, ${managerName} ${managerSurname}, C.F.
+        ${managerTaxCode}, e-mail ${managerEmail}.
+      </span>
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <table>
+      <tr>
+        <th>
+          <p style="margin-left: 50px !important"></p>
+        </th>
+        <th style="text-align: center">
+          <span class="text-style"
+            ><i>F.to digitalmente dall&rsquo;Aderente</i></span
+          >
+        </th>
+        <th>
+          <p style="margin-left: 10px !important"></p>
+        </th>
+        <th style="text-align: center">
+          <span class="text-style"
+            ><i>F.to digitalmente da PagoPA S.p.A.</i></span
+          >
+        </th>
+      </tr>
+      <tr>
+        <td></td>
+        <td>_______________________________</td>
+        <td></td>
+        <td>_______________________________</td>
+      </tr>
+    </table>
+
+    <p style="padding: 5pt"></p>
+    <p>
+      <span class="text-style"
+        ><b>Clausole ai sensi degli artt. 1341 e 1342 del c.c.</b></span
+      >
+      <br />
+      <span class="text-style">
+        Firmando digitalmente l&rsquo;Accordo, anche in considerazione del
+        contenuto del messaggio PEC con cui la Società invia il presente Accordo
+        ai fini della sottoscrizione da parte dell&rsquo;Aderente, il firmatario
+        dichiara di accettare espressamente e specificatamente, anche ai sensi e
+        per gli effetti degli artt. 1341 e 1342 del codice civile, i seguenti
+        articoli dei T&C: 2 (Oggetto), 3 (Obblighi delle Parti), 4
+        (Dichiarazioni e garanzie dell&rsquo;Aderente), 5 (Durata, recesso,
+        risoluzione, conservazione e cancellazione dei dati), 6 (Livelli di
+        servizio), 7 (Modifica e integrazione dell&rsquo;Accordo), 8
+        (Limitazione di responsabilità), 10 (Utilizzo di dati anonimizzati e/o
+        aggregati e pubblicità), 12 (Riservatezza), 14 (Foro e legge
+        applicabile) e 15 (Modello ex D.Lgs. n. 231/01 e PTPCT).</span
+      >
+    </p>
+
+    <p style="padding: 5pt"></p>
+
+    <p style="margin-left: 50px">
+      <span class="text-style">
+        F.to digitalmente dall&rsquo;Aderente
+        <br />
+        ________________________________
+      </span>
+    </p>
+
+    <div style="page-break-before: always"></div>
+
+    <!-- allegato 1 -->
+    <div id="allegato-1">
+      <p class="title-position-center">
+        <span class="title"
+          >Allegato 1 <br />TERMINI E CONDIZIONI DI ADESIONE E D&rsquo;USO DELLA
+          INFRASTRUTTURA</span
+        >
+      </p>
+
+      <div id="art1">
+        <p>
+          <span class="test-style">
+            <b>ART.1 - Definizioni</b>
+          </span>
+        </p>
+
+        <ol id="l1">
+          <!--capitolo 1-->
+          <li data-list-text="1.">
+            <span class="text-style">
+              Ai fini dei presenti T&C si rinvia alle definizioni individuate
+              con la lettera maiuscola e già specificate in precedenza
+              nell&rsquo;atto a cui tali T&C sono allegati.
+            </span>
+          </li>
+
+          <br />
+          <!--capitolo 2-->
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Fermo restando quanto previsto al comma 1 che precede, in
+              aggiunta si stabiliscono le seguenti ulteriori definizioni:</span
+            >
+            <span class="text-style">
+              <ul id="forced-list-point">
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>API o &quot;Application Programming Interface”:</b> un
+                    insieme di procedure, funzionalità e/o operazioni
+                    disponibili al programmatore, di solito raggruppate per
+                    formare un insieme di strumenti specifici per
+                    l&rsquo;espletamento di un determinato compito.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Ambiente di Attestazione:</b> ambiente messo a
+                    disposizione sulla Infrastruttura per consentire ad un
+                    Aderente di testare le funzionalità della Infrastruttura,
+                    utilizzando dati fittizi da lui creati ad hoc - rimanendo
+                    l&rsquo;Aderente stesso l&rsquo;unico soggetto in grado di
+                    valutare il carattere fittizio dei dati utilizzati.
+                  </span>
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Ambiente di Collaudo:</b> ambiente messo a disposizione
+                    sulla Infrastruttura per consentire ad un Aderente di
+                    testare, con dati fittizi da lui creati ad hoc, rimanendo
+                    l&rsquo;Aderente stesso l&rsquo;unico soggetto in grado di
+                    valutare il carattere fittizio dei dati trasmessi, oltre
+                    alle funzionalità della Infrastruttura in linea con quanto
+                    previsto dalle Linee Guida AgID, anche l&rsquo;effettiva
+                    fruizione degli E-service, ricevendo, a tal fine, ove
+                    necessario dagli Erogatori una valutazione tecnica
+                    propedeutica all&rsquo;accesso a tali E-service.
+                  </span>
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Ambiente di Esercizio:</b> ambiente messo a disposizione
+                    sulla Infrastruttura tramite cui l&rsquo;Aderente può
+                    accedere e fruire degli E-service messi a disposizione dagli
+                    Erogatori.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Attributi:</b> le caratteristiche possedute dagli
+                    Aderenti. In base a quanto previsto nelle Linee Guida AgID,
+                    gli Attributi possono essere Certificati, Dichiarati e
+                    Verificati.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Catalogo API:</b> la componente unica e centralizzata che
+                    assicura agli Erogatori la registrazione e la pubblicazione
+                    dei propri E-service e ai Fruitori la consultazione degli
+                    E-service pubblicati.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Erogatore:</b> un Aderente, rientrante nella categoria
+                    dei soggetti di cui all&rsquo;articolo 2, comma 2, del CAD,
+                    che rende disponibile un E-service ad altro Aderente
+                    mediante le funzionalità dell&rsquo;Infrastruttura, per la
+                    fruizione di dati in proprio possesso o l&rsquo;integrazione
+                    dei processi.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>E-service:</b> ciascun servizio digitale realizzato da un
+                    Erogatore, attraverso l&rsquo;implementazione delle
+                    necessarie API conformi a quanto indicato nelle Linee guida
+                    AgID TECNICA e Linee Guida AgID SICUREZZA, per assicurare ai
+                    Fruitori l&rsquo;accesso ai dati e/o l&rsquo;integrazione di
+                    processi.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Erogazione Inversa:</b> situazione in cui un Erogatore
+                    espone un e-service per ricevere dati da parte di un
+                    Fruitore.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Fruitore:</b> l&rsquo;Aderente che fruisce degli
+                    E-service messi a disposizione da un Erogatore mediante le
+                    funzionalità della Infrastruttura.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b
+                      >Gestore della piattaforma di approvvigionamento
+                      digitale:</b
+                    >
+                    il soggetto che ricopre il ruolo di gestore della
+                    piattaforma di approvvigionamento digitale ai sensi
+                    dell&rsquo;art. 25 del Decreto Legislativo n. 36/2023 e
+                    soddisfa i &quot;Requisiti tecnici e modalità di
+                    certificazione delle Piattaforme di approvvigionamento
+                    digitale” previsti nelle regole tecniche adottate da AgID
+                    con Determinazione n. 137/2023.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Linee Guida AgID:</b> le linee guida AgID
+                    sull&rsquo;infrastruttura tecnologica per
+                    l&rsquo;interoperabilità dei sistemi informativi e delle
+                    basi di dati di cui all&rsquo;art. 50-ter, comma 2, del CAD,
+                    adottate con determinazione n. 627/2021.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Parte/i:</b> l&rsquo;Aderente o/e la Società.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Indice:</b> l&rsquo;Indice nazionale dei domicili
+                    digitali delle imprese e dei professionisti di cui
+                    all&rsquo;art. 6-bis del CAD da cui la Infrastruttura
+                    recupera il domicilio digitale dell&rsquo;Aderente
+                    utilizzato nelle comunicazioni.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Requisiti di Fruizione:</b> gli Attributi, associati da
+                    un Erogatore a ciascun E-service pubblicato sul Catalogo
+                    API, che un Fruitore deve possedere per poter fruire di un
+                    E-service.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Servizi:</b> le componenti e le funzionalità messe a
+                    disposizione dalla Infrastruttura per permettere
+                    l&rsquo;erogazione e la fruizione degli E-service
+                    nell&rsquo;Ambiente di Attestazione, nell&rsquo;Ambiente di
+                    Collaudo e nell&rsquo;Ambiente di Esercizio, secondo le
+                    modalità previste per ciascun ambiente.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Utente/i:</b> ogni persona fisica che accede alla
+                    Infrastruttura ed è autorizzata dall&rsquo;Aderente ad agire
+                    per suo conto sulla Infrastruttura stessa. In base a quanto
+                    previsto nelle Linee Guida AgID, gli Utenti possono essere
+                    Operatori API, Operatori di Sicurezza, Operatori
+                    Amministrativi. Il legale rappresentante che sottoscrive il
+                    presente Accordo assume il ruolo di Operatore
+                    Amministrativo.</span
+                  >
+                </li>
+
+                <li id="forced-list-point">
+                  <span class="text-style">
+                    <b>Voucher:</b> la rappresentazione digitale degli elementi
+                    utili ad applicare i Requisiti di Fruizione richiesti per
+                    l&rsquo;accesso ad un E-service, rilasciato
+                    dall&rsquo;Infrastruttura in relazione a ogni richiesta di
+                    fruizione di un E-service.</span
+                  >
+                </li>
+              </ul>
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art2">
+        <p>
+          <span class="test-style"><b>ART.2 - Oggetto</b></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              I presenti T&C regolano l&rsquo;erogazione dei Servizi da parte
+              della Società e le condizioni di adesione e uso della
+              Infrastruttura da parte dell&rsquo;Aderente anche in caso di
+              conclusione della/e fase/i di sperimentazione e di
+              evolutiva.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >La Società, nel rispetto dei termini dell&rsquo;Accordo, fornisce
+              all&rsquo;Aderente una licenza, non esclusiva, all&rsquo;uso della
+              Infrastruttura tramite cui è possibile fruire dei Servizi.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >I Servizi, erogati dalla Società, sono individuati nella
+              Documentazione Tecnica, in coerenza con quanto previsto nelle
+              Linee Guida AgID.</span
+            >
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara di aver ricevuto tutte le informazioni
+              necessarie - anche per il tramite della Documentazione Tecnica -
+              per verificare che i Servizi corrispondano alle sue esigenze e si
+              impegna a controllare tale corrispondenza all&rsquo;evolversi dei
+              Servizi come risultanti dalla Documentazione Tecnica messa a
+              disposizione sull&rsquo;Infrastruttura e comunicati ai sensi
+              dell&rsquo;art. 7 che segue; di conseguenza, la Società non può
+              essere in alcun modo ritenuta responsabile di eventuali inidoneità
+              dei Servizi alle esigenze dell&rsquo;Aderente.</span
+            >
+          </li>
+
+          <li data-list-text="5.">
+            <span class="text-style"
+              >La Società, ove lo ritenga necessario, si riserva il diritto di
+              implementare anche un servizio di tracciatura, raccolta e
+              conservazione sulla Infrastruttura dell&rsquo;andamento
+              esclusivamente quantitativo delle transazioni avvenute tra ciascun
+              Erogatore e ciascun Fruitore con riferimento alla numerosità dei
+              Voucher rilasciati dalla Infrastruttura e notificati alla
+              Infrastruttura stessa (di seguito,
+              <b>&quot;Servizio di Tracing”</b>). Nel caso in cui venga
+              implementato tale servizio, la Società ne darà comunicazione
+              all&rsquo;Aderente con le modalità indicate nella Documentazione
+              Tecnica.</span
+            >
+          </li>
+
+          <li data-list-text="6.">
+            <span class="text-style"
+              >L&rsquo;Aderente accetta e riconosce che, se aderisce alla
+              Infrastruttura prima dell&rsquo;apertura - comunicata da parte
+              della Società agli Aderenti anche mediante informativa pubblicata
+              sulla Infrastruttura - degli Ambienti di Collaudo e/o
+              all&rsquo;Ambiente di Esercizio a soggetti non rientranti nelle
+              categorie di cui agli art. 2, comma 2, lett. a, b e c, del CAD,
+              accederà esclusivamente all&rsquo;Ambiente di Attestazione.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art3">
+        <p>
+          <span class="test-style"
+            ><b>ART. 3 - Obblighi delle Parti<br /></b
+          ></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Le Parti si impegnano a operare nel pieno rispetto delle
+              disposizioni di cui al presente Accordo, alle Linee guida AgID
+              nonché di ogni normativa, atto o provvedimento pubblico inerente
+              la Infrastruttura. In particolare, l&rsquo;Aderente dichiara,
+              anche per conto dei propri Utenti, di aver preso visione e
+              compreso integralmente le Linee Guida AgID.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente si impegna a utilizzare, e far utilizzare ai
+              propri Utenti, i Servizi esclusivamente per gli scopi previsti
+              dall&rsquo;Accordo, in conformità ai termini e alle condizioni ivi
+              previsti, e a non usare i Servizi per scopi illeciti o ulteriori
+              rispetto alle proprie finalità istituzionali/statutarie. A tal
+              fine si specifica che, in nessun caso, la Società potrà rispondere
+              ad alcun titolo dei danni causati direttamente o indirettamente a
+              terzi attraverso l&rsquo;utilizzo dei Servizi da parte
+              dell&rsquo;Aderente e dei suoi Utenti.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >L&rsquo;Aderente, si obbliga, in particolare, a:</span
+            >
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) utilizzare i Servizi unicamente tramite Utenti
+                  opportunamente comunicati alla Società tramite la
+                  Infrastruttura ed a vigilare sull&rsquo;operato degli stessi
+                  di cui resta l&rsquo;unico responsabile;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) indicare e tenere aggiornato il profilo del legale
+                  rappresentante e di tutti gli Utenti - fornendo a tal fine
+                  tutti i dati di contatto richiesti, ivi incluso il cellulare
+                  aziendale ove assegnato -, nonché rimuoverli dalla
+                  Infrastruttura in caso di cessazione delle relative funzioni,
+                  cariche o ruoli eventualmente ricoperti;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  c) tenere sempre aggiornata la sua anagrafica sul relativo
+                  Indice di appartenenza e, verificare la correttezza dei dati
+                  ivi presenti, provvedendo, in caso di imprecisioni, a
+                  chiederne l&rsquo;aggiornamento o la rettifica;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  d) a partire dal momento di attivazione del Servizio di
+                  Tracing, realizzare un proprio servizio che gli consenta di
+                  depositare, con le modalità e secondo i criteri indicati nella
+                  Documentazione Tecnica, i tracciati delle transazioni cui ha
+                  preso parte;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  e) formare gli Utenti sul corretto utilizzo della
+                  Infrastruttura e dei relativi Servizi;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  f) rispettare ogni altra regola o indicazione fornita dalla
+                  Società sull&rsquo;uso dei Servizi e/o della
+                  Infrastruttura.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >L&rsquo;Aderente si obbliga a conservare, e far conservare dai
+              suoi Utenti, con la massima riservatezza le chiavi per la gestione
+              degli E-service messi a disposizione sulla Infrastruttura, e
+              risponde, pertanto, anche della custodia delle stesse.
+              L&rsquo;Aderente sarà, pertanto, responsabile degli eventuali
+              danni causati dall&rsquo;eventuale utilizzo delle chiavi da parte
+              di terzi non autorizzati. L&rsquo;Aderente si impegna comunque a
+              comunicare, entro e non oltre 24 (ventiquattro) ore dal momento in
+              cui viene a conoscenza dell&rsquo;evento, tramite la
+              Infrastruttura, alla Società l&rsquo;eventuale furto, smarrimento,
+              perdita ovvero appropriazione a qualsiasi titolo, da parte di
+              terzi non autorizzati, delle chiavi per la gestione degli
+              E-service. Nel caso in cui la Società venga a conoscenza di tali
+              eventi, anche la Società si impegna a darne comunicazione
+              all&rsquo;Aderente, entro e non oltre 24 (ventiquattro) ore dal
+              momento in cui viene a conoscenza dell&rsquo;evento.</span
+            >
+          </li>
+
+          <li data-list-text="5.">
+            <span class="text-style"
+              >E&rsquo;, altresì, fatto esplicito divieto di, e l&rsquo;Aderente
+              si impegna a non:</span
+            >
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) aggirare o manomettere l&rsquo;accesso e
+                  l&rsquo;autenticazione alla Infrastruttura;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) accedere alla Infrastruttura attraverso programmi o metodi
+                  diversi da quelli ufficialmente rilasciati e gestiti dalla
+                  Società;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  c) utilizzare la Infrastruttura e/o i Servizi in violazione o
+                  in sovraccarico della capacità di rete;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  d) trasmettere alla Infrastruttura virus, malware, o altro
+                  codice dannoso, violarne la sicurezza e/o effettuare
+                  interventi di hacking.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="6.">
+            <span class="text-style"
+              >L&rsquo;Aderente è tenuto ad avvisare, entro e non oltre 24
+              (ventiquattro) ore dal momento in cui viene a conoscenza
+              dell&rsquo;evento, tramite la Infrastruttura, la Società in caso
+              di uso o accesso non autorizzati, e per proprio conto, alla
+              Infrastruttura e alle relative funzioni, nonché di qualsiasi
+              violazione, malfunzionamento o incidente di sicurezza. Qualora
+              tali eventi comportino violazioni e intrusioni nei dati personali,
+              l&rsquo;Aderente dovrà avvisare la Società entro 24 (ventiquattro)
+              ore dal momento in cui viene a conoscenza dell&rsquo;evento. La
+              Società non potrà essere considerata responsabile per eventuali
+              danni o disservizi derivanti da usi ed accessi non autorizzati
+              effettuati dall&rsquo;Aderente, dai suoi Utenti.</span
+            >
+          </li>
+
+          <li data-list-text="7.">
+            <span class="text-style"
+              >Fermi restando gli altri rimedi a disposizione della Società ai
+              sensi dell&rsquo;Accordo o della normativa applicabile, nel caso
+              di violazioni gravi o sostanziali dell&rsquo;Accordo, la Società
+              si riserva il diritto di sospendere o limitare temporaneamente
+              l&rsquo;accesso dell&rsquo;Aderente e/o dei suoi Utenti. E&rsquo;
+              responsabilità dell&rsquo;Aderente comunicare entro e non oltre 24
+              (ventiquattro) ore dal momento in cui viene a conoscenza
+              dell&rsquo;evento, tramite la Infrastruttura, alla Società
+              qualsiasi violazione dell&rsquo;Accordo da parte dei suoi Utenti o
+              di terzi di cui fosse a conoscenza.</span
+            >
+          </li>
+
+          <li data-list-text="8.">
+            <span class="text-style"
+              >Nell&rsquo;erogazione dei Servizi, la Società si impegna a:</span
+            >
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) assicurare il corretto funzionamento della Infrastruttura e
+                  della sua conformità alla disciplina vigente, ivi inclusa la
+                  normativa sulla protezione dei dati personali e sulla
+                  sicurezza informatica;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) nell&rsquo;Ambiente di Esercizio, rispettare i livelli di
+                  servizio di cui all&rsquo;art. 6 che segue;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  c) comunicare preventivamente all&rsquo;Aderente le
+                  interruzioni programmate dei Servizi;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  d) assicurare l&rsquo;identificazione univoca
+                  dell&rsquo;Aderente e degli Utenti in fase di accesso alla
+                  Infrastruttura;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  e) nell&rsquo;Ambiente di Esercizio, raccogliere e conservare
+                  le dichiarazioni rilasciate dal Fruitore in fase di
+                  compilazione dello strumento di analisi del rischio sulla
+                  protezione dei dati personali messo a tal fine a disposizione
+                  dalla Infrastruttura;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  f) nell&rsquo;Ambiente di Esercizio, tracciare, raccogliere e
+                  conservare tutte le attività previste nelle Linee Guida
+                  AgID.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="9.">
+            <span class="text-style"
+              >L&rsquo;Aderente accetta e riconosce che ai fini
+              dell&rsquo;erogazione dei Servizi, la Società potrebbe utilizzare
+              servizi, soluzioni e software pre-esistenti di titolarità di terzi
+              (di seguito <b>&quot;Terze Parti”</b>) e concessi in licenza alla
+              Società (di seguito <b>&quot;Soluzioni di Terze Parti”</b>). A tal
+              fine la Società garantisce all&rsquo;Aderente di avere il diritto
+              di utilizzare tali Soluzioni di Terze Parti per le finalità di cui
+              all&rsquo;Accordo e per tutta la durata dello stesso, restando
+              inteso che la Società è e rimane responsabile del corretto
+              funzionamento della Infrastruttura e garantisce all&rsquo;Aderente
+              il corretto funzionamento della Infrastruttura stessa anche ove si
+              avvalga di tali Soluzioni di Terze Parti.</span
+            >
+          </li>
+
+          <li data-list-text="10.">
+            <span class="text-style"
+              >L&rsquo;Aderente si obbliga per tutta la durata del presente
+              Accordo a comunicare, ai sensi e per gli effetti del D.P.R. n.
+              445/2000 alla Società e tramite gli strumenti messi a disposizione
+              dall&rsquo;Infrastruttura, ogni eventuale sua modifica soggettiva
+              intervenuta, anche relativa all&rsquo;appartenenza ad una delle
+              categorie previste dall&rsquo;art. 2, comma 2, del CAD, con
+              diritto di controllo da parte della Società.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art4">
+        <p>
+          <span class="test-style"
+            ><b>ART. 4 - Dichiarazioni e garanzie dell&rsquo;Aderente</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              L&rsquo;Aderente accetta, riconosce e garantisce che:</span
+            >
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) è responsabilità esclusiva dello stesso porre in essere, a
+                  propria cura e spese, tutte le attività necessarie
+                  all&rsquo;integrazione tecnologica, come descritto nella
+                  Documentazione Tecnica, pena l&rsquo;impossibilità di fruire
+                  dei Servizi;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  b) può fruire di un E-service reso disponibile sulla
+                  Infrastruttura solo ove abbia preventivamente:</span
+                >
+                <ol class="text-style" style="margin-left: 2px">
+                  <li>
+                    <span class="text-style"
+                      >i. aderito all&rsquo;Infrastruttura;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      ii. inviato all&rsquo;Erogatore, per il tramite della
+                      Infrastruttura, la richiesta di fruizione
+                      dell&rsquo;E-service attraverso la sola selezione
+                      dell&rsquo;E-service sul Catalogo API, laddove ritenga di
+                      possedere tutti gli Attributi Certificati, Dichiarati e
+                      Verificati previsti nei Requisiti di fruizione
+                      dell&rsquo;E-service;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      iii. per ogni finalità per cui intende fruire di quel
+                      determinato E-service, effettuato l&rsquo;analisi del
+                      rischio sulla protezione dei dati personali che saranno
+                      ottenuti mediante la fruizione dell&rsquo;E-service ed
+                      indicato il numero di chiamate giornaliere che effettuerà
+                      all&rsquo;E-service per quella specifica finalità (c.d.
+                      stima di carico);</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      iv. prima di fruire dell&rsquo;E-service per la specifica
+                      finalità dichiarata, comunicato direttamente
+                      all&rsquo;Erogatore (o al Fruitore in caso di Erogazione
+                      Inversa) - e quindi al di fuori della Infrastruttura - il
+                      riferimento al/i documento/i informatico/i che dimostri/no
+                      la sussistenza del rapporto intercorrente tra il Fruitore
+                      (o l&rsquo;Erogatore in caso di Erogazione Inversa) e il
+                      soggetto di cui sono richiesti i dati personali e che gli
+                      consenta di accedere legittimamente a tutti i dati
+                      personali messi a disposizione dall&rsquo;Erogatore (o dal
+                      Fruitore in caso di Erogazione Inversa) tramite
+                      l&rsquo;E-service. Resta inteso che nel caso in cui il
+                      Fruitore sia un soggetto privato dovrà permettere
+                      all&rsquo;Erogatore di recuperare i documenti attestanti
+                      la legittimità dello specifico trattamento dei dati
+                      personali a partire dal riferimento indicato dal Fruitore
+                      nel singolo utilizzo dell&rsquo;E-service;</span
+                    >
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                <span class="text-style">
+                  c) con riferimento alla fruizione di uno specifico E-service,
+                  al variare delle proprie esigenze, può:</span
+                >
+                <ol class="text-style" style="margin-left: 2px">
+                  <li>
+                    <span class="text-style">
+                      i. sospendere o eliminare una finalità precedentemente
+                      registrata;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      ii. ridurre o aumentare la stima di carico associata ad
+                      una specifica finalità precedentemente registrata;</span
+                    >
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                <span class="text-style">
+                  d) la Società non è titolare dei dati detenuti da un Erogatore
+                  (o Fruitore in caso di Erogazione Inversa) e forniti in fase
+                  di erogazione di un E-service, nè ha alcun obbligo di verifica
+                  sugli stessi;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  e) la Società non è responsabile di quanto dichiarato da un
+                  Fruitore in fase di compilazione dei campi dello strumento di
+                  analisi del rischio, né ha alcun obbligo di verifica degli
+                  stessi;</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  f) l&rsquo;Erogatore (o il Fruitore in caso di Erogazione
+                  Inversa) è l&rsquo;unico responsabile, ai sensi delle leggi
+                  vigenti, della correttezza, completezza, integrità e
+                  rispondenza delle informazioni con quanto risultante in banche
+                  dati dell&rsquo;Erogatore stesso (o del Fruitore in caso di
+                  Erogazione Inversa) dei dati forniti in fase di erogazione di
+                  un E-service, nonché della loro comunicazione ai Fruitori (o
+                  Erogatori in caso di Erogazione Inversa);</span
+                >
+              </li>
+
+              <li>
+                <span class="text-style">
+                  g) non potrà avanzare alcuna pretesa verso la Società avente
+                  ad oggetto:</span
+                >
+                <ol class="text-style" style="margin-left: 2px">
+                  <li>
+                    <span class="text-style">
+                      i. la correttezza, completezza, integrità e rispondenza
+                      delle informazioni con quanto risultante in banche dati
+                      dell&rsquo;Erogatore stesso (o del Fruitore in caso di
+                      Erogazione Inversa) dei dati forniti in fase di erogazione
+                      di un E-service, nonché della loro comunicazione ai
+                      Fruitori (o Erogatori in caso di Erogazione
+                      Inversa);</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      ii. gli E-service messi a disposizione e, in particolare,
+                      la liceità della loro messa a disposizione tramite la
+                      Infrastruttura, nonché il loro contenuto e la loro
+                      operatività, sicurezza e disponibilità nei confronti dei
+                      Fruitori;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style">
+                      iii. il contenuto, l&rsquo;aggiornamento e la validità dei
+                      Requisiti di fruizione applicabili agli E-service messi a
+                      disposizione tramite la Infrastruttura.</span
+                    >
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente, infine, prende atto che, fatta eccezione per le
+              richieste di assistenza relative al funzionamento della
+              Infrastruttura come previste dalle Linee Guida AgID, la Società
+              non fornisce alcuna assistenza al Fruitore in relazione alla
+              fruizione degli E-service messi a disposizione tramite la
+              Infrastruttura e/o al loro contenuto. Qualunque informazione e/o
+              assistenza di cui un Fruitore dovesse necessitare ai fini della
+              fruizione di un E-service o del suo contenuto è di esclusiva
+              competenza e responsabilità dell&rsquo;Erogatore, a cui la Società
+              si riserva il diritto di re-indirizzare qualunque richiesta
+              avanzata da parte di un Fruitore.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >L&rsquo;Aderente, ove non sia stata già conclusa, in tutto o in
+              parte, la sperimentazione/evolutiva della Infrastruttura,
+              dichiara, di accettare che durante le fasi di
+              sperimentazione/evolutiva e, i periodi di manutenzione e/o di
+              interruzione, la Infrastruttura e/o i Servizi potrebbero
+              presentare problematiche di funzionamento o aspetti che richiedano
+              interventi o miglioramenti.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art5">
+        <p>
+          <span class="test-style"
+            ><b>ART. 5 - Durata, recesso e risoluzione</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              L&rsquo;Accordo è valido ed efficace a partire dalla data di
+              controfirma dello stesso, ha una durata pari a 5 (cinque) anni e
+              si rinnova automaticamente per lo stesso periodo di tempo, salvo
+              disdetta comunicata dall&rsquo;Aderente al domicilio digitale
+              della Società con 60 (sessanta) giorni di anticipo rispetto alla
+              scadenza contrattuale.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Ciascuna Parte si riserva la facoltà di recedere dal presente
+              Accordo dandone preventiva comunicazione all&rsquo;altra, tramite
+              la Infrastruttura, con un preavviso di 3 (tre) mesi durante le
+              fasi di esercizio della Infrastruttura e di 30 (trenta) giorni
+              durante le fasi di sperimentazione/evolutiva.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >Resta inteso che il recesso e la disdetta dell&rsquo;Aderente non
+              libera quest&rsquo;ultimo dagli obblighi assunti e non ancora
+              pienamente assolti.</span
+            >
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >In caso di inadempimento da parte dell&rsquo;Aderente di una
+              qualsiasi delle obbligazioni previste dagli articoli 3, 4, 9 e 11
+              dei presenti T&C, la Società avrà la facoltà di risolvere
+              l&rsquo;Accordo ai sensi e per gli effetti cui all&rsquo;art. 1456
+              c.c., fermo ogni altro diritto e rimedio a disposizione della
+              Società, dandone comunicazione all&rsquo;Aderente al domicilio
+              digitale presente sull&rsquo;Indice di appartenenza tramite la
+              Infrastruttura.
+            </span>
+          </li>
+
+          <li data-list-text="5.">
+            <span class="text-style"
+              >In caso di cessazione del presente Accordo, l&rsquo;Aderente
+              accetta e riconosce che le richieste di fruizione degli E-service
+              non potranno più essere eseguite tramite l&rsquo;Infrastruttura,
+              non potendo l&rsquo;Aderente fruire di E-service disponibili sulla
+              Infrastruttura, senza poter avanzare qualsiasi diritto e/o azione
+              nei confronti della Società per ogni conseguenza di tale
+              risoluzione.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art6">
+        <p>
+          <span class="test-style"
+            ><b>ART. 6 - Livelli di servizio</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              L&rsquo;erogazione dei Servizi da parte della Società dovrà
+              avvenire con le modalità e secondo i livelli di servizio (di
+              seguito <b>&quot;SLA”</b>) indicati nella Documentazione Tecnica,
+              restando inteso che essi comprendono tutte le attività necessarie
+              per la perfetta e puntuale esecuzione dei Servizi stessi.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente accetta e riconosce che gli SLA saranno
+              garantiti solo nell&rsquo;Ambiente di Esercizio ed al di fuori
+              delle fasi di sperimentazione e di evolutiva, nonché dei periodi
+              programmati di manutenzione e/o interruzione della Infrastruttura
+              e/o dei Servizi.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art7">
+        <p>
+          <span class="test-style"
+            ><b>ART. 7 - Modifica e integrazione dell&rsquo;Accordo</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Sempre fatto salvo per l&rsquo;Aderente il diritto di recesso di
+              cui all&rsquo;art. 5 che precede, la Società si riserva il diritto
+              di integrare e/o modificare unilateralmente, in tutto o in parte,
+              il presente Accordo, dandone preventiva comunicazione
+              all&rsquo;Aderente al domicilio digitale presente
+              sull&rsquo;Indice di appartenenza con 60 (sessanta) giorni
+              rispetto alla data prevista di entrata in vigore delle suddette
+              modifiche e/o integrazioni: una volta decorso il predetto termine
+              di 60 (sessanta) giorni, nel caso in cui l&rsquo;Aderente non
+              abbia esercitato il diritto di recesso di cui all&rsquo;art. 5 che
+              precede, le modifiche e/o integrazioni si considereranno
+              automaticamente accettate dall&rsquo;Aderente, senza necessità di
+              alcun ulteriore consenso tra le Parti.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Sempre fatto salvo per l&rsquo;Aderente il diritto di recesso di
+              cui all&rsquo;art. 5 del presente Accordo, in deroga a quanto
+              previsto al comma 1 che precede, qualora si tratti di modifiche
+              e/o integrazioni non sostanziali (ossia, che non comportino
+              l&rsquo;introduzione o la variazione di diritti o obblighi in capo
+              ad una delle Parti), la Società si riserva il diritto di
+              modificare e/o integrare unilateralmente, in tutto o in parte, il
+              presente Accordo, ivi inclusi gli Allegati e la Documentazione
+              Tecnica, mediante pubblicazione degli aggiornamenti sul Sito e/o
+              sull&rsquo;Infrastruttura nelle seguenti date di ogni anno: 30
+              marzo e/o 30 giugno e/o 30 settembre e/o 30 dicembre
+              (singolarmente, <b>“Data di Pubblicazione”</b>), senza la
+              necessità di preventiva comunicazione all&rsquo;Aderente.
+              Pertanto, in tali casi, laddove, in pendenza dell&rsquo;efficacia
+              del presente Accordo, la Società dovesse modificare e/o integrare
+              lo stesso, l&rsquo;Aderente dichiara espressamente che le nuove
+              modifiche saranno accettate automaticamente, senza necessità di
+              alcun ulteriore consenso tra le Parti.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >Resta inteso che le modifiche e/o integrazioni al presente
+              Accordo non troveranno applicazione nei confronti
+              dell&rsquo;Aderente recedente, durante il periodo di preavviso
+              indicato all&rsquo;art. 5 che precede.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art8">
+        <p>
+          <span class="test-style"
+            ><b>ART. 8 - Limitazione di responsabilità</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              In sede di prima applicazione, la Società è responsabile dei
+              malfunzionamenti, dei disservizi o delle interruzioni della
+              Infrastruttura e/o dei Servizi o parte di essi e/o di una o più
+              funzionalità, alla stessa imputabili a titolo di dolo o colpa
+              grave, con esclusione di quelli imputabili a titolo di colpa
+              lieve. Fermo restando quanto previsto al capoverso che precede, si
+              precisa che, in ogni caso, la Società non potrà essere ritenuta
+              responsabile:</span
+            >
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) per danni diretti o indiretti provocati da
+                  malfunzionamenti, disservizi o interruzioni della
+                  Infrastruttura e/o dei Servizi né parte di essi e/o di una o
+                  più funzionalità, durante le fasi di sperimentazione/evolutiva
+                  e/o i periodi di manutenzione e/o interruzione programmata
+                  della Infrastruttura stessa;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) per eventuali violazioni sui dati personali intervenute in
+                  fase di comunicazione dei dati tra Erogatori e Fruitori in
+                  relazione alla erogazione/fruizione di un E-service, fatta
+                  eccezione per il caso in cui la violazione sia imputabile alla
+                  Società stessa;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  c) per la mancata e/o illecita erogazione o fruizione
+                  dell&rsquo;E-service da parte dell&rsquo;Aderente, fatta
+                  eccezione per il caso in cui la violazione sia imputabile alla
+                  Società stessa.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente non potrà essere ritenuto responsabile per la
+              mancata erogazione o fruizione dell&rsquo;E-service dovuta a un
+              malfunzionamento o disservizio dell&rsquo;Infrastruttura, salvo
+              che tale evento sia dipeso da una causa allo stesso
+              imputabile.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara e riconosce che gli eventuali livelli
+              di servizio concordati con un Erogatore per la fruizione di un
+              determinato E-service - che in ogni caso dovranno essere in linea
+              con gli SLA individuati all&rsquo;articolo 6 che precede - saranno
+              applicati, misurati e/o gestiti dallo stesso insieme
+              all&rsquo;altro Aderente, senza che ciò possa comportare alcun
+              coinvolgimento della Infrastruttura e/o della Società. Pertanto,
+              l&rsquo;Aderente dichiara e riconosce che anche le eventuali
+              controversie nascenti relative all&rsquo;applicazione, alla
+              misurazione e/o alla gestione di tali livelli di servizio, saranno
+              risolte direttamente e esclusivamente con l&rsquo;altro Aderente
+              coinvolto, senza che la Infrastruttura possa svolgere alcun ruolo.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art9">
+        <p>
+          <span class="test-style"
+            ><b>ART. 9 - Diritti di proprietà intellettuale</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Tutti i diritti di proprietà intellettuale e industriale relativi
+              alla Infrastruttura sono di titolarità della Società e/o dei danti
+              causa della stessa Società, e nessuna loro parte può essere
+              utilizzata in qualsiasi forma né con alcun mezzo, ad eccezione di
+              quanto espressamente concesso ai sensi dell&rsquo;Accordo e/o
+              dalle licenze applicabili.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Ogni utilizzo da parte dell&rsquo;Aderente dei marchi, dei loghi,
+              del nome commerciale e di qualsiasi altro segno distintivo
+              relativo alla Società e/o all&rsquo;Infrastruttura e/o ai Servizi
+              dovrà essere preventivamente richiesto dall&rsquo;Aderente tramite
+              la Infrastruttura stessa alla Società e da quest&rsquo;ultima
+              espressamente autorizzato, in forma scritta.</span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art10">
+        <p>
+          <span class="test-style"
+            ><b
+              >ART. 10 - Utilizzo di dati anonimizzati e/o aggregati e
+              pubblicità</b
+            ><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Sempre garantendo il pieno rispetto della normativa privacy
+              applicabile, la Società detiene i diritti all&rsquo;utilizzo dei
+              dati che tratta in qualità di titolare del trattamento e per
+              effetto dell&rsquo;erogazione dei Servizi. Tali dati verranno
+              utilizzati previa aggregazione e/o anonimizzazione per le seguenti
+              finalità:</span
+            >
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) monitoraggio del funzionamento e utilizzo
+                  dell&rsquo;Infrastruttura;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) miglioramento ed evoluzione della Infrastruttura
+                  stessa.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Si fa sin da ora espressa menzione che, in aggiunta, la Società
+              potrà utilizzare, nonché condividere i dati aggregati e/o
+              anonimizzati di cui al comma 1 che precede con terzi soggetti (a
+              titolo esemplificativo e non esaustivo ad es. Università) per
+              finalità di analisi, ricerca, sviluppo e valorizzazione del
+              patrimonio aziendale.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >L&rsquo;Aderente autorizza la Società ad utilizzare il nome, i
+              marchi, i loghi e gli altri segni distintivi dell&rsquo;Aderente
+              stesso per l&rsquo;attuazione dell&rsquo;Accordo.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art11">
+        <p>
+          <span class="test-style"
+            ><b>ART. 11 - Trattamento dei dati personali</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Ai fini dell&rsquo;esecuzione del presente Accordo, le Parti
+              tratteranno i dati personali in qualità di titolari autonomi del
+              trattamento.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Le Parti si impegnano a trattare i dati nel rispetto dei principi
+              di liceità, correttezza, trasparenza, limitazione delle finalità,
+              minimizzazione, esattezza, limitazione della conservazione e
+              integrità, e comunque nel rispetto delle previsioni del
+              Regolamento (UE) 2016/679 e del D.Lgs. n. 196/2003, come
+              modificato dal D.Lgs. n. 101/2018.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >Fatta eccezione per i casi di responsabilità diretta di una delle
+              Parti ed a quanto previsto dall&rsquo;art. 8 che precede, le Parti
+              si impegnano a manlevarsi e tenersi indenni, reciprocamente, da
+              qualsiasi perdita, contestazione, responsabilità, condanna o
+              sanzione, nonché altre spese sostenute o costi subiti - anche in
+              termini di danno reputazionale - per effetto di un&rsquo;azione,
+              reclamo, procedura intrapresa dalla competente Autorità Garante
+              per la protezione dei dati personali o da qualsiasi interessato
+              qualora tale azione sia conseguenza anche di una sola violazione
+              da parte di ognuna di esse o di relativi sub-contraenti, agenti
+              e/o sub-appaltatori della normativa in materia di trattamento dei
+              dati personali e/o delle obbligazioni assunte ai fini
+              dell&rsquo;esecuzione del presente Accordo (ivi inclusi gli
+              Allegati).
+            </span>
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara di aver preso visione
+              dell&rsquo;informativa sul trattamento dei dati personali della
+              Società allegata al presente Accordo (<a href="#allegato-2"
+                >Allegato 2</a
+              >).
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art12">
+        <p>
+          <span class="test-style"><b>ART. 12 - Riservatezza</b><br /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              In esecuzione del presente Accordo, ciascuna Parte potrebbe avere
+              accesso ad informazioni dell&rsquo;altra Parte o di società del
+              Gruppo dell&rsquo;altra Parte (in forma verbale, cartacea od
+              elettronica) che siano relative ad attività passate, presenti o
+              future riguardanti l&rsquo;impresa, la ricerca, lo sviluppo, i
+              prodotti, i servizi e le conoscenze tecniche (di seguito,
+              <b>&quot;Informazioni Riservate”</b>).</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Le Informazioni Riservate di una Parte (di seguito
+              <b>&quot;Parte Comunicante”</b>) possono essere utilizzate
+              dall&rsquo;altra Parte (di seguito <b>&quot;Parte Ricevente”</b>)
+              solo in relazione all&rsquo;esecuzione del presente Accordo e
+              potranno essere divulgate dalla Parte Ricevente esclusivamente ai
+              propri dipendenti, società controllanti, società controllate,
+              consulenti, fornitori e sub-fornitori che debbano conoscerle ai
+              fini dell&rsquo;esecuzione di quanto previsto nel presente
+              Accordo. Ogni Parte riconosce che i menzionati soggetti sono
+              obbligati al rispetto delle disposizioni contenute nel presente
+              Accordo con riferimento alle Informazioni Riservate.</span
+            >
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >Ciascuna Parte s&rsquo;impegna a proteggere la riservatezza delle
+              Informazioni Riservate dell&rsquo;altra Parte con la stessa cura
+              con la quale protegge la riservatezza delle proprie Informazioni
+              Riservate e comunque con il grado di diligenza che le compete.
+            </span>
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >Le Informazioni Riservate non potranno essere copiate o
+              riprodotte senza il previo consenso scritto della Parte
+              Comunicante. Le Informazioni Riservate messe a disposizione nel
+              corso del presente Accordo, incluse eventuali loro copie, dovranno
+              essere restituite alla Parte Comunicante o distrutte al
+              verificarsi del primo tra i seguenti eventi:
+            </span>
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) la cessazione, per qualsiasi causa, del presente
+                  Accordo;</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) la richiesta della Parte Comunicante, a meno che la Parte
+                  Ricevente non sia autorizzata a trattenere tali Informazioni
+                  Riservate ad altro titolo.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="5.">
+            <span class="text-style"
+              >Niente nel presente Accordo impone alla Parte Ricevente di
+              mantenere riservate o comunque tenere confidenziali le
+              Informazioni Riservate se:
+            </span>
+
+            <ol class="text-style" style="margin-left: 2px">
+              <li>
+                <span class="text-style">
+                  a) al momento in cui le Informazioni Riservate sono state per
+                  la prima volta divulgate dalla Parte Comunicante alla Parte
+                  Ricevente, la Parte Ricevente si trovava già in possesso,
+                  lecitamente, delle Informazioni Riservate; o</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  b) le Informazioni Riservate divengono pubbliche per causa
+                  diversa dalla negligenza o dalla violazione delle obbligazioni
+                  gravanti sulla Parte Ricevente contenute nel presente Accordo;
+                  o</span
+                >
+              </li>
+              <li>
+                <span class="text-style">
+                  c) la divulgazione delle Informazioni Riservate è richiesta
+                  dalla legge o da un provvedimento di un&rsquo;Autorità e, in
+                  detta eventualità, deve essere comunicata soltanto quella
+                  parte delle Informazioni Riservate la cui divulgazione viene
+                  ordinata, usando le migliori cautele per ottenere un
+                  trattamento confidenziale per qualsiasi Informazione Riservata
+                  comunicata. Resta fermo che, in tale eventualità, la Parte
+                  Ricevente informerà immediatamente la Parte Comunicante
+                  dell&rsquo;esistenza di tale obbligo.</span
+                >
+              </li>
+            </ol>
+          </li>
+
+          <li data-list-text="6.">
+            <span class="text-style"
+              >Gli obblighi di riservatezza di cui al presente articolo si
+              applicheranno per tutta la durata del presente Accordo e per i 5
+              (cinque) anni successivi alla scadenza di tutte le obbligazioni
+              connesse alla stipula dell&rsquo;Accordo o alla eventuale
+              risoluzione/recesso anticipato dello stesso.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art13">
+        <p>
+          <span class="test-style"
+            ><b>ART. 13 - Comunicazioni e referente dell&rsquo;Accordo</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Ove non indicato diversamente, qualunque comunicazione fra le
+              Parti riguardante il presente Accordo è effettuata, tramite la
+              Infrastruttura, al domicilio digitale di ciascuna Parte presente
+              sull&rsquo;Indice di appartenenza e all&rsquo;indirizzo e-mail del
+              referente dell&rsquo;Accordo stesso indicato al comma che segue,
+              nonché se del caso all&rsquo;/gli eventuale/i Utente/i coinvolto/i
+              anche utilizzando il numero di telefono ad uso lavorativo censito
+              nel presente Accordo, sul Portale o sulla Infrastruttura.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara che il referente del presente Accordo è
+              l&rsquo;Operatore amministrativo indicato alla lettera a)
+              dell&rsquo;<a href="#allegato-4">Allegato 4.</a></span
+            >
+          </li>
+        </ol>
+      </div>
+
+      <div id="art14">
+        <p>
+          <span class="test-style"
+            ><b> ART. 14 - Foro e legge applicabile</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Il presente Accordo è soggetto alla Legge italiana. Per quanto non
+              espressamente previsto, si fa espresso rinvio al codice civile, al
+              CAD, al D.Lgs. n. 36/2023, alle Linee guida AgID, nonchè alle
+              altre disposizioni vigenti in materia.</span
+            >
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >Ogni eventuale contestazione e/o controversia che dovesse
+              insorgere fra le Parti in relazione all&rsquo;interpretazione,
+              alla validità e/o all&rsquo;esecuzione del presente Accordo, che
+              non venisse risolta bonariamente e in buona fede fra le stesse,
+              sarà deferita in via esclusiva al Foro di Roma.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <div id="art15">
+        <p>
+          <span class="test-style"
+            ><b> ART. 15 - Modello ex D.Lgs. n. 231/01 e PTPCT</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              L&rsquo;Aderente dichiara di aver preso e di prendere atto dei
+              principi etici generali di onestà ed osservanza della legge,
+              pluralismo, professionalità, imparzialità, correttezza,
+              riservatezza, trasparenza, diligenza, lealtà e buona fede nonché
+              del contenuto del Codice Etico, del Modello di Organizzazione,
+              Gestione e Controllo (di seguito, congiuntamente,
+              <b>&quot;Modello”</b>) e del Piano Triennale di Prevenzione della
+              Corruzione e Trasparenza (<b>&quot;PTPCT”</b>) della Società
+              adottati ex D.Lgs. n. 231/2001 (di seguito <b>&quot;Decreto”</b>)
+              ed ex lege 190/2012, avendone preso chiara, piena ed esatta
+              visione nella sezione &quot;Società Trasparente” del sito al
+              seguente
+              <a
+                href="https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html&sa=D&source=editors&ust=1729008416036926&usg=AOvVaw3FgZCEULZ-WnvlS5kRDeyk"
+                >link</a
+              >
+              e al
+              <a
+                href="https://pagopa.portaleamministrazionetrasparente.it/pagina769_prevenzione-della-corruzione.html&sa=D&source=editors&ust=1729008416037203&usg=AOvVaw3VnQelwhCxrebEhJ2oBPtB"
+                >link</a
+              >.
+            </span>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara e garantisce, inoltre, che quanto forma
+              oggetto del presente Accordo sarà realizzato anche nel rispetto
+              dei principi e delle previsioni previsti nel Modello e nel PTPCT
+              e, per l&rsquo;effetto, si impegna a far conoscere gli stessi,
+              nonché tutta la normativa applicabile a chiunque, a qualsiasi
+              titolo, prenderà parte alla realizzazione delle attività oggetto
+              del presente Accordo.
+            </span>
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >In particolare, e senza limitare la generalità di quanto sopra,
+              l&rsquo;Aderente garantisce che i suoi dipendenti e/o
+              collaboratori e/o soci e/o amministratori e/o legali
+              rappresentanti e/o chiunque partecipi, a qualsiasi titolo, alla
+              realizzazione di quanto forma oggetto dell&rsquo;Accordo e/o
+              faccia parte della sua organizzazione non terrà comportamenti,
+              omissivi e/o commissivi, che possano comportare la violazione,
+              anche solo indiretta, dei principi, delle previsioni e delle norme
+              del Modello, del PTPCT e/o di tutta la normativa applicabile e/o
+              che risultino lesivi dell&rsquo;immagine e, comunque, dei valori
+              morali e materiali in cui la Società si riconosce e che applica
+              nell&rsquo;esercizio della propria attività, anche con riferimento
+              ai rapporti con soggetti terzi.
+            </span>
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >L&rsquo;effettivo rispetto delle dichiarazioni e garanzie ivi
+              rilasciate, nonché la prevenzione, sotto ogni forma, delle
+              criticità e dei rischi evidenziati dal Modello e dal PTPCT sono
+              considerati parte essenziale, nell&rsquo;interesse della Società,
+              anche ai sensi e per gli effetti dell&rsquo;articolo 1456 c.c.,
+              delle obbligazioni assunte dall&rsquo;Aderente con il presente
+              Accordo.
+            </span>
+          </li>
+
+          <li data-list-text="5.">
+            <span class="text-style"
+              >La violazione anche di una sola delle dichiarazioni e/o garanzie
+              sopra previste costituisce grave inadempimento contrattuale con
+              ogni conseguenza di legge, anche in ordine alla facoltà della
+              Società di risolvere il presente Accordo ai sensi e per gli
+              effetti dell&rsquo;art. 1456 c.c., salvo il risarcimento del danno
+              ed ogni altro diritto e/o azioni previsti dalla legge e/o dal
+              presente Accordo.
+            </span>
+          </li>
+
+          <li data-list-text="6.">
+            <span class="text-style"
+              >L&rsquo;Aderente dichiara di non essere a conoscenza di fatti
+              rilevanti ai sensi del Decreto nel suo rapporto con la Società, in
+              particolare nella fase delle trattative e della conclusione
+              dell&rsquo;Accordo e si impegna, per quanto di sua spettanza, a
+              vigilare sull&rsquo;esecuzione di esso in modo da scongiurare il
+              rischio di commissione dei reati previsti dal succitato Decreto,
+              nonché ad attivare, in tale ipotesi, tutte le azioni più opportune
+              in conformità alla legge e ai propri strumenti di organizzazione
+              interna.
+            </span>
+          </li>
+
+          <li data-list-text="7.">
+            <span class="text-style"
+              >Con specifico riferimento alla normativa anticorruzione,
+              l&rsquo;Aderente dichiara e garantisce che non porrà in essere
+              atti omissivi e/o commissivi tra cui trasferimenti, diretti e/o
+              indiretti, di somme, che possano comportare la violazione, anche
+              solo indiretta, della normativa anticorruzione, ferme restando le
+              garanzie e manleve rilasciate ai sensi del presente Accordo.
+            </span>
+          </li>
+
+          <li data-list-text="8.">
+            <span class="text-style"
+              >L&rsquo;Aderente assume le garanzie di cui sopra ai sensi
+              dell&rsquo;art. 1381 c.c., per ogni proprio sub-appaltatore e
+              sub-contraente individuato ai sensi del presente Accordo.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <p style="margin-top: 10px"></p>
+
+      <div id="art16">
+        <span class="test-style"><b> ART. 16 - Clausola fiscale</b><br /></span>
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Il presente Accordo è soggetto ad imposta di registro in caso
+              d&rsquo;uso ai sensi del D.P.R. n. 131/86 e ad imposta di bollo ai
+              sensi dell&rsquo;art. 2 della Tariffa, parte prima, allegata al
+              D.P.R. n. 642 del 1972.
+            </span>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >L&rsquo;imposta di bollo verrà assolta dall&rsquo;Aderente, che
+              dovrà fornire prova dell&rsquo;avvenuto assolvimento alla PagoPA
+              S.p.A. entro 60 (sessanta) giorni dalla sottoscrizione del
+              presente Accordo, inviando una email all&rsquo;indirizzo
+              <a href="mailto:indirect-tax@pagopa.it">indirect-tax@pagopa.it</a
+              >.
+            </span>
+          </li>
+        </ol>
+      </div>
+
+      <p style="margin-top: 10px"></p>
+
+      <div id="art17">
+        <p>
+          <span class="test-style"
+            ><b> ART. 17 - Disposizioni finali</b><br
+          /></span>
+        </p>
+
+        <ol id="l1">
+          <li data-list-text="1.">
+            <span class="text-style">
+              Il presente Accordo costituisce l&rsquo;unico accordo tra le
+              Parti, relativamente all&rsquo;oggetto dello stesso.
+            </span>
+          </li>
+
+          <li data-list-text="2.">
+            <span class="text-style"
+              >E&rsquo; fatto espresso divieto all&rsquo;Aderente di cedere, in
+              tutto o in parte, il presente Accordo e/o di trasferire i diritti
+              e gli obblighi derivanti dallo stesso senza il preventivo consenso
+              della Società.
+            </span>
+          </li>
+
+          <li data-list-text="3.">
+            <span class="text-style"
+              >L&rsquo;eventuale nullità o l&rsquo;invalidità di qualsiasi
+              singola disposizione del presente Accordo s&rsquo;intende
+              limitata, per quanto possibile, alla disposizione in questione e
+              non si estende all&rsquo;intero Accordo che continuerà ad avere
+              piena validità ed efficacia.
+            </span>
+          </li>
+
+          <li data-list-text="4.">
+            <span class="text-style"
+              >La mancata o non puntuale applicazione di una qualsiasi delle
+              previsioni del presente Accordo non comporterà la rinuncia
+              definitiva alle facoltà o diritti connessi a tale disposizione o a
+              farla valere o invocarne l&rsquo;applicazione in futuro.
+            </span>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div style="page-break-before: always"></div>
+
+    <!-- allegato 2 -->
+    <div id="allegato-2">
+      <p class="title-position-center">
+        <span class="title"
+          >Allegato 2 <br />
+          INFORMATIVA SUL TRATTAMENTO DEI DATI PERSONALI ai sensi degli artt.
+          13-14 del Regolamento (UE) 2016/679</span
+        >
+        <br />
+        <span class="text-style"> (di seguito <b>&quot;Regolamento”</b>)</span>
+      </p>
+
+      <p>
+        <span class="text-style">
+          L&rsquo;Infrastruttura interoperabilità PDND (di seguito
+          <b>&quot;Infrastruttura”</b>) è prevista dall&rsquo;art. 50-ter, comma
+          2, del Codice dell&rsquo;Amministrazione Digitale (di seguito
+          <b>&quot;CAD”</b>) e gestita da PagoPA S.p.A. (di seguito
+          <b>&quot;Società”</b>), ai sensi dell&rsquo;art. 8, commi 2 e 3, del
+          D.L. n. 135/2018. Per il tramite della Infrastruttura, i soggetti di
+          cui all&rsquo;art. 2, comma 2, del CAD (di seguito
+          <b>&quot;Erogatore/i”</b> e/o <b>&quot;Aderente/i”</b>) mettono a
+          disposizione i propri servizi digitali (di seguito
+          <b>&quot;E-service”</b>) in favore di altri Aderenti
+          all&rsquo;Infrastruttura che possono essere, in aggiunta ai soggetti
+          di cui all&rsquo;art. 2, comma 2 del CAD, anche i soggetti privati (di
+          seguito <b>&quot;Fruitore/i”</b>
+          e/o
+          <b>&quot;Aderente/i”</b>). I soggetti che operano
+          sull&rsquo;Infrastruttura per conto degli Aderenti, sono nel seguito
+          definiti &quot;Utenti” e sono coloro ai quali è rivolta la presente
+          informativa.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="text-style">
+          Si precisa che la Società non è titolare dei dati detenuti da un
+          Erogatore (o Fruitore nel caso di Erogazione Inversa) e forniti in
+          fase di erogazione di un E-service, né ha alcun obbligo di verifica
+          e/o conservazione sugli stessi. Gli Aderenti nella erogazione e/o
+          fruizione degli E-service tramite l&rsquo;Infrastruttura operano in
+          qualità di titolari autonomi del trattamento. Sarà, pertanto,
+          necessario rivolgersi a questi ultimi per informazioni sul trattamento
+          dei dati diversi da quelli indicati nella presente informativa, ivi
+          inclusi, quelli comunicati tramite API.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Titolare del trattamento e base giuridica </span>
+
+        <br />
+
+        <span class="text-style">
+          Il Titolare del trattamento è PagoPA S.p.A., con sede in Roma, Piazza
+          Colonna 370, CAP - 00187, n. di iscrizione a Registro Imprese di Roma,
+          CF e P.IVA 15376371009.
+          <br />
+          E-mail: <a href="mailto:info@pagopa.it">info@pagopa.it</a>.
+          <br />
+          La Società tratta i dati personali in qualità di Titolare del
+          trattamento sulla base dell&rsquo;esercizio del compito di interesse
+          pubblico di cui all&rsquo;art. 6, comma 1, lett. e), del Regolamento.
+          <br />
+          Per ogni domanda inerente il trattamento di dati personali si prega di
+          scrivere utilizzando il
+          <a
+            href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+            >form</a
+          >
+          dedicato alla gestione delle richieste degli interessati.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title">
+          Data protection officer (DPO) o Responsabile Protezione Dati (RPD)
+        </span>
+
+        <br />
+
+        <span class="text-style">
+          PagoPA S.p.A. ha nominato un proprio Responsabile della Protezione dei
+          dati, ai sensi dell&rsquo;art. 37 del Regolamento, che può essere
+          contattato tramite il presente
+          <a
+            href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+            >form</a
+          >
+          di contatto. Il form è altresì disponibile sul sito web della Società
+          ovvero www.pagopa.it nella sezione &quot;Diritto alla protezione dei
+          dati personali”.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title">
+          Dati personali trattati e finalità del trattamento
+        </span>
+
+        <br />
+
+        <span class="text-style">
+          In aggiunta a quanto già riportato nell&rsquo;informativa privacy e
+          nei termini e condizioni relativi all&rsquo;utilizzo del Portale, di
+          seguito gli ulteriori i dati personali degli Utenti trattati, a titolo
+          esemplificativo e non esaustivo:
+        </span>
+        <br />
+      </p>
+
+      <ol class="text-style" style="margin-left: 2px">
+        <li>
+          <span class="text-style">
+            - nome, cognome e codice fiscale ottenuto tramite accesso
+            all&rsquo;Infrastruttura con SPID/CIE al fine di identificare
+            univocamente ogni persona fisica che accede
+            all&rsquo;Infrastruttura;</span
+          >
+        </li>
+        <li>
+          <span class="text-style">
+            - indirizzo e-mail ad uso lavorativo degli Utenti;</span
+          >
+        </li>
+        <li>
+          <span class="text-style">
+            - dati relativi ai modi e tempi di interazione degli Utenti con il
+            backoffice della Infrastruttura ed ai dati dei dispositivi
+            utilizzati (e.g. sistema operativo, browser, risoluzione schermo,
+            url di provenienza, pagine visualizzate, azioni effettuate su
+            elementi dell&rsquo;interfaccia utente, timestamp, etc.). I dati
+            sono collegati a un identificativo randomico generato a ogni
+            sessione di navigazione e memorizzato nel local storage del
+            dispositivo dell&rsquo;utente;</span
+          >
+        </li>
+        <li>
+          <span class="text-style">
+            - dati inerenti i log di accesso, di sistema/funzionamento e audit
+            log per il monitoraggio dell&rsquo;attività degli Utenti
+            sull&rsquo;Infrastruttura (indirizzo IP dell&rsquo;Aderente, tipo di
+            dispositivo e browser usato, tracciamento degli accessi, di invio e
+            visualizzazione delle notifiche).</span
+          >
+        </li>
+      </ol>
+
+      <p style="margin-top: 10px"></p>
+
+      <span class="text-style">
+        Per maggiori informazioni è sempre disponibile il
+        <a
+          href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+          >form</a
+        >
+        dedicato alla gestione delle richieste degli interessati disponibile
+        nella sezione &quot;Diritto alla protezione dei dati personali” del sito
+        internet della Società
+        <a href="https://www.pagopa.it/it/">https://www.pagopa.it/it/</a>.
+      </span>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Modalità del trattamento </span>
+
+        <br />
+
+        <span class="text-style">
+          I dati personali degli Utenti sono trattati adottando adeguate misure
+          di sicurezza volte ad impedire l&rsquo;accesso, la divulgazione, la
+          modifica o la distruzione non autorizzata dei dati personali. Tutti i
+          dipendenti della Società che hanno accesso ai dati personali sono
+          debitamente designati quali soggetti autorizzati al trattamento e
+          ciascuno di essi è incaricato di trattare unicamente i dati
+          strettamente necessari allo svolgimento delle proprie mansioni
+          lavorative. Il trattamento è effettuato prevalentemente mediante
+          strumenti informatici, con modalità organizzative e logiche
+          strettamente correlate alle finalità sopra indicate. Oltre al
+          Titolare, in alcuni casi, possono avere accesso ai dati, a seguito di
+          comunicazione da parte dello stesso, anche ulteriori soggetti
+          coinvolti nella gestione e l&rsquo;erogazione dei servizi offerti
+          tramite l&rsquo;Infrastruttura, nominati, ove necessario, quali
+          responsabili del trattamento ai sensi dell&rsquo;art. 28 del
+          Regolamento. Tali soggetti trattano i dati esclusivamente per attività
+          funzionali o comunque strettamente connesse allo svolgimento del
+          servizio.</span
+        >
+        <br />
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Categorie di destinatari dei dati </span>
+
+        <br />
+
+        <span class="text-style">
+          Il Titolare, nello svolgimento delle proprie attività e per erogare i
+          propri servizi, potrebbe trasmettere i dati alle seguenti categorie di
+          destinatari:</span
+        >
+        <br />
+      </p>
+
+      <ul id="forced-list-point">
+        <li id="forced-list-point">
+          <span class="text-style">
+            responsabili del trattamento quali fornitori dei relativi servizi;
+          </span>
+        </li>
+        <li id="forced-list-point">
+          <span class="text-style">
+            altri soggetti pubblici o privati che ne facciano richiesta alla
+            Società per l&rsquo;esecuzione di un compito di interesse pubblico o
+            connesso all&rsquo;esercizio di un pubblico potere o per adempiere a
+            un obbligo legale o contrattuale.
+          </span>
+        </li>
+      </ul>
+      <span class="text-style">
+        Non è prevista alcuna forma di diffusione dei dati personali a soggetti
+        indeterminati.
+        <br />
+        L&rsquo;elenco completo dei responsabili del trattamento può essere
+        richiesto alla Società scrivendo sul
+        <a
+          href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+          >form</a
+        >
+        di contatto presente nella sezione &quot;Diritto alla protezione dei
+        dati personali” del
+        <a href="https://www.pagopa.it/it/">sito web</a>
+        della Società.
+      </span>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Tempi di conservazione dei dati </span>
+        <br />
+        <span class="text-style">
+          Nel rispetto dei principi di cui all&rsquo;art. 5 del Regolamento i
+          dati personali raccolti saranno conservati per il periodo di tempo
+          necessario allo svolgimento delle attività descritte, salvo gli
+          eventuali obblighi di legge e le eventuali ulteriori necessità di
+          difesa in giudizio.
+          <br />
+          Nello specifico si indicano di seguito i tempi di conservazione che il
+          Titolare ha individuato a titolo esemplificativo e non esaustivo:
+        </span>
+      </p>
+
+      <ol class="text-style" style="margin-left: 2px">
+        <li>
+          <span class="text-style"
+            >- dati acquisiti a mezzo SPID/CIE ovvero nome, cognome e codice
+            fiscale: 24 mesi dalla memorizzazione;
+          </span>
+        </li>
+        <li>
+          <span class="text-style"
+            >- token, contenente un UUID pseudo-anonimizzato: 10 anni dalla
+            cessazione del rapporto in linea con il termine prescrizionale
+            ordinario previsto dall&rsquo;art. 2946 del c.c., ossia il termine a
+            partire dal quale si considerano estinti i diritti eventualmente
+            azionabili in giudizio dalle parti;</span
+          >
+        </li>
+        <li>
+          <span class="text-style"
+            >- indirizzo IP: 90 giorni dalla memorizzazione, al fine di
+            effettuare analisi statistiche sull&rsquo;usabilità
+            dell&rsquo;Infrastruttura ed in via ulteriore per supportare le
+            competenti Autorità nelle attività investigative/probatorie;</span
+          >
+        </li>
+      </ol>
+
+      <span class="text-style">
+        Si rinvia al paragrafo &quot;Limitazione dei tempi di conservazione”
+        delle
+        <a
+          href="https://www.agid.gov.it/it/agenzia/stampa-e-comunicazione/notizie/2021/10/05/interoperabilita-agid-adotta-linee-guida"
+          >Linee Guida AgID</a
+        >
+        per informazioni relative ai tempi di conservazione di:
+        <ol class="text-style" style="margin-left: 2px">
+          <li>
+            <span class="text-style"
+              >- log di sistema/funzionamento (ivi inclusi i log di accesso a
+              mezzo SPID/SPID Professionale/CIE);
+            </span>
+          </li>
+          <li><span class="text-style">- accordo di adesione.</span></li>
+        </ol>
+      </span>
+
+      <span class="text-style">
+        Per maggiori informazioni è sempre disponibile il
+        <a
+          href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+          >form</a
+        >
+        dedicato alla gestione delle richieste degli interessati disponibile
+        nella sezione &quot;Diritto alla protezione dei dati personali” del sito
+        internet della Società
+        <a href="https://www.pagopa.it/it/">https://www.pagopa.it/it/</a>.
+      </span>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Trasferimento transfrontaliero dei dati </span>
+        <br />
+        <span class="text-style">
+          I dati personali potranno essere trasferiti fuori dall&rsquo;Unione
+          Europea da parte di fornitori di servizi di cui la Società si avvale
+          per attività connesse alla gestione dell&rsquo;infrastruttura. Tale
+          trasferimento, ove ricorra il caso, verrà disciplinato con i fornitori
+          di servizi mediante il ricorso a clausole contrattuali standard
+          adottate dalla Commissione europea con la decisione 2021/914/UE ed
+          eventuali successive modifiche o, in alternativa, sulla base di una
+          decisione di adeguatezza della Commissione europea e/o di ogni altro
+          strumento consentito dalla normativa di riferimento. La lista dei
+          fornitori coinvolti, comprensivi delle garanzie poste in essere, può
+          essere richiesta in qualsiasi momento, utilizzando il
+          <a
+            href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+            >form</a
+          >
+          dedicato alla gestione delle richieste degli interessati disponibile
+          nella sezione &quot;Diritto alla protezione dei dati personali” del
+          sito internet della Società
+          <a href="https://www.pagopa.it/it/">https://www.pagopa.it/it/</a>.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Diritti degli interessati </span>
+        <br />
+        <span class="text-style">
+          Gli Utenti, ai quali i dati personali si riferiscono, hanno il diritto
+          di ottenere dalla Società, in qualità di Titolare del trattamento,
+          l&rsquo;accesso ai propri dati personali, l&rsquo;aggiornamento,
+          l&rsquo;integrazione, la rettifica o, laddove previsto dalla legge e
+          nei limiti previsti, la cancellazione degli stessi, la limitazione del
+          trattamento e il diritto di opporsi allo stesso. Gli Utenti potranno,
+          altresì, chiedere l&rsquo;anonimizzazione dei dati o il blocco dei
+          dati trattati in violazione di legge, compresi quelli di cui non è
+          necessaria la conservazione in relazione agli scopi del trattamento.
+          <br />
+          Le richieste dovranno essere inoltrate alla Società. Gli Interessati
+          possono, altresì, contattare il Responsabile della protezione dei dati
+          per tutte le questioni inerenti il trattamento dei propri dati
+          personali e l&rsquo;esercizio dei propri diritti, utilizzando il
+          presente
+          <a
+            href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+            >form</a
+          >
+          dedicato alla gestione delle richieste degli interessati disponibile
+          nella sezione &quot;Diritto alla protezione dei dati personali” del
+          sito internet della Società
+          <a href="https://www.pagopa.it/it/">https://www.pagopa.it/it/</a>.
+
+          <br />
+
+          Gli Interessati che ritengano che il trattamento dei dati personali a
+          loro riferiti, effettuato dal Titolare del trattamento, avvenga in
+          violazione di quanto previsto dal Regolamento, hanno il diritto di
+          proporre reclamo al Garante, come previsto dall&rsquo;art. 77 del
+          Regolamento stesso, o di adire le opportune sedi giudiziarie (art. 79
+          del Regolamento).
+
+          <br />
+          <br />
+
+          Di seguito si trasmettono i dati di contatto ed i riferimenti
+          dell&rsquo;<b
+            >Autorità di controllo - Garante per la protezione dei dati
+            personali</b
+          >:
+          <br />
+          Indirizzo e-mail: garante@gpdp.it
+          <br />
+          Indirizzo PEC: protocollo@pec.gpdp.it
+          <br />
+          Sito web: https://www.garanteprivacy.it
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="title"> Modifiche </span>
+        <br />
+        <span class="text-style"
+          >Il Titolare si riserva il diritto di apportare alla presente
+          Informativa, a propria esclusiva discrezione ed in qualunque momento,
+          tutte le modifiche ritenute opportune o rese obbligatorie dalle norme
+          di volta in volta vigenti, dandone adeguata pubblicità agli Utenti. In
+          caso di mancata accettazione delle modifiche effettuate, si invitano
+          gli Utenti a cessare l&rsquo;utilizzo dell&rsquo;Infrastruttura e a
+          chiedere alla Società la rimozione dei propri dati personali; salvo
+          quanto diversamente specificato, la precedente versione
+          dell&rsquo;informativa continuerà ad applicarsi ai dati personali
+          raccolti sino a quel momento.</span
+        >
+      </p>
+    </div>
+
+    <div style="page-break-before: always"></div>
+
+    <!-- allegato 3 -->
+    <div id="allegato-3">
+      <p class="title-position-center">
+        <span class="title"
+          >Allegato 3 <br />
+          NOMINA DELL&rsquo;UTENTE CON RUOLO DI OPERATORE AMMINISTRATIVO</span
+        >
+      </p>
+
+      <p>
+        <span class="text-style">
+          L&rsquo;Aderente nomina quale Utente autorizzato ad agire per proprio
+          conto con il ruolo di Operatore amministrativo il/i soggetto/i di
+          seguito indicato/i <i>[nominarne almeno uno]</i>:
+        </span>
+      </p>
+
+      <span class="text-style"> ${delegates} </span>
+
+      <p>
+        <span class="text-style">
+          Con la presente, l&rsquo;Aderente dichiara e garantisce di aver
+          conferito al/i suindicato/i Utente/i, anche tramite il compimento di
+          tutti gli atti che dovessero essere richiesti dalla normativa
+          applicabile, tutti i poteri necessari a compiere per proprio conto
+          sulla Infrastruttura ogni attività e/o funzione attribuite
+          all&rsquo;Utente con ruolo di Operatore amministrativo nelle Linee
+          guida AgID (es. ove Fruitore, inviare la richiesta di fruizione di un
+          E-service).
+          <br />
+          A tal fine, l&rsquo;Aderente si impegna a manlevare e tenere indenne
+          la Società da ogni danno diretto e/o indiretto, e da tutte le spese, i
+          costi nonché pretese e contestazioni eventualmente avanzate da altri
+          Aderenti e/o terzi, in caso di assenza di tali poteri o di non
+          conformità degli stessi ai requisiti previsti per legge.
+          <br />
+          L&rsquo;Aderente si impegna a tenere costantemente aggiornato sulla
+          Infrastruttura l&rsquo;elenco degli Utenti con ruolo di Operativi
+          amministrativi nominati.
+        </span>
+      </p>
+
+      <p style="margin-top: 25px"></p>
+
+      <p>
+        <span class="text-style">
+          <i>F.to digitalmente dall&rsquo;Aderente</i>
+          <br />
+          __________________________________
+        </span>
+      </p>
+    </div>
+
+    <div style="page-break-before: always"></div>
+
+    <!-- allegato 4 -->
+    <div id="allegato-4">
+      <p class="title-position-center">
+        <span class="title">Allegato 4 <br /> </span>
+      </p>
+
+      <p style="text-align: center">
+        <span class="text-style">
+          <b>
+            FAC-SIMILE NON COSTITUENTE PARTE INTEGRANTE dell&rsquo;Accordo di
+            Adesione.
+          </b>
+          <br />
+          <b
+            >L&rsquo;Allegato 4 dovrà essere compilato, sottoscritto e inoltrato
+            dall&rsquo;Aderente separatamente all&rsquo;indirizzo indicato da
+            PagoPA S.p.A., solo in caso di eventuale espressa adesione alla fase
+            di sperimentazione/evolutiva da parte dell&rsquo;Aderente.
+            <br />
+            Pertanto, la sottoscrizione del testo dell&rsquo;intero accordo di
+            adesione da parte del rappresentante legale dell&rsquo;Aderente non
+            comporta l&rsquo;espressione automatica del consenso o
+            l&rsquo;accettazione di quanto specificato nell&rsquo;Allegato 4
+            medesimo.</b
+          ></span
+        >
+      </p>
+
+      <p class="title-position-center">
+        <span class="title">
+          LIBERATORIA E CONSENSO PRIVACY ALL&rsquo;USO DI VIDEO E IMMAGINI
+          <br />
+        </span>
+      </p>
+
+      <p>
+        <span class="text-style">
+          Con riferimento alla propria partecipazione alla/e fasi di
+          sperimentazione/evolutiva della Infrastruttura, il/la sottoscritto/a
+          _______________________________ (di seguito
+          <b>&quot;Interessato”</b>) dichiara di aver acconsentito:
+        </span>
+      </p>
+
+      <ul id="forced-list-point">
+        <li id="forced-list-point">
+          <span class="text-style">
+            alle riprese audio video della propria persona;
+          </span>
+        </li>
+        <li id="forced-list-point">
+          <span class="text-style">
+            alla conservazione delle riprese audio video nella banca dati di
+            della Società, per un periodo di tempo pari a due anni da PagoPA
+            S.p.A.;
+          </span>
+        </li>
+        <li id="forced-list-point">
+          <span class="text-style">
+            all&rsquo;utilizzo delle riprese audio video per la propria
+            partecipazione alla/e fase/i di sperimentazione/evolutiva
+            dell&rsquo;Infrastruttura.
+          </span>
+        </li>
+      </ul>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="subtitle">Obbligatorietà o meno del consenso:</span><br />
+        <span class="text-style">
+          Il conferimento dati è facoltativo. Il mancato consenso non permetterà
+          l&rsquo;utilizzo e la conservazione delle riprese audio video relative
+          alla tua persona.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <p>
+        <span class="subtitle"> Dichiara, altresì, quanto segue:</span><br />
+        <span class="text-style">
+          Di essere stata/o edotta/o dagli incaricati della Società che le
+          anzidette riprese audio video durante la propria partecipazione alla/e
+          fase/i di sperimentazione/evolutiva dell&rsquo;Infrastruttura verranno
+          conservate ed utilizzate per un periodo di tempo pari a due anni da
+          PagoPA S.p.A..
+          <br />
+          Pertanto, a titolo gratuito, ai sensi dell&rsquo;art. 10 cod.civ. e
+          degli artt. 96 e 97 legge 22.4.1941, n. 633, Legge sul diritto
+          d&rsquo;autore e ss.mm. acconsenti all&rsquo;utilizzo delle riprese
+          audio video alla tua persona, nonché ne autorizzi la conservazione
+          negli archivi informatici della Società e degli aventi causa.
+          <br />
+          Specificatamente con la firma della presente liberatoria conferisci,
+          quindi, diritto alla Società, ai suoi agenti, dipendenti, licenziatari
+          di riprodurre e utilizzare le tue riprese audio video o informazioni
+          digitali ad esse relative, in formato singolo, multiplo, in movimento
+          o a video, a colori o in altro modo, il tutto sempre nel rispetto
+          della tua persona e dei diritti fondamentali.
+          <br />
+          Dichiari di non avere nulla a che pretendere quale corrispettivo per
+          l&rsquo;utilizzo delle riprese audio video di cui sopra, né ad alcun
+          altro titolo.
+          <br />
+          Dichiari di essere consapevole che la sottoscrizione del presente
+          documento è condizione essenziale affinché le riprese audio video
+          vengano utilizzate.
+        </span>
+      </p>
+
+      <p style="margin-top: 10px"></p>
+
+      <span class="subtitle"> Informativa sul trattamento dati personali </span
+      ><br />
+      <span class="text-style">
+        Ai sensi del Regolamento (UE) 2016/679, nonché di ogni altra successiva
+        normativa applicabile in materia di protezione dei dati personali, il/la
+        sottoscritto/a dichiara di essere stato/a informato/a dalla Società in
+        merito all&rsquo;utilizzo dei dati personali, per quanto sopra
+        dichiarato.<br />
+        È reso edotto che per ogni esigenza e/o esercizio dei suoi diritti ed in
+        ogni momento potrai direttamente rivolgerti al nostro Data Protection
+        Officer scrivendo a <a href="mailto:dpo@pagopa.it">dpo@pagopa.it</a>
+        o utilizzando il form di contatto disponibile al seguente link:
+        <a
+          href="https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8"
+        >
+          https://privacyportal-de.onetrust.com/webform/77f17844-04c3-4969-a11d-462ee77acbe1/9ab6533d-be4a-482e-929a-0d8d2ab29df8
+        </a>
+        .
+      </span>
+
+      <p style="margin-top: 10px"></p>
+
+      <span class="text-style">
+        L&rsquo;Interessato
+        <br />
+        ___________________________________________________________
+      </span>
+    </div>
+  </body>
+</html>
