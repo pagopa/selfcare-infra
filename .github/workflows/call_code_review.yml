@@ -23,7 +23,7 @@ env:
 jobs:
   plan:
     name: Terraform Plan
-    runs-on: [ ${{ inputs.agent }}, ${{ inputs.environment }} ]
+    runs-on: ["${{ inputs.environment }}"]
     environment: "${{ inputs.environment != null && inputs.environment || (github.base_ref == 'main' && 'prod' || (github.base_ref == 'develop' && 'uat' || 'dev')) }}-ci"
     permissions:
       id-token: write
