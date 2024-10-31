@@ -91,10 +91,6 @@ module "mongdb_collection_user-groups" {
     unique = true
     },
     {
-      keys   = ["institutionId", "productId", "name"]
-      unique = true
-    },
-    {
       keys   = ["institutionId"]
       unique = false
     },
