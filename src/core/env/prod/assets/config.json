@@ -2,7 +2,7 @@
   "product": {
     "prod-pn": {
       "ipa": {
-        "PA": "L6,L4,L45,L35,L5,L17,L15,C14"
+        "PA": "L6,L4,L45,L35,L5,L17,L15"
       }
     },
     "default": {
