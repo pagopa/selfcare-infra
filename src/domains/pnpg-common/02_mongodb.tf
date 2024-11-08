@@ -77,7 +77,8 @@ resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
   }
 }
 
-module "mongdb_collection_user-groups" {
+// TODO: to be removed
+module "mongdb_collection_old-user-groups" {
   source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v5.3.0"
 
   name                = "userGroups"

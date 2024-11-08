@@ -100,7 +100,8 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
   key_vault_id = module.key_vault.id
 }
 
-module "mongdb_collection_user-groups" {
+// TODO: to be removed
+module "mongdb_collection_old-user-groups" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
 
   name                = "userGroups"
