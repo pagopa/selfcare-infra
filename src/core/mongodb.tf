@@ -100,41 +100,6 @@ resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings
   key_vault_id = module.key_vault.id
 }
 
-module "mongdb_collection_user-groups" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v7.50.1"
-
-  name                = "userGroups"
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-
-  cosmosdb_mongo_account_name  = module.cosmosdb_account_mongodb.name
-  cosmosdb_mongo_database_name = azurerm_cosmosdb_mongo_database.selc_user_group.name
-
-  indexes = [
-    {
-      keys   = ["_id"]
-      unique = true
-    },
-    {
-      keys   = ["institutionId", "productId", "name"]
-      unique = true
-    },
-    {
-      keys   = ["institutionId"]
-      unique = false
-    },
-    {
-      keys   = ["productId"]
-      unique = false
-    },
-    {
-      keys   = ["members"]
-      unique = false
-    }
-  ]
-
-  lock_enable = true
-}
-
 # selcMsCore
 resource "azurerm_cosmosdb_mongo_database" "selc_ms_core" {
   name                = "selcMsCore"
