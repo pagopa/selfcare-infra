@@ -56,27 +56,6 @@ module "cosmosdb_account_mongodb" {
   tags = var.tags
 }
 
-resource "azurerm_cosmosdb_mongo_database" "selc_user_group" {
-  name                = "selcUserGroup"
-  resource_group_name = azurerm_resource_group.mongodb_rg.name
-  account_name        = module.cosmosdb_account_mongodb.name
-
-  throughput = var.cosmosdb_mongodb_enable_autoscaling || local.cosmosdb_mongodb_enable_serverless ? null : var.cosmosdb_mongodb_throughput
-
-  dynamic "autoscale_settings" {
-    for_each = var.cosmosdb_mongodb_enable_autoscaling && !local.cosmosdb_mongodb_enable_serverless ? [""] : []
-    content {
-      max_throughput = var.cosmosdb_mongodb_max_throughput
-    }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      autoscale_settings
-    ]
-  }
-}
-
 #
 # Key Vault secrets
 #
