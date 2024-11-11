@@ -1,0 +1,33 @@
+{
+    "prod-interop": [
+        "PA",
+        "GSP",
+        "SA",
+        "SCP",
+        "AS",
+        "PRV"
+    ],
+    "prod-pn": [
+        "PA"
+    ],
+    "prod-idpay": [
+        "PA"
+    ],
+    "prod-io": [
+        "PA",
+        "GSP"
+    ],
+    "prod-pagopa": [
+        "PA",
+        "GSP"
+    ],
+    "prod-io-sign": [
+        "PA",
+        "GSP"
+    ],
+    "default": [
+        "PA",
+        "GSP",
+        "SCP"
+    ]
+}
