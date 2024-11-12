@@ -1,0 +1,1 @@
+The product_institution_types.json file maps product IDs to eligible institution types and categories for onboarding. It's environment-specific, with different versions tailored to each environment's available products and institution types.
