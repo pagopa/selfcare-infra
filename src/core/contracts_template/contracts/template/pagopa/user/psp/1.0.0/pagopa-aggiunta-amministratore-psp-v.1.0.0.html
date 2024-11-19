@@ -4,28 +4,12 @@
 <meta name=Generator content="Microsoft Word 15 (filtered)">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <style type="text/css">
-    * {
-        font-family: "Montserrat", sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
     body {
         height: 100%;
         width: 100%;
         margin: 0 auto;
-        padding: 40px;
-    }
-
-    .page {
-        width: 595px;
-        /* A4 larghezza */
-        height: 842px;
-        /* A4 altezza */
-        /* Spazio per il footer */
-        position: relative;
-        page-break-after: always;
+        padding: 20px;
+        font-family: "Montserrat", sans-serif;
     }
 
     .header img {
@@ -49,31 +33,48 @@
         text-align: center;
     }
 
-    /* .footer {
+    .footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-top: 1px solid #000;
         padding-top: 10px;
-        position: absolute;
-        width: -webkit-fill-available;
-        bottom: 40px;
-    }
-
-    .footer p {
         font-size: 6pt;
-        text-align: left;
     }
 
-    .footer img {
+    .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .checkbox {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 15px;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .page {
+        display: block;
+        width: 595px;
+        height: 842px;
+        position: relative
+    }
+
+    .image {
         width: 62.74px;
         height: 62.74px;
     }
-
-    .page-number {
-        font-size: 6pt;
-        text-align: center;
-    } */
 </style>
 
 <body>
@@ -83,59 +84,82 @@
             <img src="https://selfcare.pagopa.it/assets/logo_pagopacorp.png" alt="Logo PagoPA">
         </div>
 
-        <div class="content right-aligned">
-            <p>Spett. le<br>
-                PagoPA S.p.A.<br>
-                Piazza Colonna, 370<br>
-                00187 – ROMA</p>
-        </div>
 
-        <div class="content">
-            <p class="left-aligned"><strong>Oggetto:</strong> Nomina Amministratori su Area Riservata - Accordo di
-                servizio per l’adesione al sistema dei pagamenti elettronici pagoPA</p>
-        </div>
+        <p style="text-align: right;">Spett. le<br>
+            PagoPA S.p.A.<br>
+            Piazza Colonna, 370<br>
+            00187 – ROMA</p>
 
-        <div class="content">
-            <p>Spett. le PagoPA S.p.A.,</p>
-            <p>Con riferimento all’oggetto e tenuta ferma la validità e l’efficacia dell’accordo stipulato, il
-                Prestatore Aderente:</p>
-            <p>Ragione Sociale: ${institutionName}<br>
-                Sede Legale: ${institutionMail}<br>
-                Codice Fiscale: ${institutionTaxCode}<br>
-                Iscrizione al Registro delle Imprese n.: ${institutionRegister}<br>
-                Partita IVA: ${institutionVatNumber}</p>
-            <p>La partita IVA è di gruppo?<br>
-                <input type="checkbox"> Sì<br>
-                <input type="checkbox"> No
-            </p>
-            <p>Iscrizione all’Albo al n. ${legalRegisterNumber}<br>
-                Codice ABI: ${institutionAbi}</p>
-                <br>
+
+        <p style="text-align: left;"><strong>Oggetto:</strong> Nomina Amministratori su Area Riservata - Accordo di
+            servizio per l’adesione al sistema dei pagamenti elettronici pagoPA</p>
+
+        <p>Spett. le PagoPA S.p.A.,</p>
+        <p>Con riferimento all’oggetto e tenuta ferma la validità e l’efficacia dell’accordo stipulato, il
+            Prestatore Aderente:</p>
+        <p>Ragione Sociale: ${institutionName}<br>
+            Sede Legale: ${institutionMail}<br>
+            Codice Fiscale: ${institutionTaxCode}<br>
+            Iscrizione al Registro delle Imprese n.: ${institutionRegister}<br>
+            Partita IVA: ${institutionVatNumber}</p>
+        <p>La partita IVA è di gruppo?</p>
+        <div class="checkbox-container">
+            <div class="checkbox">${vatNumberGroupCheckbox1}</div>
+            <label>Sì</label>
         </div>
+        <div class="checkbox-container">
+            <div class="checkbox">${vatNumberGroupCheckbox2}</div>
+            <label>No</label>
+        </div>
+        <p>Iscrizione all’Albo al n. ${legalRegisterNumber}<br>
+            Codice ABI: ${institutionAbi}</p><br>
         <p>dichiara di aver nominato Amministratore/i:</p>
-            <p>${delegates}</p>
+        <p>${delegates}</p>
+
+        <span class="footer">
+            <p>PagoPA S.p.A.<br>
+                società per azioni con socio unico<br>
+                capitale sociale di euro 1,000,000 interamente versato<br>
+                sede legale in Roma, Piazza Colonna 370, CAP 00187<br>
+                n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009</p>
+
+            <img class="image" src="https://selfcare.pagopa.it/assets/icon_pagopacorp_rounded_primary.png"
+                alt="Logo PagoPA">
+        </span>
     </div>
 
 
     <!-- Seconda pagina -->
     <div class="page">
-        <div class="content">
-            <p>Con la presente si <strong><u>delega/no</u></strong> l’Amministratore/gli Amministratori ad eseguire nei
-                confronti di PagoPA S.p.A. quanto dettagliato nel contratto stipulato e quando disciplinato all’interno
-                del <a href="https://docs.pagopa.it/area-riservata/area-riservata/ruoli">Manuale di Area Riservata</a>.
-            </p>
-            <p>La delega ricevuta obbliga l’Amministratore/gli Amministratori a ricevere ogni comunicazione proveniente
-                da PagoPA S.p.A., incluse quelle di carattere tecnico, anche nel caso in cui comportino la pronta
-                attuazione delle indicazioni ivi contenute.</p>
-            <p>Ciascun Amministratore potrà, in <a href="https://selfcare.pagopa.it/auth/login">Area Riservata</a>,
-                gestire le utenze e i ruoli come meglio dettagliato nel <a
-                    href="https://docs.pagopa.it/area-riservata/area-riservata/ruoli">Manuale di Area Riservata</a>.</p>
-            <p>La nomina ricevuta delega inoltre l’Amministratore/gli Amministratori allo svolgimento delle attività
-                dettagliate nelle Linee guida e negli Allegati alle stesse.</p>
-            <p>Distinti saluti.</p>
-            <br><br>
-            <p class="signature">(FIRMA DEL SOGGETTO CON POTERI DI FIRMA E RAPPRESENTANZA)</p>
-        </div>
+        <p>Con la presente si <strong><u>delega/no</u></strong> l’Amministratore/gli Amministratori ad eseguire nei
+            confronti di PagoPA S.p.A. quanto dettagliato nel contratto stipulato e quando disciplinato all’interno
+            del <a href=" https://docs.pagopa.it/area-riservata/area-riservata/ruoli">Manuale di Area Riservata</a>.
+        </p>
+        <p>La delega ricevuta obbliga l’Amministratore/gli Amministratori a ricevere ogni comunicazione proveniente
+            da PagoPA S.p.A., incluse quelle di carattere tecnico, anche nel caso in cui comportino la pronta
+            attuazione delle indicazioni ivi contenute.</p>
+        <p>Ciascun Amministratore potrà, in <a href="https://selfcare.pagopa.it/auth/login">Area Riservata</a>,
+            gestire le utenze e i ruoli come meglio dettagliato nel <a
+                href="https://docs.pagopa.it/area-riservata/area-riservata/ruoli">Manuale di Area Riservata</a>.</p>
+        <p>La nomina ricevuta delega inoltre l’Amministratore/gli Amministratori allo svolgimento delle attività
+            dettagliate nelle Linee guida e negli Allegati alle stesse.</p>
+        <p>Distinti saluti.</p>
+        <br><br>
+        <p class="signature">(FIRMA DEL SOGGETTO CON POTERI DI FIRMA E RAPPRESENTANZA)</p>
+
+        <span class="footer">
+            <div>
+                <p>PagoPA S.p.A.<br>
+                    società per azioni con socio unico<br>
+                    capitale sociale di euro 1,000,000 interamente versato<br>
+                    sede legale in Roma, Piazza Colonna 370, CAP 00187<br>
+                    n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009</p>
+            </div>
+            <div>
+                <img class="image" src="https://selfcare.pagopa.it/assets/icon_pagopacorp_rounded_primary.png"
+                    alt="Logo PagoPA">
+            </div>
+        </span>
     </div>
 
 </body>
