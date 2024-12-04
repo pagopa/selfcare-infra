@@ -552,6 +552,25 @@
       .c6 {
         margin-right: 1pt;
       }
+
+      .checkbox-container {
+        color: #000000;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .checkbox {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 15px;
+        font-size: 12px;
+        margin-right: 5px;
+      }
     </style>
   </head>
 
@@ -663,21 +682,20 @@
       </span>
     </p>
 
-    <p>
-      <span class="text-style" style="margin-left: 20px">
-        <input
-          type="checkbox"
-          id="checkbox1"
-          value="?"
-          style="margin-left: 20px"
-        />
-        <label for="checkbox1"
+    <p style="margin-top: 10pt"></p>
+
+    <div class="checkbox-container">
+      <div class="checkbox">${isAggregatorCheckbox}</div>
+      <label
+        ><span class="text-style"
           >L&apos;Ente intende aderire in qualit&agrave; di Ente Aggregatore,
           conferma di aver compilato in ogni sua parte l&apos;Allegato 1 e lo
-          accetta integralmente (<a href="#allegato-1">Allegato 1</a>).</label
-        ><br />
-      </span>
-    </p>
+          accetta integralmente (<a href="#allegato-1">Allegato 1</a>).</span
+        ></label
+      >
+    </div>
+
+    <br />
 
     <p class="c6">
       <span class="sub-title"> * * * </span>
