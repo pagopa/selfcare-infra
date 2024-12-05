@@ -23,7 +23,8 @@
         "PA": {},
         "GSP": {},
         "PSP": {},
-        "PRV": {}
+        "PRV": {},
+        "GPU": {}
     },
     "prod-io-sign": {
         "PA": {},
