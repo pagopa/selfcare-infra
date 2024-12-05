@@ -59,20 +59,12 @@ jobs:
                 --container '$web' \
                 --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
                 --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-                --file "./env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
+                --file ".src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
                 --overwrite true \
                 --name 'assets/app-io-premium-plans.json'
 
     - name: Purge blob storage
       run: |
-          az storage blob upload \
-                --container '$web' \
-                --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-                --file "./env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
-                --overwrite true \
-                --name 'assets/app-io-premium-plans.json'
-                
           az cdn endpoint purge \
                 --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
                 --name "${{ env.CDN_NAME }}" \
