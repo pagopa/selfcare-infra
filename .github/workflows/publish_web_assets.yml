@@ -1,0 +1,51 @@
+name: Publish web assets
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "/assets/**"
+
+  workflow_dispatch:
+    inputs:
+      env:
+        required: true
+        type: choice
+        description: 'Select the Environment'
+        default: 'dev'
+        options: 
+        - dev
+        - uat
+        - prod
+        
+jobs:
+  release_dev:
+    uses: ./.github/workflows/call_publish_web_assets.yml
+    name: DEV Selfcare Infra Release contracts template
+    if: ${{ inputs.env == 'dev' }}
+    secrets: inherit
+    with:
+      environment: dev
+      environment_short: d
+      agent: self-hosted
+
+  release_uat:
+    uses: ./.github/workflows/call_publish_web_assets.yml
+    name: UAT Selfcare Infra Release contracts template
+    if: ${{ inputs.env == 'uat' }}
+    secrets: inherit
+    with:
+      environment: uat
+      environment_short: u
+      agent: self-hosted
+
+  release_prod:
+    uses: ./.github/workflows/call_publish_web_assets.yml
+    name: PROD Selfcare Infra Release contracts template
+    if: ${{ inputs.env == 'prod' }}
+    secrets: inherit
+    with:
+      environment: prod
+      environment_short: p
+      agent: self-hosted
