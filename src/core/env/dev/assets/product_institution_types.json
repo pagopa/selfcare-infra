@@ -25,7 +25,8 @@
         "GSP": {},
         "PSP": {},
         "PT": {},
-        "PRV": {}
+        "PRV": {},
+        "GPU": {}
     },
     "prod-io-sign": {
         "PA": {},
