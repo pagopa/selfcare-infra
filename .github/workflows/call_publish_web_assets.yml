@@ -58,7 +58,7 @@ jobs:
           az storage blob upload \
                 --container '$web' \
                 --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+                --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
                 --file "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
                 --overwrite true \
                 --name 'assets/app-io-premium-plans.json'
