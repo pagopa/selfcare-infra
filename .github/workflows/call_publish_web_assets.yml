@@ -83,8 +83,6 @@ jobs:
                 --overwrite true \
                 --name 'assets/product_institution_types.json'
 
-                
-
     - name: Purge blob storage
       run: |
           az cdn endpoint purge \
