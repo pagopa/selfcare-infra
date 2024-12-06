@@ -14,33 +14,6 @@ resource "null_resource" "upload_contract_templates" {
   }
 }
 
-resource "null_resource" "upload_psp_contracts" {
-  provisioner "local-exec" {
-    command = <<EOT
-              az storage copy \
-                --account-name ${module.selc-contracts-storage.name} \
-                --account-key "${module.selc-contracts-storage.primary_access_key}" \
-                --destination-container ${nonsensitive(azurerm_storage_container.selc-contracts-container.name)} \
-                --source "./contracts_psp/*" \
-                --recursive
-          EOT
-  }
-}
-
-
-resource "null_resource" "upload_io_contracts" {
-  provisioner "local-exec" {
-    command = <<EOT
-              az storage copy \
-                --account-name ${module.selc-contracts-storage.name} \
-                --account-key "${module.selc-contracts-storage.primary_access_key}" \
-                --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
-                --source "./contracts_io/*" \
-                --recursive
-          EOT
-  }
-}
-
 resource "null_resource" "app_io_premium_plans" {
   # triggers = {
   #   file_sha1 = filesha1("./env/${var.env}/assets/app-io-premium-plans.json")
