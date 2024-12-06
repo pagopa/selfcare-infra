@@ -89,7 +89,7 @@ jobs:
                 --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
                 --name "${{ env.CDN_NAME }}" \
                 --profile-name "${{ env.CDN_PROFILE }}"  \
-                --content-paths "/assets/**" \
+                --content-paths "/assets/*" \
                 --no-wait
 
     - name: Azure Logout
