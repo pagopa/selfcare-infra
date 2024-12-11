@@ -77,6 +77,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-token-exchange-frontend"
     subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
+    subject    = "prod-ci"
   }
 ]
 
@@ -127,6 +131,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-token-exchange-frontend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
     subject    = "prod-cd"
   }
 ]
