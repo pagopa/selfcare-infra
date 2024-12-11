@@ -3471,6 +3471,24 @@ td, th {
             widows: 2;
             text-align: left
         }
+        .checkbox-container {
+        color: #000000;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+      }
+
+      .checkbox {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 15px;
+        font-size: 12px;
+        margin-right: 5px;
+      }
     </style>
 </head>
 
@@ -3523,8 +3541,9 @@ td, th {
                     <td class="c59" colspan="2" rowspan="1">
                         <p class="c17"><span class="c1">Prodotto: </span></p>
                         <br />
-                                <input type="checkbox" checked />
-                                <span class="c1">piattaforma pagoPA</span></li>
+                        <div class="checkbox-container">
+                            <div class="checkbox">X</div><span class="c1">piattaforma pagoPA</span></li>
+                        </div>
                         <p class="c17 c48 c41"><span class="c28 c5 c102"></span></p>
                         <p class="c17 c48 c41"><span class="c1"></span></p>
                     </td>
@@ -3536,14 +3555,14 @@ td, th {
                         </ol>
                     </td>
                     <td class="c8" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_pwvrtzstwoah-0 start">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">SI</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${businessRegisterCheckbox1}</div><span class="c1">SI</span></li>
+                        </div>
                     </td>
                     <td class="c13" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_uqttmmknqlg6-0 start">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">NO</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${businessRegisterCheckbox2}</div><span class="c1">NO</span></li>
+                        </div>
                     </td>
                 </tr>
                 <tr class="c58">
@@ -3564,14 +3583,14 @@ td, th {
                         </ol>
                     </td>
                     <td class="c8" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_pwvrtzstwoah-0">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">SI</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${publicServicesCheckbox1}</div><span class="c1">SI</span></li>
+                        </div>
                     </td>
                     <td class="c13" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_uqttmmknqlg6-0">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">NO</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${publicServicesCheckbox2}</div><span class="c1">NO</span></li>
+                        </div>
                     </td>
                 </tr>
                 <tr class="c3">
@@ -3590,14 +3609,14 @@ td, th {
                         </ol>
                     </td>
                     <td class="c8" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_pwvrtzstwoah-0">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">SI</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${longTermPaymentsCheckbox1}</div><span class="c1">SI</span></li>
+                        </div>
                     </td>
                     <td class="c13" colspan="1" rowspan="1">
-                        <ul class="c20 lst-kix_uqttmmknqlg6-0">
-                            <li class="c17 c43 c41 li-bullet-0"><span class="c1">NO</span></li>
-                        </ul>
+                        <div class="checkbox-container">
+                            <div class="checkbox">${longTermPaymentsCheckbox2}</div><span class="c1">NO</span></li>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -3616,18 +3635,14 @@ td, th {
                 <p class="c85 c53 c48"><span class="c1"></span></p>
                 <p class="c53 c85"><span class="c1">Il legale rappresentante dell&rsquo;Ente Richiedente dichiara e rappresenta irrevocabilmente:</span></p>
                 <ul class="c20 lst-kix_rflw54rlb8ck-0 start">
-                    <li class="c38 li-bullet-2">
-                        <input type="checkbox" checked />
-                        <span class="c1">di avere il potere di agire in nome e per conto dell&rsquo;Ente Richiedente; </span>
+                    <li class="c38 li-bullet-2"><span class="c1">di avere il potere di agire in nome e per conto dell&rsquo;Ente Richiedente; </span>
                     </li>
                     <li class="c38 li-bullet-1"><span class="c5">che l&#39;Ente, per il tramite del proprio legale rappresentante, il legale rappresentante e i propri Dirigenti sono </span><span class="c5">in possesso di tutte le autorizzazioni previste dalla legge per lo svolgimento delle attivit&agrave; ad oggetto della richiesta e sottese alla stessa</span>
                         <span
                             class="c1">;</span>
                     </li>
                     <li class="c38 li-bullet-2"><span class="c1">che esso legale rappresentante e i dirigenti dell&rsquo;Ente Richiedente non si trovano in una delle circostanze indicate nell&rsquo;articolo 94 e 95 D.Lgs. n. 36/2023;</span></li>
-                    <li class="c38 li-bullet-2"><span class="c5">che nei confronti dello stesso e dei dirigenti dell&rsquo;Ente Richiedente </span><span class="c5">non &egrave; pendente alcun procedimento per l&rsquo;applicazione di una delle misure di prevenzione di cui all&rsquo;art. 6 del D.Lgs. 159/2011 e che non sussiste nessuna delle cause ostative previste dall&rsquo;art. 67 del D.Lgs. 159/2011</span>
-                        <span
-                            class="c1">;</span>
+                    <li class="c38 li-bullet-2"><span class="c5">che nei confronti dello stesso e dei dirigenti dell&rsquo;Ente Richiedente </span><span class="c5">non &egrave; pendente alcun procedimento per l&rsquo;applicazione di una delle misure di prevenzione di cui all&rsquo;art. 6 del D.Lgs. 159/2011 e che non sussiste nessuna delle cause ostative previste dall&rsquo;art. 67 del D.Lgs. 159/2011;</span>
                     </li>
                     <li class="c38 li-bullet-2"><span class="c5">che l&rsquo;Ente richiedente</span><span class="c5">&nbsp;non &egrave; destinatario di provvedimenti giudiziari, n&eacute; coinvolto in procedimenti pendenti che comportano l&rsquo;applicazione di sanzioni amministrative di cui al decreto legislativo 8 giugno 2001, n. 231</span>
                         <span
