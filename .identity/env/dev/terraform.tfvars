@@ -177,6 +177,9 @@ environment_ci_roles_ms = {
   resource_groups = {
     terraform-state-rg = [
       "Storage Blob Data Contributor"
+    ],
+    "selc-d-contracts-storage-rg" = [
+      "Storage Blob Data Contributor"
     ]
   }
 }

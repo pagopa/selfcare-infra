@@ -90,6 +90,10 @@ cd_github_federations_ms = [
     subject    = "prod-cd"
   },
   {
+    repository = "selfcare-infra"
+    subject    = "prod-cd"
+  },
+  {
     repository = "selfcare-ms-core"
     subject    = "prod-cd"
   },
@@ -175,6 +179,9 @@ environment_ci_roles_ms = {
   ]
   resource_groups = {
     terraform-state-rg = [
+      "Storage Blob Data Contributor"
+    ],
+    "selc-p-contracts-storage-rg" = [
       "Storage Blob Data Contributor"
     ]
   }
