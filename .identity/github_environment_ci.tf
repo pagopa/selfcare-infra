@@ -38,3 +38,28 @@ resource "github_actions_environment_secret" "env_ci_secrets" {
   secret_name     = each.key
   plaintext_value = each.value
 }
+
+
+data "azurerm_key_vault_secret" "storage_checkout_account_key" {
+  name         = "web-storage-access-key"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "github_actions_environment_secret" "storage_checkout_account_key" {
+  repository      = local.github.repository
+  environment     = github_repository_environment.github_repository_environment_ci.environment
+  secret_name     = "STORAGE_CHECKOUT_ACCOUNT_KEY"
+  plaintext_value = data.azurerm_key_vault_secret.storage_checkout_account_key.value
+}
+
+data "azurerm_key_vault_secret" "storage_contracts_account_key" {
+  name         = "contracts-storage-access-key"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "github_actions_environment_secret" "storage_contracts_account_key" {
+  repository      = local.github.repository
+  environment     = github_repository_environment.github_repository_environment_ci.environment
+  secret_name     = "STORAGE_CONTRACTS_ACCOUNT_KEY"
+  plaintext_value = data.azurerm_key_vault_secret.storage_contracts_account_key.value
+}

@@ -496,7 +496,7 @@ eventhubs = [{
     name              = "SC-UserGroups"
     partitions        = 10
     message_retention = 7
-    consumers         = []
+    consumers         = ["io-cms-sync"]
     keys = [
       {
         name   = "selfcare-wo"
