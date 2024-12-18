@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="Generator" content="Microsoft Word 15 (filtered)" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Montserrat"
+    rel="stylesheet"
+  />
+  <style type="text/css">
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 10 auto;
+      padding: 20px;
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .header img {
+      width: 128.16px;
+      height: 35.6px;
+    }
+
+    .content {
+      margin-bottom: 20px;
+    }
+
+    .right-aligned {
+      text-align: right;
+    }
+
+    .left-aligned {
+      text-align: left;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .footer {
+      display: flex;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 1px solid #000;
+      text-align: center;
+      line-height: 15px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    .page {
+      width: 80%;
+      height: 100%;
+      position: relative;
+    }
+
+    .image {
+      width: 40.74px;
+      height: 40.74px;
+    }
+
+    .c141 {
+      line-height: 0.5pt !important;
+      font-family: "Montserrat" !important;
+    }
+    .c6 {
+      font-family: "Montserrat" !important;
+    }
+  </style>
+
+  <body>
+    <!-- Prima pagina -->
+    <div class="page">
+      <div class="header">
+        <img
+          src="https://selfcare.pagopa.it/assets/logo_pagopacorp.png"
+          alt="Logo PagoPA"
+        />
+      </div>
+
+      <p style="text-align: right">
+        Spett. le<br />
+        PagoPA S.p.A.<br />
+        Piazza Colonna, 370<br />
+        00187 – ROMA
+      </p>
+
+      <p style="text-align: left">
+        <strong>Oggetto:</strong> Nomina Amministratori su Area Riservata -
+        Accordo di servizio per l’adesione al sistema dei pagamenti elettronici
+        pagoPA
+      </p>
+
+      <p>Spett. le PagoPA S.p.A.,</p>
+      <p>
+        Con riferimento all’oggetto e tenuta ferma la validità e l’efficacia
+        dell’accordo stipulato, il Prestatore Aderente:
+      </p>
+      <p>
+        Ragione Sociale: ${institutionName}<br />
+        Sede Legale: ${institutionMail}<br />
+        Codice Fiscale: ${institutionTaxCode}<br />
+        Iscrizione al Registro delle Imprese n.: ${institutionRegister}<br />
+        Partita IVA: ${institutionVatNumber}
+      </p>
+      <p>La partita IVA è di gruppo?</p>
+      <div class="checkbox-container">
+        <div class="checkbox">${vatNumberGroupCheckbox1}</div>
+        <label>Sì</label>
+      </div>
+      <div class="checkbox-container">
+        <div class="checkbox">${vatNumberGroupCheckbox2}</div>
+        <label>No</label>
+      </div>
+      <p>
+        Iscrizione all’Albo al n. ${legalRegisterNumber}<br />
+        Codice ABI: ${institutionAbi}
+      </p>
+      <p>dichiara di aver nominato Amministratore/i:</p>
+      <span>${delegates}</span>
+
+    </div>
+
+    <!-- Seconda pagina -->
+    <div class="page">
+      <p>
+        Con la presente si
+        <strong><u>delega/no</u></strong> l’Amministratore/gli Amministratori ad
+        eseguire nei confronti di PagoPA S.p.A. quanto dettagliato nel contratto
+        stipulato e quando disciplinato all’interno del
+        <a href=" https://docs.pagopa.it/area-riservata/area-riservata/ruoli"
+          >Manuale di Area Riservata</a
+        >.
+      </p>
+      <p>
+        La delega ricevuta obbliga l’Amministratore/gli Amministratori a
+        ricevere ogni comunicazione proveniente da PagoPA S.p.A., incluse quelle
+        di carattere tecnico, anche nel caso in cui comportino la pronta
+        attuazione delle indicazioni ivi contenute.
+      </p>
+      <p>
+        Ciascun Amministratore potrà, in
+        <a href="https://selfcare.pagopa.it/auth/login">Area Riservata</a>,
+        gestire le utenze e i ruoli come meglio dettagliato nel
+        <a href="https://docs.pagopa.it/area-riservata/area-riservata/ruoli"
+          >Manuale di Area Riservata</a
+        >.
+      </p>
+      <p>
+        La nomina ricevuta delega inoltre l’Amministratore/gli Amministratori
+        allo svolgimento delle attività dettagliate nelle Linee guida e negli
+        Allegati alle stesse.
+      </p>
+      <p>Distinti saluti.</p>
+      <br /><br />
+      <p style="margin-bottom: 80px">
+        (FIRMA DEL SOGGETTO CON POTERI DI FIRMA E RAPPRESENTANZA)
+      </p>
+
+      <p style="margin-top: 10px; margin-bottom: 10px"></p>
+
+      <hr width="100%" size="1" />
+      <div class="footer" style="width: 100%; position: relative">
+        <span>
+          <p
+            style="
+              font-size: 8pt;
+              margin-left: 2%;
+              text-align: left;
+              position: absolute;
+            "
+          >
+            PagoPA S.p.A.<br />
+            società per azioni con socio unico<br />
+            capitale sociale di euro 1,000,000 interamente versato<br />
+            sede legale in Roma, Piazza Colonna 370, CAP 00187<br />
+            n. di iscrizione a Registro Imprese di Roma, CF e P.IVA 15376371009
+          </p>
+        </span>
+
+        <span style="margin-left: 250px; margin-right: 150px"></span>
+
+        <span
+          style="
+            overflow: hidden;
+            display: inline-block;
+            width: 100.74px;
+            height: 50.74px;
+            margin: 10px;
+            text-align: right;
+          "
+          ><img
+            alt="logo PagoPA"
+            src="https://selfcare.pagopa.it/assets/icon_pagopacorp_rounded_primary.png"
+            style="
+              width: 50.16px;
+              height: 50.6px;
+              transform: rotate(0rad) translateZ(0px);
+              -webkit-transform: rotate(0rad) translateZ(0px);
+            "
+            title="logo PagoPA"
+          />
+        </span>
+      </div>
+    </div>
+  </body>
+</html>
