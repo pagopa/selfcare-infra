@@ -85,6 +85,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-dashboard-admin-microfrontend"
     subject    = "prod-ci"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
+    subject    = "prod-ci"
   }
 ]
 
@@ -147,6 +151,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-dashboard-admin-microfrontend"
+    subject    = "prod-cd"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
     subject    = "prod-cd"
   }
 ]
