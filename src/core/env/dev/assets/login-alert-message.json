@@ -1,8 +1,8 @@
 {
   "warning-banner": {
     "severity": "warning",
-    "description": "Per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione. ",
-    "enable": false
+    "description": "Ci scusiamo per il disagio, per un aggiornamento del portale, potresti avere difficoltà a inserire una nuova adesione.",
+    "enable": true
   },
   "disservice-error-banner": {
     "severity": "error",
