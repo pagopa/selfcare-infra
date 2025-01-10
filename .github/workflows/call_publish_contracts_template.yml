@@ -53,13 +53,13 @@ jobs:
 
     - name: Install azcopy
       run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
+        apt-get update
+        apt-get install -y wget
 
         wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
-        sudo dpkg -i packages-microsoft-prod.deb
-        sudo apt-get update
-        sudo apt-get install -y azcopy
+        dpkg -i packages-microsoft-prod.deb
+        apt-get update
+        apt-get install -y azcopy
         rm -f packages-microsoft-prod.deb
         
     - name: Upload to blob storage
