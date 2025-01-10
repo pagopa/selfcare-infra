@@ -51,6 +51,17 @@ jobs:
         tenant-id: ${{ vars.ARM_TENANT_ID }}
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
+    - name: Install azcopy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+
+        wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y azcopy
+        rm -f packages-microsoft-prod.deb
+        
     - name: Upload to blob storage
       run: |
           az storage copy \
