@@ -36,6 +36,12 @@ resource "azurerm_log_analytics_workspace" "log_analytics_workspace" {
   daily_quota_gb      = var.law_daily_quota_gb
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      sku
+    ]
+  }
 }
 
 # Application insights
