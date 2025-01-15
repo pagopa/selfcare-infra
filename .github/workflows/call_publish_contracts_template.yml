@@ -51,13 +51,13 @@ jobs:
         tenant-id: ${{ vars.ARM_TENANT_ID }}
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
-    - name: Install azcopy
-      run: |
-        wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
+    # - name: Install azcopy
+    #   run: |
+    #     wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
         
     - name: Upload to blob storage
       run: |
-          ./azcopy copy \
+          az storage copy \
             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
             --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
             --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
