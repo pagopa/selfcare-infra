@@ -98,6 +98,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-onboarding-frontend"
     subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
+    subject    = "dev-ci"
   }
 ]
 
@@ -168,6 +172,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-onboarding-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
     subject    = "dev-cd"
   }
 ]
