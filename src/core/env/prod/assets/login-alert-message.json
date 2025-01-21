@@ -1,7 +1,7 @@
 {
   "warning-banner": {
-    "severity": "error",
-    "description": "Per un aggiornamento del portale, al momento non è possibile aderire ai prodotti IO e IO Premium.",
+    "severity": "warning",
+    "description": "Per un aggiornamento del portale, al momento non è possibile aderire al prodotto IO Premium.",
     "enable": true
   },
   "disservice-error-banner": {
