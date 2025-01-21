@@ -75,6 +75,60 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identit
   ]
 }
 
+module "identity_ci_fe" {
+  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
+
+  prefix    = var.prefix
+  env_short = var.env_short
+  domain    = "fe"
+
+  identity_role = "ci"
+
+  github_federations = var.ci_github_federations_fe
+
+  ci_rbac_roles = {
+    subscription_roles = concat(var.environment_ci_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_reader.name, azurerm_role_definition.apim_integration_reader.name])
+    resource_groups = merge(var.environment_ci_roles_ms.resource_groups,
+      {
+        "selc-${var.env_short}-checkout-fe-rg" = ["Storage Blob Data Contributor", "Storage Account Key Operator Service Role", "CDN Endpoint Contributor"]
+    })
+  }
+
+  tags = var.tags
+
+  depends_on = [
+    azurerm_resource_group.identity_rg
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "key_vault_access_policy_identity_fe_ci" {
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = module.identity_ci_fe.identity_principal_id
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
+
+  certificate_permissions = [
+    "Get",
+    "List",
+  ]
+}
+
+
+resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identity_fe_ci" {
+  key_vault_id = data.azurerm_key_vault.key_vault_pnpg.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = module.identity_ci_fe.identity_principal_id
+
+  secret_permissions = [
+    "Get",
+    "List",
+  ]
+}
+
 resource "azurerm_role_definition" "container_apps_jobs_reader" {
   name        = "SelfCare ${var.env} ContainerApp Jobs Reader"
   scope       = data.azurerm_subscription.current.id

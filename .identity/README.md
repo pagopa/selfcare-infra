@@ -13,8 +13,10 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_identity_cd"></a> [identity\_cd](#module\_identity\_cd) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
+| <a name="module_identity_cd_fe"></a> [identity\_cd\_fe](#module\_identity\_cd\_fe) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
 | <a name="module_identity_cd_ms"></a> [identity\_cd\_ms](#module\_identity\_cd\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
 | <a name="module_identity_ci"></a> [identity\_ci](#module\_identity\_ci) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
+| <a name="module_identity_ci_fe"></a> [identity\_ci\_fe](#module\_identity\_ci\_fe) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
 | <a name="module_identity_ci_ms"></a> [identity\_ci\_ms](#module\_identity\_ci\_ms) | github.com/pagopa/terraform-azurerm-v3//github_federated_identity | v8.49.1 |
 
 ## Resources
@@ -23,8 +25,12 @@
 |------|------|
 | [azurerm_key_vault_access_policy.key_vault_access_policy_identity_cd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.key_vault_access_policy_identity_ci](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.key_vault_access_policy_identity_fe_cd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.key_vault_access_policy_identity_fe_ci](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.key_vault_access_policy_pnpg_identity_cd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.key_vault_access_policy_pnpg_identity_ci](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.key_vault_access_policy_pnpg_identity_fe_cd](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.key_vault_access_policy_pnpg_identity_fe_ci](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_resource_group.identity_rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 | [azurerm_role_definition.apim_integration_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
 | [azurerm_role_definition.container_apps_jobs_reader](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_definition) | resource |
@@ -51,8 +57,10 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cd_github_federations"></a> [cd\_github\_federations](#input\_cd\_github\_federations) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_cd_github_federations_fe"></a> [cd\_github\_federations\_fe](#input\_cd\_github\_federations\_fe) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_cd_github_federations_ms"></a> [cd\_github\_federations\_ms](#input\_cd\_github\_federations\_ms) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_ci_github_federations"></a> [ci\_github\_federations](#input\_ci\_github\_federations) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_ci_github_federations_fe"></a> [ci\_github\_federations\_fe](#input\_ci\_github\_federations\_fe) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_ci_github_federations_ms"></a> [ci\_github\_federations\_ms](#input\_ci\_github\_federations\_ms) | GitHub Organization, repository name and scope permissions | <pre>list(object({<br/>    repository        = string<br/>    credentials_scope = optional(string, "environment")<br/>    subject           = string<br/>  }))</pre> | n/a | yes |
 | <a name="input_domain"></a> [domain](#input\_domain) | n/a | `string` | `"infra"` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
