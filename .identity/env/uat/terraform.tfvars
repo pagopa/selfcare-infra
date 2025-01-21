@@ -102,6 +102,10 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-pnpg-dashboard-frontend"
     subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-assistance-frontend"
+    subject    = "uat-ci"
   }
 ]
 
@@ -180,6 +184,10 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-pnpg-dashboard-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-assistance-frontend"
     subject    = "uat-cd"
   }
 ]
