@@ -5,6 +5,11 @@
         "PA": "L6,L4,L45,L35,L5,L17,L15,L7,L22"
       }
     },
+    "prod-io-premium": {
+      "consumptionPlan": {
+        "pricingPlan": "C0"
+      }
+    },
     "default": {
       "ipa": {
         "GSP": "L37,SAG",
