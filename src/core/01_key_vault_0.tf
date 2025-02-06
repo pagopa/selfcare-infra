@@ -132,11 +132,11 @@ resource "azurerm_key_vault_access_policy" "azure_cdn_frontdoor_policy" {
   object_id    = var.azuread_service_principal_azure_cdn_frontdoor_id
 
   secret_permissions = [
-    "Get",
+    "Get", "List"
   ]
 
   certificate_permissions = [
-    "Get",
+    "Get", "List", "GetIssuers", "ListIssuers"
   ]
 }
 
@@ -146,4 +146,16 @@ resource "azurerm_user_assigned_identity" "appgateway" {
   name                = "${local.project}-appgateway-identity"
 
   tags = var.tags
+}
+
+resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_secrets" {
+  scope                = module.key_vault.id
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = var.azuread_service_principal_azure_cdn_frontdoor_id
+}
+
+resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_certificates" {
+  scope                = module.key_vault.id
+  role_definition_name = "Key Vault Certificate User"
+  principal_id         = var.azuread_service_principal_azure_cdn_frontdoor_id
 }
