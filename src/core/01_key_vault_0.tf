@@ -152,14 +152,14 @@ resource "azurerm_user_assigned_identity" "appgateway" {
   tags = var.tags
 }
 
-resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_secrets" {
-  scope                = module.key_vault.id
-  role_definition_name = "Key Vault Secrets User"
-  principal_id         = var.azuread_service_principal_azure_cdn_frontdoor_id
-}
+# resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_secrets" {
+#   scope                = module.key_vault.id
+#   role_definition_name = "Key Vault Secrets User"
+#   principal_id         = data.azuread_service_principal.azure_cdn_frontdoor_id.id
+# }
 
-resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_certificates" {
-  scope                = module.key_vault.id
-  role_definition_name = "Key Vault Certificate User"
-  principal_id         = var.azuread_service_principal_azure_cdn_frontdoor_id
-}
+# resource "azurerm_role_assignment" "azure_cdn_frontdoor_policy_certificates" {
+#   scope                = module.key_vault.id
+#   role_definition_name = "Key Vault Certificate User"
+#   principal_id         = data.azuread_service_principal.azure_cdn_frontdoor_id.id
+# }
