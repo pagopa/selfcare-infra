@@ -39,6 +39,10 @@ jobs:
         persist-credentials: false
         fetch-depth: 0
 
+    - name: Upload to blob storage
+      run: |
+          ls -la
+
     - name: Azure Login
       id: az_login
       uses: azure/login@a65d910e8af852a8061c627c456678983e180302
@@ -52,15 +56,18 @@ jobs:
     #     wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
     
     - name: Upload to blob storage
-      id: storage_upload
-      run: |
-        tdnf install azcopy -y
-        az storage copy \
-          --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-          --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-          --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
-          --source './src/core/contracts_template/contracts/*' \
-          --recursive
+      uses: azure/CLI@v2
+      with:
+        azcliversion: 2.69.0
+        # azcopy workadound https://github.com/Azure/azure-cli/issues/30635
+        inlineScript: |
+            tdnf install -y azcopy;
+            az storage copy \
+              --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+              --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+              --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
+              --source './src/core/contracts_template/contracts/*' \
+              --recursive
 
     - name: Azure Logout
       id: az_logout
