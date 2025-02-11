@@ -54,6 +54,7 @@ jobs:
     - name: Upload to blob storage
       id: storage_upload
       run: |
+        tdnf install azcopy -y
         az storage copy \
           --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
           --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
