@@ -52,14 +52,17 @@ jobs:
     #     wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
     
     - name: Upload to blob storage
-      run: |
-        sudo apt-get install -y azcopy
-        az storage copy \
-          --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-          --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-          --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
-          --source './src/core/contracts_template/contracts/*' \
-          --recursive
+      id: storage_upload
+      uses: azure/CLI@b0e31ae20280d899279f14c36e877b4c6916e2d3
+      # uses: azure/CLI@965c8d7571d2231a54e321ddd07f7b10317f34d9 # v2
+      with:
+        inlineScript: |
+          az storage copy \
+            --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+            --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+            --destination-container "${{ env.STORAGE_CONTAINER }}/contracts" \
+            --source './src/core/contracts_template/contracts/*' \
+            --recursive
 
     - name: Azure Logout
       id: az_logout
