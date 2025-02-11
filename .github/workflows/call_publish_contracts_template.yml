@@ -56,7 +56,7 @@ jobs:
         upload_status=$(az storage blob upload-batch \
         --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
         --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-        --source './src/core/contracts_template/contracts/*' \
+        --source './src/core/contracts_template/contracts/' \
         --destination "${{ env.STORAGE_CONTAINER }}/contracts" \
         --overwrite)
 
