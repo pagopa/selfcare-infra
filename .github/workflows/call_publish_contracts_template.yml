@@ -53,7 +53,7 @@ jobs:
     
     - name: Upload to blob storage
       run: |
-        tdnf install -y azcopy
+        apt-get install -y azcopy
         az storage copy \
           --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
           --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
