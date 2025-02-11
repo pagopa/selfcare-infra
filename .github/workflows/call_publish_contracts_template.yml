@@ -61,9 +61,9 @@ jobs:
         --overwrite)
 
         if [[ $? -eq 0 ]]; then
-          echo "Upload batch completato con successo."
+          echo "Upload success."
         else
-          echo "Errore durante l'upload batch."
+          echo "Error during contracts upload batch."
           exit 1  # Esce dallo step con codice di errore
         fi
 
