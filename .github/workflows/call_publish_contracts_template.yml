@@ -60,6 +60,7 @@ jobs:
         --destination "${{ env.STORAGE_CONTAINER }}/contracts" \
         --overwrite)
 
+        echo "${upload_status}"
         if [[ $? -eq 0 ]]; then
           echo "Upload success."
         else
