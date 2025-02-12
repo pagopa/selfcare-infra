@@ -50,15 +50,21 @@ jobs:
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
     - name: Upload app-io-premium-plans to blob storage
-      uses: ./.github/workflows/call_publish_blob.yml
-      with:
-        environment: "{{ inputs.environment_short }}"
-        STORAGE_ACCOUNT_NAME: "${{ env.STORAGE_ACCOUNT_NAME }}"
-        STORAGE_CONTAINER: "${{ env.STORAGE_CONTAINER }}"
-        STORAGE_ACCOUNT_RG: ""
-        DESTINATION: "assets/app-io-premium-plans.json"
-        SOURCE: "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" 
-      
+      run: |
+        upload_status=$(az storage blob upload \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
+        --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+        --source "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" ' \
+        --destination "${{ env.STORAGE_CONTAINER }}/assets/app-io-premium-plans.json" \
+        --overwrite)
+
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during contracts upload batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi
     # - name: Upload config to blob storage
     #   run: |
     #       az storage blob upload \
