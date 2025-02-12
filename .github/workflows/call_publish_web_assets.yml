@@ -54,10 +54,10 @@ jobs:
         upload_status=$(az storage blob upload \
         --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
         --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-        --container-name "${{ env.STORAGE_CONTAINER }}" \
+        --container "${{ env.STORAGE_CONTAINER }}" \
         --file "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
         --name "assets/app-io-premium-plans.json" \
-        --overwrite)
+        --overwrite true)
 
         echo "${upload_status}"
         if [[ $? -eq 0 ]]; then
