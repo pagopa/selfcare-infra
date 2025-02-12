@@ -1,0 +1,51 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      STORAGE_ACCOUNT_NAME:
+        type: string
+        required: true
+      STORAGE_CONTAINER:
+        type: string
+        required: true
+      STORAGE_ACCOUNT_RG:
+        type: string
+        required: true
+      DESTINATION:
+        type: string
+        required: true
+      SOURCE:
+        type: string
+        required: true
+
+
+jobs:
+  
+  publish:
+    name: Publish blob ${{ inputs.environment }}
+    runs-on: ["${{ inputs.environment }}"]
+    environment: ${{ inputs.environment }}-ci
+    permissions:
+      id-token: write
+      pull-requests: write
+      contents: read
+
+    steps:
+    - name: Upload to blob storage
+      run: |
+        upload_status=$(az storage blob upload \
+        --account-name "${{ inputs.STORAGE_ACCOUNT_NAME }}" \
+        --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+        --source '${{ inputs.SOURCE }}' \
+        --destination "${{ env.STORAGE_CONTAINER }}/${{ inputs.DESTINATION }}" \
+        --overwrite)
+
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during contracts upload batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi

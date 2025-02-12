@@ -41,10 +41,6 @@ jobs:
         persist-credentials: false
         fetch-depth: 0
 
-    - name: Upload to blob storage
-      run: |
-          ls -la
-
     - name: Azure Login
       id: az_login
       uses: azure/login@a65d910e8af852a8061c627c456678983e180302
@@ -54,53 +50,53 @@ jobs:
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
     - name: Upload app-io-premium-plans to blob storage
-      run: |
-          az storage blob upload \
-                --container '$web' \
-                --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-                --file "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
-                --overwrite true \
-                --name 'assets/app-io-premium-plans.json'
+      uses: ./.github/workflows/call_publish_blob.yml
+      with:
+        environment: "{{ inputs.environment_short }}"
+        STORAGE_ACCOUNT_NAME: "${{ env.STORAGE_ACCOUNT_NAME }}"
+        STORAGE_CONTAINER: "${{ env.STORAGE_CONTAINER }}"
+        STORAGE_ACCOUNT_RG: ""
+        DESTINATION: "assets/app-io-premium-plans.json"
+        SOURCE: "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" 
       
-    - name: Upload config to blob storage
-      run: |
-          az storage blob upload \
-                --container '$web' \
-                --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-                --file "./src/core/env/${{ inputs.environment }}/assets/config.json" \
-                --overwrite true \
-                --name 'assets/config.json'
+    # - name: Upload config to blob storage
+    #   run: |
+    #       az storage blob upload \
+    #             --container '$web' \
+    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+    #             --file "./src/core/env/${{ inputs.environment }}/assets/config.json" \
+    #             --overwrite true \
+    #             --name 'assets/config.json'
     
-    - name: Upload product_institution_types to blob storage
-      run: |
-          az storage blob upload \
-                --container '$web' \
-                --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-                --file "./src/core/env/${{ inputs.environment }}/assets/product_institution_types.json" \
-                --overwrite true \
-                --name 'assets/product_institution_types.json'
+    # - name: Upload product_institution_types to blob storage
+    #   run: |
+    #       az storage blob upload \
+    #             --container '$web' \
+    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+    #             --file "./src/core/env/${{ inputs.environment }}/assets/product_institution_types.json" \
+    #             --overwrite true \
+    #             --name 'assets/product_institution_types.json'
 
-    - name: Upload login-alert-message to blob storage
-      run: |
-          az storage blob upload \
-                --container '$web' \
-                --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-                --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-                --file "./src/core/env/${{ inputs.environment }}/assets/login-alert-message.json" \
-                --overwrite true \
-                --name 'assets/login-alert-message.json'
+    # - name: Upload login-alert-message to blob storage
+    #   run: |
+    #       az storage blob upload \
+    #             --container '$web' \
+    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+    #             --file "./src/core/env/${{ inputs.environment }}/assets/login-alert-message.json" \
+    #             --overwrite true \
+    #             --name 'assets/login-alert-message.json'
 
-    - name: Purge blob storage
-      run: |
-          az cdn endpoint purge \
-                --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
-                --name "${{ env.CDN_NAME }}" \
-                --profile-name "${{ env.CDN_PROFILE }}"  \
-                --content-paths "/assets/*" \
-                --no-wait
+    # - name: Purge blob storage
+    #   run: |
+    #       az cdn endpoint purge \
+    #             --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
+    #             --name "${{ env.CDN_NAME }}" \
+    #             --profile-name "${{ env.CDN_PROFILE }}"  \
+    #             --content-paths "/assets/*" \
+    #             --no-wait
 
     - name: Azure Logout
       id: az_logout
