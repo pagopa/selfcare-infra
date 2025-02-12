@@ -54,8 +54,9 @@ jobs:
         upload_status=$(az storage blob upload \
         --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
         --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
-        --source "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
-        --destination "${{ env.STORAGE_CONTAINER }}/assets/app-io-premium-plans.json" \
+        --container-name "${{ env.STORAGE_CONTAINER }}" \
+        --file "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
+        --name "assets/app-io-premium-plans.json" \
         --overwrite)
 
         echo "${upload_status}"
