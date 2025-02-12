@@ -39,3 +39,15 @@ resource "null_resource" "app_io_premium_plans" {
   }
 }
 
+resource "null_resource" "upload_psp_contracts" {
+  provisioner "local-exec" {
+    command = <<EOT
+              az storage copy \
+                --account-name ${module.selc-contracts-storage.name} \
+                --account-key "${module.selc-contracts-storage.primary_access_key}" \
+                --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
+                --source "./contracts-from-pda/*" \
+                --recursive
+          EOT
+  }
+}
