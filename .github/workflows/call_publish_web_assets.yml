@@ -66,6 +66,7 @@ jobs:
           echo "Error during contracts upload batch."
           exit 1  # Esce dallo step con codice di errore
         fi
+        
     # - name: Upload config to blob storage
     #   run: |
     #       az storage blob upload \
