@@ -53,7 +53,7 @@ jobs:
       run: |
         upload_status=$(az storage blob upload \
         --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
-        --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
         --container '${{ env.STORAGE_CONTAINER }}' \
         --file "./src/core/env/${{ inputs.environment }}/assets/config.json" \
         --name "assets/config.json" \
