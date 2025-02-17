@@ -67,44 +67,52 @@ jobs:
           exit 1  # Esce dallo step con codice di errore
         fi
 
-    # - name: Upload config to blob storage
-    #   run: |
-    #       az storage blob upload \
-    #             --container '$web' \
-    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-    #             --file "./src/core/env/${{ inputs.environment }}/assets/config.json" \
-    #             --overwrite true \
-    #             --name 'assets/config.json'
+
     
-    # - name: Upload product_institution_types to blob storage
-    #   run: |
-    #       az storage blob upload \
-    #             --container '$web' \
-    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-    #             --file "./src/core/env/${{ inputs.environment }}/assets/product_institution_types.json" \
-    #             --overwrite true \
-    #             --name 'assets/product_institution_types.json'
+    - name: Upload product_institution_types to blob storage
+      run: |
+        upload_status=$(az storage blob upload \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+        --container '${{ env.STORAGE_CONTAINER }}' \
+        --file "./src/core/env/${{ inputs.environment }}/assets/product_institution_types.json" \
+        --name "assets/product_institution_types.json" \
+        --overwrite true)
 
-    # - name: Upload login-alert-message to blob storage
-    #   run: |
-    #       az storage blob upload \
-    #             --container '$web' \
-    #             --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-    #             --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
-    #             --file "./src/core/env/${{ inputs.environment }}/assets/login-alert-message.json" \
-    #             --overwrite true \
-    #             --name 'assets/login-alert-message.json'
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during contracts upload batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi
+      
+    - name: Upload login-alert-message to blob storage
+      run: |
+        upload_status=$(az storage blob upload \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+        --container '${{ env.STORAGE_CONTAINER }}' \
+        --file "./src/core/env/${{ inputs.environment }}/assets/login-alert-message.json" \
+        --name "assets/login-alert-message.json" \
+        --overwrite true)
 
-    # - name: Purge blob storage
-    #   run: |
-    #       az cdn endpoint purge \
-    #             --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
-    #             --name "${{ env.CDN_NAME }}" \
-    #             --profile-name "${{ env.CDN_PROFILE }}"  \
-    #             --content-paths "/assets/*" \
-    #             --no-wait
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during contracts upload batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi
+
+    - name: Purge blob storage
+      run: |
+          az cdn endpoint purge \
+                --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
+                --name "${{ env.CDN_NAME }}" \
+                --profile-name "${{ env.CDN_PROFILE }}"  \
+                --content-paths "/assets/*" \
+                --no-wait
 
     - name: Azure Logout
       id: az_logout
