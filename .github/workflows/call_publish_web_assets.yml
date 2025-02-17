@@ -49,14 +49,14 @@ jobs:
         tenant-id: ${{ vars.ARM_TENANT_ID }}
         subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
 
-    - name: Upload app-io-premium-plans to blob storage
+    - name: Upload config.json to blob storage
       run: |
         upload_status=$(az storage blob upload \
         --account-name "${{ env.STORAGE_ACCOUNT_NAME}}" \
         --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
         --container '${{ env.STORAGE_CONTAINER }}' \
-        --file "./src/core/env/${{ inputs.environment }}/assets/app-io-premium-plans.json" \
-        --name "assets/app-io-premium-plans.json" \
+        --file "./src/core/env/${{ inputs.environment }}/assets/config.json" \
+        --name "assets/config.json" \
         --overwrite true)
 
         echo "${upload_status}"
