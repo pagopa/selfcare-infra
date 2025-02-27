@@ -56,9 +56,10 @@ jobs:
     - name: Upload to blob storage
       run: |
         upload_status=$(az storage blob upload-batch \
-        --connection-string "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_CONNECTION_STRING }}" \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
         --source './src/core/resources/products/' \
-        --destination "${{ env.STORAGE_CONTAINER }}/resources/products" \
+        --destination '${{ env.STORAGE_CONTAINER }}/resources/products' \
         --overwrite)
 
         echo "${upload_status}"
