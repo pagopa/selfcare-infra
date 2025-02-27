@@ -1,0 +1,77 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+      environment_short:
+        type: string
+        required: true
+      agent:
+        type: string
+        required: true
+
+env:
+  STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}checkoutsa"
+  STORAGE_CONTAINER: "$web"
+  STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-checkout-fe-rg"
+  ARM_USE_OIDC: true
+  ARM_USE_AZUREAD: true
+  ARM_STORAGE_USE_AZUREAD: true
+  CDN_PROFILE: "selc-${{ inputs.environment_short }}-checkout-cdn-profile"
+  CDN_NAME: "selc-${{ inputs.environment_short }}-checkout-cdn-endpoint"
+
+jobs:
+  
+  publish:
+    name: Publish product logo ${{ inputs.environment }}
+    runs-on: ["${{ inputs.environment }}"]
+    environment: ${{ inputs.environment }}-ci
+    permissions:
+      id-token: write
+      pull-requests: write
+      contents: read
+
+    steps:
+
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@1f9a0c22da41e6ebfa534300ef656657ea2c6707
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+
+    - name: Azure Login
+      id: az_login
+      uses: azure/login@a65d910e8af852a8061c627c456678983e180302
+      with:
+        client-id: ${{ secrets.ARM_CLIENT_ID }}
+        tenant-id: ${{ vars.ARM_TENANT_ID }}
+        subscription-id: ${{ vars.ARM_SUBSCRIPTION_ID }}
+
+    # - name: Install azcopy
+    #   run: |
+    #     wget -O azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy_v10.tar.gz --strip-components=1
+    
+    - name: Upload to blob storage
+      run: |
+        upload_status=$(az storage blob upload-batch \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+        --source './src/core/resources/products/' \
+        --destination "${{ env.STORAGE_CONTAINER }}/resources/products" \
+        --overwrite)
+
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during contracts upload batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi
+
+    - name: Azure Logout
+      id: az_logout
+      if: always()
+      run: |
+        az logout        
