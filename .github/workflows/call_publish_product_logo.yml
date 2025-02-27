@@ -59,14 +59,14 @@ jobs:
         --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
         --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
         --source './src/core/resources/products/' \
-        --destination "${{ env.STORAGE_CONTAINER }}/resources/products" \
+        --destination '${{ env.STORAGE_CONTAINER }}/resources/products' \
         --overwrite)
 
         echo "${upload_status}"
         if [[ $? -eq 0 ]]; then
           echo "Upload success."
         else
-          echo "Error during contracts upload batch."
+          echo "Error during logo lofo batch."
           exit 1  # Esce dallo step con codice di errore
         fi
 
