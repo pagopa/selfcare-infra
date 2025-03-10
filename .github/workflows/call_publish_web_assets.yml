@@ -105,6 +105,23 @@ jobs:
           exit 1  # Esce dallo step con codice di errore
         fi
 
+    - name: Upload aggregates sample files to blob storage
+      run: |
+        upload_status=$(az storage blob upload-batch \
+        --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
+        --account-key "${{ secrets.STORAGE_CHECKOUT_ACCOUNT_KEY }}" \
+        --source './src/core/resources/aggregates/' \
+        --destination '${{ env.STORAGE_CONTAINER }}/resources/aggregates' \
+        --overwrite)
+
+        echo "${upload_status}"
+        if [[ $? -eq 0 ]]; then
+          echo "Upload success."
+        else
+          echo "Error during logo lofo batch."
+          exit 1  # Esce dallo step con codice di errore
+        fi
+
     - name: Purge blob storage
       run: |
           az cdn endpoint purge \
