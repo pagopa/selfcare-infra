@@ -122,13 +122,22 @@ jobs:
           exit 1  # Esce dallo step con codice di errore
         fi
 
-    - name: Purge blob storage
+    - name: Purge blob storage assets
       run: |
           az cdn endpoint purge \
                 --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
                 --name "${{ env.CDN_NAME }}" \
                 --profile-name "${{ env.CDN_PROFILE }}"  \
                 --content-paths "/assets/*" \
+                --no-wait
+                
+    - name: Purge blob storage resources
+      run: |
+          az cdn endpoint purge \
+                --resource-group "${{ env.STORAGE_ACCOUNT_RG }}" \
+                --name "${{ env.CDN_NAME }}" \
+                --profile-name "${{ env.CDN_PROFILE }}"  \
+                --content-paths "/resources/*" \
                 --no-wait
 
     - name: Azure Logout
