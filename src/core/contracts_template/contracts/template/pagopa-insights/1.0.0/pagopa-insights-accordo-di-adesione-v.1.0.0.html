@@ -3525,27 +3525,27 @@
 
     <span class="text-style">
       Il Prestatore di Servizi ${businessName} [ragione sociale], con sede
-      legale in ${address} ${zipCode} [Indirizzo, cap, città, provincia], Codice
-      Fiscale n. ${institutionTaxCode}, iscrizione al Registro delle imprese di
-      ${institutionRegister} [da valorizzare se applicabile], n. partita IVA
-      ${institutionVatNumber}
+      legale in ${address} ${zipCode} ${extCountry} [Indirizzo, cap, città,
+      provincia], Codice Fiscale n. ${institutionTaxCode}, iscrizione al
+      Registro delle imprese di ${institutionRegister} [da valorizzare se
+      applicabile], n. partita IVA ${institutionVatNumber}
     </span>
     <div class="checkbox-container">
       <div class="checkbox">${vatNumberGroupCheckbox1}</div>
       <label><span class="text-style"> (spuntare se di gruppo)</span></label>
     </div>
     <span class="text-style">
-      Codice SDI ${institutionRecipientCode}, iscritto all'Albo _______________
-      al n. ${legalRegisterNumber} [da valorizzare se applicabile], Cod. ABI
-      ${institutionAbi} [da valorizzare se applicabile], indirizzo PEC
-      ${institutionMail}, in persona del legale rappresentante p.t.
-      ${legalRegisterName} (di seguito, il <b>"Prestatore Aderente"</b>), con la
-      sottoscrizione della presente Lettera di adesione richiede di aderire al
-      Servizio di pagoPA Insights. Il Prestatore Aderente, ad ogni effetto di
-      legge, dichiara di aver sottoscritto con la PagoPA S.p.A. (“Società”)
-      l’Accordo di Servizio per l’Adesione al Sistema dei pagamenti elettronici
-      pagoPA e che tale accordo risulti vincolante per tutta la durata della
-      presente adesione.
+      Codice SDI ${institutionRecipientCode}, iscritto all'Albo
+      ${legalRegisterName} al n. ${legalRegisterNumber} [da valorizzare se
+      applicabile], Cod. ABI ${institutionAbi} [da valorizzare se applicabile],
+      indirizzo PEC ${institutionMail}, in persona del legale rappresentante
+      p.t. ${legalRegisterName} (di seguito, il <b>"Prestatore Aderente"</b>),
+      con la sottoscrizione della presente Lettera di adesione richiede di
+      aderire al Servizio di pagoPA Insights. Il Prestatore Aderente, ad ogni
+      effetto di legge, dichiara di aver sottoscritto con la PagoPA S.p.A.
+      (“Società”) l’Accordo di Servizio per l’Adesione al Sistema dei pagamenti
+      elettronici pagoPA e che tale accordo risulti vincolante per tutta la
+      durata della presente adesione.
     </span>
 
     <!--capitolo 1-->
@@ -3582,6 +3582,7 @@
 
       <li data-list-text="2.">
         <span class="sub-title">OBBLIGAZIONI DEL PRESTATORE ADERENTE</span>
+        <br />
         <span class="text-style" style="padding-left: 5pt">
           2.1 Il Prestatore Aderente si impegna a:
           <ol class="c6 lst-kix_ytext-stylebf6o99at5-0 start" start="1">
@@ -3681,8 +3682,8 @@
               <a
                 href="https://www.google.com/url?q=https://docs.pagopa.it/area-riservata&amp;sa=D&amp;source=editors&amp;ust=1741859517813419&amp;usg=AOvVaw0ENxovazza5I7VCGhUcVnl"
                 >https://docs.pagopa.it/area-riservata</a
-              >;</span
-            >
+              >;
+            </span>
           </li>
           <li class="li-bullet-0">
             <span class="text-style">nel </span
@@ -3895,8 +3896,10 @@
               ><span class="text-style">&nbsp;(</span
               ><span class="text-style">al</span
               ><span class="text-style">l&#39;indirizzo </span
-              ><span class="text-style"
-                > <a href="mailto:pagopaspa@pec.pagopa.it">pagopaspa@pec.pagopa.it</a></span
+              ><span class="text-style">
+                <a href="mailto:pagopaspa@pec.pagopa.it"
+                  >pagopaspa@pec.pagopa.it</a
+                ></span
               ><span class="text-style">), </span
               ><span class="text-style"
                 >con preavviso di 30 (trenta) giorni di calendario,</span
