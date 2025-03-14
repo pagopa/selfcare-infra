@@ -35,6 +35,38 @@ ci_github_federations_fe = [
     repository = "selfcare-pnpg-onboarding-frontend"
     subject    = "dev-ci"
   },
+  {
+    repository = "selfcare-token-exchange-frontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-login-frontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-dashboard-admin-microfrontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-dashboard-users-microfrontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-onboarding-frontend"
+    subject    = "dev-ci"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
+    subject    = "dev-ci"
+  }
 ]
 
 ci_github_federations_ms = [
@@ -81,38 +113,6 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-infra-private"
     subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-login-frontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-token-exchange-frontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-dashboard-frontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-dashboard-admin-microfrontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-dashboard-groups-microfrontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-dashboard-users-microfrontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-onboarding-frontend"
-    subject    = "dev-ci"
-  },
-  {
-    repository = "selfcare-pnpg-dashboard-frontend"
-    subject    = "dev-ci"
   }
 ]
 
@@ -123,6 +123,38 @@ cd_github_federations_fe = [
   },
   {
     repository = "selfcare-pnpg-onboarding-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-login-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-token-exchange-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-dashboard-admin-microfrontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-dashboard-users-microfrontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-onboarding-frontend"
+    subject    = "dev-cd"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
     subject    = "dev-cd"
   }
 ]
@@ -166,38 +198,6 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-infra-private"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-login-frontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-token-exchange-frontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-dashboard-frontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-dashboard-admin-microfrontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-dashboard-groups-microfrontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-dashboard-users-microfrontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-onboarding-frontend"
-    subject    = "dev-cd"
-  },
-  {
-    repository = "selfcare-pnpg-dashboard-frontend"
     subject    = "dev-cd"
   }
 ]

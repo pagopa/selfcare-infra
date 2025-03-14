@@ -34,6 +34,38 @@ ci_github_federations_fe = [
   {
     repository = "selfcare-pnpg-onboarding-frontend"
     subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-token-exchange-frontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-login-frontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-dashboard-admin-microfrontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-dashboard-users-microfrontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-onboarding-frontend"
+    subject    = "uat-ci"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
+    subject    = "uat-ci"
   }
 ]
 
@@ -81,38 +113,6 @@ ci_github_federations_ms = [
   {
     repository = "selfcare-infra-private"
     subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-login-frontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-token-exchange-frontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-dashboard-frontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-dashboard-admin-microfrontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-dashboard-groups-microfrontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-dashboard-users-microfrontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-onboarding-frontend"
-    subject    = "uat-ci"
-  },
-  {
-    repository = "selfcare-pnpg-dashboard-frontend"
-    subject    = "uat-ci"
   }
 ]
 
@@ -123,6 +123,38 @@ cd_github_federations_fe = [
   },
   {
     repository = "selfcare-pnpg-onboarding-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-login-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-token-exchange-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-dashboard-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-dashboard-admin-microfrontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-dashboard-groups-microfrontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-dashboard-users-microfrontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-onboarding-frontend"
+    subject    = "uat-cd"
+  },
+  {
+    repository = "selfcare-pnpg-dashboard-frontend"
     subject    = "uat-cd"
   }
 ]
@@ -170,42 +202,6 @@ cd_github_federations_ms = [
   },
   {
     repository = "selfcare-infra-private"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-login-frontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-token-exchange-frontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-dashboard-frontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-dashboard-admin-microfrontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-dashboard-groups-microfrontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-dashboard-users-microfrontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-onboarding-frontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-pnpg-dashboard-frontend"
-    subject    = "uat-cd"
-  },
-  {
-    repository = "selfcare-assistance-frontend"
     subject    = "uat-cd"
   }
 ]
