@@ -1,4 +1,3 @@
-# JWT
 module "jwt" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
@@ -62,17 +61,24 @@ resource "null_resource" "upload_jwks" {
     "changes-in-jwt" : module.jwt.certificate_data_pem
     "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
   }
+
+  #  pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
+  
+  #python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+  #
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
-              pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
+              pip install --requirement "${path.module}/utils/py/requirements.txt"
               az storage blob download \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
-              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+                
+              /usr/local/bin/python3 "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+
               if [ $? -eq 1 ]
               then
                 exit 1

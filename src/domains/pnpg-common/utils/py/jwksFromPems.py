@@ -46,7 +46,7 @@ if exists(sys.argv[1]) :
         old_jwks = JsonWebKey.import_key_set(old_jwks_data.strip())
         keys.append(re.sub("\s*]\s*}\s*$", "", re.sub('^\s*\{\s*"keys"\s*:\s*\[\s*', "\n		", old_jwks_data)))
 
-for i in range(0, (len(sys.argv) -1 )/2):
+for i in range(0, int((len(sys.argv) -1 )/2)):
     baseIndex = 2 + i*2
     kid = sys.argv[baseIndex]
     pem = sys.argv[baseIndex+1]
