@@ -3460,6 +3460,40 @@
       .lst-kix_qjpafmkwhxme-0 > li {
         counter-increment: lst-ctn-kix_qjpafmkwhxme-0;
       }
+      .table-container {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .table-container th,
+      .table-container td {
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .table-container th {
+        background-color: #e2ecfd;
+        font-weight: bold;
+      }
+
+      .table-container td {
+        background-color: #ffffff;
+      }
+
+      .table-container .header-row {
+        background-color: #e2ecfd;
+      }
+
+      .table-container .data-row {
+        background-color: #ffffff;
+      }
+
+      .table-container .highlight {
+        background-color: #e2ecfd;
+        font-style: italic;
+      }
     </style>
   </head>
 
@@ -3524,11 +3558,9 @@
     <p style="margin-top: 10pt"></p>
 
     <span class="text-style">
-      Il Prestatore di Servizi ${businessName} [ragione sociale], con sede
-      legale in ${address} ${zipCode} ${extCountry} [Indirizzo, cap, città,
-      provincia], Codice Fiscale n. ${institutionTaxCode}, iscrizione al
-      Registro delle imprese di ${institutionRegister} [da valorizzare se
-      applicabile], n. partita IVA ${institutionVatNumber}
+      Il Prestatore di Servizi ${institutionName}, con sede
+      legale in ${address}, ${zipCode}, ${institutionCity}, ${institutionCounty}, Codice Fiscale n. ${institutionTaxCode}, iscrizione al
+      Registro delle imprese di ${institutionRegister}, n. partita IVA ${institutionVatNumber}
     </span>
     <div class="checkbox-container">
       <div class="checkbox">${vatNumberGroupCheckbox1}</div>
@@ -3536,10 +3568,9 @@
     </div>
     <span class="text-style">
       Codice SDI ${institutionRecipientCode}, iscritto all'Albo
-      ${legalRegisterName} al n. ${legalRegisterNumber} [da valorizzare se
-      applicabile], Cod. ABI ${institutionAbi} [da valorizzare se applicabile],
+      ${legalRegisterName} al n. ${legalRegisterNumber}, Cod. ABI ${institutionAbi},
       indirizzo PEC ${institutionMail}, in persona del legale rappresentante
-      p.t. ${legalRegisterName} (di seguito, il <b>"Prestatore Aderente"</b>),
+      p.t. ${managerName} ${managerSurname} (di seguito, il <b>"Prestatore Aderente"</b>),
       con la sottoscrizione della presente Lettera di adesione richiede di
       aderire al Servizio di pagoPA Insights. Il Prestatore Aderente, ad ogni
       effetto di legge, dichiara di aver sottoscritto con la PagoPA S.p.A.
@@ -3680,7 +3711,7 @@
             <span class="text-style"
               >nel Manuale di Area Riservata presente al link
               <a
-                href="https://www.google.com/url?q=https://docs.pagopa.it/area-riservata&amp;sa=D&amp;source=editors&amp;ust=1741859517813419&amp;usg=AOvVaw0ENxovazza5I7VCGhUcVnl"
+                href="https://docs.pagopa.it/areariservata"
                 >https://docs.pagopa.it/area-riservata</a
               >;
             </span>
@@ -3689,10 +3720,9 @@
             <span class="text-style">nel </span
             ><span class="text-style"
               ><a
-                href="https://www.google.com/url?q=https://docs.google.com/document/d/1-aGOkA46JMcrvh3fPRQufHjchXeolBgniAyw0D0r4zQ/edit?tab%3Dt.0%23heading%3Dh.a6mkdbxxbn0o&amp;sa=D&amp;source=editors&amp;ust=1741859517814119&amp;usg=AOvVaw2Auxht9MolVVbRqZ0Ho9-c"
+                href="https://developer.pagopa.it/pago-pa/guides/manuale-insights"
                 >Manuale del Servizio</a
-              >
-              &nbsp;(Allegato 2);</span
+              > (Allegato 2);</span
             >
           </li>
         </ol>
@@ -3748,9 +3778,7 @@
           >4.1 Il Prestatore Aderente &nbsp;si obbliga al pagamento, in favore
           della Societ&agrave;, del Corrispettivo ad esso applicabi le in base
           alle fasce di transazioni relative all&rsquo;anno precedente, come
-          meglio dettagliato nell&rsquo;<a
-            class="c5"
-            href="https://www.google.com/url?q=https://docs.google.com/document/d/1fXntpI2gSLJdZ82olJqrmmnMZ0cQlb2fFyfQ6PVf784/edit?tab%3Dt.0%23heading%3Dh.4cdn1vn1ylnm&amp;sa=D&amp;source=editors&amp;ust=1741859517816065&amp;usg=AOvVaw3z3v9vMaTrZdr5N6bEhswx"
+          meglio dettagliato nell&rsquo;<a class="text-style" href="#allegato-1"
             >Allegato 1 &ldquo;Corrispettivi&rdquo;</a
           >.</span
         >
@@ -4122,13 +4150,13 @@
           ><span class="text-style">&rdquo; del sito ai seguenti link: </span
           ><span class="c9 text-style"
             ><a
-              href="https://www.google.com/url?q=https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html&amp;sa=D&amp;source=editors&amp;ust=1741859517824886&amp;usg=AOvVaw34xj4rRsvTwpLv7JaY8omM"
+              href="https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html"
               >https://pagopa.portaleamministrazionetrasparente.it/pagina746_altri-contenuti.html.</a
             ></span
           ><span class="text-style">&nbsp;e </span
           ><span class="text-style"
             ><a
-              href="https://www.google.com/url?q=https://pagopa.portaleamministrazionetrasparente.it/pagina769_prevenzione-della-corruzione.html&amp;sa=D&amp;source=editors&amp;ust=1741859517825471&amp;usg=AOvVaw0bHW9RIMeLjvpAvPYdbKDH"
+              href="https://pagopa.portaleamministrazionetrasparente.it/pagina769_prevenzione-della-corruzione.html"
               >https://pagopa.portaleamministrazionetrasparente.it/pagina769_prevenzione-della-corruzione.html</a
             ></span
           ><span class="text-style">.</span
@@ -4543,5 +4571,404 @@
     </ol>
 
     <div style="page-break-before: always"></div>
+
+    <!-- allegato 1 -->
+    <div id="allegato-1">
+      <div class="logo-container" id="banner">
+        <span
+          class="logo-sx"
+          style="
+            overflow: hidden;
+            display: inline-block;
+            margin: 0px 0px;
+            border: 0px solid #000000;
+            transform: rotate(0rad) translateZ(0px);
+            -webkit-transform: rotate(0rad) translateZ(0px);
+            width: 128.16px;
+            height: 35.6px;
+          "
+          ><img
+            alt="logo_sx_pagopa"
+            src="https://selfcare.pagopa.it/assets/logo_pagopacorp.png"
+            style="
+              width: 128.16px;
+              height: 35.6px;
+              transform: rotate(0rad) translateZ(0px);
+              -webkit-transform: rotate(0rad) translateZ(0px);
+            "
+            title="logo_sx_pagopa"
+          />
+        </span>
+
+        <span style="margin-left: 125px; margin-right: 125px" />
+
+        <span
+          class="logo-dx"
+          style="
+            overflow: hidden;
+            display: inline-block;
+            margin: 0px 0px;
+            border: 0px solid #000000;
+            transform: rotate(0rad) translateZ(0px);
+            -webkit-transform: rotate(0rad) translateZ(0px);
+            width: 128.16px;
+            height: 35.6px;
+          "
+          ><img
+            alt="logo_dx_pagopa"
+            src="https://selfcare.pagopa.it/resources/products/prod-pagopa/logo.png"
+            style="
+              width: 50.16px;
+              height: 35.6px;
+              transform: rotate(0rad) translateZ(0px);
+              -webkit-transform: rotate(0rad) translateZ(0px);
+            "
+            title="logo_dx_pagopa"
+          />
+        </span>
+      </div>
+
+      <p class="title">Allegato 1 - Corrispettivi</p>
+
+      <p style="margin-top: 10pt"></p>
+      <p class="text-style">
+        <span class="text-style"><b>1. </b></span
+        ><span class="text-style"
+          >Il corrispettivo dovuto dal Prestatore Aderente si basa su un modello
+          che prevede un </span
+        ><span class="text-style"
+          ><b
+            >costo differenziato per fasce di transazioni con esito positivo</b
+          ></span
+        ><span class="text-style">&nbsp;gestite dal Prestatore Aderente </span
+        ><span class="text-style"
+          >nell&rsquo;anno precedente a quello di sottoscrizione
+          dell&rsquo;</span
+        ><span class="text-style">adesione o di rinnovo della stessa. </span>
+      </p>
+      <p class="text-style">
+        <span class="text-style"
+          >Sulla base di tale modello, sono state individuate </span
+        ><span class="text-style">quattro (4) fasce</span
+        ><span class="text-style">, come da tabella di seguito riportata:</span>
+      </p>
+      <p class="text-style c19"><span class="text-style"></span></p>
+      <table class="table-container">
+        <thead>
+          <tr class="header-row">
+            <th>Fascia di riferimento</th>
+            <th>Transazioni con esito positivo (anno)</th>
+            <th>Corrispettivo annuale</th>
+            <th>Corrispettivo mensile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-row">
+            <td>Fascia 1°</td>
+            <td>&lt;= 1.000.000</td>
+            <td>&euro; 15.000 oltre IVA</td>
+            <td>&euro; 1.250 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 2°</td>
+            <td>(1.000.000, 5.000.000]</td>
+            <td>&euro; 26.000 oltre IVA</td>
+            <td>&euro; 2.167 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 3°</td>
+            <td>(5.000.000, 10.000.000]</td>
+            <td>&euro; 38.000 oltre IVA</td>
+            <td>&euro; 3.167 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 4°</td>
+            <td>&gt; 10.000.000</td>
+            <td>&euro; 50.000 oltre IVA</td>
+            <td>&euro; 4.167 oltre IVA</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-style"><span class="text-style"></span></p>
+      <p class="text-style">
+        <span class="text-style"
+          >In caso di adesione in corso d&rsquo;anno, l&rsquo;importo
+          sar&agrave; determinato </span
+        ><span class="text-style"><b>pro-rata</b></span
+        ><span class="text-style">&nbsp;a partire dal mese di adesione.</span>
+      </p>
+      <p class="text-style">
+        <br />
+        <span class="text-style"><b>2.</b></span
+        ><span class="text-style"
+          >&nbsp;Per le adesioni al prodotto relative agli anni 2025 e 2026 la
+          Societ&agrave; applicher&agrave; </span
+        ><span class="text-style">uno </span
+        ><span class="text-style"><b>sconto</b> </span
+        ><span class="text-style"><b>flat</b></span
+        ><span class="text-style"><b>&nbsp;del 20%</b></span
+        ><span class="text-style"><b>&nbsp;al corrispettivo unitario</b></span
+        ><span class="text-style"
+          >&nbsp;per ciascuna delle quattro (4) fasce di transazioni </span
+        ><span class="text-style"
+          >al fine di consentire al Prestatore Aderente la possibilit&agrave; di
+          esplorare il prodotto e comprenderne a pieno il valore</span
+        ><span class="text-style"
+          >. Di seguito la tabella aggiornata con i corrispettivi
+          scontati:</span
+        >
+      </p>
+      <p class="text-style c19"><span class="text-style"></span></p>
+      <table class="table-container">
+        <thead>
+          <tr class="header-row">
+            <th>Fascia di riferimento</th>
+            <th>Transazioni con esito positivo (anno)</th>
+            <th>Corrispettivo annuale</th>
+            <th>Corrispettivo mensile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-row">
+            <td>Fascia 1°</td>
+            <td>&lt;= 1.000.000</td>
+            <td>&euro; 12.000 oltre IVA</td>
+            <td>&euro; 1.000 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 2°</td>
+            <td>(1.000.000, 5.000.000]</td>
+            <td>&euro; 20.800 oltre IVA</td>
+            <td>&euro; 1.733 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 3°</td>
+            <td>(5.000.000, 10.000.000]</td>
+            <td>&euro; 30.400 oltre IVA</td>
+            <td>&euro; 2.533 oltre IVA</td>
+          </tr>
+          <tr class="data-row">
+            <td>Fascia 4°</td>
+            <td>&gt; 10.000.000</td>
+            <td>&euro; 40.000 oltre IVA</td>
+            <td>&euro; 3.333 oltre IVA</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-style c19"><span class="c17 text-style"></span></p>
+      <p class="text-style">
+        <span class="text-style"><b>3. </b></span
+        ><span class="text-style"
+          >Ai fini della determinazione del corrispettivo mensile per le
+          adesioni effettuate nel corso del mese, si applicano i seguenti
+          criteri:</span
+        >
+      </p>
+      <ul class="c11 lst-kix_k1hsqtp01rzp-0 start">
+        <li class="text-style c13 li-bullet-0">
+          <span class="text-style"
+            ><b
+              >Adesione entro il giorno 15 (compreso) del mese di riferimento</b
+            ></span
+          ><span class="text-style"
+            >: il corrispettivo sar&agrave; calcolato sull&rsquo;intero importo
+            mensile previsto per la fascia di transazioni di appartenenza;</span
+          >
+        </li>
+        <li class="text-style c13 li-bullet-0">
+          <span class="text-style"
+            ><b
+              >Adesione a partire dal giorno 16 (compreso) del mese di
+              riferimento</b
+            ></span
+          ><span class="text-style"
+            >: il corrispettivo sar&agrave; pari al 50% dell&rsquo;importo
+            mensile previsto per la fascia di transazioni di appartenenza.</span
+          >
+        </li>
+      </ul>
+      <p class="text-style c19"><span class="c17 text-style"></span></p>
+      <p class="text-style">
+        <span class="text-style"><b>4.</b></span
+        ><span class="text-style"
+          >&nbsp;Al fine di stabilire la fascia di transazioni in cui rientra un
+          Prestatore Aderente, come indicato al punto precedente, la
+          Societ&agrave; considera il volume di transazioni con esito positivo
+          gestite dal medesimo Prestatore Aderente nell&rsquo;</span
+        ><span class="text-style"
+          ><b>anno precedente alla sottoscrizione dell&rsquo;adesione</b></span
+        ><span class="text-style">&nbsp;o </span
+        ><span class="text-style"><b>al suo rinnovo</b></span
+        ><span class="text-style"
+          >. Si riportano due esempi per chiarire le casistiche possibili:</span
+        >
+      </p>
+      <ul class="c11 lst-kix_5g60d39h8gj9-0 start">
+        <li class="text-style c13 li-bullet-0">
+          <span class="text-style"
+            >per una nuova sottoscrizione nel 2025, la Societ&agrave; fa
+            riferimento al totale di transazioni con esito positivo gestite dal
+            PSP nell&rsquo;anno 2024;</span
+          >
+        </li>
+        <li class="text-style c13 li-bullet-0">
+          <span class="text-style"
+            >per un rinnovo dell&rsquo;adesione nel 2026, la Societ&agrave;
+            far&agrave; riferimento al totale di transazioni con esito positivo
+            gestite dal PSP nell&rsquo;anno 2025.</span
+          >
+        </li>
+      </ul>
+      <p class="text-style">
+        <span class="text-style"
+          >Il calcolo delle transazioni con esito positivo dell&#39;anno
+          precedente viene aggiornato annualmente</span
+        ><span class="text-style">, pertanto il costo del </span
+        ><span class="text-style">Servizio</span
+        ><span class="text-style"
+          >&nbsp;pu&ograve; variare di anno in anno. </span
+        ><span class="text-style"
+          >In caso di variazione del costo del Servizio, la Societ&agrave;
+          comunica </span
+        ><span class="text-style">via PEC</span
+        ><span class="text-style">&nbsp;(</span
+        ><span class="text-style text-style0 text-style5"
+          >pagopaspa@pec.pagopa.it</span
+        ><span class="text-style"
+          >) il Prestatore Aderente, ai sensi all&#39;</span
+        ><span class="text-style">articolo 11 </span
+        ><span class="text-style"
+          >della Lettera di adesione, entro il 31 gennaio di ogni anno.
+        </span>
+      </p>
+      <p class="text-style c19"><span class="text-style"></span></p>
+      <p class="text-style">
+        <br />
+        <span class="text-style"><b>5.</b></span
+        ><span class="text-style">&nbsp;</span
+        ><span class="text-style"
+          >Salvo quanto disciplinato all&rsquo;articolo 12 della Lettera di
+          adesione, i</span
+        ><span class="text-style">n caso di </span
+        ><span class="text-style"
+          ><b
+            >fusione tra PSP avvenuta nell&#39;anno di riferimento per il
+            calcolo della fascia di transazioni</b
+          ></span
+        ><span class="text-style"
+          >(ossia, l&#39;anno precedente alla sottoscrizione o al rinnovo del
+          Servizio), l&#39;ammontare delle transazioni con esito positivo
+          sar&agrave; determinato tenendo conto della fusione a partire dalla </span
+        ><span class="text-style"><b>data di efficacia legale</b></span
+        ><span class="text-style"
+          >della stessa. Pertanto, le transazioni con esito positivo del PSP
+          incorporato saranno incluse nel calcolo delle transazioni con esito
+          positivo complessive del PSP incorporante a decorrere dalla data di
+          efficacia legale della fusione. </span
+        ><span class="text-style">Ad esempio:</span>
+      </p>
+      <ul class="lst-kix_gilkxhvbhmc6-0 start">
+        <li class="text-style c13 li-bullet-0">
+          <span class="text-style"><b>Caso #1</b></span>
+        </li>
+      </ul>
+      <ul class="lst-kix_gilkxhvbhmc6-1 start" style="margin-left: 25px">
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >in data 1&deg; aprile 2024, il PSP A &egrave; stato incorporato nel
+            PSP B mediante fusione legale;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >nel corso del 2025, il PSP B (PSP incorporante) ha aderito al
+            servizio in oggetto;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >l&#39;anno di riferimento per il calcolo della fascia tariffaria
+            &egrave; il 2024;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >pertanto, ai fini del calcolo delle transazioni con esito positivo
+            per il 2024, saranno considerate sia le transazioni originariamente
+            gestite dal PSP B, sia quelle precedentemente gestite dal PSP A a
+            partire dalla data di efficacia legale della fusione, ossia dal
+            1&deg; aprile 2024;</span
+          >
+        </li>
+      </ul>
+      <ul class="c11 lst-kix_gilkxhvbhmc6-0">
+        <li class="text-style c13 li-bullet-0">
+          <span class="c7 text-style"><b>Caso #2</b></span>
+        </li>
+      </ul>
+      <ul class="lst-kix_gilkxhvbhmc6-1 start" style="margin-left: 25px">
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >in data 1&deg; settembre 2025, il PSP A &egrave; stato incorporato
+            nel PSP B mediante fusione legale;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >il PSP B (PSP incorporante) aveva gi&agrave; sottoscritto un
+            contratto per il Servizio nel corso del 2025, valido ed </span
+          ><span class="text-style">efficace</span
+          ><span class="text-style">&nbsp;anche</span
+          ><span class="text-style">&nbsp;l&#39;anno 2026</span
+          ><span class="text-style">;</span>
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style">n</span
+          ><span class="text-style"
+            >el 2025, anno in cui &egrave; avvenuta la fusione, il PSP B non
+            subir&agrave; variazioni di prezzo;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >tuttavia, nell&#39;anno successivo, ossia nel 2026, il PSP B
+            potrebbe subire un cambiamento di fascia tariffaria a seguito
+            dell&#39;incremento delle transazioni gestite, derivante
+            dall&#39;incorporazione del PSP A;</span
+          >
+        </li>
+      </ul>
+      <ul class="lst-kix_gilkxhvbhmc6-0">
+        <li class="li-bullet-0">
+          <span class="text-style"><b>Caso #3</b></span>
+        </li>
+      </ul>
+      <ul class="lst-kix_gilkxhvbhmc6-1 start" style="margin-left: 25px">
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >in data 1&deg; giugno 2026, il PSP A &egrave; stato incorporato nel
+            PSP B mediante fusione legale;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >il PSP A (PSP incorporato) aveva gi&agrave; sottoscritto un
+            contratto per il Servizio nel corso del 2025;</span
+          >
+        </li>
+        <li class="li-bullet-0">
+          <span class="text-style"
+            >Entro il termine di 30 giorni dalla ricezione della notifica della
+            fusione, la Societ&agrave; richieder&agrave; al PSP B (PSP
+            incorporante) di comunicare la propria intenzione riguardo al
+            trasferimento del contratto. Qualora il PSP B manifesti la
+            volont&agrave; di procedere al trasferimento e la Societ&agrave;
+            approvi tale operazione, si proceder&agrave; al ricalcolo della
+            fascia di transazioni, con riferimento all&#39;anno 2025, il che
+            potrebbe comportare variazioni del corrispettivo dovuto.</span
+          >
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
