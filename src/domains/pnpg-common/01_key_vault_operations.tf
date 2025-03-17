@@ -1,6 +1,6 @@
 # JWT
 module "jwt_auth" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v5.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v8.86.0"
 
   jwt_name         = "jwt"
   key_vault_id     = module.key_vault_pnpg.id
@@ -10,7 +10,7 @@ module "jwt_auth" {
 }
 
 module "jwt_exchange" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v5.3.0"
+  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v8.86.0"
 
   jwt_name         = "jwt-exchange"
   key_vault_id     = module.key_vault_pnpg.id
@@ -42,11 +42,12 @@ resource "null_resource" "upload_jwks" {
     "changes-in-jwt" : module.jwt_auth.certificate_data_pem
     "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
   }
+  # pip install --requirement "${path.module}/utils/py/requirements.txt"
   # python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt_auth.jwt_kid}" "${module.jwt_auth.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
   provisioner "local-exec" {
     command = <<EOT
               mkdir -p "${path.module}/.terraform/tmp"
-              pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
+              
               az storage blob download \
                 --container-name '$web' \
                 --account-name ${replace(replace(module.pnpg_checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
@@ -54,7 +55,7 @@ resource "null_resource" "upload_jwks" {
                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
                 --name '.well-known/jwks.json'
               
-              /usr/local/bin/python3 "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+              python3 "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt_auth.jwt_kid}" "${module.jwt_auth.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
               
               if [ $? -eq 1 ]
               then
@@ -88,4 +89,42 @@ resource "azurerm_api_management_certificate" "jwt_certificate" {
   api_management_name = data.azurerm_api_management.api_management_core.name
   resource_group_name = data.azurerm_api_management.api_management_core.resource_group_name
   data                = pkcs12_from_pem.jwt_pkcs12.result
+}
+
+
+
+data "local_file" "jwt_cert" {
+  filename = "${path.module}/jwt-cert"
+}
+
+resource "azurerm_key_vault_secret" "jwt_cert" {
+  name         = "jwt-cert"
+  value        = data.local_file.jwt_cert.content
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault_pnpg.id
+}
+
+# data "local_file" "jwt_public_key" {
+#   filename = "${path.module}/jwt-public-key"
+# }
+
+# resource "azurerm_key_vault_secret" "jwt_public_key" {
+#   name         = "jwt-public-key"
+#   value        = data.local_file.jwt_kid.content
+#   content_type = "text/plain"
+
+#   key_vault_id = module.key_vault_pnpg.id
+# }
+
+data "local_file" "jwt_exchange_cert" {
+  filename = "${path.module}/jwt-exchange-cert"
+}
+
+resource "azurerm_key_vault_secret" "jwt_exchange_cert" {
+  name         = "jwt-exchange-cert"
+  value        = data.local_file.jwt_exchange_cert.content
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault_pnpg.id
 }

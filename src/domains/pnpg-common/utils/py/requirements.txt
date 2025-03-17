@@ -1,7 +1,7 @@
-authlib==0.15.5
-cryptography==3.3.2
-enum34==1.1.10
-cffi==1.15.0
-ipaddress==1.0.23
-six==1.16.0
-pycparser==2.21
+authlib
+cryptography
+enum34
+cffi
+ipaddress
+six
+pycparser
