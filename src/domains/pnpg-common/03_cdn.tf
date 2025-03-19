@@ -250,6 +250,14 @@ resource "azurerm_key_vault_secret" "cdn__storage_access_key" {
   key_vault_id = module.key_vault_pnpg.id
 }
 
+resource "azurerm_key_vault_secret" "web_storage_access_key" {
+  name         = "web-storage-access-key"
+  value        = module.pnpg_checkout_cdn.storage_primary_access_key
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault_pnpg.id
+}
+
 #tfsec:ignore:azure-keyvault-ensure-secret-expiry
 resource "azurerm_key_vault_secret" "cdn_storage_connection_string" {
   name         = "cdn-storage-connection-string"
