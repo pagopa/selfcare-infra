@@ -357,7 +357,7 @@ eventhubs = [{
   name              = "SC-Contracts"
   partitions        = 30
   message_retention = 7
-  consumers         = []
+  consumers         = ["conservazione", "interceptor", "datalake"]
   iam_roles = {
     "ee71d0ec-0023-44ae-93dd-871d25ab7003" = "Azure Event Hubs Data Receiver" # io-p-sign-backoffice-func
   }
