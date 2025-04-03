@@ -35,6 +35,7 @@ locals {
     "^/onboarding/v\\d+/.*$",
     "/ms-notification-manager/*",
     "/party-registry-proxy/*",
+    "/auth/*",
   ]
 
   backends = {
@@ -184,7 +185,7 @@ module "app_gw" {
           rewrite_rule_set_name = null
         }
         bff_api = {
-          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*"]
+          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*", "/auth/*"]
           backend               = "apim"
           rewrite_rule_set_name = null
         }
@@ -200,7 +201,7 @@ module "app_gw" {
       default_rewrite_rule_set_name = "rewrite-rule-set-api"
       path_rule = {
         bff_pnpg_api = {
-          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*", "/external/*"]
+          paths                 = ["/imprese/dashboard/*", "/imprese/onboarding/*", "/external/*", "/imprese/auth/*"]
           backend               = "apim"
           rewrite_rule_set_name = null
         }
@@ -270,6 +271,7 @@ module "app_gw" {
         },
       ]
     },
+    //TODO: remove after one identity integration when hub-spid-login will be dismissed
     {
       name = "rewrite-rule-set-hub-spid-selc"
       rewrite_rules = [
@@ -293,6 +295,7 @@ module "app_gw" {
         }
       ]
     },
+    //TODO: remove after one identity integration when hub-spid-login will be dismissed
     {
       name = "rewrite-rule-set-hub-spid-pnpg"
       rewrite_rules = [
