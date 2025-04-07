@@ -32,7 +32,7 @@
 | <a name="module_event_hub"></a> [event\_hub](#module\_event\_hub) | github.com/pagopa/terraform-azurerm-v3.git//eventhub | v7.50.1 |
 | <a name="module_eventhub_snet"></a> [eventhub\_snet](#module\_eventhub\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
 | <a name="module_evh_rds_vm_snet"></a> [evh\_rds\_vm\_snet](#module\_evh\_rds\_vm\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
-| <a name="module_jwt"></a> [jwt](#module\_jwt) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
+| <a name="module_jwt"></a> [jwt](#module\_jwt) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allow_pkcs8_pem_format |
 | <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | jwt_cert_allowed_uses_as_variable |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | github.com/pagopa/terraform-azurerm-v3.git//key_vault | v7.50.1 |
 | <a name="module_load_tests_snet"></a> [load\_tests\_snet](#module\_load\_tests\_snet) | github.com/pagopa/terraform-azurerm-v3.git//subnet | v7.50.1 |
@@ -199,7 +199,6 @@
 | [azurerm_storage_container.selc_logs_container](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_container) | resource |
 | [azurerm_user_assigned_identity.appgateway](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/user_assigned_identity) | resource |
 | [azurerm_virtual_machine_extension.evh_rds_vm](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension) | resource |
-| [null_resource.app_io_premium_plans](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_alert_message](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_assets](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [null_resource.upload_config](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
