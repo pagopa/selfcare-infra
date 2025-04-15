@@ -152,6 +152,10 @@ locals {
             {
               keys   = ["toTaxCode"]
               unique = false
+            },
+            {
+              keys   = ["to", "status", "type", "productId"]
+              unique = false
             }
           ]
         },
