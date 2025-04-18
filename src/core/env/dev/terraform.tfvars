@@ -410,3 +410,5 @@ enable_load_tests_db = true
 
 cae_zone_redundant      = false
 cae_zone_redundant_pnpg = false
+
+auth_ms_private_dns_suffix = "whitemoss-eb7ef327.westeurope.azurecontainerapps.io"

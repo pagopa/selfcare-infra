@@ -1073,3 +1073,13 @@ variable "cae_zone_redundant_pnpg" {
   type        = bool
   description = "Container App Environment zone redudancy"
 }
+
+variable "auth_ms_private_dns_suffix" {
+  type        = string
+  description = "Auth container app private DNS suffix"
+}
+
+variable "auth_ms_pnpg_private_dns_suffix" {
+  type        = string
+  description = "PNPG Auth container app private DNS suffix"
+}
