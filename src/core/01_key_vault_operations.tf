@@ -93,3 +93,16 @@ resource "null_resource" "upload_jwks" {
           EOT
   }
 }
+
+
+data "local_file" "jwt_private_key_pkcs8" {
+  filename = "${path.module}/key-pkcs8key.pem"
+}
+
+resource "azurerm_key_vault_secret" "jwt_private_key_pkcs8" {
+  name         = "jwt-private-key-pkcs8"
+  value        = data.local_file.jwt_private_key_pkcs8.content
+  content_type = "text/plain"
+
+  key_vault_id = module.key_vault.id
+}

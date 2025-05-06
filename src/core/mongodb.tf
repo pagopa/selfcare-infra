@@ -24,7 +24,6 @@ module "cosmosdb_mongodb_snet" {
   service_endpoints                         = ["Microsoft.Web"]
 }
 
-###???
 module "cosmosdb_account_mongodb" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v7.50.1"
 
@@ -37,7 +36,7 @@ module "cosmosdb_account_mongodb" {
   capabilities = concat([
     "EnableMongo"
   ], var.cosmosdb_mongodb_extra_capabilities)
-  mongo_server_version = "4.2"
+  mongo_server_version = "7.0"
 
   public_network_access_enabled         = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
   private_endpoint_enabled              = var.cosmosdb_mongodb_private_endpoint_enabled
