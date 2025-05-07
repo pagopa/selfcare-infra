@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v8.93.0"
 
   name                            = replace("${local.project}-st-logs", "-", "")
   account_kind                    = "StorageV2"
@@ -67,7 +67,7 @@ resource "azurerm_storage_container" "selc_logs_container" {
 }
 
 module "logs_storage_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
   name                                      = "${local.project}-logs-storage-snet"
   address_prefixes                          = var.cidr_subnet_logs_storage
   resource_group_name                       = azurerm_resource_group.rg_vnet.name

@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "event_rg" {
 }
 
 module "eventhub_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
+  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
   name                                      = "${local.project}-eventhub-snet"
   address_prefixes                          = var.cidr_subnet_eventhub
   resource_group_name                       = azurerm_resource_group.rg_vnet.name
@@ -16,7 +16,7 @@ module "eventhub_snet" {
 }
 
 module "event_hub" {
-  source                   = "github.com/pagopa/terraform-azurerm-v3.git//eventhub?ref=v7.50.1"
+  source                   = "github.com/pagopa/terraform-azurerm-v3.git//eventhub?ref=v8.93.0"
   name                     = "${local.project}-eventhub-ns"
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
@@ -25,12 +25,13 @@ module "event_hub" {
   capacity                 = var.eventhub_capacity
   maximum_throughput_units = var.eventhub_maximum_throughput_units
   zone_redundant           = var.eventhub_zone_redundant
-
+  
   virtual_network_ids = [module.vnet.id]
-  subnet_id           = module.eventhub_snet.id
-
+  
+  private_endpoint_subnet_id     = module.eventhub_snet.id
   private_dns_zone_record_A_name = null
   public_network_access_enabled  = true
+  private_endpoint_created       = true
   eventhubs                      = var.eventhubs
 
   network_rulesets = [
@@ -43,8 +44,9 @@ module "event_hub" {
   ]
 
   private_dns_zones = {
-    id   = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
-    name = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+    id                  = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
+    name                = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+    resource_group_name = azurerm_resource_group.rg_vnet.name
   }
 
   alerts_enabled = var.eventhub_alerts_enabled

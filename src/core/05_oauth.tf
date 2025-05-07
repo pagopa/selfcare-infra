@@ -34,7 +34,7 @@ resource "azuread_application" "external_oauth2_issuer" {
 }
 
 resource "azuread_service_principal" "external_oauth2_issuer" {
-  application_id = azuread_application.external_oauth2_issuer.application_id
+  client_id = azuread_application.external_oauth2_issuer.client_id
 }
 
 resource "azurerm_role_assignment" "external_oauth2_issuer_apim_contributor" {
@@ -65,14 +65,14 @@ resource "time_rotating" "client" {
 }
 
 resource "azuread_application_password" "external_oauth2_client_fd_password" {
-  application_object_id = azuread_application.external_oauth2_client_fd.object_id
+  application_id = azuread_application.external_oauth2_client_fd.id
   rotate_when_changed = {
     rotation = time_rotating.client.id
   }
 }
 
 resource "azuread_service_principal" "external_oauth2_client_fd_sp" {
-  application_id = azuread_application.external_oauth2_client_fd.application_id
+  client_id = azuread_application.external_oauth2_client_fd.client_id
 }
 
 resource "azurerm_role_assignment" "client_eventhub_access" {
@@ -91,7 +91,7 @@ resource "azurerm_key_vault_secret" "external_oauth2_issuer_identifier_uri" {
 
 resource "azurerm_key_vault_secret" "external_oauth2_client_fd_sp_client_id" {
   name         = "external-oauth2-fd-sp-client-id"
-  value        = azuread_application.external_oauth2_client_fd.application_id
+  value        = azuread_application.external_oauth2_client_fd.id
   key_vault_id = module.key_vault.id
 
   content_type = "text/plain"

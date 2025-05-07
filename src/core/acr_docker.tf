@@ -1,5 +1,5 @@
 module "acr" {
-  source              = "github.com/pagopa/terraform-azurerm-v3.git//container_registry?ref=v7.50.1"
+  source              = "github.com/pagopa/terraform-azurerm-v3.git//container_registry?ref=v8.93.0"
   name                = replace(format("%s-acr", local.project), "-", "")
   resource_group_name = azurerm_resource_group.rg_aks.name
   location            = azurerm_resource_group.rg_aks.location

@@ -48,7 +48,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "checkout_cdn" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v8.93.0"
 
   name                  = "checkout"
   prefix                = local.project
@@ -57,6 +57,8 @@ module "checkout_cdn" {
   hostname              = format("%s.%s", var.dns_zone_prefix, var.external_domain)
   https_rewrite_enabled = true
   # lock_enabled          = var.lock_enable apz
+  
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
   index_document     = "index.html"
   error_404_document = "error.html"
