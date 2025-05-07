@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v8.93.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//storage_account?ref=v5.7.0"
 
   name                            = replace("${local.project}-st-logs", "-", "")
   account_kind                    = "StorageV2"
@@ -67,12 +67,12 @@ resource "azurerm_storage_container" "selc_logs_container" {
 }
 
 module "logs_storage_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
-  name                                      = "${local.project}-logs-storage-snet"
-  address_prefixes                          = var.cidr_subnet_logs_storage
-  resource_group_name                       = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                      = module.vnet.name
-  private_endpoint_network_policies_enabled = true
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  name                              = "${local.project}-logs-storage-snet"
+  address_prefixes                  = var.cidr_subnet_logs_storage
+  resource_group_name               = azurerm_resource_group.rg_vnet.name
+  virtual_network_name              = module.vnet.name
+  private_endpoint_network_policies = var.private_endpoint_network_policies
 
   service_endpoints = [
     "Microsoft.Storage",
@@ -99,12 +99,12 @@ resource "azurerm_private_endpoint" "logs_storage" {
 }
 
 module "spid_logs_encryption_keys" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v5.7.0"
 
   jwt_name          = "spid-logs-encryption"
   key_vault_id      = module.key_vault.id
   cert_common_name  = "spid-logs"
   cert_password     = ""
   tags              = var.tags
-  cert_allowed_uses = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+  # cert_allowed_uses = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
 }

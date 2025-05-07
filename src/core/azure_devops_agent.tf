@@ -7,13 +7,13 @@ resource "azurerm_resource_group" "azdo_rg" {
 }
 
 module "azdoa_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
-  count                                     = var.enable_azdoa ? 1 : 0
-  name                                      = format("%s-azdoa-snet", local.project)
-  address_prefixes                          = var.cidr_subnet_azdoa
-  resource_group_name                       = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                      = module.vnet.name
-  private_endpoint_network_policies_enabled = true
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  count                             = var.enable_azdoa ? 1 : 0
+  name                              = format("%s-azdoa-snet", local.project)
+  address_prefixes                  = var.cidr_subnet_azdoa
+  resource_group_name               = azurerm_resource_group.rg_vnet.name
+  virtual_network_name              = module.vnet.name
+  private_endpoint_network_policies = var.private_endpoint_network_policies
 
   service_endpoints = [
     "Microsoft.Storage",
@@ -21,7 +21,7 @@ module "azdoa_snet" {
 }
 
 module "azdoa_li" {
-  source              = "github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v8.93.0"
+  source              = "github.com/pagopa/terraform-azurerm-v4.git//azure_devops_agent?ref=v5.7.0"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-app"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name
@@ -37,7 +37,7 @@ module "azdoa_li" {
 }
 
 module "azdoa_li_infra" {
-  source              = "github.com/pagopa/terraform-azurerm-v3.git//azure_devops_agent?ref=v8.93.0"
+  source              = "github.com/pagopa/terraform-azurerm-v4.git//azure_devops_agent?ref=v5.7.0"
   count               = var.enable_azdoa ? 1 : 0
   name                = "${local.project}-azdoa-vmss-ubuntu-infra"
   resource_group_name = azurerm_resource_group.azdo_rg[0].name

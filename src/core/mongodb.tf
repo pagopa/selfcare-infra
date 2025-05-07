@@ -14,18 +14,18 @@ locals {
 
 # cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
-  source               = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
+  source               = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
   name                 = format("%s-cosmosb-mongodb-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
   address_prefixes     = var.cidr_subnet_cosmosdb_mongodb
 
-  private_endpoint_network_policies_enabled = true
-  service_endpoints                         = ["Microsoft.Web"]
+  private_endpoint_network_policies = var.private_endpoint_network_policies
+  service_endpoints                 = ["Microsoft.Web"]
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v8.93.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_account?ref=v5.7.0"
 
   name                = format("%s-cosmosdb-mongodb-account", local.project)
   location            = azurerm_resource_group.mongodb_rg.location
@@ -63,7 +63,7 @@ module "cosmosdb_account_mongodb" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings" {
   name         = "mongodb-connection-string"
-  value        = module.cosmosdb_account_mongodb.connection_strings[0]
+  value        = module.cosmosdb_account_mongodb.primary_connection_strings
   content_type = "text/plain"
 
   key_vault_id = module.key_vault.id
@@ -164,7 +164,7 @@ locals {
 }
 
 module "selc_ms_core_collections" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v8.93.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_mongodb_collection?ref=v5.7.0"
 
   for_each = {
     for index, coll in local.mongo.selcMsCore.collections :

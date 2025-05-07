@@ -26,6 +26,12 @@ locals {
   container_app_resource_group_name       = "container-app-rg"
 
   app_name_fn = "${local.project}-onboarding-fn"
+
+  private_dns_zones = {
+    id                  = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
+    name                = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+    resource_group_name = azurerm_resource_group.rg_vnet.name
+  }
 }
 
 
@@ -1072,4 +1078,10 @@ variable "cae_zone_redundant" {
 variable "cae_zone_redundant_pnpg" {
   type        = bool
   description = "Container App Environment zone redudancy"
+}
+
+variable "private_endpoint_network_policies" {
+  type        = string
+  description = "Private endpoint network policies"
+  default     = "Enabled"
 }

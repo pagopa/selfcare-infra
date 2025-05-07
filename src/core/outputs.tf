@@ -88,7 +88,7 @@ output "cosmosdb_account_mongodb_primary_readonly_key" {
 }
 
 output "cosmosdb_account_mongodb_connection_strings" {
-  value     = module.cosmosdb_account_mongodb.connection_strings
+  value     = module.cosmosdb_account_mongodb.primary_connection_strings
   sensitive = true
 }
 

@@ -39,19 +39,19 @@ resource "azurerm_key_vault_secret" "evh_rds_vm_password" {
 }
 
 module "evh_rds_vm_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v8.93.0"
-  name                                      = format("%s-vm-snet", local.project)
-  address_prefixes                          = var.cidr_subnet_eventhub_rds
-  resource_group_name                       = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                      = module.vnet.name
-  private_endpoint_network_policies_enabled = false
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  name                              = format("%s-vm-snet", local.project)
+  address_prefixes                  = var.cidr_subnet_eventhub_rds
+  resource_group_name               = azurerm_resource_group.rg_vnet.name
+  virtual_network_name              = module.vnet.name
+  private_endpoint_network_policies = var.private_endpoint_network_policies
 }
 
 resource "azurerm_network_interface" "evh_rds_vm_public" {
-  name                 = format("%s-evh-rds-vm-public-nic", local.project)
-  location             = var.location
-  resource_group_name  = azurerm_resource_group.event_rg.name
-  enable_ip_forwarding = true
+  name                   = format("%s-evh-rds-vm-public-nic", local.project)
+  location               = var.location
+  resource_group_name    = azurerm_resource_group.event_rg.name
+  ip_forwarding_enabled  = true
 
   ip_configuration {
     name                          = format("%s-evh-rds-vm-public-nic", local.project)
