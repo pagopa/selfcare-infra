@@ -98,13 +98,13 @@ resource "azurerm_private_endpoint" "logs_storage" {
   }
 }
 
-module "spid_logs_encryption_keys" {
-  source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+# module "spid_logs_encryption_keys" {
+#   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
-  jwt_name          = "spid-logs-encryption"
-  key_vault_id      = module.key_vault.id
-  cert_common_name  = "spid-logs"
-  cert_password     = ""
-  tags              = var.tags
-  cert_allowed_uses = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
-}
+#   jwt_name          = "spid-logs-encryption"
+#   key_vault_id      = module.key_vault.id
+#   cert_common_name  = "spid-logs"
+#   cert_password     = ""
+#   tags              = var.tags
+#   cert_allowed_uses = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+# }
