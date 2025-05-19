@@ -130,7 +130,7 @@ cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
 
 # spid-testenv
-enable_spid_test = true
+enable_spid_test = false
 
 robots_indexed_paths = []
 
