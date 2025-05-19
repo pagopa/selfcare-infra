@@ -1,27 +1,27 @@
 # JWT
-module "jwt" {
-  source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v5.7.0"
+# module "jwt" {
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v5.7.0"
 
-  jwt_name            = "jwt"
-  key_vault_id        = module.key_vault.id
-  cert_common_name    = "apim"
-  cert_password       = ""
-  tags                = var.tags
-  early_renewal_hours = 0
-  # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
-}
+#   jwt_name            = "jwt"
+#   key_vault_id        = module.key_vault.id
+#   cert_common_name    = "apim"
+#   cert_password       = ""
+#   tags                = var.tags
+#   early_renewal_hours = 0
+#   # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+# }
 
-module "jwt_exchange" {
-  source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v5.7.0"
+# module "jwt_exchange" {
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v5.7.0"
 
-  jwt_name            = "jwt-exchange"
-  key_vault_id        = module.key_vault.id
-  cert_common_name    = "selfcare.pagopa.it"
-  cert_password       = ""
-  tags                = var.tags
-  early_renewal_hours = 0
-  # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
-}
+#   jwt_name            = "jwt-exchange"
+#   key_vault_id        = module.key_vault.id
+#   cert_common_name    = "selfcare.pagopa.it"
+#   cert_password       = ""
+#   tags                = var.tags
+#   early_renewal_hours = 0
+#   # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+# }
 
 # module "agid_spid" {
 #   count = var.env_short == "p" ? 0 : 1
@@ -57,52 +57,52 @@ module "jwt_exchange" {
 #   cert_allowed_uses        = []
 # }
 
-resource "null_resource" "upload_jwks" {
-  triggers = {
-    "changes-in-jwt" : module.jwt.certificate_data_pem
-    "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
-  }
-  provisioner "local-exec" {
-    command = <<EOT
-              mkdir -p "${path.module}/.terraform/tmp"
-              pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
-              az storage blob download \
-                --container-name '$web' \
-                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} \
-                --file "${path.module}/.terraform/tmp/oldJwks.json" \
-                --name '.well-known/jwks.json'
-              python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
-              if [ $? -eq 1 ]
-              then
-                exit 1
-              fi
-              az storage blob upload \
-                --container-name '$web' \
-                --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
-                --account-key ${module.checkout_cdn.storage_primary_access_key} \
-                --file "${path.module}/.terraform/tmp/jwks.json" \
-                --overwrite true \
-                --name '.well-known/jwks.json'
-              az cdn endpoint purge \
-                --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
-                --name ${module.checkout_cdn.name} \
-                --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
-                --content-paths "/.well-known/jwks.json" \
-                --no-wait
-          EOT
-  }
-}
+# resource "null_resource" "upload_jwks" {
+#   triggers = {
+#     "changes-in-jwt" : module.jwt.certificate_data_pem
+#     "changes-in-jwt-exchange" : module.jwt_exchange.certificate_data_pem
+#   }
+#   provisioner "local-exec" {
+#     command = <<EOT
+#               mkdir -p "${path.module}/.terraform/tmp"
+#               pip install --require-hashes --requirement "${path.module}/utils/py/requirements.txt"
+#               az storage blob download \
+#                 --container-name '$web' \
+#                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+#                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
+#                 --file "${path.module}/.terraform/tmp/oldJwks.json" \
+#                 --name '.well-known/jwks.json'
+#               python "${path.module}/utils/py/jwksFromPems.py" "${path.module}/.terraform/tmp/oldJwks.json" "${module.jwt.jwt_kid}" "${module.jwt.certificate_data_pem}" "${module.jwt_exchange.jwt_kid}" "${module.jwt_exchange.certificate_data_pem}" > "${path.module}/.terraform/tmp/jwks.json"
+#               if [ $? -eq 1 ]
+#               then
+#                 exit 1
+#               fi
+#               az storage blob upload \
+#                 --container-name '$web' \
+#                 --account-name ${replace(replace(module.checkout_cdn.name, "-cdn-endpoint", "-sa"), "-", "")} \
+#                 --account-key ${module.checkout_cdn.storage_primary_access_key} \
+#                 --file "${path.module}/.terraform/tmp/jwks.json" \
+#                 --overwrite true \
+#                 --name '.well-known/jwks.json'
+#               az cdn endpoint purge \
+#                 --resource-group ${azurerm_resource_group.checkout_fe_rg.name} \
+#                 --name ${module.checkout_cdn.name} \
+#                 --profile-name ${replace(module.checkout_cdn.name, "-cdn-endpoint", "-cdn-profile")} \
+#                 --content-paths "/.well-known/jwks.json" \
+#                 --no-wait
+#           EOT
+#   }
+# }
 
 
-data "local_file" "jwt_private_key_pkcs8" {
-  filename = "${path.module}/key-pkcs8key.pem"
-}
+# data "local_file" "jwt_private_key_pkcs8" {
+#   filename = "${path.module}/key-pkcs8key.pem"
+# }
 
-resource "azurerm_key_vault_secret" "jwt_private_key_pkcs8" {
-  name         = "jwt-private-key-pkcs8"
-  value        = data.local_file.jwt_private_key_pkcs8.content
-  content_type = "text/plain"
+# resource "azurerm_key_vault_secret" "jwt_private_key_pkcs8" {
+#   name         = "jwt-private-key-pkcs8"
+#   value        = data.local_file.jwt_private_key_pkcs8.content
+#   content_type = "text/plain"
 
-  key_vault_id = module.key_vault.id
-}
+#   key_vault_id = module.key_vault.id
+# }
