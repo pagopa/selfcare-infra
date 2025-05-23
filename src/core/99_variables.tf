@@ -115,7 +115,7 @@ variable "vpn_sku" {
 
 variable "vpn_pip_sku" {
   type        = string
-  default     = "Basic"
+  default     = "Standard"
   description = "VPN GW PIP SKU"
 }
 

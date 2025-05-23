@@ -39,7 +39,7 @@ resource "azurerm_key_vault_secret" "evh_rds_vm_password" {
 }
 
 module "evh_rds_vm_snet" {
-  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
   name                              = format("%s-vm-snet", local.project)
   address_prefixes                  = var.cidr_subnet_eventhub_rds
   resource_group_name               = azurerm_resource_group.rg_vnet.name

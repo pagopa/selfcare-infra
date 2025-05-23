@@ -14,7 +14,7 @@ locals {
 
 # cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
-  source               = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  source               = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
   name                 = format("%s-cosmosb-mongodb-snet", local.project)
   resource_group_name  = azurerm_resource_group.rg_vnet.name
   virtual_network_name = module.vnet.name
@@ -25,7 +25,7 @@ module "cosmosdb_mongodb_snet" {
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_account?ref=v5.7.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_account?ref=v6.6.0"
 
   name                = format("%s-cosmosdb-mongodb-account", local.project)
   location            = azurerm_resource_group.mongodb_rg.location
@@ -36,9 +36,11 @@ module "cosmosdb_account_mongodb" {
   capabilities = concat([
     "EnableMongo"
   ], var.cosmosdb_mongodb_extra_capabilities)
+  
   mongo_server_version = "7.0"
 
   public_network_access_enabled         = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
+  
   private_endpoint_enabled              = var.cosmosdb_mongodb_private_endpoint_enabled
   private_endpoint_mongo_name           = "${local.project}-cosmosdb-mongodb-account"
   private_service_connection_mongo_name = "${local.project}-cosmosdb-mongodb-account-private-endpoint-mongo"
@@ -56,6 +58,7 @@ module "cosmosdb_account_mongodb" {
   additional_geo_locations = var.cosmosdb_mongodb_additional_geo_locations
 
   backup_continuous_enabled = true
+  enable_automatic_failover = true
 
   tags = var.tags
 }
@@ -164,7 +167,7 @@ locals {
 }
 
 module "selc_ms_core_collections" {
-  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_mongodb_collection?ref=v5.7.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_mongodb_collection?ref=v6.6.0"
 
   for_each = {
     for index, coll in local.mongo.selcMsCore.collections :

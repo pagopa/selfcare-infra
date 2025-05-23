@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg_load_tests_db" {
 module "load_tests_snet" {
   count = var.enable_load_tests_db ? 1 : 0
 
-  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v5.7.0"
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
   name                              = "${local.project}-load-tests-db-snet"
   address_prefixes                  = var.cidr_subnet_load_tests
   resource_group_name               = azurerm_resource_group.rg_vnet.name
