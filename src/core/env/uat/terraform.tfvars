@@ -434,7 +434,7 @@ eventhubs = [{
   name              = "SC-Users"
   partitions        = 10
   message_retention = 7
-  consumers         = []
+  consumers         = ["datalake", "interop"]
   keys = [
     {
       name   = "selfcare-wo"
@@ -456,6 +456,12 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "interop"
       listen = true
       send   = false
       manage = false
