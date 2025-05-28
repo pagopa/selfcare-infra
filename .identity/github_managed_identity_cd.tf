@@ -52,6 +52,7 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_identity_cd"
   secret_permissions = [
     "Get",
     "List",
+    "Set"
   ]
 
   certificate_permissions = [
@@ -68,6 +69,7 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identit
   secret_permissions = [
     "Get",
     "List",
+    "Set"
   ]
 }
 
