@@ -1085,3 +1085,10 @@ variable "private_endpoint_network_policies" {
   description = "Private endpoint network policies"
   default     = "Enabled"
 }
+
+
+variable "evh_private_endpoint_network_policies" {
+  type        = string
+  description = "Private endpoint network policies"
+  default     = "Disabled"
+}

@@ -33,6 +33,7 @@ module "cosmosdb_account_mongodb" {
   resource_group_name = azurerm_resource_group.mongodb_rg.name
   offer_type          = var.cosmosdb_mongodb_offer_type
   kind                = "MongoDB"
+  enable_free_tier    = var.cosmosdb_mongodb_enable_free_tier
   capabilities = concat([
     "EnableMongo"
   ], var.cosmosdb_mongodb_extra_capabilities)

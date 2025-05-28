@@ -39,6 +39,7 @@ module "event_hub" {
       virtual_network_rule           = [],
       ip_rule                        = var.eventhub_ip_rules
       trusted_service_access_enabled = false
+      public_network_access_enabled  = true
     }
   ]
 

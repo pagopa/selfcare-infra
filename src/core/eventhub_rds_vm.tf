@@ -44,7 +44,7 @@ module "evh_rds_vm_snet" {
   address_prefixes                  = var.cidr_subnet_eventhub_rds
   resource_group_name               = azurerm_resource_group.rg_vnet.name
   virtual_network_name              = module.vnet.name
-  private_endpoint_network_policies = var.private_endpoint_network_policies
+  private_endpoint_network_policies = var.evh_private_endpoint_network_policies
 }
 
 resource "azurerm_network_interface" "evh_rds_vm_public" {
