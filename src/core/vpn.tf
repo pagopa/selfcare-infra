@@ -80,17 +80,6 @@ module "dns_forwarder_vpn" {
 }
 
 
-# module "dns_forwarder" {
-#   source              = "github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder?ref=v6.6.0"
-#   name                = format("%s-dns-forwarder", local.project)
-#   location            = azurerm_resource_group.rg_vnet.location
-#   resource_group_name = azurerm_resource_group.rg_vnet.name
-#   subnet_id           = module.dns_forwarder_snet.id
-
-#   tags = var.tags
-# }
-
-
 # DNS FORWARDER FOR DISASTER RECOVERY
 
 #
@@ -103,14 +92,6 @@ module "dns_forwarder_pair_subnet" {
   resource_group_name               = azurerm_resource_group.rg_pair_vnet.name
   virtual_network_name              = module.vnet_pair.name
   private_endpoint_network_policies = var.private_endpoint_network_policies
-
-  # delegation = {
-  #   name = "delegation"
-  #   service_delegation = {
-  #     name    = "Microsoft.ContainerInstance/containerGroups"
-  #     actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-  #   }
-  # }
 }
 
 output "subnet_pair_id" {
@@ -121,23 +102,27 @@ resource "random_id" "pair_dns_forwarder_hash" {
   byte_length = 3
 }
 
-# module "vpn_pair_dns_forwarder" {
-
-#   source = "github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder?ref=v6.6.0"
-
-#   name                = "${local.project_pair}-${random_id.pair_dns_forwarder_hash.hex}-vpn-dnsfrw"
-#   location            = var.location_pair
-#   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
-#   subnet_id           = module.dns_forwarder_pair_subnet.id
-#   tags                = var.tags
-# }
 
 module "vpn_pair_dns_forwarder" {
   source              = "git::https://github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder_vm_image?ref=v6.6.0"
   resource_group_name = azurerm_resource_group.rg_pair_vnet.name
   location            = var.location_pair
-  image_name          = "${local.project}-dns-forwarder-ubuntu2204-image"
+  image_name          = "${local.project_pair}-dns-forwarder-ubuntu2204-image"
   image_version       = "v1"
   subscription_id     = data.azurerm_subscription.current.subscription_id
-  prefix              = "${local.project}"
+  prefix              = "${local.project_pair}"
+}
+
+module "dns_forwarder_pair_vpn" {
+
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder_scale_set_vm?ref=v6.6.0"
+  name                = format("%s-dns-forwarder", local.project_pair)
+  resource_group_name = azurerm_resource_group.rg_pair_vnet.name
+  subnet_id           = module.dns_forwarder_pair_subnet.id
+  subscription_name   = data.azurerm_subscription.current.display_name
+  subscription_id     = data.azurerm_subscription.current.subscription_id
+  location            = var.location_pair
+  source_image_name   = "${local.project_pair}-dns-forwarder-ubuntu2204-image-v1"
+
+  tags = var.tags
 }
