@@ -52,15 +52,33 @@ module "dns_forwarder_snet" {
   resource_group_name               = azurerm_resource_group.rg_vnet.name
   virtual_network_name              = module.vnet.name
   private_endpoint_network_policies = var.private_endpoint_network_policies
-
-  delegation = {
-    name = "delegation"
-    service_delegation = {
-      name    = "Microsoft.ContainerInstance/containerGroups"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-    }
-  }
 }
+
+module "dns_forwarder" {
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder_vm_image?ref=v6.6.0"
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  location            = azurerm_resource_group.rg_vnet.location
+  image_name          = "${local.project}-dns-forwarder-ubuntu2204-image"
+  image_version       = "v1"
+  subscription_id     = data.azurerm_subscription.current.subscription_id
+  prefix              = "${local.project}"
+}
+
+# with default image
+module "dns_forwarder_vpn" {
+
+  source              = "git::https://github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder_scale_set_vm?ref=v6.6.0"
+  name                = format("%s-dns-forwarder", local.project)
+  resource_group_name = azurerm_resource_group.rg_vnet.name
+  subnet_id           = module.dns_forwarder_snet.id
+  subscription_name   = data.azurerm_subscription.current.display_name
+  subscription_id     = data.azurerm_subscription.current.subscription_id
+  location            = var.location
+  source_image_name   = "${local.project}-dns-forwarder-ubuntu2204-image-v1"
+
+  tags = var.tags
+}
+
 
 # module "dns_forwarder" {
 #   source              = "github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder?ref=v6.6.0"
@@ -72,15 +90,6 @@ module "dns_forwarder_snet" {
 #   tags = var.tags
 # }
 
-module "dns_forwarder" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v4.git//dns_forwarder_vm_image?ref=v6.6.0"
-  resource_group_name = azurerm_resource_group.rg_vnet.name
-  location            = azurerm_resource_group.rg_vnet.location
-  image_name          = "${local.project}-dns-forwarder-ubuntu2204-image"
-  image_version       = "v1"
-  subscription_id     = data.azurerm_subscription.current.subscription_id
-  prefix              = "${local.project}"
-}
 
 # DNS FORWARDER FOR DISASTER RECOVERY
 
@@ -95,13 +104,13 @@ module "dns_forwarder_pair_subnet" {
   virtual_network_name              = module.vnet_pair.name
   private_endpoint_network_policies = var.private_endpoint_network_policies
 
-  delegation = {
-    name = "delegation"
-    service_delegation = {
-      name    = "Microsoft.ContainerInstance/containerGroups"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-    }
-  }
+  # delegation = {
+  #   name = "delegation"
+  #   service_delegation = {
+  #     name    = "Microsoft.ContainerInstance/containerGroups"
+  #     actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+  #   }
+  # }
 }
 
 output "subnet_pair_id" {
