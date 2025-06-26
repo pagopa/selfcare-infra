@@ -245,6 +245,9 @@ environment_cd_roles = {
     ],
     "selc-d-cosmosdb-mongodb-rg": [
       "PagoPA Resource Lock Contributor"
+    ],
+    "selc-d-documents-storage-rg" = [
+      "Storage Blob Data Contributor"
     ]
   }
 }
