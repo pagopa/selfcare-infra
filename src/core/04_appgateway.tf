@@ -190,13 +190,8 @@ module "app_gw" {
           rewrite_rule_set_name = null
         }
         bff_api = {
-          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*"]
+          paths                 = ["/dashboard/*", "/onboarding/*", "/party-registry-proxy/*", "/auth/*"]
           backend               = "apim"
-          rewrite_rule_set_name = null
-        }
-        auth_selc = {
-          paths                 = ["/auth/*"]
-          backend               = "auth-selc"
           rewrite_rule_set_name = null
         }
       }
