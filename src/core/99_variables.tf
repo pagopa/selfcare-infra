@@ -26,6 +26,8 @@ locals {
   container_app_resource_group_name       = "container-app-rg"
 
   app_name_fn = "${local.project}-onboarding-fn"
+  
+  enable_upload_contracts = false
 }
 
 

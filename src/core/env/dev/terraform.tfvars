@@ -130,7 +130,7 @@ cosmosdb_mongodb_extra_capabilities               = ["EnableServerless"]
 cosmosdb_mongodb_main_geo_location_zone_redundant = false
 
 # spid-testenv
-enable_spid_test = true
+enable_spid_test = false
 
 robots_indexed_paths = []
 
@@ -356,7 +356,7 @@ eventhubs = [{
   name              = "SC-Users"
   partitions        = 10
   message_retention = 7
-  consumers         = []
+  consumers         = ["datalake", "interop"]
   keys = [
     {
       name   = "selfcare-wo"
@@ -378,6 +378,12 @@ eventhubs = [{
     },
     {
       name   = "sma"
+      listen = true
+      send   = false
+      manage = false
+    },
+    {
+      name   = "interop"
       listen = true
       send   = false
       manage = false

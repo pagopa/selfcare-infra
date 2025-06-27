@@ -24,7 +24,6 @@ module "cosmosdb_mongodb_snet" {
   service_endpoints                         = ["Microsoft.Web"]
 }
 
-###???
 module "cosmosdb_account_mongodb" {
   source = "github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v7.50.1"
 

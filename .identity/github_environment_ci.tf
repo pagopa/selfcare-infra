@@ -63,3 +63,15 @@ resource "github_actions_environment_secret" "storage_contracts_account_key" {
   secret_name     = "STORAGE_CONTRACTS_ACCOUNT_KEY"
   plaintext_value = data.azurerm_key_vault_secret.storage_contracts_account_key.value
 }
+
+data "azurerm_key_vault_secret" "storage_contracts_account_connection-string" {
+  name         = "documents-storage-connection-string"
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
+resource "github_actions_environment_secret" "storage_account_key_documents" {
+  repository      = local.github.repository
+  environment     = github_repository_environment.github_repository_environment_ci.environment
+  secret_name     = "STORAGE_CONNECTION_STRING_DOCUMENTS"
+  plaintext_value = data.azurerm_key_vault_secret.storage_contracts_account_connection-string.value
+}

@@ -13,7 +13,7 @@ on:
 
 env:
   STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}contractsstorage"
-  STORAGE_CONTAINER: "selc-${{ inputs.environment_short }}-contracts-blob"
+  STORAGE_CONTAINER: "sc-${{ inputs.environment_short }}-documents-blob"
   STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-contracts-storage-rg"  
   ARM_USE_OIDC: true
   ARM_USE_AZUREAD: true
@@ -54,8 +54,7 @@ jobs:
     - name: Upload to blob storage
       run: |
         upload_status=$(az storage blob upload-batch \
-        --account-name "${{ env.STORAGE_ACCOUNT_NAME }}" \
-        --account-key "${{ secrets.STORAGE_CONTRACTS_ACCOUNT_KEY }}" \
+        --connection-string "${{ secrets.STORAGE_CONNECTION_STRING_DOCUMENTS }}" \
         --source './src/core/contracts_template/contracts/' \
         --destination "${{ env.STORAGE_CONTAINER }}/contracts" \
         --overwrite)
