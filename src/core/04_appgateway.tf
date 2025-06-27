@@ -72,15 +72,15 @@ locals {
       fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
       pick_host_name_from_backend = false
     }
-    hub-spid-selc = {
+    auth-selc = {
       protocol                    = "Https"
-      host                        = "selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"
+      host                        = "selc-${var.env_short}-auth-ms-ca.${var.auth_ms_private_dns_suffix}"
       port                        = 443
       ip_addresses                = null
-      probe                       = "/info"
-      probe_name                  = "probe-hub-spid-selc"
+      probe                       = "/q/health/live"
+      probe_name                  = "probe-auth-selc"
       request_timeout             = 60
-      fqdns                       = ["selc-${var.env_short}-hub-spid-login-ca.${var.ca_suffix_dns_private_name}"]
+      fqdns                       = ["selc-${var.env_short}-auth-ms-ca.${var.auth_ms_private_dns_suffix}"]
       pick_host_name_from_backend = false
     }
     hub-spid-pnpg = {
@@ -194,11 +194,6 @@ module "app_gw" {
           backend               = "apim"
           rewrite_rule_set_name = null
         }
-        hub_spid_selc = {
-          paths                 = ["${var.spid_selc_path_prefix}/*"]
-          backend               = "hub-spid-selc"
-          rewrite_rule_set_name = "rewrite-rule-set-hub-spid-selc"
-        }
       }
     }
     api-pnpg = {
@@ -274,30 +269,6 @@ module "app_gw" {
           response_header_configurations = []
           url                            = null
         },
-      ]
-    },
-    //TODO: remove after one identity integration when hub-spid-login will be dismissed
-    {
-      name = "rewrite-rule-set-hub-spid-selc"
-      rewrite_rules = [
-        {
-          name          = "remove-spid-path"
-          rule_sequence = 1
-          conditions = [{
-            ignore_case = true
-            negate      = false
-            pattern     = "${var.spid_selc_path_prefix}/(.*)"
-            variable    = "var_uri_path"
-          }]
-          request_header_configurations  = []
-          response_header_configurations = []
-          ## set path only on azure portal
-          url = {
-            path         = "{var_uri_path_1}"
-            query_string = ""
-            components   = "path_only"
-          }
-        }
       ]
     },
     //TODO: remove after one identity integration when hub-spid-login will be dismissed
