@@ -246,7 +246,7 @@ environment_cd_roles = {
     "selc-p-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
     ],
-    "selc-d-cosmosdb-mongodb-rg": [
+    "selc-p-cosmosdb-mongodb-rg": [
       "PagoPA Resource Lock Contributor"
     ]
   }
@@ -262,7 +262,7 @@ environment_ci_roles_ms = {
     terraform-state-rg = [
       "Storage Blob Data Contributor"
     ],
-    "selc-p-contracts-storage-rg" = [
+    "selc-p-documents-storage-rg" = [
       "Storage Blob Data Contributor"
     ]
   }

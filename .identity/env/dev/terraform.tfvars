@@ -226,7 +226,7 @@ environment_ci_roles = {
     "selc-d-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
     ],
-    "selc-d-contracts-storage-rg" = [
+    "selc-d-documents-storage-rg" = [
       "Storage Blob Data Contributor"
     ],
     "selc-d-logs-storage-rg" = [
