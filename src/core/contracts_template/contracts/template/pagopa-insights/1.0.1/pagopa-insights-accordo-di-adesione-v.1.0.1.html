@@ -5801,8 +5801,8 @@
         <span class="text-style">
           Questo approccio consente agli utenti di analizzare l&#39;andamento
           storico delle transazioni e di monitorare le operazioni pi&ugrave;
-          recenti con un aggiornamento pressoch&egrave; continuo, pur tenendo conto del
-          ritardo giornaliero nella disponibilit&agrave; dei dati.
+          recenti con un aggiornamento pressoch&egrave; continuo, pur tenendo
+          conto del ritardo giornaliero nella disponibilit&agrave; dei dati.
         </span>
         <p style="margin-top: 10pt"></p>
         <p>3.1.1.3 Specifi che e criteri di elaborazione dei dati</p>
@@ -6104,11 +6104,361 @@
         </span>
         <p style="margin-top: 10pt"></p>
         <span class="text-style">
-          Si evidenzia che, poich&egrave; le transazioni visualizzate corrispondono
-          esclusivamente a quelle gestite dal Prestatore Aderente per ciascun
-          intervallo temporale disponibile (annuale, mensile), la
+          Si evidenzia che, poich egrave; le transazioni visualizzate
+          corrispondono esclusivamente a quelle gestite dal Prestatore Aderente
+          per ciascun intervallo temporale disponibile (annuale, mensile), la
           visualizzazione dei dati sar&agrave; limitata ai soli periodi in cui
           il Prestatore Aderente ha effettivamente registrato transazioni. Di
+          conseguenza, se il Prestatore Aderente ha elaborato transazioni solo
+          in un determinato mese di uno specifi co anno, in questa sezione
+          saranno consultabili esclusivamente le transazioni relative a quel
+          mese e anno di riferimento.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            >3.2.1.3 Specifi che e criteri di elaborazione dei dati</span
+          >
+        </p>
+        <br />
+        <span class="text-style">
+          In aggiunta ai criteri defi niti nel paragrafo 3.1.1.3, il perimetro
+          dei dati transazionali del Prestatore Aderente consultabili nella
+          sezione "Transazioni Prestatore Aderente" &egrave; soggetto anche alle
+          seguenti logiche di processamento dei dati:
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"><b>3.4 Analisi Stagionalit&agrave;</b></span>
+        </p>
+        <br />
+        <ul>
+          <li>
+            <span class="text-style">
+              <b>Attribuzione transazioni a fronte di una fusione tra PSP </b
+              >(fermo restando quanto disciplinato nell&#39;articolo 12. CESSIONE E
+              OPERAZIONI STRAORDINARIE): nei casi di fusione tra PSP &egrave;
+              necessario distinguere tra i seguenti scenari:
+            </span>
+            <ul>
+              <li>
+                <span class="text-style"
+                  >il contratto di adesione al Servizio &egrave; stato sottoscritto dal
+                  <b>PSP incorporante</b></span
+                >
+                <ul>
+                  <li>
+                    <span class="text-style">
+                      il PSP incorporante può consultare le transazioni con
+                      esito positivo gestite dal PSP incorporato, a partire
+                      dalla data in cui PagoPA S.p.A. ha ricevuto la notifi ca
+                      della fusione e, retroattivamente, per le transazioni
+                      effettuate a partire dalla data di effi cacia legale della
+                      fusione;
+                    </span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <span class="text-style"
+                  >il contratto di adesione al Servizio &egrave; stato sottoscritto dal
+                  <b>PSP incorporato</b></span
+                >
+                <ul>
+                  <li>
+                    <span class="text-style">
+                      Il PSP incorporato non avr&agrave; pi&ugrave; accesso al Servizio e il
+                      PSP incorporante dovr&agrave; fare esplicita richiesta a PagoPA
+                      S.p.A.; in caso di richiesta approvata, la gestione delle
+                      utenze del Servizio sar&agrave; di esclusiva competenza del PSP
+                      incorporante, il quale determiner&agrave; quali utenti
+                      amministratori potranno accedere al Servizio 8
+                    </span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span class="text-style">
+              <b>Attribuzione transazioni di tipo donazione</b>: le transazioni
+              relative a donazioni sono ricondotte allo specifi co PSP che ha
+              gestito l&#39;operazione di pagamento, qualora sia possibile associare
+              un codice ABI al PSP ID riscontrato nella transazione.
+            </span>
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          Si precisa, inoltre, che i volumi transazionali relativi al PSP
+          aderente, cos&igrave; come rappresentati nel Servizio, non assumono carattere
+          certifi cativo ai fi ni della determinazione dell&#39;ammontare delle
+          transazioni riportate nelle
+          <b
+            >fatture relative all&#39;Accordo di Servizio per l&#39;adesione al sistema
+            dei pagamenti elettronici pagoPA</b
+          >. Tale distinzione &egrave; riconducibile alla possibile eterogeneit&agrave; dei
+          criteri di calcolo e alle modalit&agrave; di contabilizzazione adottate per
+          fi nalit&agrave; diverse, quali la fatturazione e l&#39;analisi dei dati esposti
+          nel Servizio. Tra le possibili cause di disallineamento, si evidenzia
+          che la fatturazione della piattaforma pagoPA si basa sulla
+          <b> data di rendicontazione</b>, ovvero il giorno in cui la
+          transazione viene effettivamente rendicontata, mentre il Servizio
+          espone le transazioni in base alla <b>data di pagamento</b>, ossia il
+          giorno in cui l&#39;operazione di pagamento (quindi la transazione) &egrave;
+          stata effettuata. Pertanto, per uno stesso intervallo temporale (ad
+          esempio, un anno o un trimestre), i volumi transazionali riportati
+          nelle fatture e quelli visualizzati nel Servizio potrebbero risultare
+          soggetti a disallineamenti, dovuti alla combinazione di fattori
+          metodologici e procedurali propri dei rispettivi ambiti di utilizzo.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          <em
+            >Si evidenzia infi ne che in nessun caso il Prestatore Aderente
+            potr&agrave; accedere a dati riferiti ad altri Prestatori di Servizi di
+            Pagamento (PSP), affi nché sia salvaguardata ogni informazione a
+            carattere riservato a qualsiasi titolo. Pertanto, al fi ne di
+            garantire la massima riservatezza delle informazioni, l&#39;accesso ai
+            dati della sezione “Transazioni Prestatore Aderente” &egrave; limitato
+            esclusivamente alle informazioni riconducibili al Prestatore
+            Aderente, secondo le regole di segregazione applicate.</em
+          >
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            ><b>3.3 Market Share Prestatore Aderente</b></span
+          >
+        </p>
+        <br />
+        <span class="text-style">
+          La sezione “Market Share Prestatore Aderente” &egrave; dedicata al
+          monitoraggio della quota di mercato di un singolo Prestatore Aderente,
+          offrendo una visione comparativa tra il suo volume di transazioni e il
+          totale delle transazioni della piattaforma pagoPA. Nello specifi co,
+          la sezione espone i seguenti indicatori:
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Totale transazioni</b>: volume complessivo delle transazioni
+              registrate sulla piattaforma pagoPA;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Totale transazioni Prestatore Aderente</b>: volume totale
+              delle transazioni gestite dal singolo Prestatore Aderente;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Market Share Prestatore Aderente</b>: quota di mercato del
+              Prestatore, calcolata come il rapporto tra il numero totale di
+              transazioni gestite dal Prestatore Aderente (Totale transazioni
+              Prestatore Aderente) e il totale complessivo delle transazioni
+              (Totale transazioni), moltiplicato per 100 per ottenere il valore
+              percentuale.</span
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          Tutti gli indicatori si aggiornano dinamicamente in base ai fi ltri
+          applicabili dalla barra dei <em>Controlli</em>.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          A completamento della sezione, il grafi co di trend “Market Share per
+          mese” visualizza l&#39;andamento mensile della quota di mercato, in base
+          ai fi ltri selezionati.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"><b>3.3.1 Perimetro dati</b></span>
+        </p>
+        <br />
+        <p>
+          <span class="text-style">3.3.1.1 Campi disponibili</span>
+        </p>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            >Dalla barra dei Controlli sono disponibili i seguenti
+            filtri<sup>1</sup>:</span
+          >
+        </p>
+
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Anno</b>: anno in cui sono state effettuate le
+              transazioni</span
+            >
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Mese</b>: mese in cui sono state effettuate le
+              transazioni</span
+            >
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Macro-categoria Ente Creditore</b>: la macro-categoria a cui
+              appartiene l&#39;Ente creditore che ha riscosso le transazioni; sono
+              disponibili le seguenti macro-categorie:</span
+            >
+            <ul>
+              <li><span class="text-style">ACI</span></li>
+              <li><span class="text-style">Altri Enti Territoriali</span></li>
+              <li><span class="text-style">Comuni</span></li>
+              <li><span class="text-style">Enti Comunali</span></li>
+              <li><span class="text-style">Enti Provinciali</span></li>
+              <li><span class="text-style">Enti Regionali</span></li>
+              <li><span class="text-style">Istruzione</span></li>
+              <li>
+                <span class="text-style"
+                  >Ordini Professionali - Camere di Commercio</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Pubbliche Amministrazioni Centrali</span
+                >
+              </li>
+              <li><span class="text-style">Province</span></li>
+              <li><span class="text-style">Regioni</span></li>
+              <li><span class="text-style">Salute</span></li>
+              <li><span class="text-style">Utility</span></li>
+              <li>
+                <span class="text-style"
+                  >NA (macro-categoria residuale per gli enti non
+                  classificabili<sup>1</sup> all&#39;interno delle categorie
+                  precedentemente definite<sup>1</sup>)</span
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Sotto-categoria Ente Creditore</b>: la sotto-categoria di
+              riferimento dell&#39;Ente creditore che ha riscosso le transazioni;
+              sono disponibili le seguenti sotto-categorie:</span
+            >
+            <ul>
+              <li><span class="text-style">ACI</span></li>
+              <li><span class="text-style">Altri Enti Territoriali</span></li>
+              <li><span class="text-style">Comuni</span></li>
+              <li>
+                <span class="text-style"
+                  >Consorzi Universitari (macro-categoria: Istruzione)</span
+                >
+              </li>
+              <li><span class="text-style">Enti Comunali</span></li>
+              <li><span class="text-style">Enti Provinciali</span></li>
+              <li><span class="text-style">Enti Regionali</span></li>
+              <li>
+                <span class="text-style"
+                  >Ordini Professionali - Camere di Commercio</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Pubbliche Amministrazioni Centrali</span
+                >
+              </li>
+              <li><span class="text-style">Province</span></li>
+              <li><span class="text-style">Regioni</span></li>
+              <li>
+                <span class="text-style"
+                  >Ricerca (macro-categoria: Istruzione)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Salute Locale (macro-categoria: Salute)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Salute Regionale (macro-categoria: Salute)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Salute Centrale (macro-categoria: Salute)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Salute Servizi (macro-categoria: Salute)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Scuola (macro-categoria: Istruzione)</span
+                >
+              </li>
+              <li>
+                <span class="text-style"
+                  >Universit&agrave; (macro-categoria: Istruzione)</span
+                >
+              </li>
+              <li><span class="text-style">Utility</span></li>
+              <li>
+                <span class="text-style"
+                  >NA (sotto-categoria residuale per gli enti non
+                  classificabili<sup>1</sup> all&#39;interno delle categorie
+                  precedentemente definite<sup>1</sup>)</span
+                >
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Fascia di importo</b>: il controvalore transato &egrave; stato
+              suddiviso in sette (7) diverse fasce di importo, ossia (0-25]€,
+              (25-50]€, (50-100]€, (100-200]€, (200-500]€, (500-1000]€,
+              >1000€;</span
+            >
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Tipologia Utente Debitore</b>: esistono tre (3) diverse
+              tipologie per i soggetti debitori delle posizioni debitorie, ossia
+              "F" che indica una persona fisica<sup>1</sup>, "G" per una persona
+              giuridica e "NA" per tutti i casi di intestatario e relativa
+              tipologia mancante.</span
+            >
+          </li>
+        </ul>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style">3.3.1.2 Copertura temporale</span>
+        </p>
+        <br />
+        <span class="text-style"
+          >Le specifi che relative all&#39;intervallo di disponibilit&agrave; dei dati e
+          alle modalit&agrave; di aggiornamento sono defi nite in conformit&agrave; a quanto
+          stabilito nel paragrafo 3.1.1.2 per i dati riferiti all&#39;intero
+          perimetro.</span
+        >
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          Si evidenzia che, poiché le transazioni visualizzate corrispondono
+          esclusivamente a quelle gestite dal Prestatore Aderente per ciascun
+          intervallo temporale disponibile (annuale, mensile), la
+          visualizzazione dei dati sar&agrave; limitata ai soli periodi in cui il
+          Prestatore Aderente ha effettivamente registrato transazioni. Di
           conseguenza, se il Prestatore Aderente ha elaborato transazioni solo
           in un determinato mese di uno specifi co anno, in questa sezione
           saranno consultabili esclusivamente le transazioni relative a quel
@@ -6121,26 +6471,444 @@
           >
         </p>
         <br />
-        <span class="text-style">
-          Per le specifi che e i criteri di elaborazione dei dati si rimanda a
+        <span class="text-style"
+          >Per le specifi che e i criteri di elaborazione dei dati si rimanda a
           quanto dettagliato nel paragrafo "Specifi che e criteri di
           elaborazione dei dati" presente nelle sezioni "Overview Transazioni" e
-          "Transazioni Prestatore Aderente".
-        </span>
+          "Transazioni Prestatore Aderente".</span
+        >
         <p style="margin-top: 10pt"></p>
         <p>
-          <span class="text-style"><b>3.4 Analisi Stagionalità</b></span>
+          <span class="text-style"><b>3.4 Analisi Stagionalit&agrave;</b></span>
         </p>
         <br />
         <span class="text-style">
-          Mediante la scheda “Analisi Stagionalità”, il Prestatore aderente ha
-          accesso ai risultati dell&#39;analisi di stagionalità dei servizi di
+          Mediante la scheda “Analisi Stagionalit&agrave;”, il Prestatore aderente ha
+          accesso ai risultati dell&#39;analisi di stagionalit&agrave; dei servizi di
           incasso della piattaforma pagoPA. Tale analisi mira a determinare
           quali servizi seguono andamenti stagionali ricorrenti nel tempo grazie
           al calcolo di un indice che consente di classifi carli a seconda della
-          loro progressione temporale. L'analisi si basa su un algoritmo di
-          decomposizione stagionale-tendenziale in grado di separare una serie
-          storica di dati in tre componenti principali:
+          loro progressione temporale. L&#39;analisi si basa su un
+          <b>algoritmo di decomposizione stagionale-tendenziale</b> in grado di
+          separare una serie storica di dati in tre componenti principali:
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Trend (tendenza)</b>: rappresenta il cambiamento a lungo
+              termine nei dati, mostrando una direzione generale (crescita o
+              declino) su periodi estesi;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Stagionalit&agrave;</b>: evidenzia le fluttuazioni<sup>1</sup>
+              periodiche che si ripetono regolarmente in determinati intervalli
+              di tempo (es. variazioni mensili o settimanali) e che sono legate
+              a fattori stagionali prevedibili;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Componente residua (rumore)</b>: include le variazioni che non
+              possono essere spiegate né dalla tendenza né dalla stagionalit&agrave;,
+              rappresentando i movimenti casuali o irregolari della serie.</span
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          Dalla scomposizione di una serie storica di un servizio di incasso,
+          l&#39;algoritmo permette di analizzare l&#39;infl uenza dei fattori
+          stagionali, calcolando un indice di stagionalit&agrave; che aiuta a capire
+          quanto le variazioni siano legate a ricorrenze prevedibili.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style"
+          >L&#39;indice di stagionalit&agrave; &egrave; disponibile in due diverse versioni:</span
+        >
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Indice di Stagionalit&agrave; Coppia Servizio-Ente</b>: misura la
+              stagionalit&agrave; delle transazioni legate a un singolo servizio e al
+              suo specifico<sup>1</sup> ente riscossore, valutando l&#39;andamento
+              stagionale per quella particolare combinazione di servizio ed
+              ente.</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Indice di Stagionalit&agrave; Servizio</b>: misura la stagionalit&agrave;
+              complessiva di un servizio, considerando tutte le transazioni
+              associate agli enti riscossori. &egrave; calcolato come una media
+              ponderata degli indici di stagionalit&agrave; delle singole coppie
+              Servizio-Ente, dove il peso &egrave; dato dal numero di transazioni
+              effettuate per quel servizio da ciascun ente.</span
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          L&#39;indice di stagionalit&agrave; può variare da <b>0</b> (assenza di
+          stagionalit&agrave;) a <b>1</b> (stagionalit&agrave; molto pronunciata) e viene
+          suddiviso in tre fasce con le seguenti soglie:
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Basso (<0,4)</b>: il servizio oppure la coppia servizio-ente
+              presenta una stagionalit&agrave; bassa;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Medio (0,4-0,7)</b>: il servizio oppure la coppia
+              servizio-ente presenta una stagionalit&agrave; media;</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Alto (>0,7)</b>: il servizio oppure la coppia servizio-ente
+              presenta una stagionalit&agrave; alta.</span
+            >
+          </li>
+        </ul>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"><b>3.4.1 Perimetro dati</b></span>
+        </p>
+        <br />
+        <p>
+          <span class="text-style">3.4.1.1 Campi disponibili</span>
+        </p>
+        <br />
+        <span class="text-style">
+          La scheda "Analisi Stagionalit&agrave;" &egrave; articolata in due aree di analisi:
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Indice di Stagionalit&agrave; Servizio;</b></span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Indice di Stagionalit&agrave; Coppia Servizio-Ente.</b></span
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          Entrambe permettono di valutare l&#39;andamento dei volumi transazionali
+          nel tempo e di consultare l&#39;indice di stagionalit&agrave;, offrendo una
+          visione completa delle variazioni nei fl ussi di pagamento in funzione
+          delle selezioni effettuate dall&#39;utente e fornendo un set di KPI
+          strutturati come segue:
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Transazioni</b>: rappresenta il volume totale delle
+              transazioni registrate per ciascun anno del biennio di
+              riferimento, indicando la variazione percentuale tra l&#39;ultimo anno
+              disponibile e quello precedente. I valori esposti dipende dalle
+              selezioni effettuate per il servizio di incasso, il codice
+              tassonomico e, nel caso dell&#39;Indice di Stagionalit&agrave; Coppia
+              Servizio-Ente, l&#39;ente creditore;</span
+            >
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Andamento Transazioni</b>: mostra la distribuzione mensile
+              delle transazioni per ciascun anno nel biennio di riferimento, in
+              base ai criteri selezionati;</span
+            >
+          </li>
+
+          <li>
+            <span class="text-style"
+              ><b>Indice di Stagionalit&agrave;</b>: indice che viene calcolato secondo
+              le seguenti logiche:</span
+            >
+            <ul>
+              <li>
+                <span class="text-style"
+                  ><b>Indice di Stagionalit&agrave; Servizio</b></span
+                >
+                <ul>
+                  <li>
+                    <span class="text-style"
+                      >se viene selezionato solo il servizio di incasso,
+                      l&#39;indice &egrave; calcolato come la media degli indici dei
+                      relativi codici tassonomici associati;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style"
+                      >se viene selezionato un singolo codice tassonomico,
+                      l&#39;indice corrisponde esattamente a quello del codice
+                      selezionato;</span
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span class="text-style"
+                  ><b>Indice di Stagionalit&agrave; Coppia Servizio-Ente</b></span
+                >
+                <ul>
+                  <li>
+                    <span class="text-style"
+                      >se viene selezionato solo il servizio di incasso,
+                      l&#39;indice &egrave; calcolato come la media degli indici di tutti i
+                      codici tassonomici, considerando l&#39;insieme degli enti
+                      creditori;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style"
+                      >se viene selezionato un singolo codice tassonomico,
+                      l&#39;indice &egrave; calcolato come la media degli indici degli enti
+                      creditori associati a quel codice;</span
+                    >
+                  </li>
+                  <li>
+                    <span class="text-style"
+                      >se viene selezionato un ente creditore
+                      specifico<sup>1</sup>, l&#39;indice corrisponde direttamente a
+                      quello dell&#39;ente per il codice tassonomico
+                      selezionato.</span
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <br />
+        <p>
+          <span class="text-style">3.4.1.2 Copertura temporale</span>
+        </p>
+        <br />
+        <span class="text-style">
+          L&#39;algoritmo esamina un intervallo storico rolling di due anni,
+          effettuando un <b>aggiornamento annuale</b> entro il mese di gennaio,
+          basato sull&#39;ultimo biennio completo disponibile. Ad esempio,
+          consultando la sezione "Analisi Stagionalit&agrave;" nel mese di aprile 2025,
+          i risultati presentati si riferiranno al periodo di analisi 2023-2024.
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            >3.4.1.3 Specifi che e criteri di elaborazione dei dati</span
+          >
+        </p>
+        <br />
+        <span class="text-style">
+          L&#39;analisi considera un sottoinsieme di servizi di incasso selezionati
+          in base a criteri quantitativi e qualitativi, all&#39;interno del
+          perimetro complessivo delle transazioni gestite sulla piattaforma
+          pagoPA nel biennio di riferimento. I servizi inclusi rispettano le
+          seguenti condizioni:
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <ul>
+          <li>
+            <span class="text-style"
+              ><b>Codice tassonomico valido</b>: il servizio deve essere
+              classificato<sup>1</sup> secondo la Tassonomia ufficiale<sup
+                >1</sup
+              >
+              dei Servizi di Incasso (cfr. Capitolo 3.6);</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Codice tassonomico specifico<sup>1</sup></b
+              >: non devono essere presenti classificazioni<sup>1</sup> quali ad
+              esempio "Altro", "Incassi Generali" o "Varie";</span
+            >
+          </li>
+          <li>
+            <span class="text-style"
+              ><b>Volume minimo di transazioni</b>: il servizio deve aver
+              registrato pi&ugrave; di 100.000 transazioni nel biennio di riferimento,
+              calcolate a livello di singolo ente creditore.</span
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="text-style">
+          I servizi che non soddisfano almeno uno di questi requisiti vengono
+          esclusi dall&#39;analisi e non dispongono quindi di un indice di
+          stagionalit&agrave;.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"><b>3.5 Analisi Libera</b></span>
+        </p>
+        <br />
+        <span class="text-style">
+          La sezione "Analisi Libera" &egrave; progettata per offrire al Prestatore
+          Aderente un ambiente di consultazione fl essibile, consentendo la
+          generazione di una
+          <b>vista tabellare completamente personalizzabile</b>. L&#39;utente può
+          confi gurare l&#39;analisi selezionando i valori di interesse dei campi
+          disponibili, adattando l&#39;esplorazione dei dati alle proprie esigenze
+          analitiche in modo preciso ed effi ciente. Le visualizzazioni si
+          aggiornano dinamicamente in base alle selezioni effettuate
+          dall&#39;utente, rifl ettendo sia l&#39;andamento complessivo delle
+          transazioni (<em>Dettaglio Transazioni piattaforma pagoPA</em>), sia
+          il dettaglio specifi co delle transazioni riconducibili al singolo
+          Prestatore Aderente (<em>Dettaglio Transazioni gestite</em>),
+          garantendo un&#39;analisi simultanea su entrambi i livelli di
+          aggregazione.
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"><b>3.5.1 Perimetro dati</b></span>
+        </p>
+        <br />
+        <p>
+          <span class="text-style">3.5.1.1 Campi disponibili</span>
+        </p>
+        <br />
+        <span class="text-style">
+          I campi a disposizione del Prestatore Aderente corrispondono a quelli
+          descritti nel capitolo 3.1.1.1 ed &egrave; possibile selezionare i relativi
+          valori di interesse utilizzando la barra dei fi ltri
+          (<em>Contorlli</em>).
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style">3.5.1.2 Copertura temporale</span>
+        </p>
+        <br />
+        <span class="text-style">
+          Le specifi che relative all&#39;intervallo di disponibilit&agrave; dei dati e
+          alle modalit&agrave; di aggiornamento sono defi nite in conformit&agrave; a quanto
+          stabilito nel paragrafo 3.1.1.2 per i dati riferiti all&#39;intero mercato
+          (<em>Dettaglio Transazioni piattaforma pagoPA</em>) e nel paragrafo
+          3.2.1.2 per i dati riferiti al Prestatore Aderente (<em
+            >Dettaglio Transazioni gestite</em
+          >).
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            >3.5.1.3 Specifi che e criteri di elaborazione dei dati</span
+          >
+        </p>
+        <br />
+        <span class="text-style">
+          Le metodologie di elaborazione dei dati adottano i criteri illustrati
+          nei paragrafi 3.1.1.3 per l&#39;analisi dei dati riferiti all&#39;intero
+          perimetro (<em>Dettaglio Transazioni piattaforma pagoPA</em>) e
+          3.2.1.3 per l&#39;analisi delle transazioni gestite dal Prestatore
+          Aderente (<em>Dettaglio Transazioni gestite</em>).
+        </span>
+        <p style="margin-top: 10pt"></p>
+        <p>
+          <span class="text-style"
+            ><b>3.6 Tassonomia Servizi di incasso</b></span
+          >
+        </p>
+        <br />
+        <span class="text-style">
+          La sezione “Tassonomia Servizi di incasso” fornisce l&#39;accesso alla
+          tassonomia aggiornata dei codici tassonomici relativi ai servizi di
+          incasso, con la possibilit&agrave; di applicare fi ltri basati sulle
+          principali informazioni disponibili. La tassonomia &egrave; integrata
+          direttamente nel Servizio per garantire una consultazione immediata e
+          funzionale, facilitando l&#39;analisi dei dati e consentendo eventuali
+          approfondimenti correlati. &egrave; inoltre disponibile per la consultazione
+          via web al seguente link [<a
+            href="https://developer.pagopa.it/pago-pa/guides/sanp/ente-creditore/tassonomia-dei-servizi-di-incasso"
+            >https://developer.pagopa.it/pago-pa/guides/sanp/ente-creditore/tassonomia-dei-servizi-di-incasso</a
+          >].
+        </span>
+        <br />
+        <p style="margin-top: 20px"></p>
+        <b>
+          <li class="li-bullet-0">
+            <span class="text-style">
+              <b>DISPONIBILIT&Agrave; & ACCURATEZZA DEI DATI</b>.
+            </span>
+          </li>
+        </b>
+        <br />
+        <span class="text-style">
+          L&#39;accesso al Servizio &egrave; reso disponibile da PagoPA S.p.A. per fi
+          nalit&agrave; di consultazione, sulla base dei dati disponibili al momento
+          della loro elaborazione. Oltre a quanto specifi cato nei capitoli
+          dedicati alle specifi che e criteri di elaborazione dei dati, i dati e
+          le informazioni esposti sono soggetti a periodiche revisioni,
+          aggiornamenti o integrazioni, che possono derivare da interventi
+          tecnici, operativi o normativi, senza che ciò implichi un obbligo di
+          preavviso o comunicazione nei confronti del Prestatore Aderente.</span
+        >
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          Sebbene venga posta la massima attenzione nella gestione e
+          nell&#39;aggiornamento delle informazioni, potrebbero verifi carsi
+          occasionali disallineamenti, variazioni o temporanee indisponibilit&agrave;.
+          In tale contesto, PagoPA S.p.A. non può garantire la costante
+          accuratezza e completezza dei dati esposti né assumere impegni in
+          merito alla loro continuit&agrave; e fruibilit&agrave; in ogni momento.
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          PagoPA S.p.A. si riserva il diritto di modifi care, sospendere o
+          interrompere l&#39;accesso al Servizio, in tutto o in parte, in qualsiasi
+          momento e senza preavviso, per esigenze tecniche, manutentive,
+          operative o di conformit&agrave; a nuove disposizioni normative, senza che
+          ciò comporti alcun obbligo di risarcimento o indennizzo a favore del
+          Prestatore Aderente.
+        </span>
+        <br />
+        <p style="margin-top: 20px"></p>
+        <b>
+          <li class="li-bullet-0">
+            <span class="text-style"> <b>ASSISTENZA E SUPPORTO</b>. </span>
+          </li>
+        </b>
+        <br />
+        <span class="text-style">
+          Per qualsiasi tipo di segnalazione, gli utenti possono accedere al
+          sito di Area Riservata (<a href="https://selfcare.pagopa.it"
+            >https://selfcare.pagopa.it</a
+          >) e cliccare sulla voce "Assistenza" in alto a destra.</span
+        >
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          Si consiglia di effettuare l&#39;accesso con SPID o CIE per compilare
+          correttamente il modulo web dedicato, che guida l&#39;utente nella
+          selezione del prodotto e della categoria della richiesta, facilitando
+          una gestione pi&ugrave; rapida ed effi cace dell&#39;assistenza.
+        </span>
+        <br />
+        <p style="margin-top: 10pt"></p>
+        <span class="text-style">
+          Se si accede senza autenticazione, sar&agrave; invece disponibile un form
+          mail precompilato con l&#39;indirizzo a cui inviare la richiesta.
         </span>
       </ol>
     </div>
