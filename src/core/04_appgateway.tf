@@ -195,7 +195,7 @@ module "app_gw" {
           rewrite_rule_set_name = null
         }
         auth_selc = {
-          paths                 = ["auth/*"]
+          paths                 = ["/auth/*"]
           backend               = "auth-selc"
           rewrite_rule_set_name = null
         }
