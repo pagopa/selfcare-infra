@@ -78,7 +78,7 @@ locals {
       port                        = 443
       ip_addresses                = null
       probe                       = "/q/health/live"
-      probe_name                  = "probe-hub-spid-selc"
+      probe_name                  = "probe-auth-selc"
       request_timeout             = 60
       fqdns                       = ["selc-${var.env_short}-auth-ms-ca.${var.auth_ms_private_dns_suffix}"]
       pick_host_name_from_backend = false
@@ -197,7 +197,7 @@ module "app_gw" {
         auth_selc = {
           paths                 = ["auth/*"]
           backend               = "auth-selc"
-          rewrite_rule_set_name = "rewrite-rule-set-auth-selc"
+          rewrite_rule_set_name = null
         }
       }
     }
