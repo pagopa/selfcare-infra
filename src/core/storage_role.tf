@@ -16,3 +16,10 @@ resource "azurerm_role_assignment" "storage_blob_contributor" {
   role_definition_name = "Storage Blob Data Contributor"
   principal_id       = data.azuread_group.adgroup_developers.object_id
 }
+
+
+resource "azurerm_role_assignment" "storage_blob_contributor_admin" {
+  scope              = data.azurerm_storage_account.tfstate.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id       = data.azuread_group.adgroup_admin.object_id
+}
