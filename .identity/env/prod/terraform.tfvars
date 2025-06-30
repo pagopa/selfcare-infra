@@ -259,7 +259,7 @@ environment_ci_roles_ms = {
     terraform-state-rg = [
       "Storage Blob Data Contributor"
     ],
-    "selc-p-contracts-storage-rg" = [
+    "selc-p-documents-storage-rg" = [
       "Storage Blob Data Contributor"
     ]
   }

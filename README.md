@@ -34,6 +34,12 @@ As PagoPA we build our standard Terraform modules, check available modules:
 
 ## Apply changes
 
+Before selecting the destination environment, it is necessary to set the environment variable.
+
+```sh
+export ARM_SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+```
+
 To apply changes follow the standard terraform lifecycle once the code in this repository has been changed:
 
 ```sh
