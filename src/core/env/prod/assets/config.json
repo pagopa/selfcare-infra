@@ -10,6 +10,11 @@
         "pricingPlan": "C0"
       }
     },
+    "prod-idpay-merchant": {
+      "merchantDetails": {
+        "atecoCodes": "47.43.00,95.11.00"
+      }
+    },
     "default": {
       "ipa": {
         "GSP": "L37,SAG",
