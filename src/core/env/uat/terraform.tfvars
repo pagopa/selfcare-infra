@@ -494,3 +494,5 @@ enable_load_tests_db = true
 
 cae_zone_redundant      = false
 cae_zone_redundant_pnpg = false
+
+auth_ms_private_dns_suffix = "mangopond-2a5d4d65.westeurope.azurecontainerapps.io"

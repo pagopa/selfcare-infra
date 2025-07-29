@@ -52,6 +52,16 @@ module "dns_forwarder_snet" {
   resource_group_name               = azurerm_resource_group.rg_vnet.name
   virtual_network_name              = module.vnet.name
   private_endpoint_network_policies = var.private_endpoint_network_policies
+
+  delegation = {
+    name = "delegation"
+    service_delegation = {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/action"
+      ]
+    }
+  }
 }
 
 module "dns_forwarder" {
@@ -92,6 +102,16 @@ module "dns_forwarder_pair_subnet" {
   resource_group_name               = azurerm_resource_group.rg_pair_vnet.name
   virtual_network_name              = module.vnet_pair.name
   private_endpoint_network_policies = var.private_endpoint_network_policies
+
+  delegation = {
+    name = "delegation"
+    service_delegation = {
+      name    = "Microsoft.ContainerInstance/containerGroups"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/action"
+      ]
+    }
+  }
 }
 
 output "subnet_pair_id" {

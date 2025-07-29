@@ -532,3 +532,5 @@ checkout_advanced_threat_protection_enabled = true
 
 cae_zone_redundant      = true
 cae_zone_redundant_pnpg = true
+
+auth_ms_private_dns_suffix = "lemonpond-bb0b750e.westeurope.azurecontainerapps.io"

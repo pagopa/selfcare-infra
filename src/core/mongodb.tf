@@ -157,7 +157,11 @@ locals {
               unique = false
             },
             {
-              keys   = ["to", "status", "type", "productId"]
+              keys   = ["to", "status", "type", "productId", "createdAt"]
+              unique = false
+            },
+            {
+              keys   = ["from", "status", "type", "productId", "createdAt"]
               unique = false
             }
           ]
