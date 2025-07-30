@@ -281,9 +281,9 @@ resource "azurerm_key_vault_secret" "selc_web_storage_blob_connection_string" {
   key_vault_id = module.key_vault.id
 }
 
-resource "azurerm_management_lock" "checkout_cdn_management_lock" {
-  name       = "selc-checkout-cdn-storage-lock"
-  scope      = module.checkout_cdn.id
-  lock_level = "CanNotDelete"
-  notes      = "This items can't be deleted in this subscription!"
-}
+# resource "azurerm_management_lock" "checkout_cdn_management_lock" {
+#   name       = "selc-checkout-cdn-storage-lock"
+#   scope      = module.checkout_cdn.id
+#   lock_level = "CanNotDelete"
+#   notes      = "This items can't be deleted in this subscription!"
+# } APZ
