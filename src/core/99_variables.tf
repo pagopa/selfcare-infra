@@ -26,8 +26,12 @@ locals {
   container_app_resource_group_name       = "container-app-rg"
 
   app_name_fn = "${local.project}-onboarding-fn"
-  
-  enable_upload_contracts = false
+
+  private_dns_zones = {
+    id                  = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
+    name                = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
+    resource_group_name = azurerm_resource_group.rg_vnet.name
+  }
 }
 
 
@@ -111,7 +115,7 @@ variable "vpn_sku" {
 
 variable "vpn_pip_sku" {
   type        = string
-  default     = "Basic"
+  default     = "Standard"
   description = "VPN GW PIP SKU"
 }
 
@@ -1076,7 +1080,26 @@ variable "cae_zone_redundant_pnpg" {
   description = "Container App Environment zone redudancy"
 }
 
+variable "private_endpoint_network_policies" {
+  type        = string
+  description = "Private endpoint network policies"
+  default     = "Enabled"
+}
+
+
+variable "evh_private_endpoint_network_policies" {
+  type        = string
+  description = "Private endpoint network policies"
+  default     = "Disabled"
+}
+
 variable "auth_ms_private_dns_suffix" {
   type        = string
   description = "Auth container app private DNS suffix"
+}
+
+variable "storage_account_replication_type" {
+  type        = string
+  default     = "ZRS"
+  description = "The storage account replication type (ZRS, GZRS, ...)"
 }

@@ -210,133 +210,7 @@ locals {
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 7,
       opsgenie                          = true
-    },
-    "Spid-registry" = {
-      host                              = "registry.spid.gov.it",
-      path                              = "/metadata/idp/spid-entities-idps.xml",
-      frequency                         = 900,
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "CIE-pnpg" = {
-      # CIE https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=xx_servizicie
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=xx_servizicie",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-arubaid-pnpg" = {
-      # SpidL2-arubaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=arubaid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=arubaid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-infocertid-pnpg" = {
-      # SpidL2-infocertid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocertid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=infocertid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-lepidaid-pnpg" = {
-      # SpidL2-lepidaid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=lepidaid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=lepidaid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-namirialid-pnpg" = {
-      # SpidL2-namirialid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=namirialid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=namirialid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-posteid-pnpg" = {
-      # SpidL2-posteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=posteid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=posteid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-sielteid-pnpg" = {
-      # SpidL2-sielteid https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=sielteid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=sielteid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-spiditalia-pnpg" = {
-      # SpidL2-spiditalia https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=spiditalia
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=spiditalia",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-etna-pnpg" = {
-      # SpidL2-etna https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=ehtid
-      name                              = "SpidL2-etna",
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=ehtid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-infocamere-pnpg" = {
-      # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=infocamereid
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=infocamereid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-intesiid-pnpg" = {
-      # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=intesiid
-      host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=intesiid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-timid-pnpg" = {
-      # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=timid
-      host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=timid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
-    "SpidL2-teamsystemid-pnpg" = {
-      # SpidL2-infocamere https://app-backend.io.italia.it/login?authLevel=SpidL2&entityID=teamsystemid
-      host                              = trimsuffix(azurerm_dns_a_record.dns_a_api.fqdn, "."),
-      path                              = "/spid/v1/login?authLevel=SpidL2&entityID=teamsystemid",
-      frequency                         = 900
-      expected_http_status              = 200,
-      ssl_cert_remaining_lifetime_check = 1,
-      opsgenie                          = false
-    },
+    }
   }
 
   test_urls_map_internal = {
@@ -367,15 +241,8 @@ locals {
       expected_http_status              = 200,
       ssl_cert_remaining_lifetime_check = 7,
       opsgenie                          = false
-    },
-    "TestEnv-pnpg" = {
-      host                              = trimsuffix(azurerm_dns_a_record.public_api_pnpg.fqdn, "."),
-      path                              = "/spid/v1/login?entityID=xx_testenv2&authLevel=SpidL2",
-      frequency                         = 900,
-      expected_http_status              = 308,
-      ssl_cert_remaining_lifetime_check = 7,
-      opsgenie                          = false
     }
+
   }
 }
 
@@ -384,7 +251,7 @@ module "web_test_api" {
   for_each = var.env_short == "p" ? local.test_urls_map : local.test_urls_map_internal
   # for_each = { for v in local.test_urls : v.host => v if v != null }
 
-  source = "github.com/pagopa/terraform-azurerm-v3.git//application_insights_web_test_preview?ref=v7.50.1"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//application_insights_web_test_preview?ref=v6.6.0"
 
   subscription_id                   = data.azurerm_subscription.current.subscription_id
   name                              = "${each.key}-test"
@@ -415,7 +282,7 @@ module "web_test_api" {
   ]
 }
 
-resource "azurerm_dashboard" "monitoring-dashboard" {
+resource "azurerm_portal_dashboard" "monitoring-dashboard" {
   name                = "${local.project}-monitoring-dashboard"
   resource_group_name = azurerm_resource_group.monitor_rg.name
   location            = azurerm_resource_group.monitor_rg.location
@@ -444,7 +311,7 @@ resource "azurerm_monitor_metric_alert" "functions_exceptions" {
     metric_name      = "exceptions/count"
     aggregation      = "Count"
     operator         = "GreaterThan"
-    threshold        = 4
+    threshold        = 2
 
     dimension {
       name     = "cloud/roleName"

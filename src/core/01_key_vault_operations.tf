@@ -1,6 +1,6 @@
 # JWT
 # module "jwt" {
-#   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v6.6.0"
 
 #   jwt_name            = "jwt"
 #   key_vault_id        = module.key_vault.id
@@ -8,11 +8,11 @@
 #   cert_password       = ""
 #   tags                = var.tags
 #   early_renewal_hours = 0
-#   cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+#   # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
 # }
 
 # module "jwt_exchange" {
-#   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v6.6.0"
 
 #   jwt_name            = "jwt-exchange"
 #   key_vault_id        = module.key_vault.id
@@ -20,13 +20,13 @@
 #   cert_password       = ""
 #   tags                = var.tags
 #   early_renewal_hours = 0
-#   cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
+#   # cert_allowed_uses   = ["crl_signing", "data_encipherment", "digital_signature", "key_agreement", "cert_signing", "key_encipherment"]
 # }
 
 # module "agid_spid" {
 #   count = var.env_short == "p" ? 0 : 1
 
-#   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
 #   jwt_name          = "agid-spid"
 #   key_vault_id      = module.key_vault.id
@@ -40,7 +40,7 @@
 # module "agid_login" {
 #   count = var.env_short == "p" ? 0 : 1
 
-#   source = "github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
+#   source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=jwt_cert_allowed_uses_as_variable"
 
 #   jwt_name                 = "agid-login"
 #   key_vault_id             = module.key_vault.id

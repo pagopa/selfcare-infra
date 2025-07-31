@@ -6,17 +6,17 @@ resource "azurerm_resource_group" "event_rg" {
 }
 
 module "eventhub_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
-  name                                      = "${local.project}-eventhub-snet"
-  address_prefixes                          = var.cidr_subnet_eventhub
-  resource_group_name                       = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                      = module.vnet.name
-  service_endpoints                         = ["Microsoft.EventHub"]
-  private_endpoint_network_policies_enabled = true
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
+  name                              = "${local.project}-eventhub-snet"
+  address_prefixes                  = var.cidr_subnet_eventhub
+  resource_group_name               = azurerm_resource_group.rg_vnet.name
+  virtual_network_name              = module.vnet.name
+  service_endpoints                 = ["Microsoft.EventHub"]
+  private_endpoint_network_policies = var.private_endpoint_network_policies
 }
 
 module "event_hub" {
-  source                   = "github.com/pagopa/terraform-azurerm-v3.git//eventhub?ref=v7.50.1"
+  source                   = "github.com/pagopa/terraform-azurerm-v4.git//eventhub?ref=v6.6.0"
   name                     = "${local.project}-eventhub-ns"
   location                 = var.location
   resource_group_name      = azurerm_resource_group.event_rg.name
@@ -24,28 +24,26 @@ module "event_hub" {
   sku                      = var.eventhub_sku_name
   capacity                 = var.eventhub_capacity
   maximum_throughput_units = var.eventhub_maximum_throughput_units
-  zone_redundant           = var.eventhub_zone_redundant
-
-  virtual_network_ids = [module.vnet.id]
-  subnet_id           = module.eventhub_snet.id
-
+  
+  private_endpoint_subnet_id     = module.eventhub_snet.id
   private_dns_zone_record_A_name = null
   public_network_access_enabled  = true
+  private_endpoint_created       = true
   eventhubs                      = var.eventhubs
-
+  
+  private_endpoint_resource_group_name = azurerm_resource_group.event_rg.name
+  
   network_rulesets = [
     {
       default_action                 = "Deny",
       virtual_network_rule           = [],
       ip_rule                        = var.eventhub_ip_rules
       trusted_service_access_enabled = false
+      public_network_access_enabled  = true
     }
   ]
 
-  private_dns_zones = {
-    id   = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.id]
-    name = [azurerm_private_dns_zone.privatelink_servicebus_windows_net.name]
-  }
+  private_dns_zones = local.private_dns_zones
 
   alerts_enabled = var.eventhub_alerts_enabled
   metric_alerts  = var.eventhub_metric_alerts
@@ -64,6 +62,29 @@ module "event_hub" {
       webhook_properties = null
     }
   ]
+
+  tags = var.tags
+}
+
+#
+# Private dns zone
+#
+# Create a Private DNS zone
+resource "azurerm_private_dns_zone" "eventhub" {
+  count = (var.eventhub_sku_name != "Basic" && length(local.private_dns_zones.id) == 0) ? 1 : 0
+
+  name                = "privatelink.servicebus.windows.net"
+  resource_group_name = azurerm_resource_group.event_rg.name
+}
+
+# virtual_network_ids      = [module.vnet.id]
+resource "azurerm_private_dns_zone_virtual_network_link" "eventhub" {
+  count = (var.eventhub_sku_name != "Basic" && length(local.private_dns_zones.id) == 0) ? length([module.vnet.id]) : 0
+
+  name                  = format("%s-private-dns-zone-link-%02d", "${local.project}-eventhub-ns", count.index + 1)
+  resource_group_name   = azurerm_resource_group.event_rg.name
+  private_dns_zone_name = azurerm_private_dns_zone.eventhub[0].name
+  virtual_network_id    = [module.vnet.id][count.index]
 
   tags = var.tags
 }

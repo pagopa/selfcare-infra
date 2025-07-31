@@ -72,7 +72,7 @@ resource "azurerm_container_group" "spid_testenv" {
       http_get {
         path   = "/"
         port   = 8088
-        scheme = "Http"
+        scheme = "http"
       }
       initial_delay_seconds = 30
       timeout_seconds       = 4
@@ -82,7 +82,7 @@ resource "azurerm_container_group" "spid_testenv" {
       http_get {
         path   = "/"
         port   = 8088
-        scheme = "Http"
+        scheme = "http"
       }
       initial_delay_seconds = 900
       timeout_seconds       = 4

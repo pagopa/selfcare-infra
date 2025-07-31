@@ -6,8 +6,9 @@ resource "null_resource" "upload_contract_templates" {
   provisioner "local-exec" {
     command = <<EOT
               az storage copy \
-                --connection-string '${data.azurerm_key_vault_secret.selc_documents_storage_connection_string.value}' \
-                --container 'sc-${var.env_short}-documents-blob' \
+                --account-name ${module.selc-contracts-storage.name} \
+                --account-key "${module.selc-contracts-storage.primary_access_key}" \
+                --destination-container ${azurerm_storage_container.selc-contracts-container.name} \
                 --source "./contracts_template/*" \
                 --recursive
           EOT

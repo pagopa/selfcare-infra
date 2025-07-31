@@ -245,6 +245,9 @@ environment_cd_roles = {
   resource_groups = {
     "selc-p-aks-rg" = [
       "Azure Kubernetes Service Cluster Admin Role"
+    ],
+    "selc-p-cosmosdb-mongodb-rg": [
+      "PagoPA Resource Lock Contributor"
     ]
   }
 }

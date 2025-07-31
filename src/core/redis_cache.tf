@@ -1,11 +1,11 @@
 ## Database subnet
 module "redis_snet" {
-  source                                    = "github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v7.50.1"
-  name                                      = format("%s-redis-snet", local.project)
-  address_prefixes                          = var.cidr_subnet_redis
-  resource_group_name                       = azurerm_resource_group.rg_vnet.name
-  virtual_network_name                      = module.vnet.name
-  private_endpoint_network_policies_enabled = true
+  source                            = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
+  name                              = format("%s-redis-snet", local.project)
+  address_prefixes                  = var.cidr_subnet_redis
+  resource_group_name               = azurerm_resource_group.rg_vnet.name
+  virtual_network_name              = module.vnet.name
+  private_endpoint_network_policies = var.private_endpoint_network_policies
 
   service_endpoints = [
     "Microsoft.Web",
@@ -13,7 +13,7 @@ module "redis_snet" {
 }
 
 module "redis" {
-  source                        = "github.com/pagopa/terraform-azurerm-v3.git//redis_cache?ref=v7.50.1"
+  source                        = "github.com/pagopa/terraform-azurerm-v4.git//redis_cache?ref=v6.6.0"
   name                          = format("%s-redis", local.project)
   resource_group_name           = azurerm_resource_group.data.name
   location                      = azurerm_resource_group.data.location
@@ -22,7 +22,7 @@ module "redis" {
   family                        = var.redis_family
   sku_name                      = var.redis_sku_name
   public_network_access_enabled = !var.redis_private_endpoint_enabled
-  zones                         = [1, 2, 3]
+
   private_endpoint = {
     enabled              = var.redis_private_endpoint_enabled
     virtual_network_id   = azurerm_resource_group.rg_vnet.id
