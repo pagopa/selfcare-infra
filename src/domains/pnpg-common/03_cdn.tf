@@ -45,7 +45,7 @@ locals {
 // public storage used to serve FE
 #tfsec:ignore:azure-storage-default-action-deny
 module "pnpg_checkout_cdn" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn?ref=v5.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cdn?ref=v6.6.0"
 
   name                  = "checkout"
   prefix                = local.project
@@ -53,7 +53,6 @@ module "pnpg_checkout_cdn" {
   location              = var.location
   hostname              = "${var.domain}.${var.dns_zone_prefix}.${var.external_domain}"
   https_rewrite_enabled = true
-  lock_enabled          = false
 
   index_document     = "index.html"
   error_404_document = "error.html"
@@ -64,6 +63,7 @@ module "pnpg_checkout_cdn" {
   keyvault_vault_name          = module.key_vault_pnpg.name
   keyvault_resource_group_name = module.key_vault_pnpg.resource_group_name
   keyvault_subscription_id     = data.azurerm_subscription.current.subscription_id
+  log_analytics_workspace_id   = data.azurerm_log_analytics_workspace.log_analytics.id
 
   querystring_caching_behaviour = "BypassCaching"
 

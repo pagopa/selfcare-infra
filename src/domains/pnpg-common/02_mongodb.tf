@@ -14,18 +14,18 @@ locals {
 
 # cosmosdb-Mongo subnet
 module "cosmosdb_mongodb_snet" {
-  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
+  source               = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
   name                 = "${local.project}-cosmosb-mongodb-snet"
   resource_group_name  = local.vnet_core_resource_group_name
   virtual_network_name = local.vnet_core_name
   address_prefixes     = var.cidr_subnet_pnpg_cosmosdb_mongodb
 
-  private_endpoint_network_policies_enabled = true
-  service_endpoints                         = ["Microsoft.Web"]
+  private_endpoint_network_policies = var.private_endpoint_network_policies
+  service_endpoints                 = ["Microsoft.Web"]
 }
 
 module "cosmosdb_account_mongodb" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account?ref=v5.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_account?ref=v6.6.0"
 
   name                 = "${local.project}-cosmosdb-mongodb-account"
   location             = azurerm_resource_group.mongodb_rg.location
@@ -33,7 +33,7 @@ module "cosmosdb_account_mongodb" {
   offer_type           = var.cosmosdb_mongodb_offer_type
   kind                 = "MongoDB"
   capabilities         = concat(["EnableMongo"], var.cosmosdb_mongodb_extra_capabilities)
-  mongo_server_version = "4.2"
+  mongo_server_version = "7.0"
   enable_free_tier     = var.cosmosdb_mongodb_enable_free_tier
 
   domain = var.domain
@@ -41,7 +41,9 @@ module "cosmosdb_account_mongodb" {
   public_network_access_enabled     = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
   private_endpoint_enabled          = var.cosmosdb_mongodb_private_endpoint_enabled
   subnet_id                         = module.cosmosdb_mongodb_snet.id
-  private_dns_zone_ids              = var.cosmosdb_mongodb_private_endpoint_enabled ? [data.azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id] : []
+  private_dns_zone_mongo_ids = var.cosmosdb_mongodb_private_endpoint_enabled ? [
+    data.azurerm_private_dns_zone.privatelink_mongo_cosmos_azure_com.id
+  ] : []
   is_virtual_network_filter_enabled = true
 
   consistency_policy = var.cosmosdb_mongodb_consistency_policy
@@ -62,7 +64,7 @@ module "cosmosdb_account_mongodb" {
 #tfsec:ignore:AZU023
 resource "azurerm_key_vault_secret" "cosmosdb_account_mongodb_connection_strings" {
   name         = "mongodb-connection-string"
-  value        = module.cosmosdb_account_mongodb.connection_strings[0]
+  value        = module.cosmosdb_account_mongodb.primary_connection_strings
   content_type = "text/plain"
 
   key_vault_id = module.key_vault_pnpg.id
@@ -131,7 +133,7 @@ locals {
 }
 
 module "selc_ms_core_collections" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection?ref=v5.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_mongodb_collection?ref=v6.6.0"
 
   for_each = {
     for index, coll in local.mongo.selcMsCore.collections :

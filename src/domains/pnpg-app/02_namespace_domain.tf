@@ -4,19 +4,19 @@ resource "kubernetes_namespace" "domain_namespace" {
   }
 }
 
-module "domain_pod_identity" {
-  source              = "git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_pod_identity?ref=v4.1.17"
-  resource_group_name = local.aks_resource_group_name
-  location            = var.location
-  tenant_id           = data.azurerm_subscription.current.tenant_id
-  cluster_name        = local.aks_name
+# module "domain_pod_identity" {
+#   source              = "github.com/pagopa/terraform-azurerm-v4.git//kubernetes_pod_identity?ref=v6.6.0"
+#   resource_group_name = local.aks_resource_group_name
+#   location            = var.location
+#   tenant_id           = data.azurerm_subscription.current.tenant_id
+#   cluster_name        = local.aks_name
 
-  identity_name = "${var.domain}-pod-identity"
-  namespace     = kubernetes_namespace.domain_namespace.metadata[0].name
-  key_vault_id  = data.azurerm_key_vault.kv_domain.id
+#   identity_name = "${var.domain}-pod-identity"
+#   namespace     = kubernetes_namespace.domain_namespace.metadata[0].name
+#   key_vault_id  = data.azurerm_key_vault.kv_domain.id
 
-  secret_permissions = ["Get"]
-}
+#   secret_permissions = ["Get"]
+# }
 
 resource "helm_release" "reloader" {
   name       = "reloader"
