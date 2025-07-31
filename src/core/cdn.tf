@@ -58,6 +58,8 @@ module "checkout_cdn" {
   https_rewrite_enabled = true
   # lock_enabled          = var.lock_enable apz
   
+  storage_account_replication_type = var.storage_account_replication_type
+
   log_analytics_workspace_id = azurerm_log_analytics_workspace.log_analytics_workspace.id
 
   index_document     = "index.html"

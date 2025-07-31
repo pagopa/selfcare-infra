@@ -144,6 +144,9 @@ cosmosdb_mongodb_additional_geo_locations = [{
   zone_redundant    = false
 }]
 
+# cdn storage
+storage_account_replication_type = "GZRS"
+
 
 # contracts storage
 contracts_account_replication_type   = "RAGZRS"

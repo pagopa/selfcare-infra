@@ -1097,3 +1097,9 @@ variable "auth_ms_private_dns_suffix" {
   type        = string
   description = "Auth container app private DNS suffix"
 }
+
+variable "storage_account_replication_type" {
+  type        = string
+  default     = "ZRS"
+  description = "The storage account replication type (ZRS, GZRS, ...)"
+}
