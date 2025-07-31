@@ -12,9 +12,9 @@ on:
         required: true
 
 env:
-  STORAGE_ACCOUNT_NAME: "selc${{ inputs.environment_short }}contractsstorage"
+  STORAGE_ACCOUNT_NAME: "sc${{ inputs.environment_short }}weuardocumentsst01"
   STORAGE_CONTAINER: "sc-${{ inputs.environment_short }}-documents-blob"
-  STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-contracts-storage-rg"  
+  STORAGE_ACCOUNT_RG: "selc-${{ inputs.environment_short }}-documents-storage-rg"  
   ARM_USE_OIDC: true
   ARM_USE_AZUREAD: true
   ARM_STORAGE_USE_AZUREAD: true

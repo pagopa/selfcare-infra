@@ -147,3 +147,8 @@ resource "azurerm_user_assigned_identity" "appgateway" {
 
   tags = var.tags
 }
+
+data "azurerm_key_vault_secret" "selc_documents_storage_connection_string" {
+  name         = "documents-storage-connection-string"
+  key_vault_id = module.key_vault.id
+}

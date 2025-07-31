@@ -6,6 +6,7 @@ data "azurerm_storage_account" "tfstate" {
 # Container per lo stato Terraform
 data "azurerm_storage_container" "tfstate" {
   name                  = "terraform-state"
+  storage_account_name  = data.azurerm_storage_account.tfstate.name
 }
 
 # Assegna il ruolo al service principal corrente
