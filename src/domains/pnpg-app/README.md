@@ -13,9 +13,9 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_domain_pod_identity"></a> [domain\_pod\_identity](#module\_domain\_pod\_identity) | git::https://github.com/pagopa/terraform-azurerm-v3.git//kubernetes_pod_identity | v4.1.17 |
-| <a name="module_key_vault_secrets_query"></a> [key\_vault\_secrets\_query](#module\_key\_vault\_secrets\_query) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault_secrets_query | v5.1.0 |
-| <a name="module_tls_checker"></a> [tls\_checker](#module\_tls\_checker) | git::https://github.com/pagopa/terraform-azurerm-v3.git//tls_checker | v6.7.0 |
+| <a name="module_domain_pod_identity"></a> [domain\_pod\_identity](#module\_domain\_pod\_identity) | github.com/pagopa/terraform-azurerm-v4.git//kubernetes_pod_identity | v6.6.0 |
+| <a name="module_key_vault_secrets_query"></a> [key\_vault\_secrets\_query](#module\_key\_vault\_secrets\_query) | github.com/pagopa/terraform-azurerm-v4.git//key_vault_secrets_query | v6.6.0 |
+| <a name="module_tls_checker"></a> [tls\_checker](#module\_tls\_checker) | github.com/pagopa/terraform-azurerm-v4.git//tls_checker | v6.6.0 |
 
 ## Resources
 

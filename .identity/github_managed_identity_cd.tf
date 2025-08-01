@@ -1,5 +1,5 @@
 module "identity_cd" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
+  source = "github.com/pagopa/terraform-azurerm-v4//github_federated_identity?ref=v7.26.5"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -22,7 +22,7 @@ module "identity_cd" {
 }
 
 module "identity_cd_ms" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
+  source = "github.com/pagopa/terraform-azurerm-v4//github_federated_identity?ref=v7.26.5"
 
   prefix    = var.prefix
   env_short = var.env_short
@@ -74,7 +74,7 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identit
 }
 
 module "identity_cd_fe" {
-  source = "github.com/pagopa/terraform-azurerm-v3//github_federated_identity?ref=v8.49.1"
+  source = "github.com/pagopa/terraform-azurerm-v4//github_federated_identity?ref=v7.26.5"
 
   prefix    = var.prefix
   env_short = var.env_short

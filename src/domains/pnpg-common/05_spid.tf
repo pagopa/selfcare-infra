@@ -1,5 +1,5 @@
 module "spid_logs_encryption_keys" {
-  source = "git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys?ref=v5.3.0"
+  source = "github.com/pagopa/terraform-azurerm-v4.git//jwt_keys?ref=v6.6.0"
 
   jwt_name         = "spid-logs-encryption"
   key_vault_id     = module.key_vault_pnpg.id

@@ -30,8 +30,7 @@ ingress_load_balancer_ip       = "10.11.100.250"
 ingress_load_balancer_hostname = "dev01.pnpg.internal.dev.selfcare.pagopa.it"
 ca_suffix_dns_private_name     = "victoriousfield-e39534b8.westeurope.azurecontainerapps.io"
 reverse_proxy_be_io            = "10.1.0.250"
-# This is the k8s ingress controller ip. It must be in the aks subnet range.
-reverse_proxy_ip = "10.11.100.250"
+
 #
 # Dns
 #

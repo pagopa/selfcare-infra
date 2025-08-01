@@ -259,3 +259,8 @@ variable "cidr_subnet_logs_storage" {
   description = "Logs storage address space."
 }
 
+variable "private_endpoint_network_policies" {
+  type        = string
+  description = "Private endpoint network policies"
+  default     = "Enabled"
+}

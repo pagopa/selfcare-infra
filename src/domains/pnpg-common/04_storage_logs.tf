@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg_logs_storage" {
 
 #tfsec:ignore:azure-storage-default-action-deny
 module "selc_logs_storage" {
-  source                          = "git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account?ref=v5.3.0"
+  source                          = "github.com/pagopa/terraform-azurerm-v4.git//storage_account?ref=v6.6.0"
   name                            = replace("${local.project}-st-logs", "-", "")
   account_kind                    = "StorageV2"
   account_tier                    = "Standard"
@@ -19,8 +19,8 @@ module "selc_logs_storage" {
   location                        = var.location
   advanced_threat_protection      = var.logs_advanced_threat_protection
   allow_nested_items_to_be_public = false
-
-  blob_delete_retention_days = var.logs_delete_retention_days
+  public_network_access_enabled   = false
+  blob_delete_retention_days      = var.logs_delete_retention_days
 
   tags = var.tags
 }
@@ -85,7 +85,7 @@ resource "azurerm_private_endpoint" "logs_storage" {
 }
 
 module "logs_storage_snet" {
-  source               = "git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet?ref=v5.3.0"
+  source               = "github.com/pagopa/terraform-azurerm-v4.git//subnet?ref=v6.6.0"
   name                 = "${local.project}-logs-storage-snet"
   address_prefixes     = var.cidr_subnet_logs_storage
   resource_group_name  = data.azurerm_virtual_network.vnet_core.resource_group_name

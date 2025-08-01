@@ -35,9 +35,6 @@ locals {
 
   vnet_core_name                = "${local.product}-vnet"
   vnet_core_resource_group_name = "${local.product}-vnet-rg"
-  # DOMAINS
-  system_domain_namespace = kubernetes_namespace.system_domain_namespace.metadata[0].name
-  domain_namespace        = kubernetes_namespace.domain_namespace.metadata[0].name
 
   # Service account
   azure_devops_app_service_account_name        = "azure-devops"
@@ -154,11 +151,6 @@ variable "aks_resource_group_name" {
 
 }
 
-variable "k8s_kube_config_path_prefix" {
-  type    = string
-  default = "~/.kube"
-}
-
 variable "ingress_load_balancer_ip" {
   type = string
 }
@@ -172,11 +164,6 @@ variable "ca_suffix_dns_private_name" {
   description = "CA suffix private DNS record"
 }
 
-variable "reverse_proxy_ip" {
-  type        = string
-  default     = "127.0.0.1"
-  description = "AKS external ip. Also the ingress-nginx-controller external ip. Value known after installing the ingress controller."
-}
 
 # DNS
 variable "external_domain" {

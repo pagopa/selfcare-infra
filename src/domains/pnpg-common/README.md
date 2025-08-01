@@ -12,20 +12,20 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | refs/remotes/origin/jwt_cert_allowed_uses_as_variable |
-| <a name="module_cosmosdb_account_mongodb"></a> [cosmosdb\_account\_mongodb](#module\_cosmosdb\_account\_mongodb) | git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_account | v5.3.0 |
-| <a name="module_cosmosdb_mongodb_snet"></a> [cosmosdb\_mongodb\_snet](#module\_cosmosdb\_mongodb\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v5.3.0 |
-| <a name="module_jwt_auth"></a> [jwt\_auth](#module\_jwt\_auth) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
-| <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
-| <a name="module_key_vault_pnpg"></a> [key\_vault\_pnpg](#module\_key\_vault\_pnpg) | git::https://github.com/pagopa/terraform-azurerm-v3.git//key_vault | v5.3.0 |
-| <a name="module_logs_storage_snet"></a> [logs\_storage\_snet](#module\_logs\_storage\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v5.3.0 |
-| <a name="module_pnpg_checkout_cdn"></a> [pnpg\_checkout\_cdn](#module\_pnpg\_checkout\_cdn) | git::https://github.com/pagopa/terraform-azurerm-v3.git//cdn | v5.3.0 |
-| <a name="module_redis"></a> [redis](#module\_redis) | git::https://github.com/pagopa/terraform-azurerm-v3.git//redis_cache | v5.3.0 |
-| <a name="module_redis_snet"></a> [redis\_snet](#module\_redis\_snet) | git::https://github.com/pagopa/terraform-azurerm-v3.git//subnet | v5.3.0 |
-| <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | git::https://github.com/pagopa/terraform-azurerm-v3.git//storage_account | v5.3.0 |
-| <a name="module_selc_ms_core_collections"></a> [selc\_ms\_core\_collections](#module\_selc\_ms\_core\_collections) | git::https://github.com/pagopa/terraform-azurerm-v3.git//cosmosdb_mongodb_collection | v5.3.0 |
+| <a name="module_agid_spid"></a> [agid\_spid](#module\_agid\_spid) | github.com/pagopa/terraform-azurerm-v4.git//jwt_keys | refs/remotes/origin/jwt_cert_allowed_uses_as_variable |
+| <a name="module_cosmosdb_account_mongodb"></a> [cosmosdb\_account\_mongodb](#module\_cosmosdb\_account\_mongodb) | github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_account | v5.3.0 |
+| <a name="module_cosmosdb_mongodb_snet"></a> [cosmosdb\_mongodb\_snet](#module\_cosmosdb\_mongodb\_snet) | github.com/pagopa/terraform-azurerm-v4.git//subnet | v5.3.0 |
+| <a name="module_jwt_auth"></a> [jwt\_auth](#module\_jwt\_auth) | github.com/pagopa/terraform-azurerm-v4.git//jwt_keys | v5.3.0 |
+| <a name="module_jwt_exchange"></a> [jwt\_exchange](#module\_jwt\_exchange) | github.com/pagopa/terraform-azurerm-v4.git//jwt_keys | v5.3.0 |
+| <a name="module_key_vault_pnpg"></a> [key\_vault\_pnpg](#module\_key\_vault\_pnpg) | github.com/pagopa/terraform-azurerm-v4.git//key_vault | v5.3.0 |
+| <a name="module_logs_storage_snet"></a> [logs\_storage\_snet](#module\_logs\_storage\_snet) | github.com/pagopa/terraform-azurerm-v4.git//subnet | v5.3.0 |
+| <a name="module_pnpg_checkout_cdn"></a> [pnpg\_checkout\_cdn](#module\_pnpg\_checkout\_cdn) | github.com/pagopa/terraform-azurerm-v4.git//cdn | v5.3.0 |
+| <a name="module_redis"></a> [redis](#module\_redis) | github.com/pagopa/terraform-azurerm-v4.git//redis_cache | v5.3.0 |
+| <a name="module_redis_snet"></a> [redis\_snet](#module\_redis\_snet) | github.com/pagopa/terraform-azurerm-v4.git//subnet | v5.3.0 |
+| <a name="module_selc_logs_storage"></a> [selc\_logs\_storage](#module\_selc\_logs\_storage) | github.com/pagopa/terraform-azurerm-v4.git//storage_account | v5.3.0 |
+| <a name="module_selc_ms_core_collections"></a> [selc\_ms\_core\_collections](#module\_selc\_ms\_core\_collections) | github.com/pagopa/terraform-azurerm-v4.git//cosmosdb_mongodb_collection | v5.3.0 |
 | <a name="module_spid-test-env"></a> [spid-test-env](#module\_spid-test-env) | ./modules/spid_testenv | n/a |
-| <a name="module_spid_logs_encryption_keys"></a> [spid\_logs\_encryption\_keys](#module\_spid\_logs\_encryption\_keys) | git::https://github.com/pagopa/terraform-azurerm-v3.git//jwt_keys | v5.3.0 |
+| <a name="module_spid_logs_encryption_keys"></a> [spid\_logs\_encryption\_keys](#module\_spid\_logs\_encryption\_keys) | github.com/pagopa/terraform-azurerm-v4.git//jwt_keys | v5.3.0 |
 
 ## Resources
 
