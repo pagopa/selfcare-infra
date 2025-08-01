@@ -18,6 +18,8 @@ resource "azurerm_container_app_environment" "cae_selc" {
       maximum_count         = workload_profile.value.maximum_count
     }
   }
+
+  tags = var.tags
 }
 
 resource "azurerm_management_lock" "lock_selc_cae" {
@@ -25,4 +27,21 @@ resource "azurerm_management_lock" "lock_selc_cae" {
   name       = "${var.project}-cae"
   notes      = "This Container App Environment cannot be deleted"
   scope      = azurerm_container_app_environment.cae_selc.id
+}
+
+
+resource "azurerm_user_assigned_identity" "cae_identity_selc" {
+  name                = "${var.selc_cae_name}-managed_identity"
+  location            = var.location
+  resource_group_name = var.selc_resource_group_name
+
+  tags = var.tags
+}
+
+resource "azurerm_management_lock" "identity_lock_selc" {
+  name       = azurerm_user_assigned_identity.cae_identity_selc.name
+  scope      = azurerm_user_assigned_identity.cae_identity_selc.id
+  lock_level = "CanNotDelete"
+
+  notes = "Lock for the user-assigned managed identity"
 }
