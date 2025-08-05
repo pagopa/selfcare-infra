@@ -232,9 +232,6 @@ environment_ci_roles = {
     ],
     "selc-u-contracts-storage-rg" = [
       "Storage Blob Data Contributor"
-    ],
-    "selc-u-logs-storage-rg" = [
-      "Storage Blob Data Contributor"
     ]
   }
 }
