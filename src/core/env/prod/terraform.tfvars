@@ -346,6 +346,10 @@ eventhub_ip_rules = [
   { //PROD-SMA
     ip_mask = "10.20.7.0/27",
     action  = "Allow"
+  },
+  {  // piattaforma-unitaria
+    ip_mask = "172.213.249.249",
+    action  = "Allow"
   }
 ]
 
@@ -360,7 +364,7 @@ eventhubs = [{
   name              = "SC-Contracts"
   partitions        = 30
   message_retention = 7
-  consumers         = ["conservazione", "interceptor", "datalake"]
+  consumers         = ["conservazione", "interceptor", "datalake", "piattaforma-unitaria"]
   iam_roles = {
     "ee71d0ec-0023-44ae-93dd-871d25ab7003" = "Azure Event Hubs Data Receiver" # io-p-sign-backoffice-func
   }
@@ -424,6 +428,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "piattaforma-unitaria"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   }, {
@@ -467,7 +477,7 @@ eventhubs = [{
   name              = "SC-Users"
   partitions        = 10
   message_retention = 7
-  consumers         = ["datalake", "interop"]
+  consumers         = ["datalake", "interop", "piattaforma-unitaria"]
   keys = [
     {
       name   = "selfcare-wo"
@@ -498,6 +508,12 @@ eventhubs = [{
       listen = true
       send   = false
       manage = false
+    },
+    {
+      name   = "piattaforma-unitaria"
+      listen = true
+      send   = false
+      manage = false
     }
   ]
   },
@@ -505,7 +521,7 @@ eventhubs = [{
     name              = "SC-UserGroups"
     partitions        = 10
     message_retention = 7
-    consumers         = ["io-cms-sync"]
+    consumers         = ["io-cms-sync", "piattaforma-unitaria"]
     keys = [
       {
         name   = "selfcare-wo"
@@ -515,6 +531,12 @@ eventhubs = [{
       },
       {
         name   = "io"
+        listen = true
+        send   = false
+        manage = false
+      },
+      {
+        name   = "piattaforma-unitaria"
         listen = true
         send   = false
         manage = false

@@ -241,6 +241,10 @@ eventhub_ip_rules = [
   { // KONECTA
     ip_mask = "185.170.36.80",
     action  = "Allow"
+  },
+  { // piattaforma-unitaria
+    ip_mask = "4.232.15.12",
+    action  = "Allow"
   }
 ]
 
