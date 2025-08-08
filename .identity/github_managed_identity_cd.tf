@@ -33,7 +33,7 @@ module "identity_cd_ms" {
   github_federations = var.cd_github_federations_ms
 
   cd_rbac_roles = {
-    subscription_roles = var.environment_cd_roles_ms.subscription
+    subscription_roles = concat(var.environment_cd_roles_ms.subscription, [azurerm_role_definition.container_apps_jobs_writer.name])
     resource_groups    = var.environment_cd_roles_ms.resource_groups
   }
 
@@ -120,5 +120,21 @@ resource "azurerm_key_vault_access_policy" "key_vault_access_policy_pnpg_identit
   secret_permissions = [
     "Get",
     "List",
+  ]
+}
+
+resource "azurerm_role_definition" "container_apps_jobs_writer" {
+  name        = "SelfCare ${var.env} ContainerApp Jobs Writer"
+  scope       = data.azurerm_subscription.current.id
+  description = "Custom role used to write container apps jobs execution properties"
+
+  permissions {
+    actions = [
+      "Microsoft.Authorization/roleDefinitions/write"
+    ]
+  }
+
+  assignable_scopes = [
+    data.azurerm_subscription.current.id
   ]
 }
