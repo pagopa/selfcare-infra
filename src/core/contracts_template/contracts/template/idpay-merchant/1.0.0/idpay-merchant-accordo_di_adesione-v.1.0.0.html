@@ -1099,15 +1099,15 @@
         <p class="c17 c43"><span class="c18"></span></p>
         <p class="c1 c30">
             <span class="c6"
-                >Il soggetto scrivente ______________, con sede legale in ______________, codice fiscale
-                ___________________ / partita IVA ______________, nella persona del legale rappresentante </span
+                >Il soggetto scrivente ${institutionName}, con sede legale in ${address} - ${zipCode}, codice fiscale
+                ${institutionTaxCode} / partita IVA ${institutionVatNumber}, nella persona del legale rappresentante </span
             ><span class="c14 c55">pro tempore </span
             ><span class="c6"
-                >o di altro soggetto avente poteri di firma ______________, iscritto al registro delle imprese di
-                _________________________________________ (da valorizzare solo se esistente), REA ___________________
-                (da valorizzare solo se esistente), capitale sociale ___________________________ (da compilare solo se
+                >o di altro soggetto avente poteri di firma ${managerName} ${managerSurname}, iscritto al registro delle imprese di
+                ${institutionBusinessRegisterPlace} (da valorizzare solo se esistente), REA ${institutionREA}
+                (da valorizzare solo se esistente), capitale sociale ${institutionShareCapital} (da compilare solo se
                 il soggetto scrivente &egrave; costituito sotto forma di societ&agrave; di capitali), indirizzo PEC
-                _____________________________________________________________________, ulteriori dati utili ai fini
+                ${institutionMail}, ulteriori dati utili ai fini
                 dell</span
             ><span class="c14">a eventuale</span
             ><span class="c6"
@@ -1115,7 +1115,7 @@
                 _________________________________________________________________________________,</span
             >
         </p>
-        <p class="c1 c30"><span class="c14">IBAN e soggetto intestatario _______________,</span></p>
+        <p class="c1 c30"><span class="c14">IBAN e soggetto intestatario ${holder-iban} - ${holder},</span></p>
         <p class="c1 c30">
             <span class="c14">(</span><span class="c6">di seguito </span><span class="c14">il &ldquo;</span
             ><span class="c14">Venditore</span><span class="c6">&rdquo; o </span
@@ -1789,7 +1789,6 @@
                     </td>
                 </tr>
             </table>
-            <p class="c15 c17 c32"><span class="c4"></span></p>
         </div>
     </body>
 </html>
