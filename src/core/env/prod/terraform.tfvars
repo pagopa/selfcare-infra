@@ -549,7 +549,28 @@ eventhubs = [{
         manage = false
       }
     ]
-}]
+  },
+  {
+    name              = "SC-Delegations"
+    partitions        = 10
+    message_retention = 7
+    consumers         = ["datalake"]
+    keys = [
+      {
+        name   = "selfcare-wo"
+        listen = false
+        send   = true
+        manage = false
+      },
+      {
+        name   = "datalake"
+        listen = true
+        send   = false
+        manage = false
+      }
+    ]
+  }
+]
 ##
 
 # logs storage
