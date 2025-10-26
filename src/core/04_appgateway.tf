@@ -39,17 +39,17 @@ locals {
   ]
 
   backends = {
-    aks = {
-      protocol                    = "Https"
-      host                        = "selc.internal.${var.dns_zone_prefix}.${var.external_domain}"
-      port                        = 443
-      ip_addresses                = null
-      probe                       = "/health"
-      probe_name                  = "probe-aks"
-      request_timeout             = 60
-      fqdns                       = ["selc.internal.${var.dns_zone_prefix}.${var.external_domain}"]
-      pick_host_name_from_backend = false
-    }
+    # aks = {
+    #   protocol                    = "Https"
+    #   host                        = "selc.internal.${var.dns_zone_prefix}.${var.external_domain}"
+    #   port                        = 443
+    #   ip_addresses                = null
+    #   probe                       = "/health"
+    #   probe_name                  = "probe-aks"
+    #   request_timeout             = 60
+    #   fqdns                       = ["selc.internal.${var.dns_zone_prefix}.${var.external_domain}"]
+    #   pick_host_name_from_backend = false
+    # }
     apim = {
       protocol                    = "Https"
       host                        = trim(azurerm_dns_a_record.dns_a_api.fqdn, ".")
@@ -61,17 +61,17 @@ locals {
       fqdns                       = null
       pick_host_name_from_backend = false
     }
-    platform-aks = {
-      protocol                    = "Https"
-      host                        = "${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"
-      port                        = 443
-      ip_addresses                = null
-      probe                       = "/pnpg/status"
-      probe_name                  = "probe-platform-aks"
-      request_timeout             = 60
-      fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
-      pick_host_name_from_backend = false
-    }
+    # platform-aks = {
+    #   protocol                    = "Https"
+    #   host                        = "${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"
+    #   port                        = 443
+    #   ip_addresses                = null
+    #   probe                       = "/pnpg/status"
+    #   probe_name                  = "probe-platform-aks"
+    #   request_timeout             = 60
+    #   fqdns                       = ["${var.aks_platform_env}.pnpg.internal.${var.dns_zone_prefix}.${var.external_domain}"]
+    #   pick_host_name_from_backend = false
+    # }
     auth-selc = {
       protocol                    = "Https"
       host                        = "selc-${var.env_short}-auth-ms-ca.${var.auth_ms_private_dns_suffix}"
