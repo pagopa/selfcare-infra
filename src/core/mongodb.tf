@@ -37,11 +37,11 @@ module "cosmosdb_account_mongodb" {
   capabilities = concat([
     "EnableMongo"
   ], var.cosmosdb_mongodb_extra_capabilities)
-  
+
   mongo_server_version = "7.0"
 
   public_network_access_enabled         = var.env_short == "p" ? false : var.cosmosdb_mongodb_public_network_access_enabled
-  
+
   private_endpoint_enabled              = var.cosmosdb_mongodb_private_endpoint_enabled
   private_endpoint_mongo_name           = "${local.project}-cosmosdb-mongodb-account"
   private_service_connection_mongo_name = "${local.project}-cosmosdb-mongodb-account-private-endpoint-mongo"
@@ -162,6 +162,14 @@ locals {
             },
             {
               keys   = ["from", "status", "type", "productId", "createdAt"]
+              unique = false
+            },
+            {
+              keys   = ["createdAt"]
+              unique = false
+            },
+            {
+              keys   = ["updatedAt"]
               unique = false
             }
           ]
