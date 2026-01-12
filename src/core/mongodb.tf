@@ -153,7 +153,7 @@ locals {
               unique = false
             },
             {
-              keys   = ["toTaxCode"]
+              keys   = ["toTaxCode", "fromTaxCode"]
               unique = false
             },
             {
