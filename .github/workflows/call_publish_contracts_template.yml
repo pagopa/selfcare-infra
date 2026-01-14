@@ -23,7 +23,7 @@ jobs:
   
   publish:
     name: Publish contracts template ${{ inputs.environment }}
-    runs-on: ["${{ inputs.environment }}"]
+    runs-on: ubuntu-24.04
     environment: ${{ inputs.environment }}-ci
     permissions:
       id-token: write
