@@ -22,7 +22,7 @@ env:
 jobs:
   publish:
     name: Publish contracts template ${{ inputs.environment }}
-    runs-on: ["${{ inputs.agent }}", "${{ inputs.environment }}"]
+    runs-on: ${{ fromJson(format('["{0}", "{1}"]', inputs.agent, inputs.environment)) }}
     environment: ${{ inputs.environment }}-ci
     permissions:
       id-token: write
