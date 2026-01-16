@@ -47,9 +47,10 @@ jobs:
 
       - name: Upload to blob storage
         id: storage_upload
-        uses: azure/CLI@b0e31ae20280d899279f14c36e877b4c6916e2d3
-        with:
-          inlineScript: |
+        # uses: azure/CLI@b0e31ae20280d899279f14c36e877b4c6916e2d3
+        run: |
+            echo "Inizio upload..."
+
             upload_status=$(az storage blob upload-batch \
             --connection-string "${{ secrets.STORAGE_CONNECTION_STRING_DOCUMENTS }}" \
             --source './src/core/contracts_template/contracts/' \
