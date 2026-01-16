@@ -22,7 +22,7 @@ env:
 jobs:
   publish:
     name: Publish contracts template ${{ inputs.environment }}
-    runs-on: ["${{ inputs.agent }}", dev]
+    runs-on: [self-hosted, dev]
     environment: ${{ inputs.environment }}-ci
     permissions:
       id-token: write
