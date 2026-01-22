@@ -126,61 +126,6 @@
 																				</tbody>
 																			</table>
 																		</div>
-																		<!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
-																		<!--[if mso | IE]><tr><td class="section-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="section-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-																		<div class="section" style="margin:0 auto;max-width:600px">
-																			<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
-																				<tbody>
-																					<tr>
-																						<td style="direction:ltr;font-size:0;padding:0;text-align:center">
-																							<!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
-																							<div class="mj-column-per-100 mj-outlook-group-fix" style="direction:ltr;display:inline-block;font-size:0;text-align:left;vertical-align:top;width:100%">
-																								<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top" width="100%">
-																									<tbody>
-																										<tr>
-																											<td align="center" style="font-size:0;padding:16px 25px;word-break:break-word">
-																												<p style="border-top:1px solid #d3d3d3;font-size:1px;margin:0 auto;width:100%"> </p>
-																												<!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px lightgrey;font-size:1px;margin:0px auto;width:550px;" role="presentation" width="550px" ><tr><td style="height:0;line-height:0;"> &nbsp;
-</td></tr></table><![endif]-->
-																											</td>
-																										</tr>
-																									</tbody>
-																								</table>
-																							</div>
-																							<!--[if mso | IE]></td></tr></table><![endif]-->
-																						</td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																		<!--[if mso | IE]></td></tr></table></td></tr><![endif]-->
-																		<!--[if mso | IE]><tr><td class="section-outlook" width="600px" ><table align="center" border="0" cellpadding="0" cellspacing="0" class="section-outlook" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-																		<div class="section" style="margin:0 auto;max-width:600px">
-																			<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
-																				<tbody>
-																					<tr>
-																						<td style="direction:ltr;font-size:0;padding:0 0 16px;text-align:center">
-																							<!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
-																							<div class="mj-column-per-100 mj-outlook-group-fix" style="direction:ltr;display:inline-block;font-size:0;text-align:left;vertical-align:top;width:100%">
-																								<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top" width="100%">
-																									<tbody>
-																										<tr>
-																											<td align="left" class="footer-text" style="font-size:0;padding:10px 25px;word-break:break-word">
-																												<div style="color:#5c6f82;font-family:Titillium Web,system-ui,sans-serif;font-size:14px;line-height:20px;text-align:left">
-																													<p style="margin-top:0"> Ricevi questo messaggio perché hai un’utenza attiva nell’Area Riservata dell’ente. </p>
-																												</div>
-																											</td>
-																										</tr>
-																									</tbody>
-																								</table>
-																							</div>
-																							<!--[if mso | IE]></td></tr></table><![endif]-->
-																						</td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																		<!--[if mso | IE]></td></tr></table></td></tr></table><![endif]-->
 																	</td>
 																</tr>
 															</tbody>
