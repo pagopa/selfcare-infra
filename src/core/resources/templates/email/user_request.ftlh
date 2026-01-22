@@ -104,7 +104,7 @@
 																										<td align="left" class="text" style="font-size:0;padding:0 25px 10px;word-break:break-word">
 																											<div style="color:#17324d;font-family:Titillium Web,system-ui,sans-serif;font-size:16px;font-weight:regular;line-height:24px;text-align:left">
 																												<p style="margin-top:0">
-																													<strong>${requesterName} ${requesterSurname}</strong> ha richiesto l'adesione al prodotto <strong>${productName}</strong> per conto di <strong>${institutionName}</strong> e ti ha indicato come <strong>${productRole}</strong>. </p>
+																													è stata richiesta l'adesione al prodotto <strong>${productName}</strong> per conto di <strong>${institutionName}</strong>. Ricevi questa email perché hai effettuato la richiesta oppure sei stato indicato come Legale Rappresentante o Amministratore. </p>
 																												<p style="margin-top:0"> Abbiamo inviato un'email all'indirizzo PEC primario dell'ente: contiene le istruzioni per completare l'adesione. </p>
 																												<p style="margin-top:0"> Se hai problemi tecnici o domande in merito al funzionamento dell’Area Riservata Enti, scrivi a <a href="mailto:areariservata@assistenza.pagopa.it" style="color:#0073e6" class="link">areariservata@assistenza.pagopa.it</a>. </p>
 																											</div>
