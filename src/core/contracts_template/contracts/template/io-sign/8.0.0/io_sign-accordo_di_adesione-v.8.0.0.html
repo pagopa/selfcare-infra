@@ -5978,7 +5978,7 @@
       class="c4">PagoPA</span><span class="c0">&rdquo; o &ldquo;</span><span
       class="c4">Societ&agrave;&rdquo;</span><span class="c1 c0">) </span></p>
   <p class="c21"><span class="c1 c4">e </span></p>
-  <p class="c37"><span class="c0">l&rsquo;ente scrivente ${institutionName}${parentInfo}, con sede legale in
+  <p class="c37"><span class="c0">l&rsquo;ente scrivente ${institutionName} ${parentInfo}, con sede legale in
       ${address}, ${zipCode}, nella persona del legale rappresentante </span><span class="c0 c20">pro
       tempore</span><span class="c0">&nbsp;o di altro soggetto avente poteri di firma
       ${managerName} ${managerSurname}, c.f. ${managerTaxCode}, email ${managerEmail} (di
@@ -6384,13 +6384,14 @@
     <li class="c2 li-bullet-0"><span class="c1 c0">I corrispettivi verranno fatturati da PagoPA all&rsquo;Ente con
         cadenza trimestrale, sulla base dell&rsquo;effettivo consumo.</span></li>
     <li class="c2 li-bullet-0"><span class="c0">Le fatture dovranno essere intestate come segue: </span><span
-        class="c0">&nbsp;__________________</span><span class="c0">, Partita IVA. n. </span><span
-        class="c0">&nbsp;__________________</span><span class="c0">&nbsp;con la dicitura </span><span
+        class="c0">&nbsp;${institutionName}</span><span class="c0">, Partita IVA. n. </span><span
+        class="c0">&nbsp;${institutionVatNumber}</span><span class="c0">&nbsp;con la dicitura </span><span
         class="c0 c20">&ldquo; Importi riconosciuti per l&rsquo;erogazione del servizio Firma con IO&rdquo;
       </span><span class="c0">comprensivi dell&rsquo;indicazione del periodo di riferimento - calcolati sulla base
         di quanto previsto al comma 1 del presente articolo - e dovranno essere inviate esclusivamente in
         formato xml, tramite il Sistema di interscambio, riportando nel campo Codice Destinatario il codice
-        __________________. </span><span class="c0">L&rsquo;Ente &egrave; soggetto al regime della scissione dei
+        ${institutionRecipientCode}. </span><span class="c0">L&rsquo;Ente &egrave; soggetto al regime della scissione
+        dei
         pagamenti di cui all&rsquo;art. 17-</span><span class="c0 c20">ter</span><span class="c0">&nbsp;del
         D.P.R. 633/1972, da indicare in fattura.</span></li>
     <li class="c2 li-bullet-0"><span class="c0">All&rsquo;</span><span class="c0">Ente </span><span
