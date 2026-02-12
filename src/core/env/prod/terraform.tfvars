@@ -350,10 +350,10 @@ eventhub_ip_rules = [
   },
   {  // piattaforma-unitaria
     ip_mask = "172.213.249.249",
-    action  = "4.232.7.111"
+    action  = "Allow"
   },
   {  // piattaforma-unitaria
-    ip_mask = "172.213.249.249",
+    ip_mask = "4.232.7.111",
     action  = "Allow"
   },
   {  // piattaforma-unitaria
