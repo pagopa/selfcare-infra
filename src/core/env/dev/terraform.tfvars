@@ -246,6 +246,10 @@ eventhub_ip_rules = [
   { // piattaforma-unitaria
     ip_mask = "4.232.15.12",
     action  = "Allow"
+  },
+  { // p4pa
+    ip_mask = "4.232.131.72",
+    action  = "Allow"
   }
 ]
 
