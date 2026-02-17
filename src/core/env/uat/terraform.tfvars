@@ -326,7 +326,7 @@ eventhub_ip_rules = [
     action  = "Allow"
   },
   { // p4pa
-    ip_mask = "4.232.131.72",
+    ip_mask = "72.146.248.64",
     action  = "Allow"
   }
 ]
