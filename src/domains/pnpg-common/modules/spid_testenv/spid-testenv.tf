@@ -49,6 +49,12 @@ resource "azurerm_container_group" "spid_testenv" {
   dns_name_label      = var.name
   os_type             = "Linux"
 
+  image_registry_credential {
+    server   = "index.docker.io"
+    username = var.username
+    password = var.password
+  }
+  
   container {
     name   = "spid-testenv2"
     image  = "italia/spid-testenv2:1.1.0"

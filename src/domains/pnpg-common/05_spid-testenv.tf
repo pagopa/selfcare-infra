@@ -11,5 +11,20 @@ module "spid-test-env" {
 
   spid_testenv_local_config_dir = "./env/${var.env}/spid_testenv_conf"
 
+  username = data.azurerm_key_vault_secret.docker_username.value
+  password = data.azurerm_key_vault_secret.docker_password.value
+
   tags = var.tags
 }
+
+
+data "azurerm_key_vault_secret" "docker_username" {
+  name         = "docker-username"
+  key_vault_id = module.key_vault_pnpg.id
+}
+
+data "azurerm_key_vault_secret" "docker_password" {
+  name         = "docker-password"
+  key_vault_id = module.key_vault_pnpg.id
+}
+
