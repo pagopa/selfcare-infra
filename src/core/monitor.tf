@@ -324,3 +324,29 @@ resource "azurerm_monitor_metric_alert" "functions_exceptions" {
     action_group_id = azurerm_monitor_action_group.slack.id
   }
 }
+
+resource "azurerm_dashboard_grafana" "grafana" {
+  name                = "${local.project}-grafana"
+  resource_group_name = azurerm_resource_group.dashboards.name
+  location            = var.location
+
+  grafana_major_version = 11
+  sku                   = "Standard"
+
+  api_key_enabled                   = true
+  deterministic_outbound_ip_enabled = true
+  public_network_access_enabled     = true
+  zone_redundancy_enabled           = false
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_role_assignment" "grafana_monitoring_reader" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Monitoring Reader"
+  principal_id         = azurerm_dashboard_grafana.grafana.identity[0].principal_id
+}
